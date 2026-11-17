@@ -1,0 +1,6 @@
+{
+  "name": "Unified Semester Mastery & Finals Prep Engine",
+  "description": "Local-first spaced repetition, diagnostic rubric grading, and interactive 3D stereochemistry mastery engine.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

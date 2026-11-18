@@ -827,6 +827,7 @@
           if (filters.moduleCode && filters.moduleCode !== 'ALL' && n.moduleCode !== filters.moduleCode) return false;
           if (filters.tier && filters.tier !== 'ALL' && n.tier !== filters.tier) return false;
           if (filters.skillTag && !(n.metadata?.conceptTags || []).includes(filters.skillTag)) return false;
+          if (filters.chunkNodeIds && !filters.chunkNodeIds.includes(n.id)) return false;
           if (filters.excludeNodeId && n.id === filters.excludeNodeId && nodes.length > 1) return false;
           if (!includeGolden && !filters.forceNodeId && n.metadata?.isGoldenBank && !reviewMap[n.id]) return false;
           return true;
@@ -6785,8 +6786,15 @@
         return { rows, readiness: wSum ? wReady / wSum : 0, coverage: wSum ? wCover / wSum : 0 };
       }
 
+      /* Pure: ids of every question mapped to the skills of one topic (chunk). */
+      function chunkNodeIds(map, chunkId) {
+        const ids = new Set();
+        for (const s of map?.skills || []) if (s.chunk === chunkId) for (const id of s.nodes || []) ids.add(id);
+        return [...ids];
+      }
+
       return {
-        BANK_URL, SKILL_MAP_URL, RECORD_KEY,
+        BANK_URL, SKILL_MAP_URL, RECORD_KEY, chunkNodeIds,
         fetchJson, fetchContent, bankKey, isReservedNodeId, planBankSync, syncBank, sweepOrphanedProgress,
         validateSkillMap, loadSkillMap, analyzeSkillMap, nodeProgress, skillRows,
       };
@@ -7118,6 +7126,17 @@
                 <option value="synthesis" ${appState.filters.tier === 'synthesis' ? 'selected' : ''}>Synthesis (Uncued) Only</option>
               </select>
             </label>
+            ${appState.skillMap?.chunks?.length ? `
+            <label class="block">
+              <span class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Topic</span>
+              <select id="studyChunkFilter" aria-label="Filter by topic" class="w-full text-sm bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-slate-800">
+                <option value="ALL" ${!appState.filters.chunkId ? 'selected' : ''}>All topics</option>
+                ${[...new Set(appState.skillMap.chunks.map((c) => c.part))].map((part) => `
+                  <optgroup label="${esc(part)}">
+                    ${appState.skillMap.chunks.filter((c) => c.part === part).map((c) => `<option value="${esc(c.id)}" ${appState.filters.chunkId === c.id ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}
+                  </optgroup>`).join('')}
+              </select>
+            </label>` : ''}
             ${appState.filters.skillTag ? `
               <button type="button" id="clearSkillFilter" class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium bg-blue-50 text-blue-800 border border-blue-200 rounded-full hover:bg-blue-100">
                 Skill Focus: <span class="font-mono">${esc(appState.filters.skillTag)}</span> ✕
@@ -7610,6 +7629,12 @@
         });
         $('#studyTierFilter', root)?.addEventListener('change', (e) => {
           appState.filters.tier = e.target.value;
+          loadNextQuestion();
+        });
+        $('#studyChunkFilter', root)?.addEventListener('change', (e) => {
+          const id = e.target.value === 'ALL' ? null : e.target.value;
+          appState.filters.chunkId = id;
+          appState.filters.chunkNodeIds = id ? Content.chunkNodeIds(appState.skillMap, id) : null;
           loadNextQuestion();
         });
         $('#clearSkillFilter', root)?.addEventListener('click', () => {
@@ -8629,6 +8654,9 @@
                 <span class="text-xs text-slate-500 font-mono"> · ${g.rows.length} skills · ${marks} marks · <span class="text-emerald-700">${ready}/${total} ready</span></span>
                 ${g.summary ? `<span class="block text-[11px] text-slate-500 font-normal mt-0.5">${esc(g.summary)}</span>` : ''}
               </summary>
+              <div class="px-3 py-2 border-t border-slate-100">
+                <button type="button" data-drill-chunk="${esc(g.key)}" class="px-3 py-1.5 text-xs font-medium bg-slate-900 text-white rounded-md hover:bg-slate-800">Drill this topic</button>
+              </div>
               <div class="divide-y divide-slate-100">
                 ${g.rows.slice().sort((x, y) => y.skill.weight - x.skill.weight).map((r) => `
                   <div class="px-3 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
@@ -8765,6 +8793,14 @@
           btn.addEventListener('click', () => {
             appState.route = 'settings';
             render();
+          });
+        });
+        $$('[data-drill-chunk]', root).forEach((btn) => {
+          btn.addEventListener('click', () => {
+            const id = btn.dataset.drillChunk;
+            appState.route = 'study';
+            appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null, chunkId: id, chunkNodeIds: Content.chunkNodeIds(appState.skillMap, id) };
+            loadNextQuestion();
           });
         });
         $$('[data-remediate-tag]', root).forEach((btn) => {

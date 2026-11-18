@@ -236,3 +236,18 @@ test('skill map: validator rejects an unknown chunk but still accepts a map with
   delete legacy.chunks;
   assert.equal(Content.validateSkillMap(legacy).valid, true);
 });
+
+test('topic drill: chunkNodeIds covers exactly the topic\'s skills, and the scheduler stays inside it', () => {
+  const chunk = 'terms-ts';
+  const ids = Content.chunkNodeIds(skillMap, chunk);
+  const expected = new Set(skillMap.skills.filter((s) => s.chunk === chunk).flatMap((s) => s.nodes));
+  same([...ids].sort(), [...expected].sort());
+  assert.ok(ids.length > 0);
+  const nodes = bank.questionNodes.filter((n) => ids.includes(n.id));
+  const { Scheduler } = E; const DEFAULT_SETTINGS = Scheduler.DEFAULT_SETTINGS;
+  for (let i = 0; i < 10; i++) {
+    const pick = Scheduler.selectNextNode(bank.questionNodes, {}, {}, [], DEFAULT_SETTINGS, { moduleCode: 'ALL', tier: 'ALL', chunkNodeIds: ids }, Date.now() + i);
+    assert.ok(pick?.node && ids.includes(pick.node.id), `picked ${pick?.node?.id} outside ${chunk}`);
+  }
+  assert.ok(nodes.length > 0);
+});

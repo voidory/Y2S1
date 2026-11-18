@@ -48,7 +48,8 @@
       --accent-soft: #EFF6FF;
     }
     html, body {
-      min-height: 100%;
+      height: 100%;
+      overflow: hidden;
       background: var(--bg-canvas);
       color: var(--text-primary);
       font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
@@ -61,6 +62,35 @@
       font-family: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
       font-variant-numeric: tabular-nums;
     }
+    .app-h { height: 100vh; height: 100dvh; }
+    .tabbar { padding-bottom: env(safe-area-inset-bottom); }
+    /* Every view fills the main region; only .view-scroll / .pane may scroll (bounded, never the page). */
+    .view { height: 100%; display: flex; flex-direction: column; min-height: 0; gap: 0.5rem; }
+    .view-scroll, .pane { min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+    .view-scroll { flex: 1 1 0%; }
+    /* Touch targets: every button/select in the app is at least 36px tall on phone-size screens. */
+    @media (max-width: 767px) {
+      #appRoot button, #appRoot select { min-height: 36px; }
+      #appRoot .seg > button { min-height: 34px; }
+    }
+    /* Study step flow: one step at a time on phones, both panes side by side from md up. */
+    #studyView[data-step="question"] .pane-a { display: none; }
+    #studyView[data-step="answer"] .pane-q { display: none; }
+    #studyView[data-step="answer"] .blk-result { display: none; }
+    #studyView[data-step="result"] .pane-q { display: none; }
+    #studyView[data-step="result"] .blk-answer { display: none; }
+    @media (max-width: 1023px) {
+      /* below lg each pane is a column so its primary action can sit at the bottom of the card */
+      #studyView .pane { display: flex; flex-direction: column; }
+      #studyView .blk-answer, #studyView .blk-result, #studyView .blk-result > div { display: flex; flex-direction: column; flex: 1 1 auto; }
+    }
+    @media (min-width: 1024px) {
+      #studyView .pane-q, #studyView .pane-a, #studyView .blk-answer, #studyView .blk-result { display: block !important; }
+    }
+    .seg { display: flex; gap: 0.25rem; padding: 0.25rem; background: #F1F5F9; border-radius: 0.75rem; }
+    .seg > button { flex: 1 1 0%; padding: 0.4rem 0.5rem; font-size: 0.75rem; font-weight: 600; color: #475569; border-radius: 0.5rem; white-space: nowrap; }
+    .seg > button[aria-selected="true"] { background: #FFFFFF; color: #0F172A; box-shadow: 0 1px 2px rgba(15,23,42,.12); }
+    .seg > button:disabled { opacity: .4; }
     .katex { font-size: 1.03em; }
     .katex-display { margin: 0.75rem 0; overflow-x: auto; overflow-y: hidden; }
     .prose-math p { margin: 0.4rem 0; line-height: 1.6; }
@@ -90,34 +120,45 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
-  <!-- Single-row 3-zone Top Navigation Bar -->
-  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200">
-    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 min-h-14 py-2 md:py-0 flex flex-wrap md:flex-nowrap items-center justify-between gap-x-6 gap-y-1.5">
-      <a href="#study" id="brandHome" class="order-1 font-display font-bold text-base sm:text-lg tracking-tight text-slate-900 whitespace-nowrap shrink-0">
+<body class="app-h flex flex-col overflow-hidden bg-slate-50 text-slate-900">
+  <!-- App shell: top bar, sidebar (md+), main region that never scrolls the page, bottom tab bar (phones) -->
+  <header class="shrink-0 z-30 bg-white border-b border-slate-200">
+    <div class="h-12 px-3 sm:px-5 flex items-center justify-between gap-3">
+      <a href="#study" id="brandHome" class="font-display font-bold text-[15px] sm:text-lg tracking-tight text-slate-900 truncate">
         Unified Mastery Engine
       </a>
-      <nav aria-label="Primary" class="order-3 md:order-2 w-full md:w-auto flex items-center gap-4 sm:gap-6 overflow-x-auto border-t border-slate-100 md:border-t-0 pt-1.5 md:pt-0">
-        <button type="button" data-nav="study" class="nav-link text-xs sm:text-sm font-medium whitespace-nowrap shrink-0 py-1 border-b-2 border-blue-700 text-slate-900">Study Session</button>
-        <button type="button" data-nav="mock" class="nav-link text-xs sm:text-sm font-medium whitespace-nowrap shrink-0 py-1 border-b-2 border-transparent text-slate-600 hover:text-slate-900">Mock Paper</button>
-        <button type="button" data-nav="readiness" class="nav-link text-xs sm:text-sm font-medium whitespace-nowrap shrink-0 py-1 border-b-2 border-transparent text-slate-600 hover:text-slate-900">Finals Readiness</button>
-        <button type="button" data-nav="bank" class="nav-link text-xs sm:text-sm font-medium whitespace-nowrap shrink-0 py-1 border-b-2 border-transparent text-slate-600 hover:text-slate-900">Question Bank</button>
-        <button type="button" data-nav="settings" class="nav-link text-xs sm:text-sm font-medium whitespace-nowrap shrink-0 py-1 border-b-2 border-transparent text-slate-600 hover:text-slate-900">Modules &amp; Data</button>
-      </nav>
-      <div class="order-2 md:order-3 flex items-center gap-3 shrink-0">
-        <button type="button" id="topQuickAction" class="px-3.5 py-1.5 text-xs sm:text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors whitespace-nowrap shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700">
-          Next Priority
-        </button>
-      </div>
+      <button type="button" id="topQuickAction" class="px-3.5 py-1.5 text-xs sm:text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors whitespace-nowrap shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700">
+        Next Priority
+      </button>
     </div>
   </header>
 
-  <!-- Main Workspace -->
-  <main id="appRoot" class="flex-1 max-w-[1400px] w-full mx-auto px-4 sm:px-6 py-6">
-    <div id="loadingNotice" class="py-16 text-center text-sm text-slate-500">
-      Initializing IndexedDB mastery store and stereochemistry engine...
-    </div>
-  </main>
+  <div class="flex-1 min-h-0 flex">
+    <aside class="hidden md:flex w-52 lg:w-56 shrink-0 flex-col bg-white border-r border-slate-200 p-2">
+      <nav aria-label="Primary" class="flex flex-col gap-1">
+        <button type="button" data-nav="study" data-variant="side" class="nav-link flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M8 7.5h7"/></svg><span>Study Session</span></button>
+        <button type="button" data-nav="mock" data-variant="side" class="nav-link flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg><span>Mock Paper</span></button>
+        <button type="button" data-nav="readiness" data-variant="side" class="nav-link flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V11M10 20V4M16 20v-6M2 20h20"/></svg><span>Finals Readiness</span></button>
+        <button type="button" data-nav="bank" data-variant="side" class="nav-link flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Question Bank</span></button>
+        <button type="button" data-nav="settings" data-variant="side" class="nav-link flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></svg><span>Modules &amp; Data</span></button>
+      </nav>
+    </aside>
+
+    <!-- Main Workspace -->
+    <main id="appRoot" class="relative flex-1 min-w-0 min-h-0 overflow-hidden px-3 sm:px-5 py-3">
+      <div id="loadingNotice" class="py-16 text-center text-sm text-slate-500">
+        Initializing IndexedDB mastery store and stereochemistry engine...
+      </div>
+    </main>
+  </div>
+
+  <nav aria-label="Primary (mobile)" class="tabbar md:hidden shrink-0 grid grid-cols-5 bg-white border-t border-slate-200">
+    <button type="button" data-nav="study" data-variant="tab" class="nav-link flex flex-col items-center justify-center gap-0.5 py-1.5 min-h-[52px] text-[11px] font-medium text-slate-500"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M8 7.5h7"/></svg><span>Study</span></button>
+    <button type="button" data-nav="mock" data-variant="tab" class="nav-link flex flex-col items-center justify-center gap-0.5 py-1.5 min-h-[52px] text-[11px] font-medium text-slate-500"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg><span>Mock</span></button>
+    <button type="button" data-nav="readiness" data-variant="tab" class="nav-link flex flex-col items-center justify-center gap-0.5 py-1.5 min-h-[52px] text-[11px] font-medium text-slate-500"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V11M10 20V4M16 20v-6M2 20h20"/></svg><span>Progress</span></button>
+    <button type="button" data-nav="bank" data-variant="tab" class="nav-link flex flex-col items-center justify-center gap-0.5 py-1.5 min-h-[52px] text-[11px] font-medium text-slate-500"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Bank</span></button>
+    <button type="button" data-nav="settings" data-variant="tab" class="nav-link flex flex-col items-center justify-center gap-0.5 py-1.5 min-h-[52px] text-[11px] font-medium text-slate-500"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></svg><span>More</span></button>
+  </nav>
 
   <!-- 3D Isomer Comparison / Explorer Modal -->
   <div id="explorerModal" class="fixed inset-0 z-50 hidden bg-slate-900/40 backdrop-blur-[1px] flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="explorerModalTitle">
@@ -6748,6 +6789,7 @@
         nodes: [],
         skillMap: null,
         content: { bank: null, skillMap: null },
+        ui: { sheet: null, readinessTab: 'overview', settingsTab: 'module', bankLimit: 60 },
         reviewMap: {},
         attemptLogs: [],
         settings: Scheduler.DEFAULT_SETTINGS,
@@ -6902,6 +6944,7 @@
       }
 
       function loadNextQuestion(opts = {}) {
+        appState.ui.sheet = null;
         if (appState.cleanupWidget) { appState.cleanupWidget(); appState.cleanupWidget = null; }
         const prevNode = appState.current?.node || null;
         const filters = {
@@ -7038,31 +7081,80 @@
         const daysToExam = hasExam ? Math.max(0, Math.round((mod.examTimestamp - Date.now()) / 86400000)) : null;
         const goldenCount = appState.nodes.filter((n) => n.metadata?.isGoldenBank).length;
 
-        const filterBar = `
-          <div class="flex flex-wrap items-center justify-between gap-3 mb-5 pb-3 border-b border-slate-200">
-            <div class="flex flex-wrap items-center gap-2.5">
-              <select id="studyModuleFilter" aria-label="Filter by module" class="text-xs sm:text-sm bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800">
+        // Phone step flow: question -> answer -> result. Steps are toggled by CSS (data-step), so typed input survives.
+        if (!cur.step) cur.step = 'question';
+        if (phase === 'graded' && !cur.resultShown) { cur.step = 'result'; cur.resultShown = true; }
+        else if (phase !== 'graded' && cur.step === 'result') cur.step = 'answer';
+        const step = cur.step;
+        const sheet = appState.ui.sheet;
+
+        const filterControls = `
+          <div class="space-y-3">
+            <label class="block">
+              <span class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Module</span>
+              <select id="studyModuleFilter" aria-label="Filter by module" class="w-full text-sm bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-slate-800">
                 <option value="ALL" ${appState.filters.moduleCode === 'ALL' ? 'selected' : ''}>All Modules</option>
                 ${mOptions}
               </select>
-              <select id="studyTierFilter" aria-label="Filter by tier" class="text-xs sm:text-sm bg-white border border-slate-300 rounded-lg px-2.5 py-1.5 text-slate-800">
+            </label>
+            <label class="block">
+              <span class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Tier</span>
+              <select id="studyTierFilter" aria-label="Filter by tier" class="w-full text-sm bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-slate-800">
                 <option value="ALL" ${appState.filters.tier === 'ALL' ? 'selected' : ''}>All Tiers</option>
                 <option value="atomic" ${appState.filters.tier === 'atomic' ? 'selected' : ''}>Atomic Drills Only</option>
                 <option value="synthesis" ${appState.filters.tier === 'synthesis' ? 'selected' : ''}>Synthesis (Uncued) Only</option>
               </select>
-              ${appState.filters.skillTag ? `
-                <button type="button" id="clearSkillFilter" class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium bg-blue-50 text-blue-800 border border-blue-200 rounded-full hover:bg-blue-100">
-                  Skill Focus: <span class="font-mono">${esc(appState.filters.skillTag)}</span> ✕
-                </button>` : ''}
-            </div>
-            <div class="flex items-center gap-3 text-xs text-slate-500">
+            </label>
+            ${appState.filters.skillTag ? `
+              <button type="button" id="clearSkillFilter" class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium bg-blue-50 text-blue-800 border border-blue-200 rounded-full hover:bg-blue-100">
+                Skill Focus: <span class="font-mono">${esc(appState.filters.skillTag)}</span> ✕
+              </button>` : ''}
+            <div class="text-xs text-slate-500">
               ${daysToExam !== null
                 ? `<span class="font-mono">${esc(node.moduleCode)} exam in ${daysToExam}d</span>`
                 : `<button type="button" id="btnSetExamDateStudy" class="font-mono text-blue-700 hover:underline">Set exam date</button>`}
-              <button type="button" id="btnSkipNode" class="px-2.5 py-1 border border-slate-200 bg-white hover:bg-slate-50 rounded-md text-slate-700 font-medium whitespace-nowrap">Skip →</button>
             </div>
           </div>
         `;
+
+        const queueHtml = `
+          <div class="space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <h3 class="font-display text-sm font-semibold text-slate-900">Top priority</h3>
+                <span class="text-xs font-mono text-slate-500">${rs ? `Reps: ${rs.reps}` : 'New'}</span>
+              </div>
+              <div class="divide-y divide-slate-100">
+                ${(cur.queuePreview || []).slice(0, 6).map((item, idx) => `
+                  <button type="button" data-jump-node="${esc(item.node.id)}" class="w-full text-left py-2.5 flex items-center justify-between gap-2 hover:bg-slate-50 px-1.5 rounded transition-colors ${item.node.id === node.id ? 'bg-blue-50/60' : ''}">
+                    <div class="min-w-0">
+                      <div class="text-sm font-medium text-slate-900 truncate">${idx === 0 ? '▸ ' : ''}${esc(item.node.metadata.title)}</div>
+                      <div class="text-xs text-slate-500">${esc(item.node.moduleCode)} · W${item.node.metadata.week} · ${item.node.tier}</div>
+                    </div>
+                    <span class="text-xs font-mono text-slate-500 shrink-0">${item.meta.score.toFixed(1)}</span>
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+            <div class="space-y-2 pt-3 border-t border-slate-200">
+              <h3 class="font-display text-sm font-semibold text-slate-900">Stereochemistry 3D Lab</h3>
+              <p class="text-xs text-slate-600">Inspect any of the ${goldenCount} syllabus coordination formulas (${IsomerEngine.BANK.length} total in engine) in the interactive 3D explorer with live mirror planes.</p>
+              <button type="button" id="btnLaunchExplorer" class="w-full px-3 py-2 text-sm font-medium border border-slate-300 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-800">Open 3D Isomer Explorer</button>
+            </div>
+          </div>
+        `;
+
+        const sheetHtml = sheet ? `
+          <div class="fixed inset-0 z-40 flex items-end md:items-center md:justify-center bg-slate-900/40" data-sheet-backdrop>
+            <div class="bg-white w-full md:max-w-lg rounded-t-2xl md:rounded-2xl shadow-xl p-4 max-h-[85dvh] overflow-y-auto" data-bounded-scroll role="dialog" aria-modal="true" aria-label="${sheet === 'queue' ? 'Adaptive queue' : 'Filters'}">
+              <div class="flex items-center justify-between mb-3">
+                <h2 class="font-display text-base font-semibold text-slate-900">${sheet === 'queue' ? 'Adaptive queue' : 'Filters'}</h2>
+                <button type="button" data-close-sheet aria-label="Close" class="w-9 h-9 -mr-1 rounded-lg text-slate-500 hover:bg-slate-100">✕</button>
+              </div>
+              ${sheet === 'queue' ? queueHtml : filterControls}
+            </div>
+          </div>
+        ` : '';
 
         // Input Slot Rendering
         let inputHtml = '';
@@ -7237,7 +7329,7 @@
                 <label for="equationAnsInput" class="text-xs font-semibold uppercase tracking-wider text-slate-600">Balanced Chemical Equation(s)</label>
                 <span class="text-xs font-mono text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded">${esc(slot.formatHint || 'One or more lines · use ->, →, or = · use ^ for charges (e.g. NH4^+, O2^2-, e-)')}</span>
               </div>
-              <textarea id="equationAnsInput" rows="${slot.rows || 3}" ${disabledAttr} placeholder="${esc(slot.placeholder || 'e.g. 2 NO + Cl2 -> 2 ClNO or NH4^+ + OH^- -> NH3 + H2O')}" class="w-full font-mono text-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700 leading-relaxed">${esc(cur.userInput)}</textarea>
+              <textarea data-bounded-scroll id="equationAnsInput" rows="${slot.rows || 3}" ${disabledAttr} placeholder="${esc(slot.placeholder || 'e.g. 2 NO + Cl2 -> 2 ClNO or NH4^+ + OH^- -> NH3 + H2O')}" class="w-full font-mono text-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700 leading-relaxed">${esc(cur.userInput)}</textarea>
             </div>
           `;
         } else if (slot.type === 'interactive_widget') {
@@ -7268,7 +7360,7 @@
                     </label>` : ''}
                 </div>
               </div>
-              <textarea id="synthesisInput" rows="5" ${phase !== 'answering' ? 'disabled' : ''} placeholder="${esc(slot.placeholder || 'Write your mechanistic or mathematical reasoning...')}" class="w-full text-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700 leading-relaxed">${esc(cur.userInput)}</textarea>
+              <textarea data-bounded-scroll id="synthesisInput" rows="5" ${phase !== 'answering' ? 'disabled' : ''} placeholder="${esc(slot.placeholder || 'Write your mechanistic or mathematical reasoning...')}" class="w-full text-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700 leading-relaxed">${esc(cur.userInput)}</textarea>
               ${phase === 'answering' ? `
                 <div class="flex flex-wrap items-center justify-between gap-3">
                   <span class="text-xs text-slate-500">${unlocked ? 'Ready — commit to reveal the reference comparison and self-grading rubric.' : `Write at least ${minW} words (or mark paper scratchpad) to unlock the rubric.`}</span>
@@ -7390,7 +7482,7 @@
                 </div>
               ` : ''}
 
-              <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+              <div class="sticky bottom-0 max-lg:mt-auto bg-white flex flex-wrap items-center justify-between gap-3 py-3 border-t border-slate-200">
                 <div class="flex items-center gap-2">
                   ${node.id.startsWith('gb-') || node.metadata.conceptTags?.includes('stereochemistry') ? `
                     <button type="button" id="btnOpenExplorerFromCard" class="px-3 py-1.5 text-xs font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-700">Inspect in 3D Explorer</button>
@@ -7420,93 +7512,81 @@
 
         const showStemVisual = variant.visualAsset && !(drawThenCompare && !variant.referenceImage && !variant.comparisonVisualAsset);
 
+        const tierLabel = node.tier === 'synthesis' ? 'Synthesis' : 'Atomic';
+        const stepBtn = (key, label, disabled) => `<button type="button" role="tab" data-step-go="${key}" aria-selected="${step === key}" ${disabled ? 'disabled' : ''}>${label}</button>`;
         root.innerHTML = `
-          ${filterBar}
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-            <section class="lg:col-span-8 bg-white border border-slate-200 rounded-xl p-5 sm:p-6 shadow-xs">
-              <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-4 border-b border-slate-200">
-                <div class="text-xs text-slate-500 font-medium">
-                  <span class="font-mono font-semibold text-slate-800">${esc(node.moduleCode)}</span>
-                  · Week ${node.metadata.week}
-                  · <span class="${node.tier === 'synthesis' ? 'text-blue-700 font-semibold' : 'text-slate-700'}">${node.tier === 'synthesis' ? 'Uncued Synthesis' : 'Atomic Drill'}</span>
-                  · ${esc(node.metadata.primaryTheme)}
-                  ${node.metadata.family ? ` · <span class="font-mono text-slate-500">Family: ${esc(node.metadata.family)}</span>` : ''}
-                </div>
-                <div class="text-xs font-mono text-slate-500">
-                  ${variant.marks} mark${variant.marks === 1 ? '' : 's'} · ~${node.metadata.estimatedMinutes} min
-                </div>
+          <div class="view" id="studyView" data-step="${step}">
+            <div class="shrink-0 flex items-center justify-between gap-2">
+              <div class="min-w-0 text-[11px] sm:text-xs text-slate-500 truncate">
+                <span class="font-mono font-semibold text-slate-800">${esc(node.moduleCode)}</span>
+                · W${node.metadata.week} · <span class="${node.tier === 'synthesis' ? 'text-blue-700 font-semibold' : ''}">${tierLabel}</span>
+                · ${esc(node.metadata.primaryTheme)}
               </div>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <button type="button" data-open-sheet="queue" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700">Queue</button>
+                <button type="button" data-open-sheet="filters" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700">Filters</button>
+                <button type="button" id="btnSkipNode" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700 whitespace-nowrap">Skip →</button>
+              </div>
+            </div>
 
-              <div class="mb-3">
+            <div class="seg lg:hidden shrink-0" role="tablist" aria-label="Question steps">
+              ${stepBtn('question', '1 · Question')}${stepBtn('answer', '2 · Answer')}${stepBtn('result', '3 · Result', phase !== 'graded')}
+            </div>
+
+            <div class="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] gap-3 lg:gap-4">
+              <section class="pane pane-q bg-white border border-slate-200 rounded-xl p-4 sm:p-5">
+                <div class="text-xs font-mono text-slate-500 mb-2">
+                  ${variant.marks} mark${variant.marks === 1 ? '' : 's'} · ~${node.metadata.estimatedMinutes} min${node.metadata.family ? ` · ${esc(node.metadata.family)}` : ''}
+                </div>
                 <h1 class="font-display text-lg sm:text-xl font-semibold text-slate-900 leading-snug">${esc(node.metadata.title)}</h1>
-                <div class="text-xs text-slate-500 mt-0.5">${esc(variant.perspectiveLabel)}${node.metadata.source ? ` · ${esc(node.metadata.source)}` : ''}</div>
-              </div>
+                <div class="text-xs text-slate-500 mt-0.5 mb-3">${esc(variant.perspectiveLabel)}${node.metadata.source ? ` · ${esc(node.metadata.source)}` : ''}</div>
 
-              <div class="prose-math text-[15px] text-slate-800 leading-relaxed mb-5" id="questionStemBlock">
-                ${renderMarkdownLite(inst.resolvedStem)}
-              </div>
-
-              ${showStemVisual ? renderVisualAssetHtml(variant.visualAsset, 'mb-5', 'stem-visual-asset') : ''}
-
-              ${auditNote}
-
-              ${inst.resolvedHint ? `
-                <div class="mb-5">
-                  <button type="button" id="btnToggleHint" class="text-xs font-medium text-blue-700 hover:underline">
-                    ${cur.hintOpen ? 'Hide Hint' : 'Show Hint'}
-                  </button>
-                  ${cur.hintOpen ? `<div class="mt-2 p-3 bg-blue-50/70 border border-blue-200 rounded-lg text-xs sm:text-sm text-slate-800 prose-math">${renderMarkdownLite(inst.resolvedHint)}</div>` : ''}
+                <div class="prose-math text-[15px] text-slate-800 leading-relaxed mb-4" id="questionStemBlock">
+                  ${renderMarkdownLite(inst.resolvedStem)}
                 </div>
-              ` : ''}
 
-              <div class="pt-4 border-t border-slate-200">
-                ${inputHtml}
-                ${phase === 'answering' && slot.type !== 'typed_synthesis' ? `
-                  <div class="mt-5 flex justify-end gap-2">
-                    ${drawThenCompare && variant.evaluator?.type === 'atomic_rubric' ? `
-                      <button type="button" id="btnCommitDrawCompare" class="px-5 py-2 text-sm font-medium bg-blue-700 text-white rounded-lg hover:bg-blue-800">
-                        Commit &amp; Compare with Rubric
-                      </button>
-                    ` : `
-                      <button type="button" id="btnSubmitAnswer" class="px-5 py-2 text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">
-                        Submit &amp; Grade
-                      </button>
-                    `}
+                ${showStemVisual ? renderVisualAssetHtml(variant.visualAsset, 'mb-4', 'stem-visual-asset') : ''}
+
+                ${auditNote}
+
+                ${inst.resolvedHint ? `
+                  <div class="mb-4">
+                    <button type="button" id="btnToggleHint" class="text-xs font-medium text-blue-700 hover:underline">
+                      ${cur.hintOpen ? 'Hide Hint' : 'Show Hint'}
+                    </button>
+                    ${cur.hintOpen ? `<div class="mt-2 p-3 bg-blue-50/70 border border-blue-200 rounded-lg text-xs sm:text-sm text-slate-800 prose-math">${renderMarkdownLite(inst.resolvedHint)}</div>` : ''}
                   </div>
                 ` : ''}
-              </div>
 
-              ${rubricPanelHtml}
-              ${feedbackHtml}
-            </section>
-
-            <aside class="lg:col-span-4 space-y-4">
-              <div class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
-                <div class="flex items-center justify-between">
-                  <h2 class="font-display text-sm font-semibold text-slate-900">Adaptive Queue (Top Priority)</h2>
-                  <span class="text-xs font-mono text-slate-500">${rs ? `Reps: ${rs.reps}` : 'New'}</span>
+                <div class="lg:hidden sticky bottom-0 mt-auto bg-white pt-3 pb-1 border-t border-slate-200">
+                  <button type="button" data-step-go="answer" class="w-full px-5 py-3 text-sm font-medium bg-slate-900 text-white rounded-lg">Answer →</button>
                 </div>
-                <div class="divide-y divide-slate-100">
-                  ${(cur.queuePreview || []).slice(0, 6).map((item, idx) => `
-                    <button type="button" data-jump-node="${esc(item.node.id)}" class="w-full text-left py-2 flex items-center justify-between gap-2 hover:bg-slate-50 px-1.5 rounded transition-colors ${item.node.id === node.id ? 'bg-blue-50/60' : ''}">
-                      <div class="min-w-0">
-                        <div class="text-xs font-medium text-slate-900 truncate">${idx === 0 ? '▸ ' : ''}${esc(item.node.metadata.title)}</div>
-                        <div class="text-[11px] text-slate-500">${esc(item.node.moduleCode)} · W${item.node.metadata.week} · ${item.node.tier}</div>
-                      </div>
-                      <span class="text-[11px] font-mono text-slate-500 shrink-0">${item.meta.score.toFixed(1)}</span>
-                    </button>
-                  `).join('')}
-                </div>
-              </div>
+              </section>
 
-              <div class="bg-white border border-slate-200 rounded-xl p-4 space-y-2.5">
-                <h2 class="font-display text-sm font-semibold text-slate-900">Stereochemistry 3D Lab</h2>
-                <p class="text-xs text-slate-600">Inspect any of the ${goldenCount} syllabus coordination formulas (${IsomerEngine.BANK.length} total in engine) in interactive ChemDraw 3D with live mirror planes and point-group classification.</p>
-                <button type="button" id="btnLaunchExplorer" class="w-full px-3 py-2 text-xs font-medium border border-slate-300 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-800">
-                  Open 3D Isomer Explorer
-                </button>
-              </div>
-            </aside>
+              <section class="pane pane-a bg-white border border-slate-200 rounded-xl p-4 sm:p-5">
+                <div class="blk-answer">
+                  ${inputHtml}
+                  ${phase === 'answering' && slot.type !== 'typed_synthesis' ? `
+                    <div class="sticky bottom-0 bg-white mt-4 max-lg:mt-auto py-3 border-t border-slate-200 flex justify-end gap-2">
+                      ${drawThenCompare && variant.evaluator?.type === 'atomic_rubric' ? `
+                        <button type="button" id="btnCommitDrawCompare" class="w-full sm:w-auto px-5 py-3 sm:py-2 text-sm font-medium bg-blue-700 text-white rounded-lg hover:bg-blue-800">
+                          Commit &amp; Compare with Rubric
+                        </button>
+                      ` : `
+                        <button type="button" id="btnSubmitAnswer" class="w-full sm:w-auto px-5 py-3 sm:py-2 text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">
+                          Submit &amp; Grade
+                        </button>
+                      `}
+                    </div>
+                  ` : ''}
+                  ${rubricPanelHtml}
+                </div>
+                <div class="blk-result">
+                  ${feedbackHtml}
+                </div>
+              </section>
+            </div>
+            ${sheetHtml}
           </div>
         `;
 
@@ -7537,6 +7617,23 @@
           const cid = node.id.startsWith('gb-') ? node.id.slice(3) : (variant.inputSlot.widgetConfig?.formulaCaseId || 'oh-ma4b2');
           openExplorerModal(cid);
         });
+        $$('[data-step-go]', root).forEach((btn) => {
+          btn.addEventListener('click', () => {
+            if (btn.disabled) return;
+            cur.step = btn.dataset.stepGo;
+            const view = $('#studyView', root);
+            if (view) view.dataset.step = cur.step;
+            $$('.seg [data-step-go]', root).forEach((b) => b.setAttribute('aria-selected', String(b.dataset.stepGo === cur.step)));
+            $$('.pane', root).forEach((pn) => { pn.scrollTop = 0; });
+          });
+        });
+        $$('[data-open-sheet]', root).forEach((btn) => {
+          btn.addEventListener('click', () => { appState.ui.sheet = btn.dataset.openSheet; renderStudyView(root); });
+        });
+        const closeSheet = () => { appState.ui.sheet = null; renderStudyView(root); };
+        $$('[data-close-sheet]', root).forEach((btn) => btn.addEventListener('click', closeSheet));
+        $('[data-sheet-backdrop]', root)?.addEventListener('click', (e) => { if (e.target === e.currentTarget) closeSheet(); });
+
         $$('[data-jump-node]', root).forEach((btn) => {
           btn.addEventListener('click', () => {
             appState.filters.forceNodeId = btn.dataset.jumpNode;
@@ -7956,62 +8053,49 @@
             chCounts[w] = (chCounts[w] || 0) + 1;
           }
           root.innerHTML = `
-            <div class="max-w-4xl space-y-6">
-              <div>
-                <h1 class="font-display text-2xl font-bold text-slate-900">Mock Exam Paper Assembler</h1>
-                <p class="text-sm text-slate-600 mt-1">Select a duration and syllabus chapters. Questions are assembled by <code class="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded">metadata.examStyle</code> (<code class="font-mono text-xs">mcq_1mark</code>, <code class="font-mono text-xs">short_2to3</code>, <code class="font-mono text-xs">construct_4to6</code>) in the proportions configured in Settings. Hints and feedback are suppressed until submission; synthesis rubrics are self-marked at the end.</p>
+            <div class="view max-w-4xl">
+              <div class="shrink-0">
+                <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900">Mock Paper</h1>
+                <p class="text-xs text-slate-500 mt-0.5">Questions are assembled by exam style: MCQ ${Math.round((props.mcq_1mark ?? 0.25) * 100)}% · Short ${Math.round((props.short_2to3 ?? 0.5) * 100)}% · Construct ${Math.round((props.construct_4to6 ?? 0.25) * 100)}%.</p>
               </div>
-
-              <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-5">
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  <div>
-                    <label for="mockDurationInput" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Duration (Minutes)</label>
-                    <input id="mockDurationInput" type="number" min="5" max="180" step="5" value="${m.durationMinutes}" class="w-full font-mono text-sm px-3 py-2 border border-slate-300 rounded-lg" />
-                  </div>
-                  <div>
-                    <label for="mockCountInput" class="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-1">Question Count</label>
-                    <input id="mockCountInput" type="number" min="3" max="30" step="1" value="${m.questionCount}" class="w-full font-mono text-sm px-3 py-2 border border-slate-300 rounded-lg" />
-                  </div>
-                  <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 flex flex-col justify-between">
-                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Exam Style Proportions</div>
-                    <div class="font-mono text-xs text-slate-800 mt-1">
-                      MCQ (1m): ${Math.round((props.mcq_1mark ?? 0.25) * 100)}% · Short (2–3m): ${Math.round((props.short_2to3 ?? 0.5) * 100)}% · Construct (4–6m): ${Math.round((props.construct_4to6 ?? 0.25) * 100)}%
-                    </div>
-                  </div>
+              <div class="shrink-0 grid grid-cols-2 gap-3">
+                <div>
+                  <label for="mockDurationInput" class="block text-[11px] font-semibold uppercase tracking-wider text-slate-600 mb-1">Duration (min)</label>
+                  <input id="mockDurationInput" type="number" min="5" max="180" step="5" value="${m.durationMinutes}" class="w-full font-mono text-sm px-3 py-2 border border-slate-300 rounded-lg bg-white" />
                 </div>
-
-                <div class="space-y-2.5 pt-2 border-t border-slate-200">
-                  <div class="flex flex-wrap items-center justify-between gap-2">
-                    <div class="text-xs font-semibold uppercase tracking-wider text-slate-600">Select Chapters (${esc(mod.moduleCode)})</div>
-                    <div class="flex items-center gap-2 text-xs">
-                      <button type="button" id="btnMockSelectAllCh" class="px-2.5 py-1 border border-slate-300 rounded hover:bg-slate-50 text-slate-700">Select All</button>
-                      <button type="button" id="btnMockSelectPopulatedCh" class="px-2.5 py-1 border border-slate-300 rounded hover:bg-slate-50 text-slate-700">Chapters with Nodes</button>
-                    </div>
-                  </div>
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                    ${(mod.weeks || []).map((w) => {
+                <div>
+                  <label for="mockCountInput" class="block text-[11px] font-semibold uppercase tracking-wider text-slate-600 mb-1">Questions</label>
+                  <input id="mockCountInput" type="number" min="3" max="30" step="1" value="${m.questionCount}" class="w-full font-mono text-sm px-3 py-2 border border-slate-300 rounded-lg bg-white" />
+                </div>
+              </div>
+              <div class="shrink-0 flex items-center justify-between gap-2">
+                <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-600">Chapters (${esc(mod.moduleCode)})</div>
+                <div class="flex items-center gap-2 text-xs">
+                  <button type="button" id="btnMockSelectAllCh" class="px-2.5 py-1 border border-slate-300 rounded hover:bg-slate-50 text-slate-700">All</button>
+                  <button type="button" id="btnMockSelectPopulatedCh" class="px-2.5 py-1 border border-slate-300 rounded hover:bg-slate-50 text-slate-700">With nodes</button>
+                </div>
+              </div>
+              <div class="view-scroll grid grid-cols-1 sm:grid-cols-2 gap-2 content-start">
+                ${(mod.weeks || []).map((w) => {
                       const checked = m.selectedChapters.includes(w.weekNum);
                       const cCount = chCounts[w.weekNum] || 0;
                       return `
                         <label class="flex items-center justify-between gap-2 p-2.5 rounded-lg border ${checked ? 'border-blue-600 bg-blue-50/40' : 'border-slate-200 bg-white'} cursor-pointer text-xs">
                           <div class="flex items-center gap-2 min-w-0">
                             <input type="checkbox" data-mock-ch="${w.weekNum}" ${checked ? 'checked' : ''} class="accent-blue-700" />
-                            <span class="font-mono font-semibold text-slate-700">Ch ${w.weekNum}</span>
+                            <span class="font-mono font-semibold text-slate-700 whitespace-nowrap shrink-0">Ch ${w.weekNum}</span>
                             <span class="text-slate-900 truncate">${esc(w.title)}</span>
                           </div>
                           <span class="font-mono text-[11px] text-slate-500 shrink-0">${cCount} node${cCount === 1 ? '' : 's'}</span>
                         </label>
                       `;
                     }).join('')}
-                  </div>
-                </div>
-
-                <div class="flex justify-end pt-2">
-                  <button type="button" id="btnStartMockPaper" class="px-5 py-2.5 text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">
-                    Assemble &amp; Start Mock Paper →
-                  </button>
-                </div>
-              </section>
+              </div>
+              <div class="shrink-0">
+                <button type="button" id="btnStartMockPaper" class="w-full sm:w-auto sm:ml-auto sm:block px-5 py-3 sm:py-2.5 text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">
+                  Assemble &amp; Start Mock Paper →
+                </button>
+              </div>
             </div>
           `;
 
@@ -8171,7 +8255,7 @@
                   <label for="mockEquationInput" class="block text-xs font-semibold uppercase tracking-wider text-slate-600">Balanced Chemical Equation(s)</label>
                   <span class="text-xs font-mono text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded">${esc(slot.formatHint || 'One or more lines · use ->, →, or = · use ^ for charges (e.g. NH4^+, O2^2-, e-)')}</span>
                 </div>
-                <textarea id="mockEquationInput" rows="${slot.rows || 3}" placeholder="${esc(slot.placeholder || 'e.g. 2 NO + Cl2 -> 2 ClNO or NH4^+ + OH^- -> NH3 + H2O')}" class="w-full font-mono text-sm px-3.5 py-2.5 border border-slate-300 rounded-lg">${esc(q.userInput)}</textarea>
+                <textarea data-bounded-scroll id="mockEquationInput" rows="${slot.rows || 3}" placeholder="${esc(slot.placeholder || 'e.g. 2 NO + Cl2 -> 2 ClNO or NH4^+ + OH^- -> NH3 + H2O')}" class="w-full font-mono text-sm px-3.5 py-2.5 border border-slate-300 rounded-lg">${esc(q.userInput)}</textarea>
               </div>
             `;
           } else if (slot.type === 'interactive_widget') {
@@ -8180,40 +8264,48 @@
             slotHtml = `
               <div class="space-y-2">
                 <label for="mockSynthesisInput" class="block text-xs font-semibold uppercase tracking-wider text-slate-600">Written Synthesis Response (Self-marked at end of paper)</label>
-                <textarea id="mockSynthesisInput" rows="5" placeholder="${esc(slot.placeholder || 'Write your derivation...')}" class="w-full text-sm px-3.5 py-2.5 border border-slate-300 rounded-lg">${esc(q.userInput)}</textarea>
+                <textarea data-bounded-scroll id="mockSynthesisInput" rows="5" placeholder="${esc(slot.placeholder || 'Write your derivation...')}" class="w-full text-sm px-3.5 py-2.5 border border-slate-300 rounded-lg">${esc(q.userInput)}</textarea>
               </div>
             `;
           }
 
           const mockShowStemVisual = variant.visualAsset && !(isDrawThenCompareVariant(variant) && !variant.referenceImage && !variant.comparisonVisualAsset);
 
-          root.innerHTML = `
-            <div class="space-y-5">
-              <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-wrap items-center justify-between gap-4">
-                <div class="flex items-center gap-3">
-                  <span class="font-mono text-xs font-semibold px-2.5 py-1 bg-slate-100 border border-slate-300 rounded text-slate-800">${esc(m.mockId)}</span>
-                  <span class="text-xs text-slate-500">Exam Mode: No hints or feedback until Submit</span>
+          const gridSheet = m.gridOpen ? `
+            <div class="fixed inset-0 z-40 flex items-end md:items-center md:justify-center bg-slate-900/40" data-mock-grid-backdrop>
+              <div class="bg-white w-full md:max-w-lg rounded-t-2xl md:rounded-2xl shadow-xl p-4 max-h-[85dvh] overflow-y-auto" data-bounded-scroll role="dialog" aria-modal="true" aria-label="Questions">
+                <div class="flex items-center justify-between mb-3">
+                  <h2 class="font-display text-base font-semibold text-slate-900">Questions</h2>
+                  <button type="button" data-close-mock-grid aria-label="Close" class="w-9 h-9 -mr-1 rounded-lg text-slate-500 hover:bg-slate-100">✕</button>
                 </div>
-                <div class="flex items-center gap-3">
+                <div class="grid grid-cols-4 gap-2">
+                  ${m.questions.map((item, idx) => `
+                    <button type="button" data-mock-jump="${idx}" class="px-2 py-2 text-xs font-mono rounded-lg border ${idx === m.activeIdx ? 'bg-slate-900 text-white border-slate-900 font-semibold' : 'bg-white text-slate-700 border-slate-300'}">
+                      Q${idx + 1}<span class="block text-[10px] opacity-70">${item.inst.variant.marks}m</span>
+                    </button>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+          ` : '';
+
+          root.innerHTML = `
+            <div class="view" id="mockView">
+              <div class="shrink-0 flex items-center justify-between gap-2">
+                <div class="flex items-center gap-2 min-w-0">
+                  <span class="hidden sm:inline font-mono text-xs font-semibold px-2.5 py-1 bg-slate-100 border border-slate-300 rounded text-slate-800 truncate">${esc(m.mockId)}</span>
                   <div class="font-mono text-sm font-bold px-3 py-1 rounded bg-amber-50 border border-amber-200 text-amber-900">
                     ⏱ <span id="mockTimerReadout">${mm}:${ss}</span>
                   </div>
-                  <button type="button" id="btnSubmitMockPaper" class="px-4 py-2 text-xs sm:text-sm font-semibold bg-blue-700 text-white rounded-lg hover:bg-blue-800">
-                    Submit Paper
-                  </button>
+                  <span class="text-[11px] text-slate-500 leading-tight">Exam mode:<br class="sm:hidden" /> no hints until Submit</span>
                 </div>
+                <button type="button" id="btnSubmitMockPaper" class="px-4 py-2 text-xs sm:text-sm font-semibold bg-blue-700 text-white rounded-lg hover:bg-blue-800 shrink-0">
+                  Submit Paper
+                </button>
               </div>
 
-              <div class="flex flex-wrap gap-1.5">
-                ${m.questions.map((item, idx) => `
-                  <button type="button" data-mock-jump="${idx}" class="px-3 py-1.5 text-xs font-mono rounded-lg border ${idx === m.activeIdx ? 'bg-slate-900 text-white border-slate-900 font-semibold' : 'bg-white text-slate-700 border-slate-300 hover:bg-slate-50'}">
-                    Q${idx + 1} (${item.inst.variant.marks}m)
-                  </button>
-                `).join('')}
-              </div>
-
-              <section class="bg-white border border-slate-200 rounded-xl p-5 sm:p-6 space-y-4">
-                <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-200 text-xs text-slate-500">
+              <section class="pane flex-1 bg-white border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3">
+                <div class="flex flex-wrap items-center justify-between gap-2 pb-2 border-b border-slate-200 text-xs text-slate-500">
                   <div>
                     <span class="font-mono font-semibold text-slate-800">Question ${m.activeIdx + 1} of ${m.questions.length}</span>
                     · Chapter ${q.node.metadata.week}
@@ -8227,21 +8319,29 @@
 
                 ${mockShowStemVisual ? renderVisualAssetHtml(variant.visualAsset, 'mb-2', 'mock-stem-visual') : ''}
 
-                <div class="pt-4 border-t border-slate-200">
+                <div class="pt-3 border-t border-slate-200">
                   ${slotHtml}
                 </div>
-
-                <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <button type="button" id="btnMockPrev" ${m.activeIdx === 0 ? 'disabled' : ''} class="px-3.5 py-1.5 text-xs font-medium border border-slate-300 rounded-lg disabled:opacity-40">← Previous</button>
-                  <button type="button" id="btnMockNext" ${m.activeIdx === m.questions.length - 1 ? 'disabled' : ''} class="px-3.5 py-1.5 text-xs font-medium border border-slate-300 rounded-lg disabled:opacity-40">Next →</button>
-                </div>
               </section>
+
+              <div class="shrink-0 flex items-center justify-between gap-2">
+                <button type="button" id="btnMockPrev" ${m.activeIdx === 0 ? 'disabled' : ''} class="px-4 py-2 text-sm font-medium border border-slate-300 bg-white rounded-lg disabled:opacity-40">← Prev</button>
+                <button type="button" data-open-mock-grid class="px-4 py-2 text-sm font-mono font-semibold border border-slate-300 bg-white rounded-lg">Q${m.activeIdx + 1} / ${m.questions.length} ▾</button>
+                <button type="button" id="btnMockNext" ${m.activeIdx === m.questions.length - 1 ? 'disabled' : ''} class="px-4 py-2 text-sm font-medium border border-slate-300 bg-white rounded-lg disabled:opacity-40">Next →</button>
+              </div>
+              ${gridSheet}
             </div>
           `;
+
+          $('[data-open-mock-grid]', root)?.addEventListener('click', () => { m.gridOpen = true; render(); });
+          const closeMockGrid = () => { m.gridOpen = false; render(); };
+          $('[data-close-mock-grid]', root)?.addEventListener('click', closeMockGrid);
+          $('[data-mock-grid-backdrop]', root)?.addEventListener('click', (e) => { if (e.target === e.currentTarget) closeMockGrid(); });
 
           $$('[data-mock-jump]', root).forEach((b) => {
             b.addEventListener('click', () => {
               m.activeIdx = Number(b.dataset.mockJump);
+              m.gridOpen = false;
               render();
             });
           });
@@ -8339,11 +8439,12 @@
         if (m.phase === 'self_marking') {
           const synQuestions = m.questions.filter((q) => q.inst.variant.evaluator?.type === 'atomic_rubric');
           root.innerHTML = `
-            <div class="max-w-4xl space-y-5">
-              <div class="bg-white border border-slate-200 rounded-xl p-5 space-y-2">
-                <h1 class="font-display text-xl font-bold text-slate-900">End-of-Paper Synthesis Self-Marking</h1>
-                <p class="text-sm text-slate-600">Review your written responses against the atomic rubric criteria before final marks and chapter breakdowns are computed.</p>
+            <div class="view max-w-4xl">
+              <div class="shrink-0">
+                <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900">Self-marking</h1>
+                <p class="text-xs text-slate-500 mt-0.5">Review your written responses against the rubric criteria before final marks and chapter breakdowns are computed.</p>
               </div>
+              <div class="view-scroll space-y-3">
               ${synQuestions.map((q) => `
                 <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-3">
                   <div class="text-xs font-mono text-slate-500">Q${q.index + 1} · Chapter ${q.node.metadata.week} · ${q.inst.variant.marks} marks</div>
@@ -8365,8 +8466,9 @@
                   </div>
                 </section>
               `).join('')}
-              <div class="flex justify-end">
-                <button type="button" id="btnFinalizeMockPaper" class="px-5 py-2.5 text-sm font-semibold bg-slate-900 text-white rounded-lg hover:bg-slate-800">
+              </div>
+              <div class="shrink-0">
+                <button type="button" id="btnFinalizeMockPaper" class="w-full sm:w-auto sm:ml-auto sm:block px-5 py-3 sm:py-2.5 text-sm font-semibold bg-slate-900 text-white rounded-lg hover:bg-slate-800">
                   Finalize Self-Marking &amp; Grade Paper →
                 </button>
               </div>
@@ -8387,19 +8489,8 @@
 
         // Submitted phase: show marks per chapter + question breakdown
         const pct = m.totalMarks > 0 ? Math.round((m.totalEarned / m.totalMarks) * 100) : 0;
-        root.innerHTML = `
-          <div class="space-y-6">
-            <div class="bg-white border border-slate-200 rounded-xl p-5 flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <div class="text-xs font-mono text-blue-700 font-semibold">Mock Paper Graded · ${esc(m.mockId)}</div>
-                <h1 class="font-display text-2xl font-bold text-slate-900 mt-0.5">Total Score: ${m.totalEarned} / ${m.totalMarks} marks (${pct}%)</h1>
-                <p class="text-xs text-slate-500 mt-1">All ${m.questions.length} attempt(s) logged with mockId <code class="font-mono">${esc(m.mockId)}</code> and review states updated in IndexedDB.</p>
-              </div>
-              <button type="button" id="btnNewMockPaper" class="px-4 py-2 text-xs sm:text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">
-                New Mock Paper
-              </button>
-            </div>
-
+        const resTab = m.resultTab || 'chapters';
+        const secChapters = `
             <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-3">
               <h2 class="font-display text-base font-semibold text-slate-900">Marks per Chapter Breakdown</h2>
               <div class="divide-y divide-slate-100">
@@ -8420,8 +8511,9 @@
                 }).join('')}
               </div>
             </section>
-
-            <section class="space-y-3">
+        `;
+        const secQuestions = `
+            <section class="space-y-3"><p class="text-xs text-slate-500">All ${m.questions.length} attempt(s) logged with mockId <code class="font-mono">${esc(m.mockId)}</code> and review states updated in IndexedDB.</p>
               <h2 class="font-display text-base font-semibold text-slate-900">Question-by-Question Review</h2>
               ${m.questions.map((q) => `
                 <div class="bg-white border border-slate-200 rounded-xl p-4 space-y-2">
@@ -8435,8 +8527,29 @@
                 </div>
               `).join('')}
             </section>
+        `;
+        root.innerHTML = `
+          <div class="view max-w-4xl">
+            <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center justify-between gap-3 shrink-0">
+              <div>
+                <div class="text-xs font-mono text-blue-700 font-semibold">Mock Paper Graded · ${esc(m.mockId)}</div>
+                <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900 mt-0.5">Total Score: ${m.totalEarned} / ${m.totalMarks} marks (${pct}%)</h1>
+                
+              </div>
+              <button type="button" id="btnNewMockPaper" class="px-4 py-2 text-xs sm:text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">
+                New Mock Paper
+              </button>
+            </div>
+            <div class="seg shrink-0" role="tablist" aria-label="Results sections">
+              <button type="button" role="tab" data-seg-mock="chapters" aria-selected="${resTab === 'chapters'}">By chapter</button>
+              <button type="button" role="tab" data-seg-mock="questions" aria-selected="${resTab === 'questions'}">Question review</button>
+            </div>
+            <div class="view-scroll space-y-3">${resTab === 'questions' ? secQuestions : secChapters}</div>
           </div>
         `;
+        $$('[data-seg-mock]', root).forEach((btn) => {
+          btn.addEventListener('click', () => { m.resultTab = btn.dataset.segMock; renderMockView(root); });
+        });
 
         $('#btnNewMockPaper', root)?.addEventListener('click', () => {
           m.phase = 'setup';
@@ -8445,14 +8558,12 @@
         renderMath(root);
       }
 
-      function renderSkillMapSection() {
-        const status = appState.content.skillMap;
+      /* Skill-map readiness, split so the summary and the list can sit on different tabs. */
+      function skillMapParts() {
         if (!appState.skillMap) {
-          return `
-            <section class="bg-white border border-slate-200 rounded-xl p-5">
-              <h2 class="font-display text-base font-semibold text-slate-900">Skill Map Readiness</h2>
-              <p class="text-sm text-slate-500 mt-1">Skill map not loaded${status?.error ? ': ' + esc(status.error) : '.'}</p>
-            </section>`;
+          const err = appState.content.skillMap?.error;
+          const msg = `<p class="text-sm text-slate-500">Skill map not loaded${err ? ': ' + esc(err) : '.'}</p>`;
+          return { summary: msg, list: msg };
         }
         const map = appState.skillMap;
         const nodes = appState.nodes.filter((n) => n.moduleCode === map.module);
@@ -8461,54 +8572,56 @@
         const { rows, readiness, coverage } = Content.skillRows(map, nodeIds, Content.nodeProgress(nodes, appState.reviewMap, appState.attemptLogs));
         const byCh = {};
         for (const r of rows) (byCh[r.skill.ch] ||= []).push(r);
-        const chapters = Object.keys(byCh).map(Number).sort((a, b) => a - b);
+        const chapters = Object.keys(byCh).map(Number).sort((x, y) => x - y);
         const pct = (x) => Math.round(x * 100);
         const gapCount = analysis.missingIds.length;
-        return `
-          <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-4">
+        const summary = `
+          <div class="space-y-3">
             <div>
-              <h2 class="font-display text-base font-semibold text-slate-900">Skill Map Readiness · ${esc(map.module)}</h2>
-              <p class="text-xs text-slate-500">${rows.length} exam skills weighted by marks. A skill counts as ready in proportion to its mapped questions you last scored ≥ 0.7 on; questions not yet in the bank count as not ready.</p>
+              <h3 class="font-display text-sm font-semibold text-slate-900">Skill map · ${esc(map.module)}</h3>
+              <p class="text-xs text-slate-500">${rows.length} exam skills weighted by marks. A skill is ready in proportion to its mapped questions you last scored ≥ 0.7 on; questions not yet in the bank count as not ready.</p>
             </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
-                <div class="text-xs text-slate-500">Map-weighted readiness</div>
+            <div class="grid grid-cols-3 gap-2">
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                <div class="text-[11px] text-slate-500">Map-weighted readiness</div>
                 <div class="font-mono text-xl font-bold text-emerald-700 mt-0.5">${pct(readiness)}%</div>
               </div>
-              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
-                <div class="text-xs text-slate-500">Question coverage of the map</div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                <div class="text-[11px] text-slate-500">Question coverage</div>
                 <div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${pct(coverage)}%</div>
-                <div class="text-[11px] font-mono text-slate-500">${gapCount} mapped question(s) not in the bank</div>
+                <div class="text-[11px] font-mono text-slate-500">${gapCount} not in bank</div>
               </div>
-              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
-                <div class="text-xs text-slate-500">Skills with no questions</div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+                <div class="text-[11px] text-slate-500">Skills with no questions</div>
                 <div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${analysis.orphanSkills.length + analysis.emptySkills.length}</div>
-                <div class="text-[11px] font-mono text-slate-500">${analysis.partialSkills.length} partially covered</div>
+                <div class="text-[11px] font-mono text-slate-500">${analysis.partialSkills.length} partial</div>
               </div>
             </div>
             ${gapCount ? `
               <details class="text-xs">
-                <summary class="cursor-pointer font-medium text-amber-800">Content gaps: mapped question ids missing from the bank</summary>
+                <summary class="cursor-pointer font-medium text-amber-800 py-1">Content gaps: mapped question ids missing from the bank</summary>
                 <div class="font-mono text-slate-600 mt-2 leading-relaxed">${analysis.missingIds.map(esc).join(', ')}</div>
               </details>` : ''}
-            <div class="space-y-2">
-              ${chapters.map((ch) => `
-                <details class="border border-slate-200 rounded-lg">
-                  <summary class="cursor-pointer px-3 py-2 text-xs font-semibold text-slate-800">Ch ${ch} · ${byCh[ch].length} skills · ${byCh[ch].reduce((a, r) => a + r.skill.marks, 0)} marks</summary>
-                  <div class="divide-y divide-slate-100">
-                    ${byCh[ch].sort((a, b) => b.skill.weight - a.skill.weight).map((r) => `
-                      <div class="px-3 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
-                        <div class="min-w-0"><span class="text-slate-900 font-medium">${esc(r.skill.name)}</span> <span class="text-slate-400 font-mono">(${r.skill.marks} marks)</span></div>
-                        <div class="font-mono shrink-0 text-slate-600">
-                          ${r.total === 0 ? '<span class="text-amber-700">no questions mapped</span>'
-                            : r.available === 0 ? '<span class="text-amber-700">no questions in bank yet</span>'
-                            : `<span class="text-emerald-700 font-semibold">${r.proficient}/${r.total} ready</span> · ${r.attempted} attempted${r.available < r.total ? ` · <span class="text-amber-700">${r.total - r.available} not in bank</span>` : ''}`}
-                        </div>
-                      </div>`).join('')}
-                  </div>
-                </details>`).join('')}
-            </div>
-          </section>`;
+          </div>`;
+        const list = `
+          <div class="space-y-2">
+            ${chapters.map((ch) => `
+              <details class="bg-white border border-slate-200 rounded-lg">
+                <summary class="cursor-pointer px-3 py-2.5 text-sm font-semibold text-slate-800">Ch ${ch} · ${byCh[ch].length} skills · ${byCh[ch].reduce((acc, r) => acc + r.skill.marks, 0)} marks</summary>
+                <div class="divide-y divide-slate-100">
+                  ${byCh[ch].sort((x, y) => y.skill.weight - x.skill.weight).map((r) => `
+                    <div class="px-3 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
+                      <div class="min-w-0"><span class="text-slate-900 font-medium">${esc(r.skill.name)}</span> <span class="text-slate-400 font-mono">(${r.skill.marks} marks)</span></div>
+                      <div class="font-mono shrink-0 text-slate-600">
+                        ${r.total === 0 ? '<span class="text-amber-700">no questions mapped</span>'
+                          : r.available === 0 ? '<span class="text-amber-700">no questions in bank yet</span>'
+                          : `<span class="text-emerald-700 font-semibold">${r.proficient}/${r.total} ready</span> · ${r.attempted} attempted${r.available < r.total ? ` · <span class="text-amber-700">${r.total - r.available} not in bank</span>` : ''}`}
+                      </div>
+                    </div>`).join('')}
+                </div>
+              </details>`).join('')}
+          </div>`;
+        return { summary, list };
       }
 
       function renderReadinessView(root) {
@@ -8518,124 +8631,107 @@
           readiness: Scheduler.computeModuleReadiness(m, appState.nodes, appState.reviewMap, nowMs, appState.attemptLogs),
         }));
         const faultMap = Scheduler.computeFaultSkillMap(appState.attemptLogs, nowMs);
-        const sortedFaults = Object.entries(faultMap).sort((a, b) => b[1] - a[1]);
+        const sortedFaults = Object.entries(faultMap).sort((x, y) => y[1] - x[1]);
+        const tab = appState.ui.readinessTab;
+        const skillParts = skillMapParts();
+
+        const tile = (label, value, sub, tone = 'text-slate-900') => `
+          <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
+            <div class="text-[11px] text-slate-500">${label}</div>
+            <div class="font-mono text-xl font-bold ${tone} mt-0.5">${value}</div>
+            <div class="text-[11px] font-mono text-slate-500">${sub}</div>
+          </div>`;
+
+        const overviewHtml = modStats.map(({ mod, readiness }) => `
+          <section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
+            <div class="flex items-start justify-between gap-3">
+              <div class="min-w-0">
+                <div class="text-xs font-mono font-semibold text-blue-700">${esc(mod.moduleCode)}</div>
+                <h2 class="font-display text-base font-semibold text-slate-900">${esc(mod.title)}</h2>
+              </div>
+              <div class="text-right font-mono shrink-0">
+                ${readiness.daysToExam !== null ? `
+                  <div class="text-lg font-bold text-slate-900">${Math.round(readiness.daysToExam)}d</div>
+                  <div class="text-[11px] text-slate-500">to finals</div>
+                ` : `
+                  <button type="button" data-goto-settings class="text-xs font-mono font-medium text-blue-700 hover:underline">Set exam date</button>
+                  <div class="text-[11px] text-slate-500">urgency = 1</div>
+                `}
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-2">
+              ${tile('Nodes attempted', `${Math.round(readiness.attemptedPct)}%`, `${readiness.attemptedCount} / ${readiness.totalNodes}`)}
+              ${tile('Last attempt ≥ 0.7', `${Math.round(readiness.proficientPct)}%`, `${readiness.proficientCount} / ${readiness.totalNodes} proficient`, 'text-emerald-700')}
+              ${tile('Never attempted', `${readiness.neverAttemptedCount}`, `of ${readiness.totalNodes} nodes`)}
+              ${tile('Retention projection', `${Math.round(readiness.projectedRetention * 100)}%`, `target ${Math.round((mod.targetRetention || 0.9) * 100)}% (model est.)`)}
+            </div>
+          </section>
+        `).join('') + `<section class="bg-white border border-slate-200 rounded-xl p-4">${skillParts.summary}</section>`;
+
+        const chaptersHtml = modStats.map(({ mod, readiness }) => `
+          <section class="bg-white border border-slate-200 rounded-xl p-4">
+            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">${esc(mod.moduleCode)} · attempted · last score ≥ 0.7 · never attempted</div>
+            <div class="divide-y divide-slate-100">
+              ${readiness.weeks.map((w) => `
+                <div class="py-2.5 text-xs">
+                  <div class="min-w-0">
+                    <span class="font-mono font-semibold text-slate-700">Ch ${w.weekNum}</span>
+                    <span class="text-slate-900 font-medium ml-1.5">${esc(w.title)}</span>
+                    <span class="text-slate-400 font-mono ml-1">(×${w.examWeight})</span>
+                  </div>
+                  ${w.count ? `
+                    <div class="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 font-mono">
+                      <span class="text-slate-900 font-semibold">${Math.round(w.attemptedPct)}% attempted</span>
+                      <span class="text-emerald-700 font-semibold">${Math.round(w.proficientPct)}% ≥0.7</span>
+                      <span class="text-slate-600">${w.neverAttemptedCount} never</span>
+                      <span class="text-slate-400">${Math.round(w.projectedRetention * 100)}% est.</span>
+                    </div>
+                  ` : `<div class="mt-1 font-mono text-slate-400">0 nodes</div>`}
+                </div>`).join('')}
+            </div>
+          </section>
+        `).join('');
+
+        const weakHtml = `
+          <section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
+            <div>
+              <h2 class="font-display text-base font-semibold text-slate-900">Fault-isolation weak skills</h2>
+              <p class="text-xs text-slate-500">Filled in automatically when critical or sub-skill steps are missed in synthesis rubrics.</p>
+            </div>
+            ${sortedFaults.length ? `
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                ${sortedFaults.map(([tag, score]) => `
+                  <div class="border border-rose-200 bg-rose-50/50 rounded-lg p-3 flex items-center justify-between gap-3">
+                    <div class="min-w-0">
+                      <div class="font-mono text-xs font-semibold text-rose-900 truncate">${esc(tag)}</div>
+                      <div class="text-[11px] text-rose-700">Priority boost: +${score.toFixed(2)}</div>
+                    </div>
+                    <button type="button" data-remediate-tag="${esc(tag)}" class="px-3 py-1.5 text-xs font-medium bg-white border border-rose-300 text-rose-800 rounded-md hover:bg-rose-100 shrink-0">Drill</button>
+                  </div>
+                `).join('')}
+              </div>
+            ` : '<p class="text-sm text-slate-500 py-2">No missed-skill fault flags yet. Attempt an uncued synthesis problem to test diagnostic fault isolation.</p>'}
+          </section>`;
+
+        const body = { overview: overviewHtml, chapters: chaptersHtml, skills: `<section class="space-y-3">${skillParts.summary}${skillParts.list}</section>`, weak: weakHtml }[tab] || overviewHtml;
+        const tabs = [['overview', 'Overview'], ['chapters', 'Chapters'], ['skills', 'Skills'], ['weak', 'Weak spots']];
 
         root.innerHTML = `
-          <div class="space-y-6">
-            <div class="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <h1 class="font-display text-2xl font-bold text-slate-900">Finals Readiness &amp; Chapter Coverage</h1>
-                <p class="text-sm text-slate-600 mt-1">Per-chapter coverage (% attempted, % scoring ≥ 0.7 on last attempt, and never attempted count), plus fault-isolation remediation.</p>
-              </div>
-              <div class="text-xs font-mono text-slate-500">Total Logged Attempts: ${appState.attemptLogs.length}</div>
+          <div class="view">
+            <div class="shrink-0 flex items-baseline justify-between gap-3">
+              <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900">Finals Readiness</h1>
+              <div class="text-xs font-mono text-slate-500">${appState.attemptLogs.length} attempts logged</div>
             </div>
-
-            <div class="grid grid-cols-1 gap-6">
-              ${modStats.map(({ mod, readiness }) => {
-                const attPct = Math.round(readiness.attemptedPct);
-                const profPct = Math.round(readiness.proficientPct);
-                const estPct = Math.round(readiness.projectedRetention * 100);
-                return `
-                  <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-5">
-                    <div class="flex flex-wrap items-start justify-between gap-4">
-                      <div>
-                        <div class="text-xs font-mono font-semibold text-blue-700">${esc(mod.moduleCode)}</div>
-                        <h2 class="font-display text-lg font-semibold text-slate-900">${esc(mod.title)}</h2>
-                      </div>
-                      <div class="text-right font-mono">
-                        ${readiness.daysToExam !== null ? `
-                          <div class="text-lg font-bold text-slate-900">${Math.round(readiness.daysToExam)}d</div>
-                          <div class="text-[11px] text-slate-500">to finals</div>
-                        ` : `
-                          <button type="button" data-goto-settings class="text-xs font-mono font-medium text-blue-700 hover:underline">Set exam date</button>
-                          <div class="text-[11px] text-slate-500">urgency = 1</div>
-                        `}
-                      </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-4 gap-3">
-                      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
-                        <div class="text-xs text-slate-500">Nodes Attempted</div>
-                        <div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${attPct}%</div>
-                        <div class="text-[11px] font-mono text-slate-500">${readiness.attemptedCount} / ${readiness.totalNodes} attempted</div>
-                      </div>
-                      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
-                        <div class="text-xs text-slate-500">Last Attempt ≥ 0.7</div>
-                        <div class="font-mono text-xl font-bold text-emerald-700 mt-0.5">${profPct}%</div>
-                        <div class="text-[11px] font-mono text-slate-500">${readiness.proficientCount} / ${readiness.totalNodes} proficient</div>
-                      </div>
-                      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
-                        <div class="text-xs text-slate-500">Never Attempted</div>
-                        <div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${readiness.neverAttemptedCount}</div>
-                        <div class="text-[11px] font-mono text-slate-500">of ${readiness.totalNodes} total nodes</div>
-                      </div>
-                      <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
-                        <div class="text-xs text-slate-500">Retention Projection</div>
-                        <div class="font-mono text-sm font-semibold text-slate-700 mt-1">${estPct}% <span class="text-[11px] font-normal text-slate-500">(model estimate)</span></div>
-                        <div class="text-[11px] font-mono text-slate-500 mt-0.5">target ${Math.round((mod.targetRetention || 0.9) * 100)}%</div>
-                      </div>
-                    </div>
-
-                    <div class="pt-2 border-t border-slate-200 space-y-2">
-                      <div class="flex flex-wrap items-center justify-between gap-2">
-                        <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Per-Chapter Coverage Breakdown</div>
-                        <div class="text-[11px] font-mono text-slate-500">% attempted · % last score ≥ 0.7 · never attempted · model estimate</div>
-                      </div>
-                      <div class="divide-y divide-slate-100">
-                        ${readiness.weeks.map((w) => {
-                          const wAttPct = Math.round(w.attemptedPct);
-                          const wProfPct = Math.round(w.proficientPct);
-                          const wEstPct = Math.round(w.projectedRetention * 100);
-                          return `
-                            <div class="py-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-xs">
-                              <div class="min-w-0">
-                                <span class="font-mono font-semibold text-slate-700">Ch ${w.weekNum}</span>
-                                <span class="text-slate-900 font-medium ml-1.5">${esc(w.title)}</span>
-                                <span class="text-slate-400 font-mono ml-1">(×${w.examWeight})</span>
-                              </div>
-                              ${w.count ? `
-                                <div class="flex flex-wrap items-center gap-3 font-mono shrink-0">
-                                  <span class="text-slate-900 font-semibold">${wAttPct}% attempted</span>
-                                  <span class="text-emerald-700 font-semibold">${wProfPct}% ≥0.7</span>
-                                  <span class="text-slate-600">${w.neverAttemptedCount} never attempted</span>
-                                  <span class="text-[11px] text-slate-400">${wEstPct}% model estimate</span>
-                                </div>
-                              ` : `<div class="font-mono text-slate-400 shrink-0">0 nodes (0% attempted · 0% ≥0.7 · 0 never attempted)</div>`}
-                            </div>
-                          `;
-                        }).join('')}
-                      </div>
-                    </div>
-                  </section>
-                `;
-              }).join('')}
+            <div class="seg shrink-0" role="tablist" aria-label="Readiness sections">
+              ${tabs.map(([k, label]) => `<button type="button" role="tab" data-seg-ready="${k}" aria-selected="${tab === k}">${label}</button>`).join('')}
             </div>
-
-            ${renderSkillMapSection()}
-
-            <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-3">
-              <div class="flex items-center justify-between">
-                <div>
-                  <h2 class="font-display text-base font-semibold text-slate-900">Fault-Isolation Weak Skills Matrix</h2>
-                  <p class="text-xs text-slate-500">Automatically populated when critical or sub-skill steps are missed in synthesis rubrics.</p>
-                </div>
-              </div>
-              ${sortedFaults.length ? `
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                  ${sortedFaults.map(([tag, score]) => `
-                    <div class="border border-rose-200 bg-rose-50/50 rounded-lg p-3 flex items-center justify-between gap-3">
-                      <div>
-                        <div class="font-mono text-xs font-semibold text-rose-900">${esc(tag)}</div>
-                        <div class="text-[11px] text-rose-700">Priority Boost: +${score.toFixed(2)}</div>
-                      </div>
-                      <button type="button" data-remediate-tag="${esc(tag)}" class="px-2.5 py-1 text-xs font-medium bg-white border border-rose-300 text-rose-800 rounded-md hover:bg-rose-100 shrink-0">Drill</button>
-                    </div>
-                  `).join('')}
-                </div>
-              ` : '<p class="text-sm text-slate-500 py-2">No active missed-skill fault flags recorded yet. Attempt an uncued synthesis problem to test diagnostic fault isolation.</p>'}
-            </section>
+            <div class="view-scroll space-y-3">${body}</div>
           </div>
         `;
+
+        $$('[data-seg-ready]', root).forEach((btn) => {
+          btn.addEventListener('click', () => { appState.ui.readinessTab = btn.dataset.segReady; renderReadinessView(root); });
+        });
 
         $$('[data-goto-settings]', root).forEach((btn) => {
           btn.addEventListener('click', () => {
@@ -8670,66 +8766,75 @@
 
         const goldenCount = appState.nodes.filter((n) => n.metadata?.isGoldenBank).length;
 
+        const limit = appState.ui.bankLimit;
+        const shown = filtered.slice(0, limit);
         root.innerHTML = `
-          <div class="space-y-5">
-            <div class="flex flex-wrap items-end justify-between gap-4">
-              <div>
-                <h1 class="font-display text-2xl font-bold text-slate-900">Question Bank (${appState.nodes.length} Nodes)</h1>
-                <p class="text-sm text-slate-600 mt-0.5">Includes ${appState.nodes.length - goldenCount} core curriculum nodes + ${goldenCount} migrated Golden Bank stereochemistry formulas.</p>
+          <div class="view">
+            <div class="shrink-0 flex items-center justify-between gap-2">
+              <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900">Question Bank <span class="font-mono text-xs font-normal text-slate-500">${appState.nodes.length} nodes</span></h1>
+              <div class="flex items-center gap-1.5 shrink-0">
+                <button type="button" id="btnBankOpenExplorer" class="px-3 py-1.5 text-xs font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-800">3D Explorer</button>
+                <button type="button" id="btnNewNode" class="px-3 py-1.5 text-xs font-medium bg-slate-900 text-white hover:bg-slate-800 rounded-lg">+ New</button>
               </div>
+            </div>
+
+            <div class="shrink-0 space-y-2">
+              <input id="bankSearchInput" type="search" value="${esc(f.q)}" placeholder="Search title, theme, concept tag or formula…" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-white" />
               <div class="flex items-center gap-2">
-                <button type="button" id="btnBankOpenExplorer" class="px-3.5 py-2 text-xs sm:text-sm font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-800">3D Stereochemistry Explorer</button>
-                <button type="button" id="btnNewNode" class="px-3.5 py-2 text-xs sm:text-sm font-medium bg-slate-900 text-white hover:bg-slate-800 rounded-lg">+ Author QuestionNodeV3</button>
+                <select id="bankModSel" aria-label="Module" class="flex-1 min-w-0 text-sm border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
+                  <option value="ALL">All Modules</option>
+                  ${appState.modules.map((m) => `<option value="${esc(m.moduleCode)}" ${f.moduleCode === m.moduleCode ? 'selected' : ''}>${esc(m.moduleCode)}</option>`).join('')}
+                </select>
+                <select id="bankTierSel" aria-label="Tier" class="flex-1 min-w-0 text-sm border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
+                  <option value="ALL" ${f.tier === 'ALL' ? 'selected' : ''}>All Tiers</option>
+                  <option value="atomic" ${f.tier === 'atomic' ? 'selected' : ''}>Atomic</option>
+                  <option value="synthesis" ${f.tier === 'synthesis' ? 'selected' : ''}>Synthesis</option>
+                </select>
+                <label class="inline-flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer shrink-0">
+                  <input type="checkbox" id="bankShowGolden" ${f.includeGolden ? 'checked' : ''} class="accent-blue-700" />
+                  <span>Golden (${goldenCount})</span>
+                </label>
               </div>
+              <div class="text-[11px] font-mono text-slate-500">Showing ${shown.length} of ${filtered.length} matching nodes</div>
             </div>
 
-            <div class="bg-white border border-slate-200 rounded-xl p-4 flex flex-wrap items-center gap-3">
-              <input id="bankSearchInput" type="search" value="${esc(f.q)}" placeholder="Search title, theme, concept tag, or formula..." class="flex-1 min-w-[220px] text-sm px-3 py-1.5 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700" />
-              <select id="bankModSel" class="text-sm border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
-                <option value="ALL">All Modules</option>
-                ${appState.modules.map((m) => `<option value="${esc(m.moduleCode)}" ${f.moduleCode === m.moduleCode ? 'selected' : ''}>${esc(m.moduleCode)}</option>`).join('')}
-              </select>
-              <select id="bankTierSel" class="text-sm border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
-                <option value="ALL" ${f.tier === 'ALL' ? 'selected' : ''}>All Tiers</option>
-                <option value="atomic" ${f.tier === 'atomic' ? 'selected' : ''}>Atomic</option>
-                <option value="synthesis" ${f.tier === 'synthesis' ? 'selected' : ''}>Synthesis</option>
-              </select>
-              <label class="inline-flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer">
-                <input type="checkbox" id="bankShowGolden" ${f.includeGolden ? 'checked' : ''} class="accent-blue-700" />
-                <span>Include ${goldenCount} Golden Bank</span>
-              </label>
-            </div>
-
-            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden">
-              <div class="px-4 py-2.5 bg-slate-50 border-b border-slate-200 text-xs font-mono text-slate-500 flex justify-between">
-                <span>Showing ${Math.min(filtered.length, 80)} of ${filtered.length} matching nodes</span>
-                <span>Click Launch to practice any item immediately</span>
-              </div>
-              <div class="divide-y divide-slate-100">
-                ${filtered.slice(0, 80).map((n) => `
-                  <div class="px-4 py-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50/60">
-                    <div class="min-w-0">
-                      <div class="text-sm font-medium text-slate-900 truncate">${esc(n.metadata.title)}</div>
-                      <div class="text-xs text-slate-500 mt-0.5">
-                        <span class="font-mono">${esc(n.moduleCode)}</span> · W${n.metadata.week} · ${n.tier} · ${n.variants.length} variant(s) · ${esc(n.metadata.primaryTheme)}
-                      </div>
-                    </div>
-                    <div class="flex items-center gap-2 shrink-0">
-                      ${n.id.startsWith('gb-') ? `<button type="button" data-explore-case="${esc(n.id.slice(3))}" class="px-2.5 py-1 text-xs font-medium border border-slate-200 rounded-md hover:bg-slate-100 text-slate-700">3D View</button>` : ''}
-                      <button type="button" data-inspect-node="${esc(n.id)}" class="px-2.5 py-1 text-xs font-medium border border-slate-200 rounded-md hover:bg-slate-100 text-slate-700">JSON</button>
-                      <button type="button" data-launch-node="${esc(n.id)}" class="px-3 py-1 text-xs font-medium bg-slate-900 text-white rounded-md hover:bg-slate-800">Launch</button>
+            <div class="view-scroll bg-white border border-slate-200 rounded-xl divide-y divide-slate-100">
+              ${shown.map((n) => `
+                <div class="px-3 py-2.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2 hover:bg-slate-50/60">
+                  <div class="min-w-0">
+                    <div class="text-sm font-medium text-slate-900 sm:truncate">${esc(n.metadata.title)}</div>
+                    <div class="text-xs text-slate-500 mt-0.5">
+                      <span class="font-mono">${esc(n.moduleCode)}</span> · W${n.metadata.week} · ${n.tier} · ${n.variants.length} variant(s) · ${esc(n.metadata.primaryTheme)}
                     </div>
                   </div>
-                `).join('')}
-              </div>
+                  <div class="flex items-center gap-2 shrink-0">
+                    ${n.id.startsWith('gb-') ? `<button type="button" data-explore-case="${esc(n.id.slice(3))}" class="px-2.5 py-1 text-xs font-medium border border-slate-200 rounded-md hover:bg-slate-100 text-slate-700">3D</button>` : ''}
+                    <button type="button" data-inspect-node="${esc(n.id)}" class="px-2.5 py-1 text-xs font-medium border border-slate-200 rounded-md hover:bg-slate-100 text-slate-700">JSON</button>
+                    <button type="button" data-launch-node="${esc(n.id)}" class="px-3 py-1 text-xs font-medium bg-slate-900 text-white rounded-md hover:bg-slate-800">Launch</button>
+                  </div>
+                </div>
+              `).join('')}
+              ${filtered.length > limit ? `
+                <div class="p-3 text-center">
+                  <button type="button" id="bankShowMore" class="px-4 py-2 text-sm font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-800">Show ${Math.min(60, filtered.length - limit)} more</button>
+                </div>` : ''}
+              ${filtered.length === 0 ? '<div class="p-6 text-center text-sm text-slate-500">No nodes match these filters.</div>' : ''}
             </div>
           </div>
         `;
 
-        $('#bankSearchInput', root)?.addEventListener('input', (e) => { appState.bankFilters.q = e.target.value; renderBankView(root); });
-        $('#bankModSel', root)?.addEventListener('change', (e) => { appState.bankFilters.moduleCode = e.target.value; renderBankView(root); });
-        $('#bankTierSel', root)?.addEventListener('change', (e) => { appState.bankFilters.tier = e.target.value; renderBankView(root); });
-        $('#bankShowGolden', root)?.addEventListener('change', (e) => { appState.bankFilters.includeGolden = e.target.checked; renderBankView(root); });
+        $('#bankShowMore', root)?.addEventListener('click', () => { appState.ui.bankLimit += 60; renderBankView(root); });
+
+        $('#bankSearchInput', root)?.addEventListener('input', (e) => {
+          appState.bankFilters.q = e.target.value;
+          appState.ui.bankLimit = 60;
+          renderBankView(root);
+          const box = $('#bankSearchInput', root);
+          if (box) { box.focus(); box.setSelectionRange(box.value.length, box.value.length); }
+        });
+        $('#bankModSel', root)?.addEventListener('change', (e) => { appState.bankFilters.moduleCode = e.target.value; appState.ui.bankLimit = 60; renderBankView(root); });
+        $('#bankTierSel', root)?.addEventListener('change', (e) => { appState.bankFilters.tier = e.target.value; appState.ui.bankLimit = 60; renderBankView(root); });
+        $('#bankShowGolden', root)?.addEventListener('change', (e) => { appState.bankFilters.includeGolden = e.target.checked; appState.ui.bankLimit = 60; renderBankView(root); });
         $('#btnBankOpenExplorer', root)?.addEventListener('click', () => openExplorerModal('oh-ma4b2'));
         $('#btnNewNode', root)?.addEventListener('click', () => openNodeInspector(null));
 
@@ -8758,13 +8863,7 @@
         const goldenCount = appState.nodes.filter((n) => n.metadata?.isGoldenBank).length;
         const examIsoLocal = toDatetimeLocalValue(mod.examTimestamp);
 
-        root.innerHTML = `
-          <div class="space-y-6 max-w-4xl">
-            <div>
-              <h1 class="font-display text-2xl font-bold text-slate-900">Module, Scheduler &amp; JSON Bundle Backup</h1>
-              <p class="text-sm text-slate-600 mt-1">All curriculum nodes, chapter weights, review intervals, and attempt logs are persisted locally in IndexedDB.</p>
-            </div>
-
+        const secModule = `
             <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-4">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <div>
@@ -8811,7 +8910,8 @@
                 <button type="button" id="btnSaveModule" class="px-4 py-2 text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">Save Module &amp; Chapters</button>
               </div>
             </section>
-
+        `;
+        const secScheduler = `
             <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-4">
               <h2 class="font-display text-base font-semibold text-slate-900">FSRS Memory &amp; Queue Configuration</h2>
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -8881,7 +8981,7 @@
                 </div>
                 <div>
                   <label for="cfgLfDataJson" class="block text-xs font-medium text-slate-700 mb-1">LF Metals &amp; Ligands Data (Editable JSON)</label>
-                  <textarea id="cfgLfDataJson" rows="10" class="w-full font-mono text-xs p-3 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700">${esc(JSON.stringify(s.lfData || LF.DEFAULT_DATA, null, 2))}</textarea>
+                  <textarea id="cfgLfDataJson" data-bounded-scroll rows="10" class="w-full font-mono text-xs p-3 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700">${esc(JSON.stringify(s.lfData || LF.DEFAULT_DATA, null, 2))}</textarea>
                 </div>
               </div>
 
@@ -8904,13 +9004,14 @@
                 <button type="button" id="btnSaveSettings" class="px-4 py-2 text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">Save Settings</button>
               </div>
             </section>
-
+        `;
+        const secData = `
             <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-4">
               <h2 class="font-display text-base font-semibold text-slate-900">Full JSON Bundle Export &amp; Import</h2>
               <div class="flex flex-wrap items-center gap-3">
                 <button type="button" id="btnExportBundle" class="px-4 py-2 text-sm font-medium bg-blue-700 text-white rounded-lg hover:bg-blue-800">Download JSON Bundle</button>
-                <div class="flex items-center gap-2">
-                  <select id="importModeSel" class="text-sm border border-slate-300 rounded-lg px-2.5 py-2 bg-white">
+                <div class="flex flex-wrap items-center gap-2">
+                  <select id="importModeSel" class="max-w-full text-sm border border-slate-300 rounded-lg px-2.5 py-2 bg-white">
                     <option value="merge">Import Mode: Merge (Recommended)</option>
                     <option value="skip">Import Mode: Skip Existing</option>
                     <option value="overwrite">Import Mode: Overwrite All</option>
@@ -8922,8 +9023,24 @@
                 </div>
               </div>
             </section>
+        `;
+        const tab = appState.ui.settingsTab;
+        const tabs = [['module', 'Module'], ['scheduler', 'Scheduler'], ['data', 'Data']];
+        root.innerHTML = `
+          <div class="view">
+            <div class="shrink-0">
+              <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900">Modules &amp; Data</h1>
+              <p class="text-xs text-slate-500 mt-0.5">Everything is stored locally in IndexedDB on this device.</p>
+            </div>
+            <div class="seg shrink-0" role="tablist" aria-label="Settings sections">
+              ${tabs.map(([k, label]) => `<button type="button" role="tab" data-seg-settings="${k}" aria-selected="${tab === k}">${label}</button>`).join('')}
+            </div>
+            <div class="view-scroll space-y-3 max-w-4xl">${{ module: secModule, scheduler: secScheduler, data: secData }[tab] || secModule}</div>
           </div>
         `;
+        $$('[data-seg-settings]', root).forEach((btn) => {
+          btn.addEventListener('click', () => { appState.ui.settingsTab = btn.dataset.segSettings; renderSettingsView(root); });
+        });
 
         $('#btnClearExamDate', root)?.addEventListener('click', () => {
           const inp = $('#cfgExamDatetime', root);
@@ -9186,7 +9303,7 @@
 
         body.innerHTML = `
           <p class="text-xs text-slate-600">Edit or author a flat 1-Question-1-Answer <code class="font-mono bg-slate-100 px-1 rounded">QuestionNodeV3</code> JSON record. Schema validation runs before saving to IndexedDB.</p>
-          <textarea id="nodeJsonEditor" rows="18" class="w-full font-mono text-xs p-3 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700">${esc(JSON.stringify(template, null, 2))}</textarea>
+          <textarea data-bounded-scroll id="nodeJsonEditor" rows="18" class="w-full font-mono text-xs p-3 bg-slate-50 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700">${esc(JSON.stringify(template, null, 2))}</textarea>
           <div id="nodeValidationMsg" class="text-xs"></div>
           <div class="flex justify-end gap-2 pt-2">
             <button type="button" id="btnValidateNodeJson" class="px-3.5 py-1.5 text-xs font-medium border border-slate-300 rounded-lg hover:bg-slate-50 text-slate-700">Validate Schema</button>
@@ -9232,7 +9349,11 @@
       function updateNavChrome() {
         $$('.nav-link').forEach((btn) => {
           const active = btn.dataset.nav === appState.route;
-          btn.className = `nav-link text-xs sm:text-sm font-medium whitespace-nowrap shrink-0 py-1 border-b-2 ${active ? 'border-blue-700 text-slate-900' : 'border-transparent text-slate-600 hover:text-slate-900'}`;
+          const base = btn.dataset.variant === 'tab'
+            ? `flex flex-col items-center justify-center gap-0.5 py-1.5 min-h-[52px] text-[11px] font-medium ${active ? 'text-blue-700 font-semibold' : 'text-slate-500'}`
+            : `flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium ${active ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:bg-slate-50'}`;
+          btn.className = `nav-link ${base}`;
+          if (active) btn.setAttribute('aria-current', 'page'); else btn.removeAttribute('aria-current');
         });
       }
 

@@ -217,3 +217,22 @@ test('content loading: falls back to public/content when the repo root is served
   assert.equal(none.state, 'unavailable');
   assert.match(none.error, /content\/cm2021\/question-bank\.json.*\|.*public\/content\/cm2021\/question-bank\.json/);
 });
+
+test('skill map: every skill sits in exactly one theory chunk, and no chunk is empty', () => {
+  assert.ok(skillMap.chunks.length >= 15 && skillMap.chunks.length <= 25, 'about twenty topics, not a hundred');
+  const ids = new Set(skillMap.chunks.map((c) => c.id));
+  assert.equal(ids.size, skillMap.chunks.length, 'chunk ids are unique');
+  const used = new Set(skillMap.skills.map((s) => s.chunk));
+  same(skillMap.skills.filter((s) => !ids.has(s.chunk)).map((s) => s.id), [], 'skills with an unknown chunk');
+  same([...ids].filter((id) => !used.has(id)), [], 'empty chunks');
+  assert.ok(skillMap.chunks.every((c) => c.part && c.summary), 'chunks carry a course part and a summary');
+});
+
+test('skill map: validator rejects an unknown chunk but still accepts a map without chunks', () => {
+  const bad = JSON.parse(JSON.stringify(skillMap));
+  bad.skills[0].chunk = 'nope';
+  assert.equal(Content.validateSkillMap(bad).valid, false);
+  const legacy = JSON.parse(JSON.stringify(skillMap));
+  delete legacy.chunks;
+  assert.equal(Content.validateSkillMap(legacy).valid, true);
+});

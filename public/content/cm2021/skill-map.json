@@ -2,6 +2,128 @@
  "version": "1.0",
  "date": "2026-11-18",
  "module": "CM2021",
+ "chunks": [
+  {
+   "id": "lewis-bonding",
+   "part": "Kinjo (Ch 1-5)",
+   "name": "Lewis structures & bonding models",
+   "summary": "Lewis, formal charge, resonance, dative bonds, VB sigma/pi"
+  },
+  {
+   "id": "vsepr",
+   "part": "Kinjo (Ch 1-5)",
+   "name": "Shape & polarity (VSEPR)",
+   "summary": "Geometry from a formula, repulsion ranking, polarity"
+  },
+  {
+   "id": "imf-solids",
+   "part": "Kinjo (Ch 1-5)",
+   "name": "Intermolecular forces & solids",
+   "summary": "IMFs, H-bond anomalies, solid types, unit cells, Born-Haber"
+  },
+  {
+   "id": "periodic-trends",
+   "part": "Kinjo (Ch 1-5)",
+   "name": "Periodic trends & heavy-element anomalies",
+   "summary": "IE/EA/radius, double-bond rule, inert-pair effect"
+  },
+  {
+   "id": "mo-diatomic",
+   "part": "Kinjo (Ch 1-5)",
+   "name": "MO theory: diatomics",
+   "summary": "Overlap rules, MO diagrams, bond order, magnetism, HOMO/LUMO, PES"
+  },
+  {
+   "id": "mo-polyatomic",
+   "part": "Kinjo (Ch 1-5)",
+   "name": "MO theory: polyatomics & LGOs",
+   "summary": "Polyatomic MO diagrams and qualitative ligand group orbitals"
+  },
+  {
+   "id": "delocalised",
+   "part": "Kinjo (Ch 1-5)",
+   "name": "Multicentre & hyperconjugative bonding",
+   "summary": "3c-2e, 3c-4e, hyperconjugation, planar N(SiH3)3"
+  },
+  {
+   "id": "reaction-toolkit",
+   "part": "Kinjo (Ch 1-5)",
+   "name": "Writing & balancing reactions",
+   "summary": "Oxidation numbers, equations, named processes, schemes, stoichiometry, stability"
+  },
+  {
+   "id": "hydrogen",
+   "part": "Kinjo (Ch 1-5)",
+   "name": "Hydrogen & isotopes",
+   "summary": "Hydrides, isotope effects, H2 activation, radical chains"
+  },
+  {
+   "id": "s-block",
+   "part": "Kinjo (Ch 1-5)",
+   "name": "Groups 1-2 & ion binding",
+   "summary": "Group 1 and 2 reactivity, hydration, HSAB, crowns, diagonal relationships, bio ion transport"
+  },
+  {
+   "id": "group13-14",
+   "part": "Kinjo (Ch 1-5)",
+   "name": "Boron, carbon & silicon",
+   "summary": "Boron and BX3 acidity, silicon chemistry, silicates, allotropes"
+  },
+  {
+   "id": "group15-18",
+   "part": "Kinjo (Ch 1-5)",
+   "name": "Groups 15-18",
+   "summary": "Nitrogen, phosphorus, oxygen/sulfur, halogens, noble gases"
+  },
+  {
+   "id": "naming",
+   "part": "Hiang Kwee (Ch 6-9)",
+   "name": "Naming, ligands & oxidation state",
+   "summary": "Name/formula, oxidation state, dn, CN, denticity"
+  },
+  {
+   "id": "isomerism",
+   "part": "Hiang Kwee (Ch 6-9)",
+   "name": "Isomerism & chirality",
+   "summary": "Structural, geometric and optical isomers, symmetry labels"
+  },
+  {
+   "id": "stability",
+   "part": "Hiang Kwee (Ch 6-9)",
+   "name": "Complex stability",
+   "summary": "Formation constants, stability trends, chelate effect"
+  },
+  {
+   "id": "bonding-models",
+   "part": "Hiang Kwee (Ch 6-9)",
+   "name": "Bonding models: VBT, CFT, LFT",
+   "summary": "Valence bond, crystal field and ligand field pictures, pi-bonding"
+  },
+  {
+   "id": "field-energetics",
+   "part": "Hiang Kwee (Ch 6-9)",
+   "name": "Splitting, CFSE & spin state",
+   "summary": "d-orbital splitting, CFSE, spin state, Jahn-Teller, metal identification"
+  },
+  {
+   "id": "magnetism-colour",
+   "part": "Hiang Kwee (Ch 6-9)",
+   "name": "Magnetism, colour & selection rules",
+   "summary": "Spin-only moment, colour, charge transfer, selection rules"
+  },
+  {
+   "id": "terms-ts",
+   "part": "Hiang Kwee (Ch 6-9)",
+   "name": "Terms & Tanabe-Sugano",
+   "summary": "Microstates, term symbols, Oh splitting of terms, Tanabe-Sugano diagrams"
+  },
+  {
+   "id": "kinetics",
+   "part": "Hiang Kwee (Ch 6-9)",
+   "name": "Substitution kinetics",
+   "summary": "Lability, mechanisms, stereochemistry, trans effect"
+  }
+ ],
  "skills": [
   {
    "id": "c1.lewis",
@@ -24,7 +146,8 @@
     "bk-c1-of4",
     "bk-c1-octet-exceptions",
     "bk-c1-tut1-d"
-   ]
+   ],
+   "chunk": "lewis-bonding"
   },
   {
    "id": "c1.formal-charge",
@@ -46,7 +169,8 @@
     "bk-c1-dative",
     "bk-c1-tut1-d",
     "bk-c1-scn-formal-charge"
-   ]
+   ],
+   "chunk": "lewis-bonding"
   },
   {
    "id": "c1.resonance",
@@ -66,7 +190,8 @@
     "bk-c1-resonance-count",
     "bk-c1-octet-exceptions",
     "bk-c1-scn-formal-charge"
-   ]
+   ],
+   "chunk": "lewis-bonding"
   },
   {
    "id": "c1.vsepr",
@@ -93,7 +218,8 @@
     "bk-c4-p-structures",
     "bk-c4-interhalogens",
     "bk-c4-xenon"
-   ]
+   ],
+   "chunk": "vsepr"
   },
   {
    "id": "c1.polarity",
@@ -112,7 +238,8 @@
    "nodes": [
     "bk-c1-vsepr-tut1",
     "bk-c1-polar-pick"
-   ]
+   ],
+   "chunk": "vsepr"
   },
   {
    "id": "c1.repulsion",
@@ -130,7 +257,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c1-repulsion-order"
-   ]
+   ],
+   "chunk": "vsepr"
   },
   {
    "id": "c1.dative",
@@ -153,7 +281,8 @@
     "bk-c4-sulfur-oxides",
     "bk-c4-interhalogens",
     "bk-c4-si-halides"
-   ]
+   ],
+   "chunk": "lewis-bonding"
   },
   {
    "id": "c1.vb-sigma-pi",
@@ -171,7 +300,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c1-sigma-pi"
-   ]
+   ],
+   "chunk": "lewis-bonding"
   },
   {
    "id": "c2.imf-bp",
@@ -193,7 +323,8 @@
     "bk-c2-bp-picks",
     "bk-c2-chalcogen-bp",
     "bk-c2-ammonia-borane"
-   ]
+   ],
+   "chunk": "imf-solids"
   },
   {
    "id": "c2.hbond-anomaly",
@@ -213,7 +344,8 @@
    "nodes": [
     "bk-c2-ammonia-borane",
     "bk-c2-ice"
-   ]
+   ],
+   "chunk": "imf-solids"
   },
   {
    "id": "c2.unit-cell",
@@ -232,7 +364,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c2-unit-cells"
-   ]
+   ],
+   "chunk": "imf-solids"
   },
   {
    "id": "c2.solid-types",
@@ -250,7 +383,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c2-bond-classes"
-   ]
+   ],
+   "chunk": "imf-solids"
   },
   {
    "id": "c2.born-haber",
@@ -270,7 +404,8 @@
    "nodes": [
     "bk-c2-lif-energetics",
     "bk-c4-hsab-solubility"
-   ]
+   ],
+   "chunk": "imf-solids"
   },
   {
    "id": "c2.double-bond-rule",
@@ -290,7 +425,8 @@
    "nodes": [
     "bk-c2-heavy-hybrid",
     "bk-c4-sio2-co2"
-   ]
+   ],
+   "chunk": "periodic-trends"
   },
   {
    "id": "c2.periodic-trends",
@@ -311,7 +447,8 @@
     "bk-c4-g2-ie",
     "bk-c2-ionisation-energy",
     "bk-c4-g1-g2-compare"
-   ]
+   ],
+   "chunk": "periodic-trends"
   },
   {
    "id": "c3.mo-principles",
@@ -331,7 +468,8 @@
    "nodes": [
     "bk-c3-mo-principles",
     "bk-c3-overlap-types"
-   ]
+   ],
+   "chunk": "mo-diatomic"
   },
   {
    "id": "c3.diatomic",
@@ -358,7 +496,8 @@
     "bk-c3-nf",
     "bk-c3-three-centre-pi",
     "bk-c3-h3plus"
-   ]
+   ],
+   "chunk": "mo-diatomic"
   },
   {
    "id": "c3.diatomic-magnetism",
@@ -382,7 +521,8 @@
     "bk-c3-nf",
     "bk-c3-nitrene",
     "bk-c4-n-oxides-props"
-   ]
+   ],
+   "chunk": "mo-diatomic"
   },
   {
    "id": "c3.sp-mixing",
@@ -400,7 +540,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c3-sp-mixing"
-   ]
+   ],
+   "chunk": "mo-diatomic"
   },
   {
    "id": "c3.homo-count",
@@ -419,7 +560,8 @@
    "nodes": [
     "bk-c3-homo-past",
     "bk-c3-homo-drill"
-   ]
+   ],
+   "chunk": "mo-diatomic"
   },
   {
    "id": "c3.hetero-diatomic",
@@ -439,7 +581,8 @@
     "bk-c3-nf",
     "bk-c3-nitrene",
     "bk-c3-co-binding"
-   ]
+   ],
+   "chunk": "mo-diatomic"
   },
   {
    "id": "c3.frontier",
@@ -459,7 +602,8 @@
     "bk-c3-co-binding",
     "bk-c3-water-ammonia-mo",
     "bk-c3-silyl-ie"
-   ]
+   ],
+   "chunk": "mo-diatomic"
   },
   {
    "id": "c3.polyatomic",
@@ -486,7 +630,8 @@
     "bk-c3-3c4e",
     "bk-c3-water-ammonia-mo",
     "bk-c3-co2-salcs"
-   ]
+   ],
+   "chunk": "mo-polyatomic"
   },
   {
    "id": "c3.lgo",
@@ -506,7 +651,8 @@
    "nodes": [
     "bk-c3-lgo-oh",
     "bk-c3-co2-salcs"
-   ]
+   ],
+   "chunk": "mo-polyatomic"
   },
   {
    "id": "c3.3c4e",
@@ -526,7 +672,8 @@
    "nodes": [
     "bk-c3-3c4e",
     "bk-c4-oxonium"
-   ]
+   ],
+   "chunk": "delocalised"
   },
   {
    "id": "c3.3c2e",
@@ -549,7 +696,8 @@
     "bk-c3-h3plus",
     "bk-c3-multicentre-e-deficient",
     "bk-c4-diborane"
-   ]
+   ],
+   "chunk": "delocalised"
   },
   {
    "id": "c3.pes",
@@ -567,7 +715,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c3-pes"
-   ]
+   ],
+   "chunk": "mo-diatomic"
   },
   {
    "id": "c3.hyperconj",
@@ -587,7 +736,8 @@
     "bk-c3-silyl-ie",
     "bk-c4-chlorosilanes",
     "bk-c4-hydrazine-gauche"
-   ]
+   ],
+   "chunk": "delocalised"
   },
   {
    "id": "c4.vofc",
@@ -605,7 +755,8 @@
    "weight": 0.0097,
    "nodes": [
     "bk-c4-vofc-cn"
-   ]
+   ],
+   "chunk": "reaction-toolkit"
   },
   {
    "id": "c4.ox-number",
@@ -629,7 +780,8 @@
     "bk-c4-h3po3",
     "bk-c4-clo2",
     "bk-c4-electride-alkalide"
-   ]
+   ],
+   "chunk": "reaction-toolkit"
   },
   {
    "id": "c4.balance",
@@ -665,7 +817,8 @@
     "bk-c4-boron-x3-reactions",
     "bk-c4-hno3-reactions",
     "bk-c4-halogen-redox"
-   ]
+   ],
+   "chunk": "reaction-toolkit"
   },
   {
    "id": "c4.named-process",
@@ -695,7 +848,8 @@
     "bk-c4-p-scheme",
     "bk-c4-contact",
     "bk-c4-named-roundup"
-   ]
+   ],
+   "chunk": "reaction-toolkit"
   },
   {
    "id": "c4.reaction-scheme",
@@ -714,7 +868,8 @@
    "nodes": [
     "bk-c4-n-chart",
     "bk-c4-p-scheme"
-   ]
+   ],
+   "chunk": "reaction-toolkit"
   },
   {
    "id": "c4.hydrides",
@@ -734,7 +889,8 @@
     "bk-c4-hydride-class",
     "bk-c4-hydride-reagents",
     "bk-c4-hd"
-   ]
+   ],
+   "chunk": "hydrogen"
   },
   {
    "id": "c4.isotope-zpe",
@@ -753,7 +909,8 @@
    "nodes": [
     "bk-c4-isotope-zpe",
     "bk-c4-kie"
-   ]
+   ],
+   "chunk": "hydrogen"
   },
   {
    "id": "c4.kie",
@@ -771,7 +928,8 @@
    "weight": 0.013,
    "nodes": [
     "bk-c4-kie"
-   ]
+   ],
+   "chunk": "hydrogen"
   },
   {
    "id": "c4.isotope-facts",
@@ -795,7 +953,8 @@
     "bk-c4-electrolysis",
     "bk-c4-chloralkali",
     "bk-c4-heavy-water"
-   ]
+   ],
+   "chunk": "hydrogen"
   },
   {
    "id": "c4.stoichiometry",
@@ -816,7 +975,8 @@
     "bk-c4-naalh4",
     "bk-c4-azide-tnt",
     "bk-c6-agcl"
-   ]
+   ],
+   "chunk": "reaction-toolkit"
   },
   {
    "id": "c4.h2-activation",
@@ -836,7 +996,8 @@
    "nodes": [
     "bk-c4-h-activation",
     "bk-c4-h2-reactions"
-   ]
+   ],
+   "chunk": "hydrogen"
   },
   {
    "id": "c4.radical-chain",
@@ -854,7 +1015,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c4-hcl-chain"
-   ]
+   ],
+   "chunk": "hydrogen"
   },
   {
    "id": "c4.g1-oxides",
@@ -874,7 +1036,8 @@
     "bk-c4-g1-o2",
     "bk-c4-g1-oxides-water",
     "bk-c4-li-o2-eq"
-   ]
+   ],
+   "chunk": "s-block"
   },
   {
    "id": "c4.g1-reactivity",
@@ -894,7 +1057,8 @@
     "bk-c4-li-nitride",
     "bk-c4-acetylide",
     "bk-c4-li-anomaly"
-   ]
+   ],
+   "chunk": "s-block"
   },
   {
    "id": "c4.hydration",
@@ -913,7 +1077,8 @@
    "weight": 0.013,
    "nodes": [
     "bk-c4-hydration"
-   ]
+   ],
+   "chunk": "s-block"
   },
   {
    "id": "c4.hsab",
@@ -932,7 +1097,8 @@
    "weight": 0.0065,
    "nodes": [
     "bk-c4-hsab-solubility"
-   ]
+   ],
+   "chunk": "s-block"
   },
   {
    "id": "c4.crown",
@@ -954,7 +1120,8 @@
    "nodes": [
     "bk-c4-crown-cryptand",
     "bk-c4-electride-alkalide"
-   ]
+   ],
+   "chunk": "s-block"
   },
   {
    "id": "c4.acetylide",
@@ -972,7 +1139,8 @@
    "weight": 0.0065,
    "nodes": [
     "bk-c4-acetylide"
-   ]
+   ],
+   "chunk": "s-block"
   },
   {
    "id": "c4.diagonal",
@@ -993,7 +1161,8 @@
     "bk-c4-li-nitride",
     "bk-c4-li-anomaly",
     "bk-c4-be-anomaly"
-   ]
+   ],
+   "chunk": "s-block"
   },
   {
    "id": "c4.g2-reactivity",
@@ -1015,7 +1184,8 @@
     "bk-c4-g2-oxides",
     "bk-c4-g2-nitride-halide",
     "bk-c4-g1-g2-compare"
-   ]
+   ],
+   "chunk": "s-block"
   },
   {
    "id": "c4.inert-pair",
@@ -1033,7 +1203,8 @@
    "weight": 0.0097,
    "nodes": [
     "bk-c4-inert-pair"
-   ]
+   ],
+   "chunk": "periodic-trends"
   },
   {
    "id": "c4.boron",
@@ -1052,7 +1223,8 @@
    "nodes": [
     "bk-c4-boron-misc",
     "bk-c4-boron-x3-reactions"
-   ]
+   ],
+   "chunk": "group13-14"
   },
   {
    "id": "c4.bx3-acidity",
@@ -1070,7 +1242,8 @@
    "weight": 0.013,
    "nodes": [
     "bk-c4-bx3-acidity"
-   ]
+   ],
+   "chunk": "group13-14"
   },
   {
    "id": "c4.silicon",
@@ -1091,7 +1264,8 @@
     "bk-c4-silanes",
     "bk-c4-chlorosilanes",
     "bk-c4-si-halides"
-   ]
+   ],
+   "chunk": "group13-14"
   },
   {
    "id": "c4.trisilylamine",
@@ -1110,7 +1284,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c4-trisilylamine"
-   ]
+   ],
+   "chunk": "delocalised"
   },
   {
    "id": "c4.si-o-bonds",
@@ -1128,7 +1303,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c4-sio2-co2"
-   ]
+   ],
+   "chunk": "group13-14"
   },
   {
    "id": "c4.silicates",
@@ -1146,7 +1322,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c4-silicates"
-   ]
+   ],
+   "chunk": "group13-14"
   },
   {
    "id": "c4.allotropes",
@@ -1166,7 +1343,8 @@
     "bk-c4-carbon",
     "bk-c4-p-structures",
     "bk-c4-sulfur-allotropes"
-   ]
+   ],
+   "chunk": "group13-14"
   },
   {
    "id": "c4.nitrogen",
@@ -1195,7 +1373,8 @@
     "bk-c4-n-oxides-eq",
     "bk-c4-n-oxides-props",
     "bk-c4-hno3-reactions"
-   ]
+   ],
+   "chunk": "group15-18"
   },
   {
    "id": "c4.gauche",
@@ -1213,7 +1392,8 @@
    "weight": 0.0097,
    "nodes": [
     "bk-c4-hydrazine-gauche"
-   ]
+   ],
+   "chunk": "group15-18"
   },
   {
    "id": "c4.phosphorus",
@@ -1237,7 +1417,8 @@
     "bk-c4-p-scheme",
     "bk-c4-p-equations",
     "bk-c4-p4o10-uses"
-   ]
+   ],
+   "chunk": "group15-18"
   },
   {
    "id": "c4.oxygen-sulfur",
@@ -1260,7 +1441,8 @@
     "bk-c4-contact",
     "bk-c4-sulfur-oxides",
     "bk-c4-sf6-inert"
-   ]
+   ],
+   "chunk": "group15-18"
   },
   {
    "id": "c4.kinetic-stability",
@@ -1280,7 +1462,8 @@
     "bk-c4-sf6-inert",
     "bk-c9-labile-inert",
     "bk-c4-h2-reactions"
-   ]
+   ],
+   "chunk": "reaction-toolkit"
   },
   {
    "id": "c4.halogens",
@@ -1302,7 +1485,8 @@
     "bk-c4-clo2",
     "bk-c4-interhalogens",
     "bk-c4-halogen-redox"
-   ]
+   ],
+   "chunk": "group15-18"
   },
   {
    "id": "c4.noble",
@@ -1320,7 +1504,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c4-xenon"
-   ]
+   ],
+   "chunk": "group15-18"
   },
   {
    "id": "c4.nuclear",
@@ -1338,7 +1523,8 @@
    "weight": 0.0195,
    "nodes": [
     "bk-c4-nuclear"
-   ]
+   ],
+   "chunk": "reaction-toolkit"
   },
   {
    "id": "c4.bioinorganic",
@@ -1356,7 +1542,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c4-bioinorganic"
-   ]
+   ],
+   "chunk": "s-block"
   },
   {
    "id": "c5.symmetry-ops",
@@ -1377,7 +1564,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c5-symmetry-rules"
-   ]
+   ],
+   "chunk": "isomerism"
   },
   {
    "id": "c6.name",
@@ -1402,7 +1590,8 @@
     "bk-c6-formula-rules",
     "bk-c7-identify-p1",
     "bk-c7-identify-p2"
-   ]
+   ],
+   "chunk": "naming"
   },
   {
    "id": "c6.formula",
@@ -1421,7 +1610,8 @@
    "nodes": [
     "bk-c6-formula-rules",
     "bk-c6-structure-from-name"
-   ]
+   ],
+   "chunk": "naming"
   },
   {
    "id": "c6.ox-dn-cn",
@@ -1445,7 +1635,8 @@
     "bk-c6-ox-state-practice",
     "bk-c6-dn-count",
     "bk-c6-cn-factors"
-   ]
+   ],
+   "chunk": "naming"
   },
   {
    "id": "c6.ligands",
@@ -1465,7 +1656,8 @@
    "nodes": [
     "bk-c6-denticity",
     "bk-c6-ambidentate"
-   ]
+   ],
+   "chunk": "naming"
   },
   {
    "id": "c6.structural-isomers",
@@ -1489,7 +1681,8 @@
     "bk-c6-isomer-type",
     "bk-c6-agno3-test",
     "bk-c6-agcl"
-   ]
+   ],
+   "chunk": "isomerism"
   },
   {
    "id": "c6.geometric",
@@ -1511,7 +1704,8 @@
     "bk-c6-tut4-stereo",
     "bk-c6-structure-from-name",
     "bk-c6-drawing"
-   ]
+   ],
+   "chunk": "isomerism"
   },
   {
    "id": "c6.optical",
@@ -1535,7 +1729,8 @@
     "bk-c6-delta-lambda",
     "bk-c6-tut4-stereo",
     "bk-c6-drawing"
-   ]
+   ],
+   "chunk": "isomerism"
   },
   {
    "id": "c6.isomer-count",
@@ -1553,7 +1748,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c6-isomer-counts"
-   ]
+   ],
+   "chunk": "isomerism"
   },
   {
    "id": "c7.formation-k",
@@ -1572,7 +1768,8 @@
    "nodes": [
     "bk-c7-stepwise-k",
     "bk-c7-cu-kf5"
-   ]
+   ],
+   "chunk": "stability"
   },
   {
    "id": "c7.stability",
@@ -1593,7 +1790,8 @@
    "nodes": [
     "bk-c7-ligand-basicity",
     "bk-c7-metal-stability"
-   ]
+   ],
+   "chunk": "stability"
   },
   {
    "id": "c7.chelate",
@@ -1612,7 +1810,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c7-chelate"
-   ]
+   ],
+   "chunk": "stability"
   },
   {
    "id": "c7.vbt",
@@ -1630,7 +1829,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c7-vbt"
-   ]
+   ],
+   "chunk": "bonding-models"
   },
   {
    "id": "c7.cft-essay",
@@ -1649,7 +1849,8 @@
    "nodes": [
     "bk-c7-cft-principles",
     "bk-c7-cft-limits"
-   ]
+   ],
+   "chunk": "bonding-models"
   },
   {
    "id": "c7.lft-essay",
@@ -1670,7 +1871,8 @@
     "bk-c7-cr-delta",
     "bk-c7-pi-effects",
     "bk-c7-lft-mo"
-   ]
+   ],
+   "chunk": "bonding-models"
   },
   {
    "id": "c7.splitting",
@@ -1693,7 +1895,8 @@
     "bk-c7-lft-principles",
     "bk-c7-td-oh",
     "bk-c7-sq-planar"
-   ]
+   ],
+   "chunk": "field-energetics"
   },
   {
    "id": "c7.cfse",
@@ -1717,7 +1920,8 @@
     "bk-c7-identify-p2",
     "bk-c9-cr-labile",
     "bk-c7-cfse-d1-d2"
-   ]
+   ],
+   "chunk": "field-energetics"
   },
   {
    "id": "c7.hs-ls",
@@ -1742,7 +1946,8 @@
     "bk-c8-moment-infer",
     "bk-c8-ts-d7",
     "bk-c8-ts-d4"
-   ]
+   ],
+   "chunk": "field-energetics"
   },
   {
    "id": "c7.spectrochemical",
@@ -1762,7 +1967,8 @@
    "nodes": [
     "bk-c7-spectrochemical",
     "bk-c7-cr-delta"
-   ]
+   ],
+   "chunk": "field-energetics"
   },
   {
    "id": "c7.pi-bonding",
@@ -1785,7 +1991,8 @@
     "bk-c7-pi-effects",
     "bk-c7-co-backbond",
     "bk-c7-backbond-trend"
-   ]
+   ],
+   "chunk": "bonding-models"
   },
   {
    "id": "c7.site-pref",
@@ -1803,7 +2010,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c7-co-ni-td"
-   ]
+   ],
+   "chunk": "field-energetics"
   },
   {
    "id": "c7.jahn-teller",
@@ -1822,7 +2030,8 @@
    "nodes": [
     "bk-c7-cu-kf5",
     "bk-c7-jahn-teller"
-   ]
+   ],
+   "chunk": "field-energetics"
   },
   {
    "id": "c7.metal-id",
@@ -1842,7 +2051,8 @@
     "bk-c7-identify-p1",
     "bk-c7-identify-p2",
     "bk-c8-identify-practice"
-   ]
+   ],
+   "chunk": "field-energetics"
   },
   {
    "id": "c8.spin-only",
@@ -1864,7 +2074,8 @@
     "bk-c8-moment-infer",
     "bk-c8-ts-d7",
     "bk-c8-ts-d4"
-   ]
+   ],
+   "chunk": "magnetism-colour"
   },
   {
    "id": "c8.colour",
@@ -1884,7 +2095,8 @@
    "nodes": [
     "bk-c8-colour",
     "bk-c8-identify-practice"
-   ]
+   ],
+   "chunk": "magnetism-colour"
   },
   {
    "id": "c8.microstates",
@@ -1903,7 +2115,8 @@
    "nodes": [
     "bk-c8-microstates",
     "bk-c8-terms-d8"
-   ]
+   ],
+   "chunk": "terms-ts"
   },
   {
    "id": "c8.terms",
@@ -1925,7 +2138,8 @@
     "bk-c8-ground-terms",
     "bk-c8-term-numbers",
     "bk-c8-hund"
-   ]
+   ],
+   "chunk": "terms-ts"
   },
   {
    "id": "c8.oh-terms",
@@ -1947,7 +2161,8 @@
     "bk-c8-ts-d7",
     "bk-c8-ts-d4",
     "bk-c8-ts-d6"
-   ]
+   ],
+   "chunk": "terms-ts"
   },
   {
    "id": "c8.tanabe-sugano",
@@ -1968,7 +2183,8 @@
     "bk-c8-ts-d4",
     "bk-c8-ts-d6",
     "bk-c8-ts-reading"
-   ]
+   ],
+   "chunk": "terms-ts"
   },
   {
    "id": "c8.selection",
@@ -1987,7 +2203,8 @@
    "weight": 0.0065,
    "nodes": [
     "bk-c8-selection-rules"
-   ]
+   ],
+   "chunk": "magnetism-colour"
   },
   {
    "id": "c8.charge-transfer",
@@ -2005,7 +2222,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c8-charge-transfer"
-   ]
+   ],
+   "chunk": "magnetism-colour"
   },
   {
    "id": "c9.labile",
@@ -2024,7 +2242,8 @@
    "nodes": [
     "bk-c9-labile-inert",
     "bk-c9-cr-labile"
-   ]
+   ],
+   "chunk": "kinetics"
   },
   {
    "id": "c9.mechanism",
@@ -2045,7 +2264,8 @@
     "bk-c9-mechanisms",
     "bk-c9-evidence",
     "bk-c9-stereo"
-   ]
+   ],
+   "chunk": "kinetics"
   },
   {
    "id": "c9.stereo",
@@ -2063,7 +2283,8 @@
    "weight": 0.0032,
    "nodes": [
     "bk-c9-stereo"
-   ]
+   ],
+   "chunk": "kinetics"
   },
   {
    "id": "c9.trans-effect",
@@ -2083,7 +2304,8 @@
    "nodes": [
     "bk-c9-trans-series",
     "bk-c9-trans-products"
-   ]
+   ],
+   "chunk": "kinetics"
   }
  ],
  "nodeSkills": {

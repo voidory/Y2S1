@@ -29,7 +29,7 @@ test('hooks: short, well-formed, and never printed in a question stem (they woul
     for (const v of n.variants) {
       const h = hookOf(n, v);
       if (!h) continue;
-      if (typeof h !== 'string' || h.length < 20 || h.length > 420) bad.push(`${n.id}/${v.variantId}: length ${h.length}`);
+      if (typeof h !== 'string' || h.length < 20 || h.length > 520) bad.push(`${n.id}/${v.variantId}: length ${h.length}`);
       if (v.stem.includes(h.slice(0, 40))) bad.push(`${n.id}/${v.variantId}: hook is in the stem`);
     }
   }
@@ -55,4 +55,18 @@ test('new nodes: Ostwald and Downs are in the bank, mapped to named-process, and
   assert.equal(grade('bk-c4-downs', 'c4-downs-v1', 'Downs cell'), 1);
   assert.equal(grade('bk-c4-downs', 'c4-downs-v1', "Down's process"), 1);
   assert.equal(grade('bk-c4-downs', 'c4-downs-v1', 'Haber'), 0);
+});
+
+test('hooks: history-based hooks carry their sources, and no hook asserts a date the research could not confirm', () => {
+  const historical = ['bk-c4-haber', 'bk-c4-olin-raschig', 'bk-c4-wislicenus', 'bk-c4-ostwald', 'bk-c4-downs', 'bk-c4-contact', 'bk-c4-chloralkali',
+    'bk-c4-aqua-regia', 'bk-c4-h-activation', 'bk-c4-crown-cryptand', 'bk-c4-electride-alkalide', 'bk-c4-h2o2', 'bk-c4-p-scheme'];
+  for (const id of historical) {
+    const src = byId[id].metadata.hookSources;
+    assert.ok(Array.isArray(src) && src.length >= 1 && src.every((u) => /^https:\/\//.test(u)), `${id} needs source URLs`);
+  }
+  const text = (id) => [byId[id].metadata.memoryHook, ...byId[id].variants.map((v) => v.memoryHook)].filter(Boolean).join(' ');
+  // the research found no corroborated Olin date, no Wislicenus industrial motive, and no source for the SF6 "crowding" explanation
+  assert.ok(!/\b19\d\d\b/.test(text('bk-c4-olin-raschig').replace('1907', '')), 'no unverified Olin date');
+  assert.ok(!/crowd/i.test(text('bk-c4-sf6-inert')), 'SF6 crowding explanation is unsourced');
+  assert.ok(!/designed for airbag|invented for airbag/i.test(text('bk-c4-wislicenus')));
 });

@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-18T08:44:24.000Z",
+ "exportedAt": "2026-11-18T09:52:34.000Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -5505,7 +5505,11 @@
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
     "family": "h-activation",
-    "memoryHook": "**Oxidative addition = H₂ splits across the metal**: oxidation state +2 and coordination number +2 (Ir(I) → Ir(III)). Dihydrogen and metal-hydride complexes are the intermediates in catalytic hydrogenation."
+    "memoryHook": "**Vaska’s complex, IrCl(CO)(PPh₃)₂ (Vaska and DiLuzio, 1961), is the textbook oxidative addition: Ir(I) → Ir(III), coordination number +2.** Kubas (1984) showed H₂ can also bind intact and side-on, not only as two hydrides: the intermediate on the way.",
+    "hookSources": [
+     "https://www.pnas.org/doi/full/10.1073/pnas.0609707104",
+     "https://pmc.ncbi.nlm.nih.gov/articles/PMC3238621/"
+    ]
    },
    "variants": [
     {
@@ -5774,7 +5778,10 @@
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
     "family": "g1-oxygen",
-    "memoryHook": "**Peroxide plus water gives H₂O₂**: Na₂O₂ + 2H₂O → 2NaOH + H₂O₂ (the peroxide ion just picks up protons). KO₂ scrubs CO₂ and releases O₂, so it is used in breathing apparatus."
+    "memoryHook": "**Peroxide plus water gives H₂O₂**: Na₂O₂ + 2H₂O → 2NaOH + H₂O₂. **KO₂ scrubs CO₂ and releases O₂**: 4KO₂ + 2CO₂ → 2K₂CO₃ + 3O₂, which is why it is used in breathing apparatus.",
+    "hookSources": [
+     "https://chem.libretexts.org/Courses/Howard_University/General_Chemistry:_An_Atoms_First_Approach/Unit_8:__Materials/Chapter_20:_Periodic_Trends_and_the_s-Block_Elements/Chapter_20.3:_The_Alkali_Metals_(Group_1)"
+    ]
    },
    "variants": [
     {
@@ -5852,7 +5859,10 @@
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
     "family": "g1-n2",
-    "memoryHook": "**Li is the only alkali metal that reacts with N₂**: 6Li + N₂ → 2Li₃N. Li₃N is a fast-ion conductor, and Li must be stored under argon, not nitrogen."
+    "memoryHook": "**Li is the only alkali metal that reacts with N₂ under ordinary conditions**: 6Li + N₂ → 2Li₃N. Li₃N is a fast-ion conductor, and Li is stored under argon, not nitrogen.",
+    "hookSources": [
+     "https://chem.libretexts.org/Courses/City_College_of_San_Francisco/Chemistry_101B/07:_Representative_Metals_Metalloids_and_Nonmetals/7.07:_Occurrence,_Preparation,_and_Properties_of_Nitrogen"
+    ]
    },
    "variants": [
     {
@@ -6144,7 +6154,12 @@
     "estimatedMinutes": 4,
     "examStyle": "construct_4to6",
     "family": "crown",
-    "memoryHook": "**Lock and key by size**: the cavity must match the ion diameter (Li⁺ 1.36, Na⁺ 1.9, K⁺ 2.66, Cs⁺ 3.38 Å). A cryptand wraps the ion in 3D, so it holds tighter than a flat crown ether."
+    "memoryHook": "**Pedersen (1967) named crown ethers for their crown-shaped models; Lehn with Dietrich and Sauvage (1969) added the 3D cage, the cryptand, which holds ions tighter.** Fit by size: Li⁺ 1.36, Na⁺ 1.9, K⁺ 2.66, Cs⁺ 3.38 Å. Pedersen and Lehn shared the 1987 Nobel with Cram.",
+    "hookSources": [
+     "https://www.nobelprize.org/uploads/2018/06/pedersen-lecture.pdf",
+     "https://www.nobelprize.org/prizes/chemistry/1987/speedread/",
+     "https://royalsocietypublishing.org/doi/pdf/10.1098/rsta.2000.0540"
+    ]
    },
    "variants": [
     {
@@ -6351,7 +6366,11 @@
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
     "family": "crown",
-    "memoryHook": "**Alkalide M⁻ comes from disproportionation, 2Na → Na⁺ + Na⁻**, forced by a crown or cryptand wrapping the Na⁺. In an electride the electron itself is the anion. Both are very strong reducing agents."
+    "memoryHook": "**Dye’s group made the first crystalline alkalides (alkali metal as the anion) and electrides (the electron is the anion).** Alkalides form by 2Na → Na⁺ + Na⁻, driven by a crown or cryptand wrapping the Na⁺. Both are very strong reducing agents.",
+    "hookSources": [
+     "https://pubmed.ncbi.nlm.nih.gov/25666067/",
+     "https://pubmed.ncbi.nlm.nih.gov/19645438/"
+    ]
    },
    "variants": [
     {
@@ -6574,7 +6593,12 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "named-process"
+    "family": "named-process",
+    "hookSources": [
+     "https://edu.rsc.org/download?ac=509455",
+     "https://www.britannica.com/science/chlorine/Production-and-use",
+     "https://stacks.cdc.gov/view/cdc/240109"
+    ]
    },
    "variants": [
     {
@@ -6594,7 +6618,7 @@
        "2NaCl + 2H2O -> 2NaOH + H2 + Cl2"
       ]
      },
-     "memoryHook": "The name is the products: **chlor**(ine) + **alkali** (NaOH), with H₂ as the third. Water is reduced before Na⁺, so you never get sodium here."
+     "memoryHook": "**Chlor + alkali = the products** (Cl₂ and NaOH), with H₂ as the third. Castner needed pure caustic soda to make sodium; chlorine was the by-product that turned out valuable. A diaphragm keeps Cl₂ away from the hydroxide it would react with. (Castner–Kellner is specifically the mercury-cathode version.)"
     },
     {
      "variantId": "c4-chloralkali-v2",
@@ -6613,7 +6637,7 @@
        "2NaCl -> 2Na + Cl2"
       ]
      },
-     "memoryHook": "**Downs = Na⁺ pulled DOWN to Na(0)** at the cathode: a molten, water-free bath with Cl₂ bubbling off at the anode. In water, H₂O is reduced first, which is why chlor-alkali gives NaOH instead."
+     "memoryHook": "**J. Cloyd Downs patented the cell in 1924**: electrolyse molten NaCl directly, with CaCl₂ added to lower the melting temperature, instead of making Na from NaOH (Davy 1807, then Castner). Na forms at the cathode, Cl₂ at the anode. In water, H₂O is reduced first, so you get NaOH."
     }
    ]
   },
@@ -7422,7 +7446,7 @@
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
     "family": "silicon",
-    "memoryHook": "**Hydride swap**: SiCl₄ + Li[AlH₄] → SiH₄ + Li[AlCl₄]. Si is more electropositive than H, so Si–H has the opposite polarity to C–H and silanes react far more readily than alkanes."
+    "memoryHook": "**Hydride swap**: SiCl₄ + Li[AlH₄] → SiH₄ + Li[AlCl₄]. Si (Pauling 1.9) is less electronegative than H (2.2), so Si–H is Si(δ+)–H(δ−): the opposite way round to C–H (C is 2.55)."
    },
    "variants": [
     {
@@ -7825,7 +7849,11 @@
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
     "family": "reaction-scheme",
-    "memoryHook": "**Haber makes NH₃; Ostwald burns it.** Ostwald = **O‑S‑T**: **O**xidise NH₃ → NO (Pt), **S**econd oxidation → NO₂, **T**ake it up in water → HNO₃. The 3NO₂ + H₂O step also gives NO back, so it is recycled."
+    "memoryHook": "**Ostwald (patents 1902, developed with Brauer; Kuhlmann had oxidised ammonia earlier) wanted nitric acid without Chilean saltpetre.** NH₃ burns over hot Pt with a very short contact time (longer contact lets NO decompose). **O‑S‑T**: **O**xidise NH₃ → NO, **S**econd oxidation → NO₂, **T**ake it up in water → HNO₃. Haber makes the NH₃.",
+    "hookSources": [
+     "https://patents.google.com/patent/GB190208300A/en",
+     "https://www.chm.bris.ac.uk/motm/nitric/Nitric%20Acid%20-%20Molecule%20of%20the%20Month%20-%20November%202007.pdf"
+    ]
    },
    "variants": [
     {
@@ -7932,7 +7960,11 @@
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
     "family": "named-process",
-    "memoryHook": "Haber found that N₂ + H₂ → NH₃ works; Bosch made it work at scale with big pressure: **Bosch = big pressure** (200–1000 atm, Fe, 400–600 °C). The barrier is the N≡N bond (942 kJ/mol), not the equilibrium."
+    "memoryHook": "**Haber showed it in the lab (1909); Bosch and BASF made it industrial (1913), with Mittasch’s promoted iron catalyst.** N₂ + 3H₂ → 2NH₃ turns 4 gas molecules into 2, so **high pressure pushes the equilibrium right**; heat and the catalyst are for rate (the strong N≡N bond). The aim: fertiliser from air.",
+    "hookSources": [
+     "https://www.nobelprize.org/prizes/chemistry/1918/ceremony-speech/",
+     "https://www.fertilizer.org/wp-content/uploads/2023/01/HABER.pdf"
+    ]
    },
    "variants": [
     {
@@ -8009,7 +8041,12 @@
     "estimatedMinutes": 1,
     "examStyle": "mcq_1mark",
     "family": "named-process",
-    "memoryHook": "**Olin ≈ “O‑Cl‑in”**: hypochlorite (OCl⁻) goes into NH₃ and joins two N atoms → N₂H₄ (via NH₂Cl). Same reason ammonia cleaner and bleach must never be mixed."
+    "memoryHook": "**Raschig (1907): bleach on ammonia.** NaOCl turns NH₃ into chloramine NH₂Cl, which reacts with *excess* NH₃ to give N₂H₄; the excess matters because chloramine also destroys hydrazine. **Olin is the company** that made it commercial, not a second discoverer. Never mix ammonia cleaner with bleach.",
+    "hookSources": [
+     "https://pubs.rsc.org/ct/article-pdf/doi/10.1039/CT9232301114/1581439/ct9232301114.pdf",
+     "https://www.chm.bris.ac.uk/motm/hydrazine/hydrazineh.htm",
+     "https://www.ncbi.nlm.nih.gov/books/NBK595574/"
+    ]
    },
    "variants": [
     {
@@ -8193,7 +8230,11 @@
     "estimatedMinutes": 1,
     "examStyle": "mcq_1mark",
     "family": "named-process",
-    "memoryHook": "Picture a **wise** man **laughing** as his airbag goes off: laughing gas (N₂O) + sodamide (NaNH₂) → NaN₃, the airbag salt. First step: Na + NH₃ → NaNH₂."
+    "memoryHook": "**Wislicenus (1892): sodium amide + nitrous oxide → sodium azide.** N₂O donates the extra nitrogen: 2NaNH₂ + N₂O → NaN₃ + NaOH + NH₃, after Na + NH₃ → NaNH₂. NaN₃ later served as an airbag gas generator: 2NaN₃ → 2Na + 3N₂.",
+    "hookSources": [
+     "https://pubs.rsc.org/sc/article/15/34/13605/869684/Nitrous-oxide-as-diazo-transfer-reagent",
+     "https://pubs.rsc.org/en/content/articlepdf/1900/ct/ct9007700705"
+    ]
    },
    "variants": [
     {
@@ -8637,7 +8678,10 @@
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
     "family": "aqua-regia",
-    "memoryHook": "Alchemists’ **“royal water”** dissolves the king of metals. **HNO₃ oxidises, Cl⁻ complexes**: NOCl and Cl₂ do the oxidising and gold ends up as [AuCl₄]⁻."
+    "memoryHook": "**Latin “royal water”: it dissolves gold, which neither acid manages alone.** HNO₃ oxidises and Cl⁻ complexes: NOCl and Cl₂ oxidise Au, and excess Cl⁻ holds it as [AuCl₄]⁻.",
+    "hookSources": [
+     "https://edu.rsc.org/resources/olympic-medals/851.article"
+    ]
    },
    "variants": [
     {
@@ -8814,7 +8858,12 @@
     "estimatedMinutes": 9,
     "examStyle": "construct_4to6",
     "family": "reaction-scheme",
-    "memoryHook": "**Phosphorus = “light-bearer”** (white P₄ glows and ignites in air). Limited O₂ puts an O in each of the **6 P–P edges** (P₄O₆); excess adds **4 terminal O** (P₄O₁₀), a thirsty dehydrating agent: amide → nitrile."
+    "memoryHook": "**Phosphorus = “light-bearer”; Brand isolated it from urine around 1669.** White P₄ glows by chemiluminescence (slow oxidation in air), not stored light, and ignites in air. Limited O₂ puts an O in each of the 6 P–P edges (P₄O₆); excess adds 4 terminal O (P₄O₁₀), a thirsty dehydrating agent.",
+    "hookSources": [
+     "https://periodic-table.rsc.org/element/15/Phosphorus",
+     "https://www.britannica.com/biography/Hennig-Brand",
+     "https://nora.nerc.ac.uk/id/eprint/525743/1/N525743JA.pdf"
+    ]
    },
    "variants": [
     {
@@ -9109,7 +9158,11 @@
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
     "family": "h2o2",
-    "memoryHook": "**Peroxide + strong acid releases H₂O₂**: BaO₂ + H₂SO₄ → BaSO₄↓ + H₂O₂. Insoluble BaSO₄ pulls the reaction over."
+    "memoryHook": "**Thénard discovered hydrogen peroxide in 1818.** BaO₂ + H₂SO₄ → BaSO₄↓ + H₂O₂: insoluble BaSO₄ removes the barium and pulls the reaction over.",
+    "hookSources": [
+     "https://link.springer.com/content/pdf/10.1007/978-94-017-0984-2_2.pdf",
+     "https://www.epfl.ch/labs/lsci/wp-content/uploads/2018/09/perxoide-property.pdf"
+    ]
    },
    "variants": [
     {
@@ -9206,7 +9259,11 @@
     "estimatedMinutes": 4,
     "examStyle": "construct_4to6",
     "family": "named-process",
-    "memoryHook": "The gases **contact** a solid V₂O₅ catalyst. SO₃ goes into 98% H₂SO₄ (making oleum) because it does not absorb well into water."
+    "memoryHook": "**Phillips patented the catalytic route in 1831**; the demand came from the synthetic-dye industry, which needed concentrated acid and oleum. Today a solid V₂O₅ catalyst does the oxidation. SO₃ goes into 98% H₂SO₄ because it does not absorb well into water (your slide).",
+    "hookSources": [
+     "https://edu.rsc.org/download?ac=509455",
+     "https://www.britannica.com/technology/contact-process"
+    ]
    },
    "variants": [
     {
@@ -9394,7 +9451,7 @@
     "estimatedMinutes": 3,
     "examStyle": "construct_4to6",
     "family": "kinetic-thermo",
-    "memoryHook": "**SF₆ is willing but locked**: six F crowd the S, so there is no easy path for attack (kinetic inertness). Only fluorine can take S to +6, directly: S + 3F₂ → SF₆."
+    "memoryHook": "**SF₆ is willing but kinetically inert**: thermodynamically favoured, yet unreactive under ordinary conditions. Only fluorine can take S to +6, directly: S + 3F₂ → SF₆."
    },
    "variants": [
     {
@@ -22157,7 +22214,11 @@
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
     "family": "named-process",
-    "memoryHook": "**Haber makes NH₃; Ostwald burns it.** Ostwald = **O‑S‑T**: **O**xidise NH₃ → NO (Pt), **S**econd oxidation → NO₂, **T**ake it up in water → HNO₃. The 3NO₂ + H₂O step also gives NO back, so it is recycled."
+    "memoryHook": "**Ostwald (patents 1902, developed with Brauer; Kuhlmann had oxidised ammonia earlier) wanted nitric acid without Chilean saltpetre.** NH₃ burns over hot Pt with a very short contact time (longer contact lets NO decompose). **O‑S‑T**: **O**xidise NH₃ → NO, **S**econd oxidation → NO₂, **T**ake it up in water → HNO₃. Haber makes the NH₃.",
+    "hookSources": [
+     "https://patents.google.com/patent/GB190208300A/en",
+     "https://www.chm.bris.ac.uk/motm/nitric/Nitric%20Acid%20-%20Molecule%20of%20the%20Month%20-%20November%202007.pdf"
+    ]
    },
    "variants": [
     {
@@ -22226,7 +22287,11 @@
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
     "family": "named-process",
-    "memoryHook": "**Downs = Na⁺ pulled DOWN to Na(0)** at the cathode: a molten, water-free bath with Cl₂ bubbling off at the anode. In water, H₂O is reduced first, which is why chlor-alkali gives NaOH instead."
+    "memoryHook": "**J. Cloyd Downs patented the cell in 1924**: electrolyse molten NaCl directly, with CaCl₂ added to lower the melting temperature, instead of making Na from NaOH (Davy 1807, then Castner). Na forms at the cathode, Cl₂ at the anode. In water, H₂O is reduced first, so you get NaOH.",
+    "hookSources": [
+     "https://stacks.cdc.gov/view/cdc/240109",
+     "https://periodic-table.rsc.org/element/11/sodium"
+    ]
    },
    "variants": [
     {

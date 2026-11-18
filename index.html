@@ -1068,45 +1068,136 @@
             }
           });
 
-        // Sort candidates so core seed nodes & landmarks come first and chapters are interleaved
+        const hasSeed = options.seed !== undefined && options.seed !== null;
+        let rngState = 1;
+        if (hasSeed) {
+          const numSeed = Number(options.seed);
+          if (Number.isFinite(numSeed)) {
+            rngState = (Math.abs(Math.floor(numSeed)) % 2147483646) || 1;
+          } else {
+            let h = 2166136261;
+            const str = String(options.seed);
+            for (let i = 0; i < str.length; i++) {
+              h ^= str.charCodeAt(i);
+              h = Math.imul(h, 16777619);
+            }
+            rngState = (Math.abs(h) % 2147483646) || 1;
+          }
+        }
+        const rand = hasSeed
+          ? () => { rngState = (rngState * 16807) % 2147483647; return (rngState - 1) / 2147483646; }
+          : () => Math.random();
+
+        const shuffleInPlace = (arr) => {
+          for (let i = arr.length - 1; i > 0; i--) {
+            const j = Math.floor(rand() * (i + 1));
+            const tmp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = tmp;
+          }
+          return arr;
+        };
+
+        const moduleMap = options.moduleMap
+          ? options.moduleMap
+          : Array.isArray(options.modules)
+            ? Object.fromEntries(options.modules.map((m) => [m.moduleCode, m]))
+            : options.module
+              ? { [options.module.moduleCode]: options.module }
+              : (typeof SEED_MODULES !== 'undefined'
+                ? Object.fromEntries(SEED_MODULES.map((m) => [m.moduleCode, m]))
+                : {});
+
+        const getChapterWeight = (n) => {
+          const mod = moduleMap?.[n.moduleCode];
+          const wk = Number(n.metadata?.week);
+          const wInfo = mod?.weeks?.find((w) => Number(w.weekNum) === wk);
+          const rawW = wInfo?.examWeight ?? n.metadata?.examWeight ?? 1.0;
+          const w = Number(rawW);
+          return Number.isFinite(w) ? Math.max(0, w) : 1.0;
+        };
+
+        const nowMs = Number(options.nowMs) || Date.now();
+        const isPreferred = (n) => {
+          const rs = options.reviewMap?.[n.id];
+          return !rs || (rs.reps || 0) === 0 || (rs.dueMs ?? 0) <= nowMs;
+        };
+
+        const pickWeighted = (candidates) => {
+          if (!candidates.length) return null;
+          if (candidates.length === 1) return candidates[0];
+          let totalWeight = 0;
+          const weights = candidates.map((n) => {
+            const w = getChapterWeight(n);
+            totalWeight += w;
+            return w;
+          });
+          if (totalWeight <= 0) {
+            return candidates[Math.floor(rand() * candidates.length)];
+          }
+          let r = rand() * totalWeight;
+          for (let i = 0; i < candidates.length; i++) {
+            r -= weights[i];
+            if (r <= 0) return candidates[i];
+          }
+          return candidates[candidates.length - 1];
+        };
+
         const buckets = { mcq_1mark: [], short_2to3: [], construct_4to6: [] };
-        const sortedEligible = eligible.slice().sort((a, b) => {
-          const aGold = a.metadata?.isGoldenBank ? (a.metadata?.isLandmark ? 1 : 2) : 0;
-          const bGold = b.metadata?.isGoldenBank ? (b.metadata?.isLandmark ? 1 : 2) : 0;
-          if (aGold !== bGold) return aGold - bGold;
-          return (a.metadata?.week || 0) - (b.metadata?.week || 0);
-        });
-        for (const n of sortedEligible) {
+        for (const n of eligible) {
           const st = inferNodeExamStyle(n);
           if (buckets[st]) buckets[st].push(n);
           else buckets.short_2to3.push(n);
         }
+        for (const st of styleKeys) {
+          shuffleInPlace(buckets[st]);
+        }
+        const shuffledEligible = shuffleInPlace(eligible.slice());
 
         const pickedNodes = [];
         const pickedIds = new Set();
+        const usedFamilies = new Set();
+
+        const pickFromPool = (pool) => {
+          const avail = pool.filter((n) => !pickedIds.has(n.id));
+          if (!avail.length) return null;
+          const isFreshFamily = (n) => {
+            const fam = n.metadata?.family;
+            return !fam || !usedFamilies.has(fam);
+          };
+          const t1 = avail.filter((n) => isPreferred(n) && isFreshFamily(n));
+          if (t1.length) return pickWeighted(t1);
+          const t2 = avail.filter((n) => !isPreferred(n) && isFreshFamily(n));
+          if (t2.length) return pickWeighted(t2);
+          const t3 = avail.filter((n) => isPreferred(n));
+          if (t3.length) return pickWeighted(t3);
+          return pickWeighted(avail);
+        };
+
         for (const st of styleKeys) {
           const pool = buckets[st] || [];
           const quota = styleTargets[st] || 0;
-          for (const node of pool) {
-            if (pickedNodes.filter((p) => p.examStyle === st).length >= quota) break;
-            if (!pickedIds.has(node.id)) {
-              pickedIds.add(node.id);
-              pickedNodes.push({ node, examStyle: st });
-            }
+          let countInStyle = 0;
+          while (countInStyle < quota) {
+            const chosen = pickFromPool(pool);
+            if (!chosen) break;
+            pickedIds.add(chosen.id);
+            if (chosen.metadata?.family) usedFamilies.add(chosen.metadata.family);
+            pickedNodes.push({ node: chosen, examStyle: st });
+            countInStyle += 1;
           }
         }
         // Backfill any unfilled quota from remaining eligible nodes
-        if (pickedNodes.length < targetCount) {
-          for (const node of sortedEligible) {
-            if (pickedNodes.length >= targetCount) break;
-            if (!pickedIds.has(node.id)) {
-              pickedIds.add(node.id);
-              pickedNodes.push({ node, examStyle: inferNodeExamStyle(node) });
-            }
-          }
+        while (pickedNodes.length < targetCount) {
+          const chosen = pickFromPool(shuffledEligible);
+          if (!chosen) break;
+          pickedIds.add(chosen.id);
+          if (chosen.metadata?.family) usedFamilies.add(chosen.metadata.family);
+          pickedNodes.push({ node: chosen, examStyle: inferNodeExamStyle(chosen) });
         }
 
         let totalMarks = 0;
+        const baseVariantSeed = hasSeed ? ((Math.abs(Math.floor(Number(options.seed))) || 1) + 1) : null;
         const questions = pickedNodes.map(({ node, examStyle }, idx) => {
           const rs = options.reviewMap?.[node.id];
           let variant = selectVariant(node, rs);
@@ -1114,7 +1205,7 @@
             const constructVar = node.variants.find((v) => v.inputSlot?.type === 'interactive_widget' || v.inputSlot?.type === 'typed_synthesis');
             if (constructVar) variant = constructVar;
           }
-          const inst = instantiateVariant(variant, options.seed ? options.seed + idx : null);
+          const inst = instantiateVariant(variant, hasSeed ? (baseVariantSeed + idx) : null);
           const slot = variant.inputSlot;
           let initialInput = '';
           if (slot.type === 'unordered_set') initialInput = [];
@@ -3874,10 +3965,10 @@
         const ligandChargeSum = parsed.ligands.reduce((a, b) => a + b.count * b.ligand.charge, 0);
         const charge = oxState + ligandChargeSum;
         const dn = computeDn(metalObj, oxState, data);
-        const effFieldClass = weakestLigandClass(parsed.ligands);
-        const geometry = inferGeometry(parsed.coordNumber, dn, parsed.ligands, parsed.geometry);
+        const effFieldClass = weakestLigandClass(parsed.ligands, oxState);
+        const geometry = inferGeometry(parsed.coordNumber, dn, parsed.ligands, parsed.geometry, oxState);
         // Rule: square planar only for d8 with all strong-field ligands
-        if (geometry === 'square_planar' && (dn !== 8 || !areAllLigandsStrong(parsed.ligands))) {
+        if (geometry === 'square_planar' && (dn !== 8 || !areAllLigandsStrong(parsed.ligands, oxState))) {
           return null;
         }
         const spinState = inferSpinState(geometry, dn, parsed.ligands, {
@@ -3887,10 +3978,12 @@
           coordNumber: parsed.coordNumber,
         });
         const filling = computeOrbitalFilling(geometry, dn, spinState);
-        const muSO = computeSpinOnlyMoment(filling.unpaired);
-        const isDiamagnetic = filling.unpaired === 0;
-        const magnetic = isDiamagnetic ? 'diamagnetic' : 'paramagnetic';
-        const pCount = pTermMode === 'absolute' ? filling.pTermsAbsolute : filling.pTermsRelative;
+        const muSO = filling.unpaired !== null ? computeSpinOnlyMoment(filling.unpaired) : null;
+        const isDiamagnetic = filling.unpaired !== null ? filling.unpaired === 0 : null;
+        const magnetic = filling.unpaired === null ? 'undetermined' : (isDiamagnetic ? 'diamagnetic' : 'paramagnetic');
+        const pCount = filling.unpaired === null
+          ? null
+          : (pTermMode === 'absolute' ? filling.pTermsAbsolute : filling.pTermsRelative);
         const naming = generateIUPACName(metalObj, oxState, parsed.ligands, parsed.count, charge, data, parsed.counterIons);
         const formula = formatComplexFormula(metalObj.symbol, parsed.ligands, parsed.count, charge, data, parsed.counterIons);
         const isCoIIIH2OException = isCobaltIIIHexaaquaCase(metalObj.symbol, oxState, parsed.ligands, parsed.coordNumber);
@@ -3922,7 +4015,7 @@
           isDiamagnetic,
           lfseCoeff: filling.lfseCoeff,
           lfseUnit: filling.lfseUnit,
-          lfseDisplay: `${filling.lfseCoeff} ${filling.lfseUnit}`,
+          lfseDisplay: filling.lfseCoeff !== null ? `${filling.lfseCoeff} ${filling.lfseUnit}` : null,
           lfseExpression: filling.lfseExpression,
           pTermsRelative: filling.pTermsRelative,
           pTermsAbsolute: filling.pTermsAbsolute,
@@ -4045,14 +4138,15 @@
         let matching = [];
         if (constraint.type === 'unpaired') {
           const targetK = Number(constraint.value ?? 0);
-          matching = allEvaluated.filter((c) => c.unpaired === targetK);
+          matching = allEvaluated.filter((c) => c.unpaired !== null && c.unpaired === targetK);
         } else if (constraint.type === 'most_unpaired') {
-          const maxU = allEvaluated.reduce((acc, c) => Math.max(acc, c.unpaired), 0);
+          const determined = allEvaluated.filter((c) => c.unpaired !== null);
+          const maxU = determined.reduce((acc, c) => Math.max(acc, c.unpaired), 0);
           if (maxU > 0) {
-            matching = allEvaluated.filter((c) => c.unpaired === maxU);
+            matching = determined.filter((c) => c.unpaired === maxU);
           }
         } else if (constraint.type === 'fewest_unpaired') {
-          const pool = allEvaluated.filter((c) => includeD0D10 || (c.dn > 0 && c.dn < 10));
+          const pool = allEvaluated.filter((c) => c.unpaired !== null && (includeD0D10 || (c.dn > 0 && c.dn < 10)));
           if (pool.length > 0) {
             const minU = pool.reduce((acc, c) => Math.min(acc, c.unpaired), Infinity);
             matching = pool.filter((c) => c.unpaired === minU);
@@ -4067,16 +4161,19 @@
           const targetMu = Number(constraint.value ?? 0);
           const inferredN = muSpinOnlyToUnpaired(targetMu, 0.08);
           matching = allEvaluated.filter((c) =>
-            (inferredN !== null && c.unpaired === inferredN) ||
-            Math.abs(c.muSO - targetMu) <= 0.05
+            c.unpaired !== null &&
+            c.muSO !== null &&
+            ((inferredN !== null && c.unpaired === inferredN) || Math.abs(c.muSO - targetMu) <= 0.05)
           );
         } else if (constraint.type === 'orbital_occupancy') {
           matching = allEvaluated.filter((c) => matchesOrbitalOccupancy(c, constraint.value || constraint.occupancy));
         } else if (constraint.type === 'lfse') {
           const targetA = Number(constraint.a ?? constraint.value ?? 0);
           const targetB = Number(constraint.b ?? 0);
-          // Match both a and b, with P counted relative to high spin
+          // Match both a and b, with P counted relative to high spin (never match null LFSE e.g. square_planar / undetermined)
           matching = allEvaluated.filter((c) =>
+            c.lfseCoeff !== null &&
+            c.pTermsRelative !== null &&
             Math.abs(c.lfseCoeff - targetA) < 1e-4 &&
             Math.abs(c.pTermsRelative - targetB) < 1e-4
           );
@@ -4113,7 +4210,7 @@
         // Amendment 6: Oxidation state 0 is never used in generated questions unless explicitly allowed for fixed items
         if (analysis.oxState === 0 && !options.allowOxStateZero) return null;
         // Amendment 3: Never generate a question whose answer depends on spin state if the weakest ligand is NH3 (intermediate)
-        if (analysis.fieldClass === 'intermediate' && dependsOnSpinState(analysis.geometry, analysis.dn) && !options.allowIntermediateSpinQuestion) {
+        if ((analysis.spinState === 'undetermined' || (analysis.fieldClass === 'intermediate' && dependsOnSpinState(analysis.geometry, analysis.dn))) && !options.allowIntermediateSpinQuestion) {
           return null;
         }
 
@@ -4126,11 +4223,73 @@
           : analysis.geometry === 'Td'
             ? 'tetrahedral'
             : 'square-planar';
+        const includeLfse = analysis.geometry !== 'square_planar' && analysis.lfseCoeff !== null;
         const cleanFormulaSlug = analysis.formula.replace(/[^A-Za-z0-9]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '').toLowerCase();
         const nodeId = spec.id || `lf-fwd-${analysis.geometry.toLowerCase()}-${cleanFormulaSlug}`;
         const week = spec.week || ((analysis.dn % 2 === 0) ? 7 : 8);
         const complexKindLabel = analysis.isHeteroleptic ? 'heteroleptic' : 'homoleptic';
         const noteSuffix = analysis.textbookExceptionNote ? ` ${analysis.textbookExceptionNote}` : '';
+
+        const stemParts = [
+          'its $d^n$ electron count',
+          'number of unpaired electrons',
+          ...(includeLfse ? [`LFSE stabilisation coefficient (in $${analysis.lfseUnit === 'Δo' ? '\\Delta_o' : '\\Delta_t'}$, positive for stabilisation)`] : []),
+          `number of pairing energy ($P$) terms (**${pMode}** mode)`,
+          'spin-only magnetic moment $\\mu_{\\text{so}}$ (in $\\mu_{\\text{B}}$)',
+          'and IUPAC name',
+        ].join(', ');
+
+        const inputFields = [
+          { key: 'dn', label: 'd^n count (n)', placeholder: 'e.g. 6 or d6' },
+          { key: 'unpaired', label: 'Unpaired e⁻ (n)', placeholder: 'e.g. 4' },
+          ...(includeLfse ? [{ key: 'lfse', label: `LFSE coefficient (${analysis.lfseUnit})`, placeholder: 'e.g. 0.4' }] : []),
+          { key: 'pCount', label: pLabel, placeholder: 'e.g. 0' },
+          { key: 'muSO', label: 'μ_so (μ_B)', placeholder: 'e.g. 4.90' },
+          { key: 'name', label: 'IUPAC Name', placeholder: `e.g. ${analysis.iupacName}` },
+        ];
+
+        const targets = {
+          dn: {
+            type: 'pattern',
+            caseSensitive: false,
+            acceptedPatterns: [`^\\s*(?:d\\^?)?${analysis.dn}\\s*$`],
+            expectedDisplay: `${analysis.dn} (d^${analysis.dn})`,
+          },
+          unpaired: {
+            type: 'numeric',
+            targetExpr: String(analysis.unpaired),
+            tolerance: 0,
+            expectedDisplay: String(analysis.unpaired),
+          },
+          ...(includeLfse ? {
+            lfse: {
+              type: 'numeric',
+              targetExpr: String(analysis.lfseCoeff),
+              tolerance: 0.01,
+              expectedDisplay: `${analysis.lfseCoeff}`,
+            },
+          } : {}),
+          pCount: {
+            type: 'numeric',
+            targetExpr: String(analysis.pCount),
+            tolerance: 0,
+            expectedDisplay: String(analysis.pCount),
+          },
+          muSO: {
+            type: 'numeric',
+            targetExpr: String(analysis.muSO),
+            tolerance: 0.05,
+            expectedDisplay: analysis.muSO.toFixed(2),
+          },
+          name: {
+            type: 'pattern',
+            caseSensitive: false,
+            acceptedPatterns: analysis.acceptedNamePatterns,
+            expectedDisplay: analysis.iupacName,
+          },
+        };
+
+        const lfseExplPart = includeLfse ? `, $\\text{LFSE} = ${analysis.lfseExpression}$` : '';
 
         return {
           schemaVersion: '3.0',
@@ -4155,62 +4314,18 @@
               variantId: `${nodeId}-v1`,
               perspectiveLabel: 'Forward Complex Characterization',
               marks: 3,
-              stem: `For the ${complexKindLabel} ${geomLabel} coordination compound **` + '`' + analysis.formula + '`' + `**, determine its $d^n$ electron count, number of unpaired electrons, LFSE stabilisation coefficient (in $${analysis.lfseUnit === 'Δo' ? '\\Delta_o' : '\\Delta_t'}$, positive for stabilisation), number of pairing energy ($P$) terms (**${pMode}** mode), spin-only magnetic moment $\\mu_{\\text{so}}$ (in $\\mu_{\\text{B}}$), and IUPAC name.`,
+              stem: `For the ${complexKindLabel} ${geomLabel} coordination compound **` + '`' + analysis.formula + '`' + `**, determine ${stemParts}.`,
               hint: `${analysis.metal}(${analysis.oxRoman}) is $d^{${analysis.dn}}$ in a ${geomLabel} ${analysis.fieldClass}-field (${analysis.spinState}-spin) environment (${analysis.configuration}).`,
               inputSlot: {
                 type: 'mapped_fields',
                 layout: 'grid',
-                fields: [
-                  { key: 'dn', label: 'd^n count (n)', placeholder: 'e.g. 6 or d6' },
-                  { key: 'unpaired', label: 'Unpaired e⁻ (n)', placeholder: 'e.g. 4' },
-                  { key: 'lfse', label: `LFSE coefficient (${analysis.lfseUnit})`, placeholder: 'e.g. 0.4' },
-                  { key: 'pCount', label: pLabel, placeholder: 'e.g. 0' },
-                  { key: 'muSO', label: 'μ_so (μ_B)', placeholder: 'e.g. 4.90' },
-                  { key: 'name', label: 'IUPAC Name', placeholder: `e.g. ${analysis.iupacName}` },
-                ],
+                fields: inputFields,
               },
               evaluator: {
                 type: 'mapped_fields_match',
-                targets: {
-                  dn: {
-                    type: 'pattern',
-                    caseSensitive: false,
-                    acceptedPatterns: [`^\\s*(?:d\\^?)?${analysis.dn}\\s*$`],
-                    expectedDisplay: `${analysis.dn} (d^${analysis.dn})`,
-                  },
-                  unpaired: {
-                    type: 'numeric',
-                    targetExpr: String(analysis.unpaired),
-                    tolerance: 0,
-                    expectedDisplay: String(analysis.unpaired),
-                  },
-                  lfse: {
-                    type: 'numeric',
-                    targetExpr: String(analysis.lfseCoeff),
-                    tolerance: 0.01,
-                    expectedDisplay: `${analysis.lfseCoeff}`,
-                  },
-                  pCount: {
-                    type: 'numeric',
-                    targetExpr: String(analysis.pCount),
-                    tolerance: 0,
-                    expectedDisplay: String(analysis.pCount),
-                  },
-                  muSO: {
-                    type: 'numeric',
-                    targetExpr: String(analysis.muSO),
-                    tolerance: 0.05,
-                    expectedDisplay: analysis.muSO.toFixed(2),
-                  },
-                  name: {
-                    type: 'pattern',
-                    caseSensitive: false,
-                    acceptedPatterns: analysis.acceptedNamePatterns,
-                    expectedDisplay: analysis.iupacName,
-                  },
-                },
+                targets,
               },
-              explanation: `**${analysis.formula}** (${analysis.iupacName}): ${analysis.metal}(${analysis.oxRoman}) is **$d^{${analysis.dn}}$** (${geomLabel}, ${analysis.spinState} spin, configuration \`${analysis.configuration}\`). Unpaired electrons $n = ${analysis.unpaired}$, $\\mu_{\\text{so}} = \\sqrt{${analysis.unpaired}(${analysis.unpaired}+2)} = ${analysis.muSO.toFixed(2)}\\ \\mu_{\\text{B}}$ (${analysis.magnetic}), $\\text{LFSE} = ${analysis.lfseExpression}$ ($P_{\\text{relative}} = ${analysis.pTermsRelative}, P_{\\text{absolute}} = ${analysis.pTermsAbsolute}$).${noteSuffix}`,
+              explanation: `**${analysis.formula}** (${analysis.iupacName}): ${analysis.metal}(${analysis.oxRoman}) is **$d^{${analysis.dn}}$** (${geomLabel}, ${analysis.spinState} spin, configuration \`${analysis.configuration}\`). Unpaired electrons $n = ${analysis.unpaired}$, $\\mu_{\\text{so}} = \\sqrt{${analysis.unpaired}(${analysis.unpaired}+2)} = ${analysis.muSO.toFixed(2)}\\ \\mu_{\\text{B}}$ (${analysis.magnetic})${lfseExplPart} ($P_{\\text{relative}} = ${analysis.pTermsRelative}, P_{\\text{absolute}} = ${analysis.pTermsAbsolute}$).${noteSuffix}`,
             },
           ],
         };
@@ -4222,7 +4337,7 @@
         // Amendment 6: Oxidation state 0 is never used in generated questions unless explicitly allowed
         if (solved.oxState === 0 && !options.allowOxStateZero) return null;
         // Amendment 3: Never generate a question whose answer depends on spin state if the weakest ligand is NH3
-        if (weakestLigandClass(solved.ligands) === 'intermediate' && !options.allowIntermediateSpinQuestion) {
+        if (weakestLigandClass(solved.ligands, solved.oxState) === 'intermediate' && !options.allowIntermediateSpinQuestion) {
           const anySpinDep = solved.allEvaluated.some((c) => dependsOnSpinState(c.geometry, c.dn));
           if (anySpinDep) return null;
         }
@@ -4285,20 +4400,58 @@
         const nodeId = options.id || `lf-inv-${tplSlug}-${slug}`;
 
         const allAcceptedNamePatterns = [...new Set(solved.candidates.flatMap((c) => c.acceptedNamePatterns))];
-        const allLfsePairs = solved.candidates.map((c) => ({
+        const lfseCandidates = solved.candidates.filter((c) => c.geometry !== 'square_planar' && c.lfseCoeff !== null);
+        const includeInverseLfse = lfseCandidates.length > 0 && lfseCandidates.length === solved.candidates.length;
+        const allLfsePairs = lfseCandidates.map((c) => ({
           a: c.lfseCoeff,
           b: c.pTermsRelative,
           unit: c.lfseUnit,
           expression: c.lfseExpression,
         }));
-        const allLfseValues = [...new Set(solved.candidates.map((c) => c.lfseCoeff))];
+        const allLfseValues = [...new Set(lfseCandidates.map((c) => c.lfseCoeff))];
         const firstCand = solved.candidates[0];
         const expectedNamesDisplay = solved.candidates.map((c) => c.iupacName).join(' or ');
-        const expectedLfseDisplay = [...new Set(solved.candidates.map((c) =>
+        const expectedLfseDisplay = [...new Set(lfseCandidates.map((c) =>
           c.pTermsRelative > 0 ? `${c.lfseExpression} (or ${c.lfseCoeff})` : `${c.lfseExpression}`
         ))].join(' or ');
         const ligSummary = solved.ligands.map((item) => `${item.ligand.formula} (${item.ligand.fieldClass})`).join(', ');
         const noteSuffix = solved.textbookExceptionNote ? ` ${solved.textbookExceptionNote}` : '';
+
+        const invPromptSuffix = includeInverseLfse
+          ? `Also provide the IUPAC name and LFSE (in $${firstCand.lfseUnit === 'Δo' ? '\\Delta_o' : '\\Delta_t'}$, e.g. \`${firstCand.lfseExpression}\`) for a matching complex.`
+          : 'Also provide the IUPAC name for a matching complex.';
+
+        const invFields = [
+          {
+            key: 'name',
+            label: 'IUPAC Name (for a valid M)',
+            placeholder: `e.g. ${firstCand.iupacName}`,
+          },
+          ...(includeInverseLfse ? [{
+            key: 'lfse',
+            label: `LFSE (${firstCand.lfseUnit})`,
+            placeholder: `e.g. ${firstCand.lfseExpression}`,
+          }] : []),
+        ];
+
+        const invEvalFields = {
+          name: {
+            type: 'pattern',
+            caseSensitive: false,
+            acceptedPatterns: allAcceptedNamePatterns,
+            expectedDisplay: expectedNamesDisplay,
+          },
+          ...(includeInverseLfse ? {
+            lfse: {
+              type: 'lfse_expr',
+              targetValues: allLfseValues,
+              targetLfsePairs: allLfsePairs,
+              targetExpr: String(firstCand.lfseCoeff),
+              tolerance: 0.01,
+              expectedDisplay: expectedLfseDisplay,
+            },
+          } : {}),
+        };
 
         return {
           schemaVersion: '3.0',
@@ -4322,25 +4475,14 @@
           variants: [
             {
               variantId: `${nodeId}-v1`,
-              perspectiveLabel: 'Inverse 3d Metal Set + Name & LFSE',
+              perspectiveLabel: includeInverseLfse ? 'Inverse 3d Metal Set + Name & LFSE' : 'Inverse 3d Metal Set + Name',
               marks: 3,
-              stem: `Identify **all** first-row transition metals $\\text{M} \\in \\{\\text{Sc}\\text{--}\\text{Zn}\\}$ for which **` + '`' + solved.templateFormula + '`' + `** ${constraintText}. Also provide the IUPAC name and LFSE (in $${firstCand.lfseUnit === 'Δo' ? '\\Delta_o' : '\\Delta_t'}$, e.g. \`${firstCand.lfseExpression}\`) for a matching complex.`,
+              stem: `Identify **all** first-row transition metals $\\text{M} \\in \\{\\text{Sc}\\text{--}\\text{Zn}\\}$ for which **` + '`' + solved.templateFormula + '`' + `** ${constraintText}. ${invPromptSuffix}`,
               hint: `In \`${solved.templateFormula}\`, the metal oxidation state is ${solved.oxState >= 0 ? `+${solved.oxState}` : solved.oxState} (${solved.oxRoman}), with ligand(s): ${ligSummary}.`,
               inputSlot: {
                 type: 'unordered_set',
                 placeholder: 'Type metal symbol (e.g. Ti, Cr, Mn, Fe, Co, Cu) and press Enter',
-                fields: [
-                  {
-                    key: 'name',
-                    label: 'IUPAC Name (for a valid M)',
-                    placeholder: `e.g. ${firstCand.iupacName}`,
-                  },
-                  {
-                    key: 'lfse',
-                    label: `LFSE (${firstCand.lfseUnit})`,
-                    placeholder: `e.g. ${firstCand.lfseExpression}`,
-                  },
-                ],
+                fields: invFields,
               },
               evaluator: {
                 type: 'set_match',
@@ -4350,24 +4492,9 @@
                 penaltyRatio: 0.5,
                 falsePositivePenalty: 0.5,
                 textbookExceptionNote: solved.textbookExceptionNote,
-                fields: {
-                  name: {
-                    type: 'pattern',
-                    caseSensitive: false,
-                    acceptedPatterns: allAcceptedNamePatterns,
-                    expectedDisplay: expectedNamesDisplay,
-                  },
-                  lfse: {
-                    type: 'lfse_expr',
-                    targetValues: allLfseValues,
-                    targetLfsePairs: allLfsePairs,
-                    targetExpr: String(firstCand.lfseCoeff),
-                    tolerance: 0.01,
-                    expectedDisplay: expectedLfseDisplay,
-                  },
-                },
+                fields: invEvalFields,
               },
-              explanation: `For \`${solved.templateFormula}\`, $\\text{M}$ is in oxidation state **${solved.oxRoman}** ($${solved.oxState >= 0 ? `+${solved.oxState}` : solved.oxState}$). Valid 3d metal(s): **$\\{${solved.validMetals.join(', ')}\\}$**. Matching complex(es): ${solved.candidates.map((c) => `\`${c.formula}\` (${c.iupacName}, $d^{${c.dn}}$, \`${c.configuration}\`, $n=${c.unpaired}$, $\\text{LFSE} = ${c.lfseExpression}$)`).join('; ')}.${noteSuffix}`,
+              explanation: `For \`${solved.templateFormula}\`, $\\text{M}$ is in oxidation state **${solved.oxRoman}** ($${solved.oxState >= 0 ? `+${solved.oxState}` : solved.oxState}$). Valid 3d metal(s): **$\\{${solved.validMetals.join(', ')}\\}$**. Matching complex(es): ${solved.candidates.map((c) => `\`${c.formula}\` (${c.iupacName}, $d^{${c.dn}}$, \`${c.configuration}\`, $n=${c.unpaired}${c.lfseExpression ? `, $\\text{LFSE} = ${c.lfseExpression}$` : ''})`).join('; ')}.${noteSuffix}`,
             },
           ],
         };
@@ -4391,7 +4518,7 @@
             const cl = findLig('Cl-');
             const en = findLig('en');
 
-            if (h2o && ox <= 4) {
+            if (h2o && ox < 4 && !(m.symbol === 'Cu' && ox === 1)) {
               const n1 = buildForwardQuestionNode({ metal: m.symbol, oxState: ox, ligand: h2o.id, count: 6, week: 7 }, options);
               if (n1) nodes.push(n1);
             }
@@ -4576,14 +4703,36 @@
           };
         });
 
-        const allPassed = results.every((r) => r.passed);
-        const summaryLine = results.map((r) => `${r.label} → {${r.actual.join(', ')}}`).join('; ');
+        const coNH3 = analyzeComplex('[Co(NH3)6]3+', testOpts);
+        const coNH3Passed = Boolean(
+          coNH3 &&
+          coNH3.spinState === 'low' &&
+          coNH3.unpaired === 0 &&
+          coNH3.lfseExpression === '2.4Δo − 2P'
+        );
+        const coNH3Result = {
+          label: '[Co(NH3)6]3+ → low spin, 0 unpaired, LFSE 2.4Δo − 2P',
+          template: '[Co(NH3)6]3+',
+          expected: ['low', 0, '2.4Δo − 2P'],
+          actual: coNH3 ? [coNH3.spinState, coNH3.unpaired, coNH3.lfseExpression] : [],
+          passed: coNH3Passed,
+          pass: coNH3Passed,
+          textbookExceptionNote: null,
+        };
+        const allResults = [...results, coNH3Result];
+
+        const allPassed = allResults.every((r) => r.passed);
+        const summaryLine = allResults.map((r) =>
+          r.template === '[Co(NH3)6]3+'
+            ? `[Co(NH3)6]3+ → ${r.actual.join(', ')}`
+            : `${r.label} → {${r.actual.join(', ')}}`
+        ).join('; ');
         if (allPassed) {
           console.log(`[LF Self-Test] PASS: ${summaryLine}`);
         } else {
-          console.error(`[LF Self-Test] FAIL: ${summaryLine}`, results);
+          console.error(`[LF Self-Test] FAIL: ${summaryLine}`, allResults);
         }
-        return { passed: allPassed, allPassed, results, summary: summaryLine };
+        return { passed: allPassed, allPassed, results: allResults, summary: summaryLine };
       }
 
       const selfTestResult = runSelfTest();
@@ -5314,9 +5463,25 @@
         return total;
       }
 
-      function parseChemicalSpecies(rawTerm) {
+      function buildSpeciesReading(coeff, elements, charge, displayFormula) {
+        const elemPart = Object.keys(elements)
+          .filter((el) => elements[el] > 0)
+          .sort()
+          .map((el) => `${el}:${elements[el]}`)
+          .join(',');
+        const key = `${elemPart}|${charge}`;
+        return {
+          coeff,
+          elements,
+          charge,
+          key,
+          display: displayFormula,
+        };
+      }
+
+      function parseChemicalSpeciesVariants(rawTerm) {
         let s = normalizeChemText(rawTerm);
-        if (!s) return null;
+        if (!s) return [];
 
         // Check for leading stoichiometric integer coefficient
         let coeff = 1;
@@ -5328,95 +5493,120 @@
 
         // Check if electron ("e-", "e^-", "e^1-")
         if (/^e(?:\s*\^?\s*1?\s*-|\s*-)?$/i.test(s)) {
-          return {
+          return [{
             coeff,
             elements: {},
             charge: -1,
             key: 'e|-1',
             display: 'e-',
-          };
+          }];
         }
 
         const displayFormula = s.replace(/\s+/g, '');
-        let charge = 0;
-        let formulaBody = s;
 
-        // 1. Explicit caret charge: e.g. ^2-, ^-2, ^2+, ^+2, ^-, ^+
-        const caretMatch = formulaBody.match(/^(.*?)\s*\^(?:(\d+)([+-])|([+-])(\d+)|([+-]))$/);
+        // 1. Explicit caret charge: unambiguous (e.g. NH4^+, O2^2-, ^2-, ^-2, ^2+, ^+2, ^-, ^+)
+        const caretMatch = s.match(/^(.*?)\s*\^(?:(\d+)([+-])|([+-])(\d+)|([+-]))$/);
         if (caretMatch) {
-          formulaBody = caretMatch[1].trim();
+          const formulaBody = caretMatch[1].trim();
           const mag = Number(caretMatch[2] || caretMatch[5] || 1);
           const sgn = (caretMatch[3] || caretMatch[4] || caretMatch[6]) === '+' ? 1 : -1;
-          charge = sgn * mag;
-        } else {
-          // 2. Space-separated trailing charge: e.g. "SO4 2-", "Fe 3+"
-          const spaceCharge = formulaBody.match(/^(.*?)\s+(\d+)([+-])$/);
-          if (spaceCharge) {
-            formulaBody = spaceCharge[1].trim();
-            charge = (spaceCharge[3] === '+' ? 1 : -1) * Number(spaceCharge[2]);
-          } else {
-            // 3. Charge after closing bracket ], e.g. "[Fe(CN)6]4-" or "[Co(NH3)6]3+"
-            const bracketCharge = formulaBody.match(/^(\[.+\])(\d*)([+-])$/);
-            if (bracketCharge) {
-              formulaBody = bracketCharge[1].trim();
-              charge = (bracketCharge[3] === '+' ? 1 : -1) * Number(bracketCharge[2] || 1);
-            } else {
-              // 4. Two or more digits before trailing +/- on polyatomic ion: e.g. "SO42-", "Cr2O72-", "PO43-"
-              const twoDigitPoly = formulaBody.match(/^(.+?[A-Za-z)\]]\d)(\d)([+-])$/);
-              if (twoDigitPoly) {
-                formulaBody = twoDigitPoly[1].trim();
-                charge = (twoDigitPoly[3] === '+' ? 1 : -1) * Number(twoDigitPoly[2]);
-              } else {
-                // 5. Monoatomic ion with digit + sign: e.g. "Fe2+", "Al3+", "O2-", "S2-", "N3-"
-                const monoIon = formulaBody.match(/^([A-Z][a-z]?)(\d+)([+-])$/);
-                if (monoIon) {
-                  formulaBody = monoIon[1];
-                  charge = (monoIon[3] === '+' ? 1 : -1) * Number(monoIon[2]);
-                } else {
-                  // 6. Single trailing + or - (e.g. "NO3-", "MnO4-", "NH4+", "OH-", "H+", "Cl-")
-                  const singleSign = formulaBody.match(/^(.+?)([+-])$/);
-                  if (singleSign) {
-                    formulaBody = singleSign[1].trim();
-                    charge = singleSign[2] === '+' ? 1 : -1;
-                  }
-                }
-              }
-            }
-          }
+          const elements = parseChemicalFormulaCounts(formulaBody);
+          return [buildSpeciesReading(coeff, elements, sgn * mag, displayFormula)];
         }
 
-        const elements = parseChemicalFormulaCounts(formulaBody);
-        const elemPart = Object.keys(elements)
-          .filter((el) => elements[el] > 0)
-          .sort()
-          .map((el) => `${el}:${elements[el]}`)
-          .join(',');
-        const key = `${elemPart}|${charge}`;
+        // 2. Space-separated trailing charge: unambiguous (e.g. "SO4 2-", "Fe 3+")
+        const spaceCharge = s.match(/^(.*?)\s+(\d*)([+-])$/);
+        if (spaceCharge) {
+          const formulaBody = spaceCharge[1].trim();
+          const mag = spaceCharge[2] ? Number(spaceCharge[2]) : 1;
+          const sgn = spaceCharge[3] === '+' ? 1 : -1;
+          const elements = parseChemicalFormulaCounts(formulaBody);
+          return [buildSpeciesReading(coeff, elements, sgn * mag, displayFormula)];
+        }
 
-        return {
-          coeff,
-          elements,
-          charge,
-          key,
-          display: displayFormula,
-        };
+        // 3. Charge after closing bracket ], unambiguous (e.g. "[Fe(CN)6]4-" or "[Co(NH3)6]3+")
+        const bracketCharge = s.match(/^(\[.+\])(\d*)([+-])$/);
+        if (bracketCharge) {
+          const formulaBody = bracketCharge[1].trim();
+          const sgn = bracketCharge[3] === '+' ? 1 : -1;
+          const mag = Number(bracketCharge[2] || 1);
+          const elements = parseChemicalFormulaCounts(formulaBody);
+          return [buildSpeciesReading(coeff, elements, sgn * mag, displayFormula)];
+        }
+
+        // 4. Token ending in [+-] without "^":
+        // If trailing digits precede the sign, generate EVERY reading obtained by splitting
+        // the trailing digits into (last subscript, charge magnitude <= 4), including charge +-1.
+        const signMatch = s.match(/^(.*?)(\d*)([+-])$/);
+        if (signMatch) {
+          const prefix = signMatch[1].trim();
+          const digits = signMatch[2];
+          const sgn = signMatch[3] === '+' ? 1 : -1;
+
+          if (!digits) {
+            const elements = parseChemicalFormulaCounts(prefix);
+            return [buildSpeciesReading(coeff, elements, sgn, displayFormula)];
+          }
+
+          const variants = [];
+          const seenKeys = new Set();
+          for (let k = digits.length; k >= 0; k--) {
+            const subStr = digits.slice(0, k);
+            const chgStr = digits.slice(k);
+            if (k > 0 && subStr[0] === '0') continue;
+            let mag = 1;
+            if (chgStr.length > 0) {
+              if (chgStr[0] === '0') continue;
+              mag = Number(chgStr);
+              if (!Number.isInteger(mag) || mag < 1 || mag > 4) continue;
+            }
+            const body = prefix + subStr;
+            const elements = parseChemicalFormulaCounts(body);
+            if (!Object.values(elements).some((cnt) => cnt > 0)) continue;
+            const reading = buildSpeciesReading(coeff, elements, sgn * mag, displayFormula);
+            if (!seenKeys.has(reading.key)) {
+              seenKeys.add(reading.key);
+              variants.push(reading);
+            }
+          }
+          if (variants.length) return variants;
+        }
+
+        // 5. Neutral molecule
+        const elements = parseChemicalFormulaCounts(s);
+        return [buildSpeciesReading(coeff, elements, 0, displayFormula)];
+      }
+
+      function parseChemicalSpecies(rawTerm) {
+        const variants = parseChemicalSpeciesVariants(rawTerm);
+        return variants[0] || null;
+      }
+
+      function splitEquationSideTerms(sideRaw) {
+        let s = normalizeChemText(sideRaw);
+        if (!s) return [];
+        // Protect explicit caret plus charges before splitting by '+'
+        s = s.replace(/\^\s*(\d*)\+/g, '^$1__PLUS__').replace(/\^\s*\+(\d*)/g, '^__PLUS__$1');
+        // Protect non-caret charge '+' before separator '+' (without inserting '^')
+        s = s.replace(/([A-Za-z0-9)\]])\+\s*\+/g, '$1__PLUS__ +');
+        // Protect trailing charge '+' at the end of a side (without inserting '^')
+        s = s.replace(/([A-Za-z0-9)\]])\+\s*$/g, '$1__PLUS__');
+
+        const rawTerms = s.split('+').map((t) => t.replace(/__PLUS__/g, '+').trim()).filter(Boolean);
+        const termCandidates = [];
+        for (const term of rawTerms) {
+          const variants = parseChemicalSpeciesVariants(term).filter((v) => v && v.key && v.key !== '|0');
+          if (variants.length) termCandidates.push(variants);
+        }
+        return termCandidates;
       }
 
       function splitEquationSide(sideRaw) {
-        let s = normalizeChemText(sideRaw);
-        if (!s) return [];
-        // Convert charge '+' before separator '+' (e.g. "Fe2+ + Ce4+" or "H+ + OH-") into "^2+ +" / "^+ +"
-        s = s.replace(/([A-Za-z0-9)\]])(\d*)\+\s*\+/g, '$1^$2+ +');
-        // Convert trailing charge '+' at the end of a side into "^+"
-        s = s.replace(/([A-Za-z0-9)\]])(\d*)\+\s*$/g, '$1^$2+');
-        // Protect caret plus charges before splitting by '+'
-        s = s.replace(/\^(\d*)\+/g, '^$1__PLUS__').replace(/\^\+(\d*)/g, '^__PLUS__$1');
-
-        const rawTerms = s.split('+').map((t) => t.replace(/__PLUS__/g, '+').trim()).filter(Boolean);
+        const termCandidates = splitEquationSideTerms(sideRaw);
         const merged = new Map();
-        for (const term of rawTerms) {
-          const parsed = parseChemicalSpecies(term);
-          if (!parsed || !parsed.key || parsed.key === '|0') continue;
+        for (const cands of termCandidates) {
+          const parsed = cands[0];
+          if (!parsed) continue;
           if (merged.has(parsed.key)) {
             merged.get(parsed.key).coeff += parsed.coeff;
           } else {
@@ -5442,21 +5632,17 @@
         return nums.reduce((acc, n) => gcd2(acc, n), nums[0]);
       }
 
-      function parseEquationLine(lineStr) {
-        const clean = String(lineStr ?? '').trim();
-        const arrowMatch = clean.match(/<->|<=>|->|→|⇌|=/);
-        if (!arrowMatch) {
-          return { valid: false, raw: clean, error: 'Missing reaction arrow ("->", "→", or "=").' };
-        }
-        const idx = arrowMatch.index;
-        const sep = arrowMatch[0];
-        const lhsRaw = clean.slice(0, idx).trim();
-        const rhsRaw = clean.slice(idx + sep.length).trim();
-        const lhs = splitEquationSide(lhsRaw);
-        const rhs = splitEquationSide(rhsRaw);
-        if (!lhs.length || !rhs.length) {
-          return { valid: false, raw: clean, error: 'Both reactant and product sides must contain at least one species.' };
-        }
+      function finalizeParsedEquationLine(rawClean, lhsPicked, rhsPicked, lhsTermCandidates = null, rhsTermCandidates = null) {
+        const mergeSide = (list) => {
+          const merged = new Map();
+          for (const sp of list) {
+            if (merged.has(sp.key)) merged.get(sp.key).coeff += sp.coeff;
+            else merged.set(sp.key, { ...sp });
+          }
+          return [...merged.values()];
+        };
+        const lhs = mergeSide(lhsPicked);
+        const rhs = mergeSide(rhsPicked);
 
         const lhsAtoms = {};
         const rhsAtoms = {};
@@ -5492,7 +5678,7 @@
 
         return {
           valid: true,
-          raw: clean,
+          raw: rawClean,
           lhs,
           rhs,
           lhsAtoms,
@@ -5505,7 +5691,105 @@
           lhsKeySet,
           rhsKeySet,
           signature,
+          lhsTermCandidates,
+          rhsTermCandidates,
         };
+      }
+
+      function resolveParsedEquationLine(parsedLine, routeContext = null) {
+        if (!parsedLine || !parsedLine.valid) return parsedLine;
+        const lhsTermCands = parsedLine.lhsTermCandidates || parsedLine.lhs.map((s) => [s]);
+        const rhsTermCands = parsedLine.rhsTermCandidates || parsedLine.rhs.map((s) => [s]);
+
+        const filterForSide = (cands, sideKeys, allKeys) => {
+          if (!allKeys || cands.length <= 1) return cands;
+          if (sideKeys) {
+            const onSide = cands.filter((c) => sideKeys.has(c.key));
+            if (onSide.length) return onSide;
+          }
+          const inRoute = cands.filter((c) => allKeys.has(c.key));
+          if (inRoute.length) return inRoute;
+          return cands;
+        };
+
+        const filteredLhs = lhsTermCands.map((c) => filterForSide(c, routeContext?.lhsKeys, routeContext?.allKeys));
+        const filteredRhs = rhsTermCands.map((c) => filterForSide(c, routeContext?.rhsKeys, routeContext?.allKeys));
+
+        const allFiltered = [
+          ...filteredLhs.map((c, idx) => ({ side: 'L', idx, cands: c })),
+          ...filteredRhs.map((c, idx) => ({ side: 'R', idx, cands: c })),
+        ];
+        const ambiguousSlots = allFiltered.filter((slot) => slot.cands.length > 1);
+
+        if (ambiguousSlots.length === 0) {
+          return finalizeParsedEquationLine(
+            parsedLine.raw,
+            filteredLhs.map((c) => c[0]),
+            filteredRhs.map((c) => c[0]),
+            lhsTermCands,
+            rhsTermCands
+          );
+        }
+
+        const lhsChoices = filteredLhs.map((c) => c[0]);
+        const rhsChoices = filteredRhs.map((c) => c[0]);
+        let bestBalanced = null;
+        let checks = 0;
+        const MAX_COMBO_CHECKS = 4096;
+
+        function search(pos) {
+          if (bestBalanced || checks >= MAX_COMBO_CHECKS) return;
+          if (pos === ambiguousSlots.length) {
+            checks += 1;
+            const candidate = finalizeParsedEquationLine(parsedLine.raw, lhsChoices, rhsChoices, lhsTermCands, rhsTermCands);
+            if (candidate.isBalanced) bestBalanced = candidate;
+            return;
+          }
+          const slot = ambiguousSlots[pos];
+          for (const opt of slot.cands) {
+            if (slot.side === 'L') lhsChoices[slot.idx] = opt;
+            else rhsChoices[slot.idx] = opt;
+            search(pos + 1);
+            if (bestBalanced || checks >= MAX_COMBO_CHECKS) return;
+          }
+        }
+        search(0);
+
+        if (bestBalanced) return bestBalanced;
+        return finalizeParsedEquationLine(
+          parsedLine.raw,
+          filteredLhs.map((c) => c[0]),
+          filteredRhs.map((c) => c[0]),
+          lhsTermCands,
+          rhsTermCands
+        );
+      }
+
+      function parseEquationLine(lineStr, routeContext = null) {
+        const clean = String(lineStr ?? '').trim();
+        const arrowMatch = clean.match(/<->|<=>|->|→|⇌|=/);
+        if (!arrowMatch) {
+          return { valid: false, raw: clean, error: 'Missing reaction arrow ("->", "→", or "=").' };
+        }
+        const idx = arrowMatch.index;
+        const sep = arrowMatch[0];
+        const lhsRaw = clean.slice(0, idx).trim();
+        const rhsRaw = clean.slice(idx + sep.length).trim();
+        const lhsTermCands = splitEquationSideTerms(lhsRaw);
+        const rhsTermCands = splitEquationSideTerms(rhsRaw);
+        if (!lhsTermCands.length || !rhsTermCands.length) {
+          return { valid: false, raw: clean, error: 'Both reactant and product sides must contain at least one species.' };
+        }
+
+        const baseLine = {
+          valid: true,
+          raw: clean,
+          lhs: lhsTermCands.map((c) => c[0]),
+          rhs: rhsTermCands.map((c) => c[0]),
+          lhsTermCandidates: lhsTermCands,
+          rhsTermCandidates: rhsTermCands,
+        };
+        return resolveParsedEquationLine(baseLine, routeContext);
       }
 
       function parseEquationBlock(input) {
@@ -5515,7 +5799,7 @@
         return linesRaw
           .map((l) => String(l ?? '').trim())
           .filter(Boolean)
-          .map(parseEquationLine);
+          .map((l) => parseEquationLine(l));
       }
 
       function isPositiveIntegerMultiple(userLine, keyLine) {
@@ -5542,6 +5826,17 @@
           else if (Math.abs(r - ratio) > 1e-6) return false;
         }
         return ratio !== null && ratio >= 1 - 1e-6 && Math.abs(ratio - Math.round(ratio)) < 1e-6;
+      }
+
+      function buildRouteKeyContext(route) {
+        const lhsKeys = new Set();
+        const rhsKeys = new Set();
+        const allKeys = new Set();
+        for (const rLine of route) {
+          for (const k of rLine.lhsKeySet) { lhsKeys.add(k); allKeys.add(k); }
+          for (const k of rLine.rhsKeySet) { rhsKeys.add(k); allKeys.add(k); }
+        }
+        return { lhsKeys, rhsKeys, allKeys };
       }
 
       function gradeEquationMatch(evaluator, userInput, node = null, variant = null) {
@@ -5582,10 +5877,12 @@
         // Check if user lines match the species sets of any accepted route (supporting multi-step routes)
         for (const route of acceptedRoutes) {
           if (route.length !== userLines.length) continue;
+          const routeCtx = buildRouteKeyContext(route);
+          const resolvedUserLines = userLines.map((uLine) => resolveParsedEquationLine(uLine, routeCtx));
           const usedRouteIdx = new Set();
           const matchedPairs = [];
 
-          for (const uLine of userLines) {
+          for (const uLine of resolvedUserLines) {
             const rIdx = route.findIndex((rLine, idx) => !usedRouteIdx.has(idx) && rLine.signature === uLine.signature);
             if (rIdx >= 0) {
               usedRouteIdx.add(rIdx);
@@ -5633,18 +5930,19 @@
         }
 
         // Species mismatch: find closest accepted route to report missing and extra species
-        const userSpeciesMap = new Map();
-        for (const uLine of userLines) {
-          for (const s of [...uLine.lhs, ...uLine.rhs]) {
-            userSpeciesMap.set(s.key, s.display);
-          }
-        }
-
         let bestDiff = Infinity;
         let bestMissing = [];
         let bestExtra = [];
 
         for (const route of acceptedRoutes) {
+          const routeCtx = buildRouteKeyContext(route);
+          const resolvedUserLines = userLines.map((uLine) => resolveParsedEquationLine(uLine, routeCtx));
+          const userSpeciesMap = new Map();
+          for (const uLine of resolvedUserLines) {
+            for (const s of [...uLine.lhs, ...uLine.rhs]) {
+              userSpeciesMap.set(s.key, s.display);
+            }
+          }
           const routeSpeciesMap = new Map();
           for (const rLine of route) {
             for (const s of [...rLine.lhs, ...rLine.rhs]) {
@@ -5756,6 +6054,7 @@
         gradeNameMatch,
         gradeEquationMatch,
         parseChemicalSpecies,
+        parseChemicalSpeciesVariants,
         parseEquationLine,
         parseEquationBlock,
         normalizeNomenclatureName,
@@ -6689,9 +6988,9 @@
             <div class="space-y-2">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <label for="equationAnsInput" class="text-xs font-semibold uppercase tracking-wider text-slate-600">Balanced Chemical Equation(s)</label>
-                <span class="text-xs font-mono text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded">${esc(slot.formatHint || 'One or more lines · use ->, →, or = · charges e.g. 2-, ^2-, e-')}</span>
+                <span class="text-xs font-mono text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded">${esc(slot.formatHint || 'One or more lines · use ->, →, or = · use ^ for charges (e.g. NH4^+, O2^2-, e-)')}</span>
               </div>
-              <textarea id="equationAnsInput" rows="${slot.rows || 3}" ${disabledAttr} placeholder="${esc(slot.placeholder || 'e.g. 2 NO + Cl2 -> 2 ClNO')}" class="w-full font-mono text-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700 leading-relaxed">${esc(cur.userInput)}</textarea>
+              <textarea id="equationAnsInput" rows="${slot.rows || 3}" ${disabledAttr} placeholder="${esc(slot.placeholder || 'e.g. 2 NO + Cl2 -> 2 ClNO or NH4^+ + OH^- -> NH3 + H2O')}" class="w-full font-mono text-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700 leading-relaxed">${esc(cur.userInput)}</textarea>
             </div>
           `;
         } else if (slot.type === 'interactive_widget') {
@@ -7253,6 +7552,7 @@
           totalQuestions,
           proportions,
           reviewMap: appState.reviewMap,
+          modules: appState.modules,
         });
 
         const nowMs = Date.now();
@@ -7620,8 +7920,11 @@
           } else if (slot.type === 'typed_equation') {
             slotHtml = `
               <div class="space-y-2">
-                <label for="mockEquationInput" class="block text-xs font-semibold uppercase tracking-wider text-slate-600">Balanced Chemical Equation(s)</label>
-                <textarea id="mockEquationInput" rows="${slot.rows || 3}" placeholder="${esc(slot.placeholder || 'e.g. 2 NO + Cl2 -> 2 ClNO')}" class="w-full font-mono text-sm px-3.5 py-2.5 border border-slate-300 rounded-lg">${esc(q.userInput)}</textarea>
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <label for="mockEquationInput" class="block text-xs font-semibold uppercase tracking-wider text-slate-600">Balanced Chemical Equation(s)</label>
+                  <span class="text-xs font-mono text-slate-600 bg-slate-100 border border-slate-200 px-2 py-0.5 rounded">${esc(slot.formatHint || 'One or more lines · use ->, →, or = · use ^ for charges (e.g. NH4^+, O2^2-, e-)')}</span>
+                </div>
+                <textarea id="mockEquationInput" rows="${slot.rows || 3}" placeholder="${esc(slot.placeholder || 'e.g. 2 NO + Cl2 -> 2 ClNO or NH4^+ + OH^- -> NH3 + H2O')}" class="w-full font-mono text-sm px-3.5 py-2.5 border border-slate-300 rounded-lg">${esc(q.userInput)}</textarea>
               </div>
             `;
           } else if (slot.type === 'interactive_widget') {

@@ -13,12 +13,13 @@ const files = { [Content.BANK_URL]: bank, [Content.SKILL_MAP_URL]: skillMap };
 
 /*
  * The skill map was generated against a fuller bank than the one first shipped. Most gaps were filled from the
- * course notes and tutorials; these two remain on purpose and are pinned in both directions: a NEW gap fails
+ * course notes and tutorials. One remains on purpose and is pinned in both directions: a NEW gap fails
  * (something regressed), and a CLOSED gap fails until it is removed here.
- *   bk-c3-pes                 photoelectron spectra (textbook 5.2.4) is not in the lecture slides or tutorials
- *   bk-c5-elements-reduction  formal point groups / irreducible representations are not examined in the course
+ *   bk-c3-pes   photoelectron spectra (textbook 5.2.4) is not in the lecture slides or tutorials
+ * Formal point-group / irreducible-representation skills are out of scope for the course (symmetry labels are
+ * read, not manipulated) and have been removed from both the bank and the skill map.
  */
-const KNOWN_GAPS = ['bk-c3-pes', 'bk-c5-elements-reduction'];
+const KNOWN_GAPS = ['bk-c3-pes'];
 
 test('bundled bank: every node passes the app validator and belongs to a known module/week', () => {
   assert.equal(bank.bundleVersion, '3.0');
@@ -162,4 +163,13 @@ test('nodeProgress: proficient needs an attempt scoring >= 0.7 (latest log wins)
   same(p.n1, { attempted: true, proficient: true });
   same(p.n2, { attempted: true, proficient: false });
   same(p.n3, { attempted: false, proficient: false });
+});
+
+test('skill map: weights equal marks / total marks, and no formal group-theory skills remain', () => {
+  const total = skillMap.skills.reduce((a, k) => a + k.marks, 0);
+  const off = skillMap.skills.filter((k) => Math.abs(k.weight - k.marks / total) > 0.0001).map((k) => k.id);
+  same(off, [], 'skills whose weight is not marks/total');
+  const formal = ['c5.point-group', 'c5.reducible-rep', 'c5.projection', 'c5.hybrids'];
+  same(skillMap.skills.filter((k) => formal.includes(k.id)).map((k) => k.id), []);
+  same([...bankIds].filter((id) => ['bk-c5-point-groups', 'bk-c5-reducible-rep', 'bk-c5-hybrids-gt'].includes(id)), []);
 });

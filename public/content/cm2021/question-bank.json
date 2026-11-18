@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-18T03:22:17.000Z",
+ "exportedAt": "2026-11-18T03:51:41.000Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -3337,7 +3337,7 @@
    "tier": "atomic",
    "metadata": {
     "title": "Ligand group orbitals of six H atoms in O_h",
-    "source": "Tutorial 3 Q D",
+    "source": "Tutorial 3 Q D; Ch7 LFT slides (octahedral LGOs) — drafted from course notes (unverified)",
     "week": 3,
     "primaryTheme": "Molecular Orbital Theory",
     "conceptTags": [
@@ -3346,7 +3346,7 @@
     ],
     "difficultyEstimate": 5,
     "estimatedMinutes": 3,
-    "examStyle": "short_2to3",
+    "examStyle": "construct_4to6",
     "family": "lgo"
    },
    "variants": [
@@ -3395,6 +3395,85 @@
         "expectedDisplay": "a₁g"
        }
       }
+     }
+    },
+    {
+     "variantId": "c3-lgo-oh-v2",
+     "perspectiveLabel": "Draw the LGOs",
+     "marks": 4,
+     "stem": "Draw the six σ-type ligand group orbitals of an octahedral ML₆ complex (each ligand contributes one σ orbital pointing at M), as shown in the lectures. Show the signs of the lobes, group them by symmetry label, and say which metal orbital each group can overlap with.",
+     "explanation": "The six σ LGOs split into a₁g + t₁u + e_g. a₁g (no nodes) is lowest; t₁u has one node and e_g two. Each LGO overlaps only with the metal orbitals of matching symmetry; t₂g has none, which is why the t₂g set stays non-bonding (and defines the d-orbital splitting in LFT).",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "a₁g: one LGO with all six ligand orbitals in phase; it matches the metal s orbital",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "t₁u: three LGOs, each built from the pair of ligands on one axis with opposite signs (x, y, z); they match the metal p_x, p_y, p_z",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "e_g: two LGOs — one with the z-axis pair in phase and the four equatorial ligands out of phase, and one with the x pair in phase and the y pair out of phase; they match the metal d_z² and d_x²−y²",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "The metal d_xy, d_xz, d_yz (t₂g) point between the ligands and have no σ LGO partner, so they are non-bonding in a σ-only complex",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c3-lgo-oh-v3",
+     "perspectiveLabel": "Match to the metal",
+     "marks": 2,
+     "stem": "Which statement correctly matches the σ LGOs of an octahedral complex to the metal orbitals?",
+     "explanation": "Overlap requires matching symmetry (the labels tell you which orbitals can interact). a₁g has the symmetry of s, t₁u of p, e_g of d_z² and d_x²−y²; d_xy, d_xz and d_yz (t₂g) have no matching LGO in a σ-only complex.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "a₁g ↔ s; t₁u ↔ p_x, p_y, p_z; e_g ↔ d_z² and d_x²−y²; d_xy, d_xz, d_yz are non-bonding"
+       },
+       {
+        "id": "b",
+        "label": "a₁g ↔ s; t₁u ↔ p_x, p_y, p_z; e_g ↔ all five d orbitals"
+       },
+       {
+        "id": "c",
+        "label": "a₁g ↔ p; t₁u ↔ s; e_g ↔ d_xy, d_xz, d_yz"
+       },
+       {
+        "id": "d",
+        "label": "Every LGO overlaps with the metal d_xy, d_xz, d_yz"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
      }
     }
    ]
@@ -4005,8 +4084,8 @@
    "moduleCode": "CM2021",
    "tier": "atomic",
    "metadata": {
-    "title": "Group orbitals of CO₂ (D₂h descent)",
-    "source": "Ch3 textbook 5.4.2",
+    "title": "Group orbitals of CO₂ (qualitative)",
+    "source": "Ch3 textbook 5.4.2 (qualitative use only); LGO slides — drafted from course notes (unverified)",
     "week": 3,
     "primaryTheme": "Molecular Orbital Theory",
     "conceptTags": [
@@ -4014,72 +4093,89 @@
      "polyatomic-mo",
      "group-theory-mo"
     ],
-    "difficultyEstimate": 7,
-    "estimatedMinutes": 4,
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
     "family": "lgo"
    },
    "variants": [
     {
      "variantId": "c3-co2-salcs-v1",
-     "perspectiveLabel": "Recall",
+     "perspectiveLabel": "Draw the group orbitals",
      "marks": 4,
-     "stem": "CO₂ is treated in D₂h (z = molecular axis). Which **carbon** orbital (2s, 2p_x, 2p_y, 2p_z or none) has the right symmetry to combine with each O group orbital?",
-     "explanation": "C 2s is A_g, 2p_z B₁u, 2p_y B₂u, 2p_x B₃u. B₂g and B₃g group orbitals have no carbon partner → nonbonding π pairs on O. The main σ interaction is C 2s with the O 2p_z A_g combination (3.6 eV apart) rather than O 2s (13 eV apart).",
+     "stem": "CO₂ is linear (z along O–C–O). Draw the group orbitals formed from the two O 2p_z orbitals and from the two O 2p_x orbitals (in-phase and out-of-phase combinations), and show which carbon orbital, if any, each can overlap with.",
+     "explanation": "Group orbitals are sums and differences of the equivalent O orbitals. Only those with the same symmetry as a carbon valence orbital interact (C 2s, 2p_z → σ; C 2p_x, 2p_y → π). The remaining π combinations have no carbon partner and stay non-bonding on O.",
+     "drawOnPaperThenCompare": true,
      "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
        {
-        "key": "ag",
-        "label": "A_g (O 2p_z in phase)"
+        "id": "r1",
+        "criterion": "O 2p_z group orbitals: the combination symmetric about the carbon (g) matches C 2s; the antisymmetric combination (u) matches C 2p_z (both give σ interactions)",
+        "marks": 1,
+        "isCritical": true
        },
        {
-        "key": "b1u",
-        "label": "B₁u (O 2p_z out of phase)"
+        "id": "r2",
+        "criterion": "O 2p_x group orbitals: the combination with the same sign on both oxygens (u) matches C 2p_x (π interaction); likewise 2p_y",
+        "marks": 1,
+        "isCritical": true
        },
        {
-        "key": "b2u",
-        "label": "B₂u (O 2p_y)"
+        "id": "r3",
+        "criterion": "The other combination of O 2p_x (and 2p_y), with opposite signs on the two oxygens (g), has no matching carbon valence orbital, so it is non-bonding",
+        "marks": 1,
+        "isCritical": true
        },
        {
-        "key": "b3g",
-        "label": "B₃g (O 2p_y)"
+        "id": "r4",
+        "criterion": "Overlap is limited to orbitals of matching symmetry; C 2s is closer in energy to the O 2p_z group orbital than to O 2s",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c3-co2-salcs-v2",
+     "perspectiveLabel": "Non-bonding",
+     "marks": 2,
+     "stem": "In CO₂, why do some of the O 2p group orbitals remain non-bonding?",
+     "explanation": "Overlap requires matching symmetry. The out-of-phase (g) combinations of the O 2p_x and 2p_y orbitals have no carbon 2p partner and (without carbon d orbitals) cannot interact, so they remain non-bonding oxygen lone-pair-like orbitals.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "They have no carbon valence orbital of matching symmetry to overlap with"
+       },
+       {
+        "id": "b",
+        "label": "They are too high in energy"
+       },
+       {
+        "id": "c",
+        "label": "Oxygen is more electronegative than carbon, so it cannot form π bonds"
+       },
+       {
+        "id": "d",
+        "label": "They are filled"
        }
       ]
      },
      "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "ag": {
-        "acceptedPatterns": [
-         "^\\s*(?:2\\s*s|s)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "2s"
-       },
-       "b1u": {
-        "acceptedPatterns": [
-         "^\\s*(?:2\\s*p\\s*_?\\s*z|p\\s*_?\\s*z)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "2p_z"
-       },
-       "b2u": {
-        "acceptedPatterns": [
-         "^\\s*(?:2\\s*p\\s*_?\\s*y|p\\s*_?\\s*y)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "2p_y"
-       },
-       "b3g": {
-        "acceptedPatterns": [
-         "^\\s*(?:none|no\\s*match|non[\\s-]*bonding)"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "none (nonbonding)"
-       }
-      }
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
      }
     }
    ]
@@ -9759,415 +9855,12 @@
   },
   {
    "schemaVersion": "3.0",
-   "id": "bk-c5-point-groups",
-   "moduleCode": "CM2021",
-   "tier": "atomic",
-   "metadata": {
-    "title": "Assign point groups",
-    "source": "Ch5 Symmetry & Group Theory; Ch3 MO examples (H₂O C₂v, NH₃ C₃v, BF₃ D₃h, CH₄ T_d, CO₂ D∞h)",
-    "week": 5,
-    "primaryTheme": "Symmetry & Group Theory",
-    "conceptTags": [
-     "point-group"
-    ],
-    "difficultyEstimate": 4,
-    "estimatedMinutes": 4,
-    "examStyle": "construct_4to6",
-    "family": "point-group"
-   },
-   "variants": [
-    {
-     "variantId": "c5-point-groups-v1",
-     "perspectiveLabel": "Set A",
-     "marks": 4,
-     "stem": "Give the point group of each molecule.",
-     "explanation": "H₂O: C₂ + two σ_v. NH₃: C₃ + three σ_v. BF₃: C₃ ⊥ three C₂ + σ_h. CH₄: tetrahedral (E, 8C₃, 3C₂, 6S₄, 6σ_d).",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "H₂O"
-       },
-       {
-        "key": "b",
-        "label": "NH₃"
-       },
-       {
-        "key": "c",
-        "label": "BF₃"
-       },
-       {
-        "key": "d",
-        "label": "CH₄"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "acceptedPatterns": [
-         "^\\s*(?:C\\s*_?[2₂]\\s*_?v)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "C₂v"
-       },
-       "b": {
-        "acceptedPatterns": [
-         "^\\s*(?:C\\s*_?[3₃]\\s*_?v)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "C₃v"
-       },
-       "c": {
-        "acceptedPatterns": [
-         "^\\s*(?:D\\s*_?[3₃]\\s*_?h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "D₃h"
-       },
-       "d": {
-        "acceptedPatterns": [
-         "^\\s*(?:T\\s*\\s*_?d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "T_d"
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c5-point-groups-v2",
-     "perspectiveLabel": "Set B",
-     "marks": 4,
-     "stem": "Give the point group of each molecule.",
-     "explanation": "Linear molecules with an inversion centre are D∞h, without one C∞v. Square planar XeF₄ is D₄h; octahedral SF₆ is O_h.",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "SF₆"
-       },
-       {
-        "key": "b",
-        "label": "XeF₄"
-       },
-       {
-        "key": "c",
-        "label": "CO₂"
-       },
-       {
-        "key": "d",
-        "label": "HCl"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "acceptedPatterns": [
-         "^\\s*(?:O\\s*\\s*_?h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "O_h"
-       },
-       "b": {
-        "acceptedPatterns": [
-         "^\\s*(?:D\\s*_?[4₄]\\s*_?h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "D₄h"
-       },
-       "c": {
-        "acceptedPatterns": [
-         "^\\s*(?:D\\s*(?:∞|inf|infinity)\\s*_?h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "D∞h"
-       },
-       "d": {
-        "acceptedPatterns": [
-         "^\\s*(?:C\\s*(?:∞|inf|infinity)\\s*_?v)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "C∞v"
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c5-point-groups-v3",
-     "perspectiveLabel": "Set C",
-     "marks": 4,
-     "stem": "Give the point group of each molecule.",
-     "explanation": "PF₅ (TBP): D₃h. SF₄ (see-saw): C₂v. trans-N₂F₂ (planar, C₂ ⊥ plane, σ_h, i): C₂h. CHCl₃: C₃v.",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "PF₅"
-       },
-       {
-        "key": "b",
-        "label": "SF₄"
-       },
-       {
-        "key": "c",
-        "label": "trans-N₂F₂"
-       },
-       {
-        "key": "d",
-        "label": "CHCl₃"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "acceptedPatterns": [
-         "^\\s*(?:D\\s*_?[3₃]\\s*_?h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "D₃h"
-       },
-       "b": {
-        "acceptedPatterns": [
-         "^\\s*(?:C\\s*_?[2₂]\\s*_?v)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "C₂v"
-       },
-       "c": {
-        "acceptedPatterns": [
-         "^\\s*(?:C\\s*_?[2₂]\\s*_?h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "C₂h"
-       },
-       "d": {
-        "acceptedPatterns": [
-         "^\\s*(?:C\\s*_?[3₃]\\s*_?v)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "C₃v"
-       }
-      }
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c5-reducible-rep",
-   "moduleCode": "CM2021",
-   "tier": "atomic",
-   "metadata": {
-    "title": "Reducible representations of H 1s group orbitals",
-    "source": "Ch3 textbook 5.4.3–5.4.4 (H₂O, NH₃)",
-    "week": 5,
-    "primaryTheme": "Symmetry & Group Theory",
-    "conceptTags": [
-     "reducible-representation",
-     "ligand-group-orbitals"
-    ],
-    "difficultyEstimate": 6,
-    "estimatedMinutes": 3,
-    "examStyle": "short_2to3",
-    "family": "group-theory"
-   },
-   "variants": [
-    {
-     "variantId": "c5-reducible-rep-v1",
-     "perspectiveLabel": "H₂O",
-     "marks": 3,
-     "stem": "For the two H 1s orbitals of H₂O (C₂v; operations E, C₂, σ_v(xz), σ_v′(yz), molecule in the xz plane): give Γ and its reduction.",
-     "explanation": "An orbital left in place contributes 1, a moved orbital 0, a sign-reversed orbital −1. E and σ_v(xz) leave both H in place (2); C₂ and σ_v′ swap them (0). Γ = A₁ + B₁: the in-phase (A₁) and out-of-phase (B₁) combinations, matching O 2s/2p_z (A₁) and O 2p_x (B₁). O 2p_y (B₂) is nonbonding.",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "g",
-        "label": "Γ (characters under E, C₂, σ_v, σ_v′)"
-       },
-       {
-        "key": "r",
-        "label": "Γ reduces to"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "g": {
-        "acceptedPatterns": [
-         "^\\s*(?:2\\s*,?\\s*0\\s*,?\\s*2\\s*,?\\s*0)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "2, 0, 2, 0"
-       },
-       "r": {
-        "acceptedPatterns": [
-         "^\\s*(?:A\\s*_?[1₁]\\s*\\+\\s*B\\s*_?[1₁]|B\\s*_?[1₁]\\s*\\+\\s*A\\s*_?[1₁])\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "A₁ + B₁"
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c5-reducible-rep-v2",
-     "perspectiveLabel": "NH₃",
-     "marks": 3,
-     "stem": "For the three H 1s orbitals of NH₃ (C₃v; classes E, 2C₃, 3σ_v): give Γ, its reduction, and the normalisation coefficient of each H in the A₁ SALC.",
-     "explanation": "Γ = 3, 0, 1 → A₁ + E. A₁ SALC = (1/√3)(H_a + H_b + H_c). E pair: (1/√6)(2H_a − H_b − H_c) matches N p_y; (1/√2)(H_b − H_c) matches N p_x.",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "g",
-        "label": "Γ (E, 2C₃, 3σ_v)"
-       },
-       {
-        "key": "r",
-        "label": "Γ reduces to"
-       },
-       {
-        "key": "c",
-        "label": "Coefficient of each H 1s in the A₁ SALC"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "g": {
-        "acceptedPatterns": [
-         "^\\s*(?:3\\s*,?\\s*0\\s*,?\\s*1)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "3, 0, 1"
-       },
-       "r": {
-        "acceptedPatterns": [
-         "^\\s*(?:A\\s*_?[1₁]\\s*\\+\\s*E|E\\s*\\+\\s*A\\s*_?[1₁])\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "A₁ + E"
-       },
-       "c": {
-        "type": "numeric",
-        "targetExpr": "1/sqrt(3)",
-        "tolerance": 0.01,
-        "expectedDisplay": "1/√3 ≈ 0.577"
-       }
-      }
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c5-hybrids-gt",
-   "moduleCode": "CM2021",
-   "tier": "atomic",
-   "metadata": {
-    "title": "Hybrid orbitals from group theory",
-    "source": "Ch3 textbook 5.4.7, Example 5.11, Exercise 5.11",
-    "week": 5,
-    "primaryTheme": "Symmetry & Group Theory",
-    "conceptTags": [
-     "hybridization",
-     "reducible-representation"
-    ],
-    "difficultyEstimate": 5,
-    "estimatedMinutes": 4,
-    "examStyle": "construct_4to6",
-    "family": "group-theory"
-   },
-   "variants": [
-    {
-     "variantId": "c5-hybrids-gt-v1",
-     "perspectiveLabel": "Recall",
-     "marks": 4,
-     "stem": "Using the reducible representation of vectors pointing at the ligands, give the hybridisation of the central atom.",
-     "explanation": "Match each irreducible representation to central-atom orbitals of suitable energy: A₁′ → 2s, E′ → (2p_x, 2p_y) for BF₃ (3d too high) → sp². T_d: A₁ (s) + T₂ (p_x, p_y, p_z) → sp³. TBP → dsp³; square planar → dsp² (d_x²−y², s, p_x, p_y).",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "B in BF₃ (Γ = A₁′ + E′)"
-       },
-       {
-        "key": "b",
-        "label": "C in CH₄ (Γ = A₁ + T₂)"
-       },
-       {
-        "key": "c",
-        "label": "P in PF₅"
-       },
-       {
-        "key": "d",
-        "label": "Pt in [PtCl₄]²⁻ (square planar)"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "acceptedPatterns": [
-         "^\\s*(?:sp\\s*[2²])\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "sp²"
-       },
-       "b": {
-        "acceptedPatterns": [
-         "^\\s*(?:sp\\s*[3³])\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "sp³"
-       },
-       "c": {
-        "acceptedPatterns": [
-         "^\\s*(?:dsp\\s*[3³]|sp\\s*[3³]\\s*d|d\\s*sp\\s*[3³])\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "dsp³ (sp³d)"
-       },
-       "d": {
-        "acceptedPatterns": [
-         "^\\s*(?:dsp\\s*[2²]|sp\\s*[2²]\\s*d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "dsp²"
-       }
-      }
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
    "id": "bk-c5-symmetry-rules",
    "moduleCode": "CM2021",
    "tier": "atomic",
    "metadata": {
-    "title": "Symmetry-operation rules of thumb",
-    "source": "Ch3 textbook 5.4.2 (descent in symmetry, character rules); Ch6 optical isomerism slides (S_n)",
+    "title": "Chirality from σ and Sₙ",
+    "source": "Ch6 optical isomerism slides (σ, S_n; mirror plane and inversion centre) — drafted from course notes (unverified)",
     "week": 5,
     "primaryTheme": "Symmetry & Group Theory",
     "conceptTags": [
@@ -10175,72 +9868,78 @@
      "chirality"
     ],
     "difficultyEstimate": 3,
-    "estimatedMinutes": 1,
-    "examStyle": "mcq_1mark",
-    "family": "group-theory"
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "chirality-symmetry"
    },
    "variants": [
     {
      "variantId": "c5-symmetry-rules-v1",
-     "perspectiveLabel": "Characters",
-     "marks": 1,
-     "stem": "When building a reducible representation from a set of orbitals, an orbital that stays in place but has its lobes reversed contributes…",
-     "explanation": "Unchanged → +1; moved to another position → 0; same position, sign reversed → −1.",
+     "perspectiveLabel": "Which are chiral",
+     "marks": 2,
+     "stem": "Which of these are **chiral**? Select all that apply.",
+     "hint": "Look for a mirror plane (σ = S₁) or inversion centre (i = S₂).",
+     "explanation": "[M(AA)₃] and cis-[M(AA)₂X₂] are propeller/skewed arrangements with no mirror plane or other improper axis, so they are chiral. trans-[CoCl₂(en)₂]⁺ has a mirror plane (σ) and so is achiral; mer-[MA₃B₃] has a mirror plane containing the meridian; the square-planar complex lies in a σ_h plane (the molecular plane), so it is achiral.",
      "inputSlot": {
       "type": "choice",
-      "selectionMode": "single",
+      "selectionMode": "multi",
       "options": [
        {
         "id": "a",
-        "label": "+1"
+        "label": "[Co(en)₃]³⁺"
        },
        {
         "id": "b",
-        "label": "0"
+        "label": "cis-[CoCl₂(en)₂]⁺"
        },
        {
         "id": "c",
-        "label": "−1"
+        "label": "trans-[CoCl₂(en)₂]⁺"
        },
        {
         "id": "d",
-        "label": "+2"
+        "label": "mer-[CrCl₃(py)₃]"
+       },
+       {
+        "id": "e",
+        "label": "square planar [Pt(NH₃)(py)ClBr]"
        }
       ]
      },
      "evaluator": {
       "type": "choice_match",
       "targetIds": [
-       "c"
+       "a",
+       "b"
       ],
-      "gradingMode": "exact"
+      "gradingMode": "partial_with_penalty"
      }
     },
     {
      "variantId": "c5-symmetry-rules-v2",
-     "perspectiveLabel": "Descent",
+     "perspectiveLabel": "σ_h",
      "marks": 1,
-     "stem": "For a linear molecule such as CO₂ (D∞h), the course works in which simpler point group?",
-     "explanation": "Descent in symmetry: D∞h → D₂h and C∞v → C₂v keep the orbital symmetry without infinite-fold axes.",
+     "stem": "A flat (planar) molecule such as square-planar [Pt(NH₃)₂Cl₂] cannot be chiral because…",
+     "explanation": "Any molecule that lies in a mirror plane has σ (= S₁), so it is superimposable on its mirror image. A C_n axis alone does not rule out chirality (e.g. [Co(en)₃]³⁺ has C₃ and C₂ axes and is chiral).",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
       "options": [
        {
         "id": "a",
-        "label": "D₂h"
+        "label": "its molecular plane is a mirror plane (σ_h), and σ = S₁ is an improper axis"
        },
        {
         "id": "b",
-        "label": "C₂v"
+        "label": "it has a C₂ axis"
        },
        {
         "id": "c",
-        "label": "D₃h"
+        "label": "it has no C_n axis"
        },
        {
         "id": "d",
-        "label": "C₁"
+        "label": "planar molecules have no symmetry elements"
        }
       ]
      },

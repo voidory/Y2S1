@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-18T08:38:49.000Z",
+ "exportedAt": "2026-11-18T08:44:24.000Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -1798,7 +1798,8 @@
     "difficultyEstimate": 7,
     "estimatedMinutes": 3,
     "examStyle": "construct_4to6",
-    "family": "heavy-hybrid"
+    "family": "heavy-hybrid",
+    "memoryHook": "**Heavier p-block atoms barely mix s and p**, so disilene is trans-bent and weakly bonded (donor–acceptor), unlike planar ethene. This is the double-bond rule."
    },
    "variants": [
     {
@@ -4388,7 +4389,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "oxidation-number"
+    "family": "oxidation-number",
+    "memoryHook": "**H is −1 when bonded to a metal (hydride), +1 with nonmetals**: KH (−1); [ReH₉]²⁻ makes Re +7; H₃PO₂ makes P +1."
    },
    "variants": [
     {
@@ -4473,7 +4475,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "oxidation-number"
+    "family": "oxidation-number",
+    "memoryHook": "**An average oxidation number can hide different atoms**: Mn₃O₄ is +8/3 on average, really Mn(II) + 2 Mn(III). The electropositive partner takes its usual charge: Mg is +2, so Ga is −5 in Mg₅Ga₂."
    },
    "variants": [
     {
@@ -4532,7 +4535,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "oxidation-number"
+    "family": "oxidation-number",
+    "memoryHook": "**The N oxides climb by +1**: N₂O (+1), NO (+2), N₂O₃ (+3), NO₂ (+4), N₂O₅ (+5). O is always −2, so count N."
    },
    "variants": [
     {
@@ -4617,7 +4621,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "p-oxoacid"
+    "family": "p-oxoacid",
+    "memoryHook": "**Phosphor-OUS is the lower state (+3), phosphor-IC the higher (+5).** PCl₃ + 3H₂O → H₃PO₃ + 3HCl; one H is on P and does not ionise, so it is diprotic."
    },
    "variants": [
     {
@@ -4686,7 +4691,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "halogen-oxide"
+    "family": "halogen-oxide",
+    "memoryHook": "**ClO₂ has an odd electron** (Cl +4, yellow-green, paramagnetic). It is made by reducing chlorate: 2NaClO₃ + SO₂ + H₂SO₄ → 2ClO₂ + 2NaHSO₄."
    },
    "variants": [
     {
@@ -4878,7 +4884,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "hydride"
+    "family": "hydride",
+    "memoryHook": "**Salt-like hydrides belong to the “salty” s-block**: only Li–Cs and Ca–Ba are electropositive enough to hand H an electron (H⁻). BeH₂ is covalent and polymeric; TiH₁.₈ is metallic and non-stoichiometric."
    },
    "variants": [
     {
@@ -5015,7 +5022,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "hydride"
+    "family": "hydride",
+    "memoryHook": "**Feed LiH to the chloride**: 8LiH + Al₂Cl₆ → 6LiCl + 2Li[AlH₄]. The LiCl forms and drives it. The same swap of Cl for H makes silane."
    },
    "variants": [
     {
@@ -5109,7 +5117,8 @@
     "difficultyEstimate": 6,
     "estimatedMinutes": 1,
     "examStyle": "construct_4to6",
-    "family": "isotope"
+    "family": "isotope",
+    "memoryHook": "**Heavier isotope → lower zero-point energy → sits deeper in the well → stronger bond.** D₂ 106.0 vs H₂ 104.2 kcal/mol: the heavy one sits still, so more energy is needed to pull it apart."
    },
    "variants": [
     {
@@ -5212,7 +5221,8 @@
     "difficultyEstimate": 6,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "isotope"
+    "family": "isotope",
+    "memoryHook": "**C–H breaks faster than C–D.** C–D starts lower (lower zero-point energy), so it has further to climb to the transition state: CH₄ chlorinates faster than CD₄. “D is lazy: it sits low, so it climbs slowly.”"
    },
    "variants": [
     {
@@ -5275,7 +5285,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "isotope"
+    "family": "isotope",
+    "memoryHook": "**NaH + D₂O → HD**: one H⁻ meets one D⁺, one of each in and HD out. The other routes scramble H and D statistically."
    },
    "variants": [
     {
@@ -5347,7 +5358,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "electrolysis"
+    "family": "electrolysis",
+    "memoryHook": "**An Ox, Red Cat**: Anode = oxidation (2Br⁻ → Br₂ + 2e⁻); Cathode = reduction (K⁺ + e⁻ → K)."
    },
    "variants": [
     {
@@ -5432,7 +5444,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 4,
     "examStyle": "construct_4to6",
-    "family": "h-storage"
+    "family": "h-storage",
+    "memoryHook": "**Weight % H = (mass of H released) ÷ (mass of compound) × 100.** The usable figure is lower than the theoretical 7.47% because not all the H comes out: 3 mol NaAlH₄ give 4.5 mol H₂, which is 5.60%."
    },
    "variants": [
     {
@@ -5491,7 +5504,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "h-activation"
+    "family": "h-activation",
+    "memoryHook": "**Oxidative addition = H₂ splits across the metal**: oxidation state +2 and coordination number +2 (Ir(I) → Ir(III)). Dihydrogen and metal-hydride complexes are the intermediates in catalytic hydrogenation."
    },
    "variants": [
     {
@@ -5586,7 +5600,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "radical-chain"
+    "family": "radical-chain",
+    "memoryHook": "**Start, carry on, stop**: light splits the weak Cl–Cl bond (243 kJ/mol); Cl• takes H from H₂; H• takes Cl from Cl₂ and gives Cl• back, so the chain feeds itself until radicals recombine."
    },
    "variants": [
     {
@@ -5758,7 +5773,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g1-oxygen"
+    "family": "g1-oxygen",
+    "memoryHook": "**Peroxide plus water gives H₂O₂**: Na₂O₂ + 2H₂O → 2NaOH + H₂O₂ (the peroxide ion just picks up protons). KO₂ scrubs CO₂ and releases O₂, so it is used in breathing apparatus."
    },
    "variants": [
     {
@@ -5835,7 +5851,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g1-n2"
+    "family": "g1-n2",
+    "memoryHook": "**Li is the only alkali metal that reacts with N₂**: 6Li + N₂ → 2Li₃N. Li₃N is a fast-ion conductor, and Li must be stored under argon, not nitrogen."
    },
    "variants": [
     {
@@ -5893,7 +5910,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "hydration"
+    "family": "hydration",
+    "memoryHook": "**Charge density = charge ÷ radius.** The more concentrated the charge, the more water it grabs: Al³⁺ (high charge, small) beats everything; within a group, Li⁺ > Na⁺ > K⁺."
    },
    "variants": [
     {
@@ -6125,7 +6143,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 4,
     "examStyle": "construct_4to6",
-    "family": "crown"
+    "family": "crown",
+    "memoryHook": "**Lock and key by size**: the cavity must match the ion diameter (Li⁺ 1.36, Na⁺ 1.9, K⁺ 2.66, Cs⁺ 3.38 Å). A cryptand wraps the ion in 3D, so it holds tighter than a flat crown ether."
    },
    "variants": [
     {
@@ -6331,7 +6350,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "crown"
+    "family": "crown",
+    "memoryHook": "**Alkalide M⁻ comes from disproportionation, 2Na → Na⁺ + Na⁻**, forced by a crown or cryptand wrapping the Na⁺. In an electride the electron itself is the anion. Both are very strong reducing agents."
    },
    "variants": [
     {
@@ -6395,7 +6415,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 2,
     "examStyle": "construct_4to6",
-    "family": "acetylide"
+    "family": "acetylide",
+    "memoryHook": "**sp C–H is the acidic one**: 50% s-character holds the carbanion’s pair close, so an alkali metal strips H from acetylene (2M + HC≡CH → M₂C₂ + H₂) but not from hexane (sp³)."
    },
    "variants": [
     {
@@ -6470,7 +6491,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g1-li"
+    "family": "g1-li",
+    "memoryHook": "**Li is the odd one out and behaves like Mg (diagonal)**: small and polarising, so it forms covalent organolithiums: 2Li + RCl → RLi + LiCl."
    },
    "variants": [
     {
@@ -6656,7 +6678,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g2-carbonate"
+    "family": "g2-carbonate",
+    "memoryHook": "**Small, polarising cation = weak carbonate.** MgCO₃ 813 K < CaCO₃ 1173 K < SrCO₃ 1563 K: the cation pulls O²⁻ off CO₃²⁻ to build a stable oxide lattice. Stability rises down the group."
    },
    "variants": [
     {
@@ -6771,7 +6794,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g2-be"
+    "family": "g2-be",
+    "memoryHook": "**Be bites both ways (diagonal to Al)**: Be(OH)₂ dissolves in acid *and* in base to give [Be(OH)₄]²⁻, just like Al(OH)₃. It is amphoteric."
    },
    "variants": [
     {
@@ -6899,7 +6923,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g2-misc"
+    "family": "g2-misc",
+    "memoryHook": "**Group 2 + N₂ → M₃N₂ (Mg to Ba, not Be); add water → 3M(OH)₂ + 2NH₃.** The nitride is a store of ammonia."
    },
    "variants": [
     {
@@ -6978,7 +7003,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 1,
     "examStyle": "mcq_1mark",
-    "family": "periodic-trend"
+    "family": "periodic-trend",
+    "memoryHook": "**IE falls down a group (the outer electron is further away and shielded) and rises across a period**: Be > Mg > Ca > Sr > Ba."
    },
    "variants": [
     {
@@ -7063,7 +7089,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 3,
     "examStyle": "construct_4to6",
-    "family": "inert-pair"
+    "family": "inert-pair",
+    "memoryHook": "**The inert pair stays home**: poor d/f shielding holds the 6s² pair tight, so Tl prefers +1 and Pb prefers +2 over the group oxidation state."
    },
    "variants": [
     {
@@ -7292,7 +7319,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "boron"
+    "family": "boron",
+    "memoryHook": "**H₂SO₄ + CaF₂ makes HF in situ**, so B₂O₃ + 3CaF₂ + 3H₂SO₄ → 2BF₃ + 3CaSO₄ + 3H₂O. Insoluble CaSO₄ helps drive it."
    },
    "variants": [
     {
@@ -7393,7 +7421,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "silicon"
+    "family": "silicon",
+    "memoryHook": "**Hydride swap**: SiCl₄ + Li[AlH₄] → SiH₄ + Li[AlCl₄]. Si is more electropositive than H, so Si–H has the opposite polarity to C–H and silanes react far more readily than alkanes."
    },
    "variants": [
     {
@@ -7599,7 +7628,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 3,
     "examStyle": "short_2to3",
-    "family": "heavy-hybrid"
+    "family": "heavy-hybrid",
+    "memoryHook": "**C likes two double bonds; Si likes four single bonds.** So CO₂ is a small molecule (a gas) and SiO₂ is a giant 3D network (quartz, mp 1710 °C)."
    },
    "variants": [
     {
@@ -7656,7 +7686,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 4,
     "examStyle": "construct_4to6",
-    "family": "silicate"
+    "family": "silicate",
+    "memoryHook": "**Count the terminal O atoms: that is the charge.** SiO₄⁴⁻ has 4, Si₂O₇⁶⁻ has 6, a single chain (SiO₃)ₙ²ⁿ⁻ has 2 per Si, the ring Si₆O₁₈¹²⁻ has 12. Bridging O is shared and carries no charge."
    },
    "variants": [
     {
@@ -7731,7 +7762,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "allotrope"
+    "family": "allotrope",
+    "memoryHook": "**Diamond: sp³, every electron locked in a bond, insulator, hardest. Graphite: sp² layers with free π electrons, so it conducts.**"
    },
    "variants": [
     {
@@ -8248,7 +8280,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "explosive"
+    "family": "explosive",
+    "memoryHook": "**Explosives release N₂ gas fast**: 2NaN₃ → 2Na + 3N₂ (airbags). Forming the very strong N≡N bond releases huge energy."
    },
    "variants": [
     {
@@ -8359,7 +8392,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "nh3"
+    "family": "nh3",
+    "memoryHook": "**A stronger base displaces the weaker**: 2NH₄Cl + Ca(OH)₂ → 2NH₃ + CaCl₂ + 2H₂O. Never mix NH₃ with bleach: chloramine is toxic."
    },
    "variants": [
     {
@@ -8417,7 +8451,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "n-oxides"
+    "family": "n-oxides",
+    "memoryHook": "**NH₄NO₃ → N₂O + 2H₂O: N(−3) and N(+5) meet in the middle at +1** (comproportionation). N₂O is laughing gas."
    },
    "variants": [
     {
@@ -8673,7 +8708,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 3,
     "examStyle": "short_2to3",
-    "family": "p-oxoacid"
+    "family": "p-oxoacid",
+    "memoryHook": "**Only O–H protons ionise; P–H hydrogens are bystanders.** H₃PO₄ has three O–H (triprotic), H₃PO₃ = HP(O)(OH)₂ has two (diprotic), H₃PO₂ = H₂P(O)OH has one (monoprotic). Count the OH groups."
    },
    "variants": [
     {
@@ -8892,7 +8928,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 3,
     "examStyle": "short_2to3",
-    "family": "p-eq"
+    "family": "p-eq",
+    "memoryHook": "**Phosphate rock + sand + coke → P₄**: sand (SiO₂) grabs the Ca as CaSiO₃, coke does the reducing, and the P₄ vapour is condensed under water because white P ignites in air."
    },
    "variants": [
     {
@@ -9071,7 +9108,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "h2o2"
+    "family": "h2o2",
+    "memoryHook": "**Peroxide + strong acid releases H₂O₂**: BaO₂ + H₂SO₄ → BaSO₄↓ + H₂O₂. Insoluble BaSO₄ pulls the reaction over."
    },
    "variants": [
     {
@@ -9355,7 +9393,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 3,
     "examStyle": "construct_4to6",
-    "family": "kinetic-thermo"
+    "family": "kinetic-thermo",
+    "memoryHook": "**SF₆ is willing but locked**: six F crowd the S, so there is no easy path for attack (kinetic inertness). Only fluorine can take S to +6, directly: S + 3F₂ → SF₆."
    },
    "variants": [
     {
@@ -19858,7 +19897,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 4,
     "examStyle": "short_2to3",
-    "family": "ie-trends"
+    "family": "ie-trends",
+    "memoryHook": "**IE falls down a group and rises across a period**, so a Group 2 atom is higher than its Group 1 neighbour (Na < Li, Mg < Be)."
    },
    "variants": [
     {
@@ -20074,7 +20114,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 4,
     "examStyle": "short_2to3",
-    "family": "heavy-water"
+    "family": "heavy-water",
+    "memoryHook": "**D₂O is the heavier, stickier water**: denser (its ice sinks in normal water), mp 3.8 °C, bp 101.4 °C, more viscous (1.25 vs 1.00 mPa·s)."
    },
    "variants": [
     {
@@ -20156,7 +20197,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "short_2to3",
-    "family": "h2-reactivity"
+    "family": "h2-reactivity",
+    "memoryHook": "**H₂ is willing but stubborn**: the reactions are favourable, but the strong H–H bond (and N≡N for N₂) gives a high barrier. The more reactive the nonmetal, the milder the conditions needed."
    },
    "variants": [
     {
@@ -20370,7 +20412,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 6,
     "examStyle": "short_2to3",
-    "family": "g1-o2-equations"
+    "family": "g1-o2-equations",
+    "memoryHook": "**Bigger cation, bigger anion**: Li⁺ takes O²⁻ (oxide), Na⁺ takes O₂²⁻ (peroxide), K⁺ and heavier take O₂⁻ (superoxide). Lattice energy is best when the ion sizes match."
    },
    "variants": [
     {
@@ -20485,7 +20528,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "short_2to3",
-    "family": "g1-g2-compare"
+    "family": "g1-g2-compare",
+    "memoryHook": "**Group 2 = Group 1 squeezed**: smaller, more highly charged ions, so higher mp, density and ionisation energy, and M²⁺ holds water and lattices harder."
    },
    "variants": [
     {
@@ -20617,7 +20661,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 7,
     "examStyle": "short_2to3",
-    "family": "bx3-reactions"
+    "family": "bx3-reactions",
+    "memoryHook": "**H₂SO₄ + CaF₂ makes HF in situ**, so B₂O₃ + 3CaF₂ + 3H₂SO₄ → 2BF₃ + 3CaSO₄ + 3H₂O. Insoluble CaSO₄ helps drive it."
    },
    "variants": [
     {
@@ -20830,7 +20875,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 8,
     "examStyle": "short_2to3",
-    "family": "hno3-oxidation"
+    "family": "hno3-oxidation",
+    "memoryHook": "**Concentrated HNO₃ is a brutal oxidiser and goes to brown NO₂ itself**: I₂ + 10HNO₃ → 2HIO₃ + 10NO₂ + 4H₂O. Count electrons: 2 I from 0 to +5 lose 10 e⁻, so 10 HNO₃ each take 1."
    },
    "variants": [
     {
@@ -20946,7 +20992,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 6,
     "examStyle": "short_2to3",
-    "family": "p4o10-uses"
+    "family": "p4o10-uses",
+    "memoryHook": "**P₄O₁₀ is bone-dry thirsty**: it drinks water (P₄O₁₀ + 6H₂O → 4H₃PO₄) and rips H₂O out of other molecules (amide → nitrile)."
    },
    "variants": [
     {
@@ -21058,7 +21105,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 3,
     "examStyle": "short_2to3",
-    "family": "s-allotropes"
+    "family": "s-allotropes",
+    "memoryHook": "**S₈ is a crown-shaped ring.** α-sulfur (orthorhombic) is the stable form at room temperature; β-sulfur (monoclinic) is also S₈ rings but only stable above the transition temperature."
    },
    "variants": [
     {
@@ -21137,7 +21185,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 5,
     "examStyle": "short_2to3",
-    "family": "halogen-redox"
+    "family": "halogen-redox",
+    "memoryHook": "**The stronger oxidiser (higher up the group) takes the electron from the halide below it**: Cl₂ + 2Br⁻ → 2Cl⁻ + Br₂. Oxidising power runs F₂ > Cl₂ > Br₂ > I₂."
    },
    "variants": [
     {
@@ -21249,7 +21298,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 4,
     "examStyle": "short_2to3",
-    "family": "bioinorganic"
+    "family": "bioinorganic",
+    "memoryHook": "**K and Mg stay inside the cell; Na and Ca stay outside.** Ion pumps burn energy to hold that gradient."
    },
    "variants": [
     {

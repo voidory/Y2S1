@@ -2482,7 +2482,7 @@
       });
     }
 
-    const CONTENT_VERSION = 6;
+    const CONTENT_VERSION = 7;
     const REMOVED_NODE_IDS = [
       'cm2101-particle-in-box-param',
       'cm2112-symmetry-ir-atomic',
@@ -4545,7 +4545,7 @@
                 textbookExceptionNote: solved.textbookExceptionNote,
                 fields: invEvalFields,
               },
-              explanation: `For \`${solved.templateFormula}\`, $\\text{M}$ is in oxidation state **${solved.oxRoman}** ($${solved.oxState >= 0 ? `+${solved.oxState}` : solved.oxState}$). Valid 3d metal(s): **$\\{${solved.validMetals.join(', ')}\\}$**. Matching complex(es): ${solved.candidates.map((c) => `\`${c.formula}\` (${c.iupacName}, $d^{${c.dn}}$, \`${c.configuration}\`, $n=${c.unpaired}${c.lfseExpression ? `, $\\text{LFSE} = ${c.lfseExpression}$` : ''})`).join('; ')}.${noteSuffix}`,
+              explanation: `For \`${solved.templateFormula}\`, $\\text{M}$ is in oxidation state **${solved.oxRoman}** ($${solved.oxState >= 0 ? `+${solved.oxState}` : solved.oxState}$). Valid 3d metal(s): **$\\{${solved.validMetals.join(', ')}\\}$**. Matching complex(es): ${solved.candidates.map((c) => `\`${c.formula}\` (${c.iupacName}, $d^{${c.dn}}$, \`${c.configuration}\`, $n=${c.unpaired}$${c.lfseExpression ? `, $\\text{LFSE} = ${c.lfseExpression}$` : ''})`).join('; ')}.${noteSuffix}`,
             },
           ],
         };
@@ -7084,7 +7084,9 @@
         const fr = evalResult?.fieldResults;
         const fields = variant?.inputSlot?.fields;
         if (!fr || !Array.isArray(fields)) return null;
-        const inp = userInput && typeof userInput === 'object' ? userInput : {};
+        const raw = userInput && typeof userInput === 'object' ? userInput : {};
+        // set answers keep their companion fields (name, LFSE...) under .fields; mapped answers are flat
+        const inp = raw.fields && typeof raw.fields === 'object' && !Array.isArray(raw.fields) ? raw.fields : raw;
         const vs = variant.review?.vsepr || {};
         const rows = fields.filter((f) => fr[f.key]).map((f) => {
           const res = fr[f.key];

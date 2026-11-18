@@ -115,3 +115,30 @@ test('review rows: built from the real grader, with a drawn comparison for wrong
   const drv = Review.buildMappedReview(dv, wrongIn, dres);
   assert.ok(drv.rows.length > 0 && drv.rows.every((r) => !r.vsepr && r.expected && r.yours === '9'));
 });
+
+test('review rows: set answers read their companion fields, not blanks', () => {
+  const n = E.LF.generateQuestionBank({}).find((x) => x.id === 'lf-inv-M_H2O_6_3plus-unpaired-1');
+  const v = n.variants[0];
+  const input = { tokens: ['Fe'], fields: { name: 'hexaaquairon(III)', lfse: '0' } };
+  const res = Evaluators.evaluate(v, input, {}, {}, n);
+  const rv = Review.buildMappedReview(v, input, res);
+  assert.ok(rv && rv.rows.length >= 1);
+  const name = rv.rows.find((r) => r.key === 'name');
+  assert.equal(name.yours, 'hexaaquairon(III)', 'what the student typed is shown, not (blank)');
+  assert.equal(name.passed, false);
+  assert.match(name.expected, /titanium/);
+});
+
+test('generated metal-ID explanations: math spans are balanced and no LaTeX command leaks outside one', () => {
+  const bad = [];
+  for (const n of E.LF.generateQuestionBank({})) {
+    for (const v of n.variants) {
+      const ex = (v.explanation || '').replace(/\\\$/g, '');
+      const parts = ex.split('$');
+      if ((parts.length - 1) % 2 !== 0) bad.push(`${n.id}: odd number of $`);
+      // even-indexed parts are plain text: a \text{...} or \mu there means a math span was cut short
+      parts.forEach((t, i) => { if (i % 2 === 0 && /\\(text|mu|Delta|sqrt)\b/.test(t)) bad.push(`${n.id}: LaTeX outside math: ${t.slice(0, 40)}`); });
+    }
+  }
+  assert.deepEqual(bad.slice(0, 5), []);
+});

@@ -847,7 +847,9 @@
     "bk-c4-aqua-regia",
     "bk-c4-p-scheme",
     "bk-c4-contact",
-    "bk-c4-named-roundup"
+    "bk-c4-named-roundup",
+    "bk-c4-ostwald",
+    "bk-c4-downs"
    ],
    "chunk": "reaction-toolkit"
   },
@@ -3006,6 +3008,12 @@
   ],
   "bk-c9-trans-series": [
    "c9.trans-effect"
+  ],
+  "bk-c4-ostwald": [
+   "c4.named-process"
+  ],
+  "bk-c4-downs": [
+   "c4.named-process"
   ]
  }
 }

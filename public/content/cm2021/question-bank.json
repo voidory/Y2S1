@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-18T03:55:56.000Z",
+ "exportedAt": "2026-11-18T09:56:51.000Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -1798,7 +1798,8 @@
     "difficultyEstimate": 7,
     "estimatedMinutes": 3,
     "examStyle": "construct_4to6",
-    "family": "heavy-hybrid"
+    "family": "heavy-hybrid",
+    "memoryHook": "**Heavier p-block atoms barely mix s and p**, so disilene is trans-bent and weakly bonded (donor–acceptor), unlike planar ethene. This is the double-bond rule."
    },
    "variants": [
     {
@@ -4388,7 +4389,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "oxidation-number"
+    "family": "oxidation-number",
+    "memoryHook": "**H is −1 when bonded to a metal (hydride), +1 with nonmetals**: KH (−1); [ReH₉]²⁻ makes Re +7; H₃PO₂ makes P +1."
    },
    "variants": [
     {
@@ -4473,7 +4475,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "oxidation-number"
+    "family": "oxidation-number",
+    "memoryHook": "**An average oxidation number can hide different atoms**: Mn₃O₄ is +8/3 on average, really Mn(II) + 2 Mn(III). The electropositive partner takes its usual charge: Mg is +2, so Ga is −5 in Mg₅Ga₂."
    },
    "variants": [
     {
@@ -4532,7 +4535,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "oxidation-number"
+    "family": "oxidation-number",
+    "memoryHook": "**The N oxides climb by +1**: N₂O (+1), NO (+2), N₂O₃ (+3), NO₂ (+4), N₂O₅ (+5). O is always −2, so count N."
    },
    "variants": [
     {
@@ -4617,7 +4621,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "p-oxoacid"
+    "family": "p-oxoacid",
+    "memoryHook": "**Phosphor-OUS is the lower state (+3), phosphor-IC the higher (+5).** PCl₃ + 3H₂O → H₃PO₃ + 3HCl; one H is on P and does not ionise, so it is diprotic."
    },
    "variants": [
     {
@@ -4686,7 +4691,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "halogen-oxide"
+    "family": "halogen-oxide",
+    "memoryHook": "**ClO₂ has an odd electron** (Cl +4, yellow-green, paramagnetic). It is made by reducing chlorate: 2NaClO₃ + SO₂ + H₂SO₄ → 2ClO₂ + 2NaHSO₄."
    },
    "variants": [
     {
@@ -4783,7 +4789,8 @@
       "accepted": [
        "CH4 + H2O -> CO + 3H2"
       ]
-     }
+     },
+     "memoryHook": "**“Water” or “steam” in the name = H₂O is a reactant.** Steam reforming (CH₄, Ni, 1200 K) and water gas (coke) both give CO + H₂ (syngas)."
     },
     {
      "variantId": "c4-h2-prep-v2",
@@ -4801,7 +4808,8 @@
       "accepted": [
        "CO + H2O -> CO2 + H2"
       ]
-     }
+     },
+     "memoryHook": "**Shift**: CO borrows an O from steam and shifts to CO₂, freeing extra H₂ (700 K, iron oxide)."
     },
     {
      "variantId": "c4-h2-prep-v3",
@@ -4819,7 +4827,8 @@
       "accepted": [
        "C + H2O -> CO + H2"
       ]
-     }
+     },
+     "memoryHook": "**“Water” or “steam” in the name = H₂O is a reactant.** Steam reforming (CH₄, Ni, 1200 K) and water gas (coke) both give CO + H₂ (syngas)."
     },
     {
      "variantId": "c4-h2-prep-v4",
@@ -4875,7 +4884,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "hydride"
+    "family": "hydride",
+    "memoryHook": "**Salt-like hydrides belong to the “salty” s-block**: only Li–Cs and Ca–Ba are electropositive enough to hand H an electron (H⁻). BeH₂ is covalent and polymeric; TiH₁.₈ is metallic and non-stoichiometric."
    },
    "variants": [
     {
@@ -5012,7 +5022,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "hydride"
+    "family": "hydride",
+    "memoryHook": "**Feed LiH to the chloride**: 8LiH + Al₂Cl₆ → 6LiCl + 2Li[AlH₄]. The LiCl forms and drives it. The same swap of Cl for H makes silane."
    },
    "variants": [
     {
@@ -5106,7 +5117,8 @@
     "difficultyEstimate": 6,
     "estimatedMinutes": 1,
     "examStyle": "construct_4to6",
-    "family": "isotope"
+    "family": "isotope",
+    "memoryHook": "**Heavier isotope → lower zero-point energy → sits deeper in the well → stronger bond.** D₂ 106.0 vs H₂ 104.2 kcal/mol: the heavy one sits still, so more energy is needed to pull it apart."
    },
    "variants": [
     {
@@ -5209,7 +5221,8 @@
     "difficultyEstimate": 6,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "isotope"
+    "family": "isotope",
+    "memoryHook": "**C–H breaks faster than C–D.** C–D starts lower (lower zero-point energy), so it has further to climb to the transition state: CH₄ chlorinates faster than CD₄. “D is lazy: it sits low, so it climbs slowly.”"
    },
    "variants": [
     {
@@ -5272,7 +5285,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "isotope"
+    "family": "isotope",
+    "memoryHook": "**NaH + D₂O → HD**: one H⁻ meets one D⁺, one of each in and HD out. The other routes scramble H and D statistically."
    },
    "variants": [
     {
@@ -5344,7 +5358,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "electrolysis"
+    "family": "electrolysis",
+    "memoryHook": "**An Ox, Red Cat**: Anode = oxidation (2Br⁻ → Br₂ + 2e⁻); Cathode = reduction (K⁺ + e⁻ → K)."
    },
    "variants": [
     {
@@ -5429,7 +5444,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 4,
     "examStyle": "construct_4to6",
-    "family": "h-storage"
+    "family": "h-storage",
+    "memoryHook": "**Weight % H = (mass of H released) ÷ (mass of compound) × 100.** The usable figure is lower than the theoretical 7.47% because not all the H comes out: 3 mol NaAlH₄ give 4.5 mol H₂, which is 5.60%."
    },
    "variants": [
     {
@@ -5488,7 +5504,13 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "h-activation"
+    "family": "h-activation",
+    "memoryHook": "**Vaska’s complex, IrCl(CO)(PPh₃)₂ (Vaska and DiLuzio, 1961), is the textbook oxidative addition: Ir(I) → Ir(III), coordination number +2.** Kubas (1984) showed H₂ can also bind intact and side-on, not only as two hydrides: the intermediate on the way.",
+    "hookSources": [
+     "https://www.pnas.org/doi/full/10.1073/pnas.0609707104",
+     "https://pmc.ncbi.nlm.nih.gov/articles/PMC3238621/"
+    ],
+    "memoryHookNote": "Who first made Vaska’s complex is contested (a crystallographic review credits an earlier preparation to Angoletta), so the credit here is for the 1961 formulation, not for priority."
    },
    "variants": [
     {
@@ -5583,7 +5605,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "radical-chain"
+    "family": "radical-chain",
+    "memoryHook": "**Start, carry on, stop**: light splits the weak Cl–Cl bond (243 kJ/mol); Cl• takes H from H₂; H• takes Cl from Cl₂ and gives Cl• back, so the chain feeds itself until radicals recombine."
    },
    "variants": [
     {
@@ -5643,7 +5666,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 3,
     "examStyle": "short_2to3",
-    "family": "g1-oxygen"
+    "family": "g1-oxygen",
+    "memoryHook": "**Bigger cation, bigger anion**: Li⁺ takes O²⁻ (oxide), Na⁺ takes O₂²⁻ (peroxide), K⁺ and heavier take O₂⁻ (superoxide). Lattice energy is best when the ion sizes match."
    },
    "variants": [
     {
@@ -5754,7 +5778,11 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g1-oxygen"
+    "family": "g1-oxygen",
+    "memoryHook": "**Peroxide plus water gives H₂O₂**: Na₂O₂ + 2H₂O → 2NaOH + H₂O₂. **KO₂ scrubs CO₂ and releases O₂**: 4KO₂ + 2CO₂ → 2K₂CO₃ + 3O₂, which is why it is used in breathing apparatus.",
+    "hookSources": [
+     "https://chem.libretexts.org/Courses/Howard_University/General_Chemistry:_An_Atoms_First_Approach/Unit_8:__Materials/Chapter_20:_Periodic_Trends_and_the_s-Block_Elements/Chapter_20.3:_The_Alkali_Metals_(Group_1)"
+    ]
    },
    "variants": [
     {
@@ -5831,7 +5859,11 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g1-n2"
+    "family": "g1-n2",
+    "memoryHook": "**Li is the only alkali metal that reacts with N₂ under ordinary conditions**: 6Li + N₂ → 2Li₃N. Li₃N is a fast-ion conductor, and Li is stored under argon, not nitrogen.",
+    "hookSources": [
+     "https://chem.libretexts.org/Courses/City_College_of_San_Francisco/Chemistry_101B/07:_Representative_Metals_Metalloids_and_Nonmetals/7.07:_Occurrence,_Preparation,_and_Properties_of_Nitrogen"
+    ]
    },
    "variants": [
     {
@@ -5889,7 +5921,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "hydration"
+    "family": "hydration",
+    "memoryHook": "**Charge density = charge ÷ radius.** The more concentrated the charge, the more water it grabs: Al³⁺ (high charge, small) beats everything; within a group, Li⁺ > Na⁺ > K⁺."
    },
    "variants": [
     {
@@ -6121,7 +6154,13 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 4,
     "examStyle": "construct_4to6",
-    "family": "crown"
+    "family": "crown",
+    "memoryHook": "**Pedersen (1967) named crown ethers for their crown-shaped models; Lehn with Dietrich and Sauvage (1969) added the 3D cage, the cryptand, which holds ions tighter.** Fit by size: Li⁺ 1.36, Na⁺ 1.9, K⁺ 2.66, Cs⁺ 3.38 Å. Pedersen and Lehn shared the 1987 Nobel with Cram.",
+    "hookSources": [
+     "https://www.nobelprize.org/uploads/2018/06/pedersen-lecture.pdf",
+     "https://www.nobelprize.org/prizes/chemistry/1987/speedread/",
+     "https://royalsocietypublishing.org/doi/pdf/10.1098/rsta.2000.0540"
+    ]
    },
    "variants": [
     {
@@ -6327,7 +6366,12 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "crown"
+    "family": "crown",
+    "memoryHook": "**Dye’s group made the first crystalline alkalides (alkali metal as the anion) and electrides (the electron is the anion).** Alkalides form by 2Na → Na⁺ + Na⁻, driven by a crown or cryptand wrapping the Na⁺. Both are very strong reducing agents.",
+    "hookSources": [
+     "https://pubmed.ncbi.nlm.nih.gov/25666067/",
+     "https://pubmed.ncbi.nlm.nih.gov/19645438/"
+    ]
    },
    "variants": [
     {
@@ -6391,7 +6435,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 2,
     "examStyle": "construct_4to6",
-    "family": "acetylide"
+    "family": "acetylide",
+    "memoryHook": "**sp C–H is the acidic one**: 50% s-character holds the carbanion’s pair close, so an alkali metal strips H from acetylene (2M + HC≡CH → M₂C₂ + H₂) but not from hexane (sp³)."
    },
    "variants": [
     {
@@ -6466,7 +6511,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g1-li"
+    "family": "g1-li",
+    "memoryHook": "**Li is the odd one out and behaves like Mg (diagonal)**: small and polarising, so it forms covalent organolithiums: 2Li + RCl → RLi + LiCl."
    },
    "variants": [
     {
@@ -6548,7 +6594,12 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "named-process"
+    "family": "named-process",
+    "hookSources": [
+     "https://edu.rsc.org/download?ac=509455",
+     "https://www.britannica.com/science/chlorine/Production-and-use",
+     "https://stacks.cdc.gov/view/cdc/240109"
+    ]
    },
    "variants": [
     {
@@ -6567,7 +6618,8 @@
       "accepted": [
        "2NaCl + 2H2O -> 2NaOH + H2 + Cl2"
       ]
-     }
+     },
+     "memoryHook": "**Chlor + alkali = the products** (Cl₂ and NaOH), with H₂ as the third. Castner needed pure caustic soda to make sodium; chlorine was the by-product that turned out valuable. A diaphragm keeps Cl₂ away from the hydroxide it would react with. (Castner–Kellner is specifically the mercury-cathode version.)"
     },
     {
      "variantId": "c4-chloralkali-v2",
@@ -6585,7 +6637,8 @@
       "accepted": [
        "2NaCl -> 2Na + Cl2"
       ]
-     }
+     },
+     "memoryHook": "**J. Cloyd Downs patented the cell in 1924**: electrolyse molten NaCl directly, with CaCl₂ added to lower the melting temperature, instead of making Na from NaOH (Davy 1807, then Castner). Na forms at the cathode, Cl₂ at the anode. In water, H₂O is reduced first, so you get NaOH."
     }
    ]
   },
@@ -6606,7 +6659,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g2-carbonate"
+    "family": "g2-carbonate",
+    "memoryHook": "**Milky = CaCO₃ (chalk); clear again = Ca(HCO₃)₂.** The reverse of that second step is how stalactites form."
    },
    "variants": [
     {
@@ -6649,7 +6703,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g2-carbonate"
+    "family": "g2-carbonate",
+    "memoryHook": "**Small, polarising cation = weak carbonate.** MgCO₃ 813 K < CaCO₃ 1173 K < SrCO₃ 1563 K: the cation pulls O²⁻ off CO₃²⁻ to build a stable oxide lattice. Stability rises down the group."
    },
    "variants": [
     {
@@ -6764,7 +6819,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g2-be"
+    "family": "g2-be",
+    "memoryHook": "**Be bites both ways (diagonal to Al)**: Be(OH)₂ dissolves in acid *and* in base to give [Be(OH)₄]²⁻, just like Al(OH)₃. It is amphoteric."
    },
    "variants": [
     {
@@ -6892,7 +6948,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g2-misc"
+    "family": "g2-misc",
+    "memoryHook": "**Group 2 + N₂ → M₃N₂ (Mg to Ba, not Be); add water → 3M(OH)₂ + 2NH₃.** The nitride is a store of ammonia."
    },
    "variants": [
     {
@@ -6971,7 +7028,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 1,
     "examStyle": "mcq_1mark",
-    "family": "periodic-trend"
+    "family": "periodic-trend",
+    "memoryHook": "**IE falls down a group (the outer electron is further away and shielded) and rises across a period**: Be > Mg > Ca > Sr > Ba."
    },
    "variants": [
     {
@@ -7056,7 +7114,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 3,
     "examStyle": "construct_4to6",
-    "family": "inert-pair"
+    "family": "inert-pair",
+    "memoryHook": "**The inert pair stays home**: poor d/f shielding holds the 6s² pair tight, so Tl prefers +1 and Pb prefers +2 over the group oxidation state."
    },
    "variants": [
     {
@@ -7285,7 +7344,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "boron"
+    "family": "boron",
+    "memoryHook": "**H₂SO₄ + CaF₂ makes HF in situ**, so B₂O₃ + 3CaF₂ + 3H₂SO₄ → 2BF₃ + 3CaSO₄ + 3H₂O. Insoluble CaSO₄ helps drive it."
    },
    "variants": [
     {
@@ -7386,7 +7446,9 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "silicon"
+    "family": "silicon",
+    "memoryHook": "**Hydride swap**: SiCl₄ + Li[AlH₄] → SiH₄ + Li[AlCl₄]. Si (Pauling 1.9) is less electronegative than H (2.2), so Si–H is Si(δ+)–H(δ−): the opposite way round to C–H (C is 2.55).",
+    "memoryHookNote": "No source checked states the general Si–H versus C–H polarity outright; it follows from the Pauling electronegativities (Si 1.9, H 2.2, C 2.55)."
    },
    "variants": [
     {
@@ -7592,7 +7654,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 3,
     "examStyle": "short_2to3",
-    "family": "heavy-hybrid"
+    "family": "heavy-hybrid",
+    "memoryHook": "**C likes two double bonds; Si likes four single bonds.** So CO₂ is a small molecule (a gas) and SiO₂ is a giant 3D network (quartz, mp 1710 °C)."
    },
    "variants": [
     {
@@ -7649,7 +7712,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 4,
     "examStyle": "construct_4to6",
-    "family": "silicate"
+    "family": "silicate",
+    "memoryHook": "**Count the terminal O atoms: that is the charge.** SiO₄⁴⁻ has 4, Si₂O₇⁶⁻ has 6, a single chain (SiO₃)ₙ²ⁿ⁻ has 2 per Si, the ring Si₆O₁₈¹²⁻ has 12. Bridging O is shared and carries no charge."
    },
    "variants": [
     {
@@ -7724,7 +7788,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "allotrope"
+    "family": "allotrope",
+    "memoryHook": "**Diamond: sp³, every electron locked in a bond, insulator, hardest. Graphite: sp² layers with free π electrons, so it conducts.**"
    },
    "variants": [
     {
@@ -7785,7 +7850,12 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "reaction-scheme"
+    "family": "reaction-scheme",
+    "memoryHook": "**Ostwald (patents 1902, developed with Brauer; Kuhlmann had oxidised ammonia earlier) wanted nitric acid without Chilean saltpetre.** NH₃ burns over hot Pt with a very short contact time (longer contact lets NO decompose). **O‑S‑T**: **O**xidise NH₃ → NO, **S**econd oxidation → NO₂, **T**ake it up in water → HNO₃. Haber makes the NH₃.",
+    "hookSources": [
+     "https://patents.google.com/patent/GB190208300A/en",
+     "https://www.chm.bris.ac.uk/motm/nitric/Nitric%20Acid%20-%20Molecule%20of%20the%20Month%20-%20November%202007.pdf"
+    ]
    },
    "variants": [
     {
@@ -7891,7 +7961,12 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "named-process"
+    "family": "named-process",
+    "memoryHook": "**Haber showed it in the lab (1909); Bosch and BASF made it industrial (1913), with Mittasch’s promoted iron catalyst.** N₂ + 3H₂ → 2NH₃ turns 4 gas molecules into 2, so **high pressure pushes the equilibrium right**; heat and the catalyst are for rate (the strong N≡N bond). The aim: fertiliser from air.",
+    "hookSources": [
+     "https://www.nobelprize.org/prizes/chemistry/1918/ceremony-speech/",
+     "https://www.fertilizer.org/wp-content/uploads/2023/01/HABER.pdf"
+    ]
    },
    "variants": [
     {
@@ -7967,7 +8042,13 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 1,
     "examStyle": "mcq_1mark",
-    "family": "named-process"
+    "family": "named-process",
+    "memoryHook": "**Raschig (1907): bleach on ammonia.** NaOCl turns NH₃ into chloramine NH₂Cl, which reacts with *excess* NH₃ to give N₂H₄; the excess matters because chloramine also destroys hydrazine. **Olin is the company** that made it commercial, not a second discoverer. Never mix ammonia cleaner with bleach.",
+    "hookSources": [
+     "https://pubs.rsc.org/ct/article-pdf/doi/10.1039/CT9232301114/1581439/ct9232301114.pdf",
+     "https://www.chm.bris.ac.uk/motm/hydrazine/hydrazineh.htm",
+     "https://www.ncbi.nlm.nih.gov/books/NBK595574/"
+    ]
    },
    "variants": [
     {
@@ -8150,7 +8231,12 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 1,
     "examStyle": "mcq_1mark",
-    "family": "named-process"
+    "family": "named-process",
+    "memoryHook": "**Wislicenus (1892): sodium amide + nitrous oxide → sodium azide.** N₂O donates the extra nitrogen: 2NaNH₂ + N₂O → NaN₃ + NaOH + NH₃, after Na + NH₃ → NaNH₂. NaN₃ later served as an airbag gas generator: 2NaN₃ → 2Na + 3N₂.",
+    "hookSources": [
+     "https://pubs.rsc.org/sc/article/15/34/13605/869684/Nitrous-oxide-as-diazo-transfer-reagent",
+     "https://pubs.rsc.org/en/content/articlepdf/1900/ct/ct9007700705"
+    ]
    },
    "variants": [
     {
@@ -8237,7 +8323,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "explosive"
+    "family": "explosive",
+    "memoryHook": "**Explosives release N₂ gas fast**: 2NaN₃ → 2Na + 3N₂ (airbags). Forming the very strong N≡N bond releases huge energy."
    },
    "variants": [
     {
@@ -8348,7 +8435,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "nh3"
+    "family": "nh3",
+    "memoryHook": "**A stronger base displaces the weaker**: 2NH₄Cl + Ca(OH)₂ → 2NH₃ + CaCl₂ + 2H₂O. Never mix NH₃ with bleach: chloramine is toxic."
    },
    "variants": [
     {
@@ -8406,7 +8494,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "n-oxides"
+    "family": "n-oxides",
+    "memoryHook": "**NH₄NO₃ → N₂O + 2H₂O: N(−3) and N(+5) meet in the middle at +1** (comproportionation). N₂O is laughing gas."
    },
    "variants": [
     {
@@ -8590,7 +8679,11 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "aqua-regia"
+    "family": "aqua-regia",
+    "memoryHook": "**Latin “royal water”: it dissolves gold, which neither acid manages alone.** HNO₃ oxidises and Cl⁻ complexes: NOCl and Cl₂ oxidise Au, and excess Cl⁻ holds it as [AuCl₄]⁻.",
+    "hookSources": [
+     "https://edu.rsc.org/resources/olympic-medals/851.article"
+    ]
    },
    "variants": [
     {
@@ -8661,7 +8754,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 3,
     "examStyle": "short_2to3",
-    "family": "p-oxoacid"
+    "family": "p-oxoacid",
+    "memoryHook": "**Only O–H protons ionise; P–H hydrogens are bystanders.** H₃PO₄ has three O–H (triprotic), H₃PO₃ = HP(O)(OH)₂ has two (diprotic), H₃PO₂ = H₂P(O)OH has one (monoprotic). Count the OH groups."
    },
    "variants": [
     {
@@ -8765,7 +8859,14 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 9,
     "examStyle": "construct_4to6",
-    "family": "reaction-scheme"
+    "family": "reaction-scheme",
+    "memoryHook": "**Phosphorus = “light-bearer”; Brand isolated it from urine around 1669.** White P₄ glows by chemiluminescence (slow oxidation in air), not stored light, and ignites in air. Limited O₂ puts an O in each of the 6 P–P edges (P₄O₆); excess adds 4 terminal O (P₄O₁₀), a thirsty dehydrating agent.",
+    "hookSources": [
+     "https://periodic-table.rsc.org/element/15/Phosphorus",
+     "https://www.britannica.com/biography/Hennig-Brand",
+     "https://nora.nerc.ac.uk/id/eprint/525743/1/N525743JA.pdf"
+    ],
+    "memoryHookNote": "The word “phosphorus” was already used for light-giving materials before the element was found, so Brand did not coin it."
    },
    "variants": [
     {
@@ -8879,7 +8980,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 3,
     "examStyle": "short_2to3",
-    "family": "p-eq"
+    "family": "p-eq",
+    "memoryHook": "**Phosphate rock + sand + coke → P₄**: sand (SiO₂) grabs the Ca as CaSiO₃, coke does the reducing, and the P₄ vapour is condensed under water because white P ignites in air."
    },
    "variants": [
     {
@@ -9058,7 +9160,13 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "h2o2"
+    "family": "h2o2",
+    "memoryHook": "**Thénard discovered hydrogen peroxide in 1818.** BaO₂ + H₂SO₄ → BaSO₄↓ + H₂O₂: insoluble BaSO₄ removes the barium and pulls the reaction over.",
+    "hookSources": [
+     "https://link.springer.com/content/pdf/10.1007/978-94-017-0984-2_2.pdf",
+     "https://www.epfl.ch/labs/lsci/wp-content/uploads/2018/09/perxoide-property.pdf"
+    ],
+    "memoryHookNote": "Histories disagree on which acid Thénard first used (nitric in scholarly accounts, sulfuric with hydrochloric in a government factsheet); sulfuric acid is the route in your course."
    },
    "variants": [
     {
@@ -9154,7 +9262,13 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 4,
     "examStyle": "construct_4to6",
-    "family": "named-process"
+    "family": "named-process",
+    "memoryHook": "**Phillips patented the catalytic route in 1831**; the demand came from the synthetic-dye industry, which needed concentrated acid and oleum. Today a solid V₂O₅ catalyst does the oxidation: the gases **contact** a solid surface. SO₃ goes into 98% H₂SO₄ because it does not absorb well into water (your slide).",
+    "hookSources": [
+     "https://edu.rsc.org/download?ac=509455",
+     "https://www.britannica.com/technology/contact-process"
+    ],
+    "memoryHookNote": "The origin of the name “contact” is not documented in the sources checked, so read it as a memory aid: catalysis at a solid surface."
    },
    "variants": [
     {
@@ -9341,7 +9455,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 3,
     "examStyle": "construct_4to6",
-    "family": "kinetic-thermo"
+    "family": "kinetic-thermo",
+    "memoryHook": "**SF₆ is willing but kinetically inert**: thermodynamically favoured, yet unreactive under ordinary conditions. Only fluorine can take S to +6, directly: S + 3F₂ → SF₆."
    },
    "variants": [
     {
@@ -9728,7 +9843,11 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "named-process"
+    "family": "named-process",
+    "hookSources": [
+     "https://www.deutsche-biographie.de/sfz24114.html",
+     "https://www.elch.chem.msu.ru/rus/wp/wp-content/uploads/2016/03/about_Grotthuss_v32-2-p119-128.pdf"
+    ]
    },
    "variants": [
     {
@@ -9849,7 +9968,9 @@
        "a"
       ],
       "gradingMode": "exact"
-     }
+     },
+     "memoryHook": "**Grotthuss = a proton relay, not a manufacturing process**: H⁺ hops along hydrogen-bonded water wires. It is named for Theodor von Grotthuss, whose electrolysis-of-water theory had charge passed along a chain of molecules.",
+     "memoryHookNote": "Sources date Grotthuss’s theory to about 1805–06, and none checked ties his original proposal precisely to the modern proton-relay mechanism."
     }
    ]
   },
@@ -19844,7 +19965,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 4,
     "examStyle": "short_2to3",
-    "family": "ie-trends"
+    "family": "ie-trends",
+    "memoryHook": "**IE falls down a group and rises across a period**, so a Group 2 atom is higher than its Group 1 neighbour (Na < Li, Mg < Be)."
    },
    "variants": [
     {
@@ -20060,7 +20182,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 4,
     "examStyle": "short_2to3",
-    "family": "heavy-water"
+    "family": "heavy-water",
+    "memoryHook": "**D₂O is the heavier, stickier water**: denser (its ice sinks in normal water), mp 3.8 °C, bp 101.4 °C, more viscous (1.25 vs 1.00 mPa·s)."
    },
    "variants": [
     {
@@ -20142,7 +20265,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "short_2to3",
-    "family": "h2-reactivity"
+    "family": "h2-reactivity",
+    "memoryHook": "**H₂ is willing but stubborn**: the reactions are favourable, but the strong H–H bond (and N≡N for N₂) gives a high barrier. The more reactive the nonmetal, the milder the conditions needed."
    },
    "variants": [
     {
@@ -20356,7 +20480,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 6,
     "examStyle": "short_2to3",
-    "family": "g1-o2-equations"
+    "family": "g1-o2-equations",
+    "memoryHook": "**Bigger cation, bigger anion**: Li⁺ takes O²⁻ (oxide), Na⁺ takes O₂²⁻ (peroxide), K⁺ and heavier take O₂⁻ (superoxide). Lattice energy is best when the ion sizes match."
    },
    "variants": [
     {
@@ -20471,7 +20596,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "short_2to3",
-    "family": "g1-g2-compare"
+    "family": "g1-g2-compare",
+    "memoryHook": "**Group 2 = Group 1 squeezed**: smaller, more highly charged ions, so higher mp, density and ionisation energy, and M²⁺ holds water and lattices harder."
    },
    "variants": [
     {
@@ -20603,7 +20729,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 7,
     "examStyle": "short_2to3",
-    "family": "bx3-reactions"
+    "family": "bx3-reactions",
+    "memoryHook": "**H₂SO₄ + CaF₂ makes HF in situ**, so B₂O₃ + 3CaF₂ + 3H₂SO₄ → 2BF₃ + 3CaSO₄ + 3H₂O. Insoluble CaSO₄ helps drive it."
    },
    "variants": [
     {
@@ -20816,7 +20943,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 8,
     "examStyle": "short_2to3",
-    "family": "hno3-oxidation"
+    "family": "hno3-oxidation",
+    "memoryHook": "**Concentrated HNO₃ is a brutal oxidiser and goes to brown NO₂ itself**: I₂ + 10HNO₃ → 2HIO₃ + 10NO₂ + 4H₂O. Count electrons: 2 I from 0 to +5 lose 10 e⁻, so 10 HNO₃ each take 1."
    },
    "variants": [
     {
@@ -20932,7 +21060,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 6,
     "examStyle": "short_2to3",
-    "family": "p4o10-uses"
+    "family": "p4o10-uses",
+    "memoryHook": "**P₄O₁₀ is bone-dry thirsty**: it drinks water (P₄O₁₀ + 6H₂O → 4H₃PO₄) and rips H₂O out of other molecules (amide → nitrile)."
    },
    "variants": [
     {
@@ -21044,7 +21173,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 3,
     "examStyle": "short_2to3",
-    "family": "s-allotropes"
+    "family": "s-allotropes",
+    "memoryHook": "**S₈ is a crown-shaped ring.** α-sulfur (orthorhombic) is the stable form at room temperature; β-sulfur (monoclinic) is also S₈ rings but only stable above the transition temperature."
    },
    "variants": [
     {
@@ -21123,7 +21253,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 5,
     "examStyle": "short_2to3",
-    "family": "halogen-redox"
+    "family": "halogen-redox",
+    "memoryHook": "**The stronger oxidiser (higher up the group) takes the electron from the halide below it**: Cl₂ + 2Br⁻ → 2Cl⁻ + Br₂. Oxidising power runs F₂ > Cl₂ > Br₂ > I₂."
    },
    "variants": [
     {
@@ -21235,7 +21366,8 @@
     "difficultyEstimate": 2,
     "estimatedMinutes": 4,
     "examStyle": "short_2to3",
-    "family": "bioinorganic"
+    "family": "bioinorganic",
+    "memoryHook": "**K and Mg stay inside the cell; Na and Ca stay outside.** Ion pumps burn energy to hold that gradient."
    },
    "variants": [
     {
@@ -22072,6 +22204,160 @@
        "a"
       ],
       "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-ostwald",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Ostwald process (nitric acid from ammonia)",
+    "source": "Added at the student's request; steps from the Ch4 nitrogen reaction chart",
+    "week": 4,
+    "primaryTheme": "Group 15",
+    "conceptTags": [
+     "named-process"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "named-process",
+    "memoryHook": "**Ostwald (patents 1902, developed with Brauer; Kuhlmann had oxidised ammonia earlier) wanted nitric acid without Chilean saltpetre.** NH₃ burns over hot Pt with a very short contact time (longer contact lets NO decompose). **O‑S‑T**: **O**xidise NH₃ → NO, **S**econd oxidation → NO₂, **T**ake it up in water → HNO₃. Haber makes the NH₃.",
+    "hookSources": [
+     "https://patents.google.com/patent/GB190208300A/en",
+     "https://www.chm.bris.ac.uk/motm/nitric/Nitric%20Acid%20-%20Molecule%20of%20the%20Month%20-%20November%202007.pdf"
+    ]
+   },
+   "variants": [
+    {
+     "variantId": "c4-ostwald-v1",
+     "perspectiveLabel": "Name it",
+     "marks": 1,
+     "stem": "Name the industrial process that converts ammonia into nitric acid, via NO and NO₂ over a platinum catalyst.",
+     "explanation": "The **Ostwald process**: NH₃ is oxidised to NO over Pt, NO is oxidised to NO₂, and NO₂ is absorbed in water to give HNO₃.",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "Name of the process"
+     },
+     "evaluator": {
+      "type": "pattern_match",
+      "acceptedPatterns": [
+       "^\\s*(?:the\\s+)?ostwald(?:\\s+process)?\\s*\\.?\\s*$"
+      ],
+      "caseSensitive": false,
+      "expectedDisplay": "Ostwald process"
+     }
+    },
+    {
+     "variantId": "c4-ostwald-v2",
+     "perspectiveLabel": "Equations",
+     "marks": 3,
+     "stem": "Write the equations for the Ostwald process from NH₃ to HNO₃ (Pt catalyst, about 1300 K for the first step).",
+     "explanation": "4NH₃ + 5O₂ → 4NO + 6H₂O (Pt, 1300 K); 2NO + O₂ → 2NO₂; 3NO₂ + H₂O → 2HNO₃ + NO (the NO is recycled). Overall NH₃ + 2O₂ → HNO₃ + H₂O.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       [
+        "4NH3 + 5O2 -> 4NO + 6H2O",
+        "2NO + O2 -> 2NO2",
+        "3NO2 + H2O -> 2HNO3 + NO"
+       ],
+       [
+        "4NH3 + 5O2 -> 4NO + 6H2O",
+        "2NO + O2 -> 2NO2",
+        "4NO2 + O2 + 2H2O -> 4HNO3"
+       ],
+       "NH3 + 2O2 -> HNO3 + H2O"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-downs",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Downs cell (sodium from molten NaCl)",
+    "source": "Added at the student's request; Ch4 Group 1 (fused-salt electrolysis)",
+    "week": 4,
+    "primaryTheme": "Group 1",
+    "conceptTags": [
+     "named-process"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "named-process",
+    "memoryHook": "**J. Cloyd Downs patented the cell in 1924**: electrolyse molten NaCl directly, with CaCl₂ added to lower the melting temperature, instead of making Na from NaOH (Davy 1807, then Castner). Na forms at the cathode, Cl₂ at the anode. In water, H₂O is reduced first, so you get NaOH.",
+    "hookSources": [
+     "https://stacks.cdc.gov/view/cdc/240109",
+     "https://periodic-table.rsc.org/element/11/sodium"
+    ]
+   },
+   "variants": [
+    {
+     "variantId": "c4-downs-v1",
+     "perspectiveLabel": "Name it",
+     "marks": 1,
+     "stem": "Sodium metal is made industrially by electrolysing molten NaCl. Name the cell or process.",
+     "explanation": "The **Downs cell**: Na⁺ is reduced to liquid Na at the cathode and Cl⁻ is oxidised to Cl₂ at the anode (2NaCl → 2Na + Cl₂).",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "Name of the cell or process"
+     },
+     "evaluator": {
+      "type": "pattern_match",
+      "acceptedPatterns": [
+       "^\\s*(?:the\\s+)?downs?(?:'?s)?(?:\\s+(?:cell|process))?\\s*\\.?\\s*$"
+      ],
+      "caseSensitive": false,
+      "expectedDisplay": "Downs cell (Downs process)"
+     }
+    },
+    {
+     "variantId": "c4-downs-v2",
+     "perspectiveLabel": "Why not aqueous",
+     "marks": 3,
+     "stem": "Explain why sodium metal cannot be made by electrolysing aqueous NaCl, and what is made at the cathode instead.",
+     "explanation": "In water, H₂O is reduced in preference to Na⁺ (Na⁺/Na is far more negative), so H₂ and OH⁻ form. Molten NaCl has no water, so Na⁺ is reduced to Na.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 10,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Water is reduced at the cathode in preference to Na⁺ (E° for Na⁺/Na ≈ −2.71 V is far more negative)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "So H₂ and OH⁻ (NaOH) form at the cathode instead of sodium metal",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Molten (fused) NaCl contains no water, so Na⁺ is reduced to Na(l) at the cathode and Cl⁻ oxidised to Cl₂ at the anode",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
      }
     }
    ]

@@ -62,7 +62,7 @@ const BANNED = [
   await p.fill('#mf_a', 'linear'); await p.fill('#mf_b', 'T-shaped'); await p.fill('#mf_c', 'square pyramidal'); await submit();
   await guard('result screen');
   const resText = await p.evaluate(() => document.querySelector('#studyView').innerText);
-  ok(/You'll see this again (soon|in a few hours|tomorrow|in \d+ (days|weeks))/.test(resText), 'the result says when you will see the question again, in words');
+  ok(/Due for review (soon|in a few hours|tomorrow|in \d+ (days|weeks|months))/.test(resText), 'the result says when the question is due again, in words');
   ok(/Not there yet/i.test(resText) && /\bExplanation\b/i.test(resText), 'plain verdict and an "Explanation" heading');
   ok(!!(await p.$('details[data-add-hook]')) && !(await p.evaluate(() => document.querySelector('details[data-add-hook]').open)), 'with no built-in hook the hook box is one collapsed line, "＋ Add my hook"');
   await p.evaluate(() => document.querySelector('details[data-add-hook] summary').click()); await p.waitForTimeout(150);

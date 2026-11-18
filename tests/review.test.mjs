@@ -142,3 +142,17 @@ test('generated metal-ID explanations: math spans are balanced and no LaTeX comm
   }
   assert.deepEqual(bad.slice(0, 5), []);
 });
+
+test('shape diagnosis: the sentence always agrees with the code (one source of truth)', () => {
+  const pairs = Object.keys(Review.SHAPE_OF).map((k) => k.split(',').map(Number));
+  const expectText = { 'missed-lp': /missed \d lone pairs?/, 'extra-lp': /added \d lone pairs?/, 'same-geometry': /Same electron geometry/, miscount: /Count the electron domains again/, right: /The shape is right/ };
+  for (const [bp, lp] of pairs) {
+    const correct = { shape: Review.SHAPE_OF[`${bp},${lp}`], bp, lp };
+    for (const name of Object.keys(Review.CANON)) {
+      const yours = Review.shapeFromName(name);
+      const code = Review.diagnoseShapeCode(yours, correct);
+      assert.match(Review.diagnoseShape(yours, correct), expectText[code], `${name} vs ${correct.shape} (${bp}+${lp}) is ${code}`);
+    }
+  }
+  assert.equal(Review.diagnoseShapeCode(null, { shape: 'bent', bp: 2, lp: 1 }), 'unrecognised');
+});

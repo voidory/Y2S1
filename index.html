@@ -186,7 +186,7 @@
   </div>
 
   <!-- Toast notification -->
-  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden max-w-sm bg-slate-900 text-white text-sm px-4 py-2.5 rounded-lg shadow-lg" role="status" aria-live="polite"></div>
+  <div id="toastBanner" class="fixed bottom-20 md:bottom-5 right-3 md:right-5 left-3 md:left-auto z-50 hidden max-w-sm bg-slate-900 text-white text-sm px-4 py-2.5 rounded-lg shadow-lg" role="status" aria-live="polite"></div>
   <script type="module">
     /* =====================================================================
        NAMESPACE 1: Expr — Sandboxed Recursive-Descent Expression Compiler
@@ -835,7 +835,12 @@
           return true;
         });
 
-        if (!pool.length) pool = nodes.slice(0, 20);
+        if (!pool.length) {
+          const filtered = (filters.moduleCode && filters.moduleCode !== 'ALL') || (filters.tier && filters.tier !== 'ALL') || filters.skillTag
+            || filters.chunkNodeIds || (filters.masteryAdj && filters.masteryAdj.exclude.size > 0);
+          if (filtered) return { node: null, meta: null, queuePreview: [] }; // the "No matching questions" screen explains it
+          pool = nodes.slice(0, 20);
+        }
 
         // Never serve two nodes of the same metadata.family back to back (when an alternative exists)
         if (prevFamily && !filters.forceNodeId) {
@@ -6894,8 +6899,9 @@
         retiredWeight: 0.08,
       };
       const cfgOf = (settings) => ({ ...DEFAULTS, ...(settings?.mastery || {}) });
-      // generated "identify the metal" questions are not in the skill map by id; they exercise these skills
-      const GENERATED_INVERSE_SKILLS = ['c7.metal-id', 'c7.cfse', 'c6.name'];
+      // generated "identify the metal" questions are not in the skill map by id. They credit metal identification and CFSE only:
+      // they name just a few ligand types, which is far narrower than the whole "name a coordination compound" skill, so they must not retire it
+      const GENERATED_INVERSE_SKILLS = ['c7.metal-id', 'c7.cfse'];
       const skillsOfNode = (map, id) => map?.nodeSkills?.[id] || (String(id).startsWith('lf-inv-') ? GENERATED_INVERSE_SKILLS : []);
 
       /* Pure. `overrides.resetAt[skillId]` = card index before which attempts are ignored (a manual re-open). */
@@ -7015,21 +7021,27 @@
         return null;
       }
 
-      /* Pure. One sentence on how the student's shape differs from the right one. */
+      /* Pure. How a wrong shape differs, as a code. */
+      function diagnoseShapeCode(yours, correct) {
+        if (!yours) return 'unrecognised';
+        if (yours.shape === correct.shape) return 'right';
+        const nYou = yours.bp + yours.lp, nRight = correct.bp + correct.lp;
+        if (yours.bp === correct.bp && yours.lp < correct.lp) return 'missed-lp';
+        if (yours.bp === correct.bp && yours.lp > correct.lp) return 'extra-lp';
+        if (nYou === nRight) return 'same-geometry';
+        return 'miscount';
+      }
+
+      /* Pure. One sentence on how the student's shape differs from the right one (built from the code above). */
       function diagnoseShape(yours, correct) {
-        if (!yours) return 'No recognisable shape was given.';
-        if (yours.shape === correct.shape) return 'The shape is right.';
+        const code = diagnoseShapeCode(yours, correct);
+        if (code === 'unrecognised') return 'No recognisable shape was given.';
+        if (code === 'right') return 'The shape is right.';
         const nYou = yours.bp + yours.lp, nRight = correct.bp + correct.lp;
         const plural = (k, w) => `${k} ${w}${k === 1 ? '' : 's'}`;
-        if (yours.bp === correct.bp && yours.lp < correct.lp) {
-          return `You counted the bonds correctly (${correct.bp}) but missed ${plural(correct.lp - yours.lp, 'lone pair')}: the central atom has ${correct.lp}, which squeezes the bonds into a ${correct.shape} shape.`;
-        }
-        if (yours.bp === correct.bp && yours.lp > correct.lp) {
-          return `You added ${plural(yours.lp - correct.lp, 'lone pair')} that ${yours.lp - correct.lp === 1 ? 'is' : 'are'} not there: the central atom has ${correct.lp}.`;
-        }
-        if (nYou === nRight) {
-          return `Same electron geometry (${GEOMETRY_OF[nRight]}), but the split is different: ${correct.bp} bonded + ${correct.lp} lone, not ${yours.bp} + ${yours.lp}.`;
-        }
+        if (code === 'missed-lp') return `You counted the bonds correctly (${correct.bp}) but missed ${plural(correct.lp - yours.lp, 'lone pair')}: the central atom has ${correct.lp}, which squeezes the bonds into a ${correct.shape} shape.`;
+        if (code === 'extra-lp') return `You added ${plural(yours.lp - correct.lp, 'lone pair')} that ${yours.lp - correct.lp === 1 ? 'is' : 'are'} not there: the central atom has ${correct.lp}.`;
+        if (code === 'same-geometry') return `Same electron geometry (${GEOMETRY_OF[nRight]}), but the split is different: ${correct.bp} bonded + ${correct.lp} lone, not ${yours.bp} + ${yours.lp}.`;
         return `Count the electron domains again: the central atom has ${plural(correct.bp, 'bonded atom')} + ${plural(correct.lp, 'lone pair')} = ${nRight}, which gives a ${GEOMETRY_OF[nRight]} arrangement; your answer implies ${nYou}.`;
       }
 
@@ -7244,17 +7256,6 @@
         'order:wrong-order': 'Put steps or items in the wrong order',
         'short:wrong-value': 'Wrong value or name',
       };
-
-      /* Pure. How a wrong shape differs, as a code (the sentence version is diagnoseShape). */
-      function diagnoseShapeCode(yours, correct) {
-        if (!yours) return 'unrecognised';
-        if (yours.shape === correct.shape) return 'right';
-        const nYou = yours.bp + yours.lp, nRight = correct.bp + correct.lp;
-        if (yours.bp === correct.bp && yours.lp < correct.lp) return 'missed-lp';
-        if (yours.bp === correct.bp && yours.lp > correct.lp) return 'extra-lp';
-        if (nYou === nRight) return 'same-geometry';
-        return 'miscount';
-      }
 
       /* Pure. Tags (strings, see ERROR_LABELS) for a wrong answer; [] when the answer passed. */
       function errorTags(variant, userInput, evalResult, rubricChecks) {
@@ -7515,6 +7516,11 @@
         }
       }
 
+      /* Tagging the kind of slip is a bonus: if it ever throws, the attempt must still be saved. */
+      function safeErrorTags(variant, userInput, evalResult, rubricChecks) {
+        try { return Review.errorTags(variant, userInput, evalResult, rubricChecks); } catch (err) { console.warn('[Review] could not tag the slip:', err.message); return []; }
+      }
+
       function drillTopic(chunkId) {
         appState.route = 'study';
         appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null, chunkId, chunkNodeIds: Content.chunkNodeIds(appState.skillMap, chunkId) };
@@ -7554,7 +7560,7 @@
         const el = $('#toastBanner');
         if (!el) return;
         el.textContent = msg;
-        el.className = `fixed bottom-5 right-5 z-50 max-w-sm text-sm px-4 py-2.5 rounded-lg shadow-lg ${isError ? 'bg-rose-700 text-white' : 'bg-slate-900 text-white'}`;
+        el.className = `fixed bottom-20 md:bottom-5 right-3 md:right-5 left-3 md:left-auto z-50 md:max-w-sm text-sm px-4 py-2.5 rounded-lg shadow-lg ${isError ? 'bg-rose-700 text-white' : 'bg-slate-900 text-white'}`;
         el.classList.remove('hidden');
         clearTimeout(showToast._t);
         showToast._t = setTimeout(() => el.classList.add('hidden'), 3200);
@@ -7577,6 +7583,12 @@
         appState.masteryLogs = allLogs.map((l) => ({ nodeId: l.nodeId, variantId: l.variantId, timestamp: l.timestamp, normalizedGrade: l.normalizedGrade }));
         appState.reviewMap = Object.fromEntries(reviews.map((r) => [r.nodeId, r]));
         appState.attemptLogs = logs;
+        // the student's own choices live in settings rows; reload them here so an import cannot leave a stale copy that the next save overwrites
+        try {
+          const [hooksRow, prefsRow] = await Promise.all([db.settings.get('myHooks'), db.settings.get('skillMastery')]);
+          appState.myHooks = hooksRow?.hooks || {};
+          appState.masteryPrefs = { removed: prefsRow?.removed || {}, resetAt: prefsRow?.resetAt || {} };
+        } catch (err) { console.warn('[Store] own settings not loaded:', err.message); }
         appState.settings = settingsRow ? { ...Scheduler.DEFAULT_SETTINGS, ...settingsRow } : Scheduler.DEFAULT_SETTINGS;
       }
 
@@ -7628,7 +7640,8 @@
 
       /* The "Answer review" card: what you answered next to what was right, for every answer type. */
       function answerReviewHtml(variant, userInput, evalResult, rubricChecks) {
-        const rv = Review.buildAnswerReview(variant, userInput, evalResult, rubricChecks);
+        let rv = null;
+        try { rv = Review.buildAnswerReview(variant, userInput, evalResult, rubricChecks); } catch (err) { console.warn('[Review] could not build the answer review:', err.message); }
         if (!rv) return '';
         const TONE = {
           good: 'bg-emerald-50 border-emerald-200 text-emerald-900', bad: 'bg-rose-50 border-rose-200 text-rose-900',
@@ -7872,7 +7885,7 @@
           userInput: cur.userInput,
           rubricChecks: cur.rubricChecks || null,
           missedSkillTags: evalResult.missedSkillTags || [],
-          errorTags: Review.errorTags(cur.inst.variant, cur.userInput, evalResult, cur.rubricChecks),
+          errorTags: safeErrorTags(cur.inst.variant, cur.userInput, evalResult, cur.rubricChecks),
         };
 
         await db.transaction('rw', db.reviewStates, db.attemptLogs, async () => {
@@ -8309,7 +8322,7 @@
                     Score: <span class="font-mono">${pct}%</span>
                     ${evalResult.vetoApplied ? ' · Capped at 45%' : evalResult.passed ? ' · Passed' : ' · Not there yet'}
                   </div>
-                  ${nextDueRs ? `<div class="text-xs">You'll see this again ${Weakness.humanDue(nextDueRs.dueMs)}</div>` : ''}
+                  ${nextDueRs ? `<div class="text-xs">Due for review ${Weakness.humanDue(nextDueRs.dueMs)}</div>` : ''}
                 </div>
                 <p class="text-sm mt-1">${esc(evalResult.feedback)}</p>
                 ${missedTags.length ? `
@@ -8955,7 +8968,7 @@
             userInput: q.userInput,
             rubricChecks: q.rubricChecks || null,
             missedSkillTags: evalRes.missedSkillTags || [],
-            errorTags: Review.errorTags(variant, q.userInput, evalRes, q.rubricChecks),
+            errorTags: safeErrorTags(variant, q.userInput, evalRes, q.rubricChecks),
           };
           newLogs.push(logEntry);
         }
@@ -10511,14 +10524,6 @@
           if (appState.content.swept.reviewStates || appState.content.swept.attemptLogs) console.info('[Content] removed orphaned progress', appState.content.swept);
           appState.content.skillMap = await Content.loadSkillMap();
           appState.skillMap = appState.content.skillMap.map;
-          try {
-            const prefs = await db.settings.get('skillMastery');
-            appState.masteryPrefs = { removed: prefs?.removed || {}, resetAt: prefs?.resetAt || {} };
-          } catch (err) { console.warn('[Mastery] preferences not loaded:', err.message); }
-          try {
-            const mh = await db.settings.get('myHooks');
-            appState.myHooks = mh?.hooks || {};
-          } catch (err) { console.warn('[Hooks] not loaded:', err.message); }
           await refreshStore();
           const bankStatus = appState.content.bank;
           if (bankStatus.state === 'unavailable') showToast('Bundled question bank not loaded: ' + bankStatus.error, true);

@@ -172,7 +172,7 @@ test('composer-only nodes never enter the study queue or a mock paper', () => {
   assert.ok(!paper.questions.some((q) => q.node.id === only.id));
 });
 
-test('mastery: generated metal-ID attempts count towards metal-ID, CFSE and naming', () => {
+test('mastery: generated metal-ID attempts count towards metal-ID and CFSE, but not the general naming skill', () => {
   const ids = inv.slice(0, 3);
   const logs = [];
   let t2 = 0;
@@ -183,6 +183,8 @@ test('mastery: generated metal-ID attempts count towards metal-ID, CFSE and nami
   const res = Mastery.evaluate(logs, map, nodes, {});
   assert.equal(res.states['c7.metal-id'].evidence, 3);
   assert.equal(res.states['c7.cfse'].evidence, 3);
+  assert.equal(res.states['c6.name'].evidence, 0, 'a few generated complexes must not retire "name a coordination compound"');
+  assert.equal(res.states['c6.name'].status, 'active');
   const adj = Mastery.adjustments(res, map, {}, {}, ['lf-inv-x']);
   assert.ok(adj.exclude.size === 0);
 });
@@ -200,4 +202,15 @@ test('generated metal-ID questions never quote their own answer in the stem or t
     for (const a of answers) if (shown.includes(a)) leaks.push(`${n.id}: shows "${a}"`);
   }
   assert.deepEqual(leaks, []);
+});
+
+test('scheduler: a filter that matches nothing returns no question instead of unrelated ones (removed means never)', () => {
+  const S2 = Scheduler.selectNextNode;
+  const base = { moduleCode: 'ALL', tier: 'ALL' };
+  const all = new Set(nodes.map((n) => n.id));
+  assert.equal(S2(nodes, {}, {}, [], Scheduler.DEFAULT_SETTINGS, { ...base, masteryAdj: { exclude: all, mult: new Map() } }, 1e12).node, null, 'every question removed');
+  assert.equal(S2(nodes, {}, {}, [], Scheduler.DEFAULT_SETTINGS, { ...base, skillTag: 'no-such-tag' }, 1e12).node, null, 'tag with no questions');
+  assert.equal(S2(nodes, {}, {}, [], Scheduler.DEFAULT_SETTINGS, { ...base, chunkNodeIds: ['nope'] }, 1e12).node, null, 'topic with no questions');
+  assert.equal(S2(nodes, {}, {}, [], Scheduler.DEFAULT_SETTINGS, { ...base, tier: 'no-such-tier' }, 1e12).node, null, 'tier with no questions');
+  assert.ok(S2(nodes, {}, {}, [], Scheduler.DEFAULT_SETTINGS, { moduleCode: 'ALL', tier: 'ALL' }, 1e12).node, 'with no filter a question is still served');
 });

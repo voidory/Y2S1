@@ -16,5 +16,49 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-      # The tests use only Node built-ins, so no install step is needed.
+      # The unit tests use only Node built-ins, so no install step is needed.
       - run: npm test
+
+  browser:
+    # Real-browser checks: layout at phone/tablet/laptop sizes, study flows, answer review, weak spots,
+    # plain wording, and data safety. See tests/e2e/*.cjs.
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+      # Only Playwright is needed, so install it on its own instead of the whole app's dependency tree.
+      - name: Install Playwright and Chromium
+        run: |
+          mkdir -p "$RUNNER_TEMP/pw"
+          cd "$RUNNER_TEMP/pw"
+          npm init -y >/dev/null
+          npm install playwright@1.63
+          npx playwright install --with-deps chromium
+          echo "NODE_PATH=$RUNNER_TEMP/pw/node_modules" >> "$GITHUB_ENV"
+      # The app loads Dexie from unpkg; the tests swap in this copy so a CDN hiccup cannot fail the run.
+      - name: Fetch Dexie for the tests
+        run: |
+          curl -fsSL --retry 3 https://unpkg.com/dexie@4.0.10/dist/dexie.mjs -o "$RUNNER_TEMP/dexie.mjs"
+          echo "DEXIE_FILE=$RUNNER_TEMP/dexie.mjs" >> "$GITHUB_ENV"
+      # Every suite runs even if an earlier one fails, so one run shows all the failures.
+      - name: Layout (no page scroll, no overflow, tap targets)
+        if: always()
+        run: node tests/e2e/layout-check.cjs
+      - name: Study flows
+        if: always()
+        run: node tests/e2e/study-flows.cjs
+      - name: Answer review
+        if: always()
+        run: node tests/e2e/answer-review.cjs
+      - name: Weak spots
+        if: always()
+        run: node tests/e2e/weak-spots.cjs
+      - name: Plain-language wording
+        if: always()
+        run: node tests/e2e/copy-cleanup.cjs
+      - name: Data safety
+        if: always()
+        run: node tests/e2e/data-safety.cjs

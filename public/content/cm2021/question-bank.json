@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-18T09:56:51.000Z",
+ "exportedAt": "2026-11-18T10:21:52.000Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -92,6 +92,30 @@
         ],
         "caseSensitive": false,
         "expectedDisplay": "pentagonal bipyramidal"
+       }
+      }
+     },
+     "review": {
+      "vsepr": {
+       "a": {
+        "bp": 4,
+        "lp": 0
+       },
+       "b": {
+        "bp": 3,
+        "lp": 2
+       },
+       "c": {
+        "bp": 6,
+        "lp": 0
+       },
+       "d": {
+        "bp": 5,
+        "lp": 0
+       },
+       "e": {
+        "bp": 7,
+        "lp": 0
        }
       }
      }
@@ -282,6 +306,22 @@
         "expectedDisplay": "square pyramidal"
        }
       }
+     },
+     "review": {
+      "vsepr": {
+       "a": {
+        "bp": 2,
+        "lp": 1
+       },
+       "b": {
+        "bp": 3,
+        "lp": 2
+       },
+       "c": {
+        "bp": 5,
+        "lp": 1
+       }
+      }
      }
     }
    ]
@@ -354,6 +394,22 @@
         "expectedDisplay": "linear"
        }
       }
+     },
+     "review": {
+      "vsepr": {
+       "a": {
+        "bp": 4,
+        "lp": 1
+       },
+       "b": {
+        "bp": 4,
+        "lp": 2
+       },
+       "c": {
+        "bp": 2,
+        "lp": 3
+       }
+      }
      }
     },
     {
@@ -405,6 +461,22 @@
         "expectedDisplay": "linear"
        }
       }
+     },
+     "review": {
+      "vsepr": {
+       "a": {
+        "bp": 3,
+        "lp": 2
+       },
+       "b": {
+        "bp": 5,
+        "lp": 1
+       },
+       "c": {
+        "bp": 2,
+        "lp": 3
+       }
+      }
      }
     },
     {
@@ -454,6 +526,22 @@
         ],
         "caseSensitive": false,
         "expectedDisplay": "square planar"
+       }
+      }
+     },
+     "review": {
+      "vsepr": {
+       "a": {
+        "bp": 4,
+        "lp": 0
+       },
+       "b": {
+        "bp": 6,
+        "lp": 0
+       },
+       "c": {
+        "bp": 4,
+        "lp": 2
        }
       }
      }
@@ -9688,6 +9776,18 @@
         "type": "numeric",
         "targetExpr": "8",
         "tolerance": 0.01
+       }
+      }
+     },
+     "review": {
+      "vsepr": {
+       "b": {
+        "bp": 2,
+        "lp": 3
+       },
+       "c": {
+        "bp": 4,
+        "lp": 2
        }
       }
      }

@@ -6978,6 +6978,138 @@
     })();
 
     /* =====================================================================
+       NAMESPACE: Review — show what exactly is wrong, not just that something is
+       ---------------------------------------------------------------------
+       Pure helpers behind the result screen's "Answer review" card: recognise a shape name, draw a VSEPR
+       shape (bonded atoms and lone-pair lobes) as SVG, and say in one sentence how a wrong shape differs
+       from the right one. Everything here is pure so it can be tested without a browser.
+       ===================================================================== */
+    const Review = (() => {
+      // (bonding domains, lone pairs) -> molecular shape
+      const SHAPE_OF = {
+        '2,0': 'linear', '2,1': 'bent', '2,2': 'bent', '2,3': 'linear',
+        '3,0': 'trigonal planar', '3,1': 'trigonal pyramidal', '3,2': 'T-shaped',
+        '4,0': 'tetrahedral', '4,1': 'see-saw', '4,2': 'square planar',
+        '5,0': 'trigonal bipyramidal', '5,1': 'square pyramidal', '6,0': 'octahedral', '7,0': 'pentagonal bipyramidal',
+      };
+      // what a bare shape name implies when nothing else is known (the usual case for each shape)
+      const CANON = {
+        'linear': [2, 0], 'bent': [2, 1], 'trigonal planar': [3, 0], 'trigonal pyramidal': [3, 1], 'T-shaped': [3, 2],
+        'tetrahedral': [4, 0], 'see-saw': [4, 1], 'square planar': [4, 2], 'trigonal bipyramidal': [5, 0],
+        'square pyramidal': [5, 1], 'octahedral': [6, 0], 'pentagonal bipyramidal': [7, 0],
+      };
+      const ALIASES = [
+        [/pentagonal[\s-]*bipyramid/, 'pentagonal bipyramidal'],
+        [/t[\s-]*shape/, 'T-shaped'], [/see[\s-]*saw|seesaw|disphenoidal/, 'see-saw'], [/square[\s-]*planar/, 'square planar'],
+        [/square[\s-]*(?:based[\s-]*)?pyramid/, 'square pyramidal'], [/trigonal[\s-]*bipyramid|\btbp\b/, 'trigonal bipyramidal'],
+        [/(?:trigonal|triangular)[\s-]*planar/, 'trigonal planar'], [/(?<!bi)pyramid/, 'trigonal pyramidal'],
+        [/octahedr/, 'octahedral'], [/tetrahedr/, 'tetrahedral'], [/bent|angular|v[\s-]*shape/, 'bent'], [/linear/, 'linear'],
+      ];
+      const GEOMETRY_OF = { 2: 'linear', 3: 'trigonal planar', 4: 'tetrahedral', 5: 'trigonal bipyramidal', 6: 'octahedral', 7: 'pentagonal bipyramidal' };
+
+      /* Pure. "Seesaw", "see-saw", "T shaped" ... -> { shape, bp, lp } or null when the text is not a shape. */
+      function shapeFromName(text) {
+        const t = String(text || '').toLowerCase().trim();
+        if (!t) return null;
+        for (const [re, shape] of ALIASES) if (re.test(t)) return { shape, bp: CANON[shape][0], lp: CANON[shape][1] };
+        return null;
+      }
+
+      /* Pure. One sentence on how the student's shape differs from the right one. */
+      function diagnoseShape(yours, correct) {
+        if (!yours) return 'No recognisable shape was given.';
+        if (yours.shape === correct.shape) return 'The shape is right.';
+        const nYou = yours.bp + yours.lp, nRight = correct.bp + correct.lp;
+        const plural = (k, w) => `${k} ${w}${k === 1 ? '' : 's'}`;
+        if (yours.bp === correct.bp && yours.lp < correct.lp) {
+          return `You counted the bonds correctly (${correct.bp}) but missed ${plural(correct.lp - yours.lp, 'lone pair')}: the central atom has ${correct.lp}, which squeezes the bonds into a ${correct.shape} shape.`;
+        }
+        if (yours.bp === correct.bp && yours.lp > correct.lp) {
+          return `You added ${plural(yours.lp - correct.lp, 'lone pair')} that ${yours.lp - correct.lp === 1 ? 'is' : 'are'} not there: the central atom has ${correct.lp}.`;
+        }
+        if (nYou === nRight) {
+          return `Same electron geometry (${GEOMETRY_OF[nRight]}), but the split is different: ${correct.bp} bonded + ${correct.lp} lone, not ${yours.bp} + ${yours.lp}.`;
+        }
+        return `Count the electron domains again: the central atom has ${plural(correct.bp, 'bonded atom')} + ${plural(correct.lp, 'lone pair')} = ${nRight}, which gives a ${GEOMETRY_OF[nRight]} arrangement; your answer implies ${nYou}.`;
+      }
+
+      const TETRA = [[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]].map(([x, y, z]) => [x / Math.sqrt(3), y / Math.sqrt(3), z / Math.sqrt(3)]);
+      const GEOM = {
+        2: [[-1, 0, 0], [1, 0, 0]],
+        3: [[0, 1, 0], [0.866, -0.5, 0], [-0.866, -0.5, 0]],
+        4: TETRA,
+        5: [[0, 0, 1], [0, 0, -1], [1, 0, 0], [-0.5, 0.866, 0], [-0.5, -0.866, 0]], // axial, axial, then equatorial
+        6: [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]],
+        7: [[0, 0, 1], [0, 0, -1], ...[0, 1, 2, 3, 4].map((k) => [Math.cos((2 * Math.PI * k) / 5), Math.sin((2 * Math.PI * k) / 5), 0])],
+      };
+      /* Which domains are lone pairs: equatorial first in a trigonal bipyramid, trans in an octahedron. */
+      function lonePairIndices(n, lp) {
+        if (n === 5) return [2, 3, 4].slice(0, lp);
+        if (n === 6) return lp === 1 ? [5] : lp === 2 ? [4, 5] : [];
+        if (n === 7) return [2, 3, 4, 5, 6].slice(0, lp);
+        return Array.from({ length: lp }, (_, i) => n - 1 - i);
+      }
+
+      /* Pure. A small SVG of the shape: grey balls are bonded atoms, amber lobes are lone pairs.
+         data-bond / data-lp attributes let tests count them. Returns '' for an unsupported domain count. */
+      function vseprSvg(bp, lp, opts = {}) {
+        const n = bp + lp;
+        const dirs = GEOM[n];
+        if (!dirs || lp > n || bp < 1) return '';
+        const lone = new Set(lonePairIndices(n, lp));
+        const a = (-68 * Math.PI) / 180, zr = (22 * Math.PI) / 180, R = 40, C = 60;
+        const items = dirs.map((v, i) => {
+          const xr = v[0] * Math.cos(zr) - v[1] * Math.sin(zr), yr = v[0] * Math.sin(zr) + v[1] * Math.cos(zr), zz = v[2];
+          const y2 = yr * Math.cos(a) - zz * Math.sin(a), d = yr * Math.sin(a) + zz * Math.cos(a);
+          return { i, x: C + R * xr, y: C - R * y2, d, lone: lone.has(i) };
+        }).sort((p, q) => p.d - q.d);
+        const stroke = opts.tone === 'bad' ? '#be123c' : opts.tone === 'good' ? '#047857' : '#475569';
+        const part = (it) => {
+          const t = (it.d + 1) / 2; // 0 far .. 1 near
+          if (it.lone) {
+            const ang = (Math.atan2(it.y - C, it.x - C) * 180) / Math.PI;
+            const cx = C + (it.x - C) * 0.62, cy = C + (it.y - C) * 0.62;
+            return `<g data-lp="1" opacity="${(0.55 + 0.45 * t).toFixed(2)}"><ellipse cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" rx="15" ry="8.5" transform="rotate(${ang.toFixed(1)} ${cx.toFixed(1)} ${cy.toFixed(1)})" fill="#fde68a" fill-opacity="0.65" stroke="#d97706" stroke-width="1.4" stroke-dasharray="3 2"/><circle cx="${(cx - 3).toFixed(1)}" cy="${cy.toFixed(1)}" r="1.8" fill="#b45309"/><circle cx="${(cx + 3).toFixed(1)}" cy="${cy.toFixed(1)}" r="1.8" fill="#b45309"/></g>`;
+          }
+          return `<g data-bond="1" opacity="${(0.6 + 0.4 * t).toFixed(2)}"><line x1="${C}" y1="${C}" x2="${it.x.toFixed(1)}" y2="${it.y.toFixed(1)}" stroke="${stroke}" stroke-width="${(1.6 + 1.6 * t).toFixed(1)}" stroke-linecap="round"/><circle cx="${it.x.toFixed(1)}" cy="${it.y.toFixed(1)}" r="${(6.5 + 3 * t).toFixed(1)}" fill="#cbd5e1" stroke="${stroke}" stroke-width="1.6"/></g>`;
+        };
+        const back = items.filter((it) => it.d < 0).map(part).join('');
+        const front = items.filter((it) => it.d >= 0).map(part).join('');
+        return `<svg viewBox="0 0 120 120" role="img" aria-label="${n} electron domains: ${bp} bonded, ${lp} lone pair${lp === 1 ? '' : 's'}" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">${back}<circle cx="${C}" cy="${C}" r="10.5" fill="#1e293b"/>${front}</svg>`;
+      }
+
+      /* Pure. Rows for a mapped-fields answer: what the student wrote, what was right, and (for shape questions)
+         the drawn comparison. Returns null when there is nothing field-by-field to show. */
+      function buildMappedReview(variant, userInput, evalResult) {
+        const fr = evalResult?.fieldResults;
+        const fields = variant?.inputSlot?.fields;
+        if (!fr || !Array.isArray(fields)) return null;
+        const inp = userInput && typeof userInput === 'object' ? userInput : {};
+        const vs = variant.review?.vsepr || {};
+        const rows = fields.filter((f) => fr[f.key]).map((f) => {
+          const res = fr[f.key];
+          const expected = res.expectedDisplay || '';
+          const yoursText = String(inp[f.key] ?? '').trim();
+          const row = { key: f.key, label: f.label, passed: Boolean(res.passed), yours: yoursText, expected, partial: res.normalizedGrade > 0 && !res.passed };
+          const data = vs[f.key];
+          if (data) {
+            const correctShape = SHAPE_OF[`${data.bp},${data.lp}`] || (shapeFromName(expected)?.shape ?? expected);
+            const youShape = shapeFromName(yoursText);
+            row.vsepr = {
+              correct: { shape: correctShape, bp: data.bp, lp: data.lp },
+              yours: youShape,
+              diagnosis: res.passed ? 'The shape is right.' : diagnoseShape(youShape, { shape: correctShape, bp: data.bp, lp: data.lp }),
+            };
+          }
+          return row;
+        });
+        return rows.length ? { rows, anyShape: rows.some((r) => r.vsepr), anyWrong: rows.some((r) => !r.passed) } : null;
+      }
+
+      return { SHAPE_OF, CANON, shapeFromName, diagnoseShape, vseprSvg, buildMappedReview, lonePairIndices };
+    })();
+
+    /* =====================================================================
        NAMESPACE 7: UI — Holistic 1-Question-1-Answer Renderer & Views
        ===================================================================== */
     const UI = (() => {
@@ -7170,6 +7302,60 @@
           `;
         }
         return '';
+      }
+
+      /* The "Answer review" card: per-field verdicts, and drawn shapes for VSEPR questions. */
+      function answerReviewHtml(variant, userInput, evalResult) {
+        const rv = Review.buildMappedReview(variant, userInput, evalResult);
+        if (!rv || (!rv.anyShape && !rv.anyWrong)) return '';
+        const fig = (svg, caption, tone) => `
+          <figure class="text-center min-w-0">
+            <div class="mx-auto w-full max-w-[132px] rounded-lg border ${tone === 'bad' ? 'border-rose-300 bg-rose-50/60' : tone === 'good' ? 'border-emerald-300 bg-emerald-50/60' : 'border-slate-200 bg-slate-50'} p-1.5">${svg}</div>
+            <figcaption class="mt-1 text-[11px] leading-tight text-slate-600">${caption}</figcaption>
+          </figure>`;
+        const blank = (txt) => `<div class="mx-auto w-full max-w-[132px] aspect-square rounded-lg border border-dashed border-slate-300 bg-slate-50 flex items-center justify-center text-[11px] text-slate-500 px-2 text-center">${txt}</div>`;
+        const rows = rv.rows.map((r) => {
+          const tone = r.passed ? 'border-emerald-200' : 'border-rose-200';
+          const status = r.passed ? '<span class="text-xs font-semibold text-emerald-700">✓ Correct</span>' : `<span class="text-xs font-semibold ${r.partial ? 'text-amber-700' : 'text-rose-700'}">${r.partial ? '◐ Partly right' : '✗ Not quite'}</span>`;
+          let body;
+          if (r.vsepr) {
+            const c = r.vsepr.correct, y = r.vsepr.yours;
+            const correctSvg = Review.vseprSvg(c.bp, c.lp, { tone: 'good' });
+            const correctFig = fig(correctSvg, `<span class="font-semibold text-emerald-800">Correct: ${esc(c.shape)}</span><br>${c.bp} bonded + ${c.lp} lone`, 'good');
+            if (r.passed) {
+              body = `<div class="grid grid-cols-2 gap-3 items-start">${correctFig}<p class="text-xs text-slate-700 self-center">${esc(r.vsepr.diagnosis)}</p></div>`;
+            } else {
+              const yourFig = y
+                ? fig(Review.vseprSvg(y.bp, y.lp, { tone: 'bad' }), `<span class="font-semibold text-rose-800">You: ${esc(y.shape)}</span><br>${y.bp} bonded + ${y.lp} lone`, 'bad')
+                : `<figure class="text-center">${blank(r.yours ? `“${esc(r.yours)}” is not a shape I recognise` : 'No answer given')}<figcaption class="mt-1 text-[11px] text-rose-800 font-semibold">You</figcaption></figure>`;
+              body = `<div class="grid grid-cols-2 gap-3 items-start">${yourFig}${correctFig}</div><p class="text-xs text-slate-800 bg-slate-50 border border-slate-200 rounded-md px-2.5 py-1.5">${esc(r.vsepr.diagnosis)}</p>`;
+            }
+          } else if (r.passed) {
+            body = `<div class="flex flex-wrap items-center gap-2 text-xs"><span class="px-2 py-0.5 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-900 font-mono">${esc(r.yours || r.expected)}</span></div>`;
+          } else {
+            body = `<div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
+              <span class="inline-flex items-center gap-1.5"><span class="text-slate-500">You</span><span class="px-2 py-0.5 rounded-md bg-rose-50 border border-rose-200 text-rose-900 font-mono ${r.yours ? 'line-through decoration-rose-400' : ''}">${esc(r.yours || '(blank)')}</span></span>
+              <span class="text-slate-400">→</span>
+              <span class="inline-flex items-center gap-1.5"><span class="text-slate-500">Correct</span><span class="px-2 py-0.5 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-900 font-mono">${esc(r.expected)}</span></span>
+            </div>`;
+          }
+          return `
+            <div class="rounded-lg border ${tone} bg-white p-3 space-y-2" data-review-row="${esc(r.key)}">
+              <div class="flex items-center justify-between gap-2">
+                <div class="text-sm font-medium text-slate-900 min-w-0">${esc(r.label)}</div>
+                ${status}
+              </div>
+              ${body}
+            </div>`;
+        }).join('');
+        return `
+          <div class="space-y-2" data-answer-review>
+            <div class="flex items-center justify-between gap-2">
+              <div class="text-xs font-semibold uppercase tracking-wider text-slate-600">Answer review</div>
+              ${rv.anyShape ? '<div class="text-[11px] text-slate-500"><span class="inline-block w-2.5 h-2.5 rounded-full bg-slate-300 border border-slate-500 align-middle"></span> bonded atom · <span class="inline-block w-3 h-2 rounded-full bg-amber-200 border border-amber-600 border-dashed align-middle"></span> lone pair</div>' : ''}
+            </div>
+            ${rows}
+          </div>`;
       }
 
       function loadNextQuestion(opts = {}) {
@@ -7723,6 +7909,8 @@
                   </div>
                 ` : ''}
               </div>
+
+              ${answerReviewHtml(variant, cur.userInput, evalResult)}
 
               ${(inst.resolvedExplanation || explanationAsset) ? `
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 prose-math text-sm text-slate-800 space-y-3" data-explanation-block>
@@ -9882,6 +10070,7 @@
       Content,
       Scheduler,
       Mastery,
+      Review,
       IsomerEngine,
       LF,
       Evaluators,

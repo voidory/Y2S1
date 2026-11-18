@@ -1,0 +1,2789 @@
+{
+ "version": "1.0",
+ "date": "2026-11-18",
+ "module": "CM2021",
+ "skills": [
+  {
+   "id": "c1.lewis",
+   "ch": 1,
+   "name": "Draw Lewis structures incl. incomplete and expanded octets",
+   "mode": "mixed",
+   "engine": "gen",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Ch1 octet exceptions; Tut1 C, D",
+   "tags": [
+    "expanded-octet"
+   ],
+   "ids": [
+    "bk-c1-resonance-count"
+   ],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c1-resonance-count",
+    "bk-c1-of4",
+    "bk-c1-octet-exceptions",
+    "bk-c1-tut1-d"
+   ]
+  },
+  {
+   "id": "c1.formal-charge",
+   "ch": 1,
+   "name": "Assign formal charges; choose the best resonance form",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Ch1 formal charge; SCN⁻ table",
+   "tags": [
+    "formal-charge"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c1-resonance-count",
+    "bk-c1-formal-charge-bridge",
+    "bk-c1-dative",
+    "bk-c1-tut1-d",
+    "bk-c1-scn-formal-charge"
+   ]
+  },
+  {
+   "id": "c1.resonance",
+   "ch": 1,
+   "name": "Resonance structures and averaged bond order",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch1 resonance",
+   "tags": [
+    "lewis-resonance"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c1-resonance-count",
+    "bk-c1-octet-exceptions",
+    "bk-c1-scn-formal-charge"
+   ]
+  },
+  {
+   "id": "c1.vsepr",
+   "ch": 1,
+   "name": "Electron-pair and molecular geometry from a formula (VSEPR)",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.5,
+   "basis": "notes",
+   "ref": "Ch1 VSEPR; Tut1 A",
+   "tags": [
+    "vsepr-geometry"
+   ],
+   "ids": [],
+   "weight": 0.0097,
+   "nodes": [
+    "bk-c1-vsepr-tut1",
+    "bk-c1-polar-pick",
+    "bk-c1-vsepr-ex1",
+    "bk-c1-vsepr-drill",
+    "bk-c1-repulsion-order",
+    "bk-c1-formal-charge-bridge",
+    "bk-c1-of4",
+    "bk-c4-p-structures",
+    "bk-c4-interhalogens",
+    "bk-c4-xenon"
+   ]
+  },
+  {
+   "id": "c1.polarity",
+   "ch": 1,
+   "name": "Decide molecular polarity from geometry",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Tut1 B",
+   "tags": [
+    "molecular-polarity"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c1-vsepr-tut1",
+    "bk-c1-polar-pick"
+   ]
+  },
+  {
+   "id": "c1.repulsion",
+   "ch": 1,
+   "name": "Rank lp/bp repulsions and predict angle distortions",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch1 VSEPR rules",
+   "tags": [],
+   "ids": [
+    "bk-c1-repulsion-order"
+   ],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c1-repulsion-order"
+   ]
+  },
+  {
+   "id": "c1.dative",
+   "ch": 1,
+   "name": "Identify dative bonds and Lewis acid/base adducts",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch1 H3N→BF3",
+   "tags": [
+    "lewis-acid-base"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c1-dative",
+    "bk-c3-bh3",
+    "bk-c4-bx3-acidity",
+    "bk-c4-sulfur-oxides",
+    "bk-c4-interhalogens",
+    "bk-c4-si-halides"
+   ]
+  },
+  {
+   "id": "c1.vb-sigma-pi",
+   "ch": 1,
+   "name": "VB overlap: count σ and π bonds, bond strength vs overlap",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch1 VB theory",
+   "tags": [
+    "valence-bond-sigma-pi"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c1-sigma-pi"
+   ]
+  },
+  {
+   "id": "c2.imf-bp",
+   "ch": 2,
+   "name": "Explain boiling-point trends from intermolecular forces",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 1.5,
+   "basis": "notes",
+   "ref": "Ch2 IMFs; Tut1 E; ExX Q1",
+   "tags": [
+    "intermolecular-forces",
+    "boiling-point-trends"
+   ],
+   "ids": [],
+   "weight": 0.0097,
+   "nodes": [
+    "bk-c2-bp-pairs",
+    "bk-c2-bp-picks",
+    "bk-c2-chalcogen-bp",
+    "bk-c2-ammonia-borane"
+   ]
+  },
+  {
+   "id": "c2.hbond-anomaly",
+   "ch": 2,
+   "name": "Explain H-bond / dihydrogen-bond anomalies (ice, NH3BH3)",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Ch2; ExX Q11 → P2 Q1c",
+   "tags": [
+    "dihydrogen-bonding",
+    "ice-structure"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c2-ammonia-borane",
+    "bk-c2-ice"
+   ]
+  },
+  {
+   "id": "c2.unit-cell",
+   "ch": 2,
+   "name": "Count ions per unit cell and derive the formula",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "tutorial",
+   "ref": "Tut1 F (CsCl, TiO2, CaF2, perovskite)",
+   "tags": [
+    "unit-cell-counting",
+    "ionic-solids"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c2-unit-cells"
+   ]
+  },
+  {
+   "id": "c2.solid-types",
+   "ch": 2,
+   "name": "Classify bonding/solid type (ionic, covalent network, metallic, molecular)",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch2 solids",
+   "tags": [
+    "solid-types"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c2-bond-classes"
+   ]
+  },
+  {
+   "id": "c2.born-haber",
+   "ch": 2,
+   "name": "Born–Haber cycle and lattice energy arithmetic",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "MO ch. 5.3.2 LiF cycle",
+   "tags": [
+    "lattice-energy",
+    "ionic-bonding"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c2-lif-energetics",
+    "bk-c4-hsab-solubility"
+   ]
+  },
+  {
+   "id": "c2.double-bond-rule",
+   "ch": 2,
+   "name": "Explain the double-bond rule / trans-bent heavy alkenes",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Ch2 heavy elements; P2 Q2c (RPbPbR)",
+   "tags": [
+    "heavy-element-bonding",
+    "double-bond-rule"
+   ],
+   "ids": [],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c2-heavy-hybrid",
+    "bk-c4-sio2-co2"
+   ]
+  },
+  {
+   "id": "c2.periodic-trends",
+   "ch": 2,
+   "name": "Periodic trends: IE, EA, radius, EN, metallic bp",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Ch1–2 IE plots; ExX Q2–3",
+   "tags": [
+    "ionisation-energy",
+    "periodic-trends"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c4-g2-ie",
+    "bk-c2-ionisation-energy",
+    "bk-c4-g1-g2-compare"
+   ]
+  },
+  {
+   "id": "c3.mo-principles",
+   "ch": 3,
+   "name": "Orbital overlap rules: σ/π/δ, g/u, energy match, no-interaction cases",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "MO ch. 5.1",
+   "tags": [
+    "mo-principles",
+    "orbital-symmetry"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c3-mo-principles",
+    "bk-c3-overlap-types"
+   ]
+  },
+  {
+   "id": "c3.diatomic",
+   "ch": 3,
+   "name": "Homonuclear diatomic configuration, bond order, bond length",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.5,
+   "basis": "notes",
+   "ref": "MO ch. 5.2, Table 5.1",
+   "tags": [
+    "diatomic-mo",
+    "bond-order"
+   ],
+   "ids": [],
+   "weight": 0.0097,
+   "nodes": [
+    "bk-c3-diatomic-length",
+    "bk-c3-xyz-puzzle",
+    "bk-c3-diatomic-table",
+    "bk-c3-o2-length-order",
+    "bk-c3-sp-mixing",
+    "bk-c3-homo-drill",
+    "bk-c3-nf",
+    "bk-c3-three-centre-pi",
+    "bk-c3-h3plus"
+   ]
+  },
+  {
+   "id": "c3.diatomic-magnetism",
+   "ch": 3,
+   "name": "Unpaired electrons / spin multiplicity of diatomics and ions",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.5,
+   "basis": "notes",
+   "ref": "MO ch. 5.2; P1 Q1b (O2²⁻)",
+   "tags": [
+    "magnetism-mo",
+    "spin-multiplicity"
+   ],
+   "ids": [],
+   "weight": 0.0097,
+   "nodes": [
+    "bk-c3-xyz-puzzle",
+    "bk-c3-diatomic-table",
+    "bk-c3-sp-mixing",
+    "bk-c3-nf",
+    "bk-c3-nitrene",
+    "bk-c4-n-oxides-props"
+   ]
+  },
+  {
+   "id": "c3.sp-mixing",
+   "ch": 3,
+   "name": "Explain s–p mixing and its effect on B2, C2, N2 vs O2",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "MO ch. 5.2.2",
+   "tags": [
+    "sp-mixing"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c3-sp-mixing"
+   ]
+  },
+  {
+   "id": "c3.homo-count",
+   "ch": 3,
+   "name": "Count electrons in the HOMO (diatomic or simple polyatomic)",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 3.5,
+   "basis": "notes",
+   "ref": "MO ch.; ExX Q8 → P1 Q1c, P3 Q1d",
+   "tags": [
+    "homo-electron-count"
+   ],
+   "ids": [],
+   "weight": 0.0227,
+   "nodes": [
+    "bk-c3-homo-past",
+    "bk-c3-homo-drill"
+   ]
+  },
+  {
+   "id": "c3.hetero-diatomic",
+   "ch": 3,
+   "name": "Heteronuclear diatomic MO diagram (CO, NO, CN⁻, HF, NF, NH)",
+   "mode": "mixed",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "MO ch. 5.3; Ex1 Q3 → P2 Q2a",
+   "tags": [
+    "heteronuclear-mo"
+   ],
+   "ids": [],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c3-nf",
+    "bk-c3-nitrene",
+    "bk-c3-co-binding"
+   ]
+  },
+  {
+   "id": "c3.frontier",
+   "ch": 3,
+   "name": "Use HOMO/LUMO location to explain reactivity (CO binds via C, BF3 LUMO)",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "MO ch. 5.3.1, 5.4.6",
+   "tags": [
+    "frontier-orbitals"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c3-co-binding",
+    "bk-c3-water-ammonia-mo",
+    "bk-c3-silyl-ie"
+   ]
+  },
+  {
+   "id": "c3.polyatomic",
+   "ch": 3,
+   "name": "Polyatomic MO diagrams: H2O, NH3, CO2, BF3, O3 π system",
+   "mode": "mixed",
+   "engine": "skel",
+   "marks": 1.5,
+   "basis": "notes",
+   "ref": "MO ch. 5.4; P1 Q2d (ozone)",
+   "tags": [
+    "polyatomic-mo",
+    "pi-systems"
+   ],
+   "ids": [],
+   "weight": 0.0097,
+   "nodes": [
+    "bk-c3-homo-past",
+    "bk-c3-homo-drill",
+    "bk-c3-three-centre-pi",
+    "bk-c3-h3plus",
+    "bk-c3-bh3",
+    "bk-c3-lgo-oh",
+    "bk-c3-3c4e",
+    "bk-c3-water-ammonia-mo",
+    "bk-c3-co2-salcs"
+   ]
+  },
+  {
+   "id": "c3.lgo",
+   "ch": 3,
+   "name": "Draw ligand group orbitals qualitatively and match them to central-atom orbitals",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "LGO slides; Tutorial 3 Q D; qualitative treatment, no point-group derivation",
+   "tags": [
+    "ligand-group-orbitals",
+    "group-theory-mo"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c3-lgo-oh",
+    "bk-c3-co2-salcs"
+   ]
+  },
+  {
+   "id": "c3.3c4e",
+   "ch": 3,
+   "name": "Explain 3c-4e bonding (FHF⁻, Zundel, I3⁻, XeF2)",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "H-bond slides; ExX Q12 → P1 Q2a",
+   "tags": [],
+   "ids": [
+    "bk-c3-3c4e",
+    "bk-c4-oxonium"
+   ],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c3-3c4e",
+    "bk-c4-oxonium"
+   ]
+  },
+  {
+   "id": "c3.3c2e",
+   "ch": 3,
+   "name": "Explain 3c-2e bonding (B2H6, BeMe2, (AlH3)n, H3⁺)",
+   "mode": "mixed",
+   "engine": "skel",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Group 2/13 slides; ExX Q7",
+   "tags": [
+    "electron-deficient",
+    "boron-hydrides"
+   ],
+   "ids": [
+    "bk-c3-h3plus"
+   ],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c3-h3plus",
+    "bk-c3-multicentre-e-deficient",
+    "bk-c4-diborane"
+   ]
+  },
+  {
+   "id": "c3.pes",
+   "ch": 3,
+   "name": "Photoelectron spectra: IE = hν − KE, vibrational fine structure",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "MO ch. 5.2.4",
+   "tags": [
+    "photoelectron-spectroscopy"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c3-pes"
+   ]
+  },
+  {
+   "id": "c3.hyperconj",
+   "ch": 3,
+   "name": "Explain α/β-silyl effects and (negative) hyperconjugation",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Group 14 silyl slides; P1 Q2c",
+   "tags": [
+    "hyperconjugation"
+   ],
+   "ids": [],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c3-silyl-ie",
+    "bk-c4-chlorosilanes",
+    "bk-c4-hydrazine-gauche"
+   ]
+  },
+  {
+   "id": "c4.vofc",
+   "ch": 4,
+   "name": "Valency, oxidation number, formal charge, CN of one atom (course definitions)",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.5,
+   "basis": "notes",
+   "ref": "Ch4 intro; ExX Q9",
+   "tags": [
+    "valency-oxidation-formal-charge"
+   ],
+   "ids": [],
+   "weight": 0.0097,
+   "nodes": [
+    "bk-c4-vofc-cn"
+   ]
+  },
+  {
+   "id": "c4.ox-number",
+   "ch": 4,
+   "name": "Oxidation numbers incl. averages in mixed-valence compounds",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 5,
+   "basis": "notes",
+   "ref": "Ch4; Ex2 Q8 → P1–P3 Q1",
+   "tags": [
+    "oxidation-number",
+    "average-oxidation-number"
+   ],
+   "ids": [],
+   "weight": 0.0325,
+   "nodes": [
+    "bk-c4-ox-numbers",
+    "bk-c4-avg-on-past",
+    "bk-c4-avg-on-n",
+    "bk-c4-h3po3",
+    "bk-c4-clo2",
+    "bk-c4-electride-alkalide"
+   ]
+  },
+  {
+   "id": "c4.balance",
+   "ch": 4,
+   "name": "Write and balance reaction equations from the notes",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "all Ch4 equations",
+   "tags": [
+    "reaction-equations",
+    "half-equations",
+    "redox-equations"
+   ],
+   "ids": [],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c4-hydride-reagents",
+    "bk-c4-electrolysis",
+    "bk-c4-g1-oxides-water",
+    "bk-c4-li-nitride",
+    "bk-c4-g2-nitride-halide",
+    "bk-c4-diborane",
+    "bk-c4-boron-misc",
+    "bk-c4-silanes",
+    "bk-c4-chlorosilanes",
+    "bk-c4-nh3-lab",
+    "bk-c4-n-oxides-eq",
+    "bk-c4-aqua-regia",
+    "bk-c4-p-equations",
+    "bk-c4-li-o2-eq",
+    "bk-c4-boron-x3-reactions",
+    "bk-c4-hno3-reactions",
+    "bk-c4-halogen-redox"
+   ]
+  },
+  {
+   "id": "c4.named-process",
+   "ch": 4,
+   "name": "Named processes: reactants, conditions, catalyst, product",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Haber, Olin–Raschig, Wislicenus, contact, steam reforming, WGS, chlor-alkali",
+   "tags": [
+    "named-process",
+    "hydrogen-synthesis",
+    "named-test"
+   ],
+   "ids": [],
+   "weight": 0.026,
+   "nodes": [
+    "bk-c4-h2-prep",
+    "bk-c4-chloralkali",
+    "bk-c4-limewater",
+    "bk-c4-n-chart",
+    "bk-c4-haber",
+    "bk-c4-olin-raschig",
+    "bk-c4-wislicenus",
+    "bk-c4-aqua-regia",
+    "bk-c4-p-scheme",
+    "bk-c4-contact",
+    "bk-c4-named-roundup"
+   ]
+  },
+  {
+   "id": "c4.reaction-scheme",
+   "ch": 4,
+   "name": "Identify A–E in a multi-step reaction scheme",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 3,
+   "basis": "notes",
+   "ref": "P3 Q2a (P scheme); N chart",
+   "tags": [
+    "reaction-scheme"
+   ],
+   "ids": [],
+   "weight": 0.0195,
+   "nodes": [
+    "bk-c4-n-chart",
+    "bk-c4-p-scheme"
+   ]
+  },
+  {
+   "id": "c4.hydrides",
+   "ch": 4,
+   "name": "Classify hydrides (saline, covalent, interstitial); hydride reagents",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Ch4 hydrogen",
+   "tags": [
+    "hydride-classes"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c4-hydride-class",
+    "bk-c4-hydride-reagents",
+    "bk-c4-hd"
+   ]
+  },
+  {
+   "id": "c4.isotope-zpe",
+   "ch": 4,
+   "name": "Explain isotope effects on bond energy via ZPE",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Ch4 isotope effect; Ex2 Q3 → P2 Q2b",
+   "tags": [
+    "zero-point-energy"
+   ],
+   "ids": [],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c4-isotope-zpe",
+    "bk-c4-kie"
+   ]
+  },
+  {
+   "id": "c4.kie",
+   "ch": 4,
+   "name": "Explain a kinetic isotope effect (C–H vs C–D)",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Ch4 isotope effect → P3 Q2d",
+   "tags": [
+    "kinetic-isotope-effect"
+   ],
+   "ids": [],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c4-kie"
+   ]
+  },
+  {
+   "id": "c4.isotope-facts",
+   "ch": 4,
+   "name": "Isotope facts: D2O properties, tritium, electrolytic enrichment",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch4 isotopes",
+   "tags": [
+    "isotope-effect",
+    "electrolysis"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c4-isotope-zpe",
+    "bk-c4-kie",
+    "bk-c4-hd",
+    "bk-c4-electrolysis",
+    "bk-c4-chloralkali",
+    "bk-c4-heavy-water"
+   ]
+  },
+  {
+   "id": "c4.stoichiometry",
+   "ch": 4,
+   "name": "Stoichiometry: H2 storage, airbag N2 volume, AgCl precipitation",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1,
+   "basis": "past-paper",
+   "ref": "data in notes; calculations from past papers",
+   "tags": [
+    "stoichiometry",
+    "hydrogen-storage"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c4-naalh4",
+    "bk-c4-azide-tnt",
+    "bk-c6-agcl"
+   ]
+  },
+  {
+   "id": "c4.h2-activation",
+   "ch": 4,
+   "name": "H2 activation: surfaces, Kubas σ-complex, oxidative addition (Vaska)",
+   "mode": "mixed",
+   "engine": "db",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch4 dihydrogen complexes",
+   "tags": [
+    "h2-activation",
+    "hydrogen-reactivity"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c4-h-activation",
+    "bk-c4-h2-reactions"
+   ]
+  },
+  {
+   "id": "c4.radical-chain",
+   "ch": 4,
+   "name": "Order the steps of a radical-chain reaction (H2 + Cl2)",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch4 HCl formation",
+   "tags": [
+    "radical-chain"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c4-hcl-chain"
+   ]
+  },
+  {
+   "id": "c4.g1-oxides",
+   "ch": 4,
+   "name": "Group 1 + O2: oxide/peroxide/superoxide, with water, KO2 + CO2",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 3,
+   "basis": "notes",
+   "ref": "Group 1 slides; Ex1 Q7 → P1 Q1b, P2 Q1a",
+   "tags": [
+    "alkali-oxides"
+   ],
+   "ids": [],
+   "weight": 0.0195,
+   "nodes": [
+    "bk-c4-g1-o2",
+    "bk-c4-g1-oxides-water",
+    "bk-c4-li-o2-eq"
+   ]
+  },
+  {
+   "id": "c4.g1-reactivity",
+   "ch": 4,
+   "name": "Group 1 reactivity: water, N2 (Li3N), H2, acetylene, RLi",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Group 1 slides",
+   "tags": [
+    "alkali-reactivity"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c4-li-nitride",
+    "bk-c4-acetylide",
+    "bk-c4-li-anomaly"
+   ]
+  },
+  {
+   "id": "c4.hydration",
+   "ch": 4,
+   "name": "Rank hydration energies / charge density",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Group 1–2; ExX Q4 → P3 Q1b",
+   "tags": [
+    "hydration-energy",
+    "charge-density"
+   ],
+   "ids": [],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c4-hydration"
+   ]
+  },
+  {
+   "id": "c4.hsab",
+   "ch": 4,
+   "name": "Explain solubility via HSAB and lattice-energy size matching (LiF vs LiClO4)",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Group 1 solubility; ExX Q6",
+   "tags": [
+    "hsab",
+    "solubility"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c4-hsab-solubility"
+   ]
+  },
+  {
+   "id": "c4.crown",
+   "ch": 4,
+   "name": "Crown ether / cryptand selectivity; electrides and alkalides",
+   "mode": "mixed",
+   "engine": "skel",
+   "marks": 1.5,
+   "basis": "notes",
+   "ref": "Group 1 complex ions; P1 Q1e",
+   "tags": [
+    "crown-ether",
+    "cryptand",
+    "size-matching",
+    "alkalide-electride"
+   ],
+   "ids": [],
+   "weight": 0.0097,
+   "nodes": [
+    "bk-c4-crown-cryptand",
+    "bk-c4-electride-alkalide"
+   ]
+  },
+  {
+   "id": "c4.acetylide",
+   "ch": 4,
+   "name": "Explain C–H acidity by hybridisation (acetylene vs hexane)",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Group 1 acetylides; ExX Q13",
+   "tags": [
+    "acidity-hybridization"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c4-acetylide"
+   ]
+  },
+  {
+   "id": "c4.diagonal",
+   "ch": 4,
+   "name": "Diagonal relationships and Be/Li anomalies (amphoteric BeO)",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Group 2 slides",
+   "tags": [
+    "diagonal-relationship",
+    "amphoterism"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c4-li-nitride",
+    "bk-c4-li-anomaly",
+    "bk-c4-be-anomaly"
+   ]
+  },
+  {
+   "id": "c4.g2-reactivity",
+   "ch": 4,
+   "name": "Group 2 reactivity: oxides, hydroxides, carbonates, nitrides, halides",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Group 2 slides",
+   "tags": [
+    "alkaline-earth-reactivity",
+    "thermal-stability"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c4-limewater",
+    "bk-c4-g2-oxides",
+    "bk-c4-g2-nitride-halide",
+    "bk-c4-g1-g2-compare"
+   ]
+  },
+  {
+   "id": "c4.inert-pair",
+   "ch": 4,
+   "name": "Explain the inert-pair effect (Tl⁺, Pb²⁺)",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 1.5,
+   "basis": "notes",
+   "ref": "Group 13/14 slides",
+   "tags": [
+    "inert-pair-effect"
+   ],
+   "ids": [],
+   "weight": 0.0097,
+   "nodes": [
+    "bk-c4-inert-pair"
+   ]
+  },
+  {
+   "id": "c4.boron",
+   "ch": 4,
+   "name": "Boron chemistry: isolation, diborane reactions, BX3 synthesis/hydrolysis",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Group 13 slides",
+   "tags": [
+    "boron-chemistry"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c4-boron-misc",
+    "bk-c4-boron-x3-reactions"
+   ]
+  },
+  {
+   "id": "c4.bx3-acidity",
+   "ch": 4,
+   "name": "Explain BX3 Lewis-acidity order via π back-donation",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Group 13 π-bonding; Ex2 Q7 → P1 Q2b",
+   "tags": [
+    "pi-backbonding-main-group"
+   ],
+   "ids": [],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c4-bx3-acidity"
+   ]
+  },
+  {
+   "id": "c4.silicon",
+   "ch": 4,
+   "name": "Silicon chemistry: silanes, chlorosilanes, hydrosilylation, SiX4",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Group 14 slides",
+   "tags": [
+    "silicon-hydrides",
+    "silicon-chemistry"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c4-silanes",
+    "bk-c4-chlorosilanes",
+    "bk-c4-si-halides"
+   ]
+  },
+  {
+   "id": "c4.trisilylamine",
+   "ch": 4,
+   "name": "Explain planar N(SiH3)3 (p,d-π model and its stated weakness)",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Group 14 trisilylamine slides",
+   "tags": [
+    "trisilylamine",
+    "p-d-pi-bonding"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c4-trisilylamine"
+   ]
+  },
+  {
+   "id": "c4.si-o-bonds",
+   "ch": 4,
+   "name": "Compare SiO2 network vs CO2 molecule from bond energies",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Group 14 SiO2 slide",
+   "tags": [
+    "bond-energy"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c4-sio2-co2"
+   ]
+  },
+  {
+   "id": "c4.silicates",
+   "ch": 4,
+   "name": "Silicate anion charge and formula from SiO4 sharing",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Group 14 silicates",
+   "tags": [
+    "silicate-structures"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c4-silicates"
+   ]
+  },
+  {
+   "id": "c4.allotropes",
+   "ch": 4,
+   "name": "Allotropes of C, P, S and their structures",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Groups 14–16",
+   "tags": [
+    "allotropes"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c4-carbon",
+    "bk-c4-p-structures",
+    "bk-c4-sulfur-allotropes"
+   ]
+  },
+  {
+   "id": "c4.nitrogen",
+   "ch": 4,
+   "name": "Nitrogen chemistry: NH3, N2H4, azides, oxides, oxoacids",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Group 15 slides",
+   "tags": [
+    "nitrogen-chemistry",
+    "nitrogen-oxides",
+    "explosives"
+   ],
+   "ids": [],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c4-avg-on-n",
+    "bk-c4-n-chart",
+    "bk-c4-haber",
+    "bk-c4-olin-raschig",
+    "bk-c4-wislicenus",
+    "bk-c4-azide-tnt",
+    "bk-c4-nh3-lab",
+    "bk-c4-n-oxides-eq",
+    "bk-c4-n-oxides-props",
+    "bk-c4-hno3-reactions"
+   ]
+  },
+  {
+   "id": "c4.gauche",
+   "ch": 4,
+   "name": "Explain the gauche preference of hydrazine",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 1.5,
+   "basis": "notes",
+   "ref": "Group 15 hydrazine; P3 Q2c (skeleton from key)",
+   "tags": [
+    "gauche-effect"
+   ],
+   "ids": [],
+   "weight": 0.0097,
+   "nodes": [
+    "bk-c4-hydrazine-gauche"
+   ]
+  },
+  {
+   "id": "c4.phosphorus",
+   "ch": 4,
+   "name": "Phosphorus chemistry: P4 oxides/halides, oxoacid basicity (H3PO3)",
+   "mode": "mixed",
+   "engine": "db",
+   "marks": 3,
+   "basis": "notes",
+   "ref": "Group 15 P slides; P1 Q1a, P2 Q1b",
+   "tags": [
+    "phosphorus-chemistry",
+    "phosphorus-oxoacids",
+    "oxoacid-strength"
+   ],
+   "ids": [],
+   "weight": 0.0195,
+   "nodes": [
+    "bk-c4-h3po3",
+    "bk-c4-oxoacid-strength",
+    "bk-c4-p-scheme",
+    "bk-c4-p-equations",
+    "bk-c4-p4o10-uses"
+   ]
+  },
+  {
+   "id": "c4.oxygen-sulfur",
+   "ch": 4,
+   "name": "O/S chemistry: H2O2, SO2/SO3, contact process, oleum",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Group 16 slides",
+   "tags": [
+    "oxygen-chemistry",
+    "disproportionation",
+    "sulfur-chemistry"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c4-h2o2",
+    "bk-c4-contact",
+    "bk-c4-sulfur-oxides",
+    "bk-c4-sf6-inert"
+   ]
+  },
+  {
+   "id": "c4.kinetic-stability",
+   "ch": 4,
+   "name": "Distinguish kinetic inertness from thermodynamic stability (SF6, H2)",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "SF6 slide; H2 reactivity",
+   "tags": [
+    "kinetic-vs-thermodynamic"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c4-sf6-inert",
+    "bk-c9-labile-inert",
+    "bk-c4-h2-reactions"
+   ]
+  },
+  {
+   "id": "c4.halogens",
+   "ch": 4,
+   "name": "Halogen chemistry: interhalogens, I3⁻, redox order, ClO2",
+   "mode": "mixed",
+   "engine": "db",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Group 17 slides; P2 Q1d",
+   "tags": [
+    "interhalogens",
+    "halogen-redox",
+    "halogen-oxides"
+   ],
+   "ids": [],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c4-clo2",
+    "bk-c4-interhalogens",
+    "bk-c4-halogen-redox"
+   ]
+  },
+  {
+   "id": "c4.noble",
+   "ch": 4,
+   "name": "Xenon fluorides: synthesis and VSEPR shapes",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Group 18 slides",
+   "tags": [
+    "noble-gas-compounds"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c4-xenon"
+   ]
+  },
+  {
+   "id": "c4.nuclear",
+   "ch": 4,
+   "name": "Balance nuclear equations (A and Z conservation)",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 3,
+   "basis": "past-paper",
+   "ref": "only ¹⁴N + n → T in notes; ExX Q10 → P2 Q1e, P3 Q1e",
+   "tags": [
+    "nuclear-arithmetic"
+   ],
+   "ids": [],
+   "weight": 0.0195,
+   "nodes": [
+    "bk-c4-nuclear"
+   ]
+  },
+  {
+   "id": "c4.bioinorganic",
+   "ch": 4,
+   "name": "Bioinorganic facts: ion pumps, valinomycin, nitrogenase, myoglobin/nitrite",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Group 1 \"In Nature\"; nitrogenase; meat processing",
+   "tags": [
+    "bioinorganic"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c4-bioinorganic"
+   ]
+  },
+  {
+   "id": "c5.symmetry-ops",
+   "ch": 5,
+   "name": "Decide chirality from σ and Sₙ (read symmetry labels; no character tables)",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch6 optical isomerism (σ, S_n); symmetry labels are read, not manipulated",
+   "tags": [
+    "symmetry-operations",
+    "chirality"
+   ],
+   "ids": [
+    "bk-c5-symmetry-rules"
+   ],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c5-symmetry-rules"
+   ]
+  },
+  {
+   "id": "c6.name",
+   "ch": 6,
+   "name": "Name a coordination compound from its formula",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Ch6 nomenclature; Tut4; P3 Q3a",
+   "tags": [
+    "nomenclature"
+   ],
+   "ids": [],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c6-name-tut4",
+    "bk-c6-name-more",
+    "bk-c6-name-past",
+    "bk-c6-ambidentate",
+    "bk-c6-ate-names",
+    "bk-c6-formula-rules",
+    "bk-c7-identify-p1",
+    "bk-c7-identify-p2"
+   ]
+  },
+  {
+   "id": "c6.formula",
+   "ch": 6,
+   "name": "Write a formula/structure from a name",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Ch6 formula rules",
+   "tags": [
+    "formula-writing"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c6-formula-rules",
+    "bk-c6-structure-from-name"
+   ]
+  },
+  {
+   "id": "c6.ox-dn-cn",
+   "ch": 6,
+   "name": "Oxidation state, dⁿ count and CN of the metal",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 3,
+   "basis": "notes",
+   "ref": "Ch6 practice; Tut4; P3 Q3a",
+   "tags": [
+    "oxidation-state-complex",
+    "d-electron-count",
+    "coordination-number"
+   ],
+   "ids": [],
+   "weight": 0.0195,
+   "nodes": [
+    "bk-c6-ox-dn-cn",
+    "bk-c6-p3q3-cfse",
+    "bk-c6-ox-state-practice",
+    "bk-c6-dn-count",
+    "bk-c6-cn-factors"
+   ]
+  },
+  {
+   "id": "c6.ligands",
+   "ch": 6,
+   "name": "Denticity, donor atoms, ambidentate ligands",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch6 ligand types",
+   "tags": [
+    "ligand-denticity",
+    "ambidentate-ligand"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c6-denticity",
+    "bk-c6-ambidentate"
+   ]
+  },
+  {
+   "id": "c6.structural-isomers",
+   "ch": 6,
+   "name": "Hydrate, ionisation, coordination, linkage isomerism; Werner/AgCl tests",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch6 isomerism",
+   "tags": [
+    "structural-isomerism",
+    "linkage-isomerism",
+    "precipitation-test",
+    "werner-formula"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c6-ambidentate",
+    "bk-c6-isomer-type",
+    "bk-c6-agno3-test",
+    "bk-c6-agcl"
+   ]
+  },
+  {
+   "id": "c6.geometric",
+   "ch": 6,
+   "name": "cis/trans and fac/mer isomers; fac/mer-directing ligands",
+   "mode": "mixed",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch6 geometric isomerism",
+   "tags": [
+    "geometric-isomerism"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c6-isomer-counts",
+    "bk-c6-geometric-misc",
+    "bk-c6-tut4-stereo",
+    "bk-c6-structure-from-name",
+    "bk-c6-drawing"
+   ]
+  },
+  {
+   "id": "c6.optical",
+   "ch": 6,
+   "name": "Chirality and Δ/Λ labelling",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch6 optical isomerism",
+   "tags": [
+    "optical-isomerism",
+    "chirality"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c5-symmetry-rules",
+    "bk-c6-isomer-counts",
+    "bk-c6-chirality",
+    "bk-c6-delta-lambda",
+    "bk-c6-tut4-stereo",
+    "bk-c6-drawing"
+   ]
+  },
+  {
+   "id": "c6.isomer-count",
+   "ch": 6,
+   "name": "Enumerate all stereoisomers of a formula",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch6 [MA2B2C2], [CoL3]³⁺",
+   "tags": [
+    "stereoisomer-count"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c6-isomer-counts"
+   ]
+  },
+  {
+   "id": "c7.formation-k",
+   "ch": 7,
+   "name": "Stepwise and overall formation constants (βn = K1…Kn)",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch7 stability",
+   "tags": [
+    "formation-constants"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c7-stepwise-k",
+    "bk-c7-cu-kf5"
+   ]
+  },
+  {
+   "id": "c7.stability",
+   "ch": 7,
+   "name": "Rank complex stability from metal charge/radius and ligand basicity",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch7 factors",
+   "tags": [
+    "complex-stability",
+    "lewis-basicity",
+    "irving-williams"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c7-ligand-basicity",
+    "bk-c7-metal-stability"
+   ]
+  },
+  {
+   "id": "c7.chelate",
+   "ch": 7,
+   "name": "Explain chelate and macrocyclic effects (entropy, kinetics)",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch7 chelate effect",
+   "tags": [
+    "chelate-effect",
+    "macrocyclic-effect"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c7-chelate"
+   ]
+  },
+  {
+   "id": "c7.vbt",
+   "ch": 7,
+   "name": "Valence-bond hybrids for complexes and why VBT fails ([CoF6]³⁻)",
+   "mode": "mixed",
+   "engine": "skel",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch7 VBT",
+   "tags": [
+    "valence-bond-theory"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c7-vbt"
+   ]
+  },
+  {
+   "id": "c7.cft-essay",
+   "ch": 7,
+   "name": "Explain crystal field theory and its limitations",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 3,
+   "basis": "notes",
+   "ref": "Ch7 CFT; P3 Q3 essays",
+   "tags": [
+    "crystal-field-theory"
+   ],
+   "ids": [],
+   "weight": 0.0195,
+   "nodes": [
+    "bk-c7-cft-principles",
+    "bk-c7-cft-limits"
+   ]
+  },
+  {
+   "id": "c7.lft-essay",
+   "ch": 7,
+   "name": "Explain ligand field theory (MO picture of a complex)",
+   "mode": "self",
+   "engine": "skel",
+   "marks": 1.5,
+   "basis": "notes",
+   "ref": "Ch7 LFT; P3 Q3",
+   "tags": [
+    "ligand-field-theory"
+   ],
+   "ids": [],
+   "weight": 0.0097,
+   "nodes": [
+    "bk-c7-lft-principles",
+    "bk-c7-cr-delta",
+    "bk-c7-pi-effects",
+    "bk-c7-lft-mo"
+   ]
+  },
+  {
+   "id": "c7.splitting",
+   "ch": 7,
+   "name": "Draw d-orbital splitting for Oh, Td, square planar",
+   "mode": "mixed",
+   "engine": "gen",
+   "marks": 1.5,
+   "basis": "notes",
+   "ref": "Ch7 CFT; P3 Q3a",
+   "tags": [
+    "d-orbital-splitting",
+    "tetrahedral-field",
+    "square-planar"
+   ],
+   "ids": [],
+   "weight": 0.0097,
+   "nodes": [
+    "bk-c7-cft-principles",
+    "bk-c7-lft-principles",
+    "bk-c7-td-oh",
+    "bk-c7-sq-planar"
+   ]
+  },
+  {
+   "id": "c7.cfse",
+   "ch": 7,
+   "name": "Compute CFSE (Oh and Td, high/low spin)",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 5,
+   "basis": "notes",
+   "ref": "Ch7 CFSE; P1–P3 Q3",
+   "tags": [
+    "cfse-calculation"
+   ],
+   "ids": [],
+   "weight": 0.0325,
+   "nodes": [
+    "bk-c6-p3q3-cfse",
+    "bk-c7-cfse-table",
+    "bk-c7-co-ni-td",
+    "bk-c7-identify-p1",
+    "bk-c7-identify-p2",
+    "bk-c9-cr-labile",
+    "bk-c7-cfse-d1-d2"
+   ]
+  },
+  {
+   "id": "c7.hs-ls",
+   "ch": 7,
+   "name": "Decide high/low spin from ligand, metal and geometry",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 3,
+   "basis": "notes",
+   "ref": "Ch7 spectrochemical series",
+   "tags": [
+    "high-low-spin"
+   ],
+   "ids": [],
+   "weight": 0.0195,
+   "nodes": [
+    "bk-c7-cfse-table",
+    "bk-c7-hs-ls",
+    "bk-c7-lft-mo",
+    "bk-c7-identify-p1",
+    "bk-c7-identify-p2",
+    "bk-c8-moment-infer",
+    "bk-c8-ts-d7",
+    "bk-c8-ts-d4"
+   ]
+  },
+  {
+   "id": "c7.spectrochemical",
+   "ch": 7,
+   "name": "Spectrochemical series and Δo factors",
+   "mode": "auto",
+   "engine": "db",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Ch7 factors affecting Δ",
+   "tags": [
+    "spectrochemical-series",
+    "delta-o-factors"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c7-spectrochemical",
+    "bk-c7-cr-delta"
+   ]
+  },
+  {
+   "id": "c7.pi-bonding",
+   "ch": 7,
+   "name": "π-donor/π-acceptor effects on Δo; back-bonding in carbonyls; 18-e count",
+   "mode": "mixed",
+   "engine": "skel",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Ch7 LFT π-bonding; Kubas 18e",
+   "tags": [
+    "pi-donor-acceptor",
+    "metal-carbonyls"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c7-cr-delta",
+    "bk-c7-pi-classify",
+    "bk-c7-pi-effects",
+    "bk-c7-co-backbond",
+    "bk-c7-backbond-trend"
+   ]
+  },
+  {
+   "id": "c7.site-pref",
+   "ch": 7,
+   "name": "Td vs Oh preference from CFSE (Co(II) vs Ni(II))",
+   "mode": "mixed",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch7 question",
+   "tags": [
+    "site-preference"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c7-co-ni-td"
+   ]
+  },
+  {
+   "id": "c7.jahn-teller",
+   "ch": 7,
+   "name": "Predict and explain Jahn–Teller distortions",
+   "mode": "mixed",
+   "engine": "skel",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Ch7 Jahn–Teller",
+   "tags": [
+    "jahn-teller"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c7-cu-kf5",
+    "bk-c7-jahn-teller"
+   ]
+  },
+  {
+   "id": "c7.metal-id",
+   "ch": 7,
+   "name": "Identify a first-row metal from a dⁿ / spin / CFSE / μ constraint",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 12,
+   "basis": "past-paper",
+   "ref": "method from Ch7–8; P1 Q3, P2 Q3",
+   "tags": [
+    "metal-identification"
+   ],
+   "ids": [],
+   "weight": 0.0779,
+   "nodes": [
+    "bk-c7-identify-p1",
+    "bk-c7-identify-p2",
+    "bk-c8-identify-practice"
+   ]
+  },
+  {
+   "id": "c8.spin-only",
+   "ch": 8,
+   "name": "Spin-only magnetic moment; infer n from μ",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Ch8 magnetism",
+   "tags": [
+    "spin-only-moment",
+    "magnetism"
+   ],
+   "ids": [],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c8-spin-only",
+    "bk-c8-moment-infer",
+    "bk-c8-ts-d7",
+    "bk-c8-ts-d4"
+   ]
+  },
+  {
+   "id": "c8.colour",
+   "ch": 8,
+   "name": "Colour from λmax via complementary colours; d¹ band energy = Δo",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch8 [Ti(H2O)6]³⁺",
+   "tags": [
+    "complementary-colour",
+    "d-d-transition"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c8-colour",
+    "bk-c8-identify-practice"
+   ]
+  },
+  {
+   "id": "c8.microstates",
+   "ch": 8,
+   "name": "Count microstates and build the microstate table",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Ch8; P3 Q4",
+   "tags": [
+    "microstates"
+   ],
+   "ids": [],
+   "weight": 0.013,
+   "nodes": [
+    "bk-c8-microstates",
+    "bk-c8-terms-d8"
+   ]
+  },
+  {
+   "id": "c8.terms",
+   "ch": 8,
+   "name": "Derive all term symbols and the ground term (Hund)",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Ch8; P3 Q4 (d⁸)",
+   "tags": [
+    "term-symbols",
+    "ground-term"
+   ],
+   "ids": [],
+   "weight": 0.026,
+   "nodes": [
+    "bk-c8-terms-d8",
+    "bk-c8-ground-terms",
+    "bk-c8-term-numbers",
+    "bk-c8-hund"
+   ]
+  },
+  {
+   "id": "c8.oh-terms",
+   "ch": 8,
+   "name": "Split free-ion terms in Oh; A/E/T labels of configurations",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Ch8 Orgel",
+   "tags": [
+    "molecular-term-symbols",
+    "orgel-diagram"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c8-oh-terms",
+    "bk-c8-ts-d7",
+    "bk-c8-ts-d4",
+    "bk-c8-ts-d6"
+   ]
+  },
+  {
+   "id": "c8.tanabe-sugano",
+   "ch": 8,
+   "name": "Read a Tanabe–Sugano diagram: ground state, allowed bands, Δo/B, spin crossover",
+   "mode": "mixed",
+   "engine": "bank",
+   "marks": 13,
+   "basis": "notes",
+   "ref": "Ch8 TS; P1 Q4 (d⁷), P2 Q4 (d⁴)",
+   "tags": [
+    "tanabe-sugano"
+   ],
+   "ids": [],
+   "weight": 0.0844,
+   "nodes": [
+    "bk-c8-ts-d7",
+    "bk-c8-ts-d4",
+    "bk-c8-ts-d6",
+    "bk-c8-ts-reading"
+   ]
+  },
+  {
+   "id": "c8.selection",
+   "ch": 8,
+   "name": "Apply spin and Laporte selection rules to rank intensities",
+   "mode": "mixed",
+   "engine": "gen",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Ch8 selection rules",
+   "tags": [
+    "selection-rules",
+    "laporte"
+   ],
+   "ids": [],
+   "weight": 0.0065,
+   "nodes": [
+    "bk-c8-selection-rules"
+   ]
+  },
+  {
+   "id": "c8.charge-transfer",
+   "ch": 8,
+   "name": "Assign LMCT/MLCT bands",
+   "mode": "mixed",
+   "engine": "skel",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch8 charge transfer (MnO4⁻)",
+   "tags": [
+    "charge-transfer"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c8-charge-transfer"
+   ]
+  },
+  {
+   "id": "c9.labile",
+   "ch": 9,
+   "name": "Predict labile vs inert from dⁿ / CFSE",
+   "mode": "mixed",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch9 labile/inert",
+   "tags": [
+    "labile-inert"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c9-labile-inert",
+    "bk-c9-cr-labile"
+   ]
+  },
+  {
+   "id": "c9.mechanism",
+   "ch": 9,
+   "name": "D/A/I mechanisms: rate laws, steady state, evidence",
+   "mode": "mixed",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch9 mechanisms",
+   "tags": [
+    "substitution-mechanism",
+    "rate-law"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c9-mechanisms",
+    "bk-c9-evidence",
+    "bk-c9-stereo"
+   ]
+  },
+  {
+   "id": "c9.stereo",
+   "ch": 9,
+   "name": "Stereochemical outcome via square-pyramidal vs trigonal-bipyramidal intermediates",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch9 stereochemistry",
+   "tags": [
+    "stereochemistry"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c9-stereo"
+   ]
+  },
+  {
+   "id": "c9.trans-effect",
+   "ch": 9,
+   "name": "Use the trans effect to predict products and design syntheses",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.5,
+   "basis": "notes",
+   "ref": "Ch9 trans effect",
+   "tags": [
+    "trans-effect",
+    "square-planar-substitution"
+   ],
+   "ids": [],
+   "weight": 0.0032,
+   "nodes": [
+    "bk-c9-trans-series",
+    "bk-c9-trans-products"
+   ]
+  }
+ ],
+ "nodeSkills": {
+  "bk-c1-dative": [
+   "c1.formal-charge",
+   "c1.dative"
+  ],
+  "bk-c1-formal-charge-bridge": [
+   "c1.formal-charge",
+   "c1.vsepr"
+  ],
+  "bk-c1-octet-exceptions": [
+   "c1.lewis",
+   "c1.resonance"
+  ],
+  "bk-c1-of4": [
+   "c1.lewis",
+   "c1.vsepr"
+  ],
+  "bk-c1-polar-pick": [
+   "c1.vsepr",
+   "c1.polarity"
+  ],
+  "bk-c1-repulsion-order": [
+   "c1.vsepr",
+   "c1.repulsion"
+  ],
+  "bk-c1-resonance-count": [
+   "c1.lewis",
+   "c1.formal-charge",
+   "c1.resonance"
+  ],
+  "bk-c1-scn-formal-charge": [
+   "c1.formal-charge",
+   "c1.resonance"
+  ],
+  "bk-c1-sigma-pi": [
+   "c1.vb-sigma-pi"
+  ],
+  "bk-c1-tut1-d": [
+   "c1.lewis",
+   "c1.formal-charge"
+  ],
+  "bk-c1-vsepr-drill": [
+   "c1.vsepr"
+  ],
+  "bk-c1-vsepr-ex1": [
+   "c1.vsepr"
+  ],
+  "bk-c1-vsepr-tut1": [
+   "c1.vsepr",
+   "c1.polarity"
+  ],
+  "bk-c2-ammonia-borane": [
+   "c2.imf-bp",
+   "c2.hbond-anomaly"
+  ],
+  "bk-c2-bond-classes": [
+   "c2.solid-types"
+  ],
+  "bk-c2-bp-pairs": [
+   "c2.imf-bp"
+  ],
+  "bk-c2-bp-picks": [
+   "c2.imf-bp"
+  ],
+  "bk-c2-chalcogen-bp": [
+   "c2.imf-bp"
+  ],
+  "bk-c2-heavy-hybrid": [
+   "c2.double-bond-rule"
+  ],
+  "bk-c2-ice": [
+   "c2.hbond-anomaly"
+  ],
+  "bk-c2-ionisation-energy": [
+   "c2.periodic-trends"
+  ],
+  "bk-c2-lif-energetics": [
+   "c2.born-haber"
+  ],
+  "bk-c2-unit-cells": [
+   "c2.unit-cell"
+  ],
+  "bk-c3-3c4e": [
+   "c3.polyatomic",
+   "c3.3c4e"
+  ],
+  "bk-c3-bh3": [
+   "c1.dative",
+   "c3.polyatomic"
+  ],
+  "bk-c3-co-binding": [
+   "c3.hetero-diatomic",
+   "c3.frontier"
+  ],
+  "bk-c3-co2-salcs": [
+   "c3.polyatomic",
+   "c3.lgo"
+  ],
+  "bk-c3-diatomic-length": [
+   "c3.diatomic"
+  ],
+  "bk-c3-diatomic-table": [
+   "c3.diatomic",
+   "c3.diatomic-magnetism"
+  ],
+  "bk-c3-h3plus": [
+   "c3.diatomic",
+   "c3.polyatomic",
+   "c3.3c2e"
+  ],
+  "bk-c3-homo-drill": [
+   "c3.diatomic",
+   "c3.homo-count",
+   "c3.polyatomic"
+  ],
+  "bk-c3-homo-past": [
+   "c3.homo-count",
+   "c3.polyatomic"
+  ],
+  "bk-c3-lgo-oh": [
+   "c3.polyatomic",
+   "c3.lgo"
+  ],
+  "bk-c3-mo-principles": [
+   "c3.mo-principles"
+  ],
+  "bk-c3-multicentre-e-deficient": [
+   "c3.3c2e"
+  ],
+  "bk-c3-nf": [
+   "c3.diatomic",
+   "c3.diatomic-magnetism",
+   "c3.hetero-diatomic"
+  ],
+  "bk-c3-nitrene": [
+   "c3.diatomic-magnetism",
+   "c3.hetero-diatomic"
+  ],
+  "bk-c3-o2-length-order": [
+   "c3.diatomic"
+  ],
+  "bk-c3-overlap-types": [
+   "c3.mo-principles"
+  ],
+  "bk-c3-pes": [
+   "c3.pes"
+  ],
+  "bk-c3-silyl-ie": [
+   "c3.frontier",
+   "c3.hyperconj"
+  ],
+  "bk-c3-sp-mixing": [
+   "c3.diatomic",
+   "c3.diatomic-magnetism",
+   "c3.sp-mixing"
+  ],
+  "bk-c3-three-centre-pi": [
+   "c3.diatomic",
+   "c3.polyatomic"
+  ],
+  "bk-c3-water-ammonia-mo": [
+   "c3.frontier",
+   "c3.polyatomic"
+  ],
+  "bk-c3-xyz-puzzle": [
+   "c3.diatomic",
+   "c3.diatomic-magnetism"
+  ],
+  "bk-c4-acetylide": [
+   "c4.g1-reactivity",
+   "c4.acetylide"
+  ],
+  "bk-c4-aqua-regia": [
+   "c4.balance",
+   "c4.named-process"
+  ],
+  "bk-c4-avg-on-n": [
+   "c4.ox-number",
+   "c4.nitrogen"
+  ],
+  "bk-c4-avg-on-past": [
+   "c4.ox-number"
+  ],
+  "bk-c4-azide-tnt": [
+   "c4.stoichiometry",
+   "c4.nitrogen"
+  ],
+  "bk-c4-be-anomaly": [
+   "c4.diagonal"
+  ],
+  "bk-c4-bioinorganic": [
+   "c4.bioinorganic"
+  ],
+  "bk-c4-boron-misc": [
+   "c4.balance",
+   "c4.boron"
+  ],
+  "bk-c4-boron-x3-reactions": [
+   "c4.balance",
+   "c4.boron"
+  ],
+  "bk-c4-bx3-acidity": [
+   "c1.dative",
+   "c4.bx3-acidity"
+  ],
+  "bk-c4-carbon": [
+   "c4.allotropes"
+  ],
+  "bk-c4-chloralkali": [
+   "c4.named-process",
+   "c4.isotope-facts"
+  ],
+  "bk-c4-chlorosilanes": [
+   "c3.hyperconj",
+   "c4.balance",
+   "c4.silicon"
+  ],
+  "bk-c4-clo2": [
+   "c4.ox-number",
+   "c4.halogens"
+  ],
+  "bk-c4-contact": [
+   "c4.named-process",
+   "c4.oxygen-sulfur"
+  ],
+  "bk-c4-crown-cryptand": [
+   "c4.crown"
+  ],
+  "bk-c4-diborane": [
+   "c3.3c2e",
+   "c4.balance"
+  ],
+  "bk-c4-electride-alkalide": [
+   "c4.ox-number",
+   "c4.crown"
+  ],
+  "bk-c4-electrolysis": [
+   "c4.balance",
+   "c4.isotope-facts"
+  ],
+  "bk-c4-g1-g2-compare": [
+   "c2.periodic-trends",
+   "c4.g2-reactivity"
+  ],
+  "bk-c4-g1-o2": [
+   "c4.g1-oxides"
+  ],
+  "bk-c4-g1-oxides-water": [
+   "c4.balance",
+   "c4.g1-oxides"
+  ],
+  "bk-c4-g2-ie": [
+   "c2.periodic-trends"
+  ],
+  "bk-c4-g2-nitride-halide": [
+   "c4.balance",
+   "c4.g2-reactivity"
+  ],
+  "bk-c4-g2-oxides": [
+   "c4.g2-reactivity"
+  ],
+  "bk-c4-h-activation": [
+   "c4.h2-activation"
+  ],
+  "bk-c4-h2-prep": [
+   "c4.named-process"
+  ],
+  "bk-c4-h2-reactions": [
+   "c4.h2-activation",
+   "c4.kinetic-stability"
+  ],
+  "bk-c4-h2o2": [
+   "c4.oxygen-sulfur"
+  ],
+  "bk-c4-h3po3": [
+   "c4.ox-number",
+   "c4.phosphorus"
+  ],
+  "bk-c4-haber": [
+   "c4.named-process",
+   "c4.nitrogen"
+  ],
+  "bk-c4-halogen-redox": [
+   "c4.balance",
+   "c4.halogens"
+  ],
+  "bk-c4-hcl-chain": [
+   "c4.radical-chain"
+  ],
+  "bk-c4-hd": [
+   "c4.hydrides",
+   "c4.isotope-facts"
+  ],
+  "bk-c4-heavy-water": [
+   "c4.isotope-facts"
+  ],
+  "bk-c4-hno3-reactions": [
+   "c4.balance",
+   "c4.nitrogen"
+  ],
+  "bk-c4-hsab-solubility": [
+   "c2.born-haber",
+   "c4.hsab"
+  ],
+  "bk-c4-hydration": [
+   "c4.hydration"
+  ],
+  "bk-c4-hydrazine-gauche": [
+   "c3.hyperconj",
+   "c4.gauche"
+  ],
+  "bk-c4-hydride-class": [
+   "c4.hydrides"
+  ],
+  "bk-c4-hydride-reagents": [
+   "c4.balance",
+   "c4.hydrides"
+  ],
+  "bk-c4-inert-pair": [
+   "c4.inert-pair"
+  ],
+  "bk-c4-interhalogens": [
+   "c1.vsepr",
+   "c1.dative",
+   "c4.halogens"
+  ],
+  "bk-c4-isotope-zpe": [
+   "c4.isotope-zpe",
+   "c4.isotope-facts"
+  ],
+  "bk-c4-kie": [
+   "c4.isotope-zpe",
+   "c4.kie",
+   "c4.isotope-facts"
+  ],
+  "bk-c4-li-anomaly": [
+   "c4.g1-reactivity",
+   "c4.diagonal"
+  ],
+  "bk-c4-li-nitride": [
+   "c4.balance",
+   "c4.g1-reactivity",
+   "c4.diagonal"
+  ],
+  "bk-c4-li-o2-eq": [
+   "c4.balance",
+   "c4.g1-oxides"
+  ],
+  "bk-c4-limewater": [
+   "c4.named-process",
+   "c4.g2-reactivity"
+  ],
+  "bk-c4-n-chart": [
+   "c4.named-process",
+   "c4.reaction-scheme",
+   "c4.nitrogen"
+  ],
+  "bk-c4-n-oxides-eq": [
+   "c4.balance",
+   "c4.nitrogen"
+  ],
+  "bk-c4-n-oxides-props": [
+   "c3.diatomic-magnetism",
+   "c4.nitrogen"
+  ],
+  "bk-c4-naalh4": [
+   "c4.stoichiometry"
+  ],
+  "bk-c4-named-roundup": [
+   "c4.named-process"
+  ],
+  "bk-c4-nh3-lab": [
+   "c4.balance",
+   "c4.nitrogen"
+  ],
+  "bk-c4-nuclear": [
+   "c4.nuclear"
+  ],
+  "bk-c4-olin-raschig": [
+   "c4.named-process",
+   "c4.nitrogen"
+  ],
+  "bk-c4-ox-numbers": [
+   "c4.ox-number"
+  ],
+  "bk-c4-oxoacid-strength": [
+   "c4.phosphorus"
+  ],
+  "bk-c4-oxonium": [
+   "c3.3c4e"
+  ],
+  "bk-c4-p-equations": [
+   "c4.balance",
+   "c4.phosphorus"
+  ],
+  "bk-c4-p-scheme": [
+   "c4.named-process",
+   "c4.reaction-scheme",
+   "c4.phosphorus"
+  ],
+  "bk-c4-p-structures": [
+   "c1.vsepr",
+   "c4.allotropes"
+  ],
+  "bk-c4-p4o10-uses": [
+   "c4.phosphorus"
+  ],
+  "bk-c4-sf6-inert": [
+   "c4.oxygen-sulfur",
+   "c4.kinetic-stability"
+  ],
+  "bk-c4-si-halides": [
+   "c1.dative",
+   "c4.silicon"
+  ],
+  "bk-c4-silanes": [
+   "c4.balance",
+   "c4.silicon"
+  ],
+  "bk-c4-silicates": [
+   "c4.silicates"
+  ],
+  "bk-c4-sio2-co2": [
+   "c2.double-bond-rule",
+   "c4.si-o-bonds"
+  ],
+  "bk-c4-sulfur-allotropes": [
+   "c4.allotropes"
+  ],
+  "bk-c4-sulfur-oxides": [
+   "c1.dative",
+   "c4.oxygen-sulfur"
+  ],
+  "bk-c4-trisilylamine": [
+   "c4.trisilylamine"
+  ],
+  "bk-c4-vofc-cn": [
+   "c4.vofc"
+  ],
+  "bk-c4-wislicenus": [
+   "c4.named-process",
+   "c4.nitrogen"
+  ],
+  "bk-c4-xenon": [
+   "c1.vsepr",
+   "c4.noble"
+  ],
+  "bk-c5-symmetry-rules": [
+   "c5.symmetry-ops",
+   "c6.optical"
+  ],
+  "bk-c6-agcl": [
+   "c4.stoichiometry",
+   "c6.structural-isomers"
+  ],
+  "bk-c6-agno3-test": [
+   "c6.structural-isomers"
+  ],
+  "bk-c6-ambidentate": [
+   "c6.name",
+   "c6.ligands",
+   "c6.structural-isomers"
+  ],
+  "bk-c6-ate-names": [
+   "c6.name"
+  ],
+  "bk-c6-chirality": [
+   "c6.optical"
+  ],
+  "bk-c6-cn-factors": [
+   "c6.ox-dn-cn"
+  ],
+  "bk-c6-delta-lambda": [
+   "c6.optical"
+  ],
+  "bk-c6-denticity": [
+   "c6.ligands"
+  ],
+  "bk-c6-dn-count": [
+   "c6.ox-dn-cn"
+  ],
+  "bk-c6-drawing": [
+   "c6.geometric",
+   "c6.optical"
+  ],
+  "bk-c6-formula-rules": [
+   "c6.name",
+   "c6.formula"
+  ],
+  "bk-c6-geometric-misc": [
+   "c6.geometric"
+  ],
+  "bk-c6-isomer-counts": [
+   "c6.geometric",
+   "c6.optical",
+   "c6.isomer-count"
+  ],
+  "bk-c6-isomer-type": [
+   "c6.structural-isomers"
+  ],
+  "bk-c6-name-more": [
+   "c6.name"
+  ],
+  "bk-c6-name-past": [
+   "c6.name"
+  ],
+  "bk-c6-name-tut4": [
+   "c6.name"
+  ],
+  "bk-c6-ox-dn-cn": [
+   "c6.ox-dn-cn"
+  ],
+  "bk-c6-ox-state-practice": [
+   "c6.ox-dn-cn"
+  ],
+  "bk-c6-p3q3-cfse": [
+   "c6.ox-dn-cn",
+   "c7.cfse"
+  ],
+  "bk-c6-structure-from-name": [
+   "c6.formula",
+   "c6.geometric"
+  ],
+  "bk-c6-tut4-stereo": [
+   "c6.geometric",
+   "c6.optical"
+  ],
+  "bk-c7-backbond-trend": [
+   "c7.pi-bonding"
+  ],
+  "bk-c7-cfse-d1-d2": [
+   "c7.cfse"
+  ],
+  "bk-c7-cfse-table": [
+   "c7.cfse",
+   "c7.hs-ls"
+  ],
+  "bk-c7-cft-limits": [
+   "c7.cft-essay"
+  ],
+  "bk-c7-cft-principles": [
+   "c7.cft-essay",
+   "c7.splitting"
+  ],
+  "bk-c7-chelate": [
+   "c7.chelate"
+  ],
+  "bk-c7-co-backbond": [
+   "c7.pi-bonding"
+  ],
+  "bk-c7-co-ni-td": [
+   "c7.cfse",
+   "c7.site-pref"
+  ],
+  "bk-c7-cr-delta": [
+   "c7.lft-essay",
+   "c7.spectrochemical",
+   "c7.pi-bonding"
+  ],
+  "bk-c7-cu-kf5": [
+   "c7.formation-k",
+   "c7.jahn-teller"
+  ],
+  "bk-c7-hs-ls": [
+   "c7.hs-ls"
+  ],
+  "bk-c7-identify-p1": [
+   "c6.name",
+   "c7.cfse",
+   "c7.hs-ls",
+   "c7.metal-id"
+  ],
+  "bk-c7-identify-p2": [
+   "c6.name",
+   "c7.cfse",
+   "c7.hs-ls",
+   "c7.metal-id"
+  ],
+  "bk-c7-jahn-teller": [
+   "c7.jahn-teller"
+  ],
+  "bk-c7-lft-mo": [
+   "c7.lft-essay",
+   "c7.hs-ls"
+  ],
+  "bk-c7-lft-principles": [
+   "c7.lft-essay",
+   "c7.splitting"
+  ],
+  "bk-c7-ligand-basicity": [
+   "c7.stability"
+  ],
+  "bk-c7-metal-stability": [
+   "c7.stability"
+  ],
+  "bk-c7-pi-classify": [
+   "c7.pi-bonding"
+  ],
+  "bk-c7-pi-effects": [
+   "c7.lft-essay",
+   "c7.pi-bonding"
+  ],
+  "bk-c7-spectrochemical": [
+   "c7.spectrochemical"
+  ],
+  "bk-c7-sq-planar": [
+   "c7.splitting"
+  ],
+  "bk-c7-stepwise-k": [
+   "c7.formation-k"
+  ],
+  "bk-c7-td-oh": [
+   "c7.splitting"
+  ],
+  "bk-c7-vbt": [
+   "c7.vbt"
+  ],
+  "bk-c8-charge-transfer": [
+   "c8.charge-transfer"
+  ],
+  "bk-c8-colour": [
+   "c8.colour"
+  ],
+  "bk-c8-ground-terms": [
+   "c8.terms"
+  ],
+  "bk-c8-hund": [
+   "c8.terms"
+  ],
+  "bk-c8-identify-practice": [
+   "c7.metal-id",
+   "c8.colour"
+  ],
+  "bk-c8-microstates": [
+   "c8.microstates"
+  ],
+  "bk-c8-moment-infer": [
+   "c7.hs-ls",
+   "c8.spin-only"
+  ],
+  "bk-c8-oh-terms": [
+   "c8.oh-terms"
+  ],
+  "bk-c8-selection-rules": [
+   "c8.selection"
+  ],
+  "bk-c8-spin-only": [
+   "c8.spin-only"
+  ],
+  "bk-c8-term-numbers": [
+   "c8.terms"
+  ],
+  "bk-c8-terms-d8": [
+   "c8.microstates",
+   "c8.terms"
+  ],
+  "bk-c8-ts-d4": [
+   "c7.hs-ls",
+   "c8.spin-only",
+   "c8.oh-terms",
+   "c8.tanabe-sugano"
+  ],
+  "bk-c8-ts-d6": [
+   "c8.oh-terms",
+   "c8.tanabe-sugano"
+  ],
+  "bk-c8-ts-d7": [
+   "c7.hs-ls",
+   "c8.spin-only",
+   "c8.oh-terms",
+   "c8.tanabe-sugano"
+  ],
+  "bk-c8-ts-reading": [
+   "c8.tanabe-sugano"
+  ],
+  "bk-c9-cr-labile": [
+   "c7.cfse",
+   "c9.labile"
+  ],
+  "bk-c9-evidence": [
+   "c9.mechanism"
+  ],
+  "bk-c9-labile-inert": [
+   "c4.kinetic-stability",
+   "c9.labile"
+  ],
+  "bk-c9-mechanisms": [
+   "c9.mechanism"
+  ],
+  "bk-c9-stereo": [
+   "c9.mechanism",
+   "c9.stereo"
+  ],
+  "bk-c9-trans-products": [
+   "c9.trans-effect"
+  ],
+  "bk-c9-trans-series": [
+   "c9.trans-effect"
+  ]
+ }
+}

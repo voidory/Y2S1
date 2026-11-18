@@ -158,7 +158,7 @@ test('IsomerEngine matches all 239 formulas in golden-bank.json with 100% parity
 
 test('migrateGoldenBankToNodes filters allowed chelate modes after first-appearance relabelling, sets CM2021 week 6, and priority × 0.5', () => {
   const migrated = migrateGoldenBankToNodes();
-  assert.equal(CONTENT_VERSION, 4);
+  assert.equal(CONTENT_VERSION, 5);
   assert.equal(migrated.length, 101);
   const allowedModes = new Set(['ABA:x', 'ABA:m', 'AAA:c', 'ABBA:x']);
   const relabel = (ch) => {
@@ -723,11 +723,11 @@ test('Turn 5 Feature C: metadata.family anti-consecutive scheduling and metadata
   assert.equal(forcedChainNext.node.id, 'node-fam-a2', 'Next in chain (forceNodeId) must open chainNext immediately');
 });
 
-test('Turn 6 & Turn 7: LF namespace (pure functions, heteroleptic/salt IUPAC nomenclature, constraint types, textbookExceptions, separate grading, and 9-case console self-test)', () => {
+test('Turn 6 & Turn 7: LF namespace (pure functions, heteroleptic/salt IUPAC nomenclature, constraint types, textbookExceptions, separate grading, and 10-case console self-test)', () => {
   const { LF } = Engine;
   assert.ok(LF, 'LF namespace should be exposed');
 
-  // 1. Console self-test on load must pass all 9 required checks (4 original + 5 new) with textbookExceptions off and oxState 0 allowed
+  // 1. Console self-test on load must pass all 10 required checks (4 original + 5 new + low-spin [Co(NH3)6]3+) with textbookExceptions off and oxState 0 allowed
   const selfTest = LF.runSelfTest();
   assert.equal(selfTest.allPassed, true);
   assert.deepEqual(
@@ -742,6 +742,7 @@ test('Turn 6 & Turn 7: LF namespace (pure functions, heteroleptic/salt IUPAC nom
       { label: 'Na2[M(NH3)2(H2O)2(SCN)2] with μs = 5.92 BM', actual: ['V'], pass: true },
       { label: '[M(en)3]F3 with LFSE = 2Δo − 2P', actual: ['Fe'], pass: true },
       { label: '[M(H2O)6]SO4 with LFSE = 0.4Δo', actual: ['Fe'], pass: true },
+      { label: '[Co(NH3)6]3+ → low spin, 0 unpaired, LFSE 2.4Δo − 2P', actual: ['low', 0, '2.4Δo − 2P'], pass: true },
     ]
   );
 

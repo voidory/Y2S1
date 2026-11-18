@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-18T03:55:56.000Z",
+ "exportedAt": "2026-11-18T08:38:49.000Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -4783,7 +4783,8 @@
       "accepted": [
        "CH4 + H2O -> CO + 3H2"
       ]
-     }
+     },
+     "memoryHook": "**“Water” or “steam” in the name = H₂O is a reactant.** Steam reforming (CH₄, Ni, 1200 K) and water gas (coke) both give CO + H₂ (syngas)."
     },
     {
      "variantId": "c4-h2-prep-v2",
@@ -4801,7 +4802,8 @@
       "accepted": [
        "CO + H2O -> CO2 + H2"
       ]
-     }
+     },
+     "memoryHook": "**Shift**: CO borrows an O from steam and shifts to CO₂, freeing extra H₂ (700 K, iron oxide)."
     },
     {
      "variantId": "c4-h2-prep-v3",
@@ -4819,7 +4821,8 @@
       "accepted": [
        "C + H2O -> CO + H2"
       ]
-     }
+     },
+     "memoryHook": "**“Water” or “steam” in the name = H₂O is a reactant.** Steam reforming (CH₄, Ni, 1200 K) and water gas (coke) both give CO + H₂ (syngas)."
     },
     {
      "variantId": "c4-h2-prep-v4",
@@ -5643,7 +5646,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 3,
     "examStyle": "short_2to3",
-    "family": "g1-oxygen"
+    "family": "g1-oxygen",
+    "memoryHook": "**Bigger cation, bigger anion**: Li⁺ takes O²⁻ (oxide), Na⁺ takes O₂²⁻ (peroxide), K⁺ and heavier take O₂⁻ (superoxide). Lattice energy is best when the ion sizes match."
    },
    "variants": [
     {
@@ -6567,7 +6571,8 @@
       "accepted": [
        "2NaCl + 2H2O -> 2NaOH + H2 + Cl2"
       ]
-     }
+     },
+     "memoryHook": "The name is the products: **chlor**(ine) + **alkali** (NaOH), with H₂ as the third. Water is reduced before Na⁺, so you never get sodium here."
     },
     {
      "variantId": "c4-chloralkali-v2",
@@ -6585,7 +6590,8 @@
       "accepted": [
        "2NaCl -> 2Na + Cl2"
       ]
-     }
+     },
+     "memoryHook": "**Downs = Na⁺ pulled DOWN to Na(0)** at the cathode: a molten, water-free bath with Cl₂ bubbling off at the anode. In water, H₂O is reduced first, which is why chlor-alkali gives NaOH instead."
     }
    ]
   },
@@ -6606,7 +6612,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "g2-carbonate"
+    "family": "g2-carbonate",
+    "memoryHook": "**Milky = CaCO₃ (chalk); clear again = Ca(HCO₃)₂.** The reverse of that second step is how stalactites form."
    },
    "variants": [
     {
@@ -7785,7 +7792,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "reaction-scheme"
+    "family": "reaction-scheme",
+    "memoryHook": "**Haber makes NH₃; Ostwald burns it.** Ostwald = **O‑S‑T**: **O**xidise NH₃ → NO (Pt), **S**econd oxidation → NO₂, **T**ake it up in water → HNO₃. The 3NO₂ + H₂O step also gives NO back, so it is recycled."
    },
    "variants": [
     {
@@ -7891,7 +7899,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
-    "family": "named-process"
+    "family": "named-process",
+    "memoryHook": "Haber found that N₂ + H₂ → NH₃ works; Bosch made it work at scale with big pressure: **Bosch = big pressure** (200–1000 atm, Fe, 400–600 °C). The barrier is the N≡N bond (942 kJ/mol), not the equilibrium."
    },
    "variants": [
     {
@@ -7967,7 +7976,8 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 1,
     "examStyle": "mcq_1mark",
-    "family": "named-process"
+    "family": "named-process",
+    "memoryHook": "**Olin ≈ “O‑Cl‑in”**: hypochlorite (OCl⁻) goes into NH₃ and joins two N atoms → N₂H₄ (via NH₂Cl). Same reason ammonia cleaner and bleach must never be mixed."
    },
    "variants": [
     {
@@ -8150,7 +8160,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 1,
     "examStyle": "mcq_1mark",
-    "family": "named-process"
+    "family": "named-process",
+    "memoryHook": "Picture a **wise** man **laughing** as his airbag goes off: laughing gas (N₂O) + sodamide (NaNH₂) → NaN₃, the airbag salt. First step: Na + NH₃ → NaNH₂."
    },
    "variants": [
     {
@@ -8590,7 +8601,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "aqua-regia"
+    "family": "aqua-regia",
+    "memoryHook": "Alchemists’ **“royal water”** dissolves the king of metals. **HNO₃ oxidises, Cl⁻ complexes**: NOCl and Cl₂ do the oxidising and gold ends up as [AuCl₄]⁻."
    },
    "variants": [
     {
@@ -8765,7 +8777,8 @@
     "difficultyEstimate": 5,
     "estimatedMinutes": 9,
     "examStyle": "construct_4to6",
-    "family": "reaction-scheme"
+    "family": "reaction-scheme",
+    "memoryHook": "**Phosphorus = “light-bearer”** (white P₄ glows and ignites in air). Limited O₂ puts an O in each of the **6 P–P edges** (P₄O₆); excess adds **4 terminal O** (P₄O₁₀), a thirsty dehydrating agent: amide → nitrile."
    },
    "variants": [
     {
@@ -9154,7 +9167,8 @@
     "difficultyEstimate": 4,
     "estimatedMinutes": 4,
     "examStyle": "construct_4to6",
-    "family": "named-process"
+    "family": "named-process",
+    "memoryHook": "The gases **contact** a solid V₂O₅ catalyst. SO₃ goes into 98% H₂SO₄ (making oleum) because it does not absorb well into water."
    },
    "variants": [
     {
@@ -22072,6 +22086,152 @@
        "a"
       ],
       "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-ostwald",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Ostwald process (nitric acid from ammonia)",
+    "source": "Added at the student's request; steps from the Ch4 nitrogen reaction chart",
+    "week": 4,
+    "primaryTheme": "Group 15",
+    "conceptTags": [
+     "named-process"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "named-process",
+    "memoryHook": "**Haber makes NH₃; Ostwald burns it.** Ostwald = **O‑S‑T**: **O**xidise NH₃ → NO (Pt), **S**econd oxidation → NO₂, **T**ake it up in water → HNO₃. The 3NO₂ + H₂O step also gives NO back, so it is recycled."
+   },
+   "variants": [
+    {
+     "variantId": "c4-ostwald-v1",
+     "perspectiveLabel": "Name it",
+     "marks": 1,
+     "stem": "Name the industrial process that converts ammonia into nitric acid, via NO and NO₂ over a platinum catalyst.",
+     "explanation": "The **Ostwald process**: NH₃ is oxidised to NO over Pt, NO is oxidised to NO₂, and NO₂ is absorbed in water to give HNO₃.",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "Name of the process"
+     },
+     "evaluator": {
+      "type": "pattern_match",
+      "acceptedPatterns": [
+       "^\\s*(?:the\\s+)?ostwald(?:\\s+process)?\\s*\\.?\\s*$"
+      ],
+      "caseSensitive": false,
+      "expectedDisplay": "Ostwald process"
+     }
+    },
+    {
+     "variantId": "c4-ostwald-v2",
+     "perspectiveLabel": "Equations",
+     "marks": 3,
+     "stem": "Write the equations for the Ostwald process from NH₃ to HNO₃ (Pt catalyst, about 1300 K for the first step).",
+     "explanation": "4NH₃ + 5O₂ → 4NO + 6H₂O (Pt, 1300 K); 2NO + O₂ → 2NO₂; 3NO₂ + H₂O → 2HNO₃ + NO (the NO is recycled). Overall NH₃ + 2O₂ → HNO₃ + H₂O.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       [
+        "4NH3 + 5O2 -> 4NO + 6H2O",
+        "2NO + O2 -> 2NO2",
+        "3NO2 + H2O -> 2HNO3 + NO"
+       ],
+       [
+        "4NH3 + 5O2 -> 4NO + 6H2O",
+        "2NO + O2 -> 2NO2",
+        "4NO2 + O2 + 2H2O -> 4HNO3"
+       ],
+       "NH3 + 2O2 -> HNO3 + H2O"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-downs",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Downs cell (sodium from molten NaCl)",
+    "source": "Added at the student's request; Ch4 Group 1 (fused-salt electrolysis)",
+    "week": 4,
+    "primaryTheme": "Group 1",
+    "conceptTags": [
+     "named-process"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "named-process",
+    "memoryHook": "**Downs = Na⁺ pulled DOWN to Na(0)** at the cathode: a molten, water-free bath with Cl₂ bubbling off at the anode. In water, H₂O is reduced first, which is why chlor-alkali gives NaOH instead."
+   },
+   "variants": [
+    {
+     "variantId": "c4-downs-v1",
+     "perspectiveLabel": "Name it",
+     "marks": 1,
+     "stem": "Sodium metal is made industrially by electrolysing molten NaCl. Name the cell or process.",
+     "explanation": "The **Downs cell**: Na⁺ is reduced to liquid Na at the cathode and Cl⁻ is oxidised to Cl₂ at the anode (2NaCl → 2Na + Cl₂).",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "Name of the cell or process"
+     },
+     "evaluator": {
+      "type": "pattern_match",
+      "acceptedPatterns": [
+       "^\\s*(?:the\\s+)?downs?(?:'?s)?(?:\\s+(?:cell|process))?\\s*\\.?\\s*$"
+      ],
+      "caseSensitive": false,
+      "expectedDisplay": "Downs cell (Downs process)"
+     }
+    },
+    {
+     "variantId": "c4-downs-v2",
+     "perspectiveLabel": "Why not aqueous",
+     "marks": 3,
+     "stem": "Explain why sodium metal cannot be made by electrolysing aqueous NaCl, and what is made at the cathode instead.",
+     "explanation": "In water, H₂O is reduced in preference to Na⁺ (Na⁺/Na is far more negative), so H₂ and OH⁻ form. Molten NaCl has no water, so Na⁺ is reduced to Na.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 10,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Water is reduced at the cathode in preference to Na⁺ (E° for Na⁺/Na ≈ −2.71 V is far more negative)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "So H₂ and OH⁻ (NaOH) form at the cathode instead of sodium metal",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Molten (fused) NaCl contains no water, so Na⁺ is reduced to Na(l) at the cathode and Cl⁻ oxidised to Cl₂ at the anode",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
      }
     }
    ]

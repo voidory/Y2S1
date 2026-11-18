@@ -6989,6 +6989,7 @@
         masteryPrefs: { removed: {}, resetAt: {} },
         masteryLogs: [],
         composerNodes: [],
+        myHooks: {},
         content: { bank: null, skillMap: null },
         ui: { sheet: null, readinessTab: 'overview', settingsTab: 'module', bankLimit: 60 },
         reviewMap: {},
@@ -7075,6 +7076,15 @@
       function masteryNow() {
         if (!appState.skillMap) return null;
         return Mastery.evaluate(appState.masteryLogs, appState.skillMap, appState.nodes, appState.settings, appState.masteryPrefs);
+      }
+
+      async function saveMyHooks() {
+        try {
+          const db = await DB.init();
+          await db.settings.put({ key: 'myHooks', hooks: appState.myHooks });
+        } catch (err) {
+          console.warn('[Hooks] could not save:', err.message);
+        }
       }
 
       async function saveMasteryPrefs() {
@@ -7722,6 +7732,20 @@
                 </div>
               ` : ''}
 
+              ${(() => {
+                const builtIn = variant.memoryHook || node.metadata?.memoryHook || '';
+                const mine = appState.myHooks[node.id] || '';
+                return `
+                <div class="bg-sky-50/70 border border-sky-200 rounded-xl p-4 text-sm text-slate-800 space-y-2" data-memory-hook-block>
+                  <div class="text-xs font-semibold uppercase tracking-wider text-sky-800">Memory hook</div>
+                  ${builtIn ? `<div class="prose-math">${renderMarkdownLite(builtIn)}</div>` : '<div class="text-xs text-slate-500">No built-in hook for this one yet.</div>'}
+                  <label class="block">
+                    <span class="block text-xs font-medium text-slate-600 mb-1">My hook (saved on this device)</span>
+                    <textarea data-bounded-scroll id="myHookInput" rows="2" placeholder="Your own picture, pun or reason…" class="w-full text-sm px-2.5 py-2 border border-slate-300 rounded-lg bg-white">${esc(mine)}</textarea>
+                  </label>
+                </div>`;
+              })()}
+
               ${inst.resolvedCaveat ? `
                 <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-4 prose-math text-sm text-amber-950">
                   <div class="text-xs font-semibold uppercase tracking-wider text-amber-800 mb-1">High-Yield Examiner Caveat</div>
@@ -7851,6 +7875,11 @@
           appState.filters.chunkId = id;
           appState.filters.chunkNodeIds = id ? Content.chunkNodeIds(appState.skillMap, id) : null;
           loadNextQuestion();
+        });
+        $('#myHookInput', root)?.addEventListener('change', async (e) => {
+          const text = e.target.value.trim();
+          if (text) appState.myHooks[node.id] = text; else delete appState.myHooks[node.id];
+          await saveMyHooks();
         });
         $('#clearSkillFilter', root)?.addEventListener('click', () => {
           appState.filters.skillTag = null;
@@ -9786,6 +9815,10 @@
             const prefs = await db.settings.get('skillMastery');
             appState.masteryPrefs = { removed: prefs?.removed || {}, resetAt: prefs?.resetAt || {} };
           } catch (err) { console.warn('[Mastery] preferences not loaded:', err.message); }
+          try {
+            const mh = await db.settings.get('myHooks');
+            appState.myHooks = mh?.hooks || {};
+          } catch (err) { console.warn('[Hooks] not loaded:', err.message); }
           await refreshStore();
           const bankStatus = appState.content.bank;
           if (bankStatus.state === 'unavailable') showToast('Bundled question bank not loaded: ' + bankStatus.error, true);

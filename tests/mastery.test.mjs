@@ -113,3 +113,91 @@ test('scheduler: honours exclusions and the retired weight', () => {
   assert.notEqual(thinned.node.id, none.node.id, 'a heavily discounted question loses to its siblings');
   assert.ok(thinned.queuePreview.find((q) => q.node.id === none.node.id).meta.masteryMult === 0.01);
 });
+
+/* ---------- metal-ID set composer ---------- */
+const { LF, DB } = E;
+const lfAll = LF.generateQuestionBank({ lfData: LF.DEFAULT_DATA, pTermMode: 'relative', includeD0D10InDiamagnetic: false, textbookExceptions: false, allowOxStateZero: true });
+const inv = lfAll.filter((n) => n.id.startsWith('lf-inv-'));
+const composerOnly = inv.filter((n) => n.metadata.composerOnly);
+
+test('composer pool: extended inverse nodes are valid, solvable, composer-only, and the shipped ones stay in the queue', () => {
+  assert.ok(composerOnly.length >= 100, `expected a large extended pool, got ${composerOnly.length}`);
+  const bad = [];
+  for (const n of inv) {
+    const r = DB.validateQuestionNodeV3(n);
+    if (!r.valid) bad.push(`${n.id}: ${r.errors.join('; ')}`);
+    if (!(n.variants[0].evaluator.targetSet.length >= 1)) bad.push(`${n.id}: empty answer set`);
+    if (!n.metadata.lfTemplate || !n.metadata.lfConstraintType) bad.push(`${n.id}: missing composer metadata`);
+  }
+  assert.deepEqual(bad, []);
+  assert.equal(new Set(inv.map((n) => n.id)).size, inv.length, 'ids are unique');
+  assert.equal(inv.length - composerOnly.length, 33, 'the original 33 inverse questions are unchanged and not composer-only');
+});
+
+test('composer: the paper\'s own Q3 answers are solvable by the extended engine', () => {
+  const sets = {
+    'lf-inv-M_H2O_6_3plus-unpaired-1': ['Ti'], 'lf-inv-MBr4_minus-most-unpaired': ['Fe'], 'lf-inv-M_CN_6_3minus-diamagnetic': ['Co'],
+  };
+  for (const [id, expected] of Object.entries(sets)) {
+    const n = inv.find((x) => x.id === id);
+    assert.ok(n, `missing ${id}`);
+    assert.deepEqual([...n.variants[0].evaluator.targetSet].sort(), expected);
+  }
+  const lf06 = inv.find((n) => n.id.startsWith('lf-inv-M_H2O_6_2plus-lfse-0p6'));
+  assert.deepEqual([...lf06.variants[0].evaluator.targetSet].sort(), ['Cr', 'Cu']);
+});
+
+test('composer: five distinct complexes covering aqua, tetrahedral, strong-field and an LFSE clue; deterministic by seed', () => {
+  for (let seed = 1; seed <= 40; seed++) {
+    const set = LF.composeMetalIdSet(inv, { parts: 5, seed });
+    assert.equal(set.length, 5);
+    const tpls = set.map((n) => n.metadata.lfTemplate);
+    assert.equal(new Set(tpls).size, 5, `seed ${seed}: repeated complex ${tpls.join(', ')}`);
+    assert.ok(tpls.some((t) => /H2O/.test(t)), `seed ${seed}: no aqua part`);
+    assert.ok(set.some((n) => n.metadata.lfCoordNumber === 4), `seed ${seed}: no tetrahedral part`);
+    assert.ok(tpls.some((t) => /CN|\(en\)/.test(t)), `seed ${seed}: no strong-field part`);
+    assert.ok(set.some((n) => n.metadata.lfConstraintType === 'lfse'), `seed ${seed}: no LFSE clue`);
+    assert.ok(set.some((n) => n.metadata.lfAnswerCount >= 2), `seed ${seed}: no multi-answer part`);
+    assert.deepEqual(LF.composeMetalIdSet(inv, { parts: 5, seed }).map((n) => n.id), set.map((n) => n.id), 'same seed, same set');
+  }
+  const distinct = new Set(Array.from({ length: 40 }, (_, i) => LF.composeMetalIdSet(inv, { parts: 5, seed: i + 1 }).map((n) => n.id).sort().join('|')));
+  assert.ok(distinct.size >= 30, `sets should rarely repeat (${distinct.size}/40 distinct)`);
+});
+
+test('composer-only nodes never enter the study queue or a mock paper', () => {
+  const only = composerOnly[0];
+  const pick = Scheduler.selectNextNode([only, ...nodes.slice(0, 5)], {}, {}, [], Scheduler.DEFAULT_SETTINGS, { moduleCode: 'ALL', tier: 'ALL' }, 1e12);
+  assert.notEqual(pick.node.id, only.id);
+  const paper = Scheduler.assembleMockPaper([only, ...nodes.slice(0, 20)], { chapters: [only.metadata.week, 1, 2, 3, 4, 5, 6, 7, 8, 9], totalQuestions: 10, durationMinutes: 30, seed: 1 });
+  assert.ok(!paper.questions.some((q) => q.node.id === only.id));
+});
+
+test('mastery: generated metal-ID attempts count towards metal-ID, CFSE and naming', () => {
+  const ids = inv.slice(0, 3);
+  const logs = [];
+  let t2 = 0;
+  for (const n of ids) {
+    for (let k = 0; k < 6; k++) logs.push({ nodeId: fillerNode, variantId: byId[fillerNode].variants[0].variantId, timestamp: ++t2, normalizedGrade: 1 });
+    logs.push({ nodeId: n.id, variantId: n.variants[0].variantId, timestamp: ++t2, normalizedGrade: 1 });
+  }
+  const res = Mastery.evaluate(logs, map, nodes, {});
+  assert.equal(res.states['c7.metal-id'].evidence, 3);
+  assert.equal(res.states['c7.cfse'].evidence, 3);
+  const adj = Mastery.adjustments(res, map, {}, {}, ['lf-inv-x']);
+  assert.ok(adj.exclude.size === 0);
+});
+
+test('generated metal-ID questions never quote their own answer in the stem or the field placeholders', () => {
+  const leaks = [];
+  for (const n of inv) {
+    const v = n.variants[0];
+    const shown = [v.stem, ...v.inputSlot.fields.map((f) => `${f.label} ${f.placeholder}`)].join(' \n ');
+    const answers = [
+      ...(v.evaluator.fields.name?.expectedDisplay || '').split(' or '),
+      // when the clue itself is an LFSE value ("... has LFSE = 0.6Δo", as in the paper's Q3(e)) the stem must state it
+      ...(n.metadata.lfConstraintType === 'lfse' ? [] : (v.evaluator.fields.lfse?.expectedDisplay || '').split(' or ').map((x) => x.replace(/ \(or .*\)$/, ''))),
+    ].map((x) => x.trim()).filter((x) => x.length >= 3);
+    for (const a of answers) if (shown.includes(a)) leaks.push(`${n.id}: shows "${a}"`);
+  }
+  assert.deepEqual(leaks, []);
+});

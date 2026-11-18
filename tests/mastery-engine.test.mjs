@@ -158,7 +158,7 @@ test('IsomerEngine matches all 239 formulas in golden-bank.json with 100% parity
 
 test('migrateGoldenBankToNodes filters allowed chelate modes after first-appearance relabelling, sets CM2021 week 6, and priority × 0.5', () => {
   const migrated = migrateGoldenBankToNodes();
-  assert.equal(CONTENT_VERSION, 5);
+  assert.equal(CONTENT_VERSION, 6);
   assert.equal(migrated.length, 101);
   const allowedModes = new Set(['ABA:x', 'ABA:m', 'AAA:c', 'ABBA:x']);
   const relabel = (ch) => {

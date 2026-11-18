@@ -35,7 +35,11 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   const vis = (sel) => p.evaluate((s) => { const e = document.querySelector(s); return !!e && getComputedStyle(e).display !== 'none' && e.getBoundingClientRect().height > 0; }, sel);
 
   // 1. typed answer survives step switching, then grades and lands on Result
-  await open('bk-c2-ice'); // numeric typed_short (variant may vary)
+  // the node has two variants (short answer, written answer) and one is drawn at random: redraw until the short one comes up
+  for (let i = 0; i < 25; i++) {
+    await open('bk-c2-ice');
+    if (await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current?.inst.variant.inputSlot.type) === 'typed_short') break;
+  }
   ok(await step() === 'question', 'a new question starts on the Question step');
   ok(!(await vis('.pane-a')), 'the answer pane is hidden on the Question step');
   await p.evaluate(() => document.querySelector('.seg [data-step-go="answer"]').click());

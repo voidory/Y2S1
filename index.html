@@ -6494,6 +6494,216 @@
     })();
 
     /* =====================================================================
+       NAMESPACE 6b: Content — bundled question bank + skill map (static JSON)
+       The bank is synced into IndexedDB on boot (idempotent, never touches
+       review states or attempt logs). The skill map is reference data: it is
+       fetched on every boot and held in memory only.
+       ===================================================================== */
+    const Content = (() => {
+      const BANK_URL = 'content/cm2021/question-bank.json';
+      const SKILL_MAP_URL = 'content/cm2021/skill-map.json';
+      // Own settings row: the Settings page rebuilds the 'global' row from scratch and would drop this.
+      const RECORD_KEY = 'bundledBank';
+      const PROFICIENT_GRADE = 0.7;
+
+      async function fetchJson(url, fetchFn) {
+        const f = fetchFn || (typeof fetch === 'function' ? fetch : null);
+        if (!f) throw new Error('fetch is unavailable');
+        const resp = await f(url, { cache: 'no-cache' });
+        if (!resp.ok) throw new Error(`${url}: HTTP ${resp.status}`);
+        try {
+          return await resp.json();
+        } catch (err) {
+          // Dev servers answer unknown paths with index.html (HTTP 200), which is not JSON.
+          throw new Error(`${url}: response is not valid JSON`);
+        }
+      }
+
+      function bankKey(bundle) {
+        return `${bundle?.bundleVersion ?? '?'}@${bundle?.exportedAt ?? '?'}`;
+      }
+
+      function isReservedNodeId(id) {
+        return typeof id === 'string' && (id.startsWith('gb-') || id.startsWith('lf-') || SEED_NODES.some((s) => s.id === id));
+      }
+
+      /* Pure: decide what a sync would do. presentIds = ids currently in questionNodes. */
+      function planBankSync(bundle, record, presentIds) {
+        const nodes = Array.isArray(bundle?.questionNodes) ? bundle.questionNodes : [];
+        const valid = [];
+        const rejected = [];
+        const seen = new Set();
+        for (const n of nodes) {
+          const res = DB.validateQuestionNodeV3(n);
+          if (!res.valid) { rejected.push({ id: n?.id ?? null, errors: res.errors }); continue; }
+          if (isReservedNodeId(n.id)) { rejected.push({ id: n.id, errors: ['id collides with a built-in node namespace'] }); continue; }
+          if (seen.has(n.id)) { rejected.push({ id: n.id, errors: ['duplicate id in bundle'] }); continue; }
+          seen.add(n.id);
+          valid.push(n);
+        }
+        const ids = valid.map((n) => n.id);
+        const key = bankKey(bundle);
+        const missing = ids.filter((id) => !presentIds.has(id));
+        const stale = (record?.ids || []).filter((id) => !seen.has(id));
+        const upToDate = record?.bankKey === key && missing.length === 0 && stale.length === 0;
+        return { upToDate, key, valid, ids, rejected, missing, stale };
+      }
+
+      /* I/O: never throws. A failure leaves whatever is already in the DB untouched. */
+      async function syncBank(db, fetchFn) {
+        let bundle;
+        try {
+          bundle = await fetchJson(BANK_URL, fetchFn);
+        } catch (err) {
+          return { state: 'unavailable', error: err.message, rejected: [] };
+        }
+        if (!bundle || !Array.isArray(bundle.questionNodes)) {
+          return { state: 'unavailable', error: `${BANK_URL}: no questionNodes array`, rejected: [] };
+        }
+        try {
+          const record = await db.settings.get(RECORD_KEY);
+          const present = new Set(await db.questionNodes.toCollection().primaryKeys());
+          const plan = planBankSync(bundle, record, present);
+          if (plan.upToDate) return { state: 'up-to-date', count: plan.ids.length, rejected: plan.rejected };
+          await db.transaction('rw', db.questionNodes, db.settings, async () => {
+            if (plan.valid.length) await db.questionNodes.bulkPut(plan.valid);
+            if (plan.stale.length) await db.questionNodes.bulkDelete(plan.stale);
+            await db.settings.put({ key: RECORD_KEY, bankKey: plan.key, ids: plan.ids });
+          });
+          return {
+            state: 'synced',
+            count: plan.ids.length,
+            removed: plan.stale.length,
+            rejected: plan.rejected,
+          };
+        } catch (err) {
+          return { state: 'unavailable', error: 'sync failed: ' + err.message, rejected: [] };
+        }
+      }
+
+      function validateSkillMap(map) {
+        const errors = [];
+        if (!map || typeof map !== 'object') return { valid: false, errors: ['skill map must be an object'] };
+        if (!map.module) errors.push('module missing');
+        if (!Array.isArray(map.skills) || !map.skills.length) errors.push('skills must be a non-empty array');
+        if (!map.nodeSkills || typeof map.nodeSkills !== 'object' || Array.isArray(map.nodeSkills)) errors.push('nodeSkills must be an object');
+        if (Array.isArray(map.skills)) {
+          const seen = new Set();
+          map.skills.forEach((s, i) => {
+            if (!s?.id) { errors.push(`skills[${i}].id missing`); return; }
+            if (seen.has(s.id)) errors.push(`duplicate skill id ${s.id}`);
+            seen.add(s.id);
+            if (!Number.isFinite(s.marks)) errors.push(`${s.id}: marks must be numeric`);
+            if (!Number.isFinite(s.weight)) errors.push(`${s.id}: weight must be numeric`);
+            if (!Array.isArray(s.nodes)) errors.push(`${s.id}: nodes must be an array`);
+          });
+        }
+        return { valid: errors.length === 0, errors };
+      }
+
+      /* I/O: never throws; the app works without a skill map. */
+      async function loadSkillMap(fetchFn) {
+        try {
+          const map = await fetchJson(SKILL_MAP_URL, fetchFn);
+          const res = validateSkillMap(map);
+          if (!res.valid) return { map: null, error: `${SKILL_MAP_URL}: ${res.errors.slice(0, 3).join('; ')}` };
+          return { map, error: null };
+        } catch (err) {
+          return { map: null, error: err.message };
+        }
+      }
+
+      /* Pure: how well the skill map and the nodes actually present agree. */
+      function analyzeSkillMap(map, nodeIds) {
+        const skills = map.skills || [];
+        const nodeSkills = map.nodeSkills || {};
+        const skillIds = new Set(skills.map((s) => s.id));
+        const cited = new Set();
+        for (const s of skills) for (const id of [...(s.nodes || []), ...(s.ids || [])]) cited.add(id);
+        for (const id of Object.keys(nodeSkills)) cited.add(id);
+
+        const inverse = {};
+        for (const s of skills) for (const id of (s.nodes || [])) (inverse[id] ||= new Set()).add(s.id);
+        const inconsistent = [];
+        for (const id of new Set([...Object.keys(inverse), ...Object.keys(nodeSkills)])) {
+          const a = [...(inverse[id] || [])].sort().join('|');
+          const b = [...(nodeSkills[id] || [])].sort().join('|');
+          if (a !== b) inconsistent.push(id);
+        }
+        const unknownSkillRefs = [...new Set(Object.values(nodeSkills).flat().filter((id) => !skillIds.has(id)))].sort();
+        const orphanSkills = [];
+        const emptySkills = [];
+        const partialSkills = [];
+        for (const s of skills) {
+          const total = (s.nodes || []).length;
+          const have = (s.nodes || []).filter((id) => nodeIds.has(id)).length;
+          if (!total) emptySkills.push(s.id);
+          else if (!have) orphanSkills.push(s.id);
+          else if (have < total) partialSkills.push({ id: s.id, missing: total - have, total });
+        }
+        return {
+          missingIds: [...cited].filter((id) => !nodeIds.has(id)).sort(),
+          nodesWithoutSkills: [...nodeIds].filter((id) => id.startsWith('bk-') && !nodeSkills[id]).sort(),
+          inconsistent: inconsistent.sort(),
+          unknownSkillRefs,
+          orphanSkills,
+          emptySkills,
+          partialSkills,
+          weightSum: skills.reduce((a, s) => a + (s.weight || 0), 0),
+        };
+      }
+
+      /* Mirrors the attempted/proficient rules of Scheduler.computeModuleReadiness, per node. */
+      function nodeProgress(nodes, reviewMap, attemptLogs) {
+        const latest = {};
+        for (const log of (attemptLogs || [])) {
+          if (!log?.nodeId) continue;
+          const prev = latest[log.nodeId];
+          if (!prev || (log.timestamp || 0) >= (prev.timestamp || 0)) latest[log.nodeId] = log;
+        }
+        const out = {};
+        for (const n of nodes) {
+          const rs = reviewMap[n.id];
+          const log = latest[n.id];
+          const attempted = Boolean(log || (rs && (rs.reps || 0) > 0));
+          let score = null;
+          if (log && typeof log.normalizedGrade === 'number') score = log.normalizedGrade;
+          else if (rs?.variantStats && Object.keys(rs.variantStats).length) {
+            const entries = Object.values(rs.variantStats).sort((a, b) => (b.lastSeenMs || 0) - (a.lastSeenMs || 0));
+            score = entries[0]?.meanGrade ?? null;
+          }
+          out[n.id] = { attempted, proficient: attempted && score !== null && score >= PROFICIENT_GRADE };
+        }
+        return out;
+      }
+
+      /* Per-skill rows plus map-weighted summaries. Missing nodes count against readiness (conservative) and
+         are reported separately as content coverage, so a gap in the bank is visible instead of silently excused. */
+      function skillRows(map, nodeIds, progress) {
+        let wSum = 0, wReady = 0, wCover = 0;
+        const rows = (map.skills || []).map((s) => {
+          const total = (s.nodes || []).length;
+          const avail = (s.nodes || []).filter((id) => nodeIds.has(id));
+          const attempted = avail.filter((id) => progress[id]?.attempted).length;
+          const proficient = avail.filter((id) => progress[id]?.proficient).length;
+          const ready = total ? proficient / total : 0;
+          const cover = total ? avail.length / total : 0;
+          wSum += s.weight || 0;
+          wReady += (s.weight || 0) * ready;
+          wCover += (s.weight || 0) * cover;
+          return { skill: s, total, available: avail.length, attempted, proficient, ready, cover };
+        });
+        return { rows, readiness: wSum ? wReady / wSum : 0, coverage: wSum ? wCover / wSum : 0 };
+      }
+
+      return {
+        BANK_URL, SKILL_MAP_URL, RECORD_KEY,
+        fetchJson, bankKey, isReservedNodeId, planBankSync, syncBank,
+        validateSkillMap, loadSkillMap, analyzeSkillMap, nodeProgress, skillRows,
+      };
+    })();
+
+    /* =====================================================================
        NAMESPACE 7: UI — Holistic 1-Question-1-Answer Renderer & Views
        ===================================================================== */
     const UI = (() => {
@@ -6501,6 +6711,8 @@
         route: 'study',
         modules: [],
         nodes: [],
+        skillMap: null,
+        content: { bank: null, skillMap: null },
         reviewMap: {},
         attemptLogs: [],
         settings: Scheduler.DEFAULT_SETTINGS,
@@ -8198,6 +8410,72 @@
         renderMath(root);
       }
 
+      function renderSkillMapSection() {
+        const status = appState.content.skillMap;
+        if (!appState.skillMap) {
+          return `
+            <section class="bg-white border border-slate-200 rounded-xl p-5">
+              <h2 class="font-display text-base font-semibold text-slate-900">Skill Map Readiness</h2>
+              <p class="text-sm text-slate-500 mt-1">Skill map not loaded${status?.error ? ': ' + esc(status.error) : '.'}</p>
+            </section>`;
+        }
+        const map = appState.skillMap;
+        const nodes = appState.nodes.filter((n) => n.moduleCode === map.module);
+        const nodeIds = new Set(nodes.map((n) => n.id));
+        const analysis = Content.analyzeSkillMap(map, nodeIds);
+        const { rows, readiness, coverage } = Content.skillRows(map, nodeIds, Content.nodeProgress(nodes, appState.reviewMap, appState.attemptLogs));
+        const byCh = {};
+        for (const r of rows) (byCh[r.skill.ch] ||= []).push(r);
+        const chapters = Object.keys(byCh).map(Number).sort((a, b) => a - b);
+        const pct = (x) => Math.round(x * 100);
+        const gapCount = analysis.missingIds.length;
+        return `
+          <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-4">
+            <div>
+              <h2 class="font-display text-base font-semibold text-slate-900">Skill Map Readiness · ${esc(map.module)}</h2>
+              <p class="text-xs text-slate-500">${rows.length} exam skills weighted by marks. A skill counts as ready in proportion to its mapped questions you last scored ≥ 0.7 on; questions not yet in the bank count as not ready.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
+                <div class="text-xs text-slate-500">Map-weighted readiness</div>
+                <div class="font-mono text-xl font-bold text-emerald-700 mt-0.5">${pct(readiness)}%</div>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
+                <div class="text-xs text-slate-500">Question coverage of the map</div>
+                <div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${pct(coverage)}%</div>
+                <div class="text-[11px] font-mono text-slate-500">${gapCount} mapped question(s) not in the bank</div>
+              </div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3.5">
+                <div class="text-xs text-slate-500">Skills with no questions</div>
+                <div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${analysis.orphanSkills.length + analysis.emptySkills.length}</div>
+                <div class="text-[11px] font-mono text-slate-500">${analysis.partialSkills.length} partially covered</div>
+              </div>
+            </div>
+            ${gapCount ? `
+              <details class="text-xs">
+                <summary class="cursor-pointer font-medium text-amber-800">Content gaps: mapped question ids missing from the bank</summary>
+                <div class="font-mono text-slate-600 mt-2 leading-relaxed">${analysis.missingIds.map(esc).join(', ')}</div>
+              </details>` : ''}
+            <div class="space-y-2">
+              ${chapters.map((ch) => `
+                <details class="border border-slate-200 rounded-lg">
+                  <summary class="cursor-pointer px-3 py-2 text-xs font-semibold text-slate-800">Ch ${ch} · ${byCh[ch].length} skills · ${byCh[ch].reduce((a, r) => a + r.skill.marks, 0)} marks</summary>
+                  <div class="divide-y divide-slate-100">
+                    ${byCh[ch].sort((a, b) => b.skill.weight - a.skill.weight).map((r) => `
+                      <div class="px-3 py-2 flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-xs">
+                        <div class="min-w-0"><span class="text-slate-900 font-medium">${esc(r.skill.name)}</span> <span class="text-slate-400 font-mono">(${r.skill.marks} marks)</span></div>
+                        <div class="font-mono shrink-0 text-slate-600">
+                          ${r.total === 0 ? '<span class="text-amber-700">no questions mapped</span>'
+                            : r.available === 0 ? '<span class="text-amber-700">no questions in bank yet</span>'
+                            : `<span class="text-emerald-700 font-semibold">${r.proficient}/${r.total} ready</span> · ${r.attempted} attempted${r.available < r.total ? ` · <span class="text-amber-700">${r.total - r.available} not in bank</span>` : ''}`}
+                        </div>
+                      </div>`).join('')}
+                  </div>
+                </details>`).join('')}
+            </div>
+          </section>`;
+      }
+
       function renderReadinessView(root) {
         const nowMs = Date.now();
         const modStats = appState.modules.map((m) => ({
@@ -8297,6 +8575,8 @@
                 `;
               }).join('')}
             </div>
+
+            ${renderSkillMapSection()}
 
             <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-3">
               <div class="flex items-center justify-between">
@@ -9012,7 +9292,16 @@
               await db.settings.put(nextSettings);
             });
           }
+          // Bundled content: neither call throws; the app keeps working on whatever is already stored.
+          appState.content.bank = await Content.syncBank(db);
+          appState.content.skillMap = await Content.loadSkillMap();
+          appState.skillMap = appState.content.skillMap.map;
           await refreshStore();
+          const bankStatus = appState.content.bank;
+          if (bankStatus.state === 'unavailable') showToast('Bundled question bank not loaded: ' + bankStatus.error, true);
+          else if (bankStatus.rejected.length) showToast(`Bundled bank: ${bankStatus.rejected.length} node(s) rejected (see console).`, true);
+          if (bankStatus.rejected.length) console.warn('[Content] rejected bundled nodes', bankStatus.rejected);
+          if (appState.content.skillMap.error) console.warn('[Content] skill map not loaded:', appState.content.skillMap.error);
 
           // Bind global chrome
           $$('.nav-link').forEach((btn) => {
@@ -9065,6 +9354,7 @@
     window.__MASTERY_ENGINE__ = {
       Expr,
       DB,
+      Content,
       Scheduler,
       IsomerEngine,
       LF,

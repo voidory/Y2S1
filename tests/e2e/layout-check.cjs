@@ -192,6 +192,19 @@ async function openStudy(page, id) {
       }
     }
 
+    // Metal-ID set (five parts, set answers with name and LFSE fields: the densest answer form)
+    await page.evaluate(() => document.querySelector('#btnNewMockPaper')?.click()); await page.waitForTimeout(250);
+    await page.evaluate(() => document.querySelector('.nav-link[data-nav="mock"]')?.click()); await page.waitForTimeout(250);
+    if (await page.$('#btnStartMetalSet')) {
+      await check('mock setup with metal-ID set');
+      await page.evaluate(() => document.querySelector('#btnStartMetalSet').click()); await page.waitForTimeout(400);
+      await check('metal-ID set in progress');
+      await page.evaluate(() => { const i = document.querySelector('#mockSetInput'); if (i) i.value = 'Ti'; document.querySelector('#btnMockAddToken')?.click(); }); await page.waitForTimeout(150);
+      await check('metal-ID set with an answer token');
+    } else {
+      report(sizeName, 'metal-ID set', ['Metal-ID set entry not found on the mock setup screen']);
+    }
+
     if (errors.length) { failures++; console.log(`  FAIL ${sizeName} · page errors: ${errors.slice(0, 3).join(' | ')}`); }
     await ctx.close();
   }

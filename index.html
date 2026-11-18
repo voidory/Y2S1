@@ -828,6 +828,8 @@
           if (filters.tier && filters.tier !== 'ALL' && n.tier !== filters.tier) return false;
           if (filters.skillTag && !(n.metadata?.conceptTags || []).includes(filters.skillTag)) return false;
           if (filters.chunkNodeIds && !filters.chunkNodeIds.includes(n.id)) return false;
+          if (filters.masteryAdj?.exclude.has(n.id) && !filters.forceNodeId) return false;
+          if (n.metadata?.composerOnly && !filters.forceNodeId) return false;
           if (filters.excludeNodeId && n.id === filters.excludeNodeId && nodes.length > 1) return false;
           if (!includeGolden && !filters.forceNodeId && n.metadata?.isGoldenBank && !reviewMap[n.id]) return false;
           return true;
@@ -843,10 +845,12 @@
           }
         }
 
-        const scored = pool.map((node) => ({
-          node,
-          meta: priorityScore(node, reviewMap[node.id], moduleMap, faultMap, nowMs),
-        })).sort((a, b) => b.meta.score - a.meta.score);
+        const scored = pool.map((node) => {
+          const meta = priorityScore(node, reviewMap[node.id], moduleMap, faultMap, nowMs);
+          const m = filters.masteryAdj?.mult.get(node.id);
+          if (m != null) { meta.score *= m; meta.masteryMult = m; } // retired skill: rarely comes up
+          return { node, meta };
+        }).sort((a, b) => b.meta.score - a.meta.score);
 
         if (filters.forceNodeId) {
           const forced = nodes.find((n) => n.id === filters.forceNodeId);
@@ -1071,6 +1075,7 @@
         };
 
         const eligible = nodes.filter((n) => {
+          if (n.metadata?.composerOnly) return false;
           if (chapters && !chapters.has(Number(n.metadata?.week))) return false;
           return true;
         });
@@ -2477,7 +2482,7 @@
       });
     }
 
-    const CONTENT_VERSION = 5;
+    const CONTENT_VERSION = 6;
     const REMOVED_NODE_IDS = [
       'cm2101-particle-in-box-param',
       'cm2112-symmetry-ir-atomic',
@@ -4460,19 +4465,19 @@
         const noteSuffix = solved.textbookExceptionNote ? ` ${solved.textbookExceptionNote}` : '';
 
         const invPromptSuffix = includeInverseLfse
-          ? `Also provide the IUPAC name and LFSE (in $${firstCand.lfseUnit === 'Δo' ? '\\Delta_o' : '\\Delta_t'}$, e.g. \`${firstCand.lfseExpression}\`) for a matching complex.`
+          ? `Also provide the IUPAC name and LFSE (as a multiple of $${firstCand.lfseUnit === 'Δo' ? '\\Delta_o' : '\\Delta_t'}$, plus pairing energy $P$ where it applies) for a matching complex.`
           : 'Also provide the IUPAC name for a matching complex.';
 
         const invFields = [
           {
             key: 'name',
             label: 'IUPAC Name (for a valid M)',
-            placeholder: `e.g. ${firstCand.iupacName}`,
+            placeholder: 'IUPAC name of the complex',
           },
           ...(includeInverseLfse ? [{
             key: 'lfse',
             label: `LFSE (${firstCand.lfseUnit})`,
-            placeholder: `e.g. ${firstCand.lfseExpression}`,
+            placeholder: `number × ${firstCand.lfseUnit}`,
           }] : []),
         ];
 
@@ -4512,6 +4517,10 @@
             examStyle: 'short_2to3',
             family: `lf-inv-${tplSlug}`,
             isGeneratedLF: true,
+            lfTemplate: solved.templateFormula,
+            lfConstraintType: cType,
+            lfCoordNumber: solved.coordNumber,
+            lfAnswerCount: solved.validMetals.length,
             textbookExceptionNote: solved.textbookExceptionNote,
           },
           variants: [
@@ -4654,7 +4663,68 @@
           const node = buildInverseQuestionNode(item.template, item.constraint, options);
           if (node) nodes.push(node); // Emit only inverse questions with >= 1 answer
         }
+
+        /* Extended pool for the set composer: every constraint the engine can solve on the conventional
+           complexes. These are composer-only (kept out of the study queue, mock papers and the bank list) so one
+           skill cannot flood the queue; their ids are stable, so attempts on them still count for mastery. */
+        if (options.extendedInverse !== false) {
+          const have = new Set(nodes.map((n) => n.id));
+          const extOpts = { ...options, allowOxStateZero: false };
+          const templates = ['[M(H2O)6]2+', '[M(H2O)6]3+', '[MCl4]-', '[MCl4]2-', '[MBr4]-', '[MBr4]2-', '[MI4]-', '[MI4]2-',
+            '[MF6]3-', '[MCl6]3-', '[M(CN)6]3-', '[M(CN)6]4-', '[M(en)3]3+', '[M(en)3]2+'];
+          for (const t of templates) {
+            let constraints;
+            try {
+              const probe = solveInverseTemplate(t, { type: 'most_unpaired' }, extOpts);
+              constraints = [{ type: 'most_unpaired' }, { type: 'diamagnetic' }];
+              for (let k = 1; k <= 5; k++) constraints.push({ type: 'unpaired', value: k });
+              const pairs = new Set(probe.allEvaluated.filter((c) => c.lfseCoeff !== null && c.pTermsRelative !== null).map((c) => `${c.lfseCoeff}|${c.pTermsRelative}`));
+              for (const pr of pairs) { const [a, b] = pr.split('|').map(Number); constraints.push({ type: 'lfse', a, b }); }
+            } catch (err) { continue; }
+            for (const c of constraints) {
+              let node = null;
+              try { node = buildInverseQuestionNode(t, c, extOpts); } catch (err) { node = null; }
+              if (!node || have.has(node.id)) continue;
+              node.metadata.composerOnly = true;
+              have.add(node.id);
+              nodes.push(node);
+            }
+          }
+        }
         return nodes;
+      }
+
+      /* Pure. Compose an exam-style set (like the finals' "identify the first-row metal" question) from the
+         generated inverse nodes: distinct complexes, covering aqua, tetrahedral, strong-field and an LFSE clue,
+         with at least one part that has more than one valid metal. Deterministic for a given seed. */
+      function composeMetalIdSet(pool, options = {}) {
+        const parts = Math.max(1, Number(options.parts) || 5);
+        let st = Number.isFinite(Number(options.seed)) && options.seed !== undefined && options.seed !== null
+          ? (Math.abs(Math.floor(Number(options.seed))) % 2147483646) || 1
+          : Math.floor(Math.random() * 2147483646) + 1;
+        const rand = () => { st = (st * 16807) % 2147483647; return (st - 1) / 2147483646; };
+        const cands = (pool || []).filter((n) => String(n.id).startsWith('lf-inv-') && n.metadata?.lfTemplate);
+        const tpl = (n) => n.metadata.lfTemplate;
+        const wants = [
+          (n) => /H2O/.test(tpl(n)),
+          (n) => n.metadata.lfCoordNumber === 4,
+          (n) => /CN|\(en\)/.test(tpl(n)),
+          (n) => n.metadata.lfConstraintType === 'lfse',
+          (n) => n.metadata.lfAnswerCount >= 2,
+        ];
+        const chosen = [];
+        const usedTpl = new Set();
+        const draw = (pred) => {
+          const opts = cands.filter((n) => pred(n) && !usedTpl.has(tpl(n)) && !chosen.includes(n));
+          if (!opts.length) return false;
+          const n = opts[Math.floor(rand() * opts.length)];
+          chosen.push(n); usedTpl.add(tpl(n));
+          return true;
+        };
+        for (const pred of wants) { if (chosen.length < parts) draw(pred); }
+        while (chosen.length < parts && draw(() => true));
+        for (let i = chosen.length - 1; i > 0; i--) { const j = Math.floor(rand() * (i + 1)); [chosen[i], chosen[j]] = [chosen[j], chosen[i]]; }
+        return chosen;
       }
 
       function generateQuestionBank(options = {}) {
@@ -4814,6 +4884,7 @@
         generateForwardQuestions,
         generateInverseQuestions,
         generateQuestionBank,
+        composeMetalIdSet,
         runSelfTest,
         selfTestResult,
       };
@@ -6801,6 +6872,112 @@
     })();
 
     /* =====================================================================
+       NAMESPACE: Mastery — retire skills you have shown you know, measured in card time
+       ---------------------------------------------------------------------
+       "Card time" is the position in the global attempt sequence, so "this skill has been away for N cards"
+       needs no clock. A skill retires after `successes` full-mark answers on different questions, each coming
+       after at least `minGapCards` other cards since the previous attempt on that skill (so it is retrieval
+       after interference, not an immediate repeat). Any answer under `failBelow` resets the evidence.
+       A retired skill keeps a small priority weight, and one maintenance check comes due after
+       `maintenanceCards` cards (doubling after every pass); failing a check re-opens the skill.
+       Everything is derived from the attempt log, so it cannot drift out of sync with it. Only the person's own
+       choices (remove, re-open) are stored.
+       ===================================================================== */
+    const Mastery = (() => {
+      const DEFAULTS = {
+        successes: 3,
+        minGapCards: 6,
+        passScore: 0.9,
+        failBelow: 0.7,
+        maintenanceCards: 30,
+        maxMaintenanceCards: 480,
+        retiredWeight: 0.08,
+      };
+      const cfgOf = (settings) => ({ ...DEFAULTS, ...(settings?.mastery || {}) });
+      // generated "identify the metal" questions are not in the skill map by id; they exercise these skills
+      const GENERATED_INVERSE_SKILLS = ['c7.metal-id', 'c7.cfse', 'c6.name'];
+      const skillsOfNode = (map, id) => map?.nodeSkills?.[id] || (String(id).startsWith('lf-inv-') ? GENERATED_INVERSE_SKILLS : []);
+
+      /* Pure. `overrides.resetAt[skillId]` = card index before which attempts are ignored (a manual re-open). */
+      function evaluate(logs, map, nodes, settings, overrides = {}) {
+        const cfg = cfgOf(settings);
+        const resetAt = overrides?.resetAt || {};
+        const sorted = [...(logs || [])].sort((a, b) => a.timestamp - b.timestamp);
+        const variantsByNode = {};
+        for (const n of nodes || []) variantsByNode[n.id] = (n.variants || []).length || 1;
+        const avail = {};
+        for (const sk of map?.skills || []) avail[sk.id] = (sk.nodes || []).reduce((a, id) => a + (variantsByNode[id] || 0), 0);
+        const required = (sid) => Math.max(2, Math.min(cfg.successes, avail[sid] || 0));
+
+        const st = {};
+        const fresh = () => ({ status: 'active', evidence: [], lastIdx: null, anchorIdx: null, interval: 0, checks: 0, retiredAtIdx: null });
+        sorted.forEach((log, idx) => {
+          for (const sid of skillsOfNode(map, log.nodeId)) {
+            if (resetAt[sid] != null && idx < resetAt[sid]) continue;
+            const s0 = (st[sid] ||= fresh());
+            const g = Number(log.normalizedGrade) || 0;
+            const gap = s0.lastIdx == null ? Infinity : idx - s0.lastIdx - 1;
+            if (s0.status === 'retired') {
+              if (g < cfg.failBelow) { s0.status = 'active'; s0.evidence = []; s0.checks = 0; s0.interval = 0; }
+              else if (g >= cfg.passScore && idx - s0.anchorIdx - 1 >= s0.interval) {
+                s0.checks += 1;
+                s0.interval = Math.min(cfg.maxMaintenanceCards, s0.interval * 2);
+                s0.anchorIdx = idx;
+              }
+            } else if (g < cfg.failBelow) {
+              s0.evidence = [];
+            } else if (g >= cfg.passScore && gap >= cfg.minGapCards) {
+              const need = required(sid);
+              const mustDiffer = (avail[sid] || 0) >= need;
+              if (!(mustDiffer && s0.evidence.includes(log.variantId))) s0.evidence.push(log.variantId);
+              if (s0.evidence.length >= need) {
+                s0.status = 'retired'; s0.retiredAtIdx = idx; s0.anchorIdx = idx; s0.interval = cfg.maintenanceCards; s0.checks = 0;
+              }
+            }
+            s0.lastIdx = idx;
+          }
+        });
+        const cardCount = sorted.length;
+        const states = {};
+        for (const sk of map?.skills || []) {
+          const x = st[sk.id] || fresh();
+          states[sk.id] = {
+            status: x.status,
+            evidence: x.evidence.length,
+            required: required(sk.id),
+            checks: x.checks,
+            dueIn: x.status === 'retired' ? Math.max(0, x.anchorIdx + x.interval + 1 - cardCount) : null, // cards still to come between
+            retiredAtIdx: x.retiredAtIdx,
+          };
+        }
+        return { states, cardCount, cfg };
+      }
+
+      /* Pure. Which questions to hide and which to make rare, given the evaluation and the person's removals.
+         A question in several skills stays as visible as its most active skill. */
+      function adjustments(result, map, removed = {}, opts = {}, extraNodeIds = []) {
+        const exclude = new Set();
+        const mult = new Map();
+        const ids = new Set([...Object.keys(map?.nodeSkills || {}), ...extraNodeIds]);
+        for (const nodeId of ids) {
+          const sids = skillsOfNode(map, nodeId);
+          if (!sids.length) continue;
+          if (sids.every((sid) => removed[sid])) { exclude.add(nodeId); continue; }
+          if (opts.ignoreRetired) continue;
+          let m = 0;
+          for (const sid of sids.filter((x) => !removed[x])) {
+            const x = result.states[sid];
+            m = Math.max(m, x && x.status === 'retired' && x.dueIn > 0 ? result.cfg.retiredWeight : 1);
+          }
+          if (m < 1) mult.set(nodeId, m);
+        }
+        return { exclude, mult };
+      }
+
+      return { DEFAULTS, evaluate, adjustments, skillsOfNode };
+    })();
+
+    /* =====================================================================
        NAMESPACE 7: UI — Holistic 1-Question-1-Answer Renderer & Views
        ===================================================================== */
     const UI = (() => {
@@ -6809,6 +6986,9 @@
         modules: [],
         nodes: [],
         skillMap: null,
+        masteryPrefs: { removed: {}, resetAt: {} },
+        masteryLogs: [],
+        composerNodes: [],
         content: { bank: null, skillMap: null },
         ui: { sheet: null, readinessTab: 'overview', settingsTab: 'module', bankLimit: 60 },
         reviewMap: {},
@@ -6892,6 +7072,20 @@
         }
       }
 
+      function masteryNow() {
+        if (!appState.skillMap) return null;
+        return Mastery.evaluate(appState.masteryLogs, appState.skillMap, appState.nodes, appState.settings, appState.masteryPrefs);
+      }
+
+      async function saveMasteryPrefs() {
+        try {
+          const db = await DB.init();
+          await db.settings.put({ key: 'skillMastery', removed: appState.masteryPrefs.removed, resetAt: appState.masteryPrefs.resetAt });
+        } catch (err) {
+          console.warn('[Mastery] could not save preferences:', err.message);
+        }
+      }
+
       function showToast(msg, isError = false) {
         const el = $('#toastBanner');
         if (!el) return;
@@ -6912,7 +7106,11 @@
           db.settings.get('global'),
         ]);
         appState.modules = modules;
-        appState.nodes = nodes;
+        appState.nodes = nodes.filter((n) => !n.metadata?.composerOnly);
+        appState.composerNodes = nodes.filter((n) => n.metadata?.composerOnly);
+        // mastery needs the whole history (attemptLogs above is only the latest 500), without the heavy payloads
+        const allLogs = await db.attemptLogs.orderBy('timestamp').toArray();
+        appState.masteryLogs = allLogs.map((l) => ({ nodeId: l.nodeId, variantId: l.variantId, timestamp: l.timestamp, normalizedGrade: l.normalizedGrade }));
         appState.reviewMap = Object.fromEntries(reviews.map((r) => [r.nodeId, r]));
         appState.attemptLogs = logs;
         appState.settings = settingsRow ? { ...Scheduler.DEFAULT_SETTINGS, ...settingsRow } : Scheduler.DEFAULT_SETTINGS;
@@ -6973,6 +7171,12 @@
           excludeNodeId: (opts.skipCurrent || prevNode) ? prevNode?.id : null,
           lastFamily: prevNode?.metadata?.family || null,
         };
+        if (appState.skillMap) {
+          // a topic or weak-spot drill is practice you asked for, so retirement does not thin it; removals still hold
+          filters.masteryAdj = Mastery.adjustments(masteryNow(), appState.skillMap, appState.masteryPrefs.removed,
+            { ignoreRetired: Boolean(appState.filters.chunkNodeIds || appState.filters.skillTag) },
+            appState.nodes.filter((n) => String(n.id).startsWith('lf-inv-')).map((n) => n.id));
+        }
         const pick = Scheduler.selectNextNode(
           appState.nodes,
           appState.reviewMap,
@@ -7066,8 +7270,19 @@
           await db.attemptLogs.put(logEntry);
         });
 
+        const masteryBefore = masteryNow();
         appState.reviewMap[cur.node.id] = nextRs;
         appState.attemptLogs.unshift(logEntry);
+        appState.masteryLogs.push({ nodeId: logEntry.nodeId, variantId: logEntry.variantId, timestamp: logEntry.timestamp, normalizedGrade: logEntry.normalizedGrade });
+        const masteryAfter = masteryNow();
+        if (masteryBefore && masteryAfter) {
+          for (const sid of appState.skillMap.nodeSkills?.[cur.node.id] || []) {
+            const was = masteryBefore.states[sid]?.status, now = masteryAfter.states[sid]?.status;
+            const name = appState.skillMap.skills.find((k) => k.id === sid)?.name || sid;
+            if (was !== 'retired' && now === 'retired') showToast(`Mastered: ${name}. It will come up rarely now.`);
+            else if (was === 'retired' && now === 'active') showToast(`Re-opened: ${name} (missed a check).`);
+          }
+        }
         cur.evalResult = evalResult;
         cur.phase = 'graded';
         render();
@@ -7227,7 +7442,7 @@
                   ${tokens.length ? tokens.map((tok, i) => `
                     <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono bg-slate-100 border border-slate-300 text-slate-900 rounded-full">
                       ${esc(tok)}
-                      ${phase === 'answering' ? `<button type="button" data-del-token="${i}" aria-label="Remove ${esc(tok)}" class="text-slate-500 hover:text-rose-700 font-sans">✕</button>` : ''}
+                      ${phase === 'answering' ? `<button type="button" data-del-token="${i}" aria-label="Remove ${esc(tok)}" class="px-3 -mx-1 text-slate-500 hover:text-rose-700 font-sans">✕</button>` : ''}
                     </span>
                   `).join('') : '<span class="text-xs text-slate-400">No items added yet.</span>'}
                 </div>
@@ -7918,6 +8133,24 @@
         }
       }
 
+      /* A fixed-format paper from the metal-ID composer: five parts, six marks each (the finals' Q3 shape). */
+      function startMetalIdSet() {
+        const pool = [...appState.nodes, ...appState.composerNodes];
+        const picked = LF.composeMetalIdSet(pool, { parts: 5 });
+        if (picked.length < 3) { showToast('Not enough generated metal-ID questions yet; reload to finish seeding.', true); return; }
+        const questions = picked.map((node, idx) => {
+          const variant = { ...node.variants[0], marks: 6 };
+          return {
+            index: idx, node, examStyle: 'short_2to3', inst: Scheduler.instantiateVariant(variant),
+            userInput: [], paperScratchpad: '', rubricChecks: {}, evalResult: null, earnedMarks: 0,
+          };
+        });
+        startMockPaper({
+          durationMinutes: 25, chapters: [7, 8],
+          paper: { mockId: `metalset-${Date.now()}`, durationMinutes: 25, chapters: [7, 8], proportions: { mcq_1mark: 0, short_2to3: 1, construct_4to6: 0 }, styleTargets: { mcq_1mark: 0, short_2to3: questions.length, construct_4to6: 0 }, questions, totalMarks: questions.length * 6 },
+        });
+      }
+
       function startMockPaper(options = {}) {
         stopMockTimer();
         const mod = appState.modules[0] || SEED_MODULES[0];
@@ -7928,7 +8161,7 @@
         const totalQuestions = Number(options.questionCount ?? appState.mock.questionCount) || 8;
         const proportions = options.proportions || appState.settings?.mockPaper?.proportions || Scheduler.DEFAULT_SETTINGS.mockPaper.proportions;
 
-        const paper = Scheduler.assembleMockPaper(appState.nodes, {
+        const paper = options.paper || Scheduler.assembleMockPaper(appState.nodes, {
           chapters,
           durationMinutes,
           totalQuestions,
@@ -8071,6 +8304,7 @@
         });
 
         appState.attemptLogs = [...newLogs, ...appState.attemptLogs];
+        for (const l of newLogs) appState.masteryLogs.push({ nodeId: l.nodeId, variantId: l.variantId, timestamp: l.timestamp, normalizedGrade: l.normalizedGrade });
         m.totalEarned = Number(totalEarned.toFixed(2));
         m.totalMarks = Number(totalMarks.toFixed(2));
         m.chapterBreakdown = Object.values(chapterMap).filter((c) => c.questionCount > 0 || m.selectedChapters.includes(c.weekNum));
@@ -8105,6 +8339,10 @@
                   <label for="mockCountInput" class="block text-[11px] font-semibold uppercase tracking-wider text-slate-600 mb-1">Questions</label>
                   <input id="mockCountInput" type="number" min="3" max="30" step="1" value="${m.questionCount}" class="w-full font-mono text-sm px-3 py-2 border border-slate-300 rounded-lg bg-white" />
                 </div>
+              </div>
+              <div class="shrink-0 flex items-center justify-between gap-3 bg-blue-50/60 border border-blue-200 rounded-lg px-3 py-2">
+                <div class="min-w-0 text-xs text-slate-700"><span class="font-semibold text-slate-900">Metal-ID set</span> · exam Q3 style: five fresh parts, 30 marks, 25 min</div>
+                <button type="button" id="btnStartMetalSet" class="shrink-0 px-3 py-1.5 text-xs font-medium bg-blue-700 text-white rounded-md hover:bg-blue-800">Start</button>
               </div>
               <div class="shrink-0 flex items-center justify-between gap-2">
                 <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-600">Chapters (${esc(mod.moduleCode)})</div>
@@ -8157,6 +8395,7 @@
             m.selectedChapters = (mod.weeks || []).filter((w) => (chCounts[w.weekNum] || 0) > 0).map((w) => w.weekNum);
             renderMockView(root);
           });
+          $('#btnStartMetalSet', root)?.addEventListener('click', () => startMetalIdSet());
           $('#btnStartMockPaper', root)?.addEventListener('click', () => {
             const dur = Math.max(5, Number($('#mockDurationInput', root)?.value) || 30);
             const cnt = Math.max(1, Number($('#mockCountInput', root)?.value) || 8);
@@ -8217,7 +8456,7 @@
                   ${tokens.map((tok, i) => `
                     <span class="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono bg-slate-100 border border-slate-300 rounded-full">
                       ${esc(tok)}
-                      <button type="button" data-mock-del-tok="${i}" class="text-slate-500 hover:text-rose-700">✕</button>
+                      <button type="button" data-mock-del-tok="${i}" aria-label="Remove ${esc(tok)}" class="px-3 -mx-1 text-slate-500 hover:text-rose-700">✕</button>
                     </span>
                   `).join('')}
                 </div>
@@ -8608,6 +8847,19 @@
         const nodeIds = new Set(nodes.map((n) => n.id));
         const analysis = Content.analyzeSkillMap(map, nodeIds);
         const { rows, readiness, coverage } = Content.skillRows(map, nodeIds, Content.nodeProgress(nodes, appState.reviewMap, appState.attemptLogs));
+        const ms = Mastery.evaluate(appState.masteryLogs, map, nodes, appState.settings, appState.masteryPrefs);
+        const removedMap = appState.masteryPrefs.removed;
+        const act = 'px-2 py-0.5 text-[11px] font-medium border rounded-md';
+        const masteryHtml = (sid) => {
+          const m = ms.states[sid];
+          if (removedMap[sid]) return `<span class="text-slate-500">removed</span> <button type="button" data-mastery-act="restore" data-skill="${esc(sid)}" class="${act} border-slate-300 text-slate-700">Restore</button>`;
+          if (m?.status === 'retired') {
+            return `<span class="text-emerald-700 font-semibold">mastered</span> <span class="text-slate-500">· check in ${m.dueIn} cards</span>
+              <button type="button" data-mastery-act="reopen" data-skill="${esc(sid)}" class="${act} border-slate-300 text-slate-700">Reopen</button>
+              <button type="button" data-mastery-act="remove" data-skill="${esc(sid)}" class="${act} border-slate-300 text-slate-700">Remove</button>`;
+          }
+          return m?.evidence ? `<span class="text-slate-500">mastery ${m.evidence}/${m.required}</span>` : '';
+        };
         // group by theory chunk when the map defines them, otherwise fall back to chapters
         const groups = (map.chunks?.length
           ? map.chunks.map((c) => ({ key: c.id, title: c.name, part: c.part, summary: c.summary, rows: rows.filter((r) => r.skill.chunk === c.id) }))
@@ -8651,7 +8903,7 @@
             <details class="bg-white border border-slate-200 rounded-lg">
               <summary class="cursor-pointer px-3 py-2.5 text-sm">
                 <span class="font-semibold text-slate-800">${esc(g.title)}</span>
-                <span class="text-xs text-slate-500 font-mono"> · ${g.rows.length} skills · ${marks} marks · <span class="text-emerald-700">${ready}/${total} ready</span></span>
+                <span class="text-xs text-slate-500 font-mono"> · ${g.rows.length} skills · ${marks} marks · <span class="text-emerald-700">${ready}/${total} ready</span>${g.rows.some((r) => ms.states[r.skill.id]?.status === 'retired') ? ` · ${g.rows.filter((r) => ms.states[r.skill.id]?.status === 'retired').length} mastered` : ''}</span>
                 ${g.summary ? `<span class="block text-[11px] text-slate-500 font-normal mt-0.5">${esc(g.summary)}</span>` : ''}
               </summary>
               <div class="px-3 py-2 border-t border-slate-100">
@@ -8665,6 +8917,7 @@
                       ${r.total === 0 ? '<span class="text-amber-700">no questions mapped</span>'
                         : r.available === 0 ? '<span class="text-amber-700">no questions in bank yet</span>'
                         : `<span class="text-emerald-700 font-semibold">${r.proficient}/${r.total} ready</span> · ${r.attempted} attempted${r.available < r.total ? ` · <span class="text-amber-700">${r.total - r.available} not in bank</span>` : ''}`}
+                      ${(() => { const h = masteryHtml(r.skill.id); return h ? `<div class="mt-1 sm:text-right">${h}</div>` : ''; })()}
                     </div>
                   </div>`).join('')}
               </div>
@@ -8792,6 +9045,17 @@
         $$('[data-goto-settings]', root).forEach((btn) => {
           btn.addEventListener('click', () => {
             appState.route = 'settings';
+            render();
+          });
+        });
+        $$('[data-mastery-act]', root).forEach((btn) => {
+          btn.addEventListener('click', async () => {
+            const sid = btn.dataset.skill, action = btn.dataset.masteryAct;
+            const prefs = appState.masteryPrefs;
+            if (action === 'remove') prefs.removed[sid] = true;
+            else if (action === 'restore') delete prefs.removed[sid];
+            else if (action === 'reopen') prefs.resetAt[sid] = appState.masteryLogs.length;
+            await saveMasteryPrefs();
             render();
           });
         });
@@ -9518,6 +9782,10 @@
           if (appState.content.swept.reviewStates || appState.content.swept.attemptLogs) console.info('[Content] removed orphaned progress', appState.content.swept);
           appState.content.skillMap = await Content.loadSkillMap();
           appState.skillMap = appState.content.skillMap.map;
+          try {
+            const prefs = await db.settings.get('skillMastery');
+            appState.masteryPrefs = { removed: prefs?.removed || {}, resetAt: prefs?.resetAt || {} };
+          } catch (err) { console.warn('[Mastery] preferences not loaded:', err.message); }
           await refreshStore();
           const bankStatus = appState.content.bank;
           if (bankStatus.state === 'unavailable') showToast('Bundled question bank not loaded: ' + bankStatus.error, true);
@@ -9578,6 +9846,7 @@
       DB,
       Content,
       Scheduler,
+      Mastery,
       IsomerEngine,
       LF,
       Evaluators,

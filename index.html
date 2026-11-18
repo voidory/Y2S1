@@ -7108,7 +7108,124 @@
         return rows.length ? { rows, anyShape: rows.some((r) => r.vsepr), anyWrong: rows.some((r) => !r.passed) } : null;
       }
 
-      return { SHAPE_OF, CANON, shapeFromName, diagnoseShape, vseprSvg, buildMappedReview, lonePairIndices };
+
+      /* ---------- generic answer review: one builder per answer type, all built from the real grader output ---------- */
+      const SUB = { 0: '₀', 1: '₁', 2: '₂', 3: '₃', 4: '₄', 5: '₅', 6: '₆', 7: '₇', 8: '₈', 9: '₉' };
+      const SUP = { 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹', '+': '⁺', '-': '⁻' };
+
+      /* Pure. "N2 + 3H2 -> 2NH3" and "NH4^+" read as chemistry: N₂ + 3H₂ → 2NH₃, NH₄⁺. */
+      function prettyFormula(text) {
+        return String(text ?? '')
+          .replace(/->|→/g, '→')
+          .replace(/\^([0-9]*[+-])/g, (_, c) => [...c].map((ch) => SUP[ch] || ch).join(''))
+          .replace(/([A-Za-z)\]])(\d+)/g, (_, a, d) => a + [...d].map((ch) => SUB[ch]).join(''));
+      }
+
+      function buildChoiceReview(variant, userInput) {
+        const target = new Set(variant.evaluator?.targetIds || []);
+        const picked = new Set(Array.isArray(userInput) ? userInput : (userInput ? [userInput] : []));
+        const options = (variant.inputSlot?.options || []).map((o) => {
+          const isTarget = target.has(o.id), isPicked = picked.has(o.id);
+          return { id: o.id, label: o.label, state: isPicked ? (isTarget ? 'right' : 'wrong') : (isTarget ? 'missed' : 'neutral') };
+        });
+        return { kind: 'choice', options, nothingPicked: picked.size === 0, anyWrong: options.some((o) => o.state === 'wrong' || o.state === 'missed') };
+      }
+
+      function buildEquationReview(variant, userInput, evalResult) {
+        const lines = Evaluators.parseEquationBlock(userInput);
+        const acc = variant.evaluator?.accepted;
+        const first = Array.isArray(acc) ? acc[0] : acc;
+        const correct = Array.isArray(first) ? first.join('\n') : (typeof first === 'string' ? first : '');
+        const rows = lines.map((l) => {
+          if (!l.valid) return { raw: l.raw, valid: false, error: l.error || 'Not understood.' };
+          const els = [...new Set([...Object.keys(l.lhsAtoms), ...Object.keys(l.rhsAtoms)])].sort();
+          return {
+            raw: l.raw, valid: true, balanced: Boolean(l.isBalanced),
+            atoms: els.map((el) => ({ el, left: l.lhsAtoms[el] || 0, right: l.rhsAtoms[el] || 0, ok: (l.lhsAtoms[el] || 0) === (l.rhsAtoms[el] || 0) })),
+            charge: (l.lhsCharge || l.rhsCharge) ? { left: l.lhsCharge, right: l.rhsCharge, ok: l.lhsCharge === l.rhsCharge } : null,
+          };
+        });
+        return {
+          kind: 'equation', passed: Boolean(evalResult?.passed), rows, correct,
+          missing: evalResult?.missingSpecies || [], extra: evalResult?.extraSpecies || [], hasInput: lines.length > 0,
+        };
+      }
+
+      function buildRubricReview(variant, userInput, rubricChecks, evalResult) {
+        const items = (variant.evaluator?.rubric || []).map((it) => ({
+          id: it.id, criterion: it.criterion, marks: Number(it.marks ?? 1), critical: Boolean(it.isCritical), met: Boolean(rubricChecks?.[it.id]),
+        }));
+        return {
+          kind: 'rubric', items, text: typeof userInput === 'string' ? userInput.trim() : '',
+          veto: Boolean(evalResult?.vetoApplied), earned: evalResult?.earnedMarks ?? 0, total: evalResult?.totalMarks ?? 0, passed: Boolean(evalResult?.passed),
+        };
+      }
+
+      /* Which of the student's items were right, which were not expected, and which expected ones were missing. */
+      function buildSetReview(variant, userInput, evalResult) {
+        const ev = variant.evaluator || {};
+        const cs = ev.caseSensitive !== false;
+        const norm = (t) => { const x = String(t ?? '').trim(); return cs ? x : x.toLowerCase(); };
+        const syn = {};
+        for (const [k, v] of Object.entries(ev.synonyms || {})) syn[norm(k)] = norm(v);
+        const target = ev.targetSet || [];
+        const targetNorm = new Set(target.map(norm));
+        const compound = userInput && typeof userInput === 'object' && !Array.isArray(userInput);
+        const src = compound ? (userInput.tokens ?? userInput.set ?? userInput.metals ?? []) : userInput;
+        const raw = (Array.isArray(src) ? src.flatMap((x) => String(x ?? '').split(/[\n,]+/)) : String(src ?? '').split(/[\n,]+/)).map((x) => x.trim()).filter(Boolean);
+        const seen = new Set(), correct = [], extra = [];
+        for (const r of raw) {
+          const n = syn[norm(r)] || norm(r);
+          if (seen.has(n)) continue;
+          seen.add(n);
+          (targetNorm.has(n) ? correct : extra).push(r);
+        }
+        const missing = target.filter((t) => !seen.has(norm(t)));
+        const hasFields = Array.isArray(variant.inputSlot?.fields) && variant.inputSlot.fields.length > 0;
+        const fields = hasFields ? buildMappedReview(variant, userInput, evalResult) : null;
+        return { kind: 'set', correct, extra, missing, passed: missing.length === 0 && extra.length === 0, fields };
+      }
+
+      function buildShortReview(variant, userInput, evalResult) {
+        const yours = String(userInput ?? '').trim();
+        return {
+          kind: 'short', passed: Boolean(evalResult?.passed), partial: (evalResult?.normalizedGrade || 0) > 0 && !evalResult?.passed,
+          yours, expected: evalResult?.expectedDisplay || '',
+        };
+      }
+
+      function buildOrderReview(variant, userInput, evalResult) {
+        const items = variant.inputSlot?.items || [];
+        const label = (id) => {
+          const f = items.find((it) => String(typeof it === 'object' ? it.id : it) === String(id));
+          return f ? (typeof f === 'object' ? (f.label ?? f.id) : f) : String(id);
+        };
+        const correct = (evalResult?.correctOrder || variant.evaluator?.targetOrder || variant.evaluator?.expectedOrder || []).map(String);
+        const yours = Array.isArray(userInput) ? userInput.map(String) : [];
+        return {
+          kind: 'order', passed: Boolean(evalResult?.passed),
+          rows: correct.map((id, i) => ({ id, label: label(id), correctPos: i + 1, yourPos: yours.indexOf(id) >= 0 ? yours.indexOf(id) + 1 : null, ok: yours[i] === id })),
+        };
+      }
+
+      /* Pure. One model per answer type for the result card, or null where there is nothing field-by-field to show. */
+      function buildAnswerReview(variant, userInput, evalResult, rubricChecks) {
+        if (!variant || !evalResult) return null;
+        const slot = variant.inputSlot?.type, ev = variant.evaluator?.type;
+        if (slot === 'mapped_fields') { const m = buildMappedReview(variant, userInput, evalResult); return m ? { kind: 'mapped', ...m } : null; }
+        if (slot === 'unordered_set') return buildSetReview(variant, userInput, evalResult);
+        if (slot === 'choice') return buildChoiceReview(variant, userInput);
+        if (slot === 'typed_equation') return buildEquationReview(variant, userInput, evalResult);
+        if (ev === 'atomic_rubric') return buildRubricReview(variant, userInput, rubricChecks, evalResult);
+        if (slot === 'ordered_list') return buildOrderReview(variant, userInput, evalResult);
+        if (slot === 'typed_short') return buildShortReview(variant, userInput, evalResult);
+        return null;
+      }
+
+      return {
+        SHAPE_OF, CANON, shapeFromName, diagnoseShape, vseprSvg, buildMappedReview, lonePairIndices,
+        prettyFormula, buildChoiceReview, buildEquationReview, buildRubricReview, buildSetReview, buildShortReview, buildOrderReview, buildAnswerReview,
+      };
     })();
 
     /* =====================================================================
@@ -7306,24 +7423,38 @@
         return '';
       }
 
-      /* The "Answer review" card: per-field verdicts, and drawn shapes for VSEPR questions. */
-      function answerReviewHtml(variant, userInput, evalResult) {
-        const rv = Review.buildMappedReview(variant, userInput, evalResult);
-        if (!rv || (!rv.anyShape && !rv.anyWrong)) return '';
+      /* The "Answer review" card: what you answered next to what was right, for every answer type. */
+      function answerReviewHtml(variant, userInput, evalResult, rubricChecks) {
+        const rv = Review.buildAnswerReview(variant, userInput, evalResult, rubricChecks);
+        if (!rv) return '';
+        const TONE = {
+          good: 'bg-emerald-50 border-emerald-200 text-emerald-900', bad: 'bg-rose-50 border-rose-200 text-rose-900',
+          warn: 'bg-amber-50 border-amber-400 border-dashed text-amber-900', plain: 'bg-slate-50 border-slate-200 text-slate-800',
+        };
+        const chip = (text, tone, extra = '') => `<span class="inline-flex items-center px-2 py-0.5 rounded-md border text-xs font-mono ${TONE[tone]} ${extra}">${esc(text)}</span>`;
+        const head = (right = '') => `<div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold uppercase tracking-wider text-slate-600">Answer review</div>${right}</div>`;
+        const wrap = (kind, inner) => `<div class="space-y-2" data-answer-review data-review-kind="${kind}">${inner}</div>`;
+        const youVsCorrect = (yours, expected) => `
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
+            <span class="inline-flex items-center gap-1.5"><span class="text-slate-500">You</span>${chip(yours || '(blank)', 'bad', yours ? 'line-through decoration-rose-400' : '')}</span>
+            <span class="text-slate-400">→</span>
+            <span class="inline-flex items-center gap-1.5"><span class="text-slate-500">Correct</span>${chip(expected, 'good')}</span>
+          </div>`;
+
+        // ---- grid-style answers (including drawn VSEPR shapes)
         const fig = (svg, caption, tone) => `
           <figure class="text-center min-w-0">
             <div class="mx-auto w-full max-w-[132px] rounded-lg border ${tone === 'bad' ? 'border-rose-300 bg-rose-50/60' : tone === 'good' ? 'border-emerald-300 bg-emerald-50/60' : 'border-slate-200 bg-slate-50'} p-1.5">${svg}</div>
             <figcaption class="mt-1 text-[11px] leading-tight text-slate-600">${caption}</figcaption>
           </figure>`;
         const blank = (txt) => `<div class="mx-auto w-full max-w-[132px] aspect-square rounded-lg border border-dashed border-slate-300 bg-slate-50 flex items-center justify-center text-[11px] text-slate-500 px-2 text-center">${txt}</div>`;
-        const rows = rv.rows.map((r) => {
+        const mappedRows = (rows) => rows.map((r) => {
           const tone = r.passed ? 'border-emerald-200' : 'border-rose-200';
           const status = r.passed ? '<span class="text-xs font-semibold text-emerald-700">✓ Correct</span>' : `<span class="text-xs font-semibold ${r.partial ? 'text-amber-700' : 'text-rose-700'}">${r.partial ? '◐ Partly right' : '✗ Not quite'}</span>`;
           let body;
           if (r.vsepr) {
             const c = r.vsepr.correct, y = r.vsepr.yours;
-            const correctSvg = Review.vseprSvg(c.bp, c.lp, { tone: 'good' });
-            const correctFig = fig(correctSvg, `<span class="font-semibold text-emerald-800">Correct: ${esc(c.shape)}</span><br>${c.bp} bonded + ${c.lp} lone`, 'good');
+            const correctFig = fig(Review.vseprSvg(c.bp, c.lp, { tone: 'good' }), `<span class="font-semibold text-emerald-800">Correct: ${esc(c.shape)}</span><br>${c.bp} bonded + ${c.lp} lone`, 'good');
             if (r.passed) {
               body = `<div class="grid grid-cols-2 gap-3 items-start">${correctFig}<p class="text-xs text-slate-700 self-center">${esc(r.vsepr.diagnosis)}</p></div>`;
             } else {
@@ -7333,13 +7464,9 @@
               body = `<div class="grid grid-cols-2 gap-3 items-start">${yourFig}${correctFig}</div><p class="text-xs text-slate-800 bg-slate-50 border border-slate-200 rounded-md px-2.5 py-1.5">${esc(r.vsepr.diagnosis)}</p>`;
             }
           } else if (r.passed) {
-            body = `<div class="flex flex-wrap items-center gap-2 text-xs"><span class="px-2 py-0.5 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-900 font-mono">${esc(r.yours || r.expected)}</span></div>`;
+            body = `<div class="flex flex-wrap items-center gap-2 text-xs">${chip(r.yours || r.expected, 'good')}</div>`;
           } else {
-            body = `<div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
-              <span class="inline-flex items-center gap-1.5"><span class="text-slate-500">You</span><span class="px-2 py-0.5 rounded-md bg-rose-50 border border-rose-200 text-rose-900 font-mono ${r.yours ? 'line-through decoration-rose-400' : ''}">${esc(r.yours || '(blank)')}</span></span>
-              <span class="text-slate-400">→</span>
-              <span class="inline-flex items-center gap-1.5"><span class="text-slate-500">Correct</span><span class="px-2 py-0.5 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-900 font-mono">${esc(r.expected)}</span></span>
-            </div>`;
+            body = youVsCorrect(r.yours, r.expected);
           }
           return `
             <div class="rounded-lg border ${tone} bg-white p-3 space-y-2" data-review-row="${esc(r.key)}">
@@ -7350,14 +7477,90 @@
               ${body}
             </div>`;
         }).join('');
-        return `
-          <div class="space-y-2" data-answer-review>
-            <div class="flex items-center justify-between gap-2">
-              <div class="text-xs font-semibold uppercase tracking-wider text-slate-600">Answer review</div>
-              ${rv.anyShape ? '<div class="text-[11px] text-slate-500"><span class="inline-block w-2.5 h-2.5 rounded-full bg-slate-300 border border-slate-500 align-middle"></span> bonded atom · <span class="inline-block w-3 h-2 rounded-full bg-amber-200 border border-amber-600 border-dashed align-middle"></span> lone pair</div>' : ''}
-            </div>
-            ${rows}
-          </div>`;
+
+        if (rv.kind === 'mapped') {
+          if (!rv.anyShape && !rv.anyWrong) return '';
+          const legend = rv.anyShape ? '<div class="text-[11px] text-slate-500"><span class="inline-block w-2.5 h-2.5 rounded-full bg-slate-300 border border-slate-500 align-middle"></span> bonded atom · <span class="inline-block w-3 h-2 rounded-full bg-amber-200 border border-amber-600 border-dashed align-middle"></span> lone pair</div>' : '';
+          return wrap('mapped', head(legend) + mappedRows(rv.rows));
+        }
+
+        // ---- written answers: the marking criteria, each met or missed
+        if (rv.kind === 'rubric') {
+          const items = rv.items.map((it) => `
+            <li class="flex gap-2.5 rounded-lg border px-3 py-2 ${it.met ? 'border-emerald-200 bg-emerald-50/60' : it.critical ? 'border-rose-300 bg-rose-50/70' : 'border-amber-300 bg-amber-50/60'}" data-rubric-item="${esc(it.id)}" data-met="${it.met ? 1 : 0}">
+              <span class="mt-0.5 shrink-0 text-sm font-bold ${it.met ? 'text-emerald-700' : 'text-rose-700'}" aria-hidden="true">${it.met ? '✓' : '✗'}</span>
+              <div class="min-w-0 text-sm text-slate-900">${renderMarkdownLite(it.criterion)}
+                <div class="mt-0.5 text-[11px] text-slate-600">${it.marks} mark${it.marks === 1 ? '' : 's'}${it.critical ? ' · <span class="font-semibold text-rose-700">critical step</span>' : ''}${it.met ? '' : ' · <span class="font-semibold text-rose-700">you missed this</span>'}</div>
+              </div>
+            </li>`).join('');
+          const yours = rv.text
+            ? `<div class="rounded-lg border border-slate-200 bg-white p-3"><div class="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Your answer</div><div data-bounded-scroll class="text-sm text-slate-800 whitespace-pre-wrap max-h-40 overflow-y-auto">${esc(rv.text)}</div></div>`
+            : '<div class="text-xs text-slate-500">You answered on paper, so only your self-marking is shown.</div>';
+          const veto = rv.veto ? '<p class="text-xs text-rose-900 bg-rose-50 border border-rose-200 rounded-md px-2.5 py-1.5">You missed a critical step, so the score is capped at 45% however many other points you hit.</p>' : '';
+          return wrap('rubric', head(`<span class="text-xs font-mono text-slate-600">${rv.earned}/${rv.total} marks</span>`) + yours + `<ul class="space-y-1.5 prose-math">${items}</ul>` + veto);
+        }
+
+        // ---- choice: every option and what happened to it
+        if (rv.kind === 'choice') {
+          if (!rv.anyWrong) return '';
+          const ST = {
+            right: ['✓', 'border-emerald-300 bg-emerald-50', 'text-emerald-800', 'you picked this: correct'],
+            wrong: ['✗', 'border-rose-300 bg-rose-50', 'text-rose-800', 'you picked this: not correct'],
+            missed: ['○', 'border-amber-400 border-dashed bg-amber-50', 'text-amber-900', 'correct, but you did not pick it'],
+            neutral: ['', 'border-slate-200 bg-white', 'text-slate-500', ''],
+          };
+          const opts = rv.options.map((o) => {
+            const m = ST[o.state];
+            return `<li class="flex items-start gap-2.5 rounded-lg border px-3 py-2 ${m[1]}" data-option-state="${o.state}"><span class="w-4 shrink-0 text-center font-bold ${m[2]}" aria-hidden="true">${m[0]}</span><div class="min-w-0 text-sm text-slate-900">${esc(o.label)}${m[3] ? `<div class="text-[11px] ${m[2]}">${m[3]}</div>` : ''}</div></li>`;
+          }).join('');
+          return wrap('choice', head(rv.nothingPicked ? '<span class="text-xs text-rose-700 font-semibold">nothing selected</span>' : '') + `<ul class="space-y-1.5">${opts}</ul>`);
+        }
+
+        // ---- equations: your equation, the atom count on each side, and the balanced reference
+        if (rv.kind === 'equation') {
+          if (rv.passed) return '';
+          const lines = rv.rows.map((r) => {
+            if (!r.valid) return `<div class="rounded-lg border border-rose-300 bg-rose-50 px-3 py-2 text-xs text-rose-900"><div class="font-mono mb-0.5">${esc(r.raw)}</div>I could not read this line: ${esc(r.error)}</div>`;
+            const rowsHtml = r.atoms.map((a) => `<tr class="${a.ok ? '' : 'bg-rose-50 text-rose-900 font-semibold'}"><td class="px-2 py-1 font-mono">${esc(a.el)}</td><td class="px-2 py-1 text-center font-mono">${a.left}</td><td class="px-2 py-1 text-center font-mono">${a.right}</td><td class="px-2 py-1 text-center">${a.ok ? '<span class="text-emerald-700">✓</span>' : '✗'}</td></tr>`).join('');
+            const chargeRow = r.charge ? `<tr class="${r.charge.ok ? '' : 'bg-rose-50 text-rose-900 font-semibold'}"><td class="px-2 py-1">charge</td><td class="px-2 py-1 text-center font-mono">${r.charge.left}</td><td class="px-2 py-1 text-center font-mono">${r.charge.right}</td><td class="px-2 py-1 text-center">${r.charge.ok ? '<span class="text-emerald-700">✓</span>' : '✗'}</td></tr>` : '';
+            const bad = r.atoms.filter((a) => !a.ok).map((a) => `${a.el} (${a.left} vs ${a.right})`);
+            if (r.charge && !r.charge.ok) bad.push(`charge (${r.charge.left} vs ${r.charge.right})`);
+            return `
+              <div class="rounded-lg border ${r.balanced ? 'border-emerald-200' : 'border-rose-200'} bg-white p-3 space-y-2" data-equation-line>
+                <div class="text-sm font-mono text-slate-900 break-words">${esc(Review.prettyFormula(r.raw))}</div>
+                <table class="w-full text-xs border border-slate-200 rounded-md overflow-hidden"><thead class="bg-slate-50 text-slate-600"><tr><th class="px-2 py-1 text-left font-semibold">Atom</th><th class="px-2 py-1 font-semibold">Reactants</th><th class="px-2 py-1 font-semibold">Products</th><th class="px-2 py-1"></th></tr></thead><tbody class="divide-y divide-slate-100">${rowsHtml}${chargeRow}</tbody></table>
+                <p class="text-xs ${r.balanced ? 'text-emerald-800' : 'text-rose-800 font-semibold'}">${r.balanced ? 'This line is balanced.' : `Not balanced: ${esc(bad.join(', '))}.`}</p>
+              </div>`;
+          }).join('');
+          const species = (rv.missing.length || rv.extra.length) ? `<div class="flex flex-wrap items-center gap-1.5 text-xs">${rv.missing.map((x) => chip('missing: ' + Review.prettyFormula(x), 'warn')).join('')}${rv.extra.map((x) => chip('not expected: ' + Review.prettyFormula(x), 'bad')).join('')}</div>` : '';
+          const ref = rv.correct ? `<div class="rounded-lg border border-emerald-200 bg-emerald-50/60 px-3 py-2"><div class="text-[11px] font-semibold uppercase tracking-wider text-emerald-800 mb-0.5">Balanced reference</div><div class="text-sm font-mono text-slate-900 whitespace-pre-wrap break-words">${esc(Review.prettyFormula(rv.correct))}</div></div>` : '';
+          return wrap('equation', head() + (rv.hasInput ? lines : '<p class="text-xs text-rose-800 font-semibold">No equation entered.</p>') + species + ref);
+        }
+
+        // ---- sets: which of your items were right, extra, or missing, then any companion fields
+        if (rv.kind === 'set') {
+          const fieldRows = rv.fields && rv.fields.anyWrong ? mappedRows(rv.fields.rows) : '';
+          if (rv.passed && !fieldRows) return '';
+          const group = (label, items, tone) => items.length ? `<div class="flex flex-wrap items-center gap-1.5"><span class="text-[11px] font-semibold uppercase tracking-wider text-slate-500 w-full sm:w-auto">${label}</span>${items.map((x) => chip(x, tone)).join('')}</div>` : '';
+          return wrap('set', head() + `<div class="rounded-lg border border-slate-200 bg-white p-3 space-y-2">
+            ${group('Correct', rv.correct, 'good')}${group('Not expected', rv.extra, 'bad')}${group('You missed', rv.missing, 'warn')}
+            ${!rv.correct.length && !rv.extra.length ? '<p class="text-xs text-rose-800 font-semibold">No items entered.</p>' : ''}
+          </div>` + fieldRows);
+        }
+
+        // ---- ordering: the correct order, and where you put each item
+        if (rv.kind === 'order') {
+          if (rv.passed) return '';
+          const rows = rv.rows.map((r) => `<li class="flex items-center gap-2.5 rounded-lg border px-3 py-2 ${r.ok ? 'border-emerald-200 bg-emerald-50/60' : 'border-rose-200 bg-rose-50/60'}"><span class="w-6 shrink-0 text-center font-mono text-xs font-semibold ${r.ok ? 'text-emerald-800' : 'text-rose-800'}">${r.correctPos}</span><span class="min-w-0 text-sm text-slate-900 flex-1">${esc(r.label)}</span><span class="text-[11px] ${r.ok ? 'text-emerald-800' : 'text-rose-800'} shrink-0">${r.ok ? '✓' : (r.yourPos ? `you put it ${r.yourPos}` : 'you left it out')}</span></li>`).join('');
+          return wrap('order', head('<span class="text-[11px] text-slate-500">correct order</span>') + `<ol class="space-y-1.5">${rows}</ol>`);
+        }
+
+        // ---- short answers
+        if (rv.kind === 'short') {
+          if (rv.passed || !rv.expected) return '';
+          return wrap('short', head() + youVsCorrect(rv.yours, rv.expected));
+        }
+        return '';
       }
 
       function loadNextQuestion(opts = {}) {
@@ -7912,7 +8115,7 @@
                 ` : ''}
               </div>
 
-              ${answerReviewHtml(variant, cur.userInput, evalResult)}
+              ${answerReviewHtml(variant, cur.userInput, evalResult, cur.rubricChecks)}
 
               ${(inst.resolvedExplanation || explanationAsset) ? `
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 prose-math text-sm text-slate-800 space-y-3" data-explanation-block>
@@ -8395,6 +8598,8 @@
         appState.mock = {
           ...appState.mock,
           phase: 'in_progress',
+          reviewFilter: 'all',
+          resultTab: 'chapters',
           durationMinutes,
           questionCount: totalQuestions,
           selectedChapters: chapters.slice(),
@@ -9010,27 +9215,33 @@
               </div>
             </section>
         `;
+        const styleName = { mcq_1mark: 'MCQ', short_2to3: 'Short', construct_4to6: 'Construct' };
+        const missedQs = m.questions.filter((q) => !q.evalResult?.passed);
+        const onlyMissed = m.reviewFilter === 'missed';
+        const shownQs = onlyMissed ? missedQs : m.questions;
+        const filterBtn = (key, label, n) => `<button type="button" data-review-filter="${key}" class="px-3 py-1.5 text-xs font-medium rounded-full border ${((key === 'missed') === onlyMissed) ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-700 border-slate-300'}">${label} (${n})</button>`;
         const secQuestions = `
-            <section class="space-y-3"><p class="text-xs text-slate-500">All ${m.questions.length} attempt(s) logged with mockId <code class="font-mono">${esc(m.mockId)}</code> and review states updated in IndexedDB.</p>
-              <h2 class="font-display text-base font-semibold text-slate-900">Question-by-Question Review</h2>
-              ${m.questions.map((q) => `
-                <div class="bg-white border border-slate-200 rounded-xl p-4 space-y-2">
-                  <div class="flex items-center justify-between text-xs font-mono">
-                    <span>Q${q.index + 1} · Ch ${q.node.metadata.week} · ${esc(q.examStyle)}</span>
-                    <span class="font-semibold ${q.evalResult?.passed ? 'text-emerald-700' : 'text-rose-700'}">${q.earnedMarks} / ${q.inst.variant.marks} marks</span>
+            <section class="space-y-3">
+              <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filter questions">${filterBtn('all', 'All', m.questions.length)}${filterBtn('missed', 'Marks lost', missedQs.length)}</div>
+              ${shownQs.length ? shownQs.map((q) => `
+                <div class="bg-white border border-slate-200 rounded-xl p-4 space-y-3" data-mock-review-q="${q.index}">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="font-mono text-slate-600">Q${q.index + 1} · Ch ${q.node.metadata.week} · ${esc(styleName[q.examStyle] || q.examStyle)}</span>
+                    <span class="font-mono font-semibold ${q.evalResult?.passed ? 'text-emerald-700' : 'text-rose-700'}">${q.earnedMarks} / ${q.inst.variant.marks} marks</span>
                   </div>
                   <div class="font-display text-sm font-semibold text-slate-900">${esc(q.node.metadata.title)}</div>
                   <div class="text-xs text-slate-700">${esc(q.evalResult?.feedback || '')}</div>
+                  ${answerReviewHtml(q.inst.variant, q.userInput, q.evalResult, q.rubricChecks)}
                   ${q.inst.resolvedExplanation ? `<div class="text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded p-2.5 prose-math">${renderMarkdownLite(q.inst.resolvedExplanation)}</div>` : ''}
                 </div>
-              `).join('')}
+              `).join('') : '<p class="text-sm text-slate-600">No marks lost on this paper.</p>'}
             </section>
         `;
         root.innerHTML = `
           <div class="view max-w-4xl">
             <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center justify-between gap-3 shrink-0">
               <div>
-                <div class="text-xs font-mono text-blue-700 font-semibold">Mock Paper Graded · ${esc(m.mockId)}</div>
+                <div class="text-xs font-semibold text-blue-700">Mock paper graded</div>
                 <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900 mt-0.5">Total Score: ${m.totalEarned} / ${m.totalMarks} marks (${pct}%)</h1>
                 
               </div>
@@ -9047,6 +9258,9 @@
         `;
         $$('[data-seg-mock]', root).forEach((btn) => {
           btn.addEventListener('click', () => { m.resultTab = btn.dataset.segMock; renderMockView(root); });
+        });
+        $$('[data-review-filter]', root).forEach((btn) => {
+          btn.addEventListener('click', () => { m.reviewFilter = btn.dataset.reviewFilter; renderMockView(root); });
         });
 
         $('#btnNewMockPaper', root)?.addEventListener('click', () => {

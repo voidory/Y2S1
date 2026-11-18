@@ -17,8 +17,19 @@ export function loadEngine() {
   return sandbox.window.__MASTERY_ENGINE__;
 }
 
-export function readContent(name) {
-  return JSON.parse(fs.readFileSync(path.join(rootDir, 'public/content/cm2021', name), 'utf8'));
+export function readContent(name, dir = 'cm2021') {
+  return JSON.parse(fs.readFileSync(path.join(rootDir, 'public/content', dir, name), 'utf8'));
+}
+
+/** A fetch that serves the bundled content straight from disk (for Content.syncAllBanks and friends). */
+export function diskFetch() {
+  return async (url) => {
+    const m = String(url).match(/^(?:public\/)?content\/([^/]+)\/([^/]+)$/);
+    if (!m) return { ok: false, status: 404, json: async () => { throw new Error('404'); } };
+    const file = path.join(rootDir, 'public/content', m[1], m[2]);
+    if (!fs.existsSync(file)) return { ok: false, status: 404, json: async () => { throw new Error('404'); } };
+    return { ok: true, status: 200, json: async () => JSON.parse(fs.readFileSync(file, 'utf8')) };
+  };
 }
 
 /** Just enough of Dexie for Content.syncBank. */

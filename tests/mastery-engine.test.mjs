@@ -80,8 +80,11 @@ test('Sandboxed Expr compiler evaluates arithmetic, functions, comparisons, tern
   assert.throws(() => Expr.evaluate('alert(1)'), /disallowed function/);
 });
 
-test('SEED_MODULES has single CM2021 module with 9 chapters and examTimestamp null', () => {
-  assert.equal(SEED_MODULES.length, 1);
+test('SEED_MODULES: CM2021 (9 chapters) and CM2011 (7 topics), no exam date set', () => {
+  assert.equal(SEED_MODULES.map((x) => x.moduleCode).join(), 'CM2021,CM2011');
+  const a = SEED_MODULES[1];
+  assert.equal(a.weeks.length, 7);
+  assert.equal(a.examTimestamp, null);
   const m = SEED_MODULES[0];
   assert.equal(m.moduleCode, 'CM2021');
   assert.equal(m.title, 'Inorganic and Bioinorganic Chemistry');

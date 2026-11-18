@@ -129,3 +129,38 @@ test('errorTags: every tag ever produced has a readable label (smoke over the ba
   assert.deepEqual(unlabelled, []);
   assert.ok(seen.size >= 8, `a good spread of slip kinds should come up (${[...seen].join(', ')})`);
 });
+
+test('humanDue: when a question comes back, in words', () => {
+  const now = 10_000_000_000, H = 3_600_000, D = 86_400_000;
+  assert.equal(Weakness.humanDue(now + 20 * 60_000, now), 'soon');
+  assert.equal(Weakness.humanDue(now + 5 * H, now), 'in a few hours');
+  assert.equal(Weakness.humanDue(now + 24 * H, now), 'tomorrow');
+  assert.equal(Weakness.humanDue(now + 3 * D, now), 'in 3 days');
+  assert.equal(Weakness.humanDue(now + 21 * D, now), 'in 3 weeks');
+  assert.equal(Weakness.humanDue(now + 120 * D, now), 'in 4 months');
+  assert.equal(Weakness.humanDue(undefined, now), '');
+  assert.equal(Weakness.humanDue(now - D, now), 'soon', 'already due reads as soon, not a negative time');
+});
+
+test('queueReason: says why each question is next', () => {
+  const r = (meta, has) => J(Weakness.queueReason(meta, has));
+  assert.equal(r({ bucket: 'newMaterial' }, false).label, 'New');
+  assert.equal(r({ bucket: 'weakAtomic' }, true).label, 'Weak spot');
+  assert.equal(r({ bucket: 'dueReviews', overdueDays: 0.2 }, true).label, 'Due now');
+  assert.equal(r({ bucket: 'dueReviews', overdueDays: 3.4 }, true).label, 'Overdue 3d');
+  assert.equal(r({ bucket: 'newMaterial' }, true).label, 'Review soon');
+  for (const x of [r({}, false), r({ bucket: 'weakAtomic' }, true), r({ bucket: 'dueReviews' }, true)]) assert.ok(x.cls.includes('border'));
+});
+
+test('humanTag: concept tags as words', () => {
+  assert.equal(Weakness.humanTag('lewis-resonance'), 'lewis resonance');
+  assert.equal(Weakness.humanTag('cfse_calculation'), 'cfse calculation');
+  assert.equal(Weakness.humanTag(null), '');
+});
+
+test('grader wording: the veto message is plain language', () => {
+  const v = byId['bk-c4-inert-pair'].variants[0];
+  const res = Evaluators.evaluate(v, 'x', {}, { r1: true }, byId['bk-c4-inert-pair']);
+  assert.match(res.feedback, /critical step was missed/i);
+  assert.doesNotMatch(res.feedback, /Zero-Step|Veto/);
+});

@@ -128,7 +128,7 @@
         Unified Mastery Engine
       </a>
       <button type="button" id="topQuickAction" class="px-3.5 py-1.5 text-xs sm:text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors whitespace-nowrap shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700">
-        Next Priority
+        Next question
       </button>
     </div>
   </header>
@@ -5286,7 +5286,7 @@
           totalMarks: Number(totalMarks.toFixed(2)),
           missedSkillTags: [...missedSkillTags],
           feedback: vetoApplied
-            ? `Zero-Step Veto applied: missed critical reasoning step caps score at 45% (${Math.round(effectiveGrade * 100)}%).`
+            ? `A critical step was missed, so the score is capped at 45% (${Math.round(effectiveGrade * 100)}%).`
             : `Self-assessed ${earnedMarks}/${totalMarks} marks (${Math.round(effectiveGrade * 100)}%).`,
         };
       }
@@ -7387,7 +7387,34 @@
         return d === 1 ? 'yesterday' : `${d} days ago`;
       }
 
-      return { PASS, chunksOf, topicStats, unresolvedMisses, slipCounts, timeAgo };
+      /* Pure. "tomorrow", "in 3 days", "in 2 weeks": when a question is due back, without the scheduler's numbers. */
+      function humanDue(dueMs, now = Date.now()) {
+        if (!Number.isFinite(dueMs)) return '';
+        const h = (dueMs - now) / 3600000;
+        if (h < 1) return 'soon';
+        if (h < 12) return 'in a few hours';
+        if (h < 36) return 'tomorrow';
+        const d = Math.round(h / 24);
+        if (d < 14) return `in ${d} days`;
+        const w = Math.round(d / 7);
+        return w < 9 ? `in ${w} weeks` : `in ${Math.round(d / 30)} months`;
+      }
+
+      /* Pure. Why a question is in the queue: a label and its colour classes. */
+      function queueReason(meta, hasReview) {
+        if (!hasReview) return { label: 'New', cls: 'bg-blue-50 border-blue-200 text-blue-800' };
+        if (meta?.bucket === 'weakAtomic') return { label: 'Weak spot', cls: 'bg-rose-50 border-rose-200 text-rose-800' };
+        if (meta?.bucket === 'dueReviews') {
+          const d = Math.floor(meta.overdueDays || 0);
+          return { label: d >= 1 ? `Overdue ${d}d` : 'Due now', cls: 'bg-amber-50 border-amber-300 text-amber-900' };
+        }
+        return { label: 'Review soon', cls: 'bg-slate-50 border-slate-200 text-slate-700' };
+      }
+
+      /* Pure. A concept tag as words: "lewis-resonance" -> "lewis resonance". */
+      function humanTag(tag) { return String(tag ?? '').replace(/[-_]+/g, ' ').trim(); }
+
+      return { PASS, chunksOf, topicStats, unresolvedMisses, slipCounts, timeAgo, humanDue, queueReason, humanTag };
     })();
 
     /* =====================================================================
@@ -7918,11 +7945,11 @@
               </select>
             </label>
             <label class="block">
-              <span class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Tier</span>
-              <select id="studyTierFilter" aria-label="Filter by tier" class="w-full text-sm bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-slate-800">
-                <option value="ALL" ${appState.filters.tier === 'ALL' ? 'selected' : ''}>All Tiers</option>
-                <option value="atomic" ${appState.filters.tier === 'atomic' ? 'selected' : ''}>Atomic Drills Only</option>
-                <option value="synthesis" ${appState.filters.tier === 'synthesis' ? 'selected' : ''}>Synthesis (Uncued) Only</option>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Question type</span>
+              <select id="studyTierFilter" aria-label="Filter by question type" class="w-full text-sm bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-slate-800">
+                <option value="ALL" ${appState.filters.tier === 'ALL' ? 'selected' : ''}>All types</option>
+                <option value="atomic" ${appState.filters.tier === 'atomic' ? 'selected' : ''}>Quick drills only</option>
+                <option value="synthesis" ${appState.filters.tier === 'synthesis' ? 'selected' : ''}>Multi-step only</option>
               </select>
             </label>
             ${appState.skillMap?.chunks?.length ? `
@@ -7952,24 +7979,24 @@
           <div class="space-y-4">
             <div class="space-y-2">
               <div class="flex items-center justify-between">
-                <h3 class="font-display text-sm font-semibold text-slate-900">Top priority</h3>
-                <span class="text-xs font-mono text-slate-500">${rs ? `Reps: ${rs.reps}` : 'New'}</span>
+                <h3 class="font-display text-sm font-semibold text-slate-900">Up next, and why</h3>
+                <span class="text-xs text-slate-500">${rs ? `You have seen this ${rs.reps} time${rs.reps === 1 ? '' : 's'}` : 'First time'}</span>
               </div>
               <div class="divide-y divide-slate-100">
                 ${(cur.queuePreview || []).slice(0, 6).map((item, idx) => `
                   <button type="button" data-jump-node="${esc(item.node.id)}" class="w-full text-left py-2.5 flex items-center justify-between gap-2 hover:bg-slate-50 px-1.5 rounded transition-colors ${item.node.id === node.id ? 'bg-blue-50/60' : ''}">
                     <div class="min-w-0">
                       <div class="text-sm font-medium text-slate-900 truncate">${idx === 0 ? '▸ ' : ''}${esc(item.node.metadata.title)}</div>
-                      <div class="text-xs text-slate-500">${esc(item.node.moduleCode)} · W${item.node.metadata.week} · ${item.node.tier}</div>
+                      <div class="text-xs text-slate-500 truncate">${esc((appState.skillMap && appState.skillMap.chunks?.find((c) => c.id === Weakness.chunksOf(appState.skillMap, item.node.id)[0])?.name) || item.node.metadata.primaryTheme)}</div>
                     </div>
-                    <span class="text-xs font-mono text-slate-500 shrink-0">${item.meta.score.toFixed(1)}</span>
+                    ${(() => { const why = Weakness.queueReason(item.meta, Boolean(appState.reviewMap[item.node.id])); return `<span class="shrink-0 text-[11px] font-medium px-2 py-0.5 rounded-full border ${why.cls}" data-queue-reason>${why.label}</span>`; })()}
                   </button>
                 `).join('')}
               </div>
             </div>
             <div class="space-y-2 pt-3 border-t border-slate-200">
               <h3 class="font-display text-sm font-semibold text-slate-900">Stereochemistry 3D Lab</h3>
-              <p class="text-xs text-slate-600">Inspect any of the ${goldenCount} syllabus coordination formulas (${IsomerEngine.BANK.length} total in engine) in the interactive 3D explorer with live mirror planes.</p>
+              <p class="text-xs text-slate-600">Inspect any of the ${goldenCount} syllabus coordination formulas in the interactive 3D explorer, with live mirror planes.</p>
               <button type="button" id="btnLaunchExplorer" class="w-full px-3 py-2 text-sm font-medium border border-slate-300 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-800">Open 3D Isomer Explorer</button>
             </div>
           </div>
@@ -8059,7 +8086,7 @@
           const gridClass = slot.layout === 'table' ? 'divide-y divide-slate-200 border border-slate-200 rounded-lg overflow-hidden bg-white' : 'grid grid-cols-1 sm:grid-cols-3 gap-3';
           inputHtml = `
             <div class="space-y-2">
-              <div class="text-xs font-semibold uppercase tracking-wider text-slate-600">Mapped Response Fields</div>
+              <div class="text-xs font-semibold uppercase tracking-wider text-slate-600">Your answers</div>
               <div class="${gridClass}">
                 ${slot.fields.map((f) => {
                   const fRes = evalResult?.fieldResults?.[f.key];
@@ -8181,7 +8208,7 @@
                 </div>
               ` : ''}
               <div class="flex flex-wrap items-center justify-between gap-2">
-                <label for="synthesisInput" class="text-xs font-semibold uppercase tracking-wider text-slate-600">${drawMode ? 'Paper Drawing Notes / Derivation (Optional)' : 'Synthesis Response (Uncued Derivation)'}</label>
+                <label for="synthesisInput" class="text-xs font-semibold uppercase tracking-wider text-slate-600">${drawMode ? 'Notes from your paper working (optional)' : 'Your answer (write it from memory)'}</label>
                 <div class="flex items-center gap-3 text-xs">
                   <span id="wordCountReadout" class="font-mono ${unlocked ? 'text-emerald-700' : 'text-slate-500'}">${wc} / ${minW} words</span>
                   ${slot.allowPaperScratchpad || drawMode ? `
@@ -8194,9 +8221,9 @@
               <textarea data-bounded-scroll id="synthesisInput" rows="5" ${phase !== 'answering' ? 'disabled' : ''} placeholder="${esc(slot.placeholder || 'Write your mechanistic or mathematical reasoning...')}" class="w-full text-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700 leading-relaxed">${esc(cur.userInput)}</textarea>
               ${phase === 'answering' ? `
                 <div class="flex flex-wrap items-center justify-between gap-3">
-                  <span class="text-xs text-slate-500">${unlocked ? 'Ready — commit to reveal the reference comparison and self-grading rubric.' : `Write at least ${minW} words (or mark paper scratchpad) to unlock the rubric.`}</span>
+                  <span class="text-xs text-slate-500">${unlocked ? 'Ready: show the marking points and mark yourself.' : `Write at least ${minW} words, or tick "solved on paper", to see the marking points.`}</span>
                   <button type="button" id="btnUnlockRubric" ${unlocked ? '' : 'disabled'} class="px-4 py-2 text-sm font-medium rounded-lg bg-blue-700 text-white hover:bg-blue-800 disabled:bg-slate-200 disabled:text-slate-500 transition-colors">
-                    ${drawMode ? 'Commit &amp; Compare with Rubric' : 'Commit &amp; Unlock Rubric'}
+                    ${drawMode ? 'Compare with marking points' : 'Show marking points'}
                   </button>
                 </div>
               ` : ''}
@@ -8215,8 +8242,8 @@
             <div class="mt-5 pt-5 border-t border-slate-200 space-y-4" id="rubricSection">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <h3 class="font-display text-sm font-semibold text-slate-900">${drawThenCompare ? 'Reference Diagram Comparison &amp; Self-Grading Rubric' : 'Atomic Self-Grading Rubric'}</h3>
-                  <p class="text-xs text-slate-500">Check each criterion strictly present in your written or paper derivation. Missing a <span class="text-rose-700 font-semibold">Critical Step</span> triggers the Zero-Step Veto (score capped at 45%).</p>
+                  <h3 class="font-display text-sm font-semibold text-slate-900">${drawThenCompare ? 'Compare with the reference and mark yourself' : 'Mark yourself'}</h3>
+                  <p class="text-xs text-slate-500">Tick each point that is clearly in your answer. Missing a <span class="text-rose-700 font-semibold">critical step</span> caps your score at 45%.</p>
                 </div>
                 ${phase === 'rubric' && llmCfg?.enabled ? `
                   <button type="button" id="btnLLMAssist" class="px-3 py-1.5 text-xs font-medium border border-blue-200 bg-blue-50 text-blue-800 rounded-lg hover:bg-blue-100">AI Pre-Check (${esc(llmCfg.model || 'LLM')})</button>
@@ -8239,7 +8266,7 @@
                           <div>${esc(item.criterion)}</div>
                           <div class="mt-1 flex flex-wrap items-center gap-3 text-xs text-slate-500 font-mono">
                             <span>${item.marks} mark${item.marks === 1 ? '' : 's'}</span>
-                            ${item.isCritical ? '<span class="text-rose-700 font-semibold">CRITICAL STEP (Veto if missed)</span>' : ''}
+                            ${item.isCritical ? '<span class="text-rose-700 font-semibold">CRITICAL STEP (caps your score if missed)</span>' : ''}
                             ${item.linkedSkillTag ? `<span>Skill: ${esc(item.linkedSkillTag)}</span>` : ''}
                           </div>
                         </div>
@@ -8271,7 +8298,6 @@
 
           const missedTags = evalResult.missedSkillTags || [];
           const nextDueRs = appState.reviewMap[node.id];
-          const nextDueDays = nextDueRs ? Math.max(0.25, (nextDueRs.dueMs - Date.now()) / 86400000).toFixed(1) : '—';
           const explanationAsset = variant.explanationVisualAsset || variant.explanationAsset || (variant.explanationImage ? { type: 'image', dataUrl: variant.explanationImage } : null);
           const chainNextId = node.metadata?.chainNext || null;
 
@@ -8281,17 +8307,17 @@
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div class="font-display font-semibold text-base">
                     Score: <span class="font-mono">${pct}%</span>
-                    ${evalResult.vetoApplied ? ' · Zero-Step Veto Applied (≤ 45%)' : evalResult.passed ? ' · Passed' : ' · Needs Review'}
+                    ${evalResult.vetoApplied ? ' · Capped at 45%' : evalResult.passed ? ' · Passed' : ' · Not there yet'}
                   </div>
-                  <div class="text-xs font-mono">Next review in ${nextDueDays}d · Stability S=${nextDueRs?.S ?? '—'}</div>
+                  ${nextDueRs ? `<div class="text-xs">You'll see this again ${Weakness.humanDue(nextDueRs.dueMs)}</div>` : ''}
                 </div>
                 <p class="text-sm mt-1">${esc(evalResult.feedback)}</p>
                 ${missedTags.length ? `
                   <div class="mt-3 pt-3 border-t border-rose-200 flex flex-wrap items-center gap-2">
-                    <span class="text-xs font-semibold uppercase tracking-wider">Fault Isolation — Drill Weak Sub-Skills:</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider">Drill the weak sub-skills:</span>
                     ${missedTags.map((tag) => `
                       <button type="button" data-drill-skill="${esc(tag)}" class="px-2.5 py-1 text-xs font-mono font-medium bg-white border border-rose-300 text-rose-800 rounded-md hover:bg-rose-100">
-                        Drill: ${esc(tag)} →
+                        Drill: ${esc(Weakness.humanTag(tag))} →
                       </button>
                     `).join('')}
                   </div>
@@ -8302,7 +8328,7 @@
 
               ${(inst.resolvedExplanation || explanationAsset) ? `
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 prose-math text-sm text-slate-800 space-y-3" data-explanation-block>
-                  <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Canonical Derivation &amp; Explanation</div>
+                  <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Explanation</div>
                   ${inst.resolvedExplanation ? renderMarkdownLite(inst.resolvedExplanation) : ''}
                   ${explanationAsset ? renderVisualAssetHtml(explanationAsset, 'mt-2', 'explanation-visual-asset') : ''}
                 </div>
@@ -8312,10 +8338,20 @@
                 const builtIn = variant.memoryHook || node.metadata?.memoryHook || '';
                 const caveat = builtIn ? (variant.memoryHookNote || node.metadata?.memoryHookNote || '') : '';
                 const mine = appState.myHooks[node.id] || '';
+                if (!builtIn) {
+                  return `
+                <details class="rounded-xl border border-sky-200 bg-sky-50/50 px-4 text-sm" data-add-hook ${mine ? 'open' : ''}>
+                  <summary class="cursor-pointer min-h-[36px] flex items-center text-xs font-semibold text-sky-800">${mine ? 'My hook' : '＋ Add my hook'}</summary>
+                  <div class="pb-3 space-y-1">
+                    <textarea data-bounded-scroll id="myHookInput" rows="2" placeholder="Your own picture, pun or reason…" class="w-full text-sm px-2.5 py-2 border border-slate-300 rounded-lg bg-white">${esc(mine)}</textarea>
+                    <div class="text-[11px] text-slate-500">Saved on this device and shown here next time.</div>
+                  </div>
+                </details>`;
+                }
                 return `
                 <div class="bg-sky-50/70 border border-sky-200 rounded-xl p-4 text-sm text-slate-800 space-y-2" data-memory-hook-block>
                   <div class="text-xs font-semibold uppercase tracking-wider text-sky-800">Memory hook</div>
-                  ${builtIn ? `<div class="prose-math">${renderMarkdownLite(builtIn)}</div>` : '<div class="text-xs text-slate-500">No built-in hook for this one yet.</div>'}
+                  <div class="prose-math">${renderMarkdownLite(builtIn)}</div>
                   ${caveat ? `<div class="text-xs text-amber-950 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-1.5" data-hook-caveat><span class="font-semibold">Caveat:</span> ${esc(caveat)}</div>` : ''}
                   <label class="block">
                     <span class="block text-xs font-medium text-slate-600 mb-1">My hook (saved on this device)</span>
@@ -8353,7 +8389,7 @@
                     </button>
                   ` : ''}
                   <button type="button" id="btnNextQuestion" class="px-5 py-2 text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">
-                    Next Priority Question →
+                    Next question →
                   </button>
                 </div>
               </div>
@@ -8370,15 +8406,16 @@
 
         const showStemVisual = variant.visualAsset && !(drawThenCompare && !variant.referenceImage && !variant.comparisonVisualAsset);
 
-        const tierLabel = node.tier === 'synthesis' ? 'Synthesis' : 'Atomic';
+        const tierLabel = node.tier === 'synthesis' ? 'Multi-step' : 'Quick drill';
+        const crumbTopicId = appState.skillMap ? Weakness.chunksOf(appState.skillMap, node.id)[0] : null;
+        const crumbTopic = (crumbTopicId && appState.skillMap.chunks?.find((c) => c.id === crumbTopicId)?.name) || node.metadata.primaryTheme;
         const stepBtn = (key, label, disabled) => `<button type="button" role="tab" data-step-go="${key}" aria-selected="${step === key}" ${disabled ? 'disabled' : ''}>${label}</button>`;
         root.innerHTML = `
           <div class="view" id="studyView" data-step="${step}">
             <div class="shrink-0 flex items-center justify-between gap-2">
               <div class="min-w-0 text-[11px] sm:text-xs text-slate-500 truncate">
-                <span class="font-mono font-semibold text-slate-800">${esc(node.moduleCode)}</span>
-                · W${node.metadata.week} · <span class="${node.tier === 'synthesis' ? 'text-blue-700 font-semibold' : ''}">${tierLabel}</span>
-                · ${esc(node.metadata.primaryTheme)}
+                ${appState.modules.length > 1 ? `<span class="font-mono font-semibold text-slate-800">${esc(node.moduleCode)}</span> · ` : ''}<span class="font-semibold text-slate-700">${esc(crumbTopic)}</span>
+                · <span class="${node.tier === 'synthesis' ? 'text-blue-700 font-semibold' : 'hidden sm:inline'}">${tierLabel}</span>
               </div>
               <div class="flex items-center gap-1.5 shrink-0">
                 <button type="button" data-open-sheet="queue" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700">Queue</button>
@@ -8973,7 +9010,7 @@
                 <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-600">Chapters (${esc(mod.moduleCode)})</div>
                 <div class="flex items-center gap-2 text-xs">
                   <button type="button" id="btnMockSelectAllCh" class="px-2.5 py-1 border border-slate-300 rounded hover:bg-slate-50 text-slate-700">All</button>
-                  <button type="button" id="btnMockSelectPopulatedCh" class="px-2.5 py-1 border border-slate-300 rounded hover:bg-slate-50 text-slate-700">With nodes</button>
+                  <button type="button" id="btnMockSelectPopulatedCh" class="px-2.5 py-1 border border-slate-300 rounded hover:bg-slate-50 text-slate-700">With questions</button>
                 </div>
               </div>
               <div class="view-scroll grid grid-cols-1 sm:grid-cols-2 gap-2 content-start">
@@ -8987,7 +9024,7 @@
                             <span class="font-mono font-semibold text-slate-700 whitespace-nowrap shrink-0">Ch ${w.weekNum}</span>
                             <span class="text-slate-900 truncate">${esc(w.title)}</span>
                           </div>
-                          <span class="font-mono text-[11px] text-slate-500 shrink-0">${cCount} node${cCount === 1 ? '' : 's'}</span>
+                          <span class="font-mono text-[11px] text-slate-500 shrink-0">${cCount} question${cCount === 1 ? '' : 's'}</span>
                         </label>
                       `;
                     }).join('')}
@@ -9474,7 +9511,7 @@
         if (!appState.skillMap) {
           const err = appState.content.skillMap?.error;
           const msg = `<p class="text-sm text-slate-500">Skill map not loaded${err ? ': ' + esc(err) : '.'}</p>`;
-          return { summary: msg, list: msg };
+          return { summary: msg, list: msg, contentCheck: msg, readiness: null };
         }
         const map = appState.skillMap;
         const nodes = appState.nodes.filter((n) => n.moduleCode === map.module);
@@ -9502,33 +9539,23 @@
         const pct = (x) => Math.round(x * 100);
         const gapCount = analysis.missingIds.length;
         const summary = `
-          <div class="space-y-3">
+          <div class="space-y-1">
+            <h3 class="font-display text-sm font-semibold text-slate-900">${rows.length} exam skills in ${groups.length} topics</h3>
+            <p class="text-xs text-slate-500">Each skill is weighted by its exam marks. A skill counts as ready when your latest answers on its questions scored 70% or more.</p>
+          </div>`;
+        const contentCheck = `
+          <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-3">
             <div>
-              <h3 class="font-display text-sm font-semibold text-slate-900">Skill map · ${esc(map.module)}</h3>
-              <p class="text-xs text-slate-500">${rows.length} exam skills in ${groups.length} topics, weighted by marks. A skill is ready in proportion to its mapped questions you last scored ≥ 0.7 on; questions not yet in the bank count as not ready.</p>
+              <h2 class="font-display text-base font-semibold text-slate-900">Content check</h2>
+              <p class="text-xs text-slate-500">Whether every exam skill has questions in the bank. For maintaining the question bank, not for studying.</p>
             </div>
             <div class="grid grid-cols-3 gap-2">
-              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
-                <div class="text-[11px] text-slate-500">Map-weighted readiness</div>
-                <div class="font-mono text-xl font-bold text-emerald-700 mt-0.5">${pct(readiness)}%</div>
-              </div>
-              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
-                <div class="text-[11px] text-slate-500">Question coverage</div>
-                <div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${pct(coverage)}%</div>
-                <div class="text-[11px] font-mono text-slate-500">${gapCount} not in bank</div>
-              </div>
-              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
-                <div class="text-[11px] text-slate-500">Skills with no questions</div>
-                <div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${analysis.orphanSkills.length + analysis.emptySkills.length}</div>
-                <div class="text-[11px] font-mono text-slate-500">${analysis.partialSkills.length} partial</div>
-              </div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><div class="text-[11px] text-slate-500">Questions present</div><div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${pct(coverage)}%</div><div class="text-[11px] font-mono text-slate-500">${gapCount} missing</div></div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><div class="text-[11px] text-slate-500">Skills with no questions</div><div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${analysis.orphanSkills.length + analysis.emptySkills.length}</div></div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><div class="text-[11px] text-slate-500">Partly covered</div><div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${analysis.partialSkills.length}</div></div>
             </div>
-            ${gapCount ? `
-              <details class="text-xs">
-                <summary class="cursor-pointer font-medium text-amber-800 py-1">Content gaps: mapped question ids missing from the bank</summary>
-                <div class="font-mono text-slate-600 mt-2 leading-relaxed">${analysis.missingIds.map(esc).join(', ')}</div>
-              </details>` : ''}
-          </div>`;
+            ${gapCount ? `<details class="text-xs"><summary class="cursor-pointer font-medium text-amber-800 py-1">Mapped questions missing from the bank</summary><div class="font-mono text-slate-600 mt-2 leading-relaxed">${analysis.missingIds.map(esc).join(', ')}</div></details>` : '<p class="text-xs text-emerald-800">Every mapped question is in the bank.</p>'}
+          </section>`;
         const sum = (g, f) => g.rows.reduce((acc, r) => acc + f(r), 0);
         const groupHtml = (g) => {
           const total = sum(g, (r) => r.total), ready = sum(g, (r) => r.proficient);
@@ -9564,7 +9591,7 @@
               ${part ? `<h4 class="text-[11px] font-semibold uppercase tracking-wide text-slate-500 pt-1">${esc(part)}</h4>` : ''}
               ${groups.filter((g) => g.part === part).map(groupHtml).join('')}`).join('')}
           </div>`;
-        return { summary, list };
+        return { summary, list, contentCheck, readiness };
       }
 
       function renderReadinessView(root) {
@@ -9583,51 +9610,76 @@
             <div class="text-[11px] font-mono text-slate-500">${sub}</div>
           </div>`;
 
-        const overviewHtml = modStats.map(({ mod, readiness }) => `
-          <section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
-            <div class="flex items-start justify-between gap-3">
-              <div class="min-w-0">
-                <div class="text-xs font-mono font-semibold text-blue-700">${esc(mod.moduleCode)}</div>
-                <h2 class="font-display text-base font-semibold text-slate-900">${esc(mod.title)}</h2>
+        const overviewHtml = (() => {
+          const map = appState.skillMap;
+          const logsN = appState.masteryLogs.length;
+          const card = (inner) => `<section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">${inner}</section>`;
+          let start;
+          if (!logsN) {
+            start = card(`<h2 class="font-display text-base font-semibold text-slate-900">Where to start</h2>
+              <p class="text-sm text-slate-600">Answer a few questions and this page will point you at your weakest topic.</p>
+              <button type="button" data-go-study class="px-4 py-2 text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">Start studying</button>`);
+          } else {
+            const ranked = map ? Weakness.topicStats(appState.masteryLogs, map).filter((t) => t.ranked) : [];
+            const weakest = ranked[0];
+            const titles = Object.fromEntries([...appState.nodes, ...appState.composerNodes].map((n) => [n.id, n.metadata?.title]));
+            const toFixN = map ? Weakness.unresolvedMisses(appState.masteryLogs, (id) => titles[id], map, 99).length : 0;
+            start = card(`<h2 class="font-display text-base font-semibold text-slate-900">Where to start</h2>
+              ${weakest ? `<div class="flex items-start justify-between gap-3">
+                  <div class="min-w-0"><div class="text-xs text-slate-500">Your weakest topic</div><div class="text-sm font-semibold text-slate-900">${esc(weakest.name)}</div><div class="text-[11px] text-slate-500">${weakest.missed} of your last ${weakest.window} answers missed</div></div>
+                  <button type="button" data-weak-drill="${esc(weakest.id)}" class="shrink-0 px-3 py-1.5 text-xs font-medium bg-slate-900 text-white rounded-md hover:bg-slate-800">Drill</button>
+                </div>` : '<p class="text-sm text-slate-600">Keep going: topics are ranked once you have answered two questions in them.</p>'}
+              ${toFixN ? `<div class="flex items-center justify-between gap-3 pt-3 border-t border-slate-100"><span class="text-sm text-slate-800">${toFixN} question${toFixN === 1 ? '' : 's'} still to fix</span><button type="button" data-seg-jump="weak" class="shrink-0 px-3 py-1.5 text-xs font-medium border border-slate-300 bg-white rounded-md text-slate-800 hover:bg-slate-50">See weak spots</button></div>` : ''}`);
+          }
+          const modCards = modStats.map(({ mod, readiness }) => `
+            <section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
+              <div class="flex items-start justify-between gap-3">
+                <div class="min-w-0">
+                  ${appState.modules.length > 1 ? `<div class="text-xs font-mono font-semibold text-blue-700">${esc(mod.moduleCode)}</div>` : ''}
+                  <h2 class="font-display text-base font-semibold text-slate-900">${esc(mod.title)}</h2>
+                </div>
+                <div class="text-right shrink-0">
+                  ${readiness.daysToExam !== null ? `
+                    <div class="font-mono text-lg font-bold text-slate-900">${Math.round(readiness.daysToExam)}d</div>
+                    <div class="text-[11px] text-slate-500">to finals</div>
+                  ` : `
+                    <button type="button" data-goto-settings class="text-xs font-medium text-blue-700 hover:underline">Set exam date</button>
+                    <div class="text-[11px] text-slate-500">so the app can prioritise</div>
+                  `}
+                </div>
               </div>
-              <div class="text-right font-mono shrink-0">
-                ${readiness.daysToExam !== null ? `
-                  <div class="text-lg font-bold text-slate-900">${Math.round(readiness.daysToExam)}d</div>
-                  <div class="text-[11px] text-slate-500">to finals</div>
-                ` : `
-                  <button type="button" data-goto-settings class="text-xs font-mono font-medium text-blue-700 hover:underline">Set exam date</button>
-                  <div class="text-[11px] text-slate-500">urgency = 1</div>
-                `}
+              <div class="grid grid-cols-2 gap-2">
+                ${skillParts.readiness !== null ? tile('Exam readiness', `${Math.round(skillParts.readiness * 100)}%`, 'weighted by marks', 'text-emerald-700') : ''}
+                ${tile('Questions tried', `${Math.round(readiness.attemptedPct)}%`, `${readiness.attemptedCount} of ${readiness.totalNodes}`)}
+                ${tile('Answered well', `${Math.round(readiness.proficientPct)}%`, `${readiness.proficientCount} of ${readiness.totalNodes}`, 'text-emerald-700')}
+                ${tile('Not tried yet', `${readiness.neverAttemptedCount}`, 'questions')}
               </div>
-            </div>
-            <div class="grid grid-cols-2 gap-2">
-              ${tile('Nodes attempted', `${Math.round(readiness.attemptedPct)}%`, `${readiness.attemptedCount} / ${readiness.totalNodes}`)}
-              ${tile('Last attempt ≥ 0.7', `${Math.round(readiness.proficientPct)}%`, `${readiness.proficientCount} / ${readiness.totalNodes} proficient`, 'text-emerald-700')}
-              ${tile('Never attempted', `${readiness.neverAttemptedCount}`, `of ${readiness.totalNodes} nodes`)}
-              ${tile('Retention projection', `${Math.round(readiness.projectedRetention * 100)}%`, `target ${Math.round((mod.targetRetention || 0.9) * 100)}% (model est.)`)}
-            </div>
-          </section>
-        `).join('') + `<section class="bg-white border border-slate-200 rounded-xl p-4">${skillParts.summary}</section>`;
+              <details class="text-xs text-slate-600">
+                <summary class="cursor-pointer min-h-[28px] flex items-center font-medium text-slate-700">About these numbers</summary>
+                <p class="mt-1 leading-relaxed">“Answered well” means your most recent attempt on a question scored 70% or more. “Exam readiness” counts each skill in proportion to its marks. A forgetting-curve model estimates you would recall about ${Math.round(readiness.projectedRetention * 100)}% of what you have seen today (the target is ${Math.round((mod.targetRetention || 0.9) * 100)}%); treat that as a rough guide.</p>
+              </details>
+            </section>`).join('');
+          return start + modCards + `<section class="bg-white border border-slate-200 rounded-xl p-4">${skillParts.summary}</section>`;
+        })();
 
         const chaptersHtml = modStats.map(({ mod, readiness }) => `
           <section class="bg-white border border-slate-200 rounded-xl p-4">
-            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">${esc(mod.moduleCode)} · attempted · last score ≥ 0.7 · never attempted</div>
+            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">How much of each chapter you have tried and answered well</div>
             <div class="divide-y divide-slate-100">
               ${readiness.weeks.map((w) => `
                 <div class="py-2.5 text-xs">
                   <div class="min-w-0">
                     <span class="font-mono font-semibold text-slate-700">Ch ${w.weekNum}</span>
                     <span class="text-slate-900 font-medium ml-1.5">${esc(w.title)}</span>
-                    <span class="text-slate-400 font-mono ml-1">(×${w.examWeight})</span>
+                    ${w.examWeight !== 1 ? `<span class="text-slate-400 ml-1">(exam weight ×${w.examWeight})</span>` : ''}
                   </div>
                   ${w.count ? `
                     <div class="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 font-mono">
-                      <span class="text-slate-900 font-semibold">${Math.round(w.attemptedPct)}% attempted</span>
-                      <span class="text-emerald-700 font-semibold">${Math.round(w.proficientPct)}% ≥0.7</span>
-                      <span class="text-slate-600">${w.neverAttemptedCount} never</span>
-                      <span class="text-slate-400">${Math.round(w.projectedRetention * 100)}% est.</span>
+                      <span class="text-slate-900 font-semibold">${Math.round(w.attemptedPct)}% tried</span>
+                      <span class="text-emerald-700 font-semibold">${Math.round(w.proficientPct)}% answered well</span>
+                      <span class="text-slate-600">${w.neverAttemptedCount} not tried</span>
                     </div>
-                  ` : `<div class="mt-1 font-mono text-slate-400">0 nodes</div>`}
+                  ` : `<div class="mt-1 text-slate-400">No questions yet</div>`}
                 </div>`).join('')}
             </div>
           </section>
@@ -9739,6 +9791,7 @@
           btn.addEventListener('click', () => drillTopic(btn.dataset.drillChunk));
         });
         $$('[data-weak-drill]', root).forEach((btn) => btn.addEventListener('click', () => drillTopic(btn.dataset.weakDrill)));
+        $$('[data-seg-jump]', root).forEach((btn) => btn.addEventListener('click', () => { appState.ui.readinessTab = btn.dataset.segJump; render(); }));
         $$('[data-weak-redo]', root).forEach((btn) => btn.addEventListener('click', () => redoNode(btn.dataset.weakRedo)));
         $('#btnWeakShowAll', root)?.addEventListener('click', () => { appState.ui.weakAll = !appState.ui.weakAll; render(); });
         $('[data-go-study]', root)?.addEventListener('click', () => { appState.route = 'study'; render(); });
@@ -9774,7 +9827,7 @@
         root.innerHTML = `
           <div class="view">
             <div class="shrink-0 flex items-center justify-between gap-2">
-              <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900">Question Bank <span class="font-mono text-xs font-normal text-slate-500">${appState.nodes.length} nodes</span></h1>
+              <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900">Question Bank <span class="font-mono text-xs font-normal text-slate-500">${appState.nodes.length} questions</span></h1>
               <div class="flex items-center gap-1.5 shrink-0">
                 <button type="button" id="btnBankOpenExplorer" class="px-3 py-1.5 text-xs font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-800">3D Explorer</button>
                 <button type="button" id="btnNewNode" class="px-3 py-1.5 text-xs font-medium bg-slate-900 text-white hover:bg-slate-800 rounded-lg">+ New</button>
@@ -9789,16 +9842,16 @@
                   ${appState.modules.map((m) => `<option value="${esc(m.moduleCode)}" ${f.moduleCode === m.moduleCode ? 'selected' : ''}>${esc(m.moduleCode)}</option>`).join('')}
                 </select>
                 <select id="bankTierSel" aria-label="Tier" class="flex-1 min-w-0 text-sm border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
-                  <option value="ALL" ${f.tier === 'ALL' ? 'selected' : ''}>All Tiers</option>
-                  <option value="atomic" ${f.tier === 'atomic' ? 'selected' : ''}>Atomic</option>
-                  <option value="synthesis" ${f.tier === 'synthesis' ? 'selected' : ''}>Synthesis</option>
+                  <option value="ALL" ${f.tier === 'ALL' ? 'selected' : ''}>All types</option>
+                  <option value="atomic" ${f.tier === 'atomic' ? 'selected' : ''}>Quick drill</option>
+                  <option value="synthesis" ${f.tier === 'synthesis' ? 'selected' : ''}>Multi-step</option>
                 </select>
                 <label class="inline-flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer shrink-0">
                   <input type="checkbox" id="bankShowGolden" ${f.includeGolden ? 'checked' : ''} class="accent-blue-700" />
                   <span>Golden (${goldenCount})</span>
                 </label>
               </div>
-              <div class="text-[11px] font-mono text-slate-500">Showing ${shown.length} of ${filtered.length} matching nodes</div>
+              <div class="text-[11px] font-mono text-slate-500">Showing ${shown.length} of ${filtered.length} matching questions</div>
             </div>
 
             <div class="view-scroll bg-white border border-slate-200 rounded-xl divide-y divide-slate-100">
@@ -9807,7 +9860,7 @@
                   <div class="min-w-0">
                     <div class="text-sm font-medium text-slate-900 sm:truncate">${esc(n.metadata.title)}</div>
                     <div class="text-xs text-slate-500 mt-0.5">
-                      <span class="font-mono">${esc(n.moduleCode)}</span> · W${n.metadata.week} · ${n.tier} · ${n.variants.length} variant(s) · ${esc(n.metadata.primaryTheme)}
+                      ${esc((appState.skillMap && appState.skillMap.chunks?.find((c) => c.id === Weakness.chunksOf(appState.skillMap, n.id)[0])?.name) || n.metadata.primaryTheme)} · ${n.tier === 'synthesis' ? 'Multi-step' : 'Quick drill'} · ${n.variants.length} version${n.variants.length === 1 ? '' : 's'}
                     </div>
                   </div>
                   <div class="flex items-center gap-2 shrink-0">
@@ -9821,7 +9874,7 @@
                 <div class="p-3 text-center">
                   <button type="button" id="bankShowMore" class="px-4 py-2 text-sm font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-800">Show ${Math.min(60, filtered.length - limit)} more</button>
                 </div>` : ''}
-              ${filtered.length === 0 ? '<div class="p-6 text-center text-sm text-slate-500">No nodes match these filters.</div>' : ''}
+              ${filtered.length === 0 ? '<div class="p-6 text-center text-sm text-slate-500">No questions match these filters.</div>' : ''}
             </div>
           </div>
         `;
@@ -10009,6 +10062,7 @@
             </section>
         `;
         const secData = `
+            ${skillMapParts().contentCheck}
             <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-4">
               <h2 class="font-display text-base font-semibold text-slate-900">Full JSON Bundle Export &amp; Import</h2>
               <div class="flex flex-wrap items-center gap-3">
@@ -10157,7 +10211,7 @@
           a.click();
           a.remove();
           URL.revokeObjectURL(url);
-          showToast(`Exported ${bundle.questionNodes.length} nodes and ${bundle.attemptLogs.length} attempts.`);
+          showToast(`Exported ${bundle.questionNodes.length} questions and ${bundle.attemptLogs.length} attempts.`);
         });
 
         $('#bundleFileInput', root)?.addEventListener('change', async (e) => {
@@ -10169,7 +10223,7 @@
             const mode = $('#importModeSel', root).value;
             const stats = await DB.importBundle(parsed, mode);
             await refreshStore();
-            showToast(`Imported (${mode}): ${stats.questionNodes} nodes, ${stats.reviewStates} states, ${stats.attemptLogs} logs.`);
+            showToast(`Imported (${mode}): ${stats.questionNodes} questions, ${stats.reviewStates} review records, ${stats.attemptLogs} attempts.`);
             render();
           } catch (err) {
             showToast('Import failed: ' + err.message, true);

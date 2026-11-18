@@ -203,3 +203,17 @@ test('sweepOrphanedProgress: a database error is swallowed and reported as zero 
   db.reviewStates.toCollection = () => { throw new Error('boom'); };
   same(await Content.sweepOrphanedProgress(db), { reviewStates: 0, attemptLogs: 0 });
 });
+
+test('content loading: falls back to public/content when the repo root is served as-is (e.g. GitHub Pages from main)', async () => {
+  const rootLayout = { ['public/' + Content.BANK_URL]: bank, ['public/' + Content.SKILL_MAP_URL]: skillMap };
+  const db = fakeDb();
+  const res = await Content.syncBank(db, fakeFetch(rootLayout));
+  assert.equal(res.state, 'synced');
+  assert.equal(db.nodes.size, bank.questionNodes.length);
+  const sm = await Content.loadSkillMap(fakeFetch(rootLayout));
+  assert.equal(sm.error, null);
+  // neither location present: one error that names both attempts
+  const none = await Content.syncBank(fakeDb(), fakeFetch({}));
+  assert.equal(none.state, 'unavailable');
+  assert.match(none.error, /content\/cm2021\/question-bank\.json.*\|.*public\/content\/cm2021\/question-bank\.json/);
+});

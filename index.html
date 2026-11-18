@@ -6519,6 +6519,20 @@
         }
       }
 
+      /* Try the site-root path first (Vite build, dev server), then the repo layout (public/ served as-is,
+         e.g. GitHub Pages deploying the repository root). */
+      async function fetchContent(url, fetchFn) {
+        let lastErr;
+        for (const candidate of [url, 'public/' + url]) {
+          try {
+            return await fetchJson(candidate, fetchFn);
+          } catch (err) {
+            lastErr = lastErr ? new Error(lastErr.message + ' | ' + err.message) : err;
+          }
+        }
+        throw lastErr;
+      }
+
       function bankKey(bundle) {
         return `${bundle?.bundleVersion ?? '?'}@${bundle?.exportedAt ?? '?'}`;
       }
@@ -6553,7 +6567,7 @@
       async function syncBank(db, fetchFn) {
         let bundle;
         try {
-          bundle = await fetchJson(BANK_URL, fetchFn);
+          bundle = await fetchContent(BANK_URL, fetchFn);
         } catch (err) {
           return { state: 'unavailable', error: err.message, rejected: [] };
         }
@@ -6625,7 +6639,7 @@
       /* I/O: never throws; the app works without a skill map. */
       async function loadSkillMap(fetchFn) {
         try {
-          const map = await fetchJson(SKILL_MAP_URL, fetchFn);
+          const map = await fetchContent(SKILL_MAP_URL, fetchFn);
           const res = validateSkillMap(map);
           if (!res.valid) return { map: null, error: `${SKILL_MAP_URL}: ${res.errors.slice(0, 3).join('; ')}` };
           return { map, error: null };
@@ -6719,7 +6733,7 @@
 
       return {
         BANK_URL, SKILL_MAP_URL, RECORD_KEY,
-        fetchJson, bankKey, isReservedNodeId, planBankSync, syncBank, sweepOrphanedProgress,
+        fetchJson, fetchContent, bankKey, isReservedNodeId, planBankSync, syncBank, sweepOrphanedProgress,
         validateSkillMap, loadSkillMap, analyzeSkillMap, nodeProgress, skillRows,
       };
     })();

@@ -828,6 +828,7 @@
           if (filters.tier && filters.tier !== 'ALL' && n.tier !== filters.tier) return false;
           if (filters.skillTag && !(n.metadata?.conceptTags || []).includes(filters.skillTag)) return false;
           if (filters.chunkNodeIds && !filters.chunkNodeIds.includes(n.id)) return false;
+          if (filters.masteryAdj?.exclude.has(n.id) && !filters.forceNodeId) return false;
           if (filters.excludeNodeId && n.id === filters.excludeNodeId && nodes.length > 1) return false;
           if (!includeGolden && !filters.forceNodeId && n.metadata?.isGoldenBank && !reviewMap[n.id]) return false;
           return true;
@@ -843,10 +844,12 @@
           }
         }
 
-        const scored = pool.map((node) => ({
-          node,
-          meta: priorityScore(node, reviewMap[node.id], moduleMap, faultMap, nowMs),
-        })).sort((a, b) => b.meta.score - a.meta.score);
+        const scored = pool.map((node) => {
+          const meta = priorityScore(node, reviewMap[node.id], moduleMap, faultMap, nowMs);
+          const m = filters.masteryAdj?.mult.get(node.id);
+          if (m != null) { meta.score *= m; meta.masteryMult = m; } // retired skill: rarely comes up
+          return { node, meta };
+        }).sort((a, b) => b.meta.score - a.meta.score);
 
         if (filters.forceNodeId) {
           const forced = nodes.find((n) => n.id === filters.forceNodeId);
@@ -6801,6 +6804,108 @@
     })();
 
     /* =====================================================================
+       NAMESPACE: Mastery — retire skills you have shown you know, measured in card time
+       ---------------------------------------------------------------------
+       "Card time" is the position in the global attempt sequence, so "this skill has been away for N cards"
+       needs no clock. A skill retires after `successes` full-mark answers on different questions, each coming
+       after at least `minGapCards` other cards since the previous attempt on that skill (so it is retrieval
+       after interference, not an immediate repeat). Any answer under `failBelow` resets the evidence.
+       A retired skill keeps a small priority weight, and one maintenance check comes due after
+       `maintenanceCards` cards (doubling after every pass); failing a check re-opens the skill.
+       Everything is derived from the attempt log, so it cannot drift out of sync with it. Only the person's own
+       choices (remove, re-open) are stored.
+       ===================================================================== */
+    const Mastery = (() => {
+      const DEFAULTS = {
+        successes: 3,
+        minGapCards: 6,
+        passScore: 0.9,
+        failBelow: 0.7,
+        maintenanceCards: 30,
+        maxMaintenanceCards: 480,
+        retiredWeight: 0.08,
+      };
+      const cfgOf = (settings) => ({ ...DEFAULTS, ...(settings?.mastery || {}) });
+
+      /* Pure. `overrides.resetAt[skillId]` = card index before which attempts are ignored (a manual re-open). */
+      function evaluate(logs, map, nodes, settings, overrides = {}) {
+        const cfg = cfgOf(settings);
+        const resetAt = overrides?.resetAt || {};
+        const sorted = [...(logs || [])].sort((a, b) => a.timestamp - b.timestamp);
+        const nodeSkills = map?.nodeSkills || {};
+        const variantsByNode = {};
+        for (const n of nodes || []) variantsByNode[n.id] = (n.variants || []).length || 1;
+        const avail = {};
+        for (const sk of map?.skills || []) avail[sk.id] = (sk.nodes || []).reduce((a, id) => a + (variantsByNode[id] || 0), 0);
+        const required = (sid) => Math.max(2, Math.min(cfg.successes, avail[sid] || 0));
+
+        const st = {};
+        const fresh = () => ({ status: 'active', evidence: [], lastIdx: null, anchorIdx: null, interval: 0, checks: 0, retiredAtIdx: null });
+        sorted.forEach((log, idx) => {
+          for (const sid of nodeSkills[log.nodeId] || []) {
+            if (resetAt[sid] != null && idx < resetAt[sid]) continue;
+            const s0 = (st[sid] ||= fresh());
+            const g = Number(log.normalizedGrade) || 0;
+            const gap = s0.lastIdx == null ? Infinity : idx - s0.lastIdx - 1;
+            if (s0.status === 'retired') {
+              if (g < cfg.failBelow) { s0.status = 'active'; s0.evidence = []; s0.checks = 0; s0.interval = 0; }
+              else if (g >= cfg.passScore && idx - s0.anchorIdx - 1 >= s0.interval) {
+                s0.checks += 1;
+                s0.interval = Math.min(cfg.maxMaintenanceCards, s0.interval * 2);
+                s0.anchorIdx = idx;
+              }
+            } else if (g < cfg.failBelow) {
+              s0.evidence = [];
+            } else if (g >= cfg.passScore && gap >= cfg.minGapCards) {
+              const need = required(sid);
+              const mustDiffer = (avail[sid] || 0) >= need;
+              if (!(mustDiffer && s0.evidence.includes(log.variantId))) s0.evidence.push(log.variantId);
+              if (s0.evidence.length >= need) {
+                s0.status = 'retired'; s0.retiredAtIdx = idx; s0.anchorIdx = idx; s0.interval = cfg.maintenanceCards; s0.checks = 0;
+              }
+            }
+            s0.lastIdx = idx;
+          }
+        });
+        const cardCount = sorted.length;
+        const states = {};
+        for (const sk of map?.skills || []) {
+          const x = st[sk.id] || fresh();
+          states[sk.id] = {
+            status: x.status,
+            evidence: x.evidence.length,
+            required: required(sk.id),
+            checks: x.checks,
+            dueIn: x.status === 'retired' ? Math.max(0, x.anchorIdx + x.interval + 1 - cardCount) : null, // cards still to come between
+            retiredAtIdx: x.retiredAtIdx,
+          };
+        }
+        return { states, cardCount, cfg };
+      }
+
+      /* Pure. Which questions to hide and which to make rare, given the evaluation and the person's removals.
+         A question in several skills stays as visible as its most active skill. */
+      function adjustments(result, map, removed = {}, opts = {}) {
+        const exclude = new Set();
+        const mult = new Map();
+        for (const [nodeId, sids] of Object.entries(map?.nodeSkills || {})) {
+          if (!sids.length) continue;
+          if (sids.every((sid) => removed[sid])) { exclude.add(nodeId); continue; }
+          if (opts.ignoreRetired) continue;
+          let m = 0;
+          for (const sid of sids.filter((x) => !removed[x])) {
+            const x = result.states[sid];
+            m = Math.max(m, x && x.status === 'retired' && x.dueIn > 0 ? result.cfg.retiredWeight : 1);
+          }
+          if (m < 1) mult.set(nodeId, m);
+        }
+        return { exclude, mult };
+      }
+
+      return { DEFAULTS, evaluate, adjustments };
+    })();
+
+    /* =====================================================================
        NAMESPACE 7: UI — Holistic 1-Question-1-Answer Renderer & Views
        ===================================================================== */
     const UI = (() => {
@@ -6809,6 +6914,7 @@
         modules: [],
         nodes: [],
         skillMap: null,
+        masteryPrefs: { removed: {}, resetAt: {} },
         content: { bank: null, skillMap: null },
         ui: { sheet: null, readinessTab: 'overview', settingsTab: 'module', bankLimit: 60 },
         reviewMap: {},
@@ -6889,6 +6995,20 @@
         }
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
           try { window.lucide.createIcons({ root: el }); } catch (_) {}
+        }
+      }
+
+      function masteryNow() {
+        if (!appState.skillMap) return null;
+        return Mastery.evaluate(appState.attemptLogs, appState.skillMap, appState.nodes, appState.settings, appState.masteryPrefs);
+      }
+
+      async function saveMasteryPrefs() {
+        try {
+          const db = await DB.init();
+          await db.settings.put({ key: 'skillMastery', removed: appState.masteryPrefs.removed, resetAt: appState.masteryPrefs.resetAt });
+        } catch (err) {
+          console.warn('[Mastery] could not save preferences:', err.message);
         }
       }
 
@@ -6973,6 +7093,11 @@
           excludeNodeId: (opts.skipCurrent || prevNode) ? prevNode?.id : null,
           lastFamily: prevNode?.metadata?.family || null,
         };
+        if (appState.skillMap) {
+          // a topic or weak-spot drill is practice you asked for, so retirement does not thin it; removals still hold
+          filters.masteryAdj = Mastery.adjustments(masteryNow(), appState.skillMap, appState.masteryPrefs.removed,
+            { ignoreRetired: Boolean(appState.filters.chunkNodeIds || appState.filters.skillTag) });
+        }
         const pick = Scheduler.selectNextNode(
           appState.nodes,
           appState.reviewMap,
@@ -7066,8 +7191,18 @@
           await db.attemptLogs.put(logEntry);
         });
 
+        const masteryBefore = masteryNow();
         appState.reviewMap[cur.node.id] = nextRs;
         appState.attemptLogs.unshift(logEntry);
+        const masteryAfter = masteryNow();
+        if (masteryBefore && masteryAfter) {
+          for (const sid of appState.skillMap.nodeSkills?.[cur.node.id] || []) {
+            const was = masteryBefore.states[sid]?.status, now = masteryAfter.states[sid]?.status;
+            const name = appState.skillMap.skills.find((k) => k.id === sid)?.name || sid;
+            if (was !== 'retired' && now === 'retired') showToast(`Mastered: ${name}. It will come up rarely now.`);
+            else if (was === 'retired' && now === 'active') showToast(`Re-opened: ${name} (missed a check).`);
+          }
+        }
         cur.evalResult = evalResult;
         cur.phase = 'graded';
         render();
@@ -8608,6 +8743,19 @@
         const nodeIds = new Set(nodes.map((n) => n.id));
         const analysis = Content.analyzeSkillMap(map, nodeIds);
         const { rows, readiness, coverage } = Content.skillRows(map, nodeIds, Content.nodeProgress(nodes, appState.reviewMap, appState.attemptLogs));
+        const ms = Mastery.evaluate(appState.attemptLogs, map, nodes, appState.settings, appState.masteryPrefs);
+        const removedMap = appState.masteryPrefs.removed;
+        const act = 'px-2 py-0.5 text-[11px] font-medium border rounded-md';
+        const masteryHtml = (sid) => {
+          const m = ms.states[sid];
+          if (removedMap[sid]) return `<span class="text-slate-500">removed</span> <button type="button" data-mastery-act="restore" data-skill="${esc(sid)}" class="${act} border-slate-300 text-slate-700">Restore</button>`;
+          if (m?.status === 'retired') {
+            return `<span class="text-emerald-700 font-semibold">mastered</span> <span class="text-slate-500">· check in ${m.dueIn} cards</span>
+              <button type="button" data-mastery-act="reopen" data-skill="${esc(sid)}" class="${act} border-slate-300 text-slate-700">Reopen</button>
+              <button type="button" data-mastery-act="remove" data-skill="${esc(sid)}" class="${act} border-slate-300 text-slate-700">Remove</button>`;
+          }
+          return m?.evidence ? `<span class="text-slate-500">mastery ${m.evidence}/${m.required}</span>` : '';
+        };
         // group by theory chunk when the map defines them, otherwise fall back to chapters
         const groups = (map.chunks?.length
           ? map.chunks.map((c) => ({ key: c.id, title: c.name, part: c.part, summary: c.summary, rows: rows.filter((r) => r.skill.chunk === c.id) }))
@@ -8651,7 +8799,7 @@
             <details class="bg-white border border-slate-200 rounded-lg">
               <summary class="cursor-pointer px-3 py-2.5 text-sm">
                 <span class="font-semibold text-slate-800">${esc(g.title)}</span>
-                <span class="text-xs text-slate-500 font-mono"> · ${g.rows.length} skills · ${marks} marks · <span class="text-emerald-700">${ready}/${total} ready</span></span>
+                <span class="text-xs text-slate-500 font-mono"> · ${g.rows.length} skills · ${marks} marks · <span class="text-emerald-700">${ready}/${total} ready</span>${g.rows.some((r) => ms.states[r.skill.id]?.status === 'retired') ? ` · ${g.rows.filter((r) => ms.states[r.skill.id]?.status === 'retired').length} mastered` : ''}</span>
                 ${g.summary ? `<span class="block text-[11px] text-slate-500 font-normal mt-0.5">${esc(g.summary)}</span>` : ''}
               </summary>
               <div class="px-3 py-2 border-t border-slate-100">
@@ -8665,6 +8813,7 @@
                       ${r.total === 0 ? '<span class="text-amber-700">no questions mapped</span>'
                         : r.available === 0 ? '<span class="text-amber-700">no questions in bank yet</span>'
                         : `<span class="text-emerald-700 font-semibold">${r.proficient}/${r.total} ready</span> · ${r.attempted} attempted${r.available < r.total ? ` · <span class="text-amber-700">${r.total - r.available} not in bank</span>` : ''}`}
+                      ${(() => { const h = masteryHtml(r.skill.id); return h ? `<div class="mt-1 sm:text-right">${h}</div>` : ''; })()}
                     </div>
                   </div>`).join('')}
               </div>
@@ -8792,6 +8941,17 @@
         $$('[data-goto-settings]', root).forEach((btn) => {
           btn.addEventListener('click', () => {
             appState.route = 'settings';
+            render();
+          });
+        });
+        $$('[data-mastery-act]', root).forEach((btn) => {
+          btn.addEventListener('click', async () => {
+            const sid = btn.dataset.skill, action = btn.dataset.masteryAct;
+            const prefs = appState.masteryPrefs;
+            if (action === 'remove') prefs.removed[sid] = true;
+            else if (action === 'restore') delete prefs.removed[sid];
+            else if (action === 'reopen') prefs.resetAt[sid] = [...appState.attemptLogs].length;
+            await saveMasteryPrefs();
             render();
           });
         });
@@ -9518,6 +9678,10 @@
           if (appState.content.swept.reviewStates || appState.content.swept.attemptLogs) console.info('[Content] removed orphaned progress', appState.content.swept);
           appState.content.skillMap = await Content.loadSkillMap();
           appState.skillMap = appState.content.skillMap.map;
+          try {
+            const prefs = await db.settings.get('skillMastery');
+            appState.masteryPrefs = { removed: prefs?.removed || {}, resetAt: prefs?.resetAt || {} };
+          } catch (err) { console.warn('[Mastery] preferences not loaded:', err.message); }
           await refreshStore();
           const bankStatus = appState.content.bank;
           if (bankStatus.state === 'unavailable') showToast('Bundled question bank not loaded: ' + bankStatus.error, true);
@@ -9578,6 +9742,7 @@
       DB,
       Content,
       Scheduler,
+      Mastery,
       IsomerEngine,
       LF,
       Evaluators,

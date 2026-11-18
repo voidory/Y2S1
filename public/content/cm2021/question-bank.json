@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-17T23:41:58.544Z",
+ "exportedAt": "2026-11-18T03:22:17.000Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -19746,6 +19746,2495 @@
         ],
         "caseSensitive": false,
         "expectedDisplay": "2 Cl⁻"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c1-sigma-pi",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Counting σ and π bonds in the valence-bond picture",
+    "source": "Ch1 Valence Bond Theory slides (σ/π overlap; ethylene, acetylene) — drafted from course notes (unverified)",
+    "week": 1,
+    "primaryTheme": "Valence Bond Theory",
+    "conceptTags": [
+     "valence-bond-sigma-pi",
+     "sigma-pi"
+    ],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 4,
+    "examStyle": "short_2to3",
+    "family": "vb-sigma-pi"
+   },
+   "variants": [
+    {
+     "variantId": "c1-sigma-pi-v1",
+     "perspectiveLabel": "Count",
+     "marks": 3,
+     "stem": "Give the number of σ bonds and π bonds in each molecule: ethene (C₂H₄), ethyne (C₂H₂) and N₂.",
+     "hint": "A single bond is one σ; a double bond is σ + π; a triple bond is σ + 2π.",
+     "explanation": "Every bond contains exactly one σ bond; each additional bond in a double or triple bond is a π bond. C₂H₄: 4 C–H + 1 C–C σ = 5 σ, 1 π. C₂H₂: 2 C–H + 1 C–C = 3 σ, 2 π. N≡N: 1 σ, 2 π.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "C₂H₄ σ bonds"
+       },
+       {
+        "key": "b",
+        "label": "C₂H₄ π bonds"
+       },
+       {
+        "key": "c",
+        "label": "C₂H₂ σ bonds"
+       },
+       {
+        "key": "d",
+        "label": "C₂H₂ π bonds"
+       },
+       {
+        "key": "e",
+        "label": "N₂ σ bonds"
+       },
+       {
+        "key": "f",
+        "label": "N₂ π bonds"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       },
+       "b": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "e": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "f": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-sigma-pi-v2",
+     "perspectiveLabel": "Overlap",
+     "marks": 2,
+     "stem": "In valence bond theory, which statement about σ and π bonds is correct?",
+     "explanation": "A σ bond has cylindrical symmetry about the bond axis and is formed by end-to-end overlap, which is normally the largest overlap and so the strongest. A π bond is formed by side-by-side overlap of p orbitals, with a nodal plane containing the axis. A π bond always accompanies a σ bond in the course treatment.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "σ: end-to-end (head-on) overlap along the bond axis; π: side-by-side overlap with electron density above and below the axis"
+       },
+       {
+        "id": "b",
+        "label": "σ: side-by-side overlap; π: end-to-end overlap along the bond axis"
+       },
+       {
+        "id": "c",
+        "label": "π bonds are stronger than σ bonds because side-by-side overlap is always greater"
+       },
+       {
+        "id": "d",
+        "label": "A π bond can exist between two atoms without a σ bond"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c1-scn-formal-charge",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Formal charges and resonance forms of thiocyanate, SCN⁻",
+    "source": "Ch1 Formal Charge slide (SCN⁻ with S–C / C–N bond-length table) — drafted from course notes (unverified)",
+    "week": 1,
+    "primaryTheme": "Lewis Structures & VSEPR",
+    "conceptTags": [
+     "formal-charge",
+     "lewis-resonance",
+     "scn"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 6,
+    "examStyle": "short_2to3",
+    "family": "scn-resonance"
+   },
+   "variants": [
+    {
+     "variantId": "c1-scn-fc-v1",
+     "perspectiveLabel": "Formal charges",
+     "marks": 3,
+     "stem": "Structure A of SCN⁻ is S=C=N with two lone pairs on S and two lone pairs on N. Give the formal charge on each atom of A.",
+     "hint": "Formal charge = (valence e⁻) − (non-bonding e⁻) − (number of bonds).",
+     "explanation": "Formal charge = valence electrons − non-bonding electrons − number of bonds. S: 6 − 4 − 2 = 0. C: 4 − 0 − 4 = 0. N: 5 − 4 − 2 = −1. The sum is −1, the charge of the ion.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "s",
+        "label": "S"
+       },
+       {
+        "key": "c",
+        "label": "C"
+       },
+       {
+        "key": "n",
+        "label": "N"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "s": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "n": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-scn-fc-v2",
+     "perspectiveLabel": "Least important form",
+     "marks": 2,
+     "stem": "Three Lewis structures of SCN⁻ are drawn: A: S=C=N (negative charge on N); B: S–C≡N (negative charge on S); C: S≡C–N with S carrying one lone pair and N three. Which contributes least?",
+     "explanation": "In C the formal charges are S +1, C 0, N −2: charge is separated and the −2 sits on N while the more electropositive S is positive. A (N −1) and B (S −1) each have a single −1 formal charge, so C is the least favourable.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "A"
+       },
+       {
+        "id": "b",
+        "label": "B"
+       },
+       {
+        "id": "c",
+        "label": "C"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ]
+     }
+    },
+    {
+     "variantId": "c1-scn-fc-v3",
+     "perspectiveLabel": "Bond lengths",
+     "marks": 2,
+     "stem": "In NaSCN the S–C distance is 165 pm and the C–N distance is 118 pm. Reference lengths: S–C single 181, double 155 pm; C–N double 128, triple 116 pm. What do these lengths indicate?",
+     "explanation": "Neither bond matches a pure single, double or triple reference length: S–C (165 pm) lies between 181 and 155 pm, and C–N (118 pm) lies between 128 and 116 pm, close to the triple bond. The real ion is therefore a hybrid of A and B, with C contributing little.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "SCN⁻ is a resonance hybrid of A and B: S–C is between single and double, C–N is between double and triple"
+       },
+       {
+        "id": "b",
+        "label": "SCN⁻ is purely structure A, with a C–N double bond"
+       },
+       {
+        "id": "c",
+        "label": "SCN⁻ is purely structure B, with a C–S single bond"
+       },
+       {
+        "id": "d",
+        "label": "SCN⁻ is mainly structure C, with a C≡S triple bond"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c1-tut1-d",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Which element E gives the expanded-octet anion [EO₄]⁻?",
+    "source": "Tutorial 1 (RK1) Q D — drafted from course notes (unverified)",
+    "week": 1,
+    "primaryTheme": "Lewis Structures & VSEPR",
+    "conceptTags": [
+     "expanded-octet",
+     "formal-charge",
+     "tutorial-1"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 6,
+    "examStyle": "short_2to3",
+    "family": "expanded-octet-tut"
+   },
+   "variants": [
+    {
+     "variantId": "c1-tut1-d-v1",
+     "perspectiveLabel": "Select E",
+     "marks": 3,
+     "stem": "A Lewis structure shows E at the centre of four O atoms with an overall charge of −1, i.e. [EO₄]⁻. Select the possible E from H, S, He, P, Xe, Br, B, Si.",
+     "hint": "Count the total valence electrons of [EO₄]⁻ and see how many E must contribute.",
+     "explanation": "Valence electrons: 4 O × 6 + 1 (charge) = 25, so E must supply 32 − 25 = 7: a halogen, Br. Br can also exceed an octet (period 4), which the structure requires. S would give SO₄²⁻, P PO₄³⁻, Si SiO₄⁴⁻ and Xe neutral XeO₄; H and He cannot form four bonds.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "H"
+       },
+       {
+        "id": "b",
+        "label": "S"
+       },
+       {
+        "id": "c",
+        "label": "He"
+       },
+       {
+        "id": "d",
+        "label": "P"
+       },
+       {
+        "id": "e",
+        "label": "Xe"
+       },
+       {
+        "id": "f",
+        "label": "Br"
+       },
+       {
+        "id": "g",
+        "label": "B"
+       },
+       {
+        "id": "h",
+        "label": "Si"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "f"
+      ]
+     }
+    },
+    {
+     "variantId": "c1-tut1-d-v2",
+     "perspectiveLabel": "Explain",
+     "marks": 3,
+     "stem": "Explain why E must be Br and not S, P, Si or Xe.",
+     "explanation": "See the working in the previous part. The −1 charge fixes E as a 7-electron element; the other period-3 or heavier candidates would require different overall charges.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Counts the electrons: [EO₄]⁻ has 32 valence electrons in a full structure, so E contributes 7 (group 17)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Br is in period 4 and can exceed an octet (more than 8 electrons around E, with two E=O and two E–O⁻ type bonds)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Other candidates give a different charge: S → SO₄²⁻, P → PO₄³⁻, Si → SiO₄⁴⁻, Xe → XeO₄ (neutral)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c2-ionisation-energy",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "First and successive ionisation energies",
+    "source": "Ch2 Ionic Bonding slide (IE and EA definitions); Ch1 IE-vs-Z plot; Group 1 and 2 property tables — drafted from course notes (unverified)",
+    "week": 2,
+    "primaryTheme": "Bonding, IMFs & Solids",
+    "conceptTags": [
+     "ionisation-energy",
+     "periodic-trends"
+    ],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 4,
+    "examStyle": "short_2to3",
+    "family": "ie-trends"
+   },
+   "variants": [
+    {
+     "variantId": "c2-ie-v1",
+     "perspectiveLabel": "Rank",
+     "marks": 3,
+     "stem": "Rank the first ionisation energies of Li (123), Na (118.5), Be (215) and Mg (176 kcal/mol) from highest to lowest.",
+     "explanation": "Going down a group IE falls (Na < Li, Mg < Be) because the outer electron is further from the nucleus and shielded. Going across a period IE rises, so Group 2 elements are higher than their Group 1 neighbours: Be > Mg > Li > Na (215 > 176 > 123 > 118.5).",
+     "inputSlot": {
+      "type": "ordered_list",
+      "directionLabel": "Highest → lowest first IE",
+      "items": [
+       {
+        "id": "li",
+        "label": "Li"
+       },
+       {
+        "id": "na",
+        "label": "Na"
+       },
+       {
+        "id": "be",
+        "label": "Be"
+       },
+       {
+        "id": "mg",
+        "label": "Mg"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "order_match",
+      "targetOrder": [
+       "be",
+       "mg",
+       "li",
+       "na"
+      ]
+     }
+    },
+    {
+     "variantId": "c2-ie-v2",
+     "perspectiveLabel": "Successive IEs",
+     "marks": 2,
+     "stem": "The third ionisation energy of Mg is far larger than its second. Why?",
+     "explanation": "Successive IEs rise because the same nuclear charge holds fewer electrons. A very large jump occurs when removal starts from a shell nearer the nucleus (less shielding), which is why Mg forms Mg²⁺ and not Mg³⁺.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "The third electron is removed from the filled inner shell, which is closer to the nucleus and much less shielded"
+       },
+       {
+        "id": "b",
+        "label": "The third electron is removed from a 3s orbital"
+       },
+       {
+        "id": "c",
+        "label": "Mg²⁺ has a lower nuclear charge than Mg⁺"
+       },
+       {
+        "id": "d",
+        "label": "Successive ionisation energies always double"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c3-overlap-types",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Classifying orbital overlaps: σ, π or none",
+    "source": "Textbook ch. 5.1 (MO from s and p orbitals), course Ch3 — drafted from course notes (unverified)",
+    "week": 3,
+    "primaryTheme": "Molecular Orbital Theory",
+    "conceptTags": [
+     "mo-principles",
+     "orbital-symmetry",
+     "sigma-pi"
+    ],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 4,
+    "examStyle": "short_2to3",
+    "family": "overlap-types"
+   },
+   "variants": [
+    {
+     "variantId": "c3-overlap-v1",
+     "perspectiveLabel": "Classify",
+     "marks": 3,
+     "stem": "Take the z axis as the line joining the two nuclei. Classify the overlap of each pair of orbitals.",
+     "hint": "Answer σ, π or none.",
+     "explanation": "σ orbitals are symmetric to rotation about the internuclear axis: s–s and pz–pz (head-on). π orbitals come from px–px or py–py (side-by-side) and change sign on C₂ rotation. px with pz has equal positive and negative overlap, so the net overlap is zero and no MO forms.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "1s + 1s"
+       },
+       {
+        "key": "b",
+        "label": "2pz + 2pz"
+       },
+       {
+        "key": "c",
+        "label": "2px + 2px"
+       },
+       {
+        "key": "d",
+        "label": "2px + 2pz"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "acceptedPatterns": [
+         "^\\s*(?:σ|sigma)\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "σ"
+       },
+       "b": {
+        "acceptedPatterns": [
+         "^\\s*(?:σ|sigma)\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "σ"
+       },
+       "c": {
+        "acceptedPatterns": [
+         "^\\s*(?:π|pi)\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "π"
+       },
+       "d": {
+        "acceptedPatterns": [
+         "^\\s*(?:none|no\\s*overlap|zero|nonbonding|non-bonding|no\\s*interaction|0)\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "none (zero net overlap)"
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c3-overlap-v2",
+     "perspectiveLabel": "No interaction",
+     "marks": 2,
+     "stem": "Which pair of orbitals has zero net overlap and so does not combine to form a bonding/antibonding MO pair?",
+     "explanation": "The overlap region between 2px and 2pz has equal positive and negative contributions that cancel. The other pairs have symmetry-allowed overlap (s–pz and pz–pz give σ; px–px gives π).",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "2s on A with 2pz on B (z = bond axis)"
+       },
+       {
+        "id": "b",
+        "label": "2px on A with 2pz on B"
+       },
+       {
+        "id": "c",
+        "label": "2pz on A with 2pz on B"
+       },
+       {
+        "id": "d",
+        "label": "2px on A with 2px on B"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "b"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-heavy-water",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Properties of heavy water D₂O",
+    "source": "Ch4 Isotope effect slides (D₂O vs H₂O table) — drafted from course notes (unverified)",
+    "week": 4,
+    "primaryTheme": "Hydrogen",
+    "conceptTags": [
+     "isotope-effect",
+     "electrolysis"
+    ],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 4,
+    "examStyle": "short_2to3",
+    "family": "heavy-water"
+   },
+   "variants": [
+    {
+     "variantId": "c4-d2o-v1",
+     "perspectiveLabel": "Properties",
+     "marks": 3,
+     "stem": "Which of the following are true of D₂O compared with H₂O? Select all that apply.",
+     "explanation": "D₂O is denser, melts at 3.8 °C and boils at 101.4 °C; its viscosity (1.25 mPa·s) is higher than that of H₂O (1.00). Because D₂O is denser, its ice sinks in normal water.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "multi",
+      "options": [
+       {
+        "id": "a",
+        "label": "D₂O is denser (1.106 vs 0.998 g/mL at 20 °C)"
+       },
+       {
+        "id": "b",
+        "label": "D₂O melts higher (3.8 °C vs 0.0 °C)"
+       },
+       {
+        "id": "c",
+        "label": "D₂O is less viscous"
+       },
+       {
+        "id": "d",
+        "label": "D₂O ice floats on liquid H₂O"
+       },
+       {
+        "id": "e",
+        "label": "D₂O boils higher (101.4 °C vs 100.0 °C)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a",
+       "b",
+       "e"
+      ],
+      "gradingMode": "partial_with_penalty"
+     }
+    },
+    {
+     "variantId": "c4-d2o-v2",
+     "perspectiveLabel": "Calculate",
+     "marks": 2,
+     "stem": "By what percentage is the density of D₂O (1.106 g/mL) greater than that of H₂O (0.998 g/mL) at 20 °C?",
+     "explanation": "(1.106 − 0.998)/0.998 × 100 = 10.8 %.",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "% to 1 decimal place",
+      "unitSuffix": "%"
+     },
+     "evaluator": {
+      "type": "numeric_match",
+      "targetExpr": "(1.106-0.998)/0.998*100",
+      "tolerance": 0.2
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-h2-reactions",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Reactivity of H₂: kinetic inertness and conditions",
+    "source": "Ch4 Reactivity of hydrogen slides (HF, HCl, NH₃, H₂ + O₂, hydrogenation) — drafted from course notes (unverified)",
+    "week": 4,
+    "primaryTheme": "Hydrogen",
+    "conceptTags": [
+     "h2-activation",
+     "hydrogen-reactivity",
+     "kinetic-vs-thermodynamic"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 5,
+    "examStyle": "short_2to3",
+    "family": "h2-reactivity"
+   },
+   "variants": [
+    {
+     "variantId": "c4-h2r-v1",
+     "perspectiveLabel": "Why conditions are needed",
+     "marks": 2,
+     "stem": "The H–H bond is strong (~436 kJ/mol), so H₂ is kinetically inert. Which statement matches the course notes?",
+     "explanation": "Hydride formation is thermodynamically favourable, but the strong H–H bond (and, for N₂, the very strong N≡N bond) gives a high activation barrier. The more reactive the nonmetal, the milder the conditions: HF forms at −196 °C; NH₃ needs the Haber–Bosch conditions.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "The conditions needed to form covalent hydrides depend on the reactivity of the nonmetal: very reactive F₂ reacts with H₂ at −196 °C, whereas N₂ needs 400–600 °C and 200–1000 atm with Fe"
+       },
+       {
+        "id": "b",
+        "label": "H₂ reacts with all nonmetals under identical, mild conditions"
+       },
+       {
+        "id": "c",
+        "label": "H₂ + F₂ requires a catalyst but N₂ + H₂ does not"
+       },
+       {
+        "id": "d",
+        "label": "H₂ is inert because its reactions with other elements are always endothermic"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-h2r-v2",
+     "perspectiveLabel": "Hydrogenation",
+     "marks": 2,
+     "stem": "Write the equation for the catalytic hydrogenation of carbon monoxide to methanol over ZnO (as described in the notes).",
+     "explanation": "CO + 2H₂ → CH₃OH over a ZnO surface, where H₂ is heterolytically activated.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "CO + 2H2 -> CH3OH"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-h2r-v3",
+     "perspectiveLabel": "Kinetic vs thermodynamic",
+     "marks": 2,
+     "stem": "A mixture of H₂ and O₂ can sit unchanged at room temperature although the reaction to water is very exothermic (large O–H bond enthalpy, 464 kJ/mol). What does this show?",
+     "explanation": "Thermodynamic favourability (the strong O–H bonds formed) does not guarantee a fast reaction. The reaction proceeds by a radical mechanism that must be initiated, so the mixture is kinetically stable until ignited and then can detonate.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "H₂ and O₂ are kinetically stable towards each other: a high activation barrier (radical-chain initiation) prevents the reaction until a spark or heat is supplied"
+       },
+       {
+        "id": "b",
+        "label": "The reaction is thermodynamically unfavourable at room temperature"
+       },
+       {
+        "id": "c",
+        "label": "H₂ and O₂ do not react because the H–H bond is weaker than the O=O bond"
+       },
+       {
+        "id": "d",
+        "label": "Water is thermodynamically unstable with respect to H₂ and O₂"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-oxonium",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Oxonium ions and the symmetric hydrogen bond (3c-4e)",
+    "source": "Ch4 Oxonium ions and Hydrogen bonding slides ([H₃O]⁺, [H₅O₂]⁺) — drafted from course notes (unverified)",
+    "week": 4,
+    "primaryTheme": "Hydrogen",
+    "conceptTags": [
+     "three-centre-four-electron"
+    ],
+    "difficultyEstimate": 4,
+    "estimatedMinutes": 6,
+    "examStyle": "short_2to3",
+    "family": "oxonium-3c4e"
+   },
+   "variants": [
+    {
+     "variantId": "c4-oxonium-v1",
+     "perspectiveLabel": "The 3c-4e bond",
+     "marks": 3,
+     "stem": "In the Zundel cation [H₂O···H···OH₂]⁺ the proton is shared symmetrically. Treat O–H–O as a three-centre, four-electron bond: give the number of MOs formed from the three atomic orbitals, the number of electrons that occupy them, and the O–H bond order.",
+     "hint": "Fill the 3-MO diagram with four electrons from the bottom.",
+     "explanation": "Three AOs give three MOs (bonding, non-bonding, antibonding). Four electrons fill the bonding and non-bonding MOs, leaving the antibonding empty. Only the bonding MO (2 e⁻) holds the three centres together, so each O–H bond has order 0.5.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "mo",
+        "label": "MOs formed"
+       },
+       {
+        "key": "e",
+        "label": "Electrons in the MOs"
+       },
+       {
+        "key": "bo",
+        "label": "O–H bond order"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "mo": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "e": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       },
+       "bo": {
+        "type": "numeric",
+        "targetExpr": "0.5",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-oxonium-v2",
+     "perspectiveLabel": "Structure",
+     "marks": 2,
+     "stem": "Which statement about the oxonium ion [H₃O]⁺ in crystals such as [OH₃]⁺[CF₃SO₃]⁻ is correct?",
+     "explanation": "[H₃O]⁺ has three O–H bonds and one lone pair on O (8 valence electrons around O), so it is trigonal pyramidal and isoelectronic with NH₃. In [O₂H₅]⁺ the shared proton lies between two H₂O molecules with O–H distances of about 0.97 and 1.21 Å.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "It is pyramidal and isoelectronic with NH₃"
+       },
+       {
+        "id": "b",
+        "label": "It is planar with three equivalent O–H bonds at 120°"
+       },
+       {
+        "id": "c",
+        "label": "It is bent, like H₂O"
+       },
+       {
+        "id": "d",
+        "label": "It has no lone pair on oxygen"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-li-o2-eq",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Group 1 + O₂: oxide, peroxide, superoxide and their reactions",
+    "source": "Ch4 Group 1 Oxides and hydroxides slide — drafted from course notes (unverified)",
+    "week": 4,
+    "primaryTheme": "Group 1",
+    "conceptTags": [
+     "reaction-equations",
+     "half-equations",
+     "redox-equations",
+     "alkali-oxides"
+    ],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 6,
+    "examStyle": "short_2to3",
+    "family": "g1-o2-equations"
+   },
+   "variants": [
+    {
+     "variantId": "c4-lio2-v1",
+     "perspectiveLabel": "Li",
+     "marks": 1,
+     "stem": "Write the equation for lithium burning in oxygen.",
+     "explanation": "Li forms the normal oxide Li₂O.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "4Li + O2 -> 2Li2O"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-lio2-v2",
+     "perspectiveLabel": "Na",
+     "marks": 1,
+     "stem": "Write the equation for sodium heated in oxygen (the principal product).",
+     "explanation": "Na forms the peroxide Na₂O₂, containing O₂²⁻.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "2Na + O2 -> Na2O2"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-lio2-v3",
+     "perspectiveLabel": "K",
+     "marks": 1,
+     "stem": "Write the equation for potassium heated in oxygen (the principal product).",
+     "explanation": "K, Rb and Cs form superoxides MO₂ containing O₂⁻ (one unpaired electron).",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "K + O2 -> KO2"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-lio2-v4",
+     "perspectiveLabel": "Na₂O₂ + water",
+     "marks": 2,
+     "stem": "Write the equation for sodium peroxide with water.",
+     "explanation": "The peroxide is hydrolysed to hydroxide and hydrogen peroxide.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "Na2O2 + 2H2O -> 2NaOH + H2O2"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-lio2-v5",
+     "perspectiveLabel": "KO₂ + water",
+     "marks": 2,
+     "stem": "Write the equation for potassium superoxide with water.",
+     "explanation": "The superoxide gives hydroxide, H₂O₂ and O₂. KO₂ also absorbs CO₂ and liberates O₂, which is why it is used in submarines and breathing apparatus.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "2KO2 + 2H2O -> 2KOH + H2O2 + O2"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-g1-g2-compare",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Group 2 vs Group 1: properties and thermal stability",
+    "source": "Ch4 Alkaline earth slides (Group I vs Group II; carbonate decomposition) — drafted from course notes (unverified)",
+    "week": 4,
+    "primaryTheme": "Group 2",
+    "conceptTags": [
+     "ionisation-energy",
+     "periodic-trends",
+     "alkaline-earth-reactivity",
+     "thermal-stability",
+     "group-trends"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 5,
+    "examStyle": "short_2to3",
+    "family": "g1-g2-compare"
+   },
+   "variants": [
+    {
+     "variantId": "c4-g12-v1",
+     "perspectiveLabel": "Compare",
+     "marks": 3,
+     "stem": "Compared with the Group 1 metal in the same period, is each Group 2 property smaller or larger?",
+     "hint": "Answer smaller or higher/larger for each.",
+     "explanation": "Group 2 atoms are smaller (greater effective nuclear charge). They therefore have higher melting and boiling points, higher density and higher ionisation energy, and the M²⁺ ions (higher charge, smaller radius) have much larger hydration energies.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "r",
+        "label": "Atomic radius"
+       },
+       {
+        "key": "mp",
+        "label": "Melting and boiling point"
+       },
+       {
+        "key": "d",
+        "label": "Density"
+       },
+       {
+        "key": "ie",
+        "label": "Ionisation energy"
+       },
+       {
+        "key": "h",
+        "label": "Hydration energy (magnitude)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "r": {
+        "acceptedPatterns": [
+         "^\\s*(?:smaller|lower|less|decrease[sd]?)\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "smaller"
+       },
+       "mp": {
+        "acceptedPatterns": [
+         "^\\s*(?:larger|higher|greater|more|increase[sd]?)\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "higher"
+       },
+       "d": {
+        "acceptedPatterns": [
+         "^\\s*(?:larger|higher|greater|more|increase[sd]?)\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "higher"
+       },
+       "ie": {
+        "acceptedPatterns": [
+         "^\\s*(?:larger|higher|greater|more|increase[sd]?)\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "higher"
+       },
+       "h": {
+        "acceptedPatterns": [
+         "^\\s*(?:larger|higher|greater|more|increase[sd]?)\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "larger"
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-g12-v2",
+     "perspectiveLabel": "Carbonate stability",
+     "marks": 2,
+     "stem": "MCO₃ → MO + CO₂ occurs at 813 K (Mg), 1173 K (Ca) and 1563 K (Sr). Order the carbonates by increasing thermal stability.",
+     "explanation": "Thermal stability of the carbonates increases down the group: the small, highly polarising Mg²⁺ distorts CO₃²⁻ most and stabilises the oxide product, so MgCO₃ decomposes at the lowest temperature.",
+     "inputSlot": {
+      "type": "ordered_list",
+      "directionLabel": "Least stable → most stable",
+      "items": [
+       {
+        "id": "mg",
+        "label": "MgCO₃"
+       },
+       {
+        "id": "ca",
+        "label": "CaCO₃"
+       },
+       {
+        "id": "sr",
+        "label": "SrCO₃"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "order_match",
+      "targetOrder": [
+       "mg",
+       "ca",
+       "sr"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-boron-x3-reactions",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Synthesis and reactions of boron trihalides",
+    "source": "Ch4 Boron halides slide — drafted from course notes (unverified)",
+    "week": 4,
+    "primaryTheme": "Group 13",
+    "conceptTags": [
+     "reaction-equations",
+     "half-equations",
+     "redox-equations",
+     "boron-chemistry",
+     "boron-halides"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 7,
+    "examStyle": "short_2to3",
+    "family": "bx3-reactions"
+   },
+   "variants": [
+    {
+     "variantId": "c4-bx3-v1",
+     "perspectiveLabel": "BF₃ synthesis",
+     "marks": 2,
+     "stem": "Write the equation for the laboratory synthesis of BF₃ from B₂O₃, CaF₂ and concentrated H₂SO₄.",
+     "explanation": "B₂O₃ + 3CaF₂ + 3H₂SO₄ → 2BF₃ + 3CaSO₄ + 3H₂O.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "B2O3 + 3CaF2 + 3H2SO4 -> 2BF3 + 3CaSO4 + 3H2O"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-bx3-v2",
+     "perspectiveLabel": "Hydrolysis",
+     "marks": 2,
+     "stem": "Write the equation for the hydrolysis of BCl₃.",
+     "explanation": "BX₃ + 3H₂O → B(OH)₃ + 3HX: boron trihalides react with compounds containing labile protons.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "BCl3 + 3H2O -> B(OH)3 + 3HCl"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-bx3-v3",
+     "perspectiveLabel": "With ammonia",
+     "marks": 2,
+     "stem": "Write the equation for BCl₃ with liquid ammonia (aminolysis).",
+     "explanation": "Three N–H bonds are replaced by B–N bonds and the HCl is taken up as [NH₄]Cl: BCl₃ + 6NH₃ → B(NH₂)₃ + 3[NH₄]Cl.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "BCl3 + 6NH3 -> B(NH2)3 + 3NH4Cl"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-bx3-v4",
+     "perspectiveLabel": "Lewis acidity",
+     "marks": 2,
+     "stem": "Write the equation for the formation of tetrafluoroboric acid from BF₃ and HF.",
+     "explanation": "BF₃ accepts F⁻ from HF: the empty p orbital on boron is filled and B becomes sp³, giving [BF₄]⁻.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "BF3 + HF -> H[BF4]",
+       "BF3 + HF -> HBF4"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-si-halides",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Silicon halides: preparation, hydrolysis and Lewis acidity",
+    "source": "Ch4 Silicon halides and Complex halides of Si slides — drafted from course notes (unverified)",
+    "week": 4,
+    "primaryTheme": "Group 14",
+    "conceptTags": [
+     "lewis-acid-base",
+     "silicon-hydrides",
+     "silicon-chemistry",
+     "silicon-halides"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 6,
+    "examStyle": "short_2to3",
+    "family": "si-halides"
+   },
+   "variants": [
+    {
+     "variantId": "c4-sihal-v1",
+     "perspectiveLabel": "SiF₄ synthesis",
+     "marks": 2,
+     "stem": "Write the equation for making SiF₄ from SiO₂, CaF₂ and concentrated H₂SO₄.",
+     "explanation": "SiO₂ + 2H₂SO₄ + 2CaF₂ → SiF₄ + 2CaSO₄ + 2H₂O.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "SiO2 + 2H2SO4 + 2CaF2 -> SiF4 + 2CaSO4 + 2H2O"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-sihal-v2",
+     "perspectiveLabel": "Hydrolysis",
+     "marks": 2,
+     "stem": "Write the equation for the hydrolysis of liquid SiCl₄.",
+     "explanation": "Both SiCl₄ and SiF₄ are readily hydrolysed: SiCl₄ + 2H₂O → SiO₂ + 4HCl.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "SiCl4 + 2H2O -> SiO2 + 4HCl"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-sihal-v3",
+     "perspectiveLabel": "Lewis acid",
+     "marks": 2,
+     "stem": "SiF₄ is a mild Lewis acid. Write the equation for SiF₄ accepting fluoride ions.",
+     "explanation": "The Lewis acid–base adduct is the octahedral hexafluorosilicate ion [SiF₆]²⁻.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "SiF4 + 2F^- -> [SiF6]^2-"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-sihal-v4",
+     "perspectiveLabel": "Why Si and not C",
+     "marks": 2,
+     "stem": "Why can SiF₄ form [SiF₆]²⁻ whereas CF₄ does not accept fluoride?",
+     "explanation": "Beyond the second period the valence shell can be expanded. Si can accept F⁻ into the octahedral [SiF₆]²⁻ (12 electrons around Si); carbon has no accessible orbitals for a fifth or sixth bond.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Si is a larger period-3 atom that can accommodate more than eight electrons (expanded octet), whereas C cannot"
+       },
+       {
+        "id": "b",
+        "label": "CF₄ has a lone pair on C"
+       },
+       {
+        "id": "c",
+        "label": "The Si–F bond is longer than the C–F bond, so SiF₄ has a net dipole"
+       },
+       {
+        "id": "d",
+        "label": "Carbon has no valence p orbitals"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-hno3-reactions",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Oxidation by concentrated nitric acid",
+    "source": "Ch4 Nitric acid slides (oxidation of I₂, P₄, S₈; dilute HNO₃ with metals) — drafted from course notes (unverified)",
+    "week": 4,
+    "primaryTheme": "Group 15",
+    "conceptTags": [
+     "reaction-equations",
+     "half-equations",
+     "redox-equations",
+     "nitrogen-chemistry",
+     "nitrogen-oxides",
+     "explosives",
+     "nitric-acid"
+    ],
+    "difficultyEstimate": 4,
+    "estimatedMinutes": 8,
+    "examStyle": "short_2to3",
+    "family": "hno3-oxidation"
+   },
+   "variants": [
+    {
+     "variantId": "c4-hno3-v1",
+     "perspectiveLabel": "I₂",
+     "marks": 2,
+     "stem": "Concentrated HNO₃ oxidises I₂ to HIO₃ and is itself reduced to NO₂. Write the balanced equation.",
+     "hint": "Assume concentrated HNO₃ is reduced to NO₂.",
+     "explanation": "I is oxidised 0 → +5 (2 × 5 = 10 e⁻ lost); each N goes +5 → +4, so 10 HNO₃ are reduced. I₂ + 10HNO₃ → 2HIO₃ + 10NO₂ + 4H₂O.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "I2 + 10HNO3 -> 2HIO3 + 10NO2 + 4H2O"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-hno3-v2",
+     "perspectiveLabel": "P₄",
+     "marks": 2,
+     "stem": "Concentrated HNO₃ oxidises P₄ to H₃PO₄ (NO₂ formed). Write the balanced equation.",
+     "hint": "Assume concentrated HNO₃ is reduced to NO₂.",
+     "explanation": "Each P is oxidised 0 → +5 (20 e⁻ in total), requiring 20 HNO₃. P₄ + 20HNO₃ → 4H₃PO₄ + 20NO₂ + 4H₂O.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "P4 + 20HNO3 -> 4H3PO4 + 20NO2 + 4H2O"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-hno3-v3",
+     "perspectiveLabel": "S₈",
+     "marks": 3,
+     "stem": "Concentrated HNO₃ oxidises S₈ to H₂SO₄ (NO₂ formed). Write the balanced equation.",
+     "hint": "Assume concentrated HNO₃ is reduced to NO₂.",
+     "explanation": "Each S is oxidised 0 → +6 (48 e⁻ in total), requiring 48 HNO₃. S₈ + 48HNO₃ → 8H₂SO₄ + 48NO₂ + 16H₂O.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "S8 + 48HNO3 -> 8H2SO4 + 48NO2 + 16H2O"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-hno3-v4",
+     "perspectiveLabel": "Dilute acid",
+     "marks": 2,
+     "stem": "Which metals liberate H₂ from very dilute nitric acid, while most metals are oxidised with nitrogen oxides formed instead?",
+     "explanation": "Aqueous HNO₃ attacks most metals, but only Mg, Mn and Zn liberate H₂ from very dilute acid, as in Mg + 2HNO₃ → Mg(NO₃)₂ + H₂.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Mg, Mn and Zn"
+       },
+       {
+        "id": "b",
+        "label": "Cu, Ag and Au"
+       },
+       {
+        "id": "c",
+        "label": "Na, K and Cs"
+       },
+       {
+        "id": "d",
+        "label": "Fe, Cr and Al"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-p4o10-uses",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "P₄O₁₀: dehydrating agent and route to phosphoric acid",
+    "source": "Ch4 Phosphorus(V) oxide and (Ortho)phosphoric acid slides — drafted from course notes (unverified)",
+    "week": 4,
+    "primaryTheme": "Group 15",
+    "conceptTags": [
+     "phosphorus-chemistry",
+     "phosphorus-oxoacids",
+     "oxoacid-strength",
+     "dehydrating-agent"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 6,
+    "examStyle": "short_2to3",
+    "family": "p4o10-uses"
+   },
+   "variants": [
+    {
+     "variantId": "c4-p4o10-v1",
+     "perspectiveLabel": "Hydration",
+     "marks": 2,
+     "stem": "Write the equation for P₄O₁₀ with water.",
+     "explanation": "P₄O₁₀ has a great affinity for water: P₄O₁₀ + 6H₂O → 4H₃PO₄.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "P4O10 + 6H2O -> 4H3PO4"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-p4o10-v2",
+     "perspectiveLabel": "Manufacture",
+     "marks": 2,
+     "stem": "Write the equation for the manufacture of phosphoric acid from phosphate rock and sulfuric acid.",
+     "explanation": "Ca₃(PO₄)₂ + 3H₂SO₄ → 2H₃PO₄ + 3CaSO₄.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "Ca3(PO4)2 + 3H2SO4 -> 2H3PO4 + 3CaSO4"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-p4o10-v3",
+     "perspectiveLabel": "Fertiliser",
+     "marks": 1,
+     "stem": "Write the equation for phosphoric acid with one equivalent of NH₃ (the first step to ammonium phosphate fertilisers).",
+     "explanation": "NH₃ + H₃PO₄ → (NH₄)H₂PO₄; further NH₃ gives (NH₄)₂HPO₄.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "NH3 + H3PO4 -> NH4H2PO4",
+       "NH3 + H3PO4 -> (NH4)H2PO4"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-p4o10-v4",
+     "perspectiveLabel": "Use",
+     "marks": 2,
+     "stem": "What property of P₄O₁₀ allows it to convert a primary amide RCONH₂ into a nitrile RCN?",
+     "explanation": "RCONH₂ → RCN + H₂O: P₄O₁₀ extracts water. This dehydrating power is also why it is used as a drying agent for anhydrous solvents.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "It is a powerful dehydrating agent: it removes the elements of water"
+       },
+       {
+        "id": "b",
+        "label": "It is a strong reducing agent"
+       },
+       {
+        "id": "c",
+        "label": "It is a strong base"
+       },
+       {
+        "id": "d",
+        "label": "It is a one-electron oxidant"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-sulfur-allotropes",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Allotropes of sulfur: S₈ rings",
+    "source": "Ch4 Sulfur slide (orthorhombic and monoclinic S₈) — drafted from course notes (unverified)",
+    "week": 4,
+    "primaryTheme": "Group 16",
+    "conceptTags": [
+     "allotropes",
+     "sulfur-chemistry"
+    ],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "s-allotropes"
+   },
+   "variants": [
+    {
+     "variantId": "c4-sall-v1",
+     "perspectiveLabel": "Stable form",
+     "marks": 2,
+     "stem": "What is the stable elemental form of sulfur at room temperature?",
+     "explanation": "The stable form is orthorhombic α-sulfur, whose crystal contains crown-shaped S₈ molecules. Monoclinic β-sulfur is also made of S₈ rings but is stable only above the transition temperature.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Orthorhombic sulfur: crown-shaped S₈ rings packed in a complex array"
+       },
+       {
+        "id": "b",
+        "label": "Monoclinic sulfur, S₈"
+       },
+       {
+        "id": "c",
+        "label": "Linear S₂ molecules"
+       },
+       {
+        "id": "d",
+        "label": "Tetrahedral S₄ molecules"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-sall-v2",
+     "perspectiveLabel": "Transition",
+     "marks": 2,
+     "stem": "At what temperature (K) does orthorhombic S₈ transform into monoclinic S₈?",
+     "explanation": "The two S₈ allotropes interconvert at 368.5 K.",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "K to 1 decimal place",
+      "unitSuffix": "K"
+     },
+     "evaluator": {
+      "type": "numeric_match",
+      "targetExpr": "368.5",
+      "tolerance": 1
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-halogen-redox",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Halogen redox behaviour",
+    "source": "Ch4 Group 7 slides (halogen redox; oxidising ability) — drafted from course notes (unverified)",
+    "week": 4,
+    "primaryTheme": "Group 17",
+    "conceptTags": [
+     "reaction-equations",
+     "half-equations",
+     "redox-equations",
+     "interhalogens",
+     "halogen-redox",
+     "halogen-oxides",
+     "halogen-displacement"
+    ],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 5,
+    "examStyle": "short_2to3",
+    "family": "halogen-redox"
+   },
+   "variants": [
+    {
+     "variantId": "c4-hal-v1",
+     "perspectiveLabel": "Displacement",
+     "marks": 2,
+     "stem": "Write the equation for chlorine bubbled into aqueous bromide.",
+     "explanation": "A halogen higher in the group oxidises a halide ion lower in the group: Cl₂ + 2Br⁻ → 2Cl⁻ + Br₂.",
+     "inputSlot": {
+      "type": "typed_equation",
+      "rows": 3,
+      "formatHint": "Integer coefficients · one equation per line · charges with ^ (e.g. NH4^+, [AlH4]^-)"
+     },
+     "evaluator": {
+      "type": "equation_match",
+      "accepted": [
+       "Cl2 + 2Br^- -> 2Cl^- + Br2"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-hal-v2",
+     "perspectiveLabel": "Rank",
+     "marks": 2,
+     "stem": "Order the halogens from strongest to weakest oxidising agent.",
+     "explanation": "Oxidising ability, which rests on electron affinity, ionic charge density and electronegativity, falls down the group: F₂ > Cl₂ > Br₂ > I₂.",
+     "inputSlot": {
+      "type": "ordered_list",
+      "directionLabel": "Strongest → weakest oxidant",
+      "items": [
+       {
+        "id": "i",
+        "label": "I₂"
+       },
+       {
+        "id": "f",
+        "label": "F₂"
+       },
+       {
+        "id": "br",
+        "label": "Br₂"
+       },
+       {
+        "id": "cl",
+        "label": "Cl₂"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "order_match",
+      "targetOrder": [
+       "f",
+       "cl",
+       "br",
+       "i"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-hal-v3",
+     "perspectiveLabel": "Which reacts",
+     "marks": 2,
+     "stem": "Which reaction occurs spontaneously?",
+     "explanation": "Only the halogen higher in the group can oxidise a halide lower in the group, so only Cl₂ + 2I⁻ → 2Cl⁻ + I₂ occurs.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Br₂ + 2Cl⁻ → 2Br⁻ + Cl₂"
+       },
+       {
+        "id": "b",
+        "label": "I₂ + 2Br⁻ → 2I⁻ + Br₂"
+       },
+       {
+        "id": "c",
+        "label": "Cl₂ + 2I⁻ → 2Cl⁻ + I₂"
+       },
+       {
+        "id": "d",
+        "label": "Br₂ + 2F⁻ → 2Br⁻ + F₂"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-bioinorganic",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Bioinorganic facts: ion pumps, valinomycin, myoglobin",
+    "source": "Ch4 Group 1 \"In Nature\" and Ionophores slides; Meat processing slide — drafted from course notes (unverified)",
+    "week": 4,
+    "primaryTheme": "Group 1",
+    "conceptTags": [
+     "bioinorganic"
+    ],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 4,
+    "examStyle": "short_2to3",
+    "family": "bioinorganic"
+   },
+   "variants": [
+    {
+     "variantId": "c4-bio-v1",
+     "perspectiveLabel": "Extracellular ions",
+     "marks": 2,
+     "stem": "Which ions are found mainly in extracellular fluids such as blood plasma? Select all that apply.",
+     "explanation": "Na⁺ and Ca²⁺ are mainly extracellular; K⁺ and Mg²⁺ are mainly intracellular. Ion pumps use energy to maintain these gradients.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "multi",
+      "options": [
+       {
+        "id": "a",
+        "label": "Na⁺"
+       },
+       {
+        "id": "b",
+        "label": "K⁺"
+       },
+       {
+        "id": "c",
+        "label": "Mg²⁺"
+       },
+       {
+        "id": "d",
+        "label": "Ca²⁺"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a",
+       "d"
+      ],
+      "gradingMode": "partial_with_penalty"
+     }
+    },
+    {
+     "variantId": "c4-bio-v2",
+     "perspectiveLabel": "Valinomycin",
+     "marks": 2,
+     "stem": "Valinomycin is a cyclic ionophore that transports a cation through membranes. Which cation, and how selectively over Na⁺?",
+     "explanation": "The cavity of valinomycin, lined with oxygen atoms, suits K⁺ (similar to the cavity of an 18-crown-6 ether); its affinity for K⁺ is about 1000 times that for Na⁺, so it disrupts the K⁺ gradient across bacterial membranes.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "K⁺, with about 1000-fold selectivity over Na⁺"
+       },
+       {
+        "id": "b",
+        "label": "Na⁺, with about 1000-fold selectivity over K⁺"
+       },
+       {
+        "id": "c",
+        "label": "Ca²⁺, with about 10-fold selectivity over Mg²⁺"
+       },
+       {
+        "id": "d",
+        "label": "Li⁺, with no selectivity"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ]
+     }
+    },
+    {
+     "variantId": "c4-bio-v3",
+     "perspectiveLabel": "Myoglobin",
+     "marks": 2,
+     "stem": "Give the oxidation state of iron in myoglobin (Mb, purple), oxymyoglobin (MbO₂, red) and metmyoglobin (brown, oxidised).",
+     "hint": "Answer with the oxidation state, e.g. II or +2.",
+     "explanation": "Mb and MbO₂ contain Fe(II); oxidation to Fe(III) gives brown metmyoglobin. Sodium nitrite preserves the pink colour of cured meat by forming a nitrosyl complex with Fe(II) and inhibiting oxidation.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "mb",
+        "label": "Mb"
+       },
+       {
+        "key": "o2",
+        "label": "MbO₂"
+       },
+       {
+        "key": "met",
+        "label": "Metmyoglobin"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "mb": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\+?\\s*2|ii|fe\\s*\\(?\\s*ii\\s*\\)?|\\+\\s*ii)\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "Fe(II)"
+       },
+       "o2": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\+?\\s*2|ii|fe\\s*\\(?\\s*ii\\s*\\)?|\\+\\s*ii)\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "Fe(II)"
+       },
+       "met": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\+?\\s*3|iii|fe\\s*\\(?\\s*iii\\s*\\)?|\\+\\s*iii)\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "Fe(III)"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c6-tut4-stereo",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Stereoisomerism of the Tutorial 4 complexes",
+    "source": "Tutorial 4 Q1 (answer key) — drafted from course notes (unverified)",
+    "week": 6,
+    "primaryTheme": "Coordination: Nomenclature & Isomerism",
+    "conceptTags": [
+     "geometric-isomerism",
+     "optical-isomerism",
+     "chirality",
+     "tutorial-4"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 6,
+    "examStyle": "short_2to3",
+    "family": "tut4-stereo"
+   },
+   "variants": [
+    {
+     "variantId": "c6-tut4s-v1",
+     "perspectiveLabel": "(i) K[Cr(H₂O)₂(C₂O₄)₂]·3H₂O",
+     "marks": 2,
+     "stem": "What type(s) of stereoisomerism does the [Cr(H₂O)₂(C₂O₄)₂]⁻ ion show?",
+     "explanation": "The two aqua ligands may be cis or trans. The cis isomer is chiral (propeller arrangement of the two oxalates), so Δ/Λ optical isomers also exist.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "None"
+       },
+       {
+        "id": "b",
+        "label": "cis/trans only"
+       },
+       {
+        "id": "c",
+        "label": "fac/mer only"
+       },
+       {
+        "id": "d",
+        "label": "cis/trans and optical isomers (Δ/Λ)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "d"
+      ]
+     }
+    },
+    {
+     "variantId": "c6-tut4s-v2",
+     "perspectiveLabel": "(iii) [CrCl₃(py)₃]",
+     "marks": 2,
+     "stem": "What type of stereoisomerism does [CrCl₃(py)₃] show?",
+     "explanation": "An octahedral [MA₃B₃] complex exists as fac (three identical ligands on one face) and mer (three in a meridian) isomers.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "None"
+       },
+       {
+        "id": "b",
+        "label": "cis/trans"
+       },
+       {
+        "id": "c",
+        "label": "fac/mer"
+       },
+       {
+        "id": "d",
+        "label": "Optical only"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ]
+     }
+    },
+    {
+     "variantId": "c6-tut4s-v3",
+     "perspectiveLabel": "No stereoisomers",
+     "marks": 3,
+     "stem": "Which of the following Tutorial 4 complexes have no stereoisomers? Select all that apply.",
+     "explanation": "[MA₅B] octahedral, tetrahedral [FeCl₄]⁻, [Mn(CN)₆]⁴⁻ (all ligands identical), the μ-oxo dimer (each Cr is [MA₅B]) and tetrahedral [Ni(NH₃)₃(NMe₃)]²⁺ ([MA₃B]) have no stereoisomers. [CrCl₃(py)₃] (fac/mer) and the oxalate complex (cis/trans, Δ/Λ) do.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "multi",
+      "options": [
+       {
+        "id": "a",
+        "label": "[Co(NH₃)₅Cl]Cl₂"
+       },
+       {
+        "id": "b",
+        "label": "Cs[FeCl₄]"
+       },
+       {
+        "id": "c",
+        "label": "K₄[Mn(CN)₆]"
+       },
+       {
+        "id": "d",
+        "label": "[(NH₃)₅Cr–O–Cr(NH₃)₅]⁴⁺"
+       },
+       {
+        "id": "e",
+        "label": "[Ni(NH₃)₃(NMe₃)](PF₆)₂"
+       },
+       {
+        "id": "f",
+        "label": "[CrCl₃(py)₃]"
+       },
+       {
+        "id": "g",
+        "label": "K[Cr(H₂O)₂(C₂O₄)₂]·3H₂O"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a",
+       "b",
+       "c",
+       "d",
+       "e"
+      ],
+      "gradingMode": "partial_with_penalty"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c6-drawing",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Drawing and counting isomers of [MA₂BCDE]",
+    "source": "Tutorial 4 Q2 — drafted from course notes (unverified)",
+    "week": 6,
+    "primaryTheme": "Coordination: Nomenclature & Isomerism",
+    "conceptTags": [
+     "geometric-isomerism",
+     "optical-isomerism",
+     "chirality",
+     "tutorial-4"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 12,
+    "examStyle": "construct_4to6",
+    "family": "ma2bcde"
+   },
+   "variants": [
+    {
+     "variantId": "c6-draw-v1",
+     "perspectiveLabel": "Geometric isomers",
+     "marks": 2,
+     "stem": "How many geometric isomers (ignoring optical isomers) does an octahedral [MA₂BCDE] complex have?",
+     "hint": "Count the arrangements with the two A ligands trans, then cis.",
+     "explanation": "Trans A₂ with B, C, D, E in the equatorial plane: 3 isomers (the three ways of pairing B, C, D, E into trans pairs). Cis A₂: 6 isomers, defined by which two of B, C, D, E are cis to the A ligands. Total 9.",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "integer"
+     },
+     "evaluator": {
+      "type": "numeric_match",
+      "targetExpr": "9",
+      "tolerance": 0
+     }
+    },
+    {
+     "variantId": "c6-draw-v2",
+     "perspectiveLabel": "All stereoisomers",
+     "marks": 2,
+     "stem": "How many stereoisomers in total (counting each enantiomer) does [MA₂BCDE] have?",
+     "explanation": "The 3 trans isomers are achiral. Each of the 6 cis geometric isomers is chiral and exists as an enantiomeric pair (12). 3 + 12 = 15.",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "integer"
+     },
+     "evaluator": {
+      "type": "numeric_match",
+      "targetExpr": "15",
+      "tolerance": 0
+     }
+    },
+    {
+     "variantId": "c6-draw-v3",
+     "perspectiveLabel": "Draw",
+     "marks": 4,
+     "stem": "Draw all geometric isomers of [MA₂BCDE] (ignore optical isomers). Describe each by its trans pairs.",
+     "explanation": "Label each isomer by its three trans pairs. With A–A trans the remaining four ligands form two trans pairs (3 ways); with A–A cis, each A is trans to one of B, C, D, E and the leftover pair is trans to each other (6 ways).",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Trans A–A isomers: three, with the trans pairs B–C/D–E, B–D/C–E and B–E/C–D in the equatorial plane",
+        "marks": 2,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Cis A–A isomers: six, each with the trans pairs (A–B, A–C, D–E), (A–B, A–D, C–E), (A–B, A–E, C–D), (A–C, A–D, B–E), (A–C, A–E, B–D), (A–D, A–E, B–C)",
+        "marks": 2,
+        "isCritical": true
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c6-structure-from-name",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Writing formulae from names (Tutorial 4 complexes)",
+    "source": "Tutorial 4 Q1 (answer key) — drafted from course notes (unverified)",
+    "week": 6,
+    "primaryTheme": "Coordination: Nomenclature & Isomerism",
+    "conceptTags": [
+     "formula-writing",
+     "geometric-isomerism",
+     "tutorial-4"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 6,
+    "examStyle": "short_2to3",
+    "family": "formula-from-name"
+   },
+   "variants": [
+    {
+     "variantId": "c6-formula-v1",
+     "perspectiveLabel": "Formula",
+     "marks": 2,
+     "stem": "Which is the formula of potassium diaquabis(oxalato)chromate(III) trihydrate?",
+     "explanation": "Cr(III) (+3) with two oxalate (2−) ligands (−4) and two neutral aqua ligands gives a complex anion of charge −1, balanced by one K⁺. The cation is written first; ligands in the formula are listed with the formula of the water of crystallisation last. (Option d lists the ligands in the wrong order for the course convention.)",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "K[Cr(H₂O)₂(C₂O₄)₂]·3H₂O"
+       },
+       {
+        "id": "b",
+        "label": "K₃[Cr(H₂O)₂(C₂O₄)₂]·3H₂O"
+       },
+       {
+        "id": "c",
+        "label": "[Cr(H₂O)₂(C₂O₄)₂]·3H₂O"
+       },
+       {
+        "id": "d",
+        "label": "K[Cr(C₂O₄)₂(H₂O)₂]·3H₂O"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ]
+     }
+    },
+    {
+     "variantId": "c6-formula-v2",
+     "perspectiveLabel": "Charge",
+     "marks": 2,
+     "stem": "What is the overall charge of μ-oxo-bis(pentaamminechromium(III)), [(NH₃)₅Cr–O–Cr(NH₃)₅]?",
+     "explanation": "Two Cr³⁺ (+6) and one bridging O²⁻ (−2), with neutral NH₃ ligands: +6 − 2 = +4, so the ion is [(NH₃)₅Cr–O–Cr(NH₃)₅]⁴⁺.",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "integer with sign, e.g. -1"
+     },
+     "evaluator": {
+      "type": "numeric_match",
+      "targetExpr": "4",
+      "tolerance": 0
+     }
+    },
+    {
+     "variantId": "c6-formula-v3",
+     "perspectiveLabel": "Counter-ions",
+     "marks": 2,
+     "stem": "How many PF₆⁻ counter-ions are needed per complex cation in triammine(trimethylamine)nickel(II) hexafluorophosphate?",
+     "explanation": "Ni(II) with four neutral ligands gives [Ni(NH₃)₃(NMe₃)]²⁺, so two PF₆⁻ are required: [Ni(NH₃)₃(NMe₃)](PF₆)₂.",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "integer"
+     },
+     "evaluator": {
+      "type": "numeric_match",
+      "targetExpr": "2",
+      "tolerance": 0
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c7-backbond-trend",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "π-back-bonding trends in metal carbonyls",
+    "source": "Ch7 LFT π-bonding slides (M→L back-bonding; questions on C≡O strength and M–C length) — drafted from course notes (unverified)",
+    "week": 7,
+    "primaryTheme": "Ligand Field Theory",
+    "conceptTags": [
+     "pi-donor-acceptor",
+     "metal-carbonyls",
+     "back-bonding"
+    ],
+    "difficultyEstimate": 4,
+    "estimatedMinutes": 7,
+    "examStyle": "short_2to3",
+    "family": "backbonding-trend"
+   },
+   "variants": [
+    {
+     "variantId": "c7-back-v1",
+     "perspectiveLabel": "C≡O strength",
+     "marks": 2,
+     "stem": "The CO ligand accepts electron density from the metal into its π* orbitals. Does the C≡O bond become stronger or weaker?",
+     "explanation": "Back-donation populates the C–O π* orbitals, which lowers the C–O bond order and weakens (and lengthens) the C≡O bond while strengthening the M–C bond.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Stronger"
+       },
+       {
+        "id": "b",
+        "label": "Weaker"
+       },
+       {
+        "id": "c",
+        "label": "No change"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "b"
+      ]
+     }
+    },
+    {
+     "variantId": "c7-back-v2",
+     "perspectiveLabel": "M–C length",
+     "marks": 3,
+     "stem": "Compound A is OC–M–CO (the two CO trans to each other); compound B is OC–M–PH₃ (CO trans to PH₃). Which has the shortest M–C bond?",
+     "explanation": "In A the two trans CO ligands compete for the same metal t₂g electron density. PH₃ is a weaker π acceptor than CO, so in B the CO receives more back-donation, giving a stronger, shorter M–C bond.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Compound A"
+       },
+       {
+        "id": "b",
+        "label": "Compound B"
+       },
+       {
+        "id": "c",
+        "label": "Same M–C bond length"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "b"
+      ]
+     }
+    },
+    {
+     "variantId": "c7-back-v3",
+     "perspectiveLabel": "Δo order",
+     "marks": 2,
+     "stem": "Order the ligands by increasing Δo.",
+     "explanation": "π donors (Cl⁻) lower Δo, ligands with no π effect (NH₃) give intermediate Δo, and π acceptors (CO) raise Δo: Cl⁻ < H₂O < NH₃ < CO.",
+     "inputSlot": {
+      "type": "ordered_list",
+      "directionLabel": "Smallest Δo → largest Δo",
+      "items": [
+       {
+        "id": "co",
+        "label": "CO (π acceptor)"
+       },
+       {
+        "id": "cl",
+        "label": "Cl⁻ (π donor)"
+       },
+       {
+        "id": "nh3",
+        "label": "NH₃ (σ only)"
+       },
+       {
+        "id": "h2o",
+        "label": "H₂O (weak π donor)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "order_match",
+      "targetOrder": [
+       "cl",
+       "h2o",
+       "nh3",
+       "co"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c7-cfse-d1-d2",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "CFSE for d¹–d³ and the Chapter 7 practice question",
+    "source": "Ch7 CFSE slides (Practice: d¹, d², d³; Question: octahedral ions) — drafted from course notes (unverified)",
+    "week": 7,
+    "primaryTheme": "Crystal Field Theory",
+    "conceptTags": [
+     "cfse-calculation"
+    ],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 5,
+    "examStyle": "short_2to3",
+    "family": "cfse-basic"
+   },
+   "variants": [
+    {
+     "variantId": "c7-cfse12-v1",
+     "perspectiveLabel": "d¹–d³",
+     "marks": 3,
+     "stem": "Using CFSE = [n(t₂g) × ⅖Δo] − [n(eg) × ⅗Δo] (stabilisation positive), calculate the CFSE of d¹, d² and d³ in an octahedral field. Enter the coefficient of Δo.",
+     "explanation": "All electrons are in t₂g: d¹ = ⅖Δo = 0.4Δo, d² = 0.8Δo, d³ = 1.2Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "d¹"
+       },
+       {
+        "key": "b",
+        "label": "d²"
+       },
+       {
+        "key": "c",
+        "label": "d³"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "0.4",
+        "tolerance": 0.01
+       },
+       "b": {
+        "type": "numeric",
+        "targetExpr": "0.8",
+        "tolerance": 0.01
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c7-cfse12-v2",
+     "perspectiveLabel": "Octahedral ions",
+     "marks": 4,
+     "stem": "Determine the CFSE (coefficient of Δo) for: high-spin d⁵, high-spin d⁶, low-spin d⁶, d⁹. For low-spin d⁶ also give the number of extra electron pairs that cost pairing energy P.",
+     "explanation": "HS d⁵ (t₂g³eg²): 1.2 − 1.2 = 0. HS d⁶ (t₂g⁴eg²): 1.6 − 1.2 = 0.4Δo. LS d⁶ (t₂g⁶): 2.4Δo − 2P (two more pairs than the high-spin configuration). d⁹ (t₂g⁶eg³): 2.4 − 1.8 = 0.6Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "High-spin d⁵"
+       },
+       {
+        "key": "b",
+        "label": "High-spin d⁶"
+       },
+       {
+        "key": "c",
+        "label": "Low-spin d⁶ (Δo coefficient)"
+       },
+       {
+        "key": "d",
+        "label": "Low-spin d⁶ (pairing energies P subtracted)"
+       },
+       {
+        "key": "e",
+        "label": "d⁹"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       },
+       "b": {
+        "type": "numeric",
+        "targetExpr": "0.4",
+        "tolerance": 0.01
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "2.4",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "e": {
+        "type": "numeric",
+        "targetExpr": "0.6",
+        "tolerance": 0.01
        }
       }
      }

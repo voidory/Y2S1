@@ -12,17 +12,13 @@ const same = (a, b, msg) => assert.equal(JSON.stringify(a), JSON.stringify(b), m
 const files = { [Content.BANK_URL]: bank, [Content.SKILL_MAP_URL]: skillMap };
 
 /*
- * The skill map was generated against a fuller bank than the one shipped (170 of 194 mapped nodes exist).
- * These are the mapped ids that are known to be missing. The test pins the list in both directions:
- * a NEW gap fails (something regressed), and a CLOSED gap fails until it is removed here.
+ * The skill map was generated against a fuller bank than the one first shipped. Most gaps were filled from the
+ * course notes and tutorials; these two remain on purpose and are pinned in both directions: a NEW gap fails
+ * (something regressed), and a CLOSED gap fails until it is removed here.
+ *   bk-c3-pes                 photoelectron spectra (textbook 5.2.4) is not in the lecture slides or tutorials
+ *   bk-c5-elements-reduction  formal point groups / irreducible representations are not examined in the course
  */
-const KNOWN_GAPS = [
-  'bk-c1-scn-formal-charge', 'bk-c1-sigma-pi', 'bk-c1-tut1-d', 'bk-c2-ionisation-energy', 'bk-c3-overlap-types',
-  'bk-c3-pes', 'bk-c4-bioinorganic', 'bk-c4-boron-x3-reactions', 'bk-c4-g1-g2-compare', 'bk-c4-h2-reactions',
-  'bk-c4-halogen-redox', 'bk-c4-heavy-water', 'bk-c4-hno3-reactions', 'bk-c4-li-o2-eq', 'bk-c4-oxonium',
-  'bk-c4-p4o10-uses', 'bk-c4-si-halides', 'bk-c4-sulfur-allotropes', 'bk-c5-elements-reduction', 'bk-c6-drawing',
-  'bk-c6-structure-from-name', 'bk-c6-tut4-stereo', 'bk-c7-backbond-trend', 'bk-c7-cfse-d1-d2',
-];
+const KNOWN_GAPS = ['bk-c3-pes', 'bk-c5-elements-reduction'];
 
 test('bundled bank: every node passes the app validator and belongs to a known module/week', () => {
   assert.equal(bank.bundleVersion, '3.0');

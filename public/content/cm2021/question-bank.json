@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-18T03:51:41.000Z",
+ "exportedAt": "2026-11-18T03:55:56.000Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -21936,6 +21936,142 @@
         "tolerance": 0.01
        }
       }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-trisilylamine",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Why is trisilylamine, N(SiH₃)₃, planar?",
+    "source": "Ch4 Group 14 slide \"Interesting structure of N(SiR₃)₃\" — drafted from course notes (unverified)",
+    "week": 4,
+    "primaryTheme": "Group 14",
+    "conceptTags": [
+     "trisilylamine",
+     "p-d-pi-bonding"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 4,
+    "examStyle": "short_2to3",
+    "family": "trisilylamine"
+   },
+   "variants": [
+    {
+     "variantId": "c4-trisilylamine-v1",
+     "perspectiveLabel": "Shape",
+     "marks": 1,
+     "stem": "Compare the geometry at nitrogen in N(SiH₃)₃ and N(CH₃)₃.",
+     "explanation": "N(CH₃)₃ is pyramidal (C–N–C about 108°), like NH₃. N(SiH₃)₃ is unusual: nitrogen is trigonal planar (N–Si 1.74 Å).",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "N(SiH₃)₃ is trigonal planar at N; N(CH₃)₃ is pyramidal"
+       },
+       {
+        "id": "b",
+        "label": "Both are pyramidal"
+       },
+       {
+        "id": "c",
+        "label": "Both are trigonal planar"
+       },
+       {
+        "id": "d",
+        "label": "N(SiH₃)₃ is pyramidal; N(CH₃)₃ is planar"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c4-trisilylamine-v2",
+     "perspectiveLabel": "Explain",
+     "marks": 4,
+     "stem": "Explain the planar structure of N(SiH₃)₃. Give the traditional p,d-π explanation and say how the notes qualify it.",
+     "explanation": "The classical rationalisation is p,d-π overlap between the N lone pair and Si 3d orbitals, which would give Si–N partial double-bond character and a planar N. The notes call this a convenient but largely untrue explanation: weak electronic interactions are responsible, and the pyramidal–planar energy difference at nitrogen is very small.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "The nitrogen of N(SiH₃)₃ is trigonal planar (N–Si 1.74 Å), unlike pyramidal NH₃ and N(CH₃)₃ (C–N–C ≈ 108°); the N lone pair sits in a p orbital perpendicular to the plane",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Traditional explanation: p,d-π bonding — the N lone pair overlaps side-by-side with an empty Si 3d orbital, giving partial Si–N double-bond character and a planar N",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Weakness stated in the notes: there seems to be little truth to the p,d-π explanation (Si 3d orbitals are not significantly involved); it is only a convenient, easy model",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "The planarity is better attributed to weak electronic interactions (e.g. negative hyperconjugation into σ*(Si–H)); the energy difference between pyramidal and planar N is very small (about 5.9 kcal/mol even for NH₃)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c4-trisilylamine-v3",
+     "perspectiveLabel": "Weakness",
+     "marks": 2,
+     "stem": "Why is the p,d-π bonding model for the planarity of N(SiH₃)₃ regarded as a weak explanation?",
+     "explanation": "According to the notes there seems to be little truth to it: it is a convenient and easy explanation, but the planarity is attributed instead to weak electronic interactions.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "The notes say there seems to be little truth to it; weak electronic interactions are responsible instead"
+       },
+       {
+        "id": "b",
+        "label": "Silicon has no d orbitals at all, so no model is needed"
+       },
+       {
+        "id": "c",
+        "label": "N(SiH₃)₃ is actually pyramidal"
+       },
+       {
+        "id": "d",
+        "label": "The Si–N bond is longer than a normal single bond"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
      }
     }
    ]

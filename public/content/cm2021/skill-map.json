@@ -1102,10 +1102,15 @@
    "marks": 0.5,
    "basis": "notes",
    "ref": "Group 14 trisilylamine slides",
-   "tags": [],
+   "tags": [
+    "trisilylamine",
+    "p-d-pi-bonding"
+   ],
    "ids": [],
    "weight": 0.0032,
-   "nodes": []
+   "nodes": [
+    "bk-c4-trisilylamine"
+   ]
   },
   {
    "id": "c4.si-o-bonds",
@@ -2513,6 +2518,9 @@
   "bk-c4-sulfur-oxides": [
    "c1.dative",
    "c4.oxygen-sulfur"
+  ],
+  "bk-c4-trisilylamine": [
+   "c4.trisilylamine"
   ],
   "bk-c4-vofc-cn": [
    "c4.vofc"

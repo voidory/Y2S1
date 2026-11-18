@@ -25,9 +25,21 @@ export function readContent(name) {
 export function fakeDb() {
   const nodes = new Map();
   const rows = new Map();
+  const reviews = new Map();
+  const logs = [];
   return {
     nodes,
     rows,
+    reviews,
+    logs,
+    reviewStates: {
+      toCollection: () => ({ primaryKeys: async () => [...reviews.keys()] }),
+      bulkDelete: async (ids) => { ids.forEach((i) => reviews.delete(i)); },
+    },
+    attemptLogs: {
+      orderBy: () => ({ uniqueKeys: async () => [...new Set(logs.map((l) => l.nodeId))] }),
+      where: () => ({ anyOf: (ids) => ({ delete: async () => { const set = new Set(ids); let n = 0; for (let i = logs.length - 1; i >= 0; i--) if (set.has(logs[i].nodeId)) { logs.splice(i, 1); n++; } return n; } }) }),
+    },
     settings: { get: async (k) => rows.get(k), put: async (r) => { rows.set(r.key, r); } },
     questionNodes: {
       toCollection: () => ({ primaryKeys: async () => [...nodes.keys()] }),

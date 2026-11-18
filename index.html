@@ -6581,6 +6581,27 @@
         }
       }
 
+      /* I/O: never throws. Deletes review states and attempt logs whose node no longer exists (for example a node
+         dropped from the bundled bank). Skipped entirely when no nodes are stored, so a failed boot cannot wipe progress. */
+      async function sweepOrphanedProgress(db) {
+        const none = { reviewStates: 0, attemptLogs: 0 };
+        try {
+          const nodeIds = new Set(await db.questionNodes.toCollection().primaryKeys());
+          if (nodeIds.size === 0) return none;
+          const orphanReviews = (await db.reviewStates.toCollection().primaryKeys()).filter((id) => !nodeIds.has(id));
+          const orphanLogNodes = (await db.attemptLogs.orderBy('nodeId').uniqueKeys()).filter((id) => !nodeIds.has(id));
+          let logsDeleted = 0;
+          await db.transaction('rw', db.reviewStates, db.attemptLogs, async () => {
+            if (orphanReviews.length) await db.reviewStates.bulkDelete(orphanReviews);
+            if (orphanLogNodes.length) logsDeleted = await db.attemptLogs.where('nodeId').anyOf(orphanLogNodes).delete();
+          });
+          return { reviewStates: orphanReviews.length, attemptLogs: logsDeleted };
+        } catch (err) {
+          console.warn('[Content] orphan sweep failed:', err.message);
+          return none;
+        }
+      }
+
       function validateSkillMap(map) {
         const errors = [];
         if (!map || typeof map !== 'object') return { valid: false, errors: ['skill map must be an object'] };
@@ -6698,7 +6719,7 @@
 
       return {
         BANK_URL, SKILL_MAP_URL, RECORD_KEY,
-        fetchJson, bankKey, isReservedNodeId, planBankSync, syncBank,
+        fetchJson, bankKey, isReservedNodeId, planBankSync, syncBank, sweepOrphanedProgress,
         validateSkillMap, loadSkillMap, analyzeSkillMap, nodeProgress, skillRows,
       };
     })();
@@ -9294,6 +9315,8 @@
           }
           // Bundled content: neither call throws; the app keeps working on whatever is already stored.
           appState.content.bank = await Content.syncBank(db);
+          appState.content.swept = await Content.sweepOrphanedProgress(db);
+          if (appState.content.swept.reviewStates || appState.content.swept.attemptLogs) console.info('[Content] removed orphaned progress', appState.content.swept);
           appState.content.skillMap = await Content.loadSkillMap();
           appState.skillMap = appState.content.skillMap.map;
           await refreshStore();

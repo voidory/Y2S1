@@ -173,3 +173,33 @@ test('skill map: weights equal marks / total marks, and no formal group-theory s
   same(skillMap.skills.filter((k) => formal.includes(k.id)).map((k) => k.id), []);
   same([...bankIds].filter((id) => ['bk-c5-point-groups', 'bk-c5-reducible-rep', 'bk-c5-hybrids-gt'].includes(id)), []);
 });
+
+test('sweepOrphanedProgress: removes review states and logs of nodes that no longer exist, keeps the rest', async () => {
+  const db = fakeDb();
+  await Content.syncBank(db, fakeFetch(files));
+  const live = bank.questionNodes[0].id;
+  db.reviews.set(live, { nodeId: live });
+  db.reviews.set('bk-gone', { nodeId: 'bk-gone' });
+  db.logs.push({ id: 1, nodeId: live }, { id: 2, nodeId: 'bk-gone' }, { id: 3, nodeId: 'bk-gone' });
+  const res = await Content.sweepOrphanedProgress(db);
+  same(res, { reviewStates: 1, attemptLogs: 2 });
+  same([...db.reviews.keys()], [live]);
+  same(db.logs.map((l) => l.id), [1]);
+  same(await Content.sweepOrphanedProgress(db), { reviewStates: 0, attemptLogs: 0 });
+});
+
+test('sweepOrphanedProgress: does nothing when no nodes are stored (a failed boot must not wipe progress)', async () => {
+  const db = fakeDb();
+  db.reviews.set('bk-x', { nodeId: 'bk-x' });
+  db.logs.push({ id: 1, nodeId: 'bk-x' });
+  same(await Content.sweepOrphanedProgress(db), { reviewStates: 0, attemptLogs: 0 });
+  assert.equal(db.reviews.size, 1);
+  assert.equal(db.logs.length, 1);
+});
+
+test('sweepOrphanedProgress: a database error is swallowed and reported as zero removals', async () => {
+  const db = fakeDb();
+  db.nodes.set('n', { id: 'n' });
+  db.reviewStates.toCollection = () => { throw new Error('boom'); };
+  same(await Content.sweepOrphanedProgress(db), { reviewStates: 0, attemptLogs: 0 });
+});

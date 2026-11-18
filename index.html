@@ -7222,10 +7222,172 @@
         return null;
       }
 
+
+      /* ---------- error tags: the kind of slip behind a wrong answer, stored with the attempt ---------- */
+      const ERROR_LABELS = {
+        'shape:missed-lp': 'Missed lone pairs on the central atom',
+        'shape:extra-lp': 'Added lone pairs that are not there',
+        'shape:same-geometry': 'Right electron geometry, wrong bonded/lone split',
+        'shape:miscount': 'Miscounted the electron domains',
+        'shape:unrecognised': 'Shape left blank or not recognised',
+        'equation:unbalanced': 'Unbalanced equation',
+        'equation:charge': 'Charge not balanced',
+        'equation:wrong-species': 'Wrong reactants or products',
+        'equation:unreadable': 'Equation not written in a readable form',
+        'choice:wrong-option': 'Picked a wrong option',
+        'choice:missed-option': 'Missed a correct option',
+        'set:extra-items': 'Gave items that do not fit',
+        'set:missing-items': 'Missed some valid items',
+        'fields:wrong-value': 'Wrong value in a multi-part answer',
+        'written:critical-step': 'Missed a critical reasoning step',
+        'written:missing-points': 'Left out marking points',
+        'order:wrong-order': 'Put steps or items in the wrong order',
+        'short:wrong-value': 'Wrong value or name',
+      };
+
+      /* Pure. How a wrong shape differs, as a code (the sentence version is diagnoseShape). */
+      function diagnoseShapeCode(yours, correct) {
+        if (!yours) return 'unrecognised';
+        if (yours.shape === correct.shape) return 'right';
+        const nYou = yours.bp + yours.lp, nRight = correct.bp + correct.lp;
+        if (yours.bp === correct.bp && yours.lp < correct.lp) return 'missed-lp';
+        if (yours.bp === correct.bp && yours.lp > correct.lp) return 'extra-lp';
+        if (nYou === nRight) return 'same-geometry';
+        return 'miscount';
+      }
+
+      /* Pure. Tags (strings, see ERROR_LABELS) for a wrong answer; [] when the answer passed. */
+      function errorTags(variant, userInput, evalResult, rubricChecks) {
+        if (!variant || !evalResult || evalResult.passed) return [];
+        const rv = buildAnswerReview(variant, userInput, evalResult, rubricChecks);
+        if (!rv) return [];
+        const tags = new Set();
+        const fieldTags = (rows) => {
+          for (const r of rows || []) {
+            if (r.passed) continue;
+            if (r.vsepr) tags.add(`shape:${diagnoseShapeCode(r.vsepr.yours, r.vsepr.correct)}`);
+            else tags.add('fields:wrong-value');
+          }
+        };
+        if (rv.kind === 'mapped') fieldTags(rv.rows);
+        else if (rv.kind === 'set') {
+          if (rv.extra.length) tags.add('set:extra-items');
+          if (rv.missing.length) tags.add('set:missing-items');
+          if (rv.fields) fieldTags(rv.fields.rows);
+        } else if (rv.kind === 'choice') {
+          if (rv.options.some((o) => o.state === 'wrong')) tags.add('choice:wrong-option');
+          if (rv.options.some((o) => o.state === 'missed')) tags.add('choice:missed-option');
+        } else if (rv.kind === 'equation') {
+          if (rv.rows.some((r) => !r.valid)) tags.add('equation:unreadable');
+          if (rv.missing.length || rv.extra.length) tags.add('equation:wrong-species');
+          if (rv.rows.some((r) => r.valid && r.atoms.some((a) => !a.ok))) tags.add('equation:unbalanced');
+          if (rv.rows.some((r) => r.valid && r.charge && !r.charge.ok)) tags.add('equation:charge');
+        } else if (rv.kind === 'rubric') {
+          if (rv.items.some((i) => !i.met && i.critical)) tags.add('written:critical-step');
+          else if (rv.items.some((i) => !i.met)) tags.add('written:missing-points');
+        } else if (rv.kind === 'order') tags.add('order:wrong-order');
+        else if (rv.kind === 'short') tags.add('short:wrong-value');
+        return [...tags];
+      }
+
       return {
+        ERROR_LABELS, diagnoseShapeCode, errorTags,
         SHAPE_OF, CANON, shapeFromName, diagnoseShape, vseprSvg, buildMappedReview, lonePairIndices,
         prettyFormula, buildChoiceReview, buildEquationReview, buildRubricReview, buildSetReview, buildShortReview, buildOrderReview, buildAnswerReview,
       };
+    })();
+
+    /* =====================================================================
+       NAMESPACE: Weakness — where you are losing marks, and what to do about it
+       ---------------------------------------------------------------------
+       Pure functions over the attempt history and the skill map: topics ranked by recent misses, the questions
+       you got wrong and have not since got right, and the kinds of slip that keep recurring.
+       ===================================================================== */
+    const Weakness = (() => {
+      const PASS = 0.7;
+
+      /* Chunk (topic) ids a question belongs to, via the skills it exercises. */
+      function chunksOf(map, nodeId) {
+        const byId = (map._skillIndex ||= Object.fromEntries((map.skills || []).map((k) => [k.id, k])));
+        const out = [];
+        for (const sid of Mastery.skillsOfNode(map, nodeId)) { const c = byId[sid]?.chunk; if (c && !out.includes(c)) out.push(c); }
+        return out;
+      }
+
+      /* Pure. Per topic: attempts, the last `window` scores, how many of those missed, and a smoothed score used for ranking (weakest first). */
+      function topicStats(logs, map, opts = {}) {
+        const win = opts.window ?? 12;
+        const sorted = [...(logs || [])].sort((a, b) => a.timestamp - b.timestamp);
+        const grades = {};
+        const skillMiss = {};
+        for (const l of sorted) {
+          const g = Number(l.normalizedGrade) || 0;
+          for (const c of chunksOf(map, l.nodeId)) (grades[c] ||= []).push({ g, ts: l.timestamp, nodeId: l.nodeId });
+        }
+        const names = Object.fromEntries((map.chunks || []).map((c) => [c.id, c]));
+        const out = Object.entries(grades).map(([id, list]) => {
+          const recent = list.slice(-win);
+          const missed = recent.filter((x) => x.g < PASS).length;
+          const sum = recent.reduce((a, x) => a + x.g, 0);
+          const mean = sum / recent.length;
+          // rank on the same score the bar shows, pulled toward 70% so one or two answers cannot dominate
+          const rankScore = (sum + 0.7 * 2) / (recent.length + 2);
+          // which skills inside the topic account for the recent misses
+          const bySkill = {};
+          for (const x of recent) if (x.g < PASS) for (const sid of Mastery.skillsOfNode(map, x.nodeId)) { const sk = (map.skills || []).find((k) => k.id === sid); if (sk?.chunk === id) bySkill[sid] = (bySkill[sid] || 0) + 1; }
+          const weakSkills = Object.entries(bySkill).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([sid, n]) => ({ id: sid, name: (map.skills || []).find((k) => k.id === sid)?.name || sid, misses: n }));
+          return {
+            id, name: names[id]?.name || id, part: names[id]?.part || '', attempts: list.length, window: recent.length, missed, mean,
+            rankScore, ranked: list.length >= (opts.minAttempts ?? 2), lastTs: list[list.length - 1].ts, weakSkills,
+          };
+        });
+        return out.sort((a, b) => (b.ranked - a.ranked) || (a.rankScore - b.rankScore) || (b.attempts - a.attempts));
+      }
+
+      /* Pure. Questions whose most recent attempt was a miss (so ones you later got right are gone), newest first. */
+      function unresolvedMisses(logs, titleOf, map, limit = 8) {
+        const latest = new Map();
+        for (const l of [...(logs || [])].sort((a, b) => a.timestamp - b.timestamp)) latest.set(l.nodeId, l);
+        return [...latest.values()]
+          .filter((l) => (Number(l.normalizedGrade) || 0) < PASS)
+          .sort((a, b) => b.timestamp - a.timestamp)
+          .slice(0, limit)
+          .map((l) => ({ nodeId: l.nodeId, title: titleOf(l.nodeId) || l.nodeId, grade: Number(l.normalizedGrade) || 0, timestamp: l.timestamp, chunk: chunksOf(map, l.nodeId)[0] || null }));
+      }
+
+      /* Pure. The slips that recur: error tags and (older) missed rubric skill tags, with the topics they happen in. */
+      function slipCounts(attemptLogs, map, opts = {}) {
+        const win = opts.window ?? 80;
+        const recent = [...(attemptLogs || [])].sort((a, b) => b.timestamp - a.timestamp).slice(0, win);
+        const tally = {};
+        const add = (key, label, kind, log) => {
+          const t = (tally[key] ||= { key, label, kind, count: 0, chunks: {}, lastTs: 0 });
+          t.count += 1;
+          t.lastTs = Math.max(t.lastTs, log.timestamp || 0);
+          for (const c of chunksOf(map, log.nodeId)) t.chunks[c] = (t.chunks[c] || 0) + 1;
+        };
+        for (const l of recent) {
+          for (const tag of l.errorTags || []) add(tag, Review.ERROR_LABELS[tag] || tag, 'error', l);
+          for (const tag of l.missedSkillTags || []) add('skill:' + tag, tag, 'skill', l);
+        }
+        return Object.values(tally)
+          .filter((t) => t.count >= (opts.minCount ?? 2))
+          .sort((a, b) => b.count - a.count || b.lastTs - a.lastTs)
+          .slice(0, opts.limit ?? 6)
+          .map((t) => ({ ...t, topChunk: Object.entries(t.chunks).sort((a, b) => b[1] - a[1])[0]?.[0] || null }));
+      }
+
+      function timeAgo(ts, now = Date.now()) {
+        const m = Math.max(0, Math.round((now - ts) / 60000));
+        if (m < 1) return 'just now';
+        if (m < 60) return `${m} min ago`;
+        const h = Math.round(m / 60);
+        if (h < 24) return `${h} h ago`;
+        const d = Math.round(h / 24);
+        return d === 1 ? 'yesterday' : `${d} days ago`;
+      }
+
+      return { PASS, chunksOf, topicStats, unresolvedMisses, slipCounts, timeAgo };
     })();
 
     /* =====================================================================
@@ -7241,6 +7403,8 @@
         masteryLogs: [],
         composerNodes: [],
         myHooks: {},
+        session: { cards: 0, retry: [] },   // cards answered this session, and misses queued to come back
+        retryAfterCards: 5,
         content: { bank: null, skillMap: null },
         ui: { sheet: null, readinessTab: 'overview', settingsTab: 'module', bankLimit: 60 },
         reviewMap: {},
@@ -7322,6 +7486,18 @@
         if (window.lucide && typeof window.lucide.createIcons === 'function') {
           try { window.lucide.createIcons({ root: el }); } catch (_) {}
         }
+      }
+
+      function drillTopic(chunkId) {
+        appState.route = 'study';
+        appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null, chunkId, chunkNodeIds: Content.chunkNodeIds(appState.skillMap, chunkId) };
+        loadNextQuestion();
+      }
+
+      function redoNode(nodeId) {
+        appState.route = 'study';
+        appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: nodeId };
+        loadNextQuestion();
       }
 
       function masteryNow() {
@@ -7572,6 +7748,11 @@
           excludeNodeId: (opts.skipCurrent || prevNode) ? prevNode?.id : null,
           lastFamily: prevNode?.metadata?.family || null,
         };
+        // a miss the student sent back: it returns once enough other cards have gone by
+        if (!appState.filters.forceNodeId) {
+          const due = appState.session.retry.find((r) => r.after <= appState.session.cards && r.nodeId !== prevNode?.id);
+          if (due) { appState.session.retry = appState.session.retry.filter((r) => r !== due); filters.forceNodeId = due.nodeId; }
+        }
         if (appState.skillMap) {
           // a topic or weak-spot drill is practice you asked for, so retirement does not thin it; removals still hold
           filters.masteryAdj = Mastery.adjustments(masteryNow(), appState.skillMap, appState.masteryPrefs.removed,
@@ -7579,7 +7760,7 @@
             appState.nodes.filter((n) => String(n.id).startsWith('lf-inv-')).map((n) => n.id));
         }
         const pick = Scheduler.selectNextNode(
-          appState.nodes,
+          filters.forceNodeId ? [...appState.nodes, ...appState.composerNodes] : appState.nodes,
           appState.reviewMap,
           moduleMap(),
           appState.attemptLogs,
@@ -7664,6 +7845,7 @@
           userInput: cur.userInput,
           rubricChecks: cur.rubricChecks || null,
           missedSkillTags: evalResult.missedSkillTags || [],
+          errorTags: Review.errorTags(cur.inst.variant, cur.userInput, evalResult, cur.rubricChecks),
         };
 
         await db.transaction('rw', db.reviewStates, db.attemptLogs, async () => {
@@ -7671,6 +7853,7 @@
           await db.attemptLogs.put(logEntry);
         });
 
+        appState.session.cards += 1;
         const masteryBefore = masteryNow();
         appState.reviewMap[cur.node.id] = nextRs;
         appState.attemptLogs.unshift(logEntry);
@@ -8149,7 +8332,16 @@
               ` : ''}
 
               <div class="sticky bottom-0 max-lg:mt-auto bg-white flex flex-wrap items-center justify-between gap-3 py-3 border-t border-slate-200">
-                <div class="flex items-center gap-2">
+                <div class="flex flex-wrap items-center gap-2">
+                  ${(() => {
+                    const topicId = appState.skillMap ? Weakness.chunksOf(appState.skillMap, node.id)[0] : null;
+                    const topicName = topicId ? appState.skillMap.chunks?.find((c) => c.id === topicId)?.name : '';
+                    return `
+                      ${topicId ? `<button type="button" id="btnDrillTopic" data-chunk="${esc(topicId)}" title="${esc(topicName || '')}" class="px-3 py-1.5 text-xs font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-700">Drill this topic</button>` : ''}
+                      ${!evalResult.passed ? (cur.retryQueued
+                        ? `<span class="text-xs font-medium text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-1.5" data-retry-queued>Coming back in ${appState.retryAfterCards} cards ✓</span>`
+                        : `<button type="button" id="btnRetryLater" class="px-3 py-1.5 text-xs font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-700">See again in ${appState.retryAfterCards} cards</button>`) : ''}`;
+                  })()}
                   ${node.id.startsWith('gb-') || node.metadata.conceptTags?.includes('stereochemistry') ? `
                     <button type="button" id="btnOpenExplorerFromCard" class="px-3 py-1.5 text-xs font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-700">Inspect in 3D Explorer</button>
                   ` : ''}
@@ -8500,6 +8692,12 @@
           }
         });
         $('#btnNextQuestion', root)?.addEventListener('click', () => loadNextQuestion({ skipCurrent: true }));
+        $('#btnDrillTopic', root)?.addEventListener('click', (e) => drillTopic(e.currentTarget.dataset.chunk));
+        $('#btnRetryLater', root)?.addEventListener('click', () => {
+          if (!appState.session.retry.some((r) => r.nodeId === node.id)) appState.session.retry.push({ nodeId: node.id, after: appState.session.cards + appState.retryAfterCards });
+          cur.retryQueued = true;
+          render();
+        });
         $$('[data-drill-skill]', root).forEach((btn) => {
           btn.addEventListener('click', () => {
             appState.filters.skillTag = btn.dataset.drillSkill;
@@ -8720,6 +8918,7 @@
             userInput: q.userInput,
             rubricChecks: q.rubricChecks || null,
             missedSkillTags: evalRes.missedSkillTags || [],
+            errorTags: Review.errorTags(variant, q.userInput, evalRes, q.rubricChecks),
           };
           newLogs.push(logEntry);
         }
@@ -9374,8 +9573,6 @@
           mod: m,
           readiness: Scheduler.computeModuleReadiness(m, appState.nodes, appState.reviewMap, nowMs, appState.attemptLogs),
         }));
-        const faultMap = Scheduler.computeFaultSkillMap(appState.attemptLogs, nowMs);
-        const sortedFaults = Object.entries(faultMap).sort((x, y) => y[1] - x[1]);
         const tab = appState.ui.readinessTab;
         const skillParts = skillMapParts();
 
@@ -9436,29 +9633,73 @@
           </section>
         `).join('');
 
-        const weakHtml = `
-          <section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
-            <div>
-              <h2 class="font-display text-base font-semibold text-slate-900">Fault-isolation weak skills</h2>
-              <p class="text-xs text-slate-500">Filled in automatically when critical or sub-skill steps are missed in synthesis rubrics.</p>
-            </div>
-            ${sortedFaults.length ? `
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                ${sortedFaults.map(([tag, score]) => `
-                  <div class="border border-rose-200 bg-rose-50/50 rounded-lg p-3 flex items-center justify-between gap-3">
-                    <div class="min-w-0">
-                      <div class="font-mono text-xs font-semibold text-rose-900 truncate">${esc(tag)}</div>
-                      <div class="text-[11px] text-rose-700">Priority boost: +${score.toFixed(2)}</div>
-                    </div>
-                    <button type="button" data-remediate-tag="${esc(tag)}" class="px-3 py-1.5 text-xs font-medium bg-white border border-rose-300 text-rose-800 rounded-md hover:bg-rose-100 shrink-0">Drill</button>
+        const weakHtml = (() => {
+          const map = appState.skillMap;
+          const card = (inner) => `<section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">${inner}</section>`;
+          if (!appState.masteryLogs.length) {
+            return card(`<h2 class="font-display text-base font-semibold text-slate-900">Nothing to diagnose yet</h2>
+              <p class="text-sm text-slate-600">Answer a few questions and this page will show which topics are losing you marks, the questions still to fix, and the slips that keep coming back.</p>
+              <button type="button" data-go-study class="px-4 py-2 text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">Start studying</button>`);
+          }
+          if (!map) return card('<p class="text-sm text-slate-600">The skill map did not load, so topics cannot be ranked. Reload the page to try again.</p>');
+          const topics = Weakness.topicStats(appState.masteryLogs, map);
+          const ranked = topics.filter((t) => t.ranked);
+          const shownTopics = appState.ui.weakAll ? ranked : ranked.slice(0, 5);
+          const chunkName = (id) => map.chunks?.find((c) => c.id === id)?.name || '';
+          const titles = Object.fromEntries([...appState.nodes, ...appState.composerNodes].map((n) => [n.id, n.metadata?.title]));
+          const misses = Weakness.unresolvedMisses(appState.masteryLogs, (id) => titles[id], map, 8);
+          const slips = Weakness.slipCounts(appState.attemptLogs, map);
+          const now = Date.now();
+          const barTone = (mean) => (mean < 0.5 ? 'bg-rose-500' : mean < 0.7 ? 'bg-amber-500' : 'bg-emerald-500');
+          const drillBtn = (chunk, label = 'Drill') => `<button type="button" data-weak-drill="${esc(chunk)}" class="shrink-0 px-3 py-1.5 text-xs font-medium bg-white border border-rose-300 text-rose-800 rounded-md hover:bg-rose-50">${label}</button>`;
+
+          const topicsHtml = shownTopics.length ? shownTopics.map((t) => {
+            const pctMean = Math.round(t.mean * 100);
+            return `
+              <div class="border border-slate-200 rounded-lg p-3 space-y-2" data-weak-topic="${esc(t.id)}" data-rank="${t.rankScore.toFixed(3)}">
+                <div class="flex items-start justify-between gap-2">
+                  <div class="min-w-0">
+                    <div class="text-sm font-semibold text-slate-900">${esc(t.name)}</div>
+                    <div class="text-[11px] text-slate-500">${esc(t.part)} · ${t.missed} of your last ${t.window} answers missed</div>
                   </div>
-                `).join('')}
-              </div>
-            ` : '<p class="text-sm text-slate-500 py-2">No missed-skill fault flags yet. Attempt an uncued synthesis problem to test diagnostic fault isolation.</p>'}
-          </section>`;
+                  ${drillBtn(t.id)}
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden" role="img" aria-label="Average score ${pctMean}%"><div class="h-full ${barTone(t.mean)}" style="width:${Math.max(3, pctMean)}%"></div></div>
+                  <span class="text-[11px] font-mono text-slate-600 w-9 text-right">${pctMean}%</span>
+                </div>
+                ${t.weakSkills.length ? `<div class="text-[11px] text-slate-600">Most misses: ${t.weakSkills.map((k) => `${esc(k.name)} ×${k.misses}`).join(' · ')}</div>` : ''}
+              </div>`;
+          }).join('') : '<p class="text-sm text-slate-500">Topics are ranked once you have answered at least two questions in them.</p>';
+          const moreBtn = ranked.length > 5 ? `<button type="button" id="btnWeakShowAll" class="text-xs font-medium text-blue-700 hover:underline">${appState.ui.weakAll ? 'Show the weakest 5' : `Show all ${ranked.length} topics`}</button>` : '';
+
+          const missesHtml = misses.length ? `<ul class="divide-y divide-slate-100">${misses.map((m) => `
+              <li class="flex items-center gap-3 py-2" data-weak-miss="${esc(m.nodeId)}">
+                <div class="min-w-0 flex-1">
+                  <div class="text-sm font-medium text-slate-900 truncate">${esc(m.title)}</div>
+                  <div class="text-[11px] text-slate-500">${esc(chunkName(m.chunk))}${m.chunk ? ' · ' : ''}${Weakness.timeAgo(m.timestamp, now)} · ${Math.round(m.grade * 100)}%</div>
+                </div>
+                <button type="button" data-weak-redo="${esc(m.nodeId)}" class="shrink-0 px-3 py-1.5 text-xs font-medium bg-slate-900 text-white rounded-md hover:bg-slate-800">Redo</button>
+              </li>`).join('')}</ul>` : '<p class="text-sm text-emerald-800">Nothing outstanding: every question you missed, you have since got right.</p>';
+
+          const slipsHtml = slips.length ? `<ul class="divide-y divide-slate-100">${slips.map((x) => `
+              <li class="flex items-center gap-3 py-2" data-weak-slip="${esc(x.key)}">
+                <div class="min-w-0 flex-1">
+                  <div class="text-sm font-medium text-slate-900">${esc(x.kind === 'skill' ? 'Missed step: ' + x.label : x.label)} <span class="font-mono text-rose-700">×${x.count}</span></div>
+                  ${x.topChunk ? `<div class="text-[11px] text-slate-500">mostly in ${esc(chunkName(x.topChunk))}</div>` : ''}
+                </div>
+                ${x.kind === 'skill' ? `<button type="button" data-remediate-tag="${esc(x.key.slice(6))}" class="shrink-0 px-3 py-1.5 text-xs font-medium bg-white border border-rose-300 text-rose-800 rounded-md hover:bg-rose-50">Drill</button>` : (x.topChunk ? drillBtn(x.topChunk, 'Drill topic') : '')}
+              </li>`).join('')}</ul>` : '<p class="text-sm text-slate-500">No pattern yet. Each wrong answer is tagged with the kind of slip, and one shows up here once it happens twice.</p>';
+
+          return `
+            ${card(`<div><h2 class="font-display text-base font-semibold text-slate-900">Weakest topics</h2><p class="text-xs text-slate-500">Weakest first, by your recent scores. Topics with only a few answers are held closer to average.</p></div>${topicsHtml}${moreBtn}`)}
+            ${card(`<div><h2 class="font-display text-base font-semibold text-slate-900">Still to fix</h2><p class="text-xs text-slate-500">Questions you missed and have not since got right.</p></div>${missesHtml}`)}
+            ${card(`<div><h2 class="font-display text-base font-semibold text-slate-900">Recurring slips</h2><p class="text-xs text-slate-500">The same kind of mistake, twice or more, in your last answers.</p></div>${slipsHtml}`)}`;
+        })();
 
         const body = { overview: overviewHtml, chapters: chaptersHtml, skills: `<section class="space-y-3">${skillParts.summary}${skillParts.list}</section>`, weak: weakHtml }[tab] || overviewHtml;
-        const tabs = [['overview', 'Overview'], ['chapters', 'Chapters'], ['skills', 'Skills'], ['weak', 'Weak spots']];
+        const toFix = appState.skillMap ? Weakness.unresolvedMisses(appState.masteryLogs, () => '', appState.skillMap, 99).length : 0;
+        const tabs = [['overview', 'Overview'], ['chapters', 'Chapters'], ['skills', 'Skills'], ['weak', toFix ? `Weak spots · ${toFix}` : 'Weak spots']];
 
         root.innerHTML = `
           <div class="view">
@@ -9495,13 +9736,12 @@
           });
         });
         $$('[data-drill-chunk]', root).forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const id = btn.dataset.drillChunk;
-            appState.route = 'study';
-            appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null, chunkId: id, chunkNodeIds: Content.chunkNodeIds(appState.skillMap, id) };
-            loadNextQuestion();
-          });
+          btn.addEventListener('click', () => drillTopic(btn.dataset.drillChunk));
         });
+        $$('[data-weak-drill]', root).forEach((btn) => btn.addEventListener('click', () => drillTopic(btn.dataset.weakDrill)));
+        $$('[data-weak-redo]', root).forEach((btn) => btn.addEventListener('click', () => redoNode(btn.dataset.weakRedo)));
+        $('#btnWeakShowAll', root)?.addEventListener('click', () => { appState.ui.weakAll = !appState.ui.weakAll; render(); });
+        $('[data-go-study]', root)?.addEventListener('click', () => { appState.route = 'study'; render(); });
         $$('[data-remediate-tag]', root).forEach((btn) => {
           btn.addEventListener('click', () => {
             appState.route = 'study';
@@ -10287,6 +10527,7 @@
       Scheduler,
       Mastery,
       Review,
+      Weakness,
       IsomerEngine,
       LF,
       Evaluators,

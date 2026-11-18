@@ -70,3 +70,22 @@ test('hooks: history-based hooks carry their sources, and no hook asserts a date
   assert.ok(!/crowd/i.test(text('bk-c4-sf6-inert')), 'SF6 crowding explanation is unsourced');
   assert.ok(!/designed for airbag|invented for airbag/i.test(text('bk-c4-wislicenus')));
 });
+
+test('hooks: every caveat is one sentence, sits with a hook, and the contested points are on the record', () => {
+  const found = [];
+  for (const n of bank.questionNodes) {
+    const items = [[n.metadata, n.metadata.memoryHook, n.metadata.memoryHookNote], ...n.variants.map((v) => [v, v.memoryHook || n.metadata.memoryHook, v.memoryHookNote])];
+    for (const [, hook, note] of items) {
+      if (!note) continue;
+      found.push(n.id);
+      assert.ok(hook, `${n.id}: a caveat needs a hook to qualify`);
+      assert.ok(note.length <= 260, `${n.id}: caveat too long (${note.length})`);
+      assert.equal(note.split(/(?<=[.!?])\s+/).length, 1, `${n.id}: a caveat is one sentence`);
+    }
+  }
+  for (const id of ['bk-c4-h-activation', 'bk-c4-h2o2', 'bk-c4-contact', 'bk-c4-p-scheme', 'bk-c4-silanes', 'bk-c4-named-roundup']) assert.ok(found.includes(id), `${id} should carry its caveat`);
+  assert.match(byId['bk-c4-h-activation'].metadata.memoryHookNote, /Angoletta/);
+  assert.match(byId['bk-c4-h2o2'].metadata.memoryHookNote, /nitric/);
+  const gro = byId['bk-c4-named-roundup'].variants.find((v) => v.perspectiveLabel === 'Not a process');
+  assert.match(gro.memoryHook, /Grotthuss/);
+});

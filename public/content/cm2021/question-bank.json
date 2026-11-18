@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-18T09:52:34.000Z",
+ "exportedAt": "2026-11-18T09:56:51.000Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -5509,7 +5509,8 @@
     "hookSources": [
      "https://www.pnas.org/doi/full/10.1073/pnas.0609707104",
      "https://pmc.ncbi.nlm.nih.gov/articles/PMC3238621/"
-    ]
+    ],
+    "memoryHookNote": "Who first made Vaska’s complex is contested (a crystallographic review credits an earlier preparation to Angoletta), so the credit here is for the 1961 formulation, not for priority."
    },
    "variants": [
     {
@@ -7446,7 +7447,8 @@
     "estimatedMinutes": 2,
     "examStyle": "short_2to3",
     "family": "silicon",
-    "memoryHook": "**Hydride swap**: SiCl₄ + Li[AlH₄] → SiH₄ + Li[AlCl₄]. Si (Pauling 1.9) is less electronegative than H (2.2), so Si–H is Si(δ+)–H(δ−): the opposite way round to C–H (C is 2.55)."
+    "memoryHook": "**Hydride swap**: SiCl₄ + Li[AlH₄] → SiH₄ + Li[AlCl₄]. Si (Pauling 1.9) is less electronegative than H (2.2), so Si–H is Si(δ+)–H(δ−): the opposite way round to C–H (C is 2.55).",
+    "memoryHookNote": "No source checked states the general Si–H versus C–H polarity outright; it follows from the Pauling electronegativities (Si 1.9, H 2.2, C 2.55)."
    },
    "variants": [
     {
@@ -8863,7 +8865,8 @@
      "https://periodic-table.rsc.org/element/15/Phosphorus",
      "https://www.britannica.com/biography/Hennig-Brand",
      "https://nora.nerc.ac.uk/id/eprint/525743/1/N525743JA.pdf"
-    ]
+    ],
+    "memoryHookNote": "The word “phosphorus” was already used for light-giving materials before the element was found, so Brand did not coin it."
    },
    "variants": [
     {
@@ -9162,7 +9165,8 @@
     "hookSources": [
      "https://link.springer.com/content/pdf/10.1007/978-94-017-0984-2_2.pdf",
      "https://www.epfl.ch/labs/lsci/wp-content/uploads/2018/09/perxoide-property.pdf"
-    ]
+    ],
+    "memoryHookNote": "Histories disagree on which acid Thénard first used (nitric in scholarly accounts, sulfuric with hydrochloric in a government factsheet); sulfuric acid is the route in your course."
    },
    "variants": [
     {
@@ -9259,11 +9263,12 @@
     "estimatedMinutes": 4,
     "examStyle": "construct_4to6",
     "family": "named-process",
-    "memoryHook": "**Phillips patented the catalytic route in 1831**; the demand came from the synthetic-dye industry, which needed concentrated acid and oleum. Today a solid V₂O₅ catalyst does the oxidation. SO₃ goes into 98% H₂SO₄ because it does not absorb well into water (your slide).",
+    "memoryHook": "**Phillips patented the catalytic route in 1831**; the demand came from the synthetic-dye industry, which needed concentrated acid and oleum. Today a solid V₂O₅ catalyst does the oxidation: the gases **contact** a solid surface. SO₃ goes into 98% H₂SO₄ because it does not absorb well into water (your slide).",
     "hookSources": [
      "https://edu.rsc.org/download?ac=509455",
      "https://www.britannica.com/technology/contact-process"
-    ]
+    ],
+    "memoryHookNote": "The origin of the name “contact” is not documented in the sources checked, so read it as a memory aid: catalysis at a solid surface."
    },
    "variants": [
     {
@@ -9838,7 +9843,11 @@
     "difficultyEstimate": 3,
     "estimatedMinutes": 5,
     "examStyle": "construct_4to6",
-    "family": "named-process"
+    "family": "named-process",
+    "hookSources": [
+     "https://www.deutsche-biographie.de/sfz24114.html",
+     "https://www.elch.chem.msu.ru/rus/wp/wp-content/uploads/2016/03/about_Grotthuss_v32-2-p119-128.pdf"
+    ]
    },
    "variants": [
     {
@@ -9959,7 +9968,9 @@
        "a"
       ],
       "gradingMode": "exact"
-     }
+     },
+     "memoryHook": "**Grotthuss = a proton relay, not a manufacturing process**: H⁺ hops along hydrogen-bonded water wires. It is named for Theodor von Grotthuss, whose electrolysis-of-water theory had charge passed along a chain of molecules.",
+     "memoryHookNote": "Sources date Grotthuss’s theory to about 1805–06, and none checked ties his original proposal precisely to the modern proton-relay mechanism."
     }
    ]
   },

@@ -7734,11 +7734,13 @@
 
               ${(() => {
                 const builtIn = variant.memoryHook || node.metadata?.memoryHook || '';
+                const caveat = builtIn ? (variant.memoryHookNote || node.metadata?.memoryHookNote || '') : '';
                 const mine = appState.myHooks[node.id] || '';
                 return `
                 <div class="bg-sky-50/70 border border-sky-200 rounded-xl p-4 text-sm text-slate-800 space-y-2" data-memory-hook-block>
                   <div class="text-xs font-semibold uppercase tracking-wider text-sky-800">Memory hook</div>
                   ${builtIn ? `<div class="prose-math">${renderMarkdownLite(builtIn)}</div>` : '<div class="text-xs text-slate-500">No built-in hook for this one yet.</div>'}
+                  ${caveat ? `<div class="text-xs text-amber-950 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-1.5" data-hook-caveat><span class="font-semibold">Caveat:</span> ${esc(caveat)}</div>` : ''}
                   <label class="block">
                     <span class="block text-xs font-medium text-slate-600 mb-1">My hook (saved on this device)</span>
                     <textarea data-bounded-scroll id="myHookInput" rows="2" placeholder="Your own picture, pun or reason…" class="w-full text-sm px-2.5 py-2 border border-slate-300 rounded-lg bg-white">${esc(mine)}</textarea>

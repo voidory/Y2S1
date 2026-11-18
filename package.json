@@ -16,7 +16,8 @@
     "test:weak": "node tests/e2e/weak-spots.cjs",
     "test:copy": "node tests/e2e/copy-cleanup.cjs",
     "test:data": "node tests/e2e/data-safety.cjs",
-    "test:e2e": "node tests/e2e/layout-check.cjs && node tests/e2e/study-flows.cjs && node tests/e2e/answer-review.cjs && node tests/e2e/weak-spots.cjs && node tests/e2e/copy-cleanup.cjs && node tests/e2e/data-safety.cjs"
+    "test:e2e": "node tests/e2e/layout-check.cjs && node tests/e2e/study-flows.cjs && node tests/e2e/answer-review.cjs && node tests/e2e/weak-spots.cjs && node tests/e2e/copy-cleanup.cjs && node tests/e2e/data-safety.cjs",
+    "test:cm2011": "node tests/e2e/cm2011-flows.cjs"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

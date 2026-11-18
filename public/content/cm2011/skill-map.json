@@ -1,0 +1,967 @@
+{
+ "version": "1.0",
+ "date": "2026-11-18",
+ "module": "CM2011",
+ "chunks": [
+  {
+   "id": "t1-stats",
+   "part": "Topic 1: Errors & confidence intervals",
+   "name": "Statistics and uncertainty",
+   "summary": "Mean, s, %RSD, Q-test, confidence interval, t-tests, error propagation"
+  },
+  {
+   "id": "t1-quant",
+   "part": "Topic 1: Errors & confidence intervals",
+   "name": "Units, dilutions & Kjeldahl",
+   "summary": "ppm and molarity, dilution factors, Kjeldahl nitrogen and adulterants"
+  },
+  {
+   "id": "e-activity",
+   "part": "Topic 3a: Electrochemistry",
+   "name": "Ionic strength and activity",
+   "summary": "I, extended Debye–Hückel γ, activities"
+  },
+  {
+   "id": "e-nernst",
+   "part": "Topic 3a: Electrochemistry",
+   "name": "Nernst equation and cells",
+   "summary": "Half-cells and cells with activities, spontaneity, Ksp → E°, ΔG and K"
+  },
+  {
+   "id": "p-principles",
+   "part": "Topic 3b: Potentiometry",
+   "name": "How the electrodes work",
+   "summary": "Glass electrode, junction potential, cell notation, written explanations"
+  },
+  {
+   "id": "p-types",
+   "part": "Topic 3b: Potentiometry",
+   "name": "Membrane types and probes",
+   "summary": "Glass, LaF₃, Ag₂S, PVC; gas-sensing probes; TISAB"
+  },
+  {
+   "id": "p-calibration",
+   "part": "Topic 3b: Potentiometry",
+   "name": "Slope, calibration and readings",
+   "summary": "Nernstian slope by charge, reading an unknown, calibration procedure"
+  },
+  {
+   "id": "p-selectivity",
+   "part": "Topic 3b: Potentiometry",
+   "name": "Interferents and selectivity",
+   "summary": "Selectivity coefficient, size of an interference error"
+  },
+  {
+   "id": "s-absorption",
+   "part": "Topic 4: Spectroscopy",
+   "name": "Absorption spectroscopy",
+   "summary": "Beer–Lambert, %T, dilutions, unit conversions, instrument layout"
+  },
+  {
+   "id": "s-fluorescence",
+   "part": "Topic 4: Spectroscopy",
+   "name": "Fluorescence",
+   "summary": "Stokes shift, 90° geometry, sensitivity, layout"
+  },
+  {
+   "id": "s-atomic",
+   "part": "Topic 4: Spectroscopy",
+   "name": "Atomic spectroscopy",
+   "summary": "AAS components, lamps, atomisers"
+  }
+ ],
+ "skills": [
+  {
+   "id": "m11.t1.meansd",
+   "ch": 1,
+   "name": "Mean, standard deviation and %RSD of replicates",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Topic 1 · errors and statistics",
+   "tags": [
+    "standard-deviation"
+   ],
+   "ids": [
+    "bk-m11-t1-meansd"
+   ],
+   "weight": 0.02963,
+   "nodes": [
+    "bk-m11-t1-meansd"
+   ],
+   "chunk": "t1-stats"
+  },
+  {
+   "id": "m11.t1.sem",
+   "ch": 1,
+   "name": "Standard error of the mean and the 1/√N rule",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 3,
+   "basis": "notes",
+   "ref": "Topic 1 · errors and statistics",
+   "tags": [
+    "standard-error"
+   ],
+   "ids": [
+    "bk-m11-t1-sem"
+   ],
+   "weight": 0.02222,
+   "nodes": [
+    "bk-m11-t1-sem"
+   ],
+   "chunk": "t1-stats"
+  },
+  {
+   "id": "m11.t1.qtest",
+   "ch": 1,
+   "name": "Q-test: compute Q and decide",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Topic 1 · errors and statistics",
+   "tags": [
+    "q-test"
+   ],
+   "ids": [
+    "bk-m11-t1-qtest"
+   ],
+   "weight": 0.02963,
+   "nodes": [
+    "bk-m11-t1-qtest"
+   ],
+   "chunk": "t1-stats"
+  },
+  {
+   "id": "m11.t1.ci",
+   "ch": 1,
+   "name": "95% confidence interval from replicates",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 5,
+   "basis": "notes",
+   "ref": "Topic 1 · errors and statistics",
+   "tags": [
+    "confidence-interval"
+   ],
+   "ids": [
+    "bk-m11-t1-ci"
+   ],
+   "weight": 0.03704,
+   "nodes": [
+    "bk-m11-t1-ci"
+   ],
+   "chunk": "t1-stats"
+  },
+  {
+   "id": "m11.t1.ttest2",
+   "ch": 1,
+   "name": "Two-sample pooled t-test: s_pooled, t_calc, decision",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 6,
+   "basis": "notes",
+   "ref": "Topic 1 · errors and statistics",
+   "tags": [
+    "t-test"
+   ],
+   "ids": [
+    "bk-m11-t1-ttest2"
+   ],
+   "weight": 0.04444,
+   "nodes": [
+    "bk-m11-t1-ttest2"
+   ],
+   "chunk": "t1-stats"
+  },
+  {
+   "id": "m11.t1.paired",
+   "ch": 1,
+   "name": "Paired t-test on differences",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 6,
+   "basis": "notes",
+   "ref": "Topic 1 · errors and statistics",
+   "tags": [
+    "t-test",
+    "paired"
+   ],
+   "ids": [
+    "bk-m11-t1-paired"
+   ],
+   "weight": 0.04444,
+   "nodes": [
+    "bk-m11-t1-paired"
+   ],
+   "chunk": "t1-stats"
+  },
+  {
+   "id": "m11.t1.errprop",
+   "ch": 1,
+   "name": "Propagate uncertainty through + − × ÷",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Topic 1 · errors and statistics",
+   "tags": [
+    "error-propagation"
+   ],
+   "ids": [
+    "bk-m11-t1-errprop"
+   ],
+   "weight": 0.02963,
+   "nodes": [
+    "bk-m11-t1-errprop"
+   ],
+   "chunk": "t1-stats"
+  },
+  {
+   "id": "m11.t1.concepts",
+   "ch": 1,
+   "name": "Accuracy, precision, random/systematic error, meaning of CI and t-test results",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Topic 1 · errors and statistics",
+   "tags": [
+    "concepts"
+   ],
+   "ids": [
+    "bk-m11-t1-concepts"
+   ],
+   "weight": 0.00741,
+   "nodes": [
+    "bk-m11-t1-concepts"
+   ],
+   "chunk": "t1-stats"
+  },
+  {
+   "id": "m11.q.ppm",
+   "ch": 1,
+   "name": "Convert between ppm, ppb and mol/L",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Topic 1 · errors and statistics",
+   "tags": [
+    "ppm"
+   ],
+   "ids": [
+    "bk-m11-q-ppm"
+   ],
+   "weight": 0.01481,
+   "nodes": [
+    "bk-m11-q-ppm"
+   ],
+   "chunk": "t1-quant"
+  },
+  {
+   "id": "m11.q.dilution",
+   "ch": 1,
+   "name": "Dilution factors, single and two-step",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 3,
+   "basis": "notes",
+   "ref": "Topic 1 · errors and statistics",
+   "tags": [
+    "dilution"
+   ],
+   "ids": [
+    "bk-m11-q-dilution"
+   ],
+   "weight": 0.02222,
+   "nodes": [
+    "bk-m11-q-dilution"
+   ],
+   "chunk": "t1-quant"
+  },
+  {
+   "id": "m11.q.kjeldahl",
+   "ch": 1,
+   "name": "Kjeldahl back-titration to %N, % protein and ppm of an adulterant",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 5,
+   "basis": "notes",
+   "ref": "Topic 1 · errors and statistics · 2011-12 final Q1",
+   "tags": [
+    "kjeldahl"
+   ],
+   "ids": [
+    "bk-m11-q-kjeldahl"
+   ],
+   "weight": 0.03704,
+   "nodes": [
+    "bk-m11-q-kjeldahl"
+   ],
+   "chunk": "t1-quant"
+  },
+  {
+   "id": "m11.e.ionic",
+   "ch": 3,
+   "name": "Ionic strength of a salt or a mixture",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Topic 3a · electrochemistry",
+   "tags": [
+    "ionic-strength"
+   ],
+   "ids": [
+    "bk-m11-e-ionic"
+   ],
+   "weight": 0.01481,
+   "nodes": [
+    "bk-m11-e-ionic"
+   ],
+   "chunk": "e-activity"
+  },
+  {
+   "id": "m11.e.gamma",
+   "ch": 3,
+   "name": "Extended Debye–Hückel: γ and activity",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Topic 3a · electrochemistry",
+   "tags": [
+    "activity-coefficient"
+   ],
+   "ids": [
+    "bk-m11-e-gamma"
+   ],
+   "weight": 0.02963,
+   "nodes": [
+    "bk-m11-e-gamma"
+   ],
+   "chunk": "e-activity"
+  },
+  {
+   "id": "m11.e.half",
+   "ch": 3,
+   "name": "Electrode potential of M/Mⁿ⁺ using activities",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 5,
+   "basis": "notes",
+   "ref": "Topic 3a · electrochemistry",
+   "tags": [
+    "nernst"
+   ],
+   "ids": [
+    "bk-m11-e-half"
+   ],
+   "weight": 0.03704,
+   "nodes": [
+    "bk-m11-e-half"
+   ],
+   "chunk": "e-nernst"
+  },
+  {
+   "id": "m11.e.fe",
+   "ch": 3,
+   "name": "Redox couple in a mixed-electrolyte solution",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 7,
+   "basis": "notes",
+   "ref": "Topic 3a · electrochemistry · 2011-12 final Q2(a)",
+   "tags": [
+    "nernst",
+    "ionic-strength"
+   ],
+   "ids": [
+    "bk-m11-e-fe"
+   ],
+   "weight": 0.05185,
+   "nodes": [
+    "bk-m11-e-fe"
+   ],
+   "chunk": "e-nernst"
+  },
+  {
+   "id": "m11.e.cell",
+   "ch": 3,
+   "name": "Full cell potential from two half-cells; spontaneity",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 8,
+   "basis": "notes",
+   "ref": "Topic 3a · electrochemistry · 2011-12 final Q2(a)",
+   "tags": [
+    "cell-potential"
+   ],
+   "ids": [
+    "bk-m11-e-cell"
+   ],
+   "weight": 0.05926,
+   "nodes": [
+    "bk-m11-e-cell"
+   ],
+   "chunk": "e-nernst"
+  },
+  {
+   "id": "m11.e.ksp",
+   "ch": 3,
+   "name": "Combine Ksp with E° to get E° of a metal / insoluble-salt electrode",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 6,
+   "basis": "notes",
+   "ref": "Topic 3a · electrochemistry · 2011-12 final Q2(c)",
+   "tags": [
+    "ksp"
+   ],
+   "ids": [
+    "bk-m11-e-ksp"
+   ],
+   "weight": 0.04444,
+   "nodes": [
+    "bk-m11-e-ksp"
+   ],
+   "chunk": "e-nernst"
+  },
+  {
+   "id": "m11.e.thermo",
+   "ch": 3,
+   "name": "Convert between E°, ΔG° and K",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 3,
+   "basis": "notes",
+   "ref": "Topic 3a · electrochemistry",
+   "tags": [
+    "gibbs"
+   ],
+   "ids": [
+    "bk-m11-e-thermo"
+   ],
+   "weight": 0.02222,
+   "nodes": [
+    "bk-m11-e-thermo"
+   ],
+   "chunk": "e-nernst"
+  },
+  {
+   "id": "m11.e.concepts",
+   "ch": 3,
+   "name": "Activity, spontaneity and the Nernst equation: concepts",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Topic 3a · electrochemistry",
+   "tags": [
+    "concepts"
+   ],
+   "ids": [
+    "bk-m11-e-concepts"
+   ],
+   "weight": 0.00741,
+   "nodes": [
+    "bk-m11-e-concepts"
+   ],
+   "chunk": "e-activity"
+  },
+  {
+   "id": "m11.p.slope",
+   "ch": 4,
+   "name": "Slope of E vs log a (sign and charge dependence)",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 3,
+   "basis": "notes",
+   "ref": "Topic 3b · potentiometry",
+   "tags": [
+    "ise-slope"
+   ],
+   "ids": [
+    "bk-m11-p-slope"
+   ],
+   "weight": 0.02222,
+   "nodes": [
+    "bk-m11-p-slope"
+   ],
+   "chunk": "p-calibration"
+  },
+  {
+   "id": "m11.p.cal",
+   "ch": 4,
+   "name": "Unknown activity from a reading, and the Nernstian test",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Topic 3b · potentiometry",
+   "tags": [
+    "calibration"
+   ],
+   "ids": [
+    "bk-m11-p-cal"
+   ],
+   "weight": 0.02963,
+   "nodes": [
+    "bk-m11-p-cal"
+   ],
+   "chunk": "p-calibration"
+  },
+  {
+   "id": "m11.p.sel",
+   "ch": 4,
+   "name": "Selectivity coefficient from E₁ and E₂ with activities",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 8,
+   "basis": "notes",
+   "ref": "Topic 3b · potentiometry · lecture Example 6",
+   "tags": [
+    "selectivity-coefficient"
+   ],
+   "ids": [
+    "bk-m11-p-sel"
+   ],
+   "weight": 0.05926,
+   "nodes": [
+    "bk-m11-p-sel"
+   ],
+   "chunk": "p-selectivity"
+  },
+  {
+   "id": "m11.p.intf",
+   "ch": 4,
+   "name": "Interference error and what K^pot means",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Topic 3b · potentiometry",
+   "tags": [
+    "interferent"
+   ],
+   "ids": [
+    "bk-m11-p-intf"
+   ],
+   "weight": 0.02963,
+   "nodes": [
+    "bk-m11-p-intf"
+   ],
+   "chunk": "p-selectivity"
+  },
+  {
+   "id": "m11.p.ag2s",
+   "ch": 4,
+   "name": "Slope for an ion sensed indirectly through Ksp",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Topic 3b · potentiometry · lecture Ag₂S slides",
+   "tags": [
+    "ksp"
+   ],
+   "ids": [
+    "bk-m11-p-ag2s"
+   ],
+   "weight": 0.02963,
+   "nodes": [
+    "bk-m11-p-ag2s"
+   ],
+   "chunk": "p-types"
+  },
+  {
+   "id": "m11.p.gas",
+   "ch": 4,
+   "name": "Gas probes: which inner solution and electrode for which gas",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Topic 3b · potentiometry · lecture gas-probe table",
+   "tags": [
+    "gas-sensing-probe"
+   ],
+   "ids": [
+    "bk-m11-p-gas"
+   ],
+   "weight": 0.01481,
+   "nodes": [
+    "bk-m11-p-gas"
+   ],
+   "chunk": "p-types"
+  },
+  {
+   "id": "m11.p.facts",
+   "ch": 4,
+   "name": "Glass, LaF₃, PVC and K⁺ electrode facts; TISAB",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 3,
+   "basis": "notes",
+   "ref": "Topic 3b · potentiometry",
+   "tags": [
+    "membranes"
+   ],
+   "ids": [
+    "bk-m11-p-facts"
+   ],
+   "weight": 0.02222,
+   "nodes": [
+    "bk-m11-p-facts"
+   ],
+   "chunk": "p-types"
+  },
+  {
+   "id": "m11.p.concepts",
+   "ch": 4,
+   "name": "Cell notation, junction potentials and interference: concepts",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Topic 3b · potentiometry",
+   "tags": [
+    "concepts"
+   ],
+   "ids": [
+    "bk-m11-p-concepts"
+   ],
+   "weight": 0.00741,
+   "nodes": [
+    "bk-m11-p-concepts"
+   ],
+   "chunk": "p-principles"
+  },
+  {
+   "id": "m11.p.procedure",
+   "ch": 4,
+   "name": "Calibration and measurement procedure for an ISE",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Topic 3b · potentiometry",
+   "tags": [
+    "calibration"
+   ],
+   "ids": [
+    "bk-m11-p-calib-order"
+   ],
+   "weight": 0.01481,
+   "nodes": [
+    "bk-m11-p-calib-order"
+   ],
+   "chunk": "p-calibration"
+  },
+  {
+   "id": "m11.p.written",
+   "ch": 4,
+   "name": "Explain glass, fluoride, ammonia electrodes and the liquid junction potential",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 5,
+   "basis": "notes",
+   "ref": "Topic 3b · potentiometry",
+   "tags": [
+    "written"
+   ],
+   "ids": [
+    "bk-m11-p-written"
+   ],
+   "weight": 0.03704,
+   "nodes": [
+    "bk-m11-p-written"
+   ],
+   "chunk": "p-principles"
+  },
+  {
+   "id": "m11.s.beer",
+   "ch": 5,
+   "name": "Beer–Lambert: A, %T, c and dilutions",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Topic 4 · spectroscopy",
+   "tags": [
+    "beer-lambert"
+   ],
+   "ids": [
+    "bk-m11-s-beer"
+   ],
+   "weight": 0.02963,
+   "nodes": [
+    "bk-m11-s-beer"
+   ],
+   "chunk": "s-absorption"
+  },
+  {
+   "id": "m11.s.wave",
+   "ch": 5,
+   "name": "Convert cm⁻¹, nm, Å, Hz and photon energy",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Topic 4 · spectroscopy",
+   "tags": [
+    "wavenumber"
+   ],
+   "ids": [
+    "bk-m11-s-wave"
+   ],
+   "weight": 0.02963,
+   "nodes": [
+    "bk-m11-s-wave"
+   ],
+   "chunk": "s-absorption"
+  },
+  {
+   "id": "m11.s.layout",
+   "ch": 5,
+   "name": "Order the parts of an absorption spectrometer",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Topic 4 · standard texts, check against your slides",
+   "tags": [
+    "instrumentation"
+   ],
+   "ids": [
+    "bk-m11-s-layout"
+   ],
+   "weight": 0.01481,
+   "nodes": [
+    "bk-m11-s-layout"
+   ],
+   "chunk": "s-absorption"
+  },
+  {
+   "id": "m11.s.fllayout",
+   "ch": 6,
+   "name": "Order the parts of a fluorimeter and explain the 90° geometry",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Topic 4 · standard texts, check against your slides",
+   "tags": [
+    "fluorescence"
+   ],
+   "ids": [
+    "bk-m11-s-fl-layout"
+   ],
+   "weight": 0.01481,
+   "nodes": [
+    "bk-m11-s-fl-layout"
+   ],
+   "chunk": "s-fluorescence"
+  },
+  {
+   "id": "m11.s.aaslayout",
+   "ch": 7,
+   "name": "Order the parts of an atomic absorption spectrometer",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Topic 4 · standard texts, check against your slides",
+   "tags": [
+    "aas"
+   ],
+   "ids": [
+    "bk-m11-s-aas-layout"
+   ],
+   "weight": 0.01481,
+   "nodes": [
+    "bk-m11-s-aas-layout"
+   ],
+   "chunk": "s-atomic"
+  },
+  {
+   "id": "m11.s.flconcepts",
+   "ch": 6,
+   "name": "Fluorescence: Stokes shift, 90° geometry, sensitivity",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Topic 4 · standard texts, check against your slides",
+   "tags": [
+    "fluorescence"
+   ],
+   "ids": [
+    "bk-m11-s-fl-concepts"
+   ],
+   "weight": 0.00741,
+   "nodes": [
+    "bk-m11-s-fl-concepts"
+   ],
+   "chunk": "s-fluorescence"
+  },
+  {
+   "id": "m11.s.aasconcepts",
+   "ch": 7,
+   "name": "AAS: lamp, atomisers and what absorbs",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 1,
+   "basis": "notes",
+   "ref": "Topic 4 · standard texts, check against your slides",
+   "tags": [
+    "aas"
+   ],
+   "ids": [
+    "bk-m11-s-aas-concepts"
+   ],
+   "weight": 0.00741,
+   "nodes": [
+    "bk-m11-s-aas-concepts"
+   ],
+   "chunk": "s-atomic"
+  },
+  {
+   "id": "m11.s.written",
+   "ch": 6,
+   "name": "Explain fluorescence vs absorption and AAS",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Topic 4 · standard texts, check against your slides",
+   "tags": [
+    "written"
+   ],
+   "ids": [
+    "bk-m11-s-written"
+   ],
+   "weight": 0.02963,
+   "nodes": [
+    "bk-m11-s-written"
+   ],
+   "chunk": "s-fluorescence"
+  }
+ ],
+ "nodeSkills": {
+  "bk-m11-t1-meansd": [
+   "m11.t1.meansd"
+  ],
+  "bk-m11-t1-sem": [
+   "m11.t1.sem"
+  ],
+  "bk-m11-t1-qtest": [
+   "m11.t1.qtest"
+  ],
+  "bk-m11-t1-ci": [
+   "m11.t1.ci"
+  ],
+  "bk-m11-t1-ttest2": [
+   "m11.t1.ttest2"
+  ],
+  "bk-m11-t1-paired": [
+   "m11.t1.paired"
+  ],
+  "bk-m11-t1-errprop": [
+   "m11.t1.errprop"
+  ],
+  "bk-m11-t1-concepts": [
+   "m11.t1.concepts"
+  ],
+  "bk-m11-q-ppm": [
+   "m11.q.ppm"
+  ],
+  "bk-m11-q-dilution": [
+   "m11.q.dilution"
+  ],
+  "bk-m11-q-kjeldahl": [
+   "m11.q.kjeldahl"
+  ],
+  "bk-m11-e-ionic": [
+   "m11.e.ionic"
+  ],
+  "bk-m11-e-gamma": [
+   "m11.e.gamma"
+  ],
+  "bk-m11-e-half": [
+   "m11.e.half"
+  ],
+  "bk-m11-e-fe": [
+   "m11.e.fe"
+  ],
+  "bk-m11-e-cell": [
+   "m11.e.cell"
+  ],
+  "bk-m11-e-ksp": [
+   "m11.e.ksp"
+  ],
+  "bk-m11-e-thermo": [
+   "m11.e.thermo"
+  ],
+  "bk-m11-e-concepts": [
+   "m11.e.concepts"
+  ],
+  "bk-m11-p-slope": [
+   "m11.p.slope"
+  ],
+  "bk-m11-p-cal": [
+   "m11.p.cal"
+  ],
+  "bk-m11-p-sel": [
+   "m11.p.sel"
+  ],
+  "bk-m11-p-intf": [
+   "m11.p.intf"
+  ],
+  "bk-m11-p-ag2s": [
+   "m11.p.ag2s"
+  ],
+  "bk-m11-p-gas": [
+   "m11.p.gas"
+  ],
+  "bk-m11-p-facts": [
+   "m11.p.facts"
+  ],
+  "bk-m11-p-concepts": [
+   "m11.p.concepts"
+  ],
+  "bk-m11-p-calib-order": [
+   "m11.p.procedure"
+  ],
+  "bk-m11-p-written": [
+   "m11.p.written"
+  ],
+  "bk-m11-s-beer": [
+   "m11.s.beer"
+  ],
+  "bk-m11-s-wave": [
+   "m11.s.wave"
+  ],
+  "bk-m11-s-layout": [
+   "m11.s.layout"
+  ],
+  "bk-m11-s-fl-layout": [
+   "m11.s.fllayout"
+  ],
+  "bk-m11-s-aas-layout": [
+   "m11.s.aaslayout"
+  ],
+  "bk-m11-s-fl-concepts": [
+   "m11.s.flconcepts"
+  ],
+  "bk-m11-s-aas-concepts": [
+   "m11.s.aasconcepts"
+  ],
+  "bk-m11-s-written": [
+   "m11.s.written"
+  ]
+ }
+}

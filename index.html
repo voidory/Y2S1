@@ -128,7 +128,7 @@
         Unified Mastery Engine
       </a>
       <button type="button" id="topQuickAction" class="px-3.5 py-1.5 text-xs sm:text-sm font-medium text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors whitespace-nowrap shrink-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-blue-700">
-        Next Priority
+        Next question
       </button>
     </div>
   </header>
@@ -186,7 +186,7 @@
   </div>
 
   <!-- Toast notification -->
-  <div id="toastBanner" class="fixed bottom-5 right-5 z-50 hidden max-w-sm bg-slate-900 text-white text-sm px-4 py-2.5 rounded-lg shadow-lg" role="status" aria-live="polite"></div>
+  <div id="toastBanner" class="fixed bottom-20 md:bottom-5 right-3 md:right-5 left-3 md:left-auto z-50 hidden max-w-sm bg-slate-900 text-white text-sm px-4 py-2.5 rounded-lg shadow-lg" role="status" aria-live="polite"></div>
   <script type="module">
     /* =====================================================================
        NAMESPACE 1: Expr — Sandboxed Recursive-Descent Expression Compiler
@@ -835,7 +835,12 @@
           return true;
         });
 
-        if (!pool.length) pool = nodes.slice(0, 20);
+        if (!pool.length) {
+          const filtered = (filters.moduleCode && filters.moduleCode !== 'ALL') || (filters.tier && filters.tier !== 'ALL') || filters.skillTag
+            || filters.chunkNodeIds || (filters.masteryAdj && filters.masteryAdj.exclude.size > 0);
+          if (filtered) return { node: null, meta: null, queuePreview: [] }; // the "No matching questions" screen explains it
+          pool = nodes.slice(0, 20);
+        }
 
         // Never serve two nodes of the same metadata.family back to back (when an alternative exists)
         if (prevFamily && !filters.forceNodeId) {
@@ -2482,7 +2487,7 @@
       });
     }
 
-    const CONTENT_VERSION = 6;
+    const CONTENT_VERSION = 7;
     const REMOVED_NODE_IDS = [
       'cm2101-particle-in-box-param',
       'cm2112-symmetry-ir-atomic',
@@ -4545,7 +4550,7 @@
                 textbookExceptionNote: solved.textbookExceptionNote,
                 fields: invEvalFields,
               },
-              explanation: `For \`${solved.templateFormula}\`, $\\text{M}$ is in oxidation state **${solved.oxRoman}** ($${solved.oxState >= 0 ? `+${solved.oxState}` : solved.oxState}$). Valid 3d metal(s): **$\\{${solved.validMetals.join(', ')}\\}$**. Matching complex(es): ${solved.candidates.map((c) => `\`${c.formula}\` (${c.iupacName}, $d^{${c.dn}}$, \`${c.configuration}\`, $n=${c.unpaired}${c.lfseExpression ? `, $\\text{LFSE} = ${c.lfseExpression}$` : ''})`).join('; ')}.${noteSuffix}`,
+              explanation: `For \`${solved.templateFormula}\`, $\\text{M}$ is in oxidation state **${solved.oxRoman}** ($${solved.oxState >= 0 ? `+${solved.oxState}` : solved.oxState}$). Valid 3d metal(s): **$\\{${solved.validMetals.join(', ')}\\}$**. Matching complex(es): ${solved.candidates.map((c) => `\`${c.formula}\` (${c.iupacName}, $d^{${c.dn}}$, \`${c.configuration}\`, $n=${c.unpaired}$${c.lfseExpression ? `, $\\text{LFSE} = ${c.lfseExpression}$` : ''})`).join('; ')}.${noteSuffix}`,
             },
           ],
         };
@@ -5286,7 +5291,7 @@
           totalMarks: Number(totalMarks.toFixed(2)),
           missedSkillTags: [...missedSkillTags],
           feedback: vetoApplied
-            ? `Zero-Step Veto applied: missed critical reasoning step caps score at 45% (${Math.round(effectiveGrade * 100)}%).`
+            ? `A critical step was missed, so the score is capped at 45% (${Math.round(effectiveGrade * 100)}%).`
             : `Self-assessed ${earnedMarks}/${totalMarks} marks (${Math.round(effectiveGrade * 100)}%).`,
         };
       }
@@ -6894,8 +6899,9 @@
         retiredWeight: 0.08,
       };
       const cfgOf = (settings) => ({ ...DEFAULTS, ...(settings?.mastery || {}) });
-      // generated "identify the metal" questions are not in the skill map by id; they exercise these skills
-      const GENERATED_INVERSE_SKILLS = ['c7.metal-id', 'c7.cfse', 'c6.name'];
+      // generated "identify the metal" questions are not in the skill map by id. They credit metal identification and CFSE only:
+      // they name just a few ligand types, which is far narrower than the whole "name a coordination compound" skill, so they must not retire it
+      const GENERATED_INVERSE_SKILLS = ['c7.metal-id', 'c7.cfse'];
       const skillsOfNode = (map, id) => map?.nodeSkills?.[id] || (String(id).startsWith('lf-inv-') ? GENERATED_INVERSE_SKILLS : []);
 
       /* Pure. `overrides.resetAt[skillId]` = card index before which attempts are ignored (a manual re-open). */
@@ -6978,6 +6984,441 @@
     })();
 
     /* =====================================================================
+       NAMESPACE: Review — show what exactly is wrong, not just that something is
+       ---------------------------------------------------------------------
+       Pure helpers behind the result screen's "Answer review" card: recognise a shape name, draw a VSEPR
+       shape (bonded atoms and lone-pair lobes) as SVG, and say in one sentence how a wrong shape differs
+       from the right one. Everything here is pure so it can be tested without a browser.
+       ===================================================================== */
+    const Review = (() => {
+      // (bonding domains, lone pairs) -> molecular shape
+      const SHAPE_OF = {
+        '2,0': 'linear', '2,1': 'bent', '2,2': 'bent', '2,3': 'linear',
+        '3,0': 'trigonal planar', '3,1': 'trigonal pyramidal', '3,2': 'T-shaped',
+        '4,0': 'tetrahedral', '4,1': 'see-saw', '4,2': 'square planar',
+        '5,0': 'trigonal bipyramidal', '5,1': 'square pyramidal', '6,0': 'octahedral', '7,0': 'pentagonal bipyramidal',
+      };
+      // what a bare shape name implies when nothing else is known (the usual case for each shape)
+      const CANON = {
+        'linear': [2, 0], 'bent': [2, 1], 'trigonal planar': [3, 0], 'trigonal pyramidal': [3, 1], 'T-shaped': [3, 2],
+        'tetrahedral': [4, 0], 'see-saw': [4, 1], 'square planar': [4, 2], 'trigonal bipyramidal': [5, 0],
+        'square pyramidal': [5, 1], 'octahedral': [6, 0], 'pentagonal bipyramidal': [7, 0],
+      };
+      const ALIASES = [
+        [/pentagonal[\s-]*bipyramid/, 'pentagonal bipyramidal'],
+        [/t[\s-]*shape/, 'T-shaped'], [/see[\s-]*saw|seesaw|disphenoidal/, 'see-saw'], [/square[\s-]*planar/, 'square planar'],
+        [/square[\s-]*(?:based[\s-]*)?pyramid/, 'square pyramidal'], [/trigonal[\s-]*bipyramid|\btbp\b/, 'trigonal bipyramidal'],
+        [/(?:trigonal|triangular)[\s-]*planar/, 'trigonal planar'], [/(?<!bi)pyramid/, 'trigonal pyramidal'],
+        [/octahedr/, 'octahedral'], [/tetrahedr/, 'tetrahedral'], [/bent|angular|v[\s-]*shape/, 'bent'], [/linear/, 'linear'],
+      ];
+      const GEOMETRY_OF = { 2: 'linear', 3: 'trigonal planar', 4: 'tetrahedral', 5: 'trigonal bipyramidal', 6: 'octahedral', 7: 'pentagonal bipyramidal' };
+
+      /* Pure. "Seesaw", "see-saw", "T shaped" ... -> { shape, bp, lp } or null when the text is not a shape. */
+      function shapeFromName(text) {
+        const t = String(text || '').toLowerCase().trim();
+        if (!t) return null;
+        for (const [re, shape] of ALIASES) if (re.test(t)) return { shape, bp: CANON[shape][0], lp: CANON[shape][1] };
+        return null;
+      }
+
+      /* Pure. How a wrong shape differs, as a code. */
+      function diagnoseShapeCode(yours, correct) {
+        if (!yours) return 'unrecognised';
+        if (yours.shape === correct.shape) return 'right';
+        const nYou = yours.bp + yours.lp, nRight = correct.bp + correct.lp;
+        if (yours.bp === correct.bp && yours.lp < correct.lp) return 'missed-lp';
+        if (yours.bp === correct.bp && yours.lp > correct.lp) return 'extra-lp';
+        if (nYou === nRight) return 'same-geometry';
+        return 'miscount';
+      }
+
+      /* Pure. One sentence on how the student's shape differs from the right one (built from the code above). */
+      function diagnoseShape(yours, correct) {
+        const code = diagnoseShapeCode(yours, correct);
+        if (code === 'unrecognised') return 'No recognisable shape was given.';
+        if (code === 'right') return 'The shape is right.';
+        const nYou = yours.bp + yours.lp, nRight = correct.bp + correct.lp;
+        const plural = (k, w) => `${k} ${w}${k === 1 ? '' : 's'}`;
+        if (code === 'missed-lp') return `You counted the bonds correctly (${correct.bp}) but missed ${plural(correct.lp - yours.lp, 'lone pair')}: the central atom has ${correct.lp}, which squeezes the bonds into a ${correct.shape} shape.`;
+        if (code === 'extra-lp') return `You added ${plural(yours.lp - correct.lp, 'lone pair')} that ${yours.lp - correct.lp === 1 ? 'is' : 'are'} not there: the central atom has ${correct.lp}.`;
+        if (code === 'same-geometry') return `Same electron geometry (${GEOMETRY_OF[nRight]}), but the split is different: ${correct.bp} bonded + ${correct.lp} lone, not ${yours.bp} + ${yours.lp}.`;
+        return `Count the electron domains again: the central atom has ${plural(correct.bp, 'bonded atom')} + ${plural(correct.lp, 'lone pair')} = ${nRight}, which gives a ${GEOMETRY_OF[nRight]} arrangement; your answer implies ${nYou}.`;
+      }
+
+      const TETRA = [[1, 1, 1], [1, -1, -1], [-1, 1, -1], [-1, -1, 1]].map(([x, y, z]) => [x / Math.sqrt(3), y / Math.sqrt(3), z / Math.sqrt(3)]);
+      const GEOM = {
+        2: [[-1, 0, 0], [1, 0, 0]],
+        3: [[0, 1, 0], [0.866, -0.5, 0], [-0.866, -0.5, 0]],
+        4: TETRA,
+        5: [[0, 0, 1], [0, 0, -1], [1, 0, 0], [-0.5, 0.866, 0], [-0.5, -0.866, 0]], // axial, axial, then equatorial
+        6: [[1, 0, 0], [-1, 0, 0], [0, 1, 0], [0, -1, 0], [0, 0, 1], [0, 0, -1]],
+        7: [[0, 0, 1], [0, 0, -1], ...[0, 1, 2, 3, 4].map((k) => [Math.cos((2 * Math.PI * k) / 5), Math.sin((2 * Math.PI * k) / 5), 0])],
+      };
+      /* Which domains are lone pairs: equatorial first in a trigonal bipyramid, trans in an octahedron. */
+      function lonePairIndices(n, lp) {
+        if (n === 5) return [2, 3, 4].slice(0, lp);
+        if (n === 6) return lp === 1 ? [5] : lp === 2 ? [4, 5] : [];
+        if (n === 7) return [2, 3, 4, 5, 6].slice(0, lp);
+        return Array.from({ length: lp }, (_, i) => n - 1 - i);
+      }
+
+      /* Pure. A small SVG of the shape: grey balls are bonded atoms, amber lobes are lone pairs.
+         data-bond / data-lp attributes let tests count them. Returns '' for an unsupported domain count. */
+      function vseprSvg(bp, lp, opts = {}) {
+        const n = bp + lp;
+        const dirs = GEOM[n];
+        if (!dirs || lp > n || bp < 1) return '';
+        const lone = new Set(lonePairIndices(n, lp));
+        const a = (-68 * Math.PI) / 180, zr = (22 * Math.PI) / 180, R = 40, C = 60;
+        const items = dirs.map((v, i) => {
+          const xr = v[0] * Math.cos(zr) - v[1] * Math.sin(zr), yr = v[0] * Math.sin(zr) + v[1] * Math.cos(zr), zz = v[2];
+          const y2 = yr * Math.cos(a) - zz * Math.sin(a), d = yr * Math.sin(a) + zz * Math.cos(a);
+          return { i, x: C + R * xr, y: C - R * y2, d, lone: lone.has(i) };
+        }).sort((p, q) => p.d - q.d);
+        const stroke = opts.tone === 'bad' ? '#be123c' : opts.tone === 'good' ? '#047857' : '#475569';
+        const part = (it) => {
+          const t = (it.d + 1) / 2; // 0 far .. 1 near
+          if (it.lone) {
+            const ang = (Math.atan2(it.y - C, it.x - C) * 180) / Math.PI;
+            const cx = C + (it.x - C) * 0.62, cy = C + (it.y - C) * 0.62;
+            return `<g data-lp="1" opacity="${(0.55 + 0.45 * t).toFixed(2)}"><ellipse cx="${cx.toFixed(1)}" cy="${cy.toFixed(1)}" rx="15" ry="8.5" transform="rotate(${ang.toFixed(1)} ${cx.toFixed(1)} ${cy.toFixed(1)})" fill="#fde68a" fill-opacity="0.65" stroke="#d97706" stroke-width="1.4" stroke-dasharray="3 2"/><circle cx="${(cx - 3).toFixed(1)}" cy="${cy.toFixed(1)}" r="1.8" fill="#b45309"/><circle cx="${(cx + 3).toFixed(1)}" cy="${cy.toFixed(1)}" r="1.8" fill="#b45309"/></g>`;
+          }
+          return `<g data-bond="1" opacity="${(0.6 + 0.4 * t).toFixed(2)}"><line x1="${C}" y1="${C}" x2="${it.x.toFixed(1)}" y2="${it.y.toFixed(1)}" stroke="${stroke}" stroke-width="${(1.6 + 1.6 * t).toFixed(1)}" stroke-linecap="round"/><circle cx="${it.x.toFixed(1)}" cy="${it.y.toFixed(1)}" r="${(6.5 + 3 * t).toFixed(1)}" fill="#cbd5e1" stroke="${stroke}" stroke-width="1.6"/></g>`;
+        };
+        const back = items.filter((it) => it.d < 0).map(part).join('');
+        const front = items.filter((it) => it.d >= 0).map(part).join('');
+        return `<svg viewBox="0 0 120 120" role="img" aria-label="${n} electron domains: ${bp} bonded, ${lp} lone pair${lp === 1 ? '' : 's'}" class="w-full h-auto" xmlns="http://www.w3.org/2000/svg">${back}<circle cx="${C}" cy="${C}" r="10.5" fill="#1e293b"/>${front}</svg>`;
+      }
+
+      /* Pure. Rows for a mapped-fields answer: what the student wrote, what was right, and (for shape questions)
+         the drawn comparison. Returns null when there is nothing field-by-field to show. */
+      function buildMappedReview(variant, userInput, evalResult) {
+        const fr = evalResult?.fieldResults;
+        const fields = variant?.inputSlot?.fields;
+        if (!fr || !Array.isArray(fields)) return null;
+        const raw = userInput && typeof userInput === 'object' ? userInput : {};
+        // set answers keep their companion fields (name, LFSE...) under .fields; mapped answers are flat
+        const inp = raw.fields && typeof raw.fields === 'object' && !Array.isArray(raw.fields) ? raw.fields : raw;
+        const vs = variant.review?.vsepr || {};
+        const rows = fields.filter((f) => fr[f.key]).map((f) => {
+          const res = fr[f.key];
+          const expected = res.expectedDisplay || '';
+          const yoursText = String(inp[f.key] ?? '').trim();
+          const row = { key: f.key, label: f.label, passed: Boolean(res.passed), yours: yoursText, expected, partial: res.normalizedGrade > 0 && !res.passed };
+          const data = vs[f.key];
+          if (data) {
+            const correctShape = SHAPE_OF[`${data.bp},${data.lp}`] || (shapeFromName(expected)?.shape ?? expected);
+            const youShape = shapeFromName(yoursText);
+            row.vsepr = {
+              correct: { shape: correctShape, bp: data.bp, lp: data.lp },
+              yours: youShape,
+              diagnosis: res.passed ? 'The shape is right.' : diagnoseShape(youShape, { shape: correctShape, bp: data.bp, lp: data.lp }),
+            };
+          }
+          return row;
+        });
+        return rows.length ? { rows, anyShape: rows.some((r) => r.vsepr), anyWrong: rows.some((r) => !r.passed) } : null;
+      }
+
+
+      /* ---------- generic answer review: one builder per answer type, all built from the real grader output ---------- */
+      const SUB = { 0: '₀', 1: '₁', 2: '₂', 3: '₃', 4: '₄', 5: '₅', 6: '₆', 7: '₇', 8: '₈', 9: '₉' };
+      const SUP = { 0: '⁰', 1: '¹', 2: '²', 3: '³', 4: '⁴', 5: '⁵', 6: '⁶', 7: '⁷', 8: '⁸', 9: '⁹', '+': '⁺', '-': '⁻' };
+
+      /* Pure. "N2 + 3H2 -> 2NH3" and "NH4^+" read as chemistry: N₂ + 3H₂ → 2NH₃, NH₄⁺. */
+      function prettyFormula(text) {
+        return String(text ?? '')
+          .replace(/->|→/g, '→')
+          .replace(/\^([0-9]*[+-])/g, (_, c) => [...c].map((ch) => SUP[ch] || ch).join(''))
+          .replace(/([A-Za-z)\]])(\d+)/g, (_, a, d) => a + [...d].map((ch) => SUB[ch]).join(''));
+      }
+
+      function buildChoiceReview(variant, userInput) {
+        const target = new Set(variant.evaluator?.targetIds || []);
+        const picked = new Set(Array.isArray(userInput) ? userInput : (userInput ? [userInput] : []));
+        const options = (variant.inputSlot?.options || []).map((o) => {
+          const isTarget = target.has(o.id), isPicked = picked.has(o.id);
+          return { id: o.id, label: o.label, state: isPicked ? (isTarget ? 'right' : 'wrong') : (isTarget ? 'missed' : 'neutral') };
+        });
+        return { kind: 'choice', options, nothingPicked: picked.size === 0, anyWrong: options.some((o) => o.state === 'wrong' || o.state === 'missed') };
+      }
+
+      function buildEquationReview(variant, userInput, evalResult) {
+        const lines = Evaluators.parseEquationBlock(userInput);
+        const acc = variant.evaluator?.accepted;
+        const first = Array.isArray(acc) ? acc[0] : acc;
+        const correct = Array.isArray(first) ? first.join('\n') : (typeof first === 'string' ? first : '');
+        const rows = lines.map((l) => {
+          if (!l.valid) return { raw: l.raw, valid: false, error: l.error || 'Not understood.' };
+          const els = [...new Set([...Object.keys(l.lhsAtoms), ...Object.keys(l.rhsAtoms)])].sort();
+          return {
+            raw: l.raw, valid: true, balanced: Boolean(l.isBalanced),
+            atoms: els.map((el) => ({ el, left: l.lhsAtoms[el] || 0, right: l.rhsAtoms[el] || 0, ok: (l.lhsAtoms[el] || 0) === (l.rhsAtoms[el] || 0) })),
+            charge: (l.lhsCharge || l.rhsCharge) ? { left: l.lhsCharge, right: l.rhsCharge, ok: l.lhsCharge === l.rhsCharge } : null,
+          };
+        });
+        return {
+          kind: 'equation', passed: Boolean(evalResult?.passed), rows, correct,
+          missing: evalResult?.missingSpecies || [], extra: evalResult?.extraSpecies || [], hasInput: lines.length > 0,
+        };
+      }
+
+      function buildRubricReview(variant, userInput, rubricChecks, evalResult) {
+        const items = (variant.evaluator?.rubric || []).map((it) => ({
+          id: it.id, criterion: it.criterion, marks: Number(it.marks ?? 1), critical: Boolean(it.isCritical), met: Boolean(rubricChecks?.[it.id]),
+        }));
+        return {
+          kind: 'rubric', items, text: typeof userInput === 'string' ? userInput.trim() : '',
+          veto: Boolean(evalResult?.vetoApplied), earned: evalResult?.earnedMarks ?? 0, total: evalResult?.totalMarks ?? 0, passed: Boolean(evalResult?.passed),
+        };
+      }
+
+      /* Which of the student's items were right, which were not expected, and which expected ones were missing. */
+      function buildSetReview(variant, userInput, evalResult) {
+        const ev = variant.evaluator || {};
+        const cs = ev.caseSensitive !== false;
+        const norm = (t) => { const x = String(t ?? '').trim(); return cs ? x : x.toLowerCase(); };
+        const syn = {};
+        for (const [k, v] of Object.entries(ev.synonyms || {})) syn[norm(k)] = norm(v);
+        const target = ev.targetSet || [];
+        const targetNorm = new Set(target.map(norm));
+        const compound = userInput && typeof userInput === 'object' && !Array.isArray(userInput);
+        const src = compound ? (userInput.tokens ?? userInput.set ?? userInput.metals ?? []) : userInput;
+        const raw = (Array.isArray(src) ? src.flatMap((x) => String(x ?? '').split(/[\n,]+/)) : String(src ?? '').split(/[\n,]+/)).map((x) => x.trim()).filter(Boolean);
+        const seen = new Set(), correct = [], extra = [];
+        for (const r of raw) {
+          const n = syn[norm(r)] || norm(r);
+          if (seen.has(n)) continue;
+          seen.add(n);
+          (targetNorm.has(n) ? correct : extra).push(r);
+        }
+        const missing = target.filter((t) => !seen.has(norm(t)));
+        const hasFields = Array.isArray(variant.inputSlot?.fields) && variant.inputSlot.fields.length > 0;
+        const fields = hasFields ? buildMappedReview(variant, userInput, evalResult) : null;
+        return { kind: 'set', correct, extra, missing, passed: missing.length === 0 && extra.length === 0, fields };
+      }
+
+      function buildShortReview(variant, userInput, evalResult) {
+        const yours = String(userInput ?? '').trim();
+        return {
+          kind: 'short', passed: Boolean(evalResult?.passed), partial: (evalResult?.normalizedGrade || 0) > 0 && !evalResult?.passed,
+          yours, expected: evalResult?.expectedDisplay || '',
+        };
+      }
+
+      function buildOrderReview(variant, userInput, evalResult) {
+        const items = variant.inputSlot?.items || [];
+        const label = (id) => {
+          const f = items.find((it) => String(typeof it === 'object' ? it.id : it) === String(id));
+          return f ? (typeof f === 'object' ? (f.label ?? f.id) : f) : String(id);
+        };
+        const correct = (evalResult?.correctOrder || variant.evaluator?.targetOrder || variant.evaluator?.expectedOrder || []).map(String);
+        const yours = Array.isArray(userInput) ? userInput.map(String) : [];
+        return {
+          kind: 'order', passed: Boolean(evalResult?.passed),
+          rows: correct.map((id, i) => ({ id, label: label(id), correctPos: i + 1, yourPos: yours.indexOf(id) >= 0 ? yours.indexOf(id) + 1 : null, ok: yours[i] === id })),
+        };
+      }
+
+      /* Pure. One model per answer type for the result card, or null where there is nothing field-by-field to show. */
+      function buildAnswerReview(variant, userInput, evalResult, rubricChecks) {
+        if (!variant || !evalResult) return null;
+        const slot = variant.inputSlot?.type, ev = variant.evaluator?.type;
+        if (slot === 'mapped_fields') { const m = buildMappedReview(variant, userInput, evalResult); return m ? { kind: 'mapped', ...m } : null; }
+        if (slot === 'unordered_set') return buildSetReview(variant, userInput, evalResult);
+        if (slot === 'choice') return buildChoiceReview(variant, userInput);
+        if (slot === 'typed_equation') return buildEquationReview(variant, userInput, evalResult);
+        if (ev === 'atomic_rubric') return buildRubricReview(variant, userInput, rubricChecks, evalResult);
+        if (slot === 'ordered_list') return buildOrderReview(variant, userInput, evalResult);
+        if (slot === 'typed_short') return buildShortReview(variant, userInput, evalResult);
+        return null;
+      }
+
+
+      /* ---------- error tags: the kind of slip behind a wrong answer, stored with the attempt ---------- */
+      const ERROR_LABELS = {
+        'shape:missed-lp': 'Missed lone pairs on the central atom',
+        'shape:extra-lp': 'Added lone pairs that are not there',
+        'shape:same-geometry': 'Right electron geometry, wrong bonded/lone split',
+        'shape:miscount': 'Miscounted the electron domains',
+        'shape:unrecognised': 'Shape left blank or not recognised',
+        'equation:unbalanced': 'Unbalanced equation',
+        'equation:charge': 'Charge not balanced',
+        'equation:wrong-species': 'Wrong reactants or products',
+        'equation:unreadable': 'Equation not written in a readable form',
+        'choice:wrong-option': 'Picked a wrong option',
+        'choice:missed-option': 'Missed a correct option',
+        'set:extra-items': 'Gave items that do not fit',
+        'set:missing-items': 'Missed some valid items',
+        'fields:wrong-value': 'Wrong value in a multi-part answer',
+        'written:critical-step': 'Missed a critical reasoning step',
+        'written:missing-points': 'Left out marking points',
+        'order:wrong-order': 'Put steps or items in the wrong order',
+        'short:wrong-value': 'Wrong value or name',
+      };
+
+      /* Pure. Tags (strings, see ERROR_LABELS) for a wrong answer; [] when the answer passed. */
+      function errorTags(variant, userInput, evalResult, rubricChecks) {
+        if (!variant || !evalResult || evalResult.passed) return [];
+        const rv = buildAnswerReview(variant, userInput, evalResult, rubricChecks);
+        if (!rv) return [];
+        const tags = new Set();
+        const fieldTags = (rows) => {
+          for (const r of rows || []) {
+            if (r.passed) continue;
+            if (r.vsepr) tags.add(`shape:${diagnoseShapeCode(r.vsepr.yours, r.vsepr.correct)}`);
+            else tags.add('fields:wrong-value');
+          }
+        };
+        if (rv.kind === 'mapped') fieldTags(rv.rows);
+        else if (rv.kind === 'set') {
+          if (rv.extra.length) tags.add('set:extra-items');
+          if (rv.missing.length) tags.add('set:missing-items');
+          if (rv.fields) fieldTags(rv.fields.rows);
+        } else if (rv.kind === 'choice') {
+          if (rv.options.some((o) => o.state === 'wrong')) tags.add('choice:wrong-option');
+          if (rv.options.some((o) => o.state === 'missed')) tags.add('choice:missed-option');
+        } else if (rv.kind === 'equation') {
+          if (rv.rows.some((r) => !r.valid)) tags.add('equation:unreadable');
+          if (rv.missing.length || rv.extra.length) tags.add('equation:wrong-species');
+          if (rv.rows.some((r) => r.valid && r.atoms.some((a) => !a.ok))) tags.add('equation:unbalanced');
+          if (rv.rows.some((r) => r.valid && r.charge && !r.charge.ok)) tags.add('equation:charge');
+        } else if (rv.kind === 'rubric') {
+          if (rv.items.some((i) => !i.met && i.critical)) tags.add('written:critical-step');
+          else if (rv.items.some((i) => !i.met)) tags.add('written:missing-points');
+        } else if (rv.kind === 'order') tags.add('order:wrong-order');
+        else if (rv.kind === 'short') tags.add('short:wrong-value');
+        return [...tags];
+      }
+
+      return {
+        ERROR_LABELS, diagnoseShapeCode, errorTags,
+        SHAPE_OF, CANON, shapeFromName, diagnoseShape, vseprSvg, buildMappedReview, lonePairIndices,
+        prettyFormula, buildChoiceReview, buildEquationReview, buildRubricReview, buildSetReview, buildShortReview, buildOrderReview, buildAnswerReview,
+      };
+    })();
+
+    /* =====================================================================
+       NAMESPACE: Weakness — where you are losing marks, and what to do about it
+       ---------------------------------------------------------------------
+       Pure functions over the attempt history and the skill map: topics ranked by recent misses, the questions
+       you got wrong and have not since got right, and the kinds of slip that keep recurring.
+       ===================================================================== */
+    const Weakness = (() => {
+      const PASS = 0.7;
+
+      /* Chunk (topic) ids a question belongs to, via the skills it exercises. */
+      function chunksOf(map, nodeId) {
+        const byId = (map._skillIndex ||= Object.fromEntries((map.skills || []).map((k) => [k.id, k])));
+        const out = [];
+        for (const sid of Mastery.skillsOfNode(map, nodeId)) { const c = byId[sid]?.chunk; if (c && !out.includes(c)) out.push(c); }
+        return out;
+      }
+
+      /* Pure. Per topic: attempts, the last `window` scores, how many of those missed, and a smoothed score used for ranking (weakest first). */
+      function topicStats(logs, map, opts = {}) {
+        const win = opts.window ?? 12;
+        const sorted = [...(logs || [])].sort((a, b) => a.timestamp - b.timestamp);
+        const grades = {};
+        const skillMiss = {};
+        for (const l of sorted) {
+          const g = Number(l.normalizedGrade) || 0;
+          for (const c of chunksOf(map, l.nodeId)) (grades[c] ||= []).push({ g, ts: l.timestamp, nodeId: l.nodeId });
+        }
+        const names = Object.fromEntries((map.chunks || []).map((c) => [c.id, c]));
+        const out = Object.entries(grades).map(([id, list]) => {
+          const recent = list.slice(-win);
+          const missed = recent.filter((x) => x.g < PASS).length;
+          const sum = recent.reduce((a, x) => a + x.g, 0);
+          const mean = sum / recent.length;
+          // rank on the same score the bar shows, pulled toward 70% so one or two answers cannot dominate
+          const rankScore = (sum + 0.7 * 2) / (recent.length + 2);
+          // which skills inside the topic account for the recent misses
+          const bySkill = {};
+          for (const x of recent) if (x.g < PASS) for (const sid of Mastery.skillsOfNode(map, x.nodeId)) { const sk = (map.skills || []).find((k) => k.id === sid); if (sk?.chunk === id) bySkill[sid] = (bySkill[sid] || 0) + 1; }
+          const weakSkills = Object.entries(bySkill).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([sid, n]) => ({ id: sid, name: (map.skills || []).find((k) => k.id === sid)?.name || sid, misses: n }));
+          return {
+            id, name: names[id]?.name || id, part: names[id]?.part || '', attempts: list.length, window: recent.length, missed, mean,
+            rankScore, ranked: list.length >= (opts.minAttempts ?? 2), lastTs: list[list.length - 1].ts, weakSkills,
+          };
+        });
+        return out.sort((a, b) => (b.ranked - a.ranked) || (a.rankScore - b.rankScore) || (b.attempts - a.attempts));
+      }
+
+      /* Pure. Questions whose most recent attempt was a miss (so ones you later got right are gone), newest first. */
+      function unresolvedMisses(logs, titleOf, map, limit = 8) {
+        const latest = new Map();
+        for (const l of [...(logs || [])].sort((a, b) => a.timestamp - b.timestamp)) latest.set(l.nodeId, l);
+        return [...latest.values()]
+          .filter((l) => (Number(l.normalizedGrade) || 0) < PASS)
+          .sort((a, b) => b.timestamp - a.timestamp)
+          .slice(0, limit)
+          .map((l) => ({ nodeId: l.nodeId, title: titleOf(l.nodeId) || l.nodeId, grade: Number(l.normalizedGrade) || 0, timestamp: l.timestamp, chunk: chunksOf(map, l.nodeId)[0] || null }));
+      }
+
+      /* Pure. The slips that recur: error tags and (older) missed rubric skill tags, with the topics they happen in. */
+      function slipCounts(attemptLogs, map, opts = {}) {
+        const win = opts.window ?? 80;
+        const recent = [...(attemptLogs || [])].sort((a, b) => b.timestamp - a.timestamp).slice(0, win);
+        const tally = {};
+        const add = (key, label, kind, log) => {
+          const t = (tally[key] ||= { key, label, kind, count: 0, chunks: {}, lastTs: 0 });
+          t.count += 1;
+          t.lastTs = Math.max(t.lastTs, log.timestamp || 0);
+          for (const c of chunksOf(map, log.nodeId)) t.chunks[c] = (t.chunks[c] || 0) + 1;
+        };
+        for (const l of recent) {
+          for (const tag of l.errorTags || []) add(tag, Review.ERROR_LABELS[tag] || tag, 'error', l);
+          for (const tag of l.missedSkillTags || []) add('skill:' + tag, tag, 'skill', l);
+        }
+        return Object.values(tally)
+          .filter((t) => t.count >= (opts.minCount ?? 2))
+          .sort((a, b) => b.count - a.count || b.lastTs - a.lastTs)
+          .slice(0, opts.limit ?? 6)
+          .map((t) => ({ ...t, topChunk: Object.entries(t.chunks).sort((a, b) => b[1] - a[1])[0]?.[0] || null }));
+      }
+
+      function timeAgo(ts, now = Date.now()) {
+        const m = Math.max(0, Math.round((now - ts) / 60000));
+        if (m < 1) return 'just now';
+        if (m < 60) return `${m} min ago`;
+        const h = Math.round(m / 60);
+        if (h < 24) return `${h} h ago`;
+        const d = Math.round(h / 24);
+        return d === 1 ? 'yesterday' : `${d} days ago`;
+      }
+
+      /* Pure. "tomorrow", "in 3 days", "in 2 weeks": when a question is due back, without the scheduler's numbers. */
+      function humanDue(dueMs, now = Date.now()) {
+        if (!Number.isFinite(dueMs)) return '';
+        const h = (dueMs - now) / 3600000;
+        if (h < 1) return 'soon';
+        if (h < 12) return 'in a few hours';
+        if (h < 36) return 'tomorrow';
+        const d = Math.round(h / 24);
+        if (d < 14) return `in ${d} days`;
+        const w = Math.round(d / 7);
+        return w < 9 ? `in ${w} weeks` : `in ${Math.round(d / 30)} months`;
+      }
+
+      /* Pure. Why a question is in the queue: a label and its colour classes. */
+      function queueReason(meta, hasReview) {
+        if (!hasReview) return { label: 'New', cls: 'bg-blue-50 border-blue-200 text-blue-800' };
+        if (meta?.bucket === 'weakAtomic') return { label: 'Weak spot', cls: 'bg-rose-50 border-rose-200 text-rose-800' };
+        if (meta?.bucket === 'dueReviews') {
+          const d = Math.floor(meta.overdueDays || 0);
+          return { label: d >= 1 ? `Overdue ${d}d` : 'Due now', cls: 'bg-amber-50 border-amber-300 text-amber-900' };
+        }
+        return { label: 'Review soon', cls: 'bg-slate-50 border-slate-200 text-slate-700' };
+      }
+
+      /* Pure. A concept tag as words: "lewis-resonance" -> "lewis resonance". */
+      function humanTag(tag) { return String(tag ?? '').replace(/[-_]+/g, ' ').trim(); }
+
+      return { PASS, chunksOf, topicStats, unresolvedMisses, slipCounts, timeAgo, humanDue, queueReason, humanTag };
+    })();
+
+    /* =====================================================================
        NAMESPACE 7: UI — Holistic 1-Question-1-Answer Renderer & Views
        ===================================================================== */
     const UI = (() => {
@@ -6990,6 +7431,8 @@
         masteryLogs: [],
         composerNodes: [],
         myHooks: {},
+        session: { cards: 0, retry: [] },   // cards answered this session, and misses queued to come back
+        retryAfterCards: 5,
         content: { bank: null, skillMap: null },
         ui: { sheet: null, readinessTab: 'overview', settingsTab: 'module', bankLimit: 60 },
         reviewMap: {},
@@ -7073,6 +7516,23 @@
         }
       }
 
+      /* Tagging the kind of slip is a bonus: if it ever throws, the attempt must still be saved. */
+      function safeErrorTags(variant, userInput, evalResult, rubricChecks) {
+        try { return Review.errorTags(variant, userInput, evalResult, rubricChecks); } catch (err) { console.warn('[Review] could not tag the slip:', err.message); return []; }
+      }
+
+      function drillTopic(chunkId) {
+        appState.route = 'study';
+        appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null, chunkId, chunkNodeIds: Content.chunkNodeIds(appState.skillMap, chunkId) };
+        loadNextQuestion();
+      }
+
+      function redoNode(nodeId) {
+        appState.route = 'study';
+        appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: nodeId };
+        loadNextQuestion();
+      }
+
       function masteryNow() {
         if (!appState.skillMap) return null;
         return Mastery.evaluate(appState.masteryLogs, appState.skillMap, appState.nodes, appState.settings, appState.masteryPrefs);
@@ -7100,7 +7560,7 @@
         const el = $('#toastBanner');
         if (!el) return;
         el.textContent = msg;
-        el.className = `fixed bottom-5 right-5 z-50 max-w-sm text-sm px-4 py-2.5 rounded-lg shadow-lg ${isError ? 'bg-rose-700 text-white' : 'bg-slate-900 text-white'}`;
+        el.className = `fixed bottom-20 md:bottom-5 right-3 md:right-5 left-3 md:left-auto z-50 md:max-w-sm text-sm px-4 py-2.5 rounded-lg shadow-lg ${isError ? 'bg-rose-700 text-white' : 'bg-slate-900 text-white'}`;
         el.classList.remove('hidden');
         clearTimeout(showToast._t);
         showToast._t = setTimeout(() => el.classList.add('hidden'), 3200);
@@ -7123,6 +7583,12 @@
         appState.masteryLogs = allLogs.map((l) => ({ nodeId: l.nodeId, variantId: l.variantId, timestamp: l.timestamp, normalizedGrade: l.normalizedGrade }));
         appState.reviewMap = Object.fromEntries(reviews.map((r) => [r.nodeId, r]));
         appState.attemptLogs = logs;
+        // the student's own choices live in settings rows; reload them here so an import cannot leave a stale copy that the next save overwrites
+        try {
+          const [hooksRow, prefsRow] = await Promise.all([db.settings.get('myHooks'), db.settings.get('skillMastery')]);
+          appState.myHooks = hooksRow?.hooks || {};
+          appState.masteryPrefs = { removed: prefsRow?.removed || {}, resetAt: prefsRow?.resetAt || {} };
+        } catch (err) { console.warn('[Store] own settings not loaded:', err.message); }
         appState.settings = settingsRow ? { ...Scheduler.DEFAULT_SETTINGS, ...settingsRow } : Scheduler.DEFAULT_SETTINGS;
       }
 
@@ -7172,6 +7638,147 @@
         return '';
       }
 
+      /* The "Answer review" card: what you answered next to what was right, for every answer type. */
+      function answerReviewHtml(variant, userInput, evalResult, rubricChecks) {
+        let rv = null;
+        try { rv = Review.buildAnswerReview(variant, userInput, evalResult, rubricChecks); } catch (err) { console.warn('[Review] could not build the answer review:', err.message); }
+        if (!rv) return '';
+        const TONE = {
+          good: 'bg-emerald-50 border-emerald-200 text-emerald-900', bad: 'bg-rose-50 border-rose-200 text-rose-900',
+          warn: 'bg-amber-50 border-amber-400 border-dashed text-amber-900', plain: 'bg-slate-50 border-slate-200 text-slate-800',
+        };
+        const chip = (text, tone, extra = '') => `<span class="inline-flex items-center px-2 py-0.5 rounded-md border text-xs font-mono ${TONE[tone]} ${extra}">${esc(text)}</span>`;
+        const head = (right = '') => `<div class="flex items-center justify-between gap-2"><div class="text-xs font-semibold uppercase tracking-wider text-slate-600">Answer review</div>${right}</div>`;
+        const wrap = (kind, inner) => `<div class="space-y-2" data-answer-review data-review-kind="${kind}">${inner}</div>`;
+        const youVsCorrect = (yours, expected) => `
+          <div class="flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs">
+            <span class="inline-flex items-center gap-1.5"><span class="text-slate-500">You</span>${chip(yours || '(blank)', 'bad', yours ? 'line-through decoration-rose-400' : '')}</span>
+            <span class="text-slate-400">→</span>
+            <span class="inline-flex items-center gap-1.5"><span class="text-slate-500">Correct</span>${chip(expected, 'good')}</span>
+          </div>`;
+
+        // ---- grid-style answers (including drawn VSEPR shapes)
+        const fig = (svg, caption, tone) => `
+          <figure class="text-center min-w-0">
+            <div class="mx-auto w-full max-w-[132px] rounded-lg border ${tone === 'bad' ? 'border-rose-300 bg-rose-50/60' : tone === 'good' ? 'border-emerald-300 bg-emerald-50/60' : 'border-slate-200 bg-slate-50'} p-1.5">${svg}</div>
+            <figcaption class="mt-1 text-[11px] leading-tight text-slate-600">${caption}</figcaption>
+          </figure>`;
+        const blank = (txt) => `<div class="mx-auto w-full max-w-[132px] aspect-square rounded-lg border border-dashed border-slate-300 bg-slate-50 flex items-center justify-center text-[11px] text-slate-500 px-2 text-center">${txt}</div>`;
+        const mappedRows = (rows) => rows.map((r) => {
+          const tone = r.passed ? 'border-emerald-200' : 'border-rose-200';
+          const status = r.passed ? '<span class="text-xs font-semibold text-emerald-700">✓ Correct</span>' : `<span class="text-xs font-semibold ${r.partial ? 'text-amber-700' : 'text-rose-700'}">${r.partial ? '◐ Partly right' : '✗ Not quite'}</span>`;
+          let body;
+          if (r.vsepr) {
+            const c = r.vsepr.correct, y = r.vsepr.yours;
+            const correctFig = fig(Review.vseprSvg(c.bp, c.lp, { tone: 'good' }), `<span class="font-semibold text-emerald-800">Correct: ${esc(c.shape)}</span><br>${c.bp} bonded + ${c.lp} lone`, 'good');
+            if (r.passed) {
+              body = `<div class="grid grid-cols-2 gap-3 items-start">${correctFig}<p class="text-xs text-slate-700 self-center">${esc(r.vsepr.diagnosis)}</p></div>`;
+            } else {
+              const yourFig = y
+                ? fig(Review.vseprSvg(y.bp, y.lp, { tone: 'bad' }), `<span class="font-semibold text-rose-800">You: ${esc(y.shape)}</span><br>${y.bp} bonded + ${y.lp} lone`, 'bad')
+                : `<figure class="text-center">${blank(r.yours ? `“${esc(r.yours)}” is not a shape I recognise` : 'No answer given')}<figcaption class="mt-1 text-[11px] text-rose-800 font-semibold">You</figcaption></figure>`;
+              body = `<div class="grid grid-cols-2 gap-3 items-start">${yourFig}${correctFig}</div><p class="text-xs text-slate-800 bg-slate-50 border border-slate-200 rounded-md px-2.5 py-1.5">${esc(r.vsepr.diagnosis)}</p>`;
+            }
+          } else if (r.passed) {
+            body = `<div class="flex flex-wrap items-center gap-2 text-xs">${chip(r.yours || r.expected, 'good')}</div>`;
+          } else {
+            body = youVsCorrect(r.yours, r.expected);
+          }
+          return `
+            <div class="rounded-lg border ${tone} bg-white p-3 space-y-2" data-review-row="${esc(r.key)}">
+              <div class="flex items-center justify-between gap-2">
+                <div class="text-sm font-medium text-slate-900 min-w-0">${esc(r.label)}</div>
+                ${status}
+              </div>
+              ${body}
+            </div>`;
+        }).join('');
+
+        if (rv.kind === 'mapped') {
+          if (!rv.anyShape && !rv.anyWrong) return '';
+          const legend = rv.anyShape ? '<div class="text-[11px] text-slate-500"><span class="inline-block w-2.5 h-2.5 rounded-full bg-slate-300 border border-slate-500 align-middle"></span> bonded atom · <span class="inline-block w-3 h-2 rounded-full bg-amber-200 border border-amber-600 border-dashed align-middle"></span> lone pair</div>' : '';
+          return wrap('mapped', head(legend) + mappedRows(rv.rows));
+        }
+
+        // ---- written answers: the marking criteria, each met or missed
+        if (rv.kind === 'rubric') {
+          const items = rv.items.map((it) => `
+            <li class="flex gap-2.5 rounded-lg border px-3 py-2 ${it.met ? 'border-emerald-200 bg-emerald-50/60' : it.critical ? 'border-rose-300 bg-rose-50/70' : 'border-amber-300 bg-amber-50/60'}" data-rubric-item="${esc(it.id)}" data-met="${it.met ? 1 : 0}">
+              <span class="mt-0.5 shrink-0 text-sm font-bold ${it.met ? 'text-emerald-700' : 'text-rose-700'}" aria-hidden="true">${it.met ? '✓' : '✗'}</span>
+              <div class="min-w-0 text-sm text-slate-900">${renderMarkdownLite(it.criterion)}
+                <div class="mt-0.5 text-[11px] text-slate-600">${it.marks} mark${it.marks === 1 ? '' : 's'}${it.critical ? ' · <span class="font-semibold text-rose-700">critical step</span>' : ''}${it.met ? '' : ' · <span class="font-semibold text-rose-700">you missed this</span>'}</div>
+              </div>
+            </li>`).join('');
+          const yours = rv.text
+            ? `<div class="rounded-lg border border-slate-200 bg-white p-3"><div class="text-[11px] font-semibold uppercase tracking-wider text-slate-500 mb-1">Your answer</div><div data-bounded-scroll class="text-sm text-slate-800 whitespace-pre-wrap max-h-40 overflow-y-auto">${esc(rv.text)}</div></div>`
+            : '<div class="text-xs text-slate-500">You answered on paper, so only your self-marking is shown.</div>';
+          const veto = rv.veto ? '<p class="text-xs text-rose-900 bg-rose-50 border border-rose-200 rounded-md px-2.5 py-1.5">You missed a critical step, so the score is capped at 45% however many other points you hit.</p>' : '';
+          return wrap('rubric', head(`<span class="text-xs font-mono text-slate-600">${rv.earned}/${rv.total} marks</span>`) + yours + `<ul class="space-y-1.5 prose-math">${items}</ul>` + veto);
+        }
+
+        // ---- choice: every option and what happened to it
+        if (rv.kind === 'choice') {
+          if (!rv.anyWrong) return '';
+          const ST = {
+            right: ['✓', 'border-emerald-300 bg-emerald-50', 'text-emerald-800', 'you picked this: correct'],
+            wrong: ['✗', 'border-rose-300 bg-rose-50', 'text-rose-800', 'you picked this: not correct'],
+            missed: ['○', 'border-amber-400 border-dashed bg-amber-50', 'text-amber-900', 'correct, but you did not pick it'],
+            neutral: ['', 'border-slate-200 bg-white', 'text-slate-500', ''],
+          };
+          const opts = rv.options.map((o) => {
+            const m = ST[o.state];
+            return `<li class="flex items-start gap-2.5 rounded-lg border px-3 py-2 ${m[1]}" data-option-state="${o.state}"><span class="w-4 shrink-0 text-center font-bold ${m[2]}" aria-hidden="true">${m[0]}</span><div class="min-w-0 text-sm text-slate-900">${esc(o.label)}${m[3] ? `<div class="text-[11px] ${m[2]}">${m[3]}</div>` : ''}</div></li>`;
+          }).join('');
+          return wrap('choice', head(rv.nothingPicked ? '<span class="text-xs text-rose-700 font-semibold">nothing selected</span>' : '') + `<ul class="space-y-1.5">${opts}</ul>`);
+        }
+
+        // ---- equations: your equation, the atom count on each side, and the balanced reference
+        if (rv.kind === 'equation') {
+          if (rv.passed) return '';
+          const lines = rv.rows.map((r) => {
+            if (!r.valid) return `<div class="rounded-lg border border-rose-300 bg-rose-50 px-3 py-2 text-xs text-rose-900"><div class="font-mono mb-0.5">${esc(r.raw)}</div>I could not read this line: ${esc(r.error)}</div>`;
+            const rowsHtml = r.atoms.map((a) => `<tr class="${a.ok ? '' : 'bg-rose-50 text-rose-900 font-semibold'}"><td class="px-2 py-1 font-mono">${esc(a.el)}</td><td class="px-2 py-1 text-center font-mono">${a.left}</td><td class="px-2 py-1 text-center font-mono">${a.right}</td><td class="px-2 py-1 text-center">${a.ok ? '<span class="text-emerald-700">✓</span>' : '✗'}</td></tr>`).join('');
+            const chargeRow = r.charge ? `<tr class="${r.charge.ok ? '' : 'bg-rose-50 text-rose-900 font-semibold'}"><td class="px-2 py-1">charge</td><td class="px-2 py-1 text-center font-mono">${r.charge.left}</td><td class="px-2 py-1 text-center font-mono">${r.charge.right}</td><td class="px-2 py-1 text-center">${r.charge.ok ? '<span class="text-emerald-700">✓</span>' : '✗'}</td></tr>` : '';
+            const bad = r.atoms.filter((a) => !a.ok).map((a) => `${a.el} (${a.left} vs ${a.right})`);
+            if (r.charge && !r.charge.ok) bad.push(`charge (${r.charge.left} vs ${r.charge.right})`);
+            return `
+              <div class="rounded-lg border ${r.balanced ? 'border-emerald-200' : 'border-rose-200'} bg-white p-3 space-y-2" data-equation-line>
+                <div class="text-sm font-mono text-slate-900 break-words">${esc(Review.prettyFormula(r.raw))}</div>
+                <table class="w-full text-xs border border-slate-200 rounded-md overflow-hidden"><thead class="bg-slate-50 text-slate-600"><tr><th class="px-2 py-1 text-left font-semibold">Atom</th><th class="px-2 py-1 font-semibold">Reactants</th><th class="px-2 py-1 font-semibold">Products</th><th class="px-2 py-1"></th></tr></thead><tbody class="divide-y divide-slate-100">${rowsHtml}${chargeRow}</tbody></table>
+                <p class="text-xs ${r.balanced ? 'text-emerald-800' : 'text-rose-800 font-semibold'}">${r.balanced ? 'This line is balanced.' : `Not balanced: ${esc(bad.join(', '))}.`}</p>
+              </div>`;
+          }).join('');
+          const species = (rv.missing.length || rv.extra.length) ? `<div class="flex flex-wrap items-center gap-1.5 text-xs">${rv.missing.map((x) => chip('missing: ' + Review.prettyFormula(x), 'warn')).join('')}${rv.extra.map((x) => chip('not expected: ' + Review.prettyFormula(x), 'bad')).join('')}</div>` : '';
+          const ref = rv.correct ? `<div class="rounded-lg border border-emerald-200 bg-emerald-50/60 px-3 py-2"><div class="text-[11px] font-semibold uppercase tracking-wider text-emerald-800 mb-0.5">Balanced reference</div><div class="text-sm font-mono text-slate-900 whitespace-pre-wrap break-words">${esc(Review.prettyFormula(rv.correct))}</div></div>` : '';
+          return wrap('equation', head() + (rv.hasInput ? lines : '<p class="text-xs text-rose-800 font-semibold">No equation entered.</p>') + species + ref);
+        }
+
+        // ---- sets: which of your items were right, extra, or missing, then any companion fields
+        if (rv.kind === 'set') {
+          const fieldRows = rv.fields && rv.fields.anyWrong ? mappedRows(rv.fields.rows) : '';
+          if (rv.passed && !fieldRows) return '';
+          const group = (label, items, tone) => items.length ? `<div class="flex flex-wrap items-center gap-1.5"><span class="text-[11px] font-semibold uppercase tracking-wider text-slate-500 w-full sm:w-auto">${label}</span>${items.map((x) => chip(x, tone)).join('')}</div>` : '';
+          return wrap('set', head() + `<div class="rounded-lg border border-slate-200 bg-white p-3 space-y-2">
+            ${group('Correct', rv.correct, 'good')}${group('Not expected', rv.extra, 'bad')}${group('You missed', rv.missing, 'warn')}
+            ${!rv.correct.length && !rv.extra.length ? '<p class="text-xs text-rose-800 font-semibold">No items entered.</p>' : ''}
+          </div>` + fieldRows);
+        }
+
+        // ---- ordering: the correct order, and where you put each item
+        if (rv.kind === 'order') {
+          if (rv.passed) return '';
+          const rows = rv.rows.map((r) => `<li class="flex items-center gap-2.5 rounded-lg border px-3 py-2 ${r.ok ? 'border-emerald-200 bg-emerald-50/60' : 'border-rose-200 bg-rose-50/60'}"><span class="w-6 shrink-0 text-center font-mono text-xs font-semibold ${r.ok ? 'text-emerald-800' : 'text-rose-800'}">${r.correctPos}</span><span class="min-w-0 text-sm text-slate-900 flex-1">${esc(r.label)}</span><span class="text-[11px] ${r.ok ? 'text-emerald-800' : 'text-rose-800'} shrink-0">${r.ok ? '✓' : (r.yourPos ? `you put it ${r.yourPos}` : 'you left it out')}</span></li>`).join('');
+          return wrap('order', head('<span class="text-[11px] text-slate-500">correct order</span>') + `<ol class="space-y-1.5">${rows}</ol>`);
+        }
+
+        // ---- short answers
+        if (rv.kind === 'short') {
+          if (rv.passed || !rv.expected) return '';
+          return wrap('short', head() + youVsCorrect(rv.yours, rv.expected));
+        }
+        return '';
+      }
+
       function loadNextQuestion(opts = {}) {
         appState.ui.sheet = null;
         if (appState.cleanupWidget) { appState.cleanupWidget(); appState.cleanupWidget = null; }
@@ -7181,6 +7788,11 @@
           excludeNodeId: (opts.skipCurrent || prevNode) ? prevNode?.id : null,
           lastFamily: prevNode?.metadata?.family || null,
         };
+        // a miss the student sent back: it returns once enough other cards have gone by
+        if (!appState.filters.forceNodeId) {
+          const due = appState.session.retry.find((r) => r.after <= appState.session.cards && r.nodeId !== prevNode?.id);
+          if (due) { appState.session.retry = appState.session.retry.filter((r) => r !== due); filters.forceNodeId = due.nodeId; }
+        }
         if (appState.skillMap) {
           // a topic or weak-spot drill is practice you asked for, so retirement does not thin it; removals still hold
           filters.masteryAdj = Mastery.adjustments(masteryNow(), appState.skillMap, appState.masteryPrefs.removed,
@@ -7188,7 +7800,7 @@
             appState.nodes.filter((n) => String(n.id).startsWith('lf-inv-')).map((n) => n.id));
         }
         const pick = Scheduler.selectNextNode(
-          appState.nodes,
+          filters.forceNodeId ? [...appState.nodes, ...appState.composerNodes] : appState.nodes,
           appState.reviewMap,
           moduleMap(),
           appState.attemptLogs,
@@ -7273,6 +7885,7 @@
           userInput: cur.userInput,
           rubricChecks: cur.rubricChecks || null,
           missedSkillTags: evalResult.missedSkillTags || [],
+          errorTags: safeErrorTags(cur.inst.variant, cur.userInput, evalResult, cur.rubricChecks),
         };
 
         await db.transaction('rw', db.reviewStates, db.attemptLogs, async () => {
@@ -7280,6 +7893,7 @@
           await db.attemptLogs.put(logEntry);
         });
 
+        appState.session.cards += 1;
         const masteryBefore = masteryNow();
         appState.reviewMap[cur.node.id] = nextRs;
         appState.attemptLogs.unshift(logEntry);
@@ -7344,11 +7958,11 @@
               </select>
             </label>
             <label class="block">
-              <span class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Tier</span>
-              <select id="studyTierFilter" aria-label="Filter by tier" class="w-full text-sm bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-slate-800">
-                <option value="ALL" ${appState.filters.tier === 'ALL' ? 'selected' : ''}>All Tiers</option>
-                <option value="atomic" ${appState.filters.tier === 'atomic' ? 'selected' : ''}>Atomic Drills Only</option>
-                <option value="synthesis" ${appState.filters.tier === 'synthesis' ? 'selected' : ''}>Synthesis (Uncued) Only</option>
+              <span class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Question type</span>
+              <select id="studyTierFilter" aria-label="Filter by question type" class="w-full text-sm bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-slate-800">
+                <option value="ALL" ${appState.filters.tier === 'ALL' ? 'selected' : ''}>All types</option>
+                <option value="atomic" ${appState.filters.tier === 'atomic' ? 'selected' : ''}>Quick drills only</option>
+                <option value="synthesis" ${appState.filters.tier === 'synthesis' ? 'selected' : ''}>Multi-step only</option>
               </select>
             </label>
             ${appState.skillMap?.chunks?.length ? `
@@ -7378,24 +7992,24 @@
           <div class="space-y-4">
             <div class="space-y-2">
               <div class="flex items-center justify-between">
-                <h3 class="font-display text-sm font-semibold text-slate-900">Top priority</h3>
-                <span class="text-xs font-mono text-slate-500">${rs ? `Reps: ${rs.reps}` : 'New'}</span>
+                <h3 class="font-display text-sm font-semibold text-slate-900">Up next, and why</h3>
+                <span class="text-xs text-slate-500">${rs ? `You have seen this ${rs.reps} time${rs.reps === 1 ? '' : 's'}` : 'First time'}</span>
               </div>
               <div class="divide-y divide-slate-100">
                 ${(cur.queuePreview || []).slice(0, 6).map((item, idx) => `
                   <button type="button" data-jump-node="${esc(item.node.id)}" class="w-full text-left py-2.5 flex items-center justify-between gap-2 hover:bg-slate-50 px-1.5 rounded transition-colors ${item.node.id === node.id ? 'bg-blue-50/60' : ''}">
                     <div class="min-w-0">
                       <div class="text-sm font-medium text-slate-900 truncate">${idx === 0 ? '▸ ' : ''}${esc(item.node.metadata.title)}</div>
-                      <div class="text-xs text-slate-500">${esc(item.node.moduleCode)} · W${item.node.metadata.week} · ${item.node.tier}</div>
+                      <div class="text-xs text-slate-500 truncate">${esc((appState.skillMap && appState.skillMap.chunks?.find((c) => c.id === Weakness.chunksOf(appState.skillMap, item.node.id)[0])?.name) || item.node.metadata.primaryTheme)}</div>
                     </div>
-                    <span class="text-xs font-mono text-slate-500 shrink-0">${item.meta.score.toFixed(1)}</span>
+                    ${(() => { const why = Weakness.queueReason(item.meta, Boolean(appState.reviewMap[item.node.id])); return `<span class="shrink-0 text-[11px] font-medium px-2 py-0.5 rounded-full border ${why.cls}" data-queue-reason>${why.label}</span>`; })()}
                   </button>
                 `).join('')}
               </div>
             </div>
             <div class="space-y-2 pt-3 border-t border-slate-200">
               <h3 class="font-display text-sm font-semibold text-slate-900">Stereochemistry 3D Lab</h3>
-              <p class="text-xs text-slate-600">Inspect any of the ${goldenCount} syllabus coordination formulas (${IsomerEngine.BANK.length} total in engine) in the interactive 3D explorer with live mirror planes.</p>
+              <p class="text-xs text-slate-600">Inspect any of the ${goldenCount} syllabus coordination formulas in the interactive 3D explorer, with live mirror planes.</p>
               <button type="button" id="btnLaunchExplorer" class="w-full px-3 py-2 text-sm font-medium border border-slate-300 bg-slate-50 hover:bg-slate-100 rounded-lg text-slate-800">Open 3D Isomer Explorer</button>
             </div>
           </div>
@@ -7485,7 +8099,7 @@
           const gridClass = slot.layout === 'table' ? 'divide-y divide-slate-200 border border-slate-200 rounded-lg overflow-hidden bg-white' : 'grid grid-cols-1 sm:grid-cols-3 gap-3';
           inputHtml = `
             <div class="space-y-2">
-              <div class="text-xs font-semibold uppercase tracking-wider text-slate-600">Mapped Response Fields</div>
+              <div class="text-xs font-semibold uppercase tracking-wider text-slate-600">Your answers</div>
               <div class="${gridClass}">
                 ${slot.fields.map((f) => {
                   const fRes = evalResult?.fieldResults?.[f.key];
@@ -7607,7 +8221,7 @@
                 </div>
               ` : ''}
               <div class="flex flex-wrap items-center justify-between gap-2">
-                <label for="synthesisInput" class="text-xs font-semibold uppercase tracking-wider text-slate-600">${drawMode ? 'Paper Drawing Notes / Derivation (Optional)' : 'Synthesis Response (Uncued Derivation)'}</label>
+                <label for="synthesisInput" class="text-xs font-semibold uppercase tracking-wider text-slate-600">${drawMode ? 'Notes from your paper working (optional)' : 'Your answer (write it from memory)'}</label>
                 <div class="flex items-center gap-3 text-xs">
                   <span id="wordCountReadout" class="font-mono ${unlocked ? 'text-emerald-700' : 'text-slate-500'}">${wc} / ${minW} words</span>
                   ${slot.allowPaperScratchpad || drawMode ? `
@@ -7620,9 +8234,9 @@
               <textarea data-bounded-scroll id="synthesisInput" rows="5" ${phase !== 'answering' ? 'disabled' : ''} placeholder="${esc(slot.placeholder || 'Write your mechanistic or mathematical reasoning...')}" class="w-full text-sm px-3.5 py-2.5 bg-white border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-700 leading-relaxed">${esc(cur.userInput)}</textarea>
               ${phase === 'answering' ? `
                 <div class="flex flex-wrap items-center justify-between gap-3">
-                  <span class="text-xs text-slate-500">${unlocked ? 'Ready — commit to reveal the reference comparison and self-grading rubric.' : `Write at least ${minW} words (or mark paper scratchpad) to unlock the rubric.`}</span>
+                  <span class="text-xs text-slate-500">${unlocked ? 'Ready: show the marking points and mark yourself.' : `Write at least ${minW} words, or tick "solved on paper", to see the marking points.`}</span>
                   <button type="button" id="btnUnlockRubric" ${unlocked ? '' : 'disabled'} class="px-4 py-2 text-sm font-medium rounded-lg bg-blue-700 text-white hover:bg-blue-800 disabled:bg-slate-200 disabled:text-slate-500 transition-colors">
-                    ${drawMode ? 'Commit &amp; Compare with Rubric' : 'Commit &amp; Unlock Rubric'}
+                    ${drawMode ? 'Compare with marking points' : 'Show marking points'}
                   </button>
                 </div>
               ` : ''}
@@ -7641,8 +8255,8 @@
             <div class="mt-5 pt-5 border-t border-slate-200 space-y-4" id="rubricSection">
               <div class="flex flex-wrap items-center justify-between gap-2">
                 <div>
-                  <h3 class="font-display text-sm font-semibold text-slate-900">${drawThenCompare ? 'Reference Diagram Comparison &amp; Self-Grading Rubric' : 'Atomic Self-Grading Rubric'}</h3>
-                  <p class="text-xs text-slate-500">Check each criterion strictly present in your written or paper derivation. Missing a <span class="text-rose-700 font-semibold">Critical Step</span> triggers the Zero-Step Veto (score capped at 45%).</p>
+                  <h3 class="font-display text-sm font-semibold text-slate-900">${drawThenCompare ? 'Compare with the reference and mark yourself' : 'Mark yourself'}</h3>
+                  <p class="text-xs text-slate-500">Tick each point that is clearly in your answer. Missing a <span class="text-rose-700 font-semibold">critical step</span> caps your score at 45%.</p>
                 </div>
                 ${phase === 'rubric' && llmCfg?.enabled ? `
                   <button type="button" id="btnLLMAssist" class="px-3 py-1.5 text-xs font-medium border border-blue-200 bg-blue-50 text-blue-800 rounded-lg hover:bg-blue-100">AI Pre-Check (${esc(llmCfg.model || 'LLM')})</button>
@@ -7665,7 +8279,7 @@
                           <div>${esc(item.criterion)}</div>
                           <div class="mt-1 flex flex-wrap items-center gap-3 text-xs text-slate-500 font-mono">
                             <span>${item.marks} mark${item.marks === 1 ? '' : 's'}</span>
-                            ${item.isCritical ? '<span class="text-rose-700 font-semibold">CRITICAL STEP (Veto if missed)</span>' : ''}
+                            ${item.isCritical ? '<span class="text-rose-700 font-semibold">CRITICAL STEP (caps your score if missed)</span>' : ''}
                             ${item.linkedSkillTag ? `<span>Skill: ${esc(item.linkedSkillTag)}</span>` : ''}
                           </div>
                         </div>
@@ -7697,7 +8311,6 @@
 
           const missedTags = evalResult.missedSkillTags || [];
           const nextDueRs = appState.reviewMap[node.id];
-          const nextDueDays = nextDueRs ? Math.max(0.25, (nextDueRs.dueMs - Date.now()) / 86400000).toFixed(1) : '—';
           const explanationAsset = variant.explanationVisualAsset || variant.explanationAsset || (variant.explanationImage ? { type: 'image', dataUrl: variant.explanationImage } : null);
           const chainNextId = node.metadata?.chainNext || null;
 
@@ -7707,26 +8320,28 @@
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div class="font-display font-semibold text-base">
                     Score: <span class="font-mono">${pct}%</span>
-                    ${evalResult.vetoApplied ? ' · Zero-Step Veto Applied (≤ 45%)' : evalResult.passed ? ' · Passed' : ' · Needs Review'}
+                    ${evalResult.vetoApplied ? ' · Capped at 45%' : evalResult.passed ? ' · Passed' : ' · Not there yet'}
                   </div>
-                  <div class="text-xs font-mono">Next review in ${nextDueDays}d · Stability S=${nextDueRs?.S ?? '—'}</div>
+                  ${nextDueRs ? `<div class="text-xs">Due for review ${Weakness.humanDue(nextDueRs.dueMs)}</div>` : ''}
                 </div>
                 <p class="text-sm mt-1">${esc(evalResult.feedback)}</p>
                 ${missedTags.length ? `
                   <div class="mt-3 pt-3 border-t border-rose-200 flex flex-wrap items-center gap-2">
-                    <span class="text-xs font-semibold uppercase tracking-wider">Fault Isolation — Drill Weak Sub-Skills:</span>
+                    <span class="text-xs font-semibold uppercase tracking-wider">Drill the weak sub-skills:</span>
                     ${missedTags.map((tag) => `
                       <button type="button" data-drill-skill="${esc(tag)}" class="px-2.5 py-1 text-xs font-mono font-medium bg-white border border-rose-300 text-rose-800 rounded-md hover:bg-rose-100">
-                        Drill: ${esc(tag)} →
+                        Drill: ${esc(Weakness.humanTag(tag))} →
                       </button>
                     `).join('')}
                   </div>
                 ` : ''}
               </div>
 
+              ${answerReviewHtml(variant, cur.userInput, evalResult, cur.rubricChecks)}
+
               ${(inst.resolvedExplanation || explanationAsset) ? `
                 <div class="bg-slate-50 border border-slate-200 rounded-xl p-4 prose-math text-sm text-slate-800 space-y-3" data-explanation-block>
-                  <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Canonical Derivation &amp; Explanation</div>
+                  <div class="text-xs font-semibold uppercase tracking-wider text-slate-500">Explanation</div>
                   ${inst.resolvedExplanation ? renderMarkdownLite(inst.resolvedExplanation) : ''}
                   ${explanationAsset ? renderVisualAssetHtml(explanationAsset, 'mt-2', 'explanation-visual-asset') : ''}
                 </div>
@@ -7736,10 +8351,20 @@
                 const builtIn = variant.memoryHook || node.metadata?.memoryHook || '';
                 const caveat = builtIn ? (variant.memoryHookNote || node.metadata?.memoryHookNote || '') : '';
                 const mine = appState.myHooks[node.id] || '';
+                if (!builtIn) {
+                  return `
+                <details class="rounded-xl border border-sky-200 bg-sky-50/50 px-4 text-sm" data-add-hook ${mine ? 'open' : ''}>
+                  <summary class="cursor-pointer min-h-[36px] flex items-center text-xs font-semibold text-sky-800">${mine ? 'My hook' : '＋ Add my hook'}</summary>
+                  <div class="pb-3 space-y-1">
+                    <textarea data-bounded-scroll id="myHookInput" rows="2" placeholder="Your own picture, pun or reason…" class="w-full text-sm px-2.5 py-2 border border-slate-300 rounded-lg bg-white">${esc(mine)}</textarea>
+                    <div class="text-[11px] text-slate-500">Saved on this device and shown here next time.</div>
+                  </div>
+                </details>`;
+                }
                 return `
                 <div class="bg-sky-50/70 border border-sky-200 rounded-xl p-4 text-sm text-slate-800 space-y-2" data-memory-hook-block>
                   <div class="text-xs font-semibold uppercase tracking-wider text-sky-800">Memory hook</div>
-                  ${builtIn ? `<div class="prose-math">${renderMarkdownLite(builtIn)}</div>` : '<div class="text-xs text-slate-500">No built-in hook for this one yet.</div>'}
+                  <div class="prose-math">${renderMarkdownLite(builtIn)}</div>
                   ${caveat ? `<div class="text-xs text-amber-950 bg-amber-50 border border-amber-200 rounded-md px-2.5 py-1.5" data-hook-caveat><span class="font-semibold">Caveat:</span> ${esc(caveat)}</div>` : ''}
                   <label class="block">
                     <span class="block text-xs font-medium text-slate-600 mb-1">My hook (saved on this device)</span>
@@ -7756,7 +8381,16 @@
               ` : ''}
 
               <div class="sticky bottom-0 max-lg:mt-auto bg-white flex flex-wrap items-center justify-between gap-3 py-3 border-t border-slate-200">
-                <div class="flex items-center gap-2">
+                <div class="flex flex-wrap items-center gap-2">
+                  ${(() => {
+                    const topicId = appState.skillMap ? Weakness.chunksOf(appState.skillMap, node.id)[0] : null;
+                    const topicName = topicId ? appState.skillMap.chunks?.find((c) => c.id === topicId)?.name : '';
+                    return `
+                      ${topicId ? `<button type="button" id="btnDrillTopic" data-chunk="${esc(topicId)}" title="${esc(topicName || '')}" class="px-3 py-1.5 text-xs font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-700">Drill this topic</button>` : ''}
+                      ${!evalResult.passed ? (cur.retryQueued
+                        ? `<span class="text-xs font-medium text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-1.5" data-retry-queued>Coming back in ${appState.retryAfterCards} cards ✓</span>`
+                        : `<button type="button" id="btnRetryLater" class="px-3 py-1.5 text-xs font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-700">See again in ${appState.retryAfterCards} cards</button>`) : ''}`;
+                  })()}
                   ${node.id.startsWith('gb-') || node.metadata.conceptTags?.includes('stereochemistry') ? `
                     <button type="button" id="btnOpenExplorerFromCard" class="px-3 py-1.5 text-xs font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-700">Inspect in 3D Explorer</button>
                   ` : ''}
@@ -7768,7 +8402,7 @@
                     </button>
                   ` : ''}
                   <button type="button" id="btnNextQuestion" class="px-5 py-2 text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">
-                    Next Priority Question →
+                    Next question →
                   </button>
                 </div>
               </div>
@@ -7785,15 +8419,16 @@
 
         const showStemVisual = variant.visualAsset && !(drawThenCompare && !variant.referenceImage && !variant.comparisonVisualAsset);
 
-        const tierLabel = node.tier === 'synthesis' ? 'Synthesis' : 'Atomic';
+        const tierLabel = node.tier === 'synthesis' ? 'Multi-step' : 'Quick drill';
+        const crumbTopicId = appState.skillMap ? Weakness.chunksOf(appState.skillMap, node.id)[0] : null;
+        const crumbTopic = (crumbTopicId && appState.skillMap.chunks?.find((c) => c.id === crumbTopicId)?.name) || node.metadata.primaryTheme;
         const stepBtn = (key, label, disabled) => `<button type="button" role="tab" data-step-go="${key}" aria-selected="${step === key}" ${disabled ? 'disabled' : ''}>${label}</button>`;
         root.innerHTML = `
           <div class="view" id="studyView" data-step="${step}">
             <div class="shrink-0 flex items-center justify-between gap-2">
               <div class="min-w-0 text-[11px] sm:text-xs text-slate-500 truncate">
-                <span class="font-mono font-semibold text-slate-800">${esc(node.moduleCode)}</span>
-                · W${node.metadata.week} · <span class="${node.tier === 'synthesis' ? 'text-blue-700 font-semibold' : ''}">${tierLabel}</span>
-                · ${esc(node.metadata.primaryTheme)}
+                ${appState.modules.length > 1 ? `<span class="font-mono font-semibold text-slate-800">${esc(node.moduleCode)}</span> · ` : ''}<span class="font-semibold text-slate-700">${esc(crumbTopic)}</span>
+                · <span class="${node.tier === 'synthesis' ? 'text-blue-700 font-semibold' : 'hidden sm:inline'}">${tierLabel}</span>
               </div>
               <div class="flex items-center gap-1.5 shrink-0">
                 <button type="button" data-open-sheet="queue" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700">Queue</button>
@@ -8107,6 +8742,12 @@
           }
         });
         $('#btnNextQuestion', root)?.addEventListener('click', () => loadNextQuestion({ skipCurrent: true }));
+        $('#btnDrillTopic', root)?.addEventListener('click', (e) => drillTopic(e.currentTarget.dataset.chunk));
+        $('#btnRetryLater', root)?.addEventListener('click', () => {
+          if (!appState.session.retry.some((r) => r.nodeId === node.id)) appState.session.retry.push({ nodeId: node.id, after: appState.session.cards + appState.retryAfterCards });
+          cur.retryQueued = true;
+          render();
+        });
         $$('[data-drill-skill]', root).forEach((btn) => {
           btn.addEventListener('click', () => {
             appState.filters.skillTag = btn.dataset.drillSkill;
@@ -8205,6 +8846,8 @@
         appState.mock = {
           ...appState.mock,
           phase: 'in_progress',
+          reviewFilter: 'all',
+          resultTab: 'chapters',
           durationMinutes,
           questionCount: totalQuestions,
           selectedChapters: chapters.slice(),
@@ -8325,6 +8968,7 @@
             userInput: q.userInput,
             rubricChecks: q.rubricChecks || null,
             missedSkillTags: evalRes.missedSkillTags || [],
+            errorTags: safeErrorTags(variant, q.userInput, evalRes, q.rubricChecks),
           };
           newLogs.push(logEntry);
         }
@@ -8379,7 +9023,7 @@
                 <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-600">Chapters (${esc(mod.moduleCode)})</div>
                 <div class="flex items-center gap-2 text-xs">
                   <button type="button" id="btnMockSelectAllCh" class="px-2.5 py-1 border border-slate-300 rounded hover:bg-slate-50 text-slate-700">All</button>
-                  <button type="button" id="btnMockSelectPopulatedCh" class="px-2.5 py-1 border border-slate-300 rounded hover:bg-slate-50 text-slate-700">With nodes</button>
+                  <button type="button" id="btnMockSelectPopulatedCh" class="px-2.5 py-1 border border-slate-300 rounded hover:bg-slate-50 text-slate-700">With questions</button>
                 </div>
               </div>
               <div class="view-scroll grid grid-cols-1 sm:grid-cols-2 gap-2 content-start">
@@ -8393,7 +9037,7 @@
                             <span class="font-mono font-semibold text-slate-700 whitespace-nowrap shrink-0">Ch ${w.weekNum}</span>
                             <span class="text-slate-900 truncate">${esc(w.title)}</span>
                           </div>
-                          <span class="font-mono text-[11px] text-slate-500 shrink-0">${cCount} node${cCount === 1 ? '' : 's'}</span>
+                          <span class="font-mono text-[11px] text-slate-500 shrink-0">${cCount} question${cCount === 1 ? '' : 's'}</span>
                         </label>
                       `;
                     }).join('')}
@@ -8820,27 +9464,33 @@
               </div>
             </section>
         `;
+        const styleName = { mcq_1mark: 'MCQ', short_2to3: 'Short', construct_4to6: 'Construct' };
+        const missedQs = m.questions.filter((q) => !q.evalResult?.passed);
+        const onlyMissed = m.reviewFilter === 'missed';
+        const shownQs = onlyMissed ? missedQs : m.questions;
+        const filterBtn = (key, label, n) => `<button type="button" data-review-filter="${key}" class="px-3 py-1.5 text-xs font-medium rounded-full border ${((key === 'missed') === onlyMissed) ? 'bg-slate-900 text-white border-slate-900' : 'bg-white text-slate-700 border-slate-300'}">${label} (${n})</button>`;
         const secQuestions = `
-            <section class="space-y-3"><p class="text-xs text-slate-500">All ${m.questions.length} attempt(s) logged with mockId <code class="font-mono">${esc(m.mockId)}</code> and review states updated in IndexedDB.</p>
-              <h2 class="font-display text-base font-semibold text-slate-900">Question-by-Question Review</h2>
-              ${m.questions.map((q) => `
-                <div class="bg-white border border-slate-200 rounded-xl p-4 space-y-2">
-                  <div class="flex items-center justify-between text-xs font-mono">
-                    <span>Q${q.index + 1} · Ch ${q.node.metadata.week} · ${esc(q.examStyle)}</span>
-                    <span class="font-semibold ${q.evalResult?.passed ? 'text-emerald-700' : 'text-rose-700'}">${q.earnedMarks} / ${q.inst.variant.marks} marks</span>
+            <section class="space-y-3">
+              <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filter questions">${filterBtn('all', 'All', m.questions.length)}${filterBtn('missed', 'Marks lost', missedQs.length)}</div>
+              ${shownQs.length ? shownQs.map((q) => `
+                <div class="bg-white border border-slate-200 rounded-xl p-4 space-y-3" data-mock-review-q="${q.index}">
+                  <div class="flex items-center justify-between text-xs">
+                    <span class="font-mono text-slate-600">Q${q.index + 1} · Ch ${q.node.metadata.week} · ${esc(styleName[q.examStyle] || q.examStyle)}</span>
+                    <span class="font-mono font-semibold ${q.evalResult?.passed ? 'text-emerald-700' : 'text-rose-700'}">${q.earnedMarks} / ${q.inst.variant.marks} marks</span>
                   </div>
                   <div class="font-display text-sm font-semibold text-slate-900">${esc(q.node.metadata.title)}</div>
                   <div class="text-xs text-slate-700">${esc(q.evalResult?.feedback || '')}</div>
+                  ${answerReviewHtml(q.inst.variant, q.userInput, q.evalResult, q.rubricChecks)}
                   ${q.inst.resolvedExplanation ? `<div class="text-xs text-slate-600 bg-slate-50 border border-slate-200 rounded p-2.5 prose-math">${renderMarkdownLite(q.inst.resolvedExplanation)}</div>` : ''}
                 </div>
-              `).join('')}
+              `).join('') : '<p class="text-sm text-slate-600">No marks lost on this paper.</p>'}
             </section>
         `;
         root.innerHTML = `
           <div class="view max-w-4xl">
             <div class="bg-white border border-slate-200 rounded-xl p-4 flex items-center justify-between gap-3 shrink-0">
               <div>
-                <div class="text-xs font-mono text-blue-700 font-semibold">Mock Paper Graded · ${esc(m.mockId)}</div>
+                <div class="text-xs font-semibold text-blue-700">Mock paper graded</div>
                 <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900 mt-0.5">Total Score: ${m.totalEarned} / ${m.totalMarks} marks (${pct}%)</h1>
                 
               </div>
@@ -8858,6 +9508,9 @@
         $$('[data-seg-mock]', root).forEach((btn) => {
           btn.addEventListener('click', () => { m.resultTab = btn.dataset.segMock; renderMockView(root); });
         });
+        $$('[data-review-filter]', root).forEach((btn) => {
+          btn.addEventListener('click', () => { m.reviewFilter = btn.dataset.reviewFilter; renderMockView(root); });
+        });
 
         $('#btnNewMockPaper', root)?.addEventListener('click', () => {
           m.phase = 'setup';
@@ -8871,7 +9524,7 @@
         if (!appState.skillMap) {
           const err = appState.content.skillMap?.error;
           const msg = `<p class="text-sm text-slate-500">Skill map not loaded${err ? ': ' + esc(err) : '.'}</p>`;
-          return { summary: msg, list: msg };
+          return { summary: msg, list: msg, contentCheck: msg, readiness: null };
         }
         const map = appState.skillMap;
         const nodes = appState.nodes.filter((n) => n.moduleCode === map.module);
@@ -8899,33 +9552,23 @@
         const pct = (x) => Math.round(x * 100);
         const gapCount = analysis.missingIds.length;
         const summary = `
-          <div class="space-y-3">
+          <div class="space-y-1">
+            <h3 class="font-display text-sm font-semibold text-slate-900">${rows.length} exam skills in ${groups.length} topics</h3>
+            <p class="text-xs text-slate-500">Each skill is weighted by its exam marks. A skill counts as ready when your latest answers on its questions scored 70% or more.</p>
+          </div>`;
+        const contentCheck = `
+          <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-3">
             <div>
-              <h3 class="font-display text-sm font-semibold text-slate-900">Skill map · ${esc(map.module)}</h3>
-              <p class="text-xs text-slate-500">${rows.length} exam skills in ${groups.length} topics, weighted by marks. A skill is ready in proportion to its mapped questions you last scored ≥ 0.7 on; questions not yet in the bank count as not ready.</p>
+              <h2 class="font-display text-base font-semibold text-slate-900">Content check</h2>
+              <p class="text-xs text-slate-500">Whether every exam skill has questions in the bank. For maintaining the question bank, not for studying.</p>
             </div>
             <div class="grid grid-cols-3 gap-2">
-              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
-                <div class="text-[11px] text-slate-500">Map-weighted readiness</div>
-                <div class="font-mono text-xl font-bold text-emerald-700 mt-0.5">${pct(readiness)}%</div>
-              </div>
-              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
-                <div class="text-[11px] text-slate-500">Question coverage</div>
-                <div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${pct(coverage)}%</div>
-                <div class="text-[11px] font-mono text-slate-500">${gapCount} not in bank</div>
-              </div>
-              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3">
-                <div class="text-[11px] text-slate-500">Skills with no questions</div>
-                <div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${analysis.orphanSkills.length + analysis.emptySkills.length}</div>
-                <div class="text-[11px] font-mono text-slate-500">${analysis.partialSkills.length} partial</div>
-              </div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><div class="text-[11px] text-slate-500">Questions present</div><div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${pct(coverage)}%</div><div class="text-[11px] font-mono text-slate-500">${gapCount} missing</div></div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><div class="text-[11px] text-slate-500">Skills with no questions</div><div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${analysis.orphanSkills.length + analysis.emptySkills.length}</div></div>
+              <div class="bg-slate-50 border border-slate-200 rounded-lg p-3"><div class="text-[11px] text-slate-500">Partly covered</div><div class="font-mono text-xl font-bold text-slate-900 mt-0.5">${analysis.partialSkills.length}</div></div>
             </div>
-            ${gapCount ? `
-              <details class="text-xs">
-                <summary class="cursor-pointer font-medium text-amber-800 py-1">Content gaps: mapped question ids missing from the bank</summary>
-                <div class="font-mono text-slate-600 mt-2 leading-relaxed">${analysis.missingIds.map(esc).join(', ')}</div>
-              </details>` : ''}
-          </div>`;
+            ${gapCount ? `<details class="text-xs"><summary class="cursor-pointer font-medium text-amber-800 py-1">Mapped questions missing from the bank</summary><div class="font-mono text-slate-600 mt-2 leading-relaxed">${analysis.missingIds.map(esc).join(', ')}</div></details>` : '<p class="text-xs text-emerald-800">Every mapped question is in the bank.</p>'}
+          </section>`;
         const sum = (g, f) => g.rows.reduce((acc, r) => acc + f(r), 0);
         const groupHtml = (g) => {
           const total = sum(g, (r) => r.total), ready = sum(g, (r) => r.proficient);
@@ -8961,7 +9604,7 @@
               ${part ? `<h4 class="text-[11px] font-semibold uppercase tracking-wide text-slate-500 pt-1">${esc(part)}</h4>` : ''}
               ${groups.filter((g) => g.part === part).map(groupHtml).join('')}`).join('')}
           </div>`;
-        return { summary, list };
+        return { summary, list, contentCheck, readiness };
       }
 
       function renderReadinessView(root) {
@@ -8970,8 +9613,6 @@
           mod: m,
           readiness: Scheduler.computeModuleReadiness(m, appState.nodes, appState.reviewMap, nowMs, appState.attemptLogs),
         }));
-        const faultMap = Scheduler.computeFaultSkillMap(appState.attemptLogs, nowMs);
-        const sortedFaults = Object.entries(faultMap).sort((x, y) => y[1] - x[1]);
         const tab = appState.ui.readinessTab;
         const skillParts = skillMapParts();
 
@@ -8982,79 +9623,148 @@
             <div class="text-[11px] font-mono text-slate-500">${sub}</div>
           </div>`;
 
-        const overviewHtml = modStats.map(({ mod, readiness }) => `
-          <section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
-            <div class="flex items-start justify-between gap-3">
-              <div class="min-w-0">
-                <div class="text-xs font-mono font-semibold text-blue-700">${esc(mod.moduleCode)}</div>
-                <h2 class="font-display text-base font-semibold text-slate-900">${esc(mod.title)}</h2>
+        const overviewHtml = (() => {
+          const map = appState.skillMap;
+          const logsN = appState.masteryLogs.length;
+          const card = (inner) => `<section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">${inner}</section>`;
+          let start;
+          if (!logsN) {
+            start = card(`<h2 class="font-display text-base font-semibold text-slate-900">Where to start</h2>
+              <p class="text-sm text-slate-600">Answer a few questions and this page will point you at your weakest topic.</p>
+              <button type="button" data-go-study class="px-4 py-2 text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">Start studying</button>`);
+          } else {
+            const ranked = map ? Weakness.topicStats(appState.masteryLogs, map).filter((t) => t.ranked) : [];
+            const weakest = ranked[0];
+            const titles = Object.fromEntries([...appState.nodes, ...appState.composerNodes].map((n) => [n.id, n.metadata?.title]));
+            const toFixN = map ? Weakness.unresolvedMisses(appState.masteryLogs, (id) => titles[id], map, 99).length : 0;
+            start = card(`<h2 class="font-display text-base font-semibold text-slate-900">Where to start</h2>
+              ${weakest ? `<div class="flex items-start justify-between gap-3">
+                  <div class="min-w-0"><div class="text-xs text-slate-500">Your weakest topic</div><div class="text-sm font-semibold text-slate-900">${esc(weakest.name)}</div><div class="text-[11px] text-slate-500">${weakest.missed} of your last ${weakest.window} answers missed</div></div>
+                  <button type="button" data-weak-drill="${esc(weakest.id)}" class="shrink-0 px-3 py-1.5 text-xs font-medium bg-slate-900 text-white rounded-md hover:bg-slate-800">Drill</button>
+                </div>` : '<p class="text-sm text-slate-600">Keep going: topics are ranked once you have answered two questions in them.</p>'}
+              ${toFixN ? `<div class="flex items-center justify-between gap-3 pt-3 border-t border-slate-100"><span class="text-sm text-slate-800">${toFixN} question${toFixN === 1 ? '' : 's'} still to fix</span><button type="button" data-seg-jump="weak" class="shrink-0 px-3 py-1.5 text-xs font-medium border border-slate-300 bg-white rounded-md text-slate-800 hover:bg-slate-50">See weak spots</button></div>` : ''}`);
+          }
+          const modCards = modStats.map(({ mod, readiness }) => `
+            <section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
+              <div class="flex items-start justify-between gap-3">
+                <div class="min-w-0">
+                  ${appState.modules.length > 1 ? `<div class="text-xs font-mono font-semibold text-blue-700">${esc(mod.moduleCode)}</div>` : ''}
+                  <h2 class="font-display text-base font-semibold text-slate-900">${esc(mod.title)}</h2>
+                </div>
+                <div class="text-right shrink-0">
+                  ${readiness.daysToExam !== null ? `
+                    <div class="font-mono text-lg font-bold text-slate-900">${Math.round(readiness.daysToExam)}d</div>
+                    <div class="text-[11px] text-slate-500">to finals</div>
+                  ` : `
+                    <button type="button" data-goto-settings class="text-xs font-medium text-blue-700 hover:underline">Set exam date</button>
+                    <div class="text-[11px] text-slate-500">so the app can prioritise</div>
+                  `}
+                </div>
               </div>
-              <div class="text-right font-mono shrink-0">
-                ${readiness.daysToExam !== null ? `
-                  <div class="text-lg font-bold text-slate-900">${Math.round(readiness.daysToExam)}d</div>
-                  <div class="text-[11px] text-slate-500">to finals</div>
-                ` : `
-                  <button type="button" data-goto-settings class="text-xs font-mono font-medium text-blue-700 hover:underline">Set exam date</button>
-                  <div class="text-[11px] text-slate-500">urgency = 1</div>
-                `}
+              <div class="grid grid-cols-2 gap-2">
+                ${skillParts.readiness !== null ? tile('Exam readiness', `${Math.round(skillParts.readiness * 100)}%`, 'weighted by marks', 'text-emerald-700') : ''}
+                ${tile('Questions tried', `${Math.round(readiness.attemptedPct)}%`, `${readiness.attemptedCount} of ${readiness.totalNodes}`)}
+                ${tile('Answered well', `${Math.round(readiness.proficientPct)}%`, `${readiness.proficientCount} of ${readiness.totalNodes}`, 'text-emerald-700')}
+                ${tile('Not tried yet', `${readiness.neverAttemptedCount}`, 'questions')}
               </div>
-            </div>
-            <div class="grid grid-cols-2 gap-2">
-              ${tile('Nodes attempted', `${Math.round(readiness.attemptedPct)}%`, `${readiness.attemptedCount} / ${readiness.totalNodes}`)}
-              ${tile('Last attempt ≥ 0.7', `${Math.round(readiness.proficientPct)}%`, `${readiness.proficientCount} / ${readiness.totalNodes} proficient`, 'text-emerald-700')}
-              ${tile('Never attempted', `${readiness.neverAttemptedCount}`, `of ${readiness.totalNodes} nodes`)}
-              ${tile('Retention projection', `${Math.round(readiness.projectedRetention * 100)}%`, `target ${Math.round((mod.targetRetention || 0.9) * 100)}% (model est.)`)}
-            </div>
-          </section>
-        `).join('') + `<section class="bg-white border border-slate-200 rounded-xl p-4">${skillParts.summary}</section>`;
+              <details class="text-xs text-slate-600">
+                <summary class="cursor-pointer min-h-[28px] flex items-center font-medium text-slate-700">About these numbers</summary>
+                <p class="mt-1 leading-relaxed">“Answered well” means your most recent attempt on a question scored 70% or more. “Exam readiness” counts each skill in proportion to its marks. A forgetting-curve model estimates you would recall about ${Math.round(readiness.projectedRetention * 100)}% of what you have seen today (the target is ${Math.round((mod.targetRetention || 0.9) * 100)}%); treat that as a rough guide.</p>
+              </details>
+            </section>`).join('');
+          return start + modCards + `<section class="bg-white border border-slate-200 rounded-xl p-4">${skillParts.summary}</section>`;
+        })();
 
         const chaptersHtml = modStats.map(({ mod, readiness }) => `
           <section class="bg-white border border-slate-200 rounded-xl p-4">
-            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">${esc(mod.moduleCode)} · attempted · last score ≥ 0.7 · never attempted</div>
+            <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">How much of each chapter you have tried and answered well</div>
             <div class="divide-y divide-slate-100">
               ${readiness.weeks.map((w) => `
                 <div class="py-2.5 text-xs">
                   <div class="min-w-0">
                     <span class="font-mono font-semibold text-slate-700">Ch ${w.weekNum}</span>
                     <span class="text-slate-900 font-medium ml-1.5">${esc(w.title)}</span>
-                    <span class="text-slate-400 font-mono ml-1">(×${w.examWeight})</span>
+                    ${w.examWeight !== 1 ? `<span class="text-slate-400 ml-1">(exam weight ×${w.examWeight})</span>` : ''}
                   </div>
                   ${w.count ? `
                     <div class="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 font-mono">
-                      <span class="text-slate-900 font-semibold">${Math.round(w.attemptedPct)}% attempted</span>
-                      <span class="text-emerald-700 font-semibold">${Math.round(w.proficientPct)}% ≥0.7</span>
-                      <span class="text-slate-600">${w.neverAttemptedCount} never</span>
-                      <span class="text-slate-400">${Math.round(w.projectedRetention * 100)}% est.</span>
+                      <span class="text-slate-900 font-semibold">${Math.round(w.attemptedPct)}% tried</span>
+                      <span class="text-emerald-700 font-semibold">${Math.round(w.proficientPct)}% answered well</span>
+                      <span class="text-slate-600">${w.neverAttemptedCount} not tried</span>
                     </div>
-                  ` : `<div class="mt-1 font-mono text-slate-400">0 nodes</div>`}
+                  ` : `<div class="mt-1 text-slate-400">No questions yet</div>`}
                 </div>`).join('')}
             </div>
           </section>
         `).join('');
 
-        const weakHtml = `
-          <section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">
-            <div>
-              <h2 class="font-display text-base font-semibold text-slate-900">Fault-isolation weak skills</h2>
-              <p class="text-xs text-slate-500">Filled in automatically when critical or sub-skill steps are missed in synthesis rubrics.</p>
-            </div>
-            ${sortedFaults.length ? `
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                ${sortedFaults.map(([tag, score]) => `
-                  <div class="border border-rose-200 bg-rose-50/50 rounded-lg p-3 flex items-center justify-between gap-3">
-                    <div class="min-w-0">
-                      <div class="font-mono text-xs font-semibold text-rose-900 truncate">${esc(tag)}</div>
-                      <div class="text-[11px] text-rose-700">Priority boost: +${score.toFixed(2)}</div>
-                    </div>
-                    <button type="button" data-remediate-tag="${esc(tag)}" class="px-3 py-1.5 text-xs font-medium bg-white border border-rose-300 text-rose-800 rounded-md hover:bg-rose-100 shrink-0">Drill</button>
+        const weakHtml = (() => {
+          const map = appState.skillMap;
+          const card = (inner) => `<section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">${inner}</section>`;
+          if (!appState.masteryLogs.length) {
+            return card(`<h2 class="font-display text-base font-semibold text-slate-900">Nothing to diagnose yet</h2>
+              <p class="text-sm text-slate-600">Answer a few questions and this page will show which topics are losing you marks, the questions still to fix, and the slips that keep coming back.</p>
+              <button type="button" data-go-study class="px-4 py-2 text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">Start studying</button>`);
+          }
+          if (!map) return card('<p class="text-sm text-slate-600">The skill map did not load, so topics cannot be ranked. Reload the page to try again.</p>');
+          const topics = Weakness.topicStats(appState.masteryLogs, map);
+          const ranked = topics.filter((t) => t.ranked);
+          const shownTopics = appState.ui.weakAll ? ranked : ranked.slice(0, 5);
+          const chunkName = (id) => map.chunks?.find((c) => c.id === id)?.name || '';
+          const titles = Object.fromEntries([...appState.nodes, ...appState.composerNodes].map((n) => [n.id, n.metadata?.title]));
+          const misses = Weakness.unresolvedMisses(appState.masteryLogs, (id) => titles[id], map, 8);
+          const slips = Weakness.slipCounts(appState.attemptLogs, map);
+          const now = Date.now();
+          const barTone = (mean) => (mean < 0.5 ? 'bg-rose-500' : mean < 0.7 ? 'bg-amber-500' : 'bg-emerald-500');
+          const drillBtn = (chunk, label = 'Drill') => `<button type="button" data-weak-drill="${esc(chunk)}" class="shrink-0 px-3 py-1.5 text-xs font-medium bg-white border border-rose-300 text-rose-800 rounded-md hover:bg-rose-50">${label}</button>`;
+
+          const topicsHtml = shownTopics.length ? shownTopics.map((t) => {
+            const pctMean = Math.round(t.mean * 100);
+            return `
+              <div class="border border-slate-200 rounded-lg p-3 space-y-2" data-weak-topic="${esc(t.id)}" data-rank="${t.rankScore.toFixed(3)}">
+                <div class="flex items-start justify-between gap-2">
+                  <div class="min-w-0">
+                    <div class="text-sm font-semibold text-slate-900">${esc(t.name)}</div>
+                    <div class="text-[11px] text-slate-500">${esc(t.part)} · ${t.missed} of your last ${t.window} answers missed</div>
                   </div>
-                `).join('')}
-              </div>
-            ` : '<p class="text-sm text-slate-500 py-2">No missed-skill fault flags yet. Attempt an uncued synthesis problem to test diagnostic fault isolation.</p>'}
-          </section>`;
+                  ${drillBtn(t.id)}
+                </div>
+                <div class="flex items-center gap-2">
+                  <div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden" role="img" aria-label="Average score ${pctMean}%"><div class="h-full ${barTone(t.mean)}" style="width:${Math.max(3, pctMean)}%"></div></div>
+                  <span class="text-[11px] font-mono text-slate-600 w-9 text-right">${pctMean}%</span>
+                </div>
+                ${t.weakSkills.length ? `<div class="text-[11px] text-slate-600">Most misses: ${t.weakSkills.map((k) => `${esc(k.name)} ×${k.misses}`).join(' · ')}</div>` : ''}
+              </div>`;
+          }).join('') : '<p class="text-sm text-slate-500">Topics are ranked once you have answered at least two questions in them.</p>';
+          const moreBtn = ranked.length > 5 ? `<button type="button" id="btnWeakShowAll" class="text-xs font-medium text-blue-700 hover:underline">${appState.ui.weakAll ? 'Show the weakest 5' : `Show all ${ranked.length} topics`}</button>` : '';
+
+          const missesHtml = misses.length ? `<ul class="divide-y divide-slate-100">${misses.map((m) => `
+              <li class="flex items-center gap-3 py-2" data-weak-miss="${esc(m.nodeId)}">
+                <div class="min-w-0 flex-1">
+                  <div class="text-sm font-medium text-slate-900 truncate">${esc(m.title)}</div>
+                  <div class="text-[11px] text-slate-500">${esc(chunkName(m.chunk))}${m.chunk ? ' · ' : ''}${Weakness.timeAgo(m.timestamp, now)} · ${Math.round(m.grade * 100)}%</div>
+                </div>
+                <button type="button" data-weak-redo="${esc(m.nodeId)}" class="shrink-0 px-3 py-1.5 text-xs font-medium bg-slate-900 text-white rounded-md hover:bg-slate-800">Redo</button>
+              </li>`).join('')}</ul>` : '<p class="text-sm text-emerald-800">Nothing outstanding: every question you missed, you have since got right.</p>';
+
+          const slipsHtml = slips.length ? `<ul class="divide-y divide-slate-100">${slips.map((x) => `
+              <li class="flex items-center gap-3 py-2" data-weak-slip="${esc(x.key)}">
+                <div class="min-w-0 flex-1">
+                  <div class="text-sm font-medium text-slate-900">${esc(x.kind === 'skill' ? 'Missed step: ' + x.label : x.label)} <span class="font-mono text-rose-700">×${x.count}</span></div>
+                  ${x.topChunk ? `<div class="text-[11px] text-slate-500">mostly in ${esc(chunkName(x.topChunk))}</div>` : ''}
+                </div>
+                ${x.kind === 'skill' ? `<button type="button" data-remediate-tag="${esc(x.key.slice(6))}" class="shrink-0 px-3 py-1.5 text-xs font-medium bg-white border border-rose-300 text-rose-800 rounded-md hover:bg-rose-50">Drill</button>` : (x.topChunk ? drillBtn(x.topChunk, 'Drill topic') : '')}
+              </li>`).join('')}</ul>` : '<p class="text-sm text-slate-500">No pattern yet. Each wrong answer is tagged with the kind of slip, and one shows up here once it happens twice.</p>';
+
+          return `
+            ${card(`<div><h2 class="font-display text-base font-semibold text-slate-900">Weakest topics</h2><p class="text-xs text-slate-500">Weakest first, by your recent scores. Topics with only a few answers are held closer to average.</p></div>${topicsHtml}${moreBtn}`)}
+            ${card(`<div><h2 class="font-display text-base font-semibold text-slate-900">Still to fix</h2><p class="text-xs text-slate-500">Questions you missed and have not since got right.</p></div>${missesHtml}`)}
+            ${card(`<div><h2 class="font-display text-base font-semibold text-slate-900">Recurring slips</h2><p class="text-xs text-slate-500">The same kind of mistake, twice or more, in your last answers.</p></div>${slipsHtml}`)}`;
+        })();
 
         const body = { overview: overviewHtml, chapters: chaptersHtml, skills: `<section class="space-y-3">${skillParts.summary}${skillParts.list}</section>`, weak: weakHtml }[tab] || overviewHtml;
-        const tabs = [['overview', 'Overview'], ['chapters', 'Chapters'], ['skills', 'Skills'], ['weak', 'Weak spots']];
+        const toFix = appState.skillMap ? Weakness.unresolvedMisses(appState.masteryLogs, () => '', appState.skillMap, 99).length : 0;
+        const tabs = [['overview', 'Overview'], ['chapters', 'Chapters'], ['skills', 'Skills'], ['weak', toFix ? `Weak spots · ${toFix}` : 'Weak spots']];
 
         root.innerHTML = `
           <div class="view">
@@ -9091,13 +9801,13 @@
           });
         });
         $$('[data-drill-chunk]', root).forEach((btn) => {
-          btn.addEventListener('click', () => {
-            const id = btn.dataset.drillChunk;
-            appState.route = 'study';
-            appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null, chunkId: id, chunkNodeIds: Content.chunkNodeIds(appState.skillMap, id) };
-            loadNextQuestion();
-          });
+          btn.addEventListener('click', () => drillTopic(btn.dataset.drillChunk));
         });
+        $$('[data-weak-drill]', root).forEach((btn) => btn.addEventListener('click', () => drillTopic(btn.dataset.weakDrill)));
+        $$('[data-seg-jump]', root).forEach((btn) => btn.addEventListener('click', () => { appState.ui.readinessTab = btn.dataset.segJump; render(); }));
+        $$('[data-weak-redo]', root).forEach((btn) => btn.addEventListener('click', () => redoNode(btn.dataset.weakRedo)));
+        $('#btnWeakShowAll', root)?.addEventListener('click', () => { appState.ui.weakAll = !appState.ui.weakAll; render(); });
+        $('[data-go-study]', root)?.addEventListener('click', () => { appState.route = 'study'; render(); });
         $$('[data-remediate-tag]', root).forEach((btn) => {
           btn.addEventListener('click', () => {
             appState.route = 'study';
@@ -9130,7 +9840,7 @@
         root.innerHTML = `
           <div class="view">
             <div class="shrink-0 flex items-center justify-between gap-2">
-              <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900">Question Bank <span class="font-mono text-xs font-normal text-slate-500">${appState.nodes.length} nodes</span></h1>
+              <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900">Question Bank <span class="font-mono text-xs font-normal text-slate-500">${appState.nodes.length} questions</span></h1>
               <div class="flex items-center gap-1.5 shrink-0">
                 <button type="button" id="btnBankOpenExplorer" class="px-3 py-1.5 text-xs font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-800">3D Explorer</button>
                 <button type="button" id="btnNewNode" class="px-3 py-1.5 text-xs font-medium bg-slate-900 text-white hover:bg-slate-800 rounded-lg">+ New</button>
@@ -9145,16 +9855,16 @@
                   ${appState.modules.map((m) => `<option value="${esc(m.moduleCode)}" ${f.moduleCode === m.moduleCode ? 'selected' : ''}>${esc(m.moduleCode)}</option>`).join('')}
                 </select>
                 <select id="bankTierSel" aria-label="Tier" class="flex-1 min-w-0 text-sm border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
-                  <option value="ALL" ${f.tier === 'ALL' ? 'selected' : ''}>All Tiers</option>
-                  <option value="atomic" ${f.tier === 'atomic' ? 'selected' : ''}>Atomic</option>
-                  <option value="synthesis" ${f.tier === 'synthesis' ? 'selected' : ''}>Synthesis</option>
+                  <option value="ALL" ${f.tier === 'ALL' ? 'selected' : ''}>All types</option>
+                  <option value="atomic" ${f.tier === 'atomic' ? 'selected' : ''}>Quick drill</option>
+                  <option value="synthesis" ${f.tier === 'synthesis' ? 'selected' : ''}>Multi-step</option>
                 </select>
                 <label class="inline-flex items-center gap-1.5 text-xs text-slate-700 cursor-pointer shrink-0">
                   <input type="checkbox" id="bankShowGolden" ${f.includeGolden ? 'checked' : ''} class="accent-blue-700" />
                   <span>Golden (${goldenCount})</span>
                 </label>
               </div>
-              <div class="text-[11px] font-mono text-slate-500">Showing ${shown.length} of ${filtered.length} matching nodes</div>
+              <div class="text-[11px] font-mono text-slate-500">Showing ${shown.length} of ${filtered.length} matching questions</div>
             </div>
 
             <div class="view-scroll bg-white border border-slate-200 rounded-xl divide-y divide-slate-100">
@@ -9163,7 +9873,7 @@
                   <div class="min-w-0">
                     <div class="text-sm font-medium text-slate-900 sm:truncate">${esc(n.metadata.title)}</div>
                     <div class="text-xs text-slate-500 mt-0.5">
-                      <span class="font-mono">${esc(n.moduleCode)}</span> · W${n.metadata.week} · ${n.tier} · ${n.variants.length} variant(s) · ${esc(n.metadata.primaryTheme)}
+                      ${esc((appState.skillMap && appState.skillMap.chunks?.find((c) => c.id === Weakness.chunksOf(appState.skillMap, n.id)[0])?.name) || n.metadata.primaryTheme)} · ${n.tier === 'synthesis' ? 'Multi-step' : 'Quick drill'} · ${n.variants.length} version${n.variants.length === 1 ? '' : 's'}
                     </div>
                   </div>
                   <div class="flex items-center gap-2 shrink-0">
@@ -9177,7 +9887,7 @@
                 <div class="p-3 text-center">
                   <button type="button" id="bankShowMore" class="px-4 py-2 text-sm font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-800">Show ${Math.min(60, filtered.length - limit)} more</button>
                 </div>` : ''}
-              ${filtered.length === 0 ? '<div class="p-6 text-center text-sm text-slate-500">No nodes match these filters.</div>' : ''}
+              ${filtered.length === 0 ? '<div class="p-6 text-center text-sm text-slate-500">No questions match these filters.</div>' : ''}
             </div>
           </div>
         `;
@@ -9365,6 +10075,7 @@
             </section>
         `;
         const secData = `
+            ${skillMapParts().contentCheck}
             <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-4">
               <h2 class="font-display text-base font-semibold text-slate-900">Full JSON Bundle Export &amp; Import</h2>
               <div class="flex flex-wrap items-center gap-3">
@@ -9513,7 +10224,7 @@
           a.click();
           a.remove();
           URL.revokeObjectURL(url);
-          showToast(`Exported ${bundle.questionNodes.length} nodes and ${bundle.attemptLogs.length} attempts.`);
+          showToast(`Exported ${bundle.questionNodes.length} questions and ${bundle.attemptLogs.length} attempts.`);
         });
 
         $('#bundleFileInput', root)?.addEventListener('change', async (e) => {
@@ -9525,7 +10236,7 @@
             const mode = $('#importModeSel', root).value;
             const stats = await DB.importBundle(parsed, mode);
             await refreshStore();
-            showToast(`Imported (${mode}): ${stats.questionNodes} nodes, ${stats.reviewStates} states, ${stats.attemptLogs} logs.`);
+            showToast(`Imported (${mode}): ${stats.questionNodes} questions, ${stats.reviewStates} review records, ${stats.attemptLogs} attempts.`);
             render();
           } catch (err) {
             showToast('Import failed: ' + err.message, true);
@@ -9813,14 +10524,6 @@
           if (appState.content.swept.reviewStates || appState.content.swept.attemptLogs) console.info('[Content] removed orphaned progress', appState.content.swept);
           appState.content.skillMap = await Content.loadSkillMap();
           appState.skillMap = appState.content.skillMap.map;
-          try {
-            const prefs = await db.settings.get('skillMastery');
-            appState.masteryPrefs = { removed: prefs?.removed || {}, resetAt: prefs?.resetAt || {} };
-          } catch (err) { console.warn('[Mastery] preferences not loaded:', err.message); }
-          try {
-            const mh = await db.settings.get('myHooks');
-            appState.myHooks = mh?.hooks || {};
-          } catch (err) { console.warn('[Hooks] not loaded:', err.message); }
           await refreshStore();
           const bankStatus = appState.content.bank;
           if (bankStatus.state === 'unavailable') showToast('Bundled question bank not loaded: ' + bankStatus.error, true);
@@ -9882,6 +10585,8 @@
       Content,
       Scheduler,
       Mastery,
+      Review,
+      Weakness,
       IsomerEngine,
       LF,
       Evaluators,

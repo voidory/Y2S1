@@ -70,6 +70,18 @@
    "summary": "AAS components, lamps, atomisers, Boltzmann populations, line widths, ICP"
   },
   {
+   "id": "x-calc",
+   "part": "Extraction",
+   "name": "Extraction calculations: D at a pH, fraction left, number of portions",
+   "summary": "Acid and base D(pH), fraction left when the solute starts in either phase, repeated extractions"
+  },
+  {
+   "id": "x-concepts",
+   "part": "Extraction",
+   "name": "Extraction concepts and conventions",
+   "summary": "Which pH leaves more behind, several small portions, K vs D, which fraction formula"
+  },
+  {
    "id": "g-gc",
    "part": "GC and HPLC",
    "name": "GC: columns, programming, injection, carrier gas",
@@ -104,7 +116,7 @@
    "ids": [
     "bk-m11-t1-meansd"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-t1-meansd"
    ],
@@ -125,7 +137,7 @@
    "ids": [
     "bk-m11-t1-sem"
    ],
-   "weight": 0.0137,
+   "weight": 0.01083,
    "nodes": [
     "bk-m11-t1-sem"
    ],
@@ -146,7 +158,7 @@
    "ids": [
     "bk-m11-t1-qtest"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-t1-qtest"
    ],
@@ -167,7 +179,7 @@
    "ids": [
     "bk-m11-t1-ci"
    ],
-   "weight": 0.02283,
+   "weight": 0.01805,
    "nodes": [
     "bk-m11-t1-ci"
    ],
@@ -188,7 +200,7 @@
    "ids": [
     "bk-m11-t1-ttest2"
    ],
-   "weight": 0.0274,
+   "weight": 0.02166,
    "nodes": [
     "bk-m11-t1-ttest2"
    ],
@@ -210,7 +222,7 @@
    "ids": [
     "bk-m11-t1-paired"
    ],
-   "weight": 0.0274,
+   "weight": 0.02166,
    "nodes": [
     "bk-m11-t1-paired"
    ],
@@ -231,7 +243,7 @@
    "ids": [
     "bk-m11-t1-errprop"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-t1-errprop"
    ],
@@ -252,7 +264,7 @@
    "ids": [
     "bk-m11-t1-concepts"
    ],
-   "weight": 0.00457,
+   "weight": 0.00361,
    "nodes": [
     "bk-m11-t1-concepts"
    ],
@@ -273,7 +285,7 @@
    "ids": [
     "bk-m11-q-ppm"
    ],
-   "weight": 0.00913,
+   "weight": 0.00722,
    "nodes": [
     "bk-m11-q-ppm"
    ],
@@ -294,7 +306,7 @@
    "ids": [
     "bk-m11-q-dilution"
    ],
-   "weight": 0.0137,
+   "weight": 0.01083,
    "nodes": [
     "bk-m11-q-dilution"
    ],
@@ -315,11 +327,55 @@
    "ids": [
     "bk-m11-q-kjeldahl"
    ],
-   "weight": 0.02283,
+   "weight": 0.01805,
    "nodes": [
     "bk-m11-q-kjeldahl"
    ],
    "chunk": "t1-quant"
+  },
+  {
+   "id": "m11.t1.ttestfinal",
+   "ch": 1,
+   "name": "Paired and pooled t-tests at 99% and 99.9%, reading the booklet table",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 5,
+   "basis": "notes",
+   "ref": "Topic 1 · booklet t table; final-style",
+   "tags": [
+    "t-test",
+    "booklet-table"
+   ],
+   "ids": [
+    "bk-m11-t1-ttest-final"
+   ],
+   "weight": 0.01805,
+   "nodes": [
+    "bk-m11-t1-ttest-final"
+   ],
+   "chunk": "t1-stats"
+  },
+  {
+   "id": "m11.t1.levels",
+   "ch": 1,
+   "name": "Highest confidence level at which a t result is still significant",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "Topic 1 · booklet t table; final-style",
+   "tags": [
+    "t-test",
+    "confidence-level"
+   ],
+   "ids": [
+    "bk-m11-t1-levels"
+   ],
+   "weight": 0.00722,
+   "nodes": [
+    "bk-m11-t1-levels"
+   ],
+   "chunk": "t1-stats"
   },
   {
    "id": "m11.e.ionic",
@@ -336,7 +392,7 @@
    "ids": [
     "bk-m11-e-ionic"
    ],
-   "weight": 0.00913,
+   "weight": 0.00722,
    "nodes": [
     "bk-m11-e-ionic"
    ],
@@ -357,7 +413,7 @@
    "ids": [
     "bk-m11-e-gamma"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-e-gamma"
    ],
@@ -378,7 +434,7 @@
    "ids": [
     "bk-m11-e-half"
    ],
-   "weight": 0.02283,
+   "weight": 0.01805,
    "nodes": [
     "bk-m11-e-half"
    ],
@@ -400,7 +456,7 @@
    "ids": [
     "bk-m11-e-fe"
    ],
-   "weight": 0.03196,
+   "weight": 0.02527,
    "nodes": [
     "bk-m11-e-fe"
    ],
@@ -421,7 +477,7 @@
    "ids": [
     "bk-m11-e-cell"
    ],
-   "weight": 0.03653,
+   "weight": 0.02888,
    "nodes": [
     "bk-m11-e-cell"
    ],
@@ -442,7 +498,7 @@
    "ids": [
     "bk-m11-e-ksp"
    ],
-   "weight": 0.0274,
+   "weight": 0.02166,
    "nodes": [
     "bk-m11-e-ksp"
    ],
@@ -463,7 +519,7 @@
    "ids": [
     "bk-m11-e-thermo"
    ],
-   "weight": 0.0137,
+   "weight": 0.01083,
    "nodes": [
     "bk-m11-e-thermo"
    ],
@@ -484,7 +540,7 @@
    "ids": [
     "bk-m11-e-concepts"
    ],
-   "weight": 0.00457,
+   "weight": 0.00361,
    "nodes": [
     "bk-m11-e-concepts"
    ],
@@ -505,7 +561,7 @@
    "ids": [
     "bk-m11-p-slope"
    ],
-   "weight": 0.0137,
+   "weight": 0.01083,
    "nodes": [
     "bk-m11-p-slope"
    ],
@@ -526,7 +582,7 @@
    "ids": [
     "bk-m11-p-cal"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-p-cal"
    ],
@@ -547,7 +603,7 @@
    "ids": [
     "bk-m11-p-sel"
    ],
-   "weight": 0.03653,
+   "weight": 0.02888,
    "nodes": [
     "bk-m11-p-sel"
    ],
@@ -568,7 +624,7 @@
    "ids": [
     "bk-m11-p-intf"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-p-intf"
    ],
@@ -589,7 +645,7 @@
    "ids": [
     "bk-m11-p-ag2s"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-p-ag2s"
    ],
@@ -610,7 +666,7 @@
    "ids": [
     "bk-m11-p-gas"
    ],
-   "weight": 0.00913,
+   "weight": 0.00722,
    "nodes": [
     "bk-m11-p-gas"
    ],
@@ -631,7 +687,7 @@
    "ids": [
     "bk-m11-p-facts"
    ],
-   "weight": 0.0137,
+   "weight": 0.01083,
    "nodes": [
     "bk-m11-p-facts"
    ],
@@ -652,7 +708,7 @@
    "ids": [
     "bk-m11-p-concepts"
    ],
-   "weight": 0.00457,
+   "weight": 0.00361,
    "nodes": [
     "bk-m11-p-concepts"
    ],
@@ -673,7 +729,7 @@
    "ids": [
     "bk-m11-p-calib-order"
    ],
-   "weight": 0.00913,
+   "weight": 0.00722,
    "nodes": [
     "bk-m11-p-calib-order"
    ],
@@ -694,7 +750,7 @@
    "ids": [
     "bk-m11-p-written"
    ],
-   "weight": 0.02283,
+   "weight": 0.01805,
    "nodes": [
     "bk-m11-p-written"
    ],
@@ -715,7 +771,7 @@
    "ids": [
     "bk-m11-s-beer"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-s-beer"
    ],
@@ -736,7 +792,7 @@
    "ids": [
     "bk-m11-s-wave"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-s-wave"
    ],
@@ -757,7 +813,7 @@
    "ids": [
     "bk-m11-s-layout"
    ],
-   "weight": 0.00913,
+   "weight": 0.00722,
    "nodes": [
     "bk-m11-s-layout"
    ],
@@ -778,7 +834,7 @@
    "ids": [
     "bk-m11-s-fl-layout"
    ],
-   "weight": 0.00913,
+   "weight": 0.00722,
    "nodes": [
     "bk-m11-s-fl-layout"
    ],
@@ -799,7 +855,7 @@
    "ids": [
     "bk-m11-s-aas-layout"
    ],
-   "weight": 0.00913,
+   "weight": 0.00722,
    "nodes": [
     "bk-m11-s-aas-layout"
    ],
@@ -820,7 +876,7 @@
    "ids": [
     "bk-m11-s-fl-concepts"
    ],
-   "weight": 0.00457,
+   "weight": 0.00361,
    "nodes": [
     "bk-m11-s-fl-concepts"
    ],
@@ -841,7 +897,7 @@
    "ids": [
     "bk-m11-s-aas-concepts"
    ],
-   "weight": 0.00457,
+   "weight": 0.00361,
    "nodes": [
     "bk-m11-s-aas-concepts"
    ],
@@ -862,7 +918,7 @@
    "ids": [
     "bk-m11-s-written"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-s-written"
    ],
@@ -884,7 +940,7 @@
    "ids": [
     "bk-m11-s-jablonski"
    ],
-   "weight": 0.02283,
+   "weight": 0.01805,
    "nodes": [
     "bk-m11-s-jablonski"
    ],
@@ -906,7 +962,7 @@
    "ids": [
     "bk-m11-s-fl-explain"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-s-fl-explain"
    ],
@@ -928,7 +984,7 @@
    "ids": [
     "bk-m11-s-fl-cal"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-s-fl-cal"
    ],
@@ -950,7 +1006,7 @@
    "ids": [
     "bk-m11-s-aas-table"
    ],
-   "weight": 0.04566,
+   "weight": 0.0361,
    "nodes": [
     "bk-m11-s-aas-table"
    ],
@@ -972,7 +1028,7 @@
    "ids": [
     "bk-m11-s-boltz"
    ],
-   "weight": 0.02283,
+   "weight": 0.01805,
    "nodes": [
     "bk-m11-s-boltz"
    ],
@@ -994,7 +1050,7 @@
    "ids": [
     "bk-m11-s-aes-aas"
    ],
-   "weight": 0.02283,
+   "weight": 0.01805,
    "nodes": [
     "bk-m11-s-aes-aas"
    ],
@@ -1016,7 +1072,7 @@
    "ids": [
     "bk-m11-s-broad"
    ],
-   "weight": 0.02283,
+   "weight": 0.01805,
    "nodes": [
     "bk-m11-s-broad"
    ],
@@ -1038,7 +1094,7 @@
    "ids": [
     "bk-m11-s-icp"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-s-icp"
    ],
@@ -1060,7 +1116,7 @@
    "ids": [
     "bk-m11-g-detectors"
    ],
-   "weight": 0.0274,
+   "weight": 0.02166,
    "nodes": [
     "bk-m11-g-detectors"
    ],
@@ -1082,7 +1138,7 @@
    "ids": [
     "bk-m11-g-columns"
    ],
-   "weight": 0.02283,
+   "weight": 0.01805,
    "nodes": [
     "bk-m11-g-columns"
    ],
@@ -1104,7 +1160,7 @@
    "ids": [
     "bk-m11-g-tprog"
    ],
-   "weight": 0.0137,
+   "weight": 0.01083,
    "nodes": [
     "bk-m11-g-tprog"
    ],
@@ -1126,7 +1182,7 @@
    "ids": [
     "bk-m11-g-inject"
    ],
-   "weight": 0.00913,
+   "weight": 0.00722,
    "nodes": [
     "bk-m11-g-inject"
    ],
@@ -1148,7 +1204,7 @@
    "ids": [
     "bk-m11-g-carrier"
    ],
-   "weight": 0.00913,
+   "weight": 0.00722,
    "nodes": [
     "bk-m11-g-carrier"
    ],
@@ -1170,7 +1226,7 @@
    "ids": [
     "bk-m11-h-column"
    ],
-   "weight": 0.00913,
+   "weight": 0.00722,
    "nodes": [
     "bk-m11-h-column"
    ],
@@ -1192,7 +1248,7 @@
    "ids": [
     "bk-m11-h-mode"
    ],
-   "weight": 0.00913,
+   "weight": 0.00722,
    "nodes": [
     "bk-m11-h-mode"
    ],
@@ -1214,7 +1270,7 @@
    "ids": [
     "bk-m11-h-order"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-h-order"
    ],
@@ -1236,7 +1292,7 @@
    "ids": [
     "bk-m11-h-gradient"
    ],
-   "weight": 0.01826,
+   "weight": 0.01444,
    "nodes": [
     "bk-m11-h-gradient"
    ],
@@ -1258,7 +1314,7 @@
    "ids": [
     "bk-m11-h-detect"
    ],
-   "weight": 0.00913,
+   "weight": 0.00722,
    "nodes": [
     "bk-m11-h-detect"
    ],
@@ -1280,7 +1336,7 @@
    "ids": [
     "bk-m11-h-particles"
    ],
-   "weight": 0.0137,
+   "weight": 0.01083,
    "nodes": [
     "bk-m11-h-particles"
    ],
@@ -1303,7 +1359,7 @@
    "ids": [
     "bk-m11-g-ms"
    ],
-   "weight": 0.02283,
+   "weight": 0.01805,
    "nodes": [
     "bk-m11-g-ms"
    ],
@@ -1326,11 +1382,99 @@
    "ids": [
     "bk-m11-g-choose"
    ],
-   "weight": 0.00913,
+   "weight": 0.00722,
    "nodes": [
     "bk-m11-g-choose"
    ],
    "chunk": "g-hplc"
+  },
+  {
+   "id": "m11.x.acid",
+   "ch": 8,
+   "name": "Extraction chain for a weak acid: D at a pH, fraction left, number of portions",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 25,
+   "basis": "notes",
+   "ref": "Extraction slides; final Q3 style",
+   "tags": [
+    "extraction",
+    "distribution-coefficient"
+   ],
+   "ids": [
+    "bk-m11-x-acid"
+   ],
+   "weight": 0.09025,
+   "nodes": [
+    "bk-m11-x-acid"
+   ],
+   "chunk": "x-calc"
+  },
+  {
+   "id": "m11.x.base",
+   "ch": 8,
+   "name": "Extraction of a weak base: D at two pH values and the concentration in each phase",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 12,
+   "basis": "notes",
+   "ref": "Extraction slides; final Q3 style",
+   "tags": [
+    "extraction",
+    "weak-base"
+   ],
+   "ids": [
+    "bk-m11-x-base"
+   ],
+   "weight": 0.04332,
+   "nodes": [
+    "bk-m11-x-base"
+   ],
+   "chunk": "x-calc"
+  },
+  {
+   "id": "m11.x.repeat",
+   "ch": 8,
+   "name": "Fraction left after one large or several small extractions, and how many are needed",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 10,
+   "basis": "notes",
+   "ref": "Extraction slides; final Q3 style",
+   "tags": [
+    "extraction",
+    "multiple-extractions"
+   ],
+   "ids": [
+    "bk-m11-x-repeat"
+   ],
+   "weight": 0.0361,
+   "nodes": [
+    "bk-m11-x-repeat"
+   ],
+   "chunk": "x-calc"
+  },
+  {
+   "id": "m11.x.explain",
+   "ch": 8,
+   "name": "Extraction concepts: pH, several small portions, K vs D, which formula",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Extraction slides; final Q3 style",
+   "tags": [
+    "extraction",
+    "written"
+   ],
+   "ids": [
+    "bk-m11-x-explain"
+   ],
+   "weight": 0.01444,
+   "nodes": [
+    "bk-m11-x-explain"
+   ],
+   "chunk": "x-concepts"
   }
  ],
  "nodeSkills": {
@@ -1366,6 +1510,12 @@
   ],
   "bk-m11-q-kjeldahl": [
    "m11.q.kjeldahl"
+  ],
+  "bk-m11-t1-ttest-final": [
+   "m11.t1.ttestfinal"
+  ],
+  "bk-m11-t1-levels": [
+   "m11.t1.levels"
   ],
   "bk-m11-e-ionic": [
    "m11.e.ionic"
@@ -1507,6 +1657,18 @@
   ],
   "bk-m11-g-choose": [
    "m11.g.choose"
+  ],
+  "bk-m11-x-acid": [
+   "m11.x.acid"
+  ],
+  "bk-m11-x-base": [
+   "m11.x.base"
+  ],
+  "bk-m11-x-repeat": [
+   "m11.x.repeat"
+  ],
+  "bk-m11-x-explain": [
+   "m11.x.explain"
   ]
  }
 }

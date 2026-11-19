@@ -364,3 +364,96 @@ test('Jablonski labelling: the right names score full marks and a swapped pair d
   const r = Evaluators.evaluate(v, swapped, sc, {}, byId['bk-m11-s-jablonski']);
   assert.ok(r.normalizedGrade > 0 && r.normalizedGrade < 1);
 });
+
+test('golden: the final\u2019s Q3 chain (benzoic acid, K 4.1, Ka 6.3e-5, pH 5: D 0.562, 1.85e-2 M left, 87.7% extracted, n = 10, 250 mL)', () => {
+  const v = variantOf('bk-m11-x-acid', 'x-acid-chain');
+  const sc = scopeWith(v, { K: 4.1, pKa: 4.2, off: 0.8, Vo: 25, r: 1, Vw: 100, C0: 0.15, Ct: 0.00001 });
+  assert.equal(sc.Ka, 6.3e-5);
+  assert.equal(sc.pH, 5);
+  assert.ok(close(sc.D, 0.562, 0.005), `D ${sc.D}`);
+  assert.ok(close(sc.C1, 1.85e-2, 0.005), `C1 ${sc.C1}`);
+  assert.ok(close(sc.pct, 87.7, 0.002), `pct ${sc.pct}`);
+  assert.ok(close(sc.Cb, 2.45e-6, 0.01), `Cb at pH 9 ${sc.Cb}`);
+  assert.ok(close(sc.f2, 0.360, 0.005), `f2 ${sc.f2}`);
+  assert.equal(sc.n, 10);
+  assert.equal(sc.Vtot, 250);
+  assert.equal(sc.which, 'the lower pH');
+  // the three named slips are recognised
+  const wrongD = Evaluators.evaluate(v, { D: String(sc.K), C1: String(sc.C1), pct: String(sc.pct), Cb: String(sc.Cb), which: 'the lower pH', f2: String(sc.f2), n: String(sc.n), Vtot: String(sc.Vtot) }, sc, {}, byId['bk-m11-x-acid']);
+  assert.match(JSON.stringify(wrongD.fieldResults.D), /ionised/);
+  const noRound = Evaluators.evaluate(v, { D: String(sc.D), C1: String(sc.C1), pct: String(sc.pct), Cb: String(sc.Cb), which: 'the lower pH', f2: String(sc.f2), n: String(sc.nex), Vtot: String(sc.Vtot) }, sc, {}, byId['bk-m11-x-acid']);
+  assert.match(JSON.stringify(noRound.fieldResults.n), /Round up/);
+});
+
+test('golden: amine extraction from the lecture Q&A (K 3, Ka 1e-9: D 2.73 and 0.0058 M left at pH 10; D 0.273 and 0.0044 M in water at pH 8)', () => {
+  const sc = scopeWith(variantOf('bk-m11-x-base', 'x-base'), { K: 3, pKa: 9.0, Vo: 50, Vw: 100, C0: 0.010 });
+  assert.equal(sc.pHa, 10);
+  assert.equal(sc.pHb, 8);
+  assert.ok(close(sc.Da, 2.73, 0.005) && close(sc.Corg_a, 0.0058, 0.01), `${sc.Da} ${sc.Corg_a}`);
+  assert.ok(close(sc.Db, 0.273, 0.005) && close(sc.Caq_b, 0.0044, 0.01), `${sc.Db} ${sc.Caq_b}`);
+});
+
+test('golden: one large vs several small extractions (K 3, 100 mL water, 500 mL solvent: 6.25% vs 0.098% after 5 x 100 mL; 5 portions for 0.1%)', () => {
+  const sc = scopeWith(variantOf('bk-m11-x-repeat', 'x-repeat'), { Vaq: 100, Vtot: 500, ns: 5, K: 3, x: 0.1 });
+  assert.ok(close(sc.q1, 6.25, 0.002), `q1 ${sc.q1}`);
+  assert.ok(close(sc.q2, 0.0977, 0.005), `q2 ${sc.q2}`);
+  assert.equal(sc.nn, 5);
+  assert.equal(sc.which, 'several small extractions');
+});
+
+test('extraction drills: n is always a whole number between 1 and 25, and the fractions are sensible', () => {
+  const v = variantOf('bk-m11-x-acid', 'x-acid-chain');
+  for (let seed = 1; seed <= 300; seed++) {
+    const sc = Scheduler.instantiateVariant(v, seed * 7727).scope;
+    assert.ok(Number.isInteger(sc.n) && sc.n >= 1 && sc.n <= 25, `n = ${sc.n} (seed ${seed})`);
+    assert.ok(sc.D > 0.05 && sc.D < 5, `D = ${sc.D}`);
+    assert.ok(sc.fo > 0 && sc.fo < 1 && sc.f2 > 0 && sc.f2 < 1);
+    assert.ok(sc.C1 < sc.C0 && sc.Cb < sc.C1, 'more is left in the organic phase at the lower pH');
+  }
+});
+
+test('golden: pooled t from summary statistics (2025/26: 30.86 ± 3.63, N 20 v 8.68 ± 1.65, N 8; s_pooled 3.219, t 4.589, 26 df read at row 25 = 3.725)', () => {
+  const v = variantOf('bk-m11-t1-ttest-final', 't-pooled-999-stats');
+  const sc = scopeWith(v, { N1: 20, N2: 8, m2: 24.68, gap: 6.18, s1: 3.63, s2: 1.65 });
+  assert.equal(sc.m1, 30.86);
+  assert.equal(sc.df, 26);
+  assert.ok(close(sc.sp, 3.219, 0.002), `sp ${sc.sp}`);
+  assert.ok(close(sc.tc, 4.589, 0.002), `tc ${sc.tc}`);
+  assert.equal(sc.tt, 3.725);
+  assert.equal(sc.dec, 'different');
+  // reading the 95% column, or df + 1, is named
+  const slip = Evaluators.evaluate(v, { sp: String(sc.sp), tc: String(sc.tc), df: String(sc.df), tt: '2.060', dec: 'different' }, sc, {}, byId['bk-m11-t1-ttest-final']);
+  assert.match(JSON.stringify(slip.fieldResults.tt), /95% column/);
+});
+
+test('golden: paired t at 99.9% (2024/25: d = 3,3,3,3,2,2,2,1 gives t 9.03 against 5.408) and at 99% with 12 pairs read at row 10 (2019/20: t 1.2 against 3.169)', () => {
+  const v8 = variantOf('bk-m11-t1-ttest-final', 't-paired-999-n8');
+  const a = scopeWith(v8, { bias: 0, e1: 3, e2: 3, e3: 3, e4: 3, e5: 2, e6: 2, e7: 2, e8: 1, x1: 10, x2: 10, x3: 10, x4: 10, x5: 9, x6: 9, x7: 9, x8: 9 });
+  assert.ok(close(a.db, 2.375) && close(a.sd_, 0.744, 0.002), `${a.db} ${a.sd_}`);
+  assert.ok(close(a.tc, 9.03, 0.002), `tc ${a.tc}`);
+  assert.equal(a.tt, 5.408);
+  assert.equal(a.dec, 'different');
+  const v12 = variantOf('bk-m11-t1-ttest-final', 't-paired-99-n12');
+  const e = [-2, -1, 0, 0, -1, 0, 1, 1, 1, 2, 2, 3];
+  const sampled = { bias: 0 };
+  e.forEach((x, i) => { sampled['e' + (i + 1)] = x; sampled['x' + (i + 1)] = 50; });
+  const b = scopeWith(v12, sampled);
+  assert.ok(close(b.db, 0.5) && close(b.sd_, 1.446, 0.003), `${b.db} ${b.sd_}`);
+  assert.ok(close(b.tc, 1.198, 0.005), `tc ${b.tc}`);
+  assert.equal(b.tt, 3.169);
+  assert.equal(b.dec, 'same');
+});
+
+test('the booklet t table: next lower row for a df that is not listed, and the verdict-flip question', () => {
+  const lib = (name) => name;
+  const { levelsOk } = { levelsOk: true };
+  assert.ok(levelsOk && lib);
+  const lv = variantOf('bk-m11-t1-levels', 't-levels');
+  const sc = scopeWith(lv, { tc: 3.4, dfv: 7 });
+  assert.equal(sc.lvl, '98%');
+  assert.equal(scopeWith(lv, { tc: 0.6, dfv: 7 }).lvl, 'none of the levels');
+  assert.equal(scopeWith(lv, { tc: 7.5, dfv: 7 }).lvl, '99.9%');
+  // 99% and 99.9% are different answers for a drop-down, even though one is the start of the other
+  const r = Evaluators.evaluate(lv, { lvl: '99%' }, scopeWith(lv, { tc: 7.5, dfv: 7 }), {}, byId['bk-m11-t1-levels']);
+  assert.equal(r.normalizedGrade, 0);
+});

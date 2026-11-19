@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-19T19:28:27.933Z",
+ "exportedAt": "2026-11-19T19:43:10.067Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -4230,6 +4230,1638 @@
           "label": "Consistent with your own melamine mass, so the method earns part credit."
          }
         ]
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-t1-ttest-final",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Two-method t-tests at 99% and 99.9% (booklet look-up)",
+    "source": "Topic 1 · booklet t table; final-style",
+    "week": 1,
+    "primaryTheme": "Statistics",
+    "conceptTags": [
+     "t-test",
+     "paired",
+     "pooled",
+     "booklet-table"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 8,
+    "examStyle": "construct_4to6",
+    "family": "stats-test"
+   },
+   "variants": [
+    {
+     "variantId": "t-paired-999-n6",
+     "perspectiveLabel": "Paired, 99.9%, 6 pairs (5 marks)",
+     "marks": 5,
+     "stem": "24-hour SO₂ was measured at 6 different times by an existing instrument and by a new one (µg m⁻³):\n\n| # | Existing | New | d = existing − new |\n|---|---|---|---|\n| 1 | {{fix(x3,0)}} | {{fix(y3,1)}} | {{fix(d3,1)}} |\n| 2 | {{fix(x1,0)}} | {{fix(y1,1)}} | {{fix(d1,1)}} |\n| 3 | {{fix(x5,0)}} | {{fix(y5,1)}} | {{fix(d5,1)}} |\n| 4 | {{fix(x2,0)}} | {{fix(y2,1)}} | {{fix(d2,1)}} |\n| 5 | {{fix(x4,0)}} | {{fix(y4,1)}} | {{fix(d4,1)}} |\n| 6 | {{fix(x6,0)}} | {{fix(y6,1)}} | {{fix(d6,1)}} |\n\nUse an appropriate Student t-test to decide whether the two instruments give different results at the **99.9% confidence level**. Look the critical value up in the booklet's t table and enter the value you used.",
+     "hint": "The same samples are measured by both instruments, so this is a **paired** test: t = |d̄|√n / s_d with n − 1 degrees of freedom. The booklet's 99.9% column (df: t): 1: 636.619, 2: 31.598, 3: 12.924, 4: 8.610, 5: 6.869, 6: 5.959, 7: 5.408, 8: 5.041, 9: 4.781, 10: 4.587, 15: 4.073, 20: 3.850, 25: 3.725, 30: 3.646, 40: 3.551, 60: 3.460, 120: 3.373. If your df is not listed, take the next lower row.",
+     "explanation": "The d column is given, so work with it: d̄ and s_d, then t_calc = |d̄|√n / s_d. A paired test has n − 1 = 5 degrees of freedom, so the 99.9% critical value is **6.869**. If t_calc is larger than that the instruments differ significantly at 99.9%; if not, the data cannot show a difference at that level. A higher confidence level needs a larger t_calc, so a result that is significant at 95% can fail at 99.9%.",
+     "variables": {
+      "sampled": {
+       "x1": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x2": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x3": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x4": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x5": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x6": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "e1": {
+        "type": "range",
+        "min": -1.5,
+        "max": -1.1,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e2": {
+        "type": "range",
+        "min": -1,
+        "max": -0.6,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e3": {
+        "type": "range",
+        "min": -0.5,
+        "max": -0.1,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e4": {
+        "type": "range",
+        "min": 0,
+        "max": 0.4,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e5": {
+        "type": "range",
+        "min": 0.5,
+        "max": 0.9,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e6": {
+        "type": "range",
+        "min": 1,
+        "max": 1.4,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "bias": {
+        "type": "choice",
+        "options": [
+         0.3,
+         0.8,
+         2,
+         3,
+         4
+        ]
+       }
+      },
+      "derived": {
+       "d1": "round(bias + e1, 1)",
+       "d2": "round(bias + e2, 1)",
+       "d3": "round(bias + e3, 1)",
+       "d4": "round(bias + e4, 1)",
+       "d5": "round(bias + e5, 1)",
+       "d6": "round(bias + e6, 1)",
+       "y1": "x1 - d1",
+       "y2": "x2 - d2",
+       "y3": "x3 - d3",
+       "y4": "x4 - d4",
+       "y5": "x5 - d5",
+       "y6": "x6 - d6",
+       "db": "mean(d1, d2, d3, d4, d5, d6)",
+       "sd_": "sd(d1, d2, d3, d4, d5, d6)",
+       "tc": "abs(db) * sqrt(6) / sd_",
+       "tt": "6.869",
+       "dec": "tc > 6.869 ? 'different' : 'same'"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "db",
+        "label": "Mean difference d̄",
+        "unit": "µg m⁻³",
+        "numeric": true
+       },
+       {
+        "key": "sd_",
+        "label": "Standard deviation of d",
+        "unit": "µg m⁻³",
+        "numeric": true
+       },
+       {
+        "key": "tc",
+        "label": "t_calc",
+        "numeric": true
+       },
+       {
+        "key": "tt",
+        "label": "t_table (99.9%, 5 df)",
+        "numeric": true
+       },
+       {
+        "key": "dec",
+        "label": "Same or different at 99.9%?",
+        "options": [
+         "same",
+         "different"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "db": {
+        "type": "numeric",
+        "targetExpr": "db",
+        "relTol": 0.03,
+        "sig": 4,
+        "tolerance": 0.05,
+        "unit": "µg m⁻³"
+       },
+       "sd_": {
+        "type": "numeric",
+        "targetExpr": "sd_",
+        "relTol": 0.03,
+        "sig": 4,
+        "unit": "µg m⁻³"
+       },
+       "tc": {
+        "type": "numeric",
+        "targetExpr": "tc",
+        "relTol": 0.04,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You left out the √n: t = |d̄|√n / s_d.",
+          "expr": "abs(db) / sd_"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "abs(u_db) * sqrt(6) / u_sd_",
+          "label": "Consistent with your own d̄ and s_d, so the method earns part credit."
+         }
+        ]
+       },
+       "tt": {
+        "type": "numeric",
+        "targetExpr": "tt",
+        "relTol": 0.001,
+        "sig": 4,
+        "paths": [
+         {
+          "label": "That is the 95% column. Use the 99.9% column of the booklet table.",
+          "expr": "5 >= 120 ? 1.98 : (5 >= 60 ? 2 : (5 >= 40 ? 2.021 : (5 >= 30 ? 2.042 : (5 >= 25 ? 2.06 : (5 >= 20 ? 2.086 : (5 >= 15 ? 2.131 : (5 >= 10 ? 2.228 : (5 >= 9 ? 2.262 : (5 >= 8 ? 2.306 : (5 >= 7 ? 2.365 : (5 >= 6 ? 2.447 : (5 >= 5 ? 2.571 : (5 >= 4 ? 2.776 : (5 >= 3 ? 3.182 : (5 >= 2 ? 4.303 : (12.706))))))))))))))))"
+         },
+         {
+          "label": "That is the 99% column. Use the 99.9% column of the booklet table.",
+          "expr": "5 >= 120 ? 2.617 : (5 >= 60 ? 2.66 : (5 >= 40 ? 2.704 : (5 >= 30 ? 2.75 : (5 >= 25 ? 2.787 : (5 >= 20 ? 2.845 : (5 >= 15 ? 2.947 : (5 >= 10 ? 3.169 : (5 >= 9 ? 3.25 : (5 >= 8 ? 3.355 : (5 >= 7 ? 3.5 : (5 >= 6 ? 3.707 : (5 >= 5 ? 4.032 : (5 >= 4 ? 4.604 : (5 >= 3 ? 5.841 : (5 >= 2 ? 9.925 : (63.657))))))))))))))))"
+         },
+         {
+          "label": "Degrees of freedom for a paired test are n − 1.",
+          "expr": "5.959"
+         }
+        ]
+       },
+       "dec": {
+        "type": "keyword",
+        "expectedExpr": "dec",
+        "synonyms": {
+         "same": [
+          "same",
+          "no significant difference",
+          "not different",
+          "agree",
+          "no difference"
+         ],
+         "different": [
+          "different",
+          "significant",
+          "disagree"
+         ]
+        },
+        "displays": {
+         "same": "same (t_calc < 6.869)",
+         "different": "different (t_calc > 6.869)"
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "t-paired-999-n8",
+     "perspectiveLabel": "Paired, 99.9%, 8 pairs (5 marks)",
+     "marks": 5,
+     "stem": "24-hour PM2.5 was measured at 8 different times by an existing instrument and by a new one (µg m⁻³):\n\n| # | Existing | New | d = existing − new |\n|---|---|---|---|\n| 1 | {{fix(x3,0)}} | {{fix(y3,1)}} | {{fix(d3,1)}} |\n| 2 | {{fix(x1,0)}} | {{fix(y1,1)}} | {{fix(d1,1)}} |\n| 3 | {{fix(x5,0)}} | {{fix(y5,1)}} | {{fix(d5,1)}} |\n| 4 | {{fix(x2,0)}} | {{fix(y2,1)}} | {{fix(d2,1)}} |\n| 5 | {{fix(x7,0)}} | {{fix(y7,1)}} | {{fix(d7,1)}} |\n| 6 | {{fix(x4,0)}} | {{fix(y4,1)}} | {{fix(d4,1)}} |\n| 7 | {{fix(x6,0)}} | {{fix(y6,1)}} | {{fix(d6,1)}} |\n| 8 | {{fix(x8,0)}} | {{fix(y8,1)}} | {{fix(d8,1)}} |\n\nUse an appropriate Student t-test to decide whether the two instruments give different results at the **99.9% confidence level**. Look the critical value up in the booklet's t table and enter the value you used.",
+     "hint": "The same samples are measured by both instruments, so this is a **paired** test: t = |d̄|√n / s_d with n − 1 degrees of freedom. The booklet's 99.9% column (df: t): 1: 636.619, 2: 31.598, 3: 12.924, 4: 8.610, 5: 6.869, 6: 5.959, 7: 5.408, 8: 5.041, 9: 4.781, 10: 4.587, 15: 4.073, 20: 3.850, 25: 3.725, 30: 3.646, 40: 3.551, 60: 3.460, 120: 3.373. If your df is not listed, take the next lower row.",
+     "explanation": "The d column is given, so work with it: d̄ and s_d, then t_calc = |d̄|√n / s_d. A paired test has n − 1 = 7 degrees of freedom, so the 99.9% critical value is **5.408**. If t_calc is larger than that the instruments differ significantly at 99.9%; if not, the data cannot show a difference at that level. A higher confidence level needs a larger t_calc, so a result that is significant at 95% can fail at 99.9%.",
+     "variables": {
+      "sampled": {
+       "x1": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x2": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x3": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x4": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x5": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x6": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x7": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x8": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "e1": {
+        "type": "range",
+        "min": -1.5,
+        "max": -1.2,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e2": {
+        "type": "range",
+        "min": -1.1,
+        "max": -0.8,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e3": {
+        "type": "range",
+        "min": -0.8,
+        "max": -0.5,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e4": {
+        "type": "range",
+        "min": -0.4,
+        "max": -0.1,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e5": {
+        "type": "range",
+        "min": 0,
+        "max": 0.3,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e6": {
+        "type": "range",
+        "min": 0.4,
+        "max": 0.7,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e7": {
+        "type": "range",
+        "min": 0.8,
+        "max": 1,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e8": {
+        "type": "range",
+        "min": 1.1,
+        "max": 1.4,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "bias": {
+        "type": "choice",
+        "options": [
+         0.3,
+         0.8,
+         2,
+         3,
+         4
+        ]
+       }
+      },
+      "derived": {
+       "d1": "round(bias + e1, 1)",
+       "d2": "round(bias + e2, 1)",
+       "d3": "round(bias + e3, 1)",
+       "d4": "round(bias + e4, 1)",
+       "d5": "round(bias + e5, 1)",
+       "d6": "round(bias + e6, 1)",
+       "d7": "round(bias + e7, 1)",
+       "d8": "round(bias + e8, 1)",
+       "y1": "x1 - d1",
+       "y2": "x2 - d2",
+       "y3": "x3 - d3",
+       "y4": "x4 - d4",
+       "y5": "x5 - d5",
+       "y6": "x6 - d6",
+       "y7": "x7 - d7",
+       "y8": "x8 - d8",
+       "db": "mean(d1, d2, d3, d4, d5, d6, d7, d8)",
+       "sd_": "sd(d1, d2, d3, d4, d5, d6, d7, d8)",
+       "tc": "abs(db) * sqrt(8) / sd_",
+       "tt": "5.408",
+       "dec": "tc > 5.408 ? 'different' : 'same'"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "db",
+        "label": "Mean difference d̄",
+        "unit": "µg m⁻³",
+        "numeric": true
+       },
+       {
+        "key": "sd_",
+        "label": "Standard deviation of d",
+        "unit": "µg m⁻³",
+        "numeric": true
+       },
+       {
+        "key": "tc",
+        "label": "t_calc",
+        "numeric": true
+       },
+       {
+        "key": "tt",
+        "label": "t_table (99.9%, 7 df)",
+        "numeric": true
+       },
+       {
+        "key": "dec",
+        "label": "Same or different at 99.9%?",
+        "options": [
+         "same",
+         "different"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "db": {
+        "type": "numeric",
+        "targetExpr": "db",
+        "relTol": 0.03,
+        "sig": 4,
+        "tolerance": 0.05,
+        "unit": "µg m⁻³"
+       },
+       "sd_": {
+        "type": "numeric",
+        "targetExpr": "sd_",
+        "relTol": 0.03,
+        "sig": 4,
+        "unit": "µg m⁻³"
+       },
+       "tc": {
+        "type": "numeric",
+        "targetExpr": "tc",
+        "relTol": 0.04,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You left out the √n: t = |d̄|√n / s_d.",
+          "expr": "abs(db) / sd_"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "abs(u_db) * sqrt(8) / u_sd_",
+          "label": "Consistent with your own d̄ and s_d, so the method earns part credit."
+         }
+        ]
+       },
+       "tt": {
+        "type": "numeric",
+        "targetExpr": "tt",
+        "relTol": 0.001,
+        "sig": 4,
+        "paths": [
+         {
+          "label": "That is the 95% column. Use the 99.9% column of the booklet table.",
+          "expr": "7 >= 120 ? 1.98 : (7 >= 60 ? 2 : (7 >= 40 ? 2.021 : (7 >= 30 ? 2.042 : (7 >= 25 ? 2.06 : (7 >= 20 ? 2.086 : (7 >= 15 ? 2.131 : (7 >= 10 ? 2.228 : (7 >= 9 ? 2.262 : (7 >= 8 ? 2.306 : (7 >= 7 ? 2.365 : (7 >= 6 ? 2.447 : (7 >= 5 ? 2.571 : (7 >= 4 ? 2.776 : (7 >= 3 ? 3.182 : (7 >= 2 ? 4.303 : (12.706))))))))))))))))"
+         },
+         {
+          "label": "That is the 99% column. Use the 99.9% column of the booklet table.",
+          "expr": "7 >= 120 ? 2.617 : (7 >= 60 ? 2.66 : (7 >= 40 ? 2.704 : (7 >= 30 ? 2.75 : (7 >= 25 ? 2.787 : (7 >= 20 ? 2.845 : (7 >= 15 ? 2.947 : (7 >= 10 ? 3.169 : (7 >= 9 ? 3.25 : (7 >= 8 ? 3.355 : (7 >= 7 ? 3.5 : (7 >= 6 ? 3.707 : (7 >= 5 ? 4.032 : (7 >= 4 ? 4.604 : (7 >= 3 ? 5.841 : (7 >= 2 ? 9.925 : (63.657))))))))))))))))"
+         },
+         {
+          "label": "Degrees of freedom for a paired test are n − 1.",
+          "expr": "5.041"
+         }
+        ]
+       },
+       "dec": {
+        "type": "keyword",
+        "expectedExpr": "dec",
+        "synonyms": {
+         "same": [
+          "same",
+          "no significant difference",
+          "not different",
+          "agree",
+          "no difference"
+         ],
+         "different": [
+          "different",
+          "significant",
+          "disagree"
+         ]
+        },
+        "displays": {
+         "same": "same (t_calc < 5.408)",
+         "different": "different (t_calc > 5.408)"
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "t-paired-99-n12",
+     "perspectiveLabel": "Paired, 99%, 12 pairs: df not in the table (5 marks)",
+     "marks": 5,
+     "stem": "24-hour PM2.5 was measured at 12 different times by an existing instrument and by a new one (µg m⁻³):\n\n| # | Existing | New | d = existing − new |\n|---|---|---|---|\n| 1 | {{fix(x3,0)}} | {{fix(y3,1)}} | {{fix(d3,1)}} |\n| 2 | {{fix(x1,0)}} | {{fix(y1,1)}} | {{fix(d1,1)}} |\n| 3 | {{fix(x5,0)}} | {{fix(y5,1)}} | {{fix(d5,1)}} |\n| 4 | {{fix(x2,0)}} | {{fix(y2,1)}} | {{fix(d2,1)}} |\n| 5 | {{fix(x7,0)}} | {{fix(y7,1)}} | {{fix(d7,1)}} |\n| 6 | {{fix(x4,0)}} | {{fix(y4,1)}} | {{fix(d4,1)}} |\n| 7 | {{fix(x6,0)}} | {{fix(y6,1)}} | {{fix(d6,1)}} |\n| 8 | {{fix(x8,0)}} | {{fix(y8,1)}} | {{fix(d8,1)}} |\n| 9 | {{fix(x9,0)}} | {{fix(y9,1)}} | {{fix(d9,1)}} |\n| 10 | {{fix(x10,0)}} | {{fix(y10,1)}} | {{fix(d10,1)}} |\n| 11 | {{fix(x11,0)}} | {{fix(y11,1)}} | {{fix(d11,1)}} |\n| 12 | {{fix(x12,0)}} | {{fix(y12,1)}} | {{fix(d12,1)}} |\n\nUse an appropriate Student t-test to decide whether the two instruments give different results at the **99% confidence level**. Look the critical value up in the booklet's t table and enter the value you used.",
+     "hint": "The same samples are measured by both instruments, so this is a **paired** test: t = |d̄|√n / s_d with n − 1 degrees of freedom. The booklet's 99% column (df: t): 1: 63.657, 2: 9.925, 3: 5.841, 4: 4.604, 5: 4.032, 6: 3.707, 7: 3.500, 8: 3.355, 9: 3.250, 10: 3.169, 15: 2.947, 20: 2.845, 25: 2.787, 30: 2.750, 40: 2.704, 60: 2.660, 120: 2.617. If your df is not listed, take the next lower row.",
+     "explanation": "The d column is given, so work with it: d̄ and s_d, then t_calc = |d̄|√n / s_d. A paired test has n − 1 = 11 degrees of freedom, so the 99% critical value is **3.169** (11 degrees of freedom is not a row of the table: use the next lower row, 10). If t_calc is larger than that the instruments differ significantly at 99%; if not, the data cannot show a difference at that level. A higher confidence level needs a larger t_calc, so a result that is significant at 95% can fail at 99.9%.",
+     "variables": {
+      "sampled": {
+       "x1": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x2": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x3": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x4": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x5": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x6": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x7": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x8": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x9": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x10": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x11": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "x12": {
+        "type": "range",
+        "min": 15,
+        "max": 95,
+        "step": 1,
+        "decimals": 0
+       },
+       "e1": {
+        "type": "range",
+        "min": -1.5,
+        "max": -1.4,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e2": {
+        "type": "range",
+        "min": -1.3,
+        "max": -1.1,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e3": {
+        "type": "range",
+        "min": -1,
+        "max": -0.8,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e4": {
+        "type": "range",
+        "min": -0.8,
+        "max": -0.6,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e5": {
+        "type": "range",
+        "min": -0.5,
+        "max": -0.3,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e6": {
+        "type": "range",
+        "min": -0.3,
+        "max": -0.1,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e7": {
+        "type": "range",
+        "min": 0,
+        "max": 0.1,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e8": {
+        "type": "range",
+        "min": 0.3,
+        "max": 0.4,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e9": {
+        "type": "range",
+        "min": 0.5,
+        "max": 0.7,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e10": {
+        "type": "range",
+        "min": 0.8,
+        "max": 0.9,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e11": {
+        "type": "range",
+        "min": 1,
+        "max": 1.1,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "e12": {
+        "type": "range",
+        "min": 1.3,
+        "max": 1.4,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "bias": {
+        "type": "choice",
+        "options": [
+         0.3,
+         0.8,
+         2,
+         3,
+         4
+        ]
+       }
+      },
+      "derived": {
+       "d1": "round(bias + e1, 1)",
+       "d2": "round(bias + e2, 1)",
+       "d3": "round(bias + e3, 1)",
+       "d4": "round(bias + e4, 1)",
+       "d5": "round(bias + e5, 1)",
+       "d6": "round(bias + e6, 1)",
+       "d7": "round(bias + e7, 1)",
+       "d8": "round(bias + e8, 1)",
+       "d9": "round(bias + e9, 1)",
+       "d10": "round(bias + e10, 1)",
+       "d11": "round(bias + e11, 1)",
+       "d12": "round(bias + e12, 1)",
+       "y1": "x1 - d1",
+       "y2": "x2 - d2",
+       "y3": "x3 - d3",
+       "y4": "x4 - d4",
+       "y5": "x5 - d5",
+       "y6": "x6 - d6",
+       "y7": "x7 - d7",
+       "y8": "x8 - d8",
+       "y9": "x9 - d9",
+       "y10": "x10 - d10",
+       "y11": "x11 - d11",
+       "y12": "x12 - d12",
+       "db": "mean(d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12)",
+       "sd_": "sd(d1, d2, d3, d4, d5, d6, d7, d8, d9, d10, d11, d12)",
+       "tc": "abs(db) * sqrt(12) / sd_",
+       "tt": "3.169",
+       "dec": "tc > 3.169 ? 'different' : 'same'"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "db",
+        "label": "Mean difference d̄",
+        "unit": "µg m⁻³",
+        "numeric": true
+       },
+       {
+        "key": "sd_",
+        "label": "Standard deviation of d",
+        "unit": "µg m⁻³",
+        "numeric": true
+       },
+       {
+        "key": "tc",
+        "label": "t_calc",
+        "numeric": true
+       },
+       {
+        "key": "tt",
+        "label": "t_table (99%, 11 df)",
+        "numeric": true
+       },
+       {
+        "key": "dec",
+        "label": "Same or different at 99%?",
+        "options": [
+         "same",
+         "different"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "db": {
+        "type": "numeric",
+        "targetExpr": "db",
+        "relTol": 0.03,
+        "sig": 4,
+        "tolerance": 0.05,
+        "unit": "µg m⁻³"
+       },
+       "sd_": {
+        "type": "numeric",
+        "targetExpr": "sd_",
+        "relTol": 0.03,
+        "sig": 4,
+        "unit": "µg m⁻³"
+       },
+       "tc": {
+        "type": "numeric",
+        "targetExpr": "tc",
+        "relTol": 0.04,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You left out the √n: t = |d̄|√n / s_d.",
+          "expr": "abs(db) / sd_"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "abs(u_db) * sqrt(12) / u_sd_",
+          "label": "Consistent with your own d̄ and s_d, so the method earns part credit."
+         }
+        ]
+       },
+       "tt": {
+        "type": "numeric",
+        "targetExpr": "tt",
+        "relTol": 0.001,
+        "sig": 4,
+        "paths": [
+         {
+          "label": "That is the 95% column. Use the 99% column of the booklet table.",
+          "expr": "11 >= 120 ? 1.98 : (11 >= 60 ? 2 : (11 >= 40 ? 2.021 : (11 >= 30 ? 2.042 : (11 >= 25 ? 2.06 : (11 >= 20 ? 2.086 : (11 >= 15 ? 2.131 : (11 >= 10 ? 2.228 : (11 >= 9 ? 2.262 : (11 >= 8 ? 2.306 : (11 >= 7 ? 2.365 : (11 >= 6 ? 2.447 : (11 >= 5 ? 2.571 : (11 >= 4 ? 2.776 : (11 >= 3 ? 3.182 : (11 >= 2 ? 4.303 : (12.706))))))))))))))))"
+         },
+         {
+          "label": "That is the 99.9% column. Use the 99% column of the booklet table.",
+          "expr": "11 >= 120 ? 3.373 : (11 >= 60 ? 3.46 : (11 >= 40 ? 3.551 : (11 >= 30 ? 3.646 : (11 >= 25 ? 3.725 : (11 >= 20 ? 3.85 : (11 >= 15 ? 4.073 : (11 >= 10 ? 4.587 : (11 >= 9 ? 4.781 : (11 >= 8 ? 5.041 : (11 >= 7 ? 5.408 : (11 >= 6 ? 5.959 : (11 >= 5 ? 6.869 : (11 >= 4 ? 8.61 : (11 >= 3 ? 12.924 : (11 >= 2 ? 31.598 : (636.619))))))))))))))))"
+         },
+         {
+          "label": "Degrees of freedom for a paired test are n − 1.",
+          "expr": "3.169"
+         }
+        ]
+       },
+       "dec": {
+        "type": "keyword",
+        "expectedExpr": "dec",
+        "synonyms": {
+         "same": [
+          "same",
+          "no significant difference",
+          "not different",
+          "agree",
+          "no difference"
+         ],
+         "different": [
+          "different",
+          "significant",
+          "disagree"
+         ]
+        },
+        "displays": {
+         "same": "same (t_calc < 3.169)",
+         "different": "different (t_calc > 3.169)"
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "t-pooled-999-stats",
+     "perspectiveLabel": "Pooled test from summary statistics, 99.9% (4 marks)",
+     "marks": 4,
+     "stem": "Two methods were used to measure the 24-hour PM2.5 concentration in the air (µg m⁻³). The summary statistics are:\n\n| Method | Mean | Std. dev. | No. measurements |\n|---|---|---|---|\n| 1 | {{fix(m1,2)}} | ±{{fix(s1,2)}} | {{fix(N1,0)}} |\n| 2 | {{fix(m2,2)}} | ±{{fix(s2,2)}} | {{fix(N2,0)}} |\n\nUse an appropriate Student t-test to decide whether the two methods give different results at the **99.9% confidence level**. Give the degrees of freedom and the critical value you read from the booklet's t table.",
+     "hint": "The two methods each measured the same quantity several times, so use the **pooled** test: s_pooled = √[((N₁−1)s₁² + (N₂−1)s₂²)/(N₁+N₂−2)] and t = |x̄₁ − x̄₂|/s_pooled × √(N₁N₂/(N₁+N₂)). The booklet's 99.9% column (df: t): 1: 636.619, 2: 31.598, 3: 12.924, 4: 8.610, 5: 6.869, 6: 5.959, 7: 5.408, 8: 5.041, 9: 4.781, 10: 4.587, 15: 4.073, 20: 3.850, 25: 3.725, 30: 3.646, 40: 3.551, 60: 3.460, 120: 3.373. If your df is not listed, take the next lower row.",
+     "explanation": "s_pooled weights the variances by their degrees of freedom; df = N₁ + N₂ − 2. t_calc = |x̄₁ − x̄₂|/s_pooled · √(N₁N₂/(N₁+N₂)). The booklet table lists df = 1–10, 15, 20, 25, 30, 40, 60 and 120, so a df that is not listed is read at the next lower row (for example 26 df is read at 25). If t_calc exceeds that critical value the methods differ significantly at 99.9%.",
+     "variables": {
+      "sampled": {
+       "N1": {
+        "type": "choice",
+        "options": [
+         12,
+         15,
+         18,
+         20,
+         24
+        ]
+       },
+       "N2": {
+        "type": "choice",
+        "options": [
+         6,
+         8,
+         10
+        ]
+       },
+       "m2": {
+        "type": "range",
+        "min": 20,
+        "max": 30,
+        "step": 0.01,
+        "decimals": 2
+       },
+       "gap": {
+        "type": "choice",
+        "options": [
+         1,
+         2.5,
+         4,
+         6
+        ]
+       },
+       "s1": {
+        "type": "range",
+        "min": 2.5,
+        "max": 4.5,
+        "step": 0.01,
+        "decimals": 2
+       },
+       "s2": {
+        "type": "range",
+        "min": 1.2,
+        "max": 2.4,
+        "step": 0.01,
+        "decimals": 2
+       }
+      },
+      "derived": {
+       "m1": "round(m2 + gap, 2)",
+       "df": "N1 + N2 - 2",
+       "sp": "sqrt(((N1 - 1) * s1^2 + (N2 - 1) * s2^2) / df)",
+       "tc": "abs(m1 - m2) / sp * sqrt(N1 * N2 / (N1 + N2))",
+       "tt": "df >= 120 ? 3.373 : (df >= 60 ? 3.46 : (df >= 40 ? 3.551 : (df >= 30 ? 3.646 : (df >= 25 ? 3.725 : (df >= 20 ? 3.85 : (df >= 15 ? 4.073 : (df >= 10 ? 4.587 : (df >= 9 ? 4.781 : (df >= 8 ? 5.041 : (df >= 7 ? 5.408 : (df >= 6 ? 5.959 : (df >= 5 ? 6.869 : (df >= 4 ? 8.61 : (df >= 3 ? 12.924 : (df >= 2 ? 31.598 : (636.619))))))))))))))))",
+       "dec": "tc > (df >= 120 ? 3.373 : (df >= 60 ? 3.46 : (df >= 40 ? 3.551 : (df >= 30 ? 3.646 : (df >= 25 ? 3.725 : (df >= 20 ? 3.85 : (df >= 15 ? 4.073 : (df >= 10 ? 4.587 : (df >= 9 ? 4.781 : (df >= 8 ? 5.041 : (df >= 7 ? 5.408 : (df >= 6 ? 5.959 : (df >= 5 ? 6.869 : (df >= 4 ? 8.61 : (df >= 3 ? 12.924 : (df >= 2 ? 31.598 : (636.619))))))))))))))))) ? 'different' : 'same'"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "sp",
+        "label": "s_pooled",
+        "unit": "µg m⁻³",
+        "numeric": true
+       },
+       {
+        "key": "tc",
+        "label": "t_calc",
+        "numeric": true
+       },
+       {
+        "key": "df",
+        "label": "Degrees of freedom",
+        "numeric": true
+       },
+       {
+        "key": "tt",
+        "label": "t_table (99.9%)",
+        "numeric": true
+       },
+       {
+        "key": "dec",
+        "label": "Same or different at 99.9%?",
+        "options": [
+         "same",
+         "different"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "sp": {
+        "type": "numeric",
+        "targetExpr": "sp",
+        "relTol": 0.03,
+        "sig": 4,
+        "unit": "µg m⁻³",
+        "paths": [
+         {
+          "label": "You averaged the two standard deviations; pool the variances instead.",
+          "expr": "(s1 + s2) / 2"
+         }
+        ]
+       },
+       "tc": {
+        "type": "numeric",
+        "targetExpr": "tc",
+        "relTol": 0.04,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You left out the √(N₁N₂/(N₁+N₂)) factor.",
+          "expr": "abs(m1 - m2) / sp"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "abs(m1 - m2) / u_sp * sqrt(N1 * N2 / (N1 + N2))",
+          "label": "Consistent with your own s_pooled, so the method earns part credit."
+         }
+        ]
+       },
+       "df": {
+        "type": "numeric",
+        "targetExpr": "df",
+        "relTol": 0.001,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "For a pooled test df = N₁ + N₂ − 2.",
+          "expr": "N1 + N2 - 1"
+         },
+         {
+          "label": "For a pooled test df = N₁ + N₂ − 2.",
+          "expr": "N1 + N2"
+         }
+        ]
+       },
+       "tt": {
+        "type": "numeric",
+        "targetExpr": "tt",
+        "relTol": 0.001,
+        "sig": 4,
+        "paths": [
+         {
+          "label": "That is the 95% column. Use the 99.9% column of the booklet table.",
+          "expr": "df >= 120 ? 1.98 : (df >= 60 ? 2 : (df >= 40 ? 2.021 : (df >= 30 ? 2.042 : (df >= 25 ? 2.06 : (df >= 20 ? 2.086 : (df >= 15 ? 2.131 : (df >= 10 ? 2.228 : (df >= 9 ? 2.262 : (df >= 8 ? 2.306 : (df >= 7 ? 2.365 : (df >= 6 ? 2.447 : (df >= 5 ? 2.571 : (df >= 4 ? 2.776 : (df >= 3 ? 3.182 : (df >= 2 ? 4.303 : (12.706))))))))))))))))"
+         },
+         {
+          "label": "That is the 99% column. Use the 99.9% column of the booklet table.",
+          "expr": "df >= 120 ? 2.617 : (df >= 60 ? 2.66 : (df >= 40 ? 2.704 : (df >= 30 ? 2.75 : (df >= 25 ? 2.787 : (df >= 20 ? 2.845 : (df >= 15 ? 2.947 : (df >= 10 ? 3.169 : (df >= 9 ? 3.25 : (df >= 8 ? 3.355 : (df >= 7 ? 3.5 : (df >= 6 ? 3.707 : (df >= 5 ? 4.032 : (df >= 4 ? 4.604 : (df >= 3 ? 5.841 : (df >= 2 ? 9.925 : (63.657))))))))))))))))"
+         },
+         {
+          "label": "Read the table at df = N₁ + N₂ − 2, then take the next lower listed row.",
+          "expr": "(df + 1) >= 120 ? 3.373 : ((df + 1) >= 60 ? 3.46 : ((df + 1) >= 40 ? 3.551 : ((df + 1) >= 30 ? 3.646 : ((df + 1) >= 25 ? 3.725 : ((df + 1) >= 20 ? 3.85 : ((df + 1) >= 15 ? 4.073 : ((df + 1) >= 10 ? 4.587 : ((df + 1) >= 9 ? 4.781 : ((df + 1) >= 8 ? 5.041 : ((df + 1) >= 7 ? 5.408 : ((df + 1) >= 6 ? 5.959 : ((df + 1) >= 5 ? 6.869 : ((df + 1) >= 4 ? 8.61 : ((df + 1) >= 3 ? 12.924 : ((df + 1) >= 2 ? 31.598 : (636.619))))))))))))))))"
+         }
+        ]
+       },
+       "dec": {
+        "type": "keyword",
+        "expectedExpr": "dec",
+        "synonyms": {
+         "same": [
+          "same",
+          "no significant difference",
+          "not different",
+          "agree",
+          "no difference"
+         ],
+         "different": [
+          "different",
+          "significant",
+          "disagree"
+         ]
+        },
+        "displays": {
+         "same": "same (t_calc < t_table)",
+         "different": "different (t_calc > t_table)"
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "t-pooled-99-stats",
+     "perspectiveLabel": "Pooled test from summary statistics, 99% (4 marks)",
+     "marks": 4,
+     "stem": "Two methods were used to measure the 24-hour PM2.5 concentration in the air (µg m⁻³). The summary statistics are:\n\n| Method | Mean | Std. dev. | No. measurements |\n|---|---|---|---|\n| 1 | {{fix(m1,2)}} | ±{{fix(s1,2)}} | {{fix(N1,0)}} |\n| 2 | {{fix(m2,2)}} | ±{{fix(s2,2)}} | {{fix(N2,0)}} |\n\nUse an appropriate Student t-test to decide whether the two methods give different results at the **99% confidence level**. Give the degrees of freedom and the critical value you read from the booklet's t table.",
+     "hint": "The two methods each measured the same quantity several times, so use the **pooled** test: s_pooled = √[((N₁−1)s₁² + (N₂−1)s₂²)/(N₁+N₂−2)] and t = |x̄₁ − x̄₂|/s_pooled × √(N₁N₂/(N₁+N₂)). The booklet's 99% column (df: t): 1: 63.657, 2: 9.925, 3: 5.841, 4: 4.604, 5: 4.032, 6: 3.707, 7: 3.500, 8: 3.355, 9: 3.250, 10: 3.169, 15: 2.947, 20: 2.845, 25: 2.787, 30: 2.750, 40: 2.704, 60: 2.660, 120: 2.617. If your df is not listed, take the next lower row.",
+     "explanation": "s_pooled weights the variances by their degrees of freedom; df = N₁ + N₂ − 2. t_calc = |x̄₁ − x̄₂|/s_pooled · √(N₁N₂/(N₁+N₂)). The booklet table lists df = 1–10, 15, 20, 25, 30, 40, 60 and 120, so a df that is not listed is read at the next lower row (for example 26 df is read at 25). If t_calc exceeds that critical value the methods differ significantly at 99%.",
+     "variables": {
+      "sampled": {
+       "N1": {
+        "type": "choice",
+        "options": [
+         12,
+         15,
+         18,
+         20,
+         24
+        ]
+       },
+       "N2": {
+        "type": "choice",
+        "options": [
+         6,
+         8,
+         10
+        ]
+       },
+       "m2": {
+        "type": "range",
+        "min": 20,
+        "max": 30,
+        "step": 0.01,
+        "decimals": 2
+       },
+       "gap": {
+        "type": "choice",
+        "options": [
+         1,
+         2.5,
+         4,
+         6
+        ]
+       },
+       "s1": {
+        "type": "range",
+        "min": 2.5,
+        "max": 4.5,
+        "step": 0.01,
+        "decimals": 2
+       },
+       "s2": {
+        "type": "range",
+        "min": 1.2,
+        "max": 2.4,
+        "step": 0.01,
+        "decimals": 2
+       }
+      },
+      "derived": {
+       "m1": "round(m2 + gap, 2)",
+       "df": "N1 + N2 - 2",
+       "sp": "sqrt(((N1 - 1) * s1^2 + (N2 - 1) * s2^2) / df)",
+       "tc": "abs(m1 - m2) / sp * sqrt(N1 * N2 / (N1 + N2))",
+       "tt": "df >= 120 ? 2.617 : (df >= 60 ? 2.66 : (df >= 40 ? 2.704 : (df >= 30 ? 2.75 : (df >= 25 ? 2.787 : (df >= 20 ? 2.845 : (df >= 15 ? 2.947 : (df >= 10 ? 3.169 : (df >= 9 ? 3.25 : (df >= 8 ? 3.355 : (df >= 7 ? 3.5 : (df >= 6 ? 3.707 : (df >= 5 ? 4.032 : (df >= 4 ? 4.604 : (df >= 3 ? 5.841 : (df >= 2 ? 9.925 : (63.657))))))))))))))))",
+       "dec": "tc > (df >= 120 ? 2.617 : (df >= 60 ? 2.66 : (df >= 40 ? 2.704 : (df >= 30 ? 2.75 : (df >= 25 ? 2.787 : (df >= 20 ? 2.845 : (df >= 15 ? 2.947 : (df >= 10 ? 3.169 : (df >= 9 ? 3.25 : (df >= 8 ? 3.355 : (df >= 7 ? 3.5 : (df >= 6 ? 3.707 : (df >= 5 ? 4.032 : (df >= 4 ? 4.604 : (df >= 3 ? 5.841 : (df >= 2 ? 9.925 : (63.657))))))))))))))))) ? 'different' : 'same'"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "sp",
+        "label": "s_pooled",
+        "unit": "µg m⁻³",
+        "numeric": true
+       },
+       {
+        "key": "tc",
+        "label": "t_calc",
+        "numeric": true
+       },
+       {
+        "key": "df",
+        "label": "Degrees of freedom",
+        "numeric": true
+       },
+       {
+        "key": "tt",
+        "label": "t_table (99%)",
+        "numeric": true
+       },
+       {
+        "key": "dec",
+        "label": "Same or different at 99%?",
+        "options": [
+         "same",
+         "different"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "sp": {
+        "type": "numeric",
+        "targetExpr": "sp",
+        "relTol": 0.03,
+        "sig": 4,
+        "unit": "µg m⁻³",
+        "paths": [
+         {
+          "label": "You averaged the two standard deviations; pool the variances instead.",
+          "expr": "(s1 + s2) / 2"
+         }
+        ]
+       },
+       "tc": {
+        "type": "numeric",
+        "targetExpr": "tc",
+        "relTol": 0.04,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You left out the √(N₁N₂/(N₁+N₂)) factor.",
+          "expr": "abs(m1 - m2) / sp"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "abs(m1 - m2) / u_sp * sqrt(N1 * N2 / (N1 + N2))",
+          "label": "Consistent with your own s_pooled, so the method earns part credit."
+         }
+        ]
+       },
+       "df": {
+        "type": "numeric",
+        "targetExpr": "df",
+        "relTol": 0.001,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "For a pooled test df = N₁ + N₂ − 2.",
+          "expr": "N1 + N2 - 1"
+         },
+         {
+          "label": "For a pooled test df = N₁ + N₂ − 2.",
+          "expr": "N1 + N2"
+         }
+        ]
+       },
+       "tt": {
+        "type": "numeric",
+        "targetExpr": "tt",
+        "relTol": 0.001,
+        "sig": 4,
+        "paths": [
+         {
+          "label": "That is the 95% column. Use the 99% column of the booklet table.",
+          "expr": "df >= 120 ? 1.98 : (df >= 60 ? 2 : (df >= 40 ? 2.021 : (df >= 30 ? 2.042 : (df >= 25 ? 2.06 : (df >= 20 ? 2.086 : (df >= 15 ? 2.131 : (df >= 10 ? 2.228 : (df >= 9 ? 2.262 : (df >= 8 ? 2.306 : (df >= 7 ? 2.365 : (df >= 6 ? 2.447 : (df >= 5 ? 2.571 : (df >= 4 ? 2.776 : (df >= 3 ? 3.182 : (df >= 2 ? 4.303 : (12.706))))))))))))))))"
+         },
+         {
+          "label": "That is the 99.9% column. Use the 99% column of the booklet table.",
+          "expr": "df >= 120 ? 3.373 : (df >= 60 ? 3.46 : (df >= 40 ? 3.551 : (df >= 30 ? 3.646 : (df >= 25 ? 3.725 : (df >= 20 ? 3.85 : (df >= 15 ? 4.073 : (df >= 10 ? 4.587 : (df >= 9 ? 4.781 : (df >= 8 ? 5.041 : (df >= 7 ? 5.408 : (df >= 6 ? 5.959 : (df >= 5 ? 6.869 : (df >= 4 ? 8.61 : (df >= 3 ? 12.924 : (df >= 2 ? 31.598 : (636.619))))))))))))))))"
+         },
+         {
+          "label": "Read the table at df = N₁ + N₂ − 2, then take the next lower listed row.",
+          "expr": "(df + 1) >= 120 ? 2.617 : ((df + 1) >= 60 ? 2.66 : ((df + 1) >= 40 ? 2.704 : ((df + 1) >= 30 ? 2.75 : ((df + 1) >= 25 ? 2.787 : ((df + 1) >= 20 ? 2.845 : ((df + 1) >= 15 ? 2.947 : ((df + 1) >= 10 ? 3.169 : ((df + 1) >= 9 ? 3.25 : ((df + 1) >= 8 ? 3.355 : ((df + 1) >= 7 ? 3.5 : ((df + 1) >= 6 ? 3.707 : ((df + 1) >= 5 ? 4.032 : ((df + 1) >= 4 ? 4.604 : ((df + 1) >= 3 ? 5.841 : ((df + 1) >= 2 ? 9.925 : (63.657))))))))))))))))"
+         }
+        ]
+       },
+       "dec": {
+        "type": "keyword",
+        "expectedExpr": "dec",
+        "synonyms": {
+         "same": [
+          "same",
+          "no significant difference",
+          "not different",
+          "agree",
+          "no difference"
+         ],
+         "different": [
+          "different",
+          "significant",
+          "disagree"
+         ]
+        },
+        "displays": {
+         "same": "same (t_calc < t_table)",
+         "different": "different (t_calc > t_table)"
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "t-pooled-999-raw-7v6",
+     "perspectiveLabel": "Pooled test on replicates, 99.9% (7 v 6, 4 marks)",
+     "marks": 4,
+     "stem": "Calcium in a milk sample was measured by two methods, 7 replicates by ICP-OES and 6 by an ion-selective electrode (mmol L⁻¹):\n\n| # | ICP-OES | ISE |\n|---|---|---|\n| 1 | {{fix(a3,1)}} | {{fix(c3,1)}} |\n| 2 | {{fix(a1,1)}} | {{fix(c1,1)}} |\n| 3 | {{fix(a5,1)}} | {{fix(c5,1)}} |\n| 4 | {{fix(a2,1)}} | {{fix(c2,1)}} |\n| 5 | {{fix(a7,1)}} | {{fix(c4,1)}} |\n| 6 | {{fix(a4,1)}} | {{fix(c6,1)}} |\n| 7 | {{fix(a6,1)}} | – |\n\nUse a pooled Student t-test to decide whether the two methods give different results at the **99.9% confidence level**. Give the critical value you read from the booklet's t table.",
+     "hint": "Pool the variances: s_pooled = √[((N₁−1)s₁² + (N₂−1)s₂²)/(N₁+N₂−2)], then t = |x̄₁ − x̄₂|/s_pooled × √(N₁N₂/(N₁+N₂)). df = 7 + 6 − 2 = 11. The booklet's 99.9% column (df: t): 1: 636.619, 2: 31.598, 3: 12.924, 4: 8.610, 5: 6.869, 6: 5.959, 7: 5.408, 8: 5.041, 9: 4.781, 10: 4.587, 15: 4.073, 20: 3.850, 25: 3.725, 30: 3.646, 40: 3.551, 60: 3.460, 120: 3.373. If your df is not listed, take the next lower row.",
+     "explanation": "s_pooled combines the variances weighted by degrees of freedom, df = N₁ + N₂ − 2 = 11. t_calc = |x̄₁ − x̄₂|/s_pooled · √(N₁N₂/(N₁+N₂)). The 99.9% critical value for 11 df is **4.587** (11 degrees of freedom is not a row of the table: use the next lower row, 10). t_calc above it means the methods differ significantly at 99.9%.",
+     "variables": {
+      "sampled": {
+       "a1": {
+        "type": "range",
+        "min": 30,
+        "max": 30.1,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "a2": {
+        "type": "range",
+        "min": 30.2,
+        "max": 30.3,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "a3": {
+        "type": "range",
+        "min": 30.4,
+        "max": 30.5,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "a4": {
+        "type": "range",
+        "min": 30.6,
+        "max": 30.7,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "a5": {
+        "type": "range",
+        "min": 30.8,
+        "max": 30.9,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "a6": {
+        "type": "range",
+        "min": 31,
+        "max": 31.1,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "a7": {
+        "type": "range",
+        "min": 31.2,
+        "max": 31.3,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "b1": {
+        "type": "range",
+        "min": 30,
+        "max": 30.1,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "b2": {
+        "type": "range",
+        "min": 30.2,
+        "max": 30.4,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "b3": {
+        "type": "range",
+        "min": 30.5,
+        "max": 30.6,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "b4": {
+        "type": "range",
+        "min": 30.7,
+        "max": 30.8,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "b5": {
+        "type": "range",
+        "min": 30.9,
+        "max": 31.1,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "b6": {
+        "type": "range",
+        "min": 31.2,
+        "max": 31.3,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "sh": {
+        "type": "choice",
+        "options": [
+         0,
+         0.5,
+         1.2,
+         2,
+         3
+        ]
+       }
+      },
+      "derived": {
+       "c1": "b1 + sh",
+       "c2": "b2 + sh",
+       "c3": "b3 + sh",
+       "c4": "b4 + sh",
+       "c5": "b5 + sh",
+       "c6": "b6 + sh",
+       "m1": "mean(a1, a2, a3, a4, a5, a6, a7)",
+       "s1": "sd(a1, a2, a3, a4, a5, a6, a7)",
+       "m2": "mean(c1, c2, c3, c4, c5, c6)",
+       "s2": "sd(c1, c2, c3, c4, c5, c6)",
+       "sp": "sqrt(((7-1)*s1^2 + (6-1)*s2^2) / 11)",
+       "tc": "abs(m1 - m2) / sp * sqrt(42 / 13)",
+       "tt": "4.587",
+       "dec": "tc > 4.587 ? 'different' : 'same'"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "sp",
+        "label": "s_pooled",
+        "unit": "mmol L⁻¹",
+        "numeric": true
+       },
+       {
+        "key": "tc",
+        "label": "t_calc",
+        "numeric": true
+       },
+       {
+        "key": "tt",
+        "label": "t_table (99.9%, 11 df)",
+        "numeric": true
+       },
+       {
+        "key": "dec",
+        "label": "Same or different at 99.9%?",
+        "options": [
+         "same",
+         "different"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "sp": {
+        "type": "numeric",
+        "targetExpr": "sp",
+        "relTol": 0.03,
+        "sig": 4,
+        "unit": "mmol L⁻¹",
+        "paths": [
+         {
+          "label": "You averaged the two standard deviations; pool the variances instead.",
+          "expr": "(s1 + s2) / 2"
+         }
+        ]
+       },
+       "tc": {
+        "type": "numeric",
+        "targetExpr": "tc",
+        "relTol": 0.04,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You left out the √(N₁N₂/(N₁+N₂)) factor.",
+          "expr": "abs(m1 - m2) / sp"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "abs(m1 - m2) / u_sp * sqrt(42 / 13)",
+          "label": "Consistent with your own s_pooled, so the method earns part credit."
+         }
+        ]
+       },
+       "tt": {
+        "type": "numeric",
+        "targetExpr": "tt",
+        "relTol": 0.001,
+        "sig": 4,
+        "paths": [
+         {
+          "label": "That is the 95% column. Use the 99.9% column of the booklet table.",
+          "expr": "11 >= 120 ? 1.98 : (11 >= 60 ? 2 : (11 >= 40 ? 2.021 : (11 >= 30 ? 2.042 : (11 >= 25 ? 2.06 : (11 >= 20 ? 2.086 : (11 >= 15 ? 2.131 : (11 >= 10 ? 2.228 : (11 >= 9 ? 2.262 : (11 >= 8 ? 2.306 : (11 >= 7 ? 2.365 : (11 >= 6 ? 2.447 : (11 >= 5 ? 2.571 : (11 >= 4 ? 2.776 : (11 >= 3 ? 3.182 : (11 >= 2 ? 4.303 : (12.706))))))))))))))))"
+         },
+         {
+          "label": "That is the 99% column. Use the 99.9% column of the booklet table.",
+          "expr": "11 >= 120 ? 2.617 : (11 >= 60 ? 2.66 : (11 >= 40 ? 2.704 : (11 >= 30 ? 2.75 : (11 >= 25 ? 2.787 : (11 >= 20 ? 2.845 : (11 >= 15 ? 2.947 : (11 >= 10 ? 3.169 : (11 >= 9 ? 3.25 : (11 >= 8 ? 3.355 : (11 >= 7 ? 3.5 : (11 >= 6 ? 3.707 : (11 >= 5 ? 4.032 : (11 >= 4 ? 4.604 : (11 >= 3 ? 5.841 : (11 >= 2 ? 9.925 : (63.657))))))))))))))))"
+         },
+         {
+          "label": "For a pooled test df = N₁ + N₂ − 2.",
+          "expr": "4.587"
+         }
+        ]
+       },
+       "dec": {
+        "type": "keyword",
+        "expectedExpr": "dec",
+        "synonyms": {
+         "same": [
+          "same",
+          "no significant difference",
+          "not different",
+          "agree",
+          "no difference"
+         ],
+         "different": [
+          "different",
+          "significant",
+          "disagree"
+         ]
+        },
+        "displays": {
+         "same": "same (t_calc < 4.587)",
+         "different": "different (t_calc > 4.587)"
+        }
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-t1-levels",
+   "moduleCode": "CM2011",
+   "tier": "atomic",
+   "metadata": {
+    "title": "At which confidence level does the verdict flip?",
+    "source": "Topic 1 · booklet t table; final-style",
+    "week": 1,
+    "primaryTheme": "Statistics",
+    "conceptTags": [
+     "t-test",
+     "confidence-level"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "stats-test"
+   },
+   "variants": [
+    {
+     "variantId": "t-levels",
+     "perspectiveLabel": "Highest level at which the methods still differ (2 marks)",
+     "marks": 2,
+     "stem": "A t-test comparing two methods gives **t_calc = {{fix(tc,1)}}** with **{{fix(dfv,0)}} degrees of freedom**. Using the booklet's t table (columns 50, 90, 95, 98, 99, 99.5 and 99.9%), what is the **highest confidence level at which the two methods still give significantly different results**?",
+     "hint": "The methods differ at a level when t_calc is larger than the table value for that level. Higher confidence levels need larger t. Booklet rows (df: 50 / 90 / 95 / 98 / 99 / 99.5 / 99.9%): 5: 0.727 / 2.015 / 2.571 / 3.365 / 4.032 / 4.773 / 6.869; 6: 0.718 / 1.943 / 2.447 / 3.143 / 3.707 / 4.317 / 5.959; 7: 0.711 / 1.895 / 2.365 / 2.998 / 3.500 / 4.029 / 5.408; 8: 0.706 / 1.860 / 2.306 / 2.896 / 3.355 / 3.832 / 5.041; 9: 0.703 / 1.833 / 2.262 / 2.821 / 3.250 / 3.690 / 4.781; 10: 0.700 / 1.812 / 2.228 / 2.764 / 3.169 / 3.581 / 4.587; 15: 0.691 / 1.753 / 2.131 / 2.602 / 2.947 / 3.252 / 4.073; 20: 0.687 / 1.725 / 2.086 / 2.528 / 2.845 / 3.153 / 3.850.",
+     "explanation": "Find the row for the degrees of freedom and compare t_calc with each column from the left: the verdict is \"different\" for every level whose critical value is below t_calc, and \"same\" from the first level whose critical value is above it. The answer is the highest level in the \"different\" range.",
+     "variables": {
+      "sampled": {
+       "tc": {
+        "type": "choice",
+        "options": [
+         0.6,
+         1.5,
+         2.4,
+         3,
+         3.4,
+         4,
+         5.2,
+         7.5
+        ]
+       },
+       "dfv": {
+        "type": "choice",
+        "options": [
+         5,
+         6,
+         7,
+         8,
+         9,
+         10,
+         15,
+         20
+        ]
+       }
+      },
+      "derived": {
+       "df": "dfv",
+       "t50": "dfv >= 120 ? 0.677 : (dfv >= 60 ? 0.679 : (dfv >= 40 ? 0.681 : (dfv >= 30 ? 0.683 : (dfv >= 25 ? 0.684 : (dfv >= 20 ? 0.687 : (dfv >= 15 ? 0.691 : (dfv >= 10 ? 0.7 : (dfv >= 9 ? 0.703 : (dfv >= 8 ? 0.706 : (dfv >= 7 ? 0.711 : (dfv >= 6 ? 0.718 : (dfv >= 5 ? 0.727 : (dfv >= 4 ? 0.741 : (dfv >= 3 ? 0.765 : (dfv >= 2 ? 0.816 : (1))))))))))))))))",
+       "t90": "dfv >= 120 ? 1.658 : (dfv >= 60 ? 1.671 : (dfv >= 40 ? 1.684 : (dfv >= 30 ? 1.697 : (dfv >= 25 ? 1.708 : (dfv >= 20 ? 1.725 : (dfv >= 15 ? 1.753 : (dfv >= 10 ? 1.812 : (dfv >= 9 ? 1.833 : (dfv >= 8 ? 1.86 : (dfv >= 7 ? 1.895 : (dfv >= 6 ? 1.943 : (dfv >= 5 ? 2.015 : (dfv >= 4 ? 2.132 : (dfv >= 3 ? 2.353 : (dfv >= 2 ? 2.92 : (6.314))))))))))))))))",
+       "t95": "dfv >= 120 ? 1.98 : (dfv >= 60 ? 2 : (dfv >= 40 ? 2.021 : (dfv >= 30 ? 2.042 : (dfv >= 25 ? 2.06 : (dfv >= 20 ? 2.086 : (dfv >= 15 ? 2.131 : (dfv >= 10 ? 2.228 : (dfv >= 9 ? 2.262 : (dfv >= 8 ? 2.306 : (dfv >= 7 ? 2.365 : (dfv >= 6 ? 2.447 : (dfv >= 5 ? 2.571 : (dfv >= 4 ? 2.776 : (dfv >= 3 ? 3.182 : (dfv >= 2 ? 4.303 : (12.706))))))))))))))))",
+       "t98": "dfv >= 120 ? 2.358 : (dfv >= 60 ? 2.39 : (dfv >= 40 ? 2.423 : (dfv >= 30 ? 2.457 : (dfv >= 25 ? 2.485 : (dfv >= 20 ? 2.528 : (dfv >= 15 ? 2.602 : (dfv >= 10 ? 2.764 : (dfv >= 9 ? 2.821 : (dfv >= 8 ? 2.896 : (dfv >= 7 ? 2.998 : (dfv >= 6 ? 3.143 : (dfv >= 5 ? 3.365 : (dfv >= 4 ? 3.747 : (dfv >= 3 ? 4.541 : (dfv >= 2 ? 6.965 : (31.821))))))))))))))))",
+       "t99": "dfv >= 120 ? 2.617 : (dfv >= 60 ? 2.66 : (dfv >= 40 ? 2.704 : (dfv >= 30 ? 2.75 : (dfv >= 25 ? 2.787 : (dfv >= 20 ? 2.845 : (dfv >= 15 ? 2.947 : (dfv >= 10 ? 3.169 : (dfv >= 9 ? 3.25 : (dfv >= 8 ? 3.355 : (dfv >= 7 ? 3.5 : (dfv >= 6 ? 3.707 : (dfv >= 5 ? 4.032 : (dfv >= 4 ? 4.604 : (dfv >= 3 ? 5.841 : (dfv >= 2 ? 9.925 : (63.657))))))))))))))))",
+       "t995": "dfv >= 120 ? 2.86 : (dfv >= 60 ? 2.915 : (dfv >= 40 ? 2.971 : (dfv >= 30 ? 3.03 : (dfv >= 25 ? 3.078 : (dfv >= 20 ? 3.153 : (dfv >= 15 ? 3.252 : (dfv >= 10 ? 3.581 : (dfv >= 9 ? 3.69 : (dfv >= 8 ? 3.832 : (dfv >= 7 ? 4.029 : (dfv >= 6 ? 4.317 : (dfv >= 5 ? 4.773 : (dfv >= 4 ? 5.598 : (dfv >= 3 ? 7.453 : (dfv >= 2 ? 14.089 : (127.32))))))))))))))))",
+       "t999": "dfv >= 120 ? 3.373 : (dfv >= 60 ? 3.46 : (dfv >= 40 ? 3.551 : (dfv >= 30 ? 3.646 : (dfv >= 25 ? 3.725 : (dfv >= 20 ? 3.85 : (dfv >= 15 ? 4.073 : (dfv >= 10 ? 4.587 : (dfv >= 9 ? 4.781 : (dfv >= 8 ? 5.041 : (dfv >= 7 ? 5.408 : (dfv >= 6 ? 5.959 : (dfv >= 5 ? 6.869 : (dfv >= 4 ? 8.61 : (dfv >= 3 ? 12.924 : (dfv >= 2 ? 31.598 : (636.619))))))))))))))))",
+       "lvl": "tc > t999 ? '99.9%' : (tc > t995 ? '99.5%' : (tc > t99 ? '99%' : (tc > t98 ? '98%' : (tc > t95 ? '95%' : (tc > t90 ? '90%' : (tc > t50 ? '50%' : 'none of the levels'))))))"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "lvl",
+        "label": "Highest level at which they differ",
+        "options": [
+         "none of the levels",
+         "50%",
+         "90%",
+         "95%",
+         "98%",
+         "99%",
+         "99.5%",
+         "99.9%"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "lvl": {
+        "type": "keyword",
+        "expectedExpr": "lvl",
+        "synonyms": {
+         "none of the levels": [
+          "none of the levels"
+         ],
+         "50%": [
+          "50%"
+         ],
+         "90%": [
+          "90%"
+         ],
+         "95%": [
+          "95%"
+         ],
+         "98%": [
+          "98%"
+         ],
+         "99%": [
+          "99%"
+         ],
+         "99.5%": [
+          "99.5%"
+         ],
+         "99.9%": [
+          "99.9%"
+         ]
+        }
        }
       }
      }
@@ -14669,6 +16301,1137 @@
        {
         "id": "d",
         "label": "GC with an FID at 400 °C"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-x-acid",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Extraction chain for a weak acid (acid starts in the organic phase)",
+    "source": "Extraction slides; final Q3 style",
+    "week": 8,
+    "primaryTheme": "Extraction",
+    "conceptTags": [
+     "extraction",
+     "distribution-coefficient"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 12,
+    "examStyle": "construct_4to6",
+    "family": "extract-acid"
+   },
+   "variants": [
+    {
+     "variantId": "x-acid-chain",
+     "perspectiveLabel": "Full chain (25 marks)",
+     "marks": 25,
+     "stem": "A weak acid HA has a partition coefficient **K = {{fix(K,1)}}** between an organic solvent and water (K = c_org/c_aq for the neutral form, so the organic solvent is favoured) and an acid dissociation constant **K_a = ${{sci(Ka, 1)}}$**. **{{fix(Vw,0)}} mL** of aqueous solution at **pH {{fix(pH,1)}}** is used to extract the acid from **{{fix(Vo,0)}} mL of the organic solvent, which holds {{fix(C0,2)}} M acid**.\n\n(a) Calculate the distribution coefficient *D*.\n(b) Find the concentration of acid left in the organic solvent after one extraction.\n(c) What percentage of the acid has been extracted into the water?\n(d) Would the organic solvent hold more acid after extraction with aqueous solution at **pH {{fix(pH,1)}}** or at **pH {{fix(pH2,1)}}**? Give the concentration left at pH {{fix(pH2,1)}} as well.\n(e) Now extract with **fresh {{fix(Vw2,0)}} mL portions** of the aqueous solution at pH {{fix(pH,1)}}. Find the fraction left in the organic solvent after each portion, the minimum number of portions needed to bring the concentration down to ${{sci(Ct, 1)}}$ M, and the total volume of aqueous solution used.",
+     "hint": "Acid: D = K/(1 + K_a/[H⁺]) with [H⁺] = 10^(−pH). The acid starts in the organic phase, so the fraction left after one extraction is f = V_org/(V_org + V_aq/D). After n identical extractions c = c₀ fⁿ, so n = ln(c/c₀)/ln f, rounded up.",
+     "explanation": "D = K/(1 + K_a/[H⁺]) with [H⁺] = 10^(−pH). Because the acid starts in the organic phase, the fraction left after one extraction is f = V_org/(V_org + V_aq/D), the concentration left is c₀f, and the percentage extracted is 100(1 − f). At the higher pH the acid is mostly ionised (A⁻ stays in the water), D is tiny and almost nothing is left in the organic solvent, so the organic solvent holds more acid after extraction at the lower pH. For repeated extractions with fresh portions, f₂ = V_org/(V_org + V_portion/D) each time, n = ln(c_target/c₀)/ln f₂ rounded up to a whole number, and the total aqueous volume is n × V_portion.",
+     "variables": {
+      "sampled": {
+       "K": {
+        "type": "range",
+        "min": 2,
+        "max": 5,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "pKa": {
+        "type": "range",
+        "min": 3.8,
+        "max": 5.2,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "off": {
+        "type": "choice",
+        "options": [
+         0.3,
+         0.5,
+         0.8,
+         1
+        ]
+       },
+       "Vo": {
+        "type": "choice",
+        "options": [
+         20,
+         25,
+         30,
+         40
+        ]
+       },
+       "r": {
+        "type": "choice",
+        "options": [
+         1,
+         2
+        ]
+       },
+       "Vw": {
+        "type": "choice",
+        "options": [
+         50,
+         75,
+         100,
+         150
+        ]
+       },
+       "C0": {
+        "type": "choice",
+        "options": [
+         0.1,
+         0.15,
+         0.2,
+         0.25
+        ]
+       },
+       "Ct": {
+        "type": "choice",
+        "options": [
+         0.001,
+         0.0001,
+         0.00001
+        ]
+       }
+      },
+      "derived": {
+       "Ka": "sigfig(10^(-pKa), 2)",
+       "pH": "round(pKa + off, 1)",
+       "pH2": "pH + 4",
+       "H": "10^(-pH)",
+       "H2": "10^(-pH2)",
+       "D": "K / (1 + Ka / H)",
+       "fo": "Vo / (Vo + Vw / D)",
+       "C1": "C0 * fo",
+       "pct": "100 * (1 - fo)",
+       "D2": "K / (1 + Ka / H2)",
+       "fo2": "Vo / (Vo + Vw / D2)",
+       "Cb": "C0 * fo2",
+       "which": "'the lower pH'",
+       "Vw2": "Vo * r",
+       "f2": "Vo / (Vo + Vw2 / D)",
+       "nex": "ln(Ct / C0) / ln(f2)",
+       "n": "round(nex + 0.4999999, 0)",
+       "Vtot": "n * Vw2",
+       "Dbase": "K / (1 + H / Ka)",
+       "Kwrong": "K",
+       "C1aq": "C0 * Vw / (Vw + D * Vo)",
+       "pctLeft": "100 * fo"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "D",
+        "label": "Distribution coefficient D",
+        "numeric": true
+       },
+       {
+        "key": "C1",
+        "label": "Concentration left in the organic solvent",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "pct",
+        "label": "Percentage extracted into the water",
+        "unit": "%",
+        "numeric": true
+       },
+       {
+        "key": "Cb",
+        "label": "Concentration left at the higher pH",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "which",
+        "label": "More acid is left in the organic solvent at",
+        "options": [
+         "the lower pH",
+         "the higher pH"
+        ]
+       },
+       {
+        "key": "f2",
+        "label": "Fraction left per portion",
+        "numeric": true
+       },
+       {
+        "key": "n",
+        "label": "Number of portions",
+        "numeric": true
+       },
+       {
+        "key": "Vtot",
+        "label": "Total aqueous volume",
+        "unit": "mL",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "D": {
+        "type": "numeric",
+        "targetExpr": "D",
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used K. At this pH the acid is partly ionised, so use D = K/(1 + K_a/[H⁺]).",
+          "expr": "Kwrong"
+         },
+         {
+          "label": "That is the form for a base. For an acid D = K/(1 + K_a/[H⁺]).",
+          "expr": "Dbase"
+         }
+        ]
+       },
+       "C1": {
+        "type": "numeric",
+        "targetExpr": "C1",
+        "relTol": 0.015,
+        "sig": 3,
+        "unit": "M",
+        "paths": [
+         {
+          "label": "You used the formula for a solute that starts in the water. Here it starts in the organic phase: f = V_org/(V_org + V_aq/D).",
+          "expr": "C1aq"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "C0 * Vo / (Vo + Vw / u_D)",
+          "label": "Consistent with your own D, so the method earns part credit."
+         }
+        ]
+       },
+       "pct": {
+        "type": "numeric",
+        "targetExpr": "pct",
+        "relTol": 0.01,
+        "sig": 3,
+        "unit": "%",
+        "paths": [
+         {
+          "label": "That is the percentage left in the organic phase. % extracted = 100 × (1 − f).",
+          "expr": "pctLeft"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "100 * (1 - u_C1 / C0)",
+          "label": "Consistent with your own concentration, so the method earns part credit."
+         }
+        ]
+       },
+       "Cb": {
+        "type": "numeric",
+        "targetExpr": "Cb",
+        "relTol": 0.03,
+        "sig": 3,
+        "unit": "M"
+       },
+       "which": {
+        "type": "keyword",
+        "expectedExpr": "which",
+        "synonyms": {
+         "the lower pH": [
+          "lower pH",
+          "lower",
+          "low pH"
+         ],
+         "the higher pH": [
+          "higher pH",
+          "higher",
+          "high pH"
+         ]
+        },
+        "displays": {
+         "the lower pH": "the lower pH (the acid stays un-ionised, so D is larger)"
+        }
+       },
+       "f2": {
+        "type": "numeric",
+        "targetExpr": "f2",
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used the large aqueous volume. Each extraction here uses the smaller portion.",
+          "expr": "fo"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "Vo / (Vo + Vw2 / u_D)",
+          "label": "Consistent with your own D, so the method earns part credit."
+         }
+        ]
+       },
+       "n": {
+        "type": "numeric",
+        "targetExpr": "n",
+        "relTol": 0.001,
+        "sig": 2,
+        "paths": [
+         {
+          "label": "Round up: you cannot do a fraction of an extraction.",
+          "expr": "nex"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "round(ln(Ct / C0) / ln(u_f2) + 0.4999999, 0)",
+          "label": "Consistent with your own fraction, so the method earns part credit."
+         }
+        ]
+       },
+       "Vtot": {
+        "type": "numeric",
+        "targetExpr": "Vtot",
+        "relTol": 0.001,
+        "sig": 3,
+        "unit": "mL",
+        "paths": [
+         {
+          "label": "Each extraction uses the smaller portion, not the first volume.",
+          "expr": "n * Vw"
+         },
+         {
+          "label": "Round the number of portions up before multiplying.",
+          "expr": "nex * Vw2"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_n * Vw2",
+          "label": "Consistent with your own number of portions, so the method earns part credit."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "x-acid-short",
+     "perspectiveLabel": "D, concentration left, % extracted (14 marks)",
+     "marks": 14,
+     "stem": "A weak acid HA has a partition coefficient **K = {{fix(K,1)}}** between an organic solvent and water (K = c_org/c_aq for the neutral form, so the organic solvent is favoured) and an acid dissociation constant **K_a = ${{sci(Ka, 1)}}$**. **{{fix(Vw,0)}} mL** of aqueous solution at **pH {{fix(pH,1)}}** is used to extract the acid from **{{fix(Vo,0)}} mL of the organic solvent, which holds {{fix(C0,2)}} M acid**.\n\n(a) Calculate the distribution coefficient *D*.\n(b) Find the concentration of acid left in the organic solvent after one extraction.\n(c) What percentage of the acid has been extracted into the water?",
+     "hint": "Acid: D = K/(1 + K_a/[H⁺]) with [H⁺] = 10^(−pH). The acid starts in the organic phase, so the fraction left after one extraction is f = V_org/(V_org + V_aq/D). After n identical extractions c = c₀ fⁿ, so n = ln(c/c₀)/ln f, rounded up.",
+     "explanation": "D = K/(1 + K_a/[H⁺]) with [H⁺] = 10^(−pH). Because the acid starts in the organic phase, the fraction left after one extraction is f = V_org/(V_org + V_aq/D), the concentration left is c₀f, and the percentage extracted is 100(1 − f). At the higher pH the acid is mostly ionised (A⁻ stays in the water), D is tiny and almost nothing is left in the organic solvent, so the organic solvent holds more acid after extraction at the lower pH. For repeated extractions with fresh portions, f₂ = V_org/(V_org + V_portion/D) each time, n = ln(c_target/c₀)/ln f₂ rounded up to a whole number, and the total aqueous volume is n × V_portion.",
+     "variables": {
+      "sampled": {
+       "K": {
+        "type": "range",
+        "min": 2,
+        "max": 5,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "pKa": {
+        "type": "range",
+        "min": 3.8,
+        "max": 5.2,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "off": {
+        "type": "choice",
+        "options": [
+         0.3,
+         0.5,
+         0.8,
+         1
+        ]
+       },
+       "Vo": {
+        "type": "choice",
+        "options": [
+         20,
+         25,
+         30,
+         40
+        ]
+       },
+       "r": {
+        "type": "choice",
+        "options": [
+         1,
+         2
+        ]
+       },
+       "Vw": {
+        "type": "choice",
+        "options": [
+         50,
+         75,
+         100,
+         150
+        ]
+       },
+       "C0": {
+        "type": "choice",
+        "options": [
+         0.1,
+         0.15,
+         0.2,
+         0.25
+        ]
+       },
+       "Ct": {
+        "type": "choice",
+        "options": [
+         0.001,
+         0.0001,
+         0.00001
+        ]
+       }
+      },
+      "derived": {
+       "Ka": "sigfig(10^(-pKa), 2)",
+       "pH": "round(pKa + off, 1)",
+       "pH2": "pH + 4",
+       "H": "10^(-pH)",
+       "H2": "10^(-pH2)",
+       "D": "K / (1 + Ka / H)",
+       "fo": "Vo / (Vo + Vw / D)",
+       "C1": "C0 * fo",
+       "pct": "100 * (1 - fo)",
+       "D2": "K / (1 + Ka / H2)",
+       "fo2": "Vo / (Vo + Vw / D2)",
+       "Cb": "C0 * fo2",
+       "which": "'the lower pH'",
+       "Vw2": "Vo * r",
+       "f2": "Vo / (Vo + Vw2 / D)",
+       "nex": "ln(Ct / C0) / ln(f2)",
+       "n": "round(nex + 0.4999999, 0)",
+       "Vtot": "n * Vw2",
+       "Dbase": "K / (1 + H / Ka)",
+       "Kwrong": "K",
+       "C1aq": "C0 * Vw / (Vw + D * Vo)",
+       "pctLeft": "100 * fo"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "D",
+        "label": "Distribution coefficient D",
+        "numeric": true
+       },
+       {
+        "key": "C1",
+        "label": "Concentration left in the organic solvent",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "pct",
+        "label": "Percentage extracted into the water",
+        "unit": "%",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "D": {
+        "type": "numeric",
+        "targetExpr": "D",
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used K. At this pH the acid is partly ionised, so use D = K/(1 + K_a/[H⁺]).",
+          "expr": "Kwrong"
+         },
+         {
+          "label": "That is the form for a base. For an acid D = K/(1 + K_a/[H⁺]).",
+          "expr": "Dbase"
+         }
+        ]
+       },
+       "C1": {
+        "type": "numeric",
+        "targetExpr": "C1",
+        "relTol": 0.015,
+        "sig": 3,
+        "unit": "M",
+        "paths": [
+         {
+          "label": "You used the formula for a solute that starts in the water. Here it starts in the organic phase: f = V_org/(V_org + V_aq/D).",
+          "expr": "C1aq"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "C0 * Vo / (Vo + Vw / u_D)",
+          "label": "Consistent with your own D, so the method earns part credit."
+         }
+        ]
+       },
+       "pct": {
+        "type": "numeric",
+        "targetExpr": "pct",
+        "relTol": 0.01,
+        "sig": 3,
+        "unit": "%",
+        "paths": [
+         {
+          "label": "That is the percentage left in the organic phase. % extracted = 100 × (1 − f).",
+          "expr": "pctLeft"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "100 * (1 - u_C1 / C0)",
+          "label": "Consistent with your own concentration, so the method earns part credit."
+         }
+        ]
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-x-base",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Extraction of a weak base at two pH values",
+    "source": "Extraction slides; final Q3 style",
+    "week": 8,
+    "primaryTheme": "Extraction",
+    "conceptTags": [
+     "extraction",
+     "distribution-coefficient",
+     "weak-base"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 8,
+    "examStyle": "construct_4to6",
+    "family": "extract-base"
+   },
+   "variants": [
+    {
+     "variantId": "x-base",
+     "perspectiveLabel": "Amine in the organic phase (12 marks)",
+     "marks": 12,
+     "stem": "An amine B has a partition coefficient **K = {{fix(K,0)}}** between an organic solvent and water (K = c_org/c_aq for the neutral base). The acid dissociation constant of its conjugate acid BH⁺ is **K_a = ${{sci(Ka, 1)}}$**. **{{fix(Vo,0)}} mL** of the organic solvent holding **{{fix(C0,3)}} M** amine is shaken once with **{{fix(Vw,0)}} mL** of aqueous solution.\n\n(a) Calculate *D* at **pH {{fix(pHa,1)}}** and the concentration of amine left in the organic phase.\n(b) Calculate *D* at **pH {{fix(pHb,1)}}** and the concentration of amine in the aqueous phase.\n(c) At which pH is more amine pulled out of the organic solvent?",
+     "hint": "Base: D = K/(1 + [H⁺]/K_a) (K_a of BH⁺). The amine starts in the organic phase: f = V_org/(V_org + V_aq/D). The amine that leaves the organic phase is c₀(1 − f)V_org, and it is dissolved in V_aq.",
+     "explanation": "For a weak base D = K·K_a/(K_a + [H⁺]) = K/(1 + [H⁺]/K_a). At high pH the base stays neutral and D approaches K; at low pH it is protonated to BH⁺, which stays in the water, so D falls and the base is pulled out of the organic phase. f = V_org/(V_org + V_aq/D), c_org = c₀f, and the amount in the water is c₀(1 − f)V_org, so c_aq = c₀(1 − f)V_org/V_aq. More amine is pulled out at the lower pH.",
+     "variables": {
+      "sampled": {
+       "K": {
+        "type": "choice",
+        "options": [
+         2,
+         3,
+         4,
+         5,
+         6
+        ]
+       },
+       "pKa": {
+        "type": "choice",
+        "options": [
+         8.5,
+         9,
+         9.5,
+         10
+        ]
+       },
+       "Vo": {
+        "type": "choice",
+        "options": [
+         40,
+         50,
+         60
+        ]
+       },
+       "Vw": {
+        "type": "choice",
+        "options": [
+         80,
+         100,
+         120
+        ]
+       },
+       "C0": {
+        "type": "choice",
+        "options": [
+         0.01,
+         0.02,
+         0.05
+        ]
+       }
+      },
+      "derived": {
+       "Ka": "sigfig(10^(-pKa), 2)",
+       "pHa": "pKa + 1",
+       "pHb": "pKa - 1",
+       "Ha": "10^(-pHa)",
+       "Hb": "10^(-pHb)",
+       "Da": "K / (1 + Ha / Ka)",
+       "Db": "K / (1 + Hb / Ka)",
+       "fa": "Vo / (Vo + Vw / Da)",
+       "Corg_a": "C0 * fa",
+       "fb": "Vo / (Vo + Vw / Db)",
+       "Caq_b": "C0 * (1 - fb) * Vo / Vw",
+       "which": "'the lower pH'",
+       "Dacid": "K / (1 + Ka / Ha)",
+       "Caq_nov": "C0 * (1 - fb)"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "Da",
+        "label": "D at the higher pH",
+        "numeric": true
+       },
+       {
+        "key": "Corg_a",
+        "label": "c(amine) left in the organic phase at the higher pH",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "Db",
+        "label": "D at the lower pH",
+        "numeric": true
+       },
+       {
+        "key": "Caq_b",
+        "label": "c(amine) in the aqueous phase at the lower pH",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "which",
+        "label": "More amine is pulled out of the organic solvent at",
+        "options": [
+         "the lower pH",
+         "the higher pH"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "Da": {
+        "type": "numeric",
+        "targetExpr": "Da",
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "That is the form for an acid. For a base D = K/(1 + [H⁺]/K_a).",
+          "expr": "Dacid"
+         }
+        ]
+       },
+       "Corg_a": {
+        "type": "numeric",
+        "targetExpr": "Corg_a",
+        "relTol": 0.015,
+        "sig": 3,
+        "unit": "M",
+        "ecf": [
+         {
+          "expr": "C0 * Vo / (Vo + Vw / u_Da)",
+          "label": "Consistent with your own D, so the method earns part credit."
+         }
+        ]
+       },
+       "Db": {
+        "type": "numeric",
+        "targetExpr": "Db",
+        "relTol": 0.01,
+        "sig": 3
+       },
+       "Caq_b": {
+        "type": "numeric",
+        "targetExpr": "Caq_b",
+        "relTol": 0.02,
+        "sig": 3,
+        "unit": "M",
+        "paths": [
+         {
+          "label": "The amount that moved is dissolved in the aqueous volume, which is not the organic volume: divide by V_aq, not V_org.",
+          "expr": "Caq_nov"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "C0 * (1 - Vo / (Vo + Vw / u_Db)) * Vo / Vw",
+          "label": "Consistent with your own D, so the method earns part credit."
+         }
+        ]
+       },
+       "which": {
+        "type": "keyword",
+        "expectedExpr": "which",
+        "synonyms": {
+         "the lower pH": [
+          "lower pH",
+          "lower",
+          "low pH"
+         ],
+         "the higher pH": [
+          "higher pH",
+          "higher",
+          "high pH"
+         ]
+        },
+        "displays": {
+         "the lower pH": "the lower pH (the base is protonated and stays in the water)"
+        }
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-x-repeat",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "One large extraction or several small ones",
+    "source": "Extraction slides; final Q3 style",
+    "week": 8,
+    "primaryTheme": "Extraction",
+    "conceptTags": [
+     "extraction",
+     "multiple-extractions"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 7,
+    "examStyle": "construct_4to6",
+    "family": "extract-multi"
+   },
+   "variants": [
+    {
+     "variantId": "x-repeat",
+     "perspectiveLabel": "Solute starts in water (10 marks)",
+     "marks": 10,
+     "stem": "A solute dissolved in **{{fix(Vaq,0)}} mL of water** is extracted with an organic solvent. Its partition coefficient is **K = {{fix(K,0)}}** (K = c_org/c_aq).\n\n(a) What percentage of the solute stays in the water after **one** extraction with **{{fix(Vtot,0)}} mL** of solvent?\n(b) What percentage stays after **{{fix(ns,0)}} extractions** with {{fix(Ve,1)}} mL each (the same total volume)?\n(c) How many extractions with {{fix(Ve,1)}} mL portions are needed to leave no more than **{{fix(x,1)}}%** in the water?\n(d) Which way removes more solute?",
+     "hint": "The solute starts in the water: after one extraction f = V_aq/(V_aq + K V_org). After n extractions the fraction is fⁿ. n = ln(target)/ln f for one portion size, rounded up.",
+     "explanation": "f = V_aq/(V_aq + K V_org) for each extraction when the solute starts in the water. One extraction with the whole volume leaves f₁; n portions of V_org/n leave (V_aq/(V_aq + K V_org/n))ⁿ, which is smaller: several small extractions beat one large one because each re-applies the equilibrium to what is left. The number needed is n = ln(target)/ln(f per portion), rounded up.",
+     "variables": {
+      "sampled": {
+       "Vaq": {
+        "type": "choice",
+        "options": [
+         50,
+         100
+        ]
+       },
+       "Vtot": {
+        "type": "choice",
+        "options": [
+         100,
+         200,
+         250,
+         500
+        ]
+       },
+       "ns": {
+        "type": "choice",
+        "options": [
+         2,
+         4,
+         5
+        ]
+       },
+       "K": {
+        "type": "choice",
+        "options": [
+         2,
+         3,
+         4,
+         5,
+         8
+        ]
+       },
+       "x": {
+        "type": "choice",
+        "options": [
+         1,
+         0.1
+        ]
+       }
+      },
+      "derived": {
+       "q1": "100 * Vaq / (Vaq + K * Vtot)",
+       "Ve": "Vtot / ns",
+       "qeach": "Vaq / (Vaq + K * Ve)",
+       "q2": "100 * qeach^ns",
+       "nex": "ln(x / 100) / ln(qeach)",
+       "nn": "round(nex + 0.4999999, 0)",
+       "which": "'several small extractions'",
+       "wrongK": "100 * Vaq / (Vaq + Vtot / K)",
+       "q1only": "100 * qeach"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "q1",
+        "label": "Left in water after one extraction",
+        "unit": "%",
+        "numeric": true
+       },
+       {
+        "key": "q2",
+        "label": "Left in water after several portions",
+        "unit": "%",
+        "numeric": true
+       },
+       {
+        "key": "nn",
+        "label": "Number of extractions for the target",
+        "numeric": true
+       },
+       {
+        "key": "which",
+        "label": "More solute is removed by",
+        "options": [
+         "one large extraction",
+         "several small extractions"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "q1": {
+        "type": "numeric",
+        "targetExpr": "q1",
+        "relTol": 0.01,
+        "sig": 3,
+        "unit": "%",
+        "paths": [
+         {
+          "label": "You inverted K. For K = c_org/c_aq the denominator is V_aq + K × V_org.",
+          "expr": "wrongK"
+         }
+        ]
+       },
+       "q2": {
+        "type": "numeric",
+        "targetExpr": "q2",
+        "relTol": 0.015,
+        "sig": 3,
+        "unit": "%",
+        "paths": [
+         {
+          "label": "That is the fraction left after one portion only. Raise it to the power of the number of portions.",
+          "expr": "q1only"
+         }
+        ]
+       },
+       "nn": {
+        "type": "numeric",
+        "targetExpr": "nn",
+        "relTol": 0.001,
+        "sig": 2,
+        "paths": [
+         {
+          "label": "Round up: you cannot do a fraction of an extraction.",
+          "expr": "nex"
+         }
+        ]
+       },
+       "which": {
+        "type": "keyword",
+        "expectedExpr": "which",
+        "synonyms": {
+         "one large extraction": [
+          "one large",
+          "one big",
+          "single"
+         ],
+         "several small extractions": [
+          "several small",
+          "many small",
+          "small portions",
+          "multiple"
+         ]
+        }
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-x-explain",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Extraction: explain",
+    "source": "Extraction slides; final Q3 style",
+    "week": 8,
+    "primaryTheme": "Extraction",
+    "conceptTags": [
+     "extraction",
+     "written"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 6,
+    "examStyle": "construct_4to6",
+    "family": "extract-concept"
+   },
+   "variants": [
+    {
+     "variantId": "x-w-ph",
+     "perspectiveLabel": "Which pH leaves more acid in the ether (4 marks)",
+     "marks": 4,
+     "stem": "Benzoic acid (a weak acid) in diethyl ether is extracted with an aqueous solution. Would you expect the concentration of benzoic acid left in the ether to be **higher after extraction at pH 5 or at pH 9**? Explain your reasoning.",
+     "explanation": "The neutral acid HA prefers the organic phase; its anion A⁻ stays in the water. At pH 9, well above the pKa (about 4.2), the acid is almost completely ionised, so the distribution coefficient D = K/(1 + K_a/[H⁺]) is tiny and almost all of the acid moves into the water. At pH 5, close to the pKa, a good fraction is still un-ionised, D is larger and more acid remains in the ether. So the ether holds more acid after extraction at pH 5.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "The neutral acid HA prefers the organic phase; the ionised form A⁻ stays in the water",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "At pH 9 (well above the pKa) the acid is mostly ionised, so D is very small and nearly all of it moves into the water",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "At pH 5 (near the pKa) much of the acid is still un-ionised, so D is larger and more stays in the ether",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "So the ether concentration is higher after extraction at pH 5 (supported by D = K/(1 + K_a/[H⁺]))",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "x-w-small",
+     "perspectiveLabel": "Why several small extractions win (3 marks)",
+     "marks": 3,
+     "stem": "With the same total volume of solvent, why do **several small extractions** remove more solute than **one large extraction**?",
+     "explanation": "Each extraction re-applies the partition equilibrium to the solute that is still left. After n portions of V_org/n the fraction left in the water is [V_aq/(V_aq + K V_org/n)]ⁿ, which is smaller than V_aq/(V_aq + K V_org) for one large portion. The gain levels off as n grows, so a few portions capture most of the benefit.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Each extraction re-applies the equilibrium to the solute still left, starting again from a smaller amount",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "The fraction left after n portions, [V_aq/(V_aq + K V_org/n)]ⁿ, is smaller than for one portion V_org",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "So the same total volume extracts more when split (with diminishing returns as n grows)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "x-w-kd",
+     "perspectiveLabel": "K and D (3 marks)",
+     "marks": 3,
+     "stem": "What is the difference between the **partition coefficient K** and the **distribution coefficient D**, and when are they equal?",
+     "explanation": "K describes the equilibrium of one chemical form (the neutral molecule) between the two solvents and does not change with pH. D is the overall ratio of the total concentration in the organic phase to the total concentration (all forms, such as HA and A⁻, or B and BH⁺) in the aqueous phase, so it depends on pH. They are equal when the solute exists in only one form, for example an acid at low pH or a base at high pH, where D approaches K.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "K: ratio of the concentration of the neutral species in the two phases; it does not depend on pH",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "D: ratio of the total concentration in the organic phase to the total in the aqueous phase (all forms, such as HA and A⁻); it depends on pH",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "They are equal when the solute is present in one form only (an acid at low pH, a base at high pH), where D approaches K",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "x-p-orig",
+     "perspectiveLabel": "Which fraction formula",
+     "marks": 1,
+     "stem": "A solute starts in **50 mL of organic solvent** and is shaken once with **25 mL of water**. Its distribution coefficient is D = 2 (organic/aqueous). Which expression gives the fraction left in the organic phase?",
+     "explanation": "The solute starts in the organic phase, so f = V_org/(V_org + V_aq/D) = 50/(50 + 25/2). The expression 25/(25 + 2 × 50) is the one for a solute that starts in the water.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "50 / (50 + 25/2)"
+       },
+       {
+        "id": "b",
+        "label": "25 / (25 + 2 × 50)"
+       },
+       {
+        "id": "c",
+        "label": "50 / (50 + 2 × 25)"
+       },
+       {
+        "id": "d",
+        "label": "25 / (25 + 50/2)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "x-p-pka",
+     "perspectiveLabel": "D at pH = pKa",
+     "marks": 1,
+     "stem": "A weak acid HA has K = 6.0 and pKa 5.0. What is D at pH 5.0?",
+     "explanation": "At pH = pKa, [A⁻] = [HA], so D = K/(1 + K_a/[H⁺]) = K/2 = 3.0.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "3.0"
+       },
+       {
+        "id": "b",
+        "label": "6.0"
+       },
+       {
+        "id": "c",
+        "label": "0.5"
+       },
+       {
+        "id": "d",
+        "label": "12.0"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "x-p-base",
+     "perspectiveLabel": "Lowering the pH for a base",
+     "marks": 1,
+     "stem": "The pH of the aqueous phase is lowered while a weak base B is extracted. Which statement is correct?",
+     "explanation": "Lower pH converts more of B into BH⁺, which is ionic and stays in the water, so D falls and more of the solute moves to the aqueous phase. K, which describes the neutral base, does not change.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "D falls and more solute moves into the aqueous phase; K does not change"
+       },
+       {
+        "id": "b",
+        "label": "D rises and more solute stays in the organic phase"
+       },
+       {
+        "id": "c",
+        "label": "K falls and more solute moves into the aqueous phase"
+       },
+       {
+        "id": "d",
+        "label": "neither K nor D changes"
        }
       ]
      },

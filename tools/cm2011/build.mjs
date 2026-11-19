@@ -8,6 +8,8 @@ import p3b from './p3b.mjs';
 import s4 from './s4.mjs';
 import f5 from './f5.mjs';
 import g5 from './g5.mjs';
+import x6 from './x6.mjs';
+import t7 from './t7.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const outDir = path.resolve(here, '..', '..', 'public', 'content', 'cm2011');
@@ -24,12 +26,14 @@ const CHUNKS = [
   { id: 's-absorption', part: 'Topic 4: Spectroscopy', name: 'Absorption spectroscopy', summary: 'Beer–Lambert, %T, dilutions, unit conversions, instrument layout' },
   { id: 's-fluorescence', part: 'Topic 4: Spectroscopy', name: 'Fluorescence', summary: 'Stokes shift, 90° geometry, sensitivity, layout' },
   { id: 's-atomic', part: 'Topic 4: Spectroscopy', name: 'Atomic spectroscopy', summary: 'AAS components, lamps, atomisers, Boltzmann populations, line widths, ICP' },
+  { id: 'x-calc', part: 'Extraction', name: 'Extraction calculations: D at a pH, fraction left, number of portions', summary: 'Acid and base D(pH), fraction left when the solute starts in either phase, repeated extractions' },
+  { id: 'x-concepts', part: 'Extraction', name: 'Extraction concepts and conventions', summary: 'Which pH leaves more behind, several small portions, K vs D, which fraction formula' },
   { id: 'g-gc', part: 'GC and HPLC', name: 'GC: columns, programming, injection, carrier gas', summary: 'Open tubular vs packed, temperature and pressure programming, split/splitless/on-column, derivatisation, carrier gases' },
   { id: 'g-detect', part: 'GC and HPLC', name: 'GC detectors and coupling to MS', summary: 'TCD, FID, MS; GC–MS vs LC–MS; what HPLC suits' },
   { id: 'g-hplc', part: 'GC and HPLC', name: 'HPLC: columns, modes, elution order, detection', summary: 'Column label, C18/C8, normal vs reversed phase, elution order, isocratic vs gradient, detectors, particle size, choosing GC or HPLC' },
 ];
 
-const all = [...t1, ...e3a, ...p3b, ...s4, ...f5, ...g5];
+const all = [...t1, ...t7, ...e3a, ...p3b, ...s4, ...f5, ...g5, ...x6];
 const nodes = all.map((x) => x.node);
 const ids = new Set();
 for (const n of nodes) { if (ids.has(n.id)) throw new Error('duplicate node id ' + n.id); ids.add(n.id); }

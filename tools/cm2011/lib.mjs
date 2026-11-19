@@ -10,7 +10,39 @@
 export const MODULE = 'CM2011';
 
 /** Two-tailed 95% Student t, by degrees of freedom (the 8-df value 2.306 matches the 2011-12 final's key). */
-export const T95 = { 1: 12.706, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571, 6: 2.447, 7: 2.365, 8: 2.306, 9: 2.262, 10: 2.228 };
+export const T95 = { 1: 12.706, 2: 4.303, 3: 3.182, 4: 2.776, 5: 2.571, 6: 2.447, 7: 2.365, 8: 2.306, 9: 2.262, 10: 2.228, 15: 2.131, 20: 2.086, 25: 2.060, 30: 2.042, 40: 2.021, 60: 2.000, 120: 1.980 };
+
+/** The booklet's Student t table (two-tailed). Its rows are df = 1-10, 15, 20, 25, 30, 40, 60 and 120 (then infinity), so a df that is not
+    listed is read at the next lower row (the exam keys do this: 4.587 for 11 df at 99.9%, 3.725 for 26 df). */
+export const TT = {
+  50:   { 1: 1.000, 2: 0.816, 3: 0.765, 4: 0.741, 5: 0.727, 6: 0.718, 7: 0.711, 8: 0.706, 9: 0.703, 10: 0.700, 15: 0.691, 20: 0.687, 25: 0.684, 30: 0.683, 40: 0.681, 60: 0.679, 120: 0.677 },
+  90:   { 1: 6.314, 2: 2.920, 3: 2.353, 4: 2.132, 5: 2.015, 6: 1.943, 7: 1.895, 8: 1.860, 9: 1.833, 10: 1.812, 15: 1.753, 20: 1.725, 25: 1.708, 30: 1.697, 40: 1.684, 60: 1.671, 120: 1.658 },
+  95:   T95,
+  98:   { 1: 31.821, 2: 6.965, 3: 4.541, 4: 3.747, 5: 3.365, 6: 3.143, 7: 2.998, 8: 2.896, 9: 2.821, 10: 2.764, 15: 2.602, 20: 2.528, 25: 2.485, 30: 2.457, 40: 2.423, 60: 2.390, 120: 2.358 },
+  99:   { 1: 63.657, 2: 9.925, 3: 5.841, 4: 4.604, 5: 4.032, 6: 3.707, 7: 3.500, 8: 3.355, 9: 3.250, 10: 3.169, 15: 2.947, 20: 2.845, 25: 2.787, 30: 2.750, 40: 2.704, 60: 2.660, 120: 2.617 },
+  99.5: { 1: 127.32, 2: 14.089, 3: 7.453, 4: 5.598, 5: 4.773, 6: 4.317, 7: 4.029, 8: 3.832, 9: 3.690, 10: 3.581, 15: 3.252, 20: 3.153, 25: 3.078, 30: 3.030, 40: 2.971, 60: 2.915, 120: 2.860 },
+  99.9: { 1: 636.619, 2: 31.598, 3: 12.924, 4: 8.610, 5: 6.869, 6: 5.959, 7: 5.408, 8: 5.041, 9: 4.781, 10: 4.587, 15: 4.073, 20: 3.850, 25: 3.725, 30: 3.646, 40: 3.551, 60: 3.460, 120: 3.373 },
+};
+/** The value the exam would read for this confidence level and df. */
+export function tLookup(level, df) {
+  const tab = TT[level];
+  const rows = Object.keys(tab).map(Number).sort((a, b) => a - b);
+  let use = rows[0];
+  for (const r of rows) if (r <= df) use = r;
+  return { row: use, t: tab[use] };
+}
+/** An Expr expression for the table value at a df held in an expression (nested ternaries over the table rows). */
+export function tExpr(level, dfExpr) {
+  const tab = TT[level];
+  const rows = Object.keys(tab).map(Number).sort((a, b) => b - a);
+  let e = String(tab[rows[rows.length - 1]]);
+  for (let i = rows.length - 2; i >= 0; i--) e = `${dfExpr} >= ${rows[i]} ? ${tab[rows[i]]} : (${e})`;
+  return e;
+}
+/** The 99.9% column of the booklet table as one line, for hints. */
+/** A table value as the booklet prints it (three decimals; the 99.5% column starts 127.32). */
+export const fmtT = (t) => (t >= 127 && t < 128 ? t.toFixed(2) : t.toFixed(3));
+export const tColumnLine = (level) => Object.entries(TT[level]).map(([df, t]) => `${df}: ${fmtT(t)}`).join(', ');
 /** Q-test critical values at 90% confidence (the 2010/11 key uses 0.47 for n = 8 and the 2011-12 key 0.56 for n = 6). */
 export const Q90 = { 3: 0.941, 4: 0.765, 5: 0.642, 6: 0.560, 7: 0.507, 8: 0.468, 9: 0.437, 10: 0.412 };
 

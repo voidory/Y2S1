@@ -167,6 +167,22 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await fillAll(await exact()); await submit();
   ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current.evalResult?.normalizedGrade === 1), 'the right five process names earn full marks');
 
+  ok(await open('bk-m11-x-acid', 'Full chain (25 marks)'), 'opened the extraction chain');
+  await answerStep();
+  ok(await p.evaluate(() => document.querySelectorAll('#studyView input[id^="mf_"], #studyView select[id^="mf_"]').length === 8), 'eight answer fields, one for each step of the chain');
+  await fillAll(await exact()); await submit();
+  ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current.evalResult?.normalizedGrade === 1), 'the exact chain (D, concentration left, % extracted, which pH, portions, volume) earns full marks');
+
+  ok(await open('bk-m11-t1-ttest-final', 'Pooled test from summary statistics, 99.9% (4 marks)'), 'opened the 99.9% pooled test from summary statistics');
+  await answerStep();
+  ok(await p.evaluate(() => document.querySelectorAll('#studyView input[id^="mf_"], #studyView select[id^="mf_"]').length === 5), 'five answer fields: s_pooled, t_calc, df, the table value and the decision');
+  await fillAll(await exact()); await submit();
+  ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current.evalResult?.normalizedGrade === 1), 'the exact numbers, the table value read at the next lower row, and the decision earn full marks');
+  ok(await open('bk-m11-t1-levels', 'Highest level at which the methods still differ (2 marks)'), 'opened the verdict-flip question');
+  await answerStep();
+  await fillAll(await exact()); await submit();
+  ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current.evalResult?.normalizedGrade === 1), 'the right confidence level earns full marks');
+
   ok(await open('bk-m11-s-fl-cal', 'Concentration from two standards (4 marks)'), 'opened the two-point calibration question');
   await answerStep();
   await fillAll(await exact()); await submit();

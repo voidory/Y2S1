@@ -282,3 +282,85 @@ test('final-style paper: four sections, only CM2011 questions, sensible marks, f
   const ids = new Set(bank.questionNodes.map((n) => n.id));
   for (const s of recipe.sections) for (const part of s.parts) for (const id of part) assert.ok(ids.has(id), id);
 });
+
+test('pick-one options are shuffled (the key is not always first), keep their ids, and are seeded', () => {
+  const picks = [];
+  for (const n of bank.questionNodes) for (const v of n.variants) if (v.inputSlot.type === 'choice') picks.push(v);
+  assert.ok(picks.length > 40, `${picks.length} pick-one variants`);
+  assert.ok(picks.every((v) => v.inputSlot.shuffleOptions === true), 'every CM2011 pick-one variant opts in to shuffling');
+  let keyFirst = 0;
+  let total = 0;
+  for (const v of picks) {
+    const ids = v.inputSlot.options.map((o) => o.id).sort().join();
+    for (let seed = 1; seed <= 12; seed++) {
+      const a = Scheduler.instantiateVariant(v, seed * 104729);
+      const b = Scheduler.instantiateVariant(v, seed * 104729);
+      const order = a.variant.inputSlot.options.map((o) => o.id);
+      assert.equal(order.slice().sort().join(), ids, `${v.variantId}: same options`);
+      assert.equal(order.join(), b.variant.inputSlot.options.map((o) => o.id).join(), `${v.variantId}: same seed, same order`);
+      assert.equal(v.inputSlot.options[0].id, v.evaluator.targetIds[0], `${v.variantId}: authored key-first`);
+      if (order[0] === v.evaluator.targetIds[0]) keyFirst++;
+      total++;
+    }
+  }
+  assert.ok(keyFirst / total < 0.5, `the key is first in ${keyFirst} of ${total} instances`);
+});
+
+test('a variant that does not opt in keeps its authored option order', () => {
+  const v = { variantId: 'x', stem: 's', inputSlot: { type: 'choice', selectionMode: 'single', options: [{ id: 'a', label: '1' }, { id: 'b', label: '2' }, { id: 'c', label: '3' }] }, evaluator: { type: 'choice_match', targetIds: ['a'] } };
+  for (let seed = 1; seed <= 20; seed++) assert.equal(Scheduler.instantiateVariant(v, seed).variant.inputSlot.options.map((o) => o.id).join(), 'a,b,c');
+});
+
+test('second-half and spectroscopy drills: rubric marks add up, ordered lists and pick-one items are well formed', () => {
+  const newIds = ['bk-m11-g-detectors', 'bk-m11-g-columns', 'bk-m11-g-tprog', 'bk-m11-g-inject', 'bk-m11-g-carrier', 'bk-m11-h-column', 'bk-m11-h-mode', 'bk-m11-h-order', 'bk-m11-h-gradient', 'bk-m11-h-detect', 'bk-m11-h-particles', 'bk-m11-g-ms', 'bk-m11-g-choose',
+    'bk-m11-s-jablonski', 'bk-m11-s-fl-explain', 'bk-m11-s-fl-cal', 'bk-m11-s-aas-table', 'bk-m11-s-boltz', 'bk-m11-s-aes-aas', 'bk-m11-s-broad', 'bk-m11-s-icp'];
+  for (const id of newIds) assert.ok(byId[id], `${id} is in the bundle`);
+  for (const id of newIds.filter((x) => /-g-|-h-/.test(x))) assert.equal(byId[id].metadata.week, 10, `${id} is in week 10`);
+  for (const id of newIds) {
+    for (const v of byId[id].variants) {
+      const t = v.evaluator.type;
+      if (t === 'atomic_rubric') {
+        const sum = v.evaluator.rubric.reduce((a, r) => a + r.marks, 0);
+        assert.equal(sum, v.marks, `${v.variantId}: rubric adds to ${sum}, marks ${v.marks}`);
+        assert.ok(v.evaluator.rubric.every((r) => r.criterion.length > 8), `${v.variantId}: criteria are not empty`);
+        assert.ok(v.explanation.length > 60, `${v.variantId}: has a model answer`);
+      } else if (t === 'order_match') {
+        assert.ok(v.inputSlot.items.length >= 4);
+        assert.equal(v.evaluator.targetOrder.join(), v.inputSlot.items.map((i) => i.id).join());
+      } else if (t === 'choice_match') {
+        assert.equal(v.evaluator.targetIds.length, 1);
+        assert.ok(v.inputSlot.options.length >= 3);
+        assert.ok(new Set(v.inputSlot.options.map((o) => o.label)).size === v.inputSlot.options.length, `${v.variantId}: distinct options`);
+      }
+    }
+  }
+});
+
+test('golden: Boltzmann fractions for Na (2500 → 2520 K gives 1.15e-4 → 1.24e-4, about +8%)', () => {
+  const v = variantOf('bk-m11-s-boltz', 'a-boltz-small');
+  const sc = scopeWith(v, { T1: 2500, dT: 20 });
+  assert.ok(close(sc.p1, 0.0115, 0.01), `p1 ${sc.p1}`);
+  assert.ok(close(sc.p2, 0.0124, 0.01), `p2 ${sc.p2}`);
+  assert.ok(close(sc.rise, 8.06, 0.01), `rise ${sc.rise}`);
+  const big = scopeWith(variantOf('bk-m11-s-boltz', 'a-boltz-big'), { T1: 3500, dT: 1000 });
+  assert.ok(close(big.p1, 0.187, 0.01) && close(big.p2, 0.881, 0.01), `${big.p1} ${big.p2}`);
+});
+
+test('golden: two-point fluorescence calibration (slope 0.03, intercept 0.08, I = 0.35 gives 9 µg/m³) and the no-intercept slip is named', () => {
+  const v = variantOf('bk-m11-s-fl-cal', 'f-cal2');
+  const sc = scopeWith(v, { m: 0.03, b: 0.08, c1: 4, c2: 24, cx: 9 });
+  assert.ok(close(sc.slope, 0.03) && close(sc.icpt, 0.08) && close(sc.cxv, 9), JSON.stringify([sc.slope, sc.icpt, sc.cxv]));
+  const res = Evaluators.evaluate(v, { slope: String(sc.slope), icpt: String(sc.icpt), cxv: String(sc.cnoint) }, sc, {}, byId['bk-m11-s-fl-cal']);
+  assert.ok(res.normalizedGrade < 1);
+  assert.match(JSON.stringify(res.fieldResults.cxv), /intercept/);
+});
+
+test('Jablonski labelling: the right names score full marks and a swapped pair does not', () => {
+  const v = variantOf('bk-m11-s-jablonski', 'f-jab-labelAE');
+  const sc = scopeWith(v, {});
+  const right = { a: 'absorption', b: 'fluorescence', c: 'phosphorescence', d: 'internal conversion', e: 'intersystem crossing' };
+  assert.equal(Evaluators.evaluate(v, right, sc, {}, byId['bk-m11-s-jablonski']).normalizedGrade, 1);
+  const swapped = { ...right, b: 'phosphorescence', c: 'fluorescence' };
+  const r = Evaluators.evaluate(v, swapped, sc, {}, byId['bk-m11-s-jablonski']);
+  assert.ok(r.normalizedGrade > 0 && r.normalizedGrade < 1);
+});

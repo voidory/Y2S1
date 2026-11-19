@@ -85,7 +85,7 @@ export function calc({ id, label, marks, stem, hint, explanation, sampled = {}, 
 export function pick({ id, label, marks = 1, stem, explanation, options, correct, multi = false, hint }) {
   return {
     variantId: id, perspectiveLabel: label, marks, stem, ...(hint ? { hint } : {}), explanation,
-    inputSlot: { type: 'choice', selectionMode: multi ? 'multi' : 'single', options: options.map(([i, l]) => ({ id: i, label: l })) },
+    inputSlot: { type: 'choice', selectionMode: multi ? 'multi' : 'single', shuffleOptions: true, options: options.map(([i, l]) => ({ id: i, label: l })) },
     evaluator: { type: 'choice_match', targetIds: [].concat(correct), gradingMode: multi ? 'partial_with_penalty' : 'exact' },
   };
 }

@@ -104,7 +104,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(/Ionic strength and activity|Slope, calibration and readings/.test(await p.evaluate(() => document.querySelector('#appRoot').innerText)), 'the skills tab lists CM2011 topics');
   await p.evaluate(() => document.querySelector('.nav-link[data-nav="bank"]').click()); await p.waitForTimeout(400);
   const bank = await p.evaluate(() => document.querySelector('#appRoot').innerText);
-  ok(/\b3\d questions/.test(bank) && !/VSEPR/.test(bank), 'the bank lists only CM2011 questions');
+  const nCm = await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.nodes.length);
+  ok(new RegExp('\\b' + nCm + ' questions').test(bank) && !/VSEPR/.test(bank), `the bank lists only CM2011 questions (${nCm})`);
 
   // 6. mock paper from CM2011
   await p.evaluate(() => document.querySelector('.nav-link[data-nav="mock"]').click()); await p.waitForTimeout(400);
@@ -134,6 +135,43 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(scored.calcs > 5 && scored.full === scored.total, `exact answers earn full marks on every calculation in the paper (${scored.full}/${scored.total}), phase ${scored.phase}`);
   await p.evaluate(() => { const { UI } = window.__MASTERY_ENGINE__; UI.appState.mock.phase = 'setup'; UI.render(); });
 
+  // 6b. the second-half and spectroscopy drills in the real app
+  await p.evaluate(() => { const { UI } = window.__MASTERY_ENGINE__; UI.appState.route = 'study'; UI.appState.current = null; UI.render(); });
+  const keyFirst = [];
+  for (let i = 0; i < 12; i++) {
+    await open('bk-m11-g-carrier', 'Optimum flow');
+    keyFirst.push(await p.evaluate(() => { const v = window.__MASTERY_ENGINE__.UI.appState.current.inst.variant; return v.inputSlot.options[0].id === v.evaluator.targetIds[0]; }));
+  }
+  ok(keyFirst.some((x) => !x), `pick-one options are shuffled (the key was first in ${keyFirst.filter(Boolean).length} of 12 draws)`);
+  await answerStep();
+  ok(await p.evaluate(() => { const c = window.__MASTERY_ENGINE__.UI.appState.current; const shown = [...document.querySelectorAll('input[name="choiceInput"]')].map((i) => i.value).join(); return shown === c.inst.variant.inputSlot.options.map((o) => o.id).join(); }), 'the options on screen follow the shuffled order');
+
+  ok(await open('bk-m11-h-order', 'Reversed phase: final-paper set'), 'opened the reversed-phase elution order question');
+  await answerStep();
+  await p.evaluate(() => { const c = window.__MASTERY_ENGINE__.UI.appState.current; c.userInput = c.inst.variant.evaluator.targetOrder.slice(); });
+  await submit();
+  ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current.evalResult?.normalizedGrade === 1), 'the right elution order earns full marks');
+
+  ok(await open('bk-m11-g-detectors', 'TCD principle (3 marks)'), 'opened the TCD written question');
+  await answerStep();
+  await p.fill('textarea', 'A heated filament sits in the helium stream. When an analyte elutes the thermal conductivity of the gas changes, so the filament temperature and resistance change. It is universal, non-destructive and less sensitive than the FID.');
+  await p.evaluate(() => document.querySelector('#btnUnlockRubric')?.click()); await p.waitForTimeout(250);
+  await p.evaluate(() => document.querySelectorAll('#rubricSection input[type=checkbox]').forEach((c) => c.click()));
+  await p.evaluate(() => document.querySelector('#btnFinalizeRubric')?.click()); await p.waitForTimeout(400);
+  const rubW = await p.evaluate(() => { const c = document.querySelector('[data-review-kind="rubric"]'); return c ? { met: [...c.querySelectorAll('[data-rubric-item]')].map((e) => e.dataset.met).join(''), g: window.__MASTERY_ENGINE__.UI.appState.current.evalResult?.normalizedGrade } : null; });
+  ok(rubW && rubW.met === '111' && rubW.g === 1, `a written answer shows its three rubric points and full marks when all are ticked (${rubW && rubW.met}, ${rubW && rubW.g})`);
+
+  ok(await open('bk-m11-s-jablonski', 'Name processes A to E (5 marks)'), 'opened the Jablonski labelling question');
+  await answerStep();
+  ok(await p.evaluate(() => document.querySelectorAll('#studyView select').length === 5), 'one drop-down per arrow (5)');
+  await fillAll(await exact()); await submit();
+  ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current.evalResult?.normalizedGrade === 1), 'the right five process names earn full marks');
+
+  ok(await open('bk-m11-s-fl-cal', 'Concentration from two standards (4 marks)'), 'opened the two-point calibration question');
+  await answerStep();
+  await fillAll(await exact()); await submit();
+  ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current.evalResult?.normalizedGrade === 1), 'the exact slope, intercept and concentration earn full marks');
+
   // 7. the choice survives a reload, and switching back restores CM2021
   await boot();
   ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.activeModule === 'CM2011' && document.querySelector('#moduleSwitch').value === 'CM2011'), 'after a reload the app is still on CM2011');
@@ -145,6 +183,11 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await boot();
   const up = await p.evaluate(() => { const a = window.__MASTERY_ENGINE__.UI.appState; return { mods: a.modules.map((m) => m.moduleCode).sort().join(), active: a.activeModule, sw: [...document.querySelector('#moduleSwitch').options].length, c11: a.allNodes.filter((n) => n.moduleCode === 'CM2011').length }; });
   ok(up.mods === 'CM2011,CM2021' && up.active === 'CM2021' && up.sw === 2 && up.c11 >= 30, `an older install gains the CM2011 module and its questions (${up.mods}, ${up.c11} questions, still on ${up.active})`);
+  // an install from before the second half: seven chapters (one renamed and re-weighted) pick up the three new ones and keep the edit
+  await p.evaluate(async () => { const db = await window.__MASTERY_ENGINE__.DB.init(); const m = await db.modules.get('CM2011'); m.weeks = m.weeks.filter((w) => w.weekNum <= 7).map((w) => (w.weekNum === 4 ? { ...w, title: 'My ISE chapter', examWeight: 2 } : w)); await db.modules.put(m); });
+  await boot();
+  const wk = await p.evaluate(async () => { const db = await window.__MASTERY_ENGINE__.DB.init(); const m = await db.modules.get('CM2011'); const w4 = m.weeks.find((w) => w.weekNum === 4); return { nums: m.weeks.map((w) => w.weekNum).join(), t4: w4.title, x4: w4.examWeight }; });
+  ok(wk.nums === '1,2,3,4,5,6,7,8,9,10' && wk.t4 === 'My ISE chapter' && wk.x4 === 2, `an install with seven chapters gains the three new ones and keeps its own edits (${wk.nums})`);
   ok(errs.length === 0, 'no page errors' + (errs.length ? ': ' + errs.join(' | ') : ''));
   await b.close(); srv.close();
   console.log(fails ? `\n${fails} FAILED` : '\nall CM2011 flows ok');

@@ -80,10 +80,10 @@ test('Sandboxed Expr compiler evaluates arithmetic, functions, comparisons, tern
   assert.throws(() => Expr.evaluate('alert(1)'), /disallowed function/);
 });
 
-test('SEED_MODULES: CM2021 (9 chapters) and CM2011 (7 topics), no exam date set', () => {
+test('SEED_MODULES: CM2021 (9 chapters) and CM2011 (10 topics), no exam date set', () => {
   assert.equal(SEED_MODULES.map((x) => x.moduleCode).join(), 'CM2021,CM2011');
   const a = SEED_MODULES[1];
-  assert.equal(a.weeks.length, 7);
+  assert.equal(a.weeks.length, 10);
   assert.equal(a.examTimestamp, null);
   const m = SEED_MODULES[0];
   assert.equal(m.moduleCode, 'CM2021');
@@ -95,6 +95,24 @@ test('SEED_MODULES: CM2021 (9 chapters) and CM2011 (7 topics), no exam date set'
     assert.equal(m.weeks[i].weekNum, i + 1);
     assert.equal(m.weeks[i].examWeight, 1.0);
   }
+});
+
+test('addMissingWeeks: adds only the chapters a stored module lacks and leaves edits alone', () => {
+  const { addMissingWeeks } = Engine;
+  const seed = SEED_MODULES.find((m) => m.moduleCode === 'CM2011');
+  // an install from before the second half existed, with a renamed chapter and a changed weight
+  const stored = [{ ...seed, weeks: seed.weeks.slice(0, 7).map((w) => (w.weekNum === 3 ? { ...w, title: 'My own title', examWeight: 2.5 } : w)), examTimestamp: 12345 }];
+  const patches = addMissingWeeks(stored, SEED_MODULES);
+  assert.equal(patches.length, 1);
+  assert.equal(patches[0].moduleCode, 'CM2011');
+  assert.equal(patches[0].weeks.map((w) => w.weekNum).join(), '1,2,3,4,5,6,7,8,9,10');
+  const w3 = patches[0].weeks.find((w) => w.weekNum === 3);
+  assert.equal(w3.title, 'My own title');
+  assert.equal(w3.examWeight, 2.5);
+  assert.equal(patches[0].examTimestamp, 12345);
+  // up to date, or a module that is not stored at all: nothing to do
+  assert.equal(addMissingWeeks([{ ...seed }], SEED_MODULES).length, 0);
+  assert.equal(addMissingWeeks([], SEED_MODULES).length, 0);
 });
 
 test('All 11 SEED_NODES pass validation, use CM2021, remapped weeks, source "seed (unverified)", and no audit', () => {

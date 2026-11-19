@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-18T14:30:48.326Z",
+ "exportedAt": "2026-11-19T19:28:27.933Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -3320,6 +3320,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -3356,6 +3357,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -3392,6 +3394,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -3428,6 +3431,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -3464,6 +3468,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -6836,6 +6841,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -6872,6 +6878,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -6908,6 +6915,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -6944,6 +6952,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -9227,6 +9236,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -9259,6 +9269,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -9295,6 +9306,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -9331,6 +9343,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -9363,6 +9376,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -9399,6 +9413,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -9435,6 +9450,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -9471,6 +9487,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -10750,6 +10767,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -10786,6 +10804,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -10822,6 +10841,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -10880,6 +10900,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -10916,6 +10937,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -10952,6 +10974,7 @@
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
+      "shuffleOptions": true,
       "options": [
        {
         "id": "a",
@@ -11083,6 +11106,3578 @@
         "isCritical": false
        }
       ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-s-jablonski",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Jablonski diagram: label and explain",
+    "source": "Topic 4b slides; past finals",
+    "week": 6,
+    "primaryTheme": "Fluorescence",
+    "conceptTags": [
+     "fluorescence",
+     "jablonski"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 6,
+    "examStyle": "construct_4to6",
+    "family": "fluor"
+   },
+   "variants": [
+    {
+     "variantId": "f-jab-label6",
+     "perspectiveLabel": "Label the Jablonski arrows (6 marks)",
+     "marks": 6,
+     "stem": "The energy-level diagram of a molecule shows the singlet states S₀ and S₁, each with vibrational levels, and a triplet state T₁ just below S₁. Name the process shown by each arrow.",
+     "explanation": "Absorption is the upward arrow from S₀. Vibrational relaxation drops the molecule to the lowest vibrational level of S₁ by giving energy to the solvent. Internal conversion is the non-radiative step between electronic states of the same spin (S₁ into a high vibrational level of S₀). Intersystem crossing is the isoenergetic non-radiative step between states of different spin (S₁ to T₁). Fluorescence and phosphorescence are the two photon-emitting steps: S₁ → S₀ (same spin, fast) and T₁ → S₀ (spin change, slow).",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "a1": "'absorption'",
+       "a2": "'vibrational relaxation'",
+       "a3": "'internal conversion'",
+       "a4": "'intersystem crossing'",
+       "a5": "'fluorescence'",
+       "a6": "'phosphorescence'"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a1",
+        "label": "Upward arrow from the lowest vibrational level of S₀ to a high vibrational level of S₁",
+        "options": [
+         "absorption",
+         "vibrational relaxation",
+         "internal conversion",
+         "intersystem crossing",
+         "fluorescence",
+         "phosphorescence"
+        ]
+       },
+       {
+        "key": "a2",
+        "label": "Short non-radiative steps down the vibrational levels of S₁ to its lowest level, energy passed to the solvent",
+        "options": [
+         "absorption",
+         "vibrational relaxation",
+         "internal conversion",
+         "intersystem crossing",
+         "fluorescence",
+         "phosphorescence"
+        ]
+       },
+       {
+        "key": "a3",
+        "label": "Non-radiative step from the lowest level of S₁ into a high vibrational level of S₀ (same spin)",
+        "options": [
+         "absorption",
+         "vibrational relaxation",
+         "internal conversion",
+         "intersystem crossing",
+         "fluorescence",
+         "phosphorescence"
+        ]
+       },
+       {
+        "key": "a4",
+        "label": "Isoenergetic non-radiative step from S₁ to the triplet state T₁ (spin changes)",
+        "options": [
+         "absorption",
+         "vibrational relaxation",
+         "internal conversion",
+         "intersystem crossing",
+         "fluorescence",
+         "phosphorescence"
+        ]
+       },
+       {
+        "key": "a5",
+        "label": "Photon emitted in S₁ → S₀ (same spin, lifetime about 10⁻⁹ to 10⁻⁴ s)",
+        "options": [
+         "absorption",
+         "vibrational relaxation",
+         "internal conversion",
+         "intersystem crossing",
+         "fluorescence",
+         "phosphorescence"
+        ]
+       },
+       {
+        "key": "a6",
+        "label": "Photon emitted in T₁ → S₀ (spin changes, lifetime about 10⁻⁴ to 10² s)",
+        "options": [
+         "absorption",
+         "vibrational relaxation",
+         "internal conversion",
+         "intersystem crossing",
+         "fluorescence",
+         "phosphorescence"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a1": {
+        "type": "keyword",
+        "expectedExpr": "a1",
+        "synonyms": {}
+       },
+       "a2": {
+        "type": "keyword",
+        "expectedExpr": "a2",
+        "synonyms": {}
+       },
+       "a3": {
+        "type": "keyword",
+        "expectedExpr": "a3",
+        "synonyms": {}
+       },
+       "a4": {
+        "type": "keyword",
+        "expectedExpr": "a4",
+        "synonyms": {}
+       },
+       "a5": {
+        "type": "keyword",
+        "expectedExpr": "a5",
+        "synonyms": {}
+       },
+       "a6": {
+        "type": "keyword",
+        "expectedExpr": "a6",
+        "synonyms": {}
+       }
+      }
+     }
+    },
+    {
+     "variantId": "f-jab-labelAE",
+     "perspectiveLabel": "Name processes A to E (5 marks)",
+     "marks": 5,
+     "stem": "In a Jablonski diagram the arrows are lettered. **A** is the upward arrow from S₀; **B** is a downward photon-emitting arrow from the lowest level of S₁ to S₀; **C** is a downward photon-emitting arrow from the lowest level of T₁ to S₀; **D** is a horizontal non-radiative step from S₁ into a high vibrational level of S₀; **E** is a horizontal isoenergetic step from S₁ to T₁. Name each process.",
+     "explanation": "A = absorption, B = fluorescence (S₁ → S₀, same spin), C = phosphorescence (T₁ → S₀, spin change, slower), D = internal conversion (non-radiative, same spin), E = intersystem crossing (non-radiative, between different multiplicities). The short vibrational relaxation steps (R) are not lettered here.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "a": "'absorption'",
+       "b": "'fluorescence'",
+       "c": "'phosphorescence'",
+       "d": "'internal conversion'",
+       "e": "'intersystem crossing'"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "A",
+        "options": [
+         "absorption",
+         "vibrational relaxation",
+         "internal conversion",
+         "intersystem crossing",
+         "fluorescence",
+         "phosphorescence"
+        ]
+       },
+       {
+        "key": "b",
+        "label": "B",
+        "options": [
+         "absorption",
+         "vibrational relaxation",
+         "internal conversion",
+         "intersystem crossing",
+         "fluorescence",
+         "phosphorescence"
+        ]
+       },
+       {
+        "key": "c",
+        "label": "C",
+        "options": [
+         "absorption",
+         "vibrational relaxation",
+         "internal conversion",
+         "intersystem crossing",
+         "fluorescence",
+         "phosphorescence"
+        ]
+       },
+       {
+        "key": "d",
+        "label": "D",
+        "options": [
+         "absorption",
+         "vibrational relaxation",
+         "internal conversion",
+         "intersystem crossing",
+         "fluorescence",
+         "phosphorescence"
+        ]
+       },
+       {
+        "key": "e",
+        "label": "E",
+        "options": [
+         "absorption",
+         "vibrational relaxation",
+         "internal conversion",
+         "intersystem crossing",
+         "fluorescence",
+         "phosphorescence"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "keyword",
+        "expectedExpr": "a",
+        "synonyms": {}
+       },
+       "b": {
+        "type": "keyword",
+        "expectedExpr": "b",
+        "synonyms": {}
+       },
+       "c": {
+        "type": "keyword",
+        "expectedExpr": "c",
+        "synonyms": {}
+       },
+       "d": {
+        "type": "keyword",
+        "expectedExpr": "d",
+        "synonyms": {}
+       },
+       "e": {
+        "type": "keyword",
+        "expectedExpr": "e",
+        "synonyms": {}
+       }
+      }
+     }
+    },
+    {
+     "variantId": "f-jab-absonly",
+     "perspectiveLabel": "Absorption with no emission (4 marks)",
+     "marks": 4,
+     "stem": "With reference to the energy-level diagram, explain what happens when a molecule **absorbs radiation but neither fluoresces nor phosphoresces**.",
+     "explanation": "Absorption lifts the molecule to an upper vibrational level of S₁. Vibrational relaxation (R) takes it to the lowest vibrational level of S₁, passing energy to the solvent. Internal conversion then moves it from S₁ into a high vibrational level of S₀ without any light being emitted, and a second vibrational relaxation brings it to the bottom of S₀. All the energy ends as heat.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Absorption raises the molecule from the lowest level of S₀ to an upper vibrational level of S₁",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "Vibrational relaxation (R) takes it to the lowest vibrational level of S₁, passing energy to the solvent",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Internal conversion carries it from S₁ into a high vibrational level of S₀ without emitting light",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "Vibrational relaxation to the bottom of S₀: the excess energy ends as heat",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "f-jab-fluor",
+     "perspectiveLabel": "Absorption then fluorescence (4 marks)",
+     "marks": 4,
+     "stem": "With reference to the same diagram, explain what happens when a molecule **absorbs radiation and then fluoresces**. Which molecules do this?",
+     "explanation": "The first steps are the same: absorption to an upper vibrational level of S₁ and vibrational relaxation to the bottom of S₁. Instead of internal conversion, the molecule emits a photon and drops straight to S₀ (a vibrational level of the ground state). This is favoured in rigid molecules, which cannot lose their energy easily through vibration.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Absorption to an upper vibrational level of S₁, as before",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "Vibrational relaxation to the lowest level of S₁",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "Instead of internal conversion the molecule emits a photon in the transition S₁ → S₀ (fluorescence)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "This happens for rigid molecules that do not lose energy easily by vibration",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "f-fvp",
+     "perspectiveLabel": "Fluorescence vs phosphorescence (6 marks)",
+     "marks": 6,
+     "stem": "Explain how **molecular fluorescence differs from molecular phosphorescence**.",
+     "explanation": "Fluorescence is the emission of a photon in a transition between states of the same spin (S₁ → S₀) and is fast, with a lifetime of about 10⁻⁹ to 10⁻⁴ s. For phosphorescence the molecule must first cross from the singlet S₁ to the triplet T₁ by intersystem crossing (an isoenergetic non-radiative step between different multiplicities); the photon is then emitted in the spin-changing transition T₁ → S₀, which is slow, with a lifetime of about 10⁻⁴ to 10² s. (Standard physics, not on the slides: T₁ lies below S₁, so phosphorescence appears at a longer wavelength.)",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Fluorescence: a photon is emitted in a transition between states of the same spin (S₁ → S₀)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Fluorescence is fast: lifetime about 10⁻⁹ to 10⁻⁴ s",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "Phosphorescence needs intersystem crossing first: an isoenergetic non-radiative step from the singlet S₁ to the triplet T₁",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "Phosphorescence: a photon is emitted in a transition between states of different spin (T₁ → S₀)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r5",
+        "criterion": "Phosphorescence is much slower: lifetime about 10⁻⁴ to 10² s",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r6",
+        "criterion": "Clear comparison of the two: both are radiative, but they differ in spin change and lifetime",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-s-fl-explain",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Fluorescence: why and how (past-final prompts)",
+    "source": "Topic 4b slides; past finals",
+    "week": 6,
+    "primaryTheme": "Fluorescence",
+    "conceptTags": [
+     "fluorescence",
+     "written"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 5,
+    "examStyle": "construct_4to6",
+    "family": "fluor"
+   },
+   "variants": [
+    {
+     "variantId": "f-sens",
+     "perspectiveLabel": "Why fluorescence is more sensitive (4 marks)",
+     "marks": 4,
+     "stem": "Why are **fluorescence measurements more sensitive than absorbance measurements** for solution-phase species?",
+     "explanation": "Fluorescence is measured against a zero background: the detector sits at 90° to the excitation beam, so only light emitted by the sample reaches it, and a detector can be made very responsive to a small signal on nothing. Absorbance is the small decrease in a large transmitted beam, which means measuring a small difference between two large intensities, and that is hard to do accurately. The effect is like spotting a faint light in a dark room compared with a brightly lit one.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Fluorescence is measured against a zero (dark) background",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "The detector is at right angles to the excitation beam, so only light emitted by the sample reaches it",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "Absorbance is a small decrease in a large transmitted signal (a small difference between two large intensities), which is hard to measure accurately",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "So the fluorescence detector can be made far more responsive to small signals (dark-room analogy)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "f-who",
+     "perspectiveLabel": "Which molecules fluoresce (2 marks)",
+     "marks": 2,
+     "stem": "Which kinds of molecule are most likely to fluoresce strongly, and why?",
+     "explanation": "Rigid molecules, such as polycyclic aromatic compounds, and many substituted aromatics, fluoresce strongly (quantum yield close to 1). They have few ways to lose the excitation energy by vibration, so internal conversion competes poorly with emission. A rise in temperature lowers the quantum yield.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Rigid molecules such as polycyclic aromatic compounds (and many substituted aromatics)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "They lose less of the excitation energy by vibration and internal conversion, so more excited molecules emit (quantum yield near 1; higher temperature lowers it)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "f-broad",
+     "perspectiveLabel": "Why absorption bands are broad (2 marks)",
+     "marks": 2,
+     "stem": "Why are molecular absorption bands in solution **broad** rather than sharp lines?",
+     "explanation": "Each electronic transition has many closely spaced vibrational and rotational levels superimposed on it, and the solvent adds further interaction, so absorption occurs over a wide range of wavelengths instead of at one.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Each electronic transition has many closely spaced vibrational and rotational levels superimposed on it",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Absorption therefore occurs over a range of wavelengths (solvent interactions add to the broadening)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "f-stokes",
+     "perspectiveLabel": "Stokes shift (4 marks)",
+     "marks": 4,
+     "stem": "What is the **Stokes shift**, what causes it, and when are the absorption and emission spectra mirror images?",
+     "explanation": "The Stokes shift is the displacement of the emission to a longer wavelength than the radiation that excited it. It is caused by re-optimisation of the molecule’s geometry in the excited state S₁ and by interactions with the surrounding solvent, which lose some of the energy before the photon is emitted. The spectra are approximate mirror images when the vibrational spacings are similar in the two states and the transition probabilities are similar; that is a condition on the spectra, not the cause of the shift.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Emission occurs at a longer wavelength than the excitation radiation",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "Cause: re-optimisation of the molecule’s geometry in the excited state S₁",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Cause: interactions with the environment (solvent)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "The spectra are approximate mirror images when vibrational spacings and transition probabilities are similar (a condition, not the cause)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "f-quench",
+     "perspectiveLabel": "Quenching and Stern–Volmer (3 marks)",
+     "marks": 3,
+     "stem": "What is **fluorescence quenching**, and how does the Stern–Volmer relation show it?",
+     "explanation": "Quenching happens when the energy of the excited molecule is transferred to another molecule, the quencher Q, instead of being emitted: M* + Q → M + Q*, after which Q* loses its energy as heat. The booklet gives Φ₀/Φ_Q = 1 + (k_q/(k_e + k_d))[Q], so the ratio of the fluorescence quantum yield without and with quencher rises linearly with the quencher concentration.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Quenching: the excited molecule transfers its energy to another molecule (the quencher Q) instead of emitting",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "M* + Q → M + Q*, then Q* → Q + heat",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "Stern–Volmer: Φ₀/Φ_Q = 1 + (k_q/(k_e + k_d))[Q], a straight line against [Q]",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "f-diagram",
+     "perspectiveLabel": "Fluorimeter block diagram (5 marks)",
+     "marks": 5,
+     "stem": "Draw a **block diagram of a fluorescence spectrometer** showing the radiation source, sample cell, wavelength selection, detector and readout. Sketch it on paper, then compare.",
+     "explanation": "Source → wavelength selection for the excitation (a monochromator or filter; not needed for a line source such as a hollow-cathode lamp) → sample cell → emission monochromator and photomultiplier detector placed at 90° to the excitation beam → readout. The excitation wavelength is fixed and the emission is scanned. The 90° geometry keeps the transmitted source light off the detector.",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Sketch it on paper, then tick the box (or note the labels here)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Radiation source",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "Wavelength selection for the excitation (monochromator or filter; omitted only for a line source)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "Sample cell",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r4",
+        "criterion": "Emission monochromator and detector (photomultiplier) at 90° to the excitation beam",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r5",
+        "criterion": "Signal readout; excitation wavelength fixed and emission scanned",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-s-fl-cal",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Fluorescence: two-point calibration",
+    "source": "Topic 4b slides; past finals",
+    "week": 6,
+    "primaryTheme": "Fluorescence",
+    "conceptTags": [
+     "fluorescence",
+     "calibration"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 5,
+    "examStyle": "construct_4to6",
+    "family": "fluor"
+   },
+   "variants": [
+    {
+     "variantId": "f-cal2",
+     "perspectiveLabel": "Concentration from two standards (4 marks)",
+     "marks": 4,
+     "stem": "The fluorescence intensity *I*_f (arbitrary units) of SO₂ in air is linearly proportional to its concentration. Two standards gave:\n\n| I_f | [SO₂] / µg m⁻³ |\n|---|---|\n| {{fix(I1,2)}} | {{fix(c1,0)}} |\n| {{fix(I2,2)}} | {{fix(c2,0)}} |\n\nA sample gives *I*_f = **{{fix(Ix,2)}}**. Using a two-point calibration of the form *y* = *m* *x* + *c*, find the slope, the intercept and the sample concentration.",
+     "hint": "m = (y₂ − y₁)/(x₂ − x₁); c = y₁ − m x₁; then x = (y − c)/m.",
+     "explanation": "Slope m = (I₂ − I₁)/(c₂ − c₁). Intercept = I₁ − m c₁. The sample concentration is x = (I_x − intercept)/m. Leaving out the intercept (x = I_x/m) is the usual slip.",
+     "variables": {
+      "sampled": {
+       "m": {
+        "type": "range",
+        "min": 0.02,
+        "max": 0.05,
+        "step": 0.001,
+        "decimals": 3
+       },
+       "b": {
+        "type": "range",
+        "min": 0.04,
+        "max": 0.12,
+        "step": 0.01,
+        "decimals": 2
+       },
+       "c1": {
+        "type": "choice",
+        "options": [
+         2,
+         4,
+         5,
+         6,
+         8
+        ]
+       },
+       "c2": {
+        "type": "choice",
+        "options": [
+         20,
+         24,
+         25,
+         30,
+         40
+        ]
+       },
+       "cx": {
+        "type": "range",
+        "min": 6,
+        "max": 18,
+        "step": 1,
+        "decimals": 0
+       }
+      },
+      "derived": {
+       "I1": "round(m * c1 + b, 2)",
+       "I2": "round(m * c2 + b, 2)",
+       "Ix": "round(m * cx + b, 2)",
+       "slope": "(I2 - I1) / (c2 - c1)",
+       "icpt": "I1 - slope * c1",
+       "cxv": "(Ix - icpt) / slope",
+       "cnoint": "Ix / slope"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "slope",
+        "label": "Slope m",
+        "unit": "per µg m⁻³",
+        "numeric": true
+       },
+       {
+        "key": "icpt",
+        "label": "Intercept c",
+        "numeric": true
+       },
+       {
+        "key": "cxv",
+        "label": "Sample concentration",
+        "unit": "µg m⁻³",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "slope": {
+        "type": "numeric",
+        "targetExpr": "slope",
+        "relTol": 0.02,
+        "sig": 3,
+        "unit": "per µg m⁻³"
+       },
+       "icpt": {
+        "type": "numeric",
+        "targetExpr": "icpt",
+        "relTol": 0.03,
+        "sig": 3,
+        "ecf": [
+         {
+          "expr": "I1 - u_slope * c1",
+          "label": "Consistent with your own slope, so the method earns part credit."
+         }
+        ]
+       },
+       "cxv": {
+        "type": "numeric",
+        "targetExpr": "cxv",
+        "relTol": 0.02,
+        "sig": 3,
+        "unit": "µg m⁻³",
+        "paths": [
+         {
+          "label": "You left out the intercept: x = (y − c)/m, not y/m.",
+          "expr": "cnoint"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "(Ix - u_icpt) / u_slope",
+          "label": "Consistent with your own slope and intercept."
+         }
+        ]
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-s-aas-table",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "AAS components and their features",
+    "source": "Topic 4c slides; past finals",
+    "week": 7,
+    "primaryTheme": "Atomic Spectroscopy",
+    "conceptTags": [
+     "aas",
+     "instrumentation"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 8,
+    "examStyle": "construct_4to6",
+    "family": "aas"
+   },
+   "variants": [
+    {
+     "variantId": "a-hcl",
+     "perspectiveLabel": "Hollow-cathode lamp (3 marks)",
+     "marks": 3,
+     "stem": "Describe the **hollow-cathode lamp** used in atomic absorption spectroscopy: what it is made of, how it works and what it emits.",
+     "explanation": "The cathode is made of the metal being determined and the lamp is filled with argon. A high voltage ionises the argon to Ar⁺ and electrons; Ar⁺ strikes the cathode and dislodges metal atoms (sputtering); the sputtered atoms collide with energetic electrons and are excited. The excited atoms emit lines of exactly the frequency the analyte absorbs, and these lines are narrower than about 10⁻³ to 10⁻² nm.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Cathode made of the metal being determined; lamp filled with argon",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "High voltage ionises Ar to Ar⁺ and e⁻; Ar⁺ sputters metal atoms off the cathode and they are excited by collisions with energetic electrons",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "The excited atoms emit the analyte’s own lines (same frequency the analyte absorbs), narrower than about 10⁻³ to 10⁻² nm",
+        "marks": 1,
+        "isCritical": true
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "a-flame",
+     "perspectiveLabel": "Flame and atomiser (3 marks)",
+     "marks": 3,
+     "stem": "Describe the **atomiser (flame)** in atomic absorption spectroscopy: how the sample reaches it and what happens there.",
+     "explanation": "The nebuliser turns the sample solution into a fine aerosol that mixes with fuel and oxidant; baffles remove large droplets, so only about 5% of the sample reaches the flame. The solvent burns off (desolvation in the primary combustion zone), then the particles vaporise and are atomised, mainly in the hot interzonal region, giving free ground-state atoms that absorb the lamp radiation. Oxides and hydroxides form in the outer cone, so the hottest region is wanted.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "The nebuliser makes a fine aerosol that mixes with fuel and oxidant (baffles remove large drops; only about 5% reaches the flame)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "The solvent burns off, then the particles vaporise and are atomised, in the hottest (interzonal) region, to avoid oxide formation",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "The result is free ground-state atoms that absorb the radiation from the lamp",
+        "marks": 1,
+        "isCritical": true
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "a-mono",
+     "perspectiveLabel": "Monochromator (2 marks)",
+     "marks": 2,
+     "stem": "What is the **monochromator** for in an atomic absorption spectrometer, and how does slit width matter?",
+     "explanation": "It isolates the analytical line from the lamp (and from light emitted by the flame and other lines) using an entrance slit, a grating and an exit slit. Slit width trades resolution against light throughput: a narrow slit separates neighbouring lines better but passes less light; a wide slit passes more light but resolves less. (Several past keys say the opposite, that a wider slit gives higher resolution; the lecture and the physics agree with the trade-off written here.)",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Isolates the analytical line from the lamp, and from flame emission and other lines (entrance slit, grating, exit slit)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Slit width trades resolution against light throughput (signal)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "a-det",
+     "perspectiveLabel": "Detector (2 marks)",
+     "marks": 2,
+     "stem": "Describe the **detector** (photomultiplier) used in atomic absorption spectroscopy.",
+     "explanation": "A photomultiplier converts photons into electrons. Each photon striking the photoemissive cathode ejects electrons, which are focused onto a dynode that releases more electrons, and this is repeated several times, so one photon gives about a million electrons (the key’s figure). The resulting current is amplified and read out.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Photons strike a photoemissive cathode and eject electrons",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "The electrons are multiplied at successive dynodes (about 10⁶ electrons per photon in the key); the amplified current is read out",
+        "marks": 1,
+        "isCritical": true
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "a-full",
+     "perspectiveLabel": "Whole AAS table (10 marks)",
+     "marks": 10,
+     "stem": "A schematic of an atomic absorption spectrometer shows the hollow-cathode lamp, the flame, the monochromator and the detector/amplifier. **Identify each component and describe its important features.**",
+     "explanation": "Hollow-cathode lamp: cathode of the analyte metal, argon fill, high voltage, Ar⁺ sputters metal atoms that are excited and emit the analyte lines (narrower than 10⁻³–10⁻² nm). Flame: nebuliser makes an aerosol, fuel and oxidant, desolvation, vaporisation and atomisation in the hot region, free ground-state atoms absorb. Monochromator: slits and grating isolate the line; slit width trades resolution against throughput. Detector: photomultiplier with dynode multiplication, amplified signal.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Lamp: cathode made of the analyte metal, filled with argon",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "Lamp: Ar⁺ sputters metal atoms off the cathode; they are excited by collisions with electrons",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Lamp: emits the analyte’s lines, narrower than about 10⁻³ to 10⁻² nm, at the frequency the analyte absorbs",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "Flame: nebuliser makes an aerosol that mixes with fuel and oxidant",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r5",
+        "criterion": "Flame: solvent burns off, particles vaporise and atomise (hottest region, avoiding oxides)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r6",
+        "criterion": "Flame: the free ground-state atoms absorb the lamp radiation",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r7",
+        "criterion": "Monochromator: isolates the analytical line (entrance slit, grating, exit slit)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r8",
+        "criterion": "Monochromator: slit width trades resolution against light throughput",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r9",
+        "criterion": "Detector: photomultiplier converts photons to electrons, multiplied at dynodes",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r10",
+        "criterion": "Detector: the amplified current is the signal that is read out",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "a-block-order",
+     "perspectiveLabel": "AAS block diagram (5 marks)",
+     "marks": 5,
+     "stem": "Put the parts of a flame atomic absorption spectrometer in order, **from sample introduction to the final signal**.",
+     "explanation": "Sample solution → nebuliser (aerosol) → spray chamber where it mixes with fuel and oxidant (baffles remove large drops) → flame (desolvation, vaporisation, atomisation; the beam from the hollow-cathode lamp passes through it) → monochromator → detector → amplifier and readout.",
+     "inputSlot": {
+      "type": "ordered_list",
+      "directionLabel": "Sample path: first → last",
+      "items": [
+       {
+        "id": "sol",
+        "label": "Sample solution"
+       },
+       {
+        "id": "neb",
+        "label": "Nebuliser (aerosol)"
+       },
+       {
+        "id": "mix",
+        "label": "Mixing with fuel and oxidant (baffles remove large drops)"
+       },
+       {
+        "id": "flame",
+        "label": "Flame (atomisation)"
+       },
+       {
+        "id": "mono",
+        "label": "Monochromator"
+       },
+       {
+        "id": "det",
+        "label": "Detector and amplifier"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "order_match",
+      "targetOrder": [
+       "sol",
+       "neb",
+       "mix",
+       "flame",
+       "mono",
+       "det"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-s-boltz",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Boltzmann populations: why emission is temperature-sensitive",
+    "source": "Topic 4c slides; past finals",
+    "week": 7,
+    "primaryTheme": "Atomic Spectroscopy",
+    "conceptTags": [
+     "boltzmann",
+     "aes"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 6,
+    "examStyle": "construct_4to6",
+    "family": "aes"
+   },
+   "variants": [
+    {
+     "variantId": "a-boltz-small",
+     "perspectiveLabel": "Small change in temperature (5 marks)",
+     "marks": 5,
+     "stem": "The lowest excited state of sodium is **3.371 × 10⁻¹⁹ J** above the ground state and the excited state has degeneracy 2 (ground state 1); *k* = 1.381 × 10⁻²³ J K⁻¹. Calculate the **percentage of Na atoms in the excited state** at **{{fix(T1,0)}} K** and at **{{fix(T2,0)}} K**, and the **percentage increase** in the excited-state population between the two temperatures.",
+     "hint": "N_e/N₀ = 2 exp[−ΔE/(kT)]. Percentage = 100 × that ratio.",
+     "explanation": "N_e/N₀ = (g_e/g₀) exp[−(E_e − E₀)/kT]. Multiply by 100 for a percentage. Only a tiny fraction of the atoms (well under 0.1%) is ever excited, so almost all atoms stay in the ground state whatever the temperature; but the excited population changes by a large percentage for a small change in temperature. That is why emission (which depends on the excited population) is far more temperature-sensitive than absorption (which depends on the ground-state atoms).",
+     "variables": {
+      "sampled": {
+       "T1": {
+        "type": "choice",
+        "options": [
+         2000,
+         2400,
+         2500,
+         2600,
+         2800,
+         3000
+        ]
+       },
+       "dT": {
+        "type": "choice",
+        "options": [
+         10,
+         20,
+         25,
+         50
+        ]
+       }
+      },
+      "derived": {
+       "T2": "T1 + dT",
+       "p1": "200 * exp(-3.371 * 10^-19 / (1.381 * 10^-23 * T1))",
+       "p2": "200 * exp(-3.371 * 10^-19 / (1.381 * 10^-23 * T2))",
+       "rise": "100 * (p2 - p1) / p1"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "p1",
+        "label": "Excited-state atoms at T₁",
+        "unit": "%",
+        "numeric": true
+       },
+       {
+        "key": "p2",
+        "label": "Excited-state atoms at T₂",
+        "unit": "%",
+        "numeric": true
+       },
+       {
+        "key": "rise",
+        "label": "Increase in the excited population",
+        "unit": "%",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "p1": {
+        "type": "numeric",
+        "targetExpr": "p1",
+        "relTol": 0.02,
+        "sig": 3,
+        "unit": "%"
+       },
+       "p2": {
+        "type": "numeric",
+        "targetExpr": "p2",
+        "relTol": 0.02,
+        "sig": 3,
+        "unit": "%"
+       },
+       "rise": {
+        "type": "numeric",
+        "targetExpr": "rise",
+        "relTol": 0.08,
+        "sig": 2,
+        "unit": "%",
+        "ecf": [
+         {
+          "expr": "100 * (u_p2 - u_p1) / u_p1",
+          "label": "Consistent with your own two percentages."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "a-boltz-big",
+     "perspectiveLabel": "Large change in temperature (5 marks)",
+     "marks": 5,
+     "stem": "The lowest excited state of sodium is **3.371 × 10⁻¹⁹ J** above the ground state and the excited state has degeneracy 2 (ground state 1); *k* = 1.381 × 10⁻²³ J K⁻¹. Calculate the **percentage of Na atoms in the excited state** at **{{fix(T1,0)}} K** and at **{{fix(T2,0)}} K**, and the **percentage increase** in the excited-state population between the two temperatures.",
+     "hint": "N_e/N₀ = 2 exp[−ΔE/(kT)]. Percentage = 100 × that ratio.",
+     "explanation": "N_e/N₀ = (g_e/g₀) exp[−(E_e − E₀)/kT]. Multiply by 100 for a percentage. Only a tiny fraction of the atoms (well under 0.1%) is ever excited, so almost all atoms stay in the ground state whatever the temperature; but the excited population changes by a large percentage for a small change in temperature. That is why emission (which depends on the excited population) is far more temperature-sensitive than absorption (which depends on the ground-state atoms).",
+     "variables": {
+      "sampled": {
+       "T1": {
+        "type": "choice",
+        "options": [
+         2500,
+         3000,
+         3500
+        ]
+       },
+       "dT": {
+        "type": "choice",
+        "options": [
+         500,
+         1000
+        ]
+       }
+      },
+      "derived": {
+       "T2": "T1 + dT",
+       "p1": "200 * exp(-3.371 * 10^-19 / (1.381 * 10^-23 * T1))",
+       "p2": "200 * exp(-3.371 * 10^-19 / (1.381 * 10^-23 * T2))",
+       "rise": "100 * (p2 - p1) / p1"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "p1",
+        "label": "Excited-state atoms at T₁",
+        "unit": "%",
+        "numeric": true
+       },
+       {
+        "key": "p2",
+        "label": "Excited-state atoms at T₂",
+        "unit": "%",
+        "numeric": true
+       },
+       {
+        "key": "rise",
+        "label": "Increase in the excited population",
+        "unit": "%",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "p1": {
+        "type": "numeric",
+        "targetExpr": "p1",
+        "relTol": 0.02,
+        "sig": 3,
+        "unit": "%"
+       },
+       "p2": {
+        "type": "numeric",
+        "targetExpr": "p2",
+        "relTol": 0.02,
+        "sig": 3,
+        "unit": "%"
+       },
+       "rise": {
+        "type": "numeric",
+        "targetExpr": "rise",
+        "relTol": 0.08,
+        "sig": 2,
+        "unit": "%",
+        "ecf": [
+         {
+          "expr": "100 * (u_p2 - u_p1) / u_p1",
+          "label": "Consistent with your own two percentages."
+         }
+        ]
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-s-aes-aas",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "AES vs AAS: temperature, types, no Stokes shift",
+    "source": "Topic 4c slides; past finals",
+    "week": 7,
+    "primaryTheme": "Atomic Spectroscopy",
+    "conceptTags": [
+     "aes",
+     "aas",
+     "written"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 5,
+    "examStyle": "construct_4to6",
+    "family": "aes"
+   },
+   "variants": [
+    {
+     "variantId": "a-aes-t",
+     "perspectiveLabel": "AES vs AAS temperature sensitivity (5 marks)",
+     "marks": 5,
+     "stem": "Explain why **atomic emission spectroscopy is more sensitive to fluctuations in flame temperature than atomic absorption spectroscopy**. Use the Boltzmann distribution.",
+     "explanation": "N_e/N₀ = (g_e/g₀) exp[−(E_e − E₀)/kT]. For sodium at 2500 K only about 1×10⁻⁴ of the atoms are excited, so more than 99.98% are in the ground state. A small rise in temperature (for example 20 K) changes that tiny excited population by a large percentage (about 8%) but hardly changes the ground-state population. Emission is proportional to the excited-state population, so it responds strongly; absorption is by the ground-state atoms, which hardly change, so it is much less sensitive.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "States the Boltzmann relation N_e/N₀ = (g_e/g₀) exp[−(E_e − E₀)/kT]",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "Only a tiny fraction of the atoms is excited (for example about 10⁻⁴ for Na near 2500 K), so almost all atoms are in the ground state",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "A small temperature change alters that tiny excited population by a large percentage (for example about 8% for 20 K)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "Emission depends on the excited-state population, so it is very temperature-sensitive",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r5",
+        "criterion": "Absorption depends on the ground-state atoms, whose number hardly changes, so AAS is much less sensitive",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "a-types",
+     "perspectiveLabel": "Three kinds of atomic spectroscopy",
+     "marks": 1,
+     "stem": "In which kind of atomic spectroscopy is the signal **emission from an excited state populated thermally**, without any lamp?",
+     "explanation": "**Atomic emission spectroscopy (AES)**, for example ICP-OES: a hot plasma excites the atoms thermally and the emitted light is measured. In AAS sharp lamp lines are absorbed by ground-state atoms; in atomic fluorescence the emission follows an initial absorption of radiation.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "atomic emission spectroscopy (AES)"
+       },
+       {
+        "id": "b",
+        "label": "atomic absorption spectroscopy (AAS)"
+       },
+       {
+        "id": "c",
+        "label": "atomic fluorescence"
+       },
+       {
+        "id": "d",
+        "label": "molecular absorption"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "a-nostokes",
+     "perspectiveLabel": "No Stokes shift in AES",
+     "marks": 1,
+     "stem": "Why does atomic emission show no Stokes shift (the emission wavelength equals the excitation wavelength)?",
+     "explanation": "Atoms have no molecular orbitals, vibrations or geometry to re-optimise, so no energy is lost between excitation and emission. The Stokes shift belongs to molecular fluorescence.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "there are no molecular orbitals, so no vibrational relaxation or re-optimisation takes place"
+       },
+       {
+        "id": "b",
+        "label": "because atomic lines are broader than molecular bands"
+       },
+       {
+        "id": "c",
+        "label": "because the plasma is cooler than a flame"
+       },
+       {
+        "id": "d",
+        "label": "because atoms emit only in the infrared"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-s-broad",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Atomic line widths",
+    "source": "Topic 4c slides; past finals",
+    "week": 7,
+    "primaryTheme": "Atomic Spectroscopy",
+    "conceptTags": [
+     "linewidth",
+     "broadening"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 5,
+    "examStyle": "construct_4to6",
+    "family": "aes"
+   },
+   "variants": [
+    {
+     "variantId": "a-broad",
+     "perspectiveLabel": "Causes of line broadening (5 marks)",
+     "marks": 5,
+     "stem": "Describe the processes that lead to **broadening of atomic linewidths**.",
+     "explanation": "Natural broadening comes from the Heisenberg uncertainty principle, δE δt ≥ h/4π: an excited state with a short lifetime (about 10⁻⁸ to 10⁻⁹ s) has an uncertain energy, giving widths of about 10⁻⁵ to 10⁻⁴ nm. Collisional (pressure) broadening: collisions between atoms shorten the lifetime of the excited state, and it grows with temperature (up to about 10⁻³ nm for Na). Doppler broadening: atoms moving toward the detector emit light seen at a higher frequency and atoms moving away at a lower frequency, and the spread of velocities broadens the line; it grows with temperature.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Natural broadening: Heisenberg uncertainty, a short excited-state lifetime gives an uncertain energy (δE δt ≥ h/4π)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Collisional (pressure) broadening: collisions between atoms shorten the excited-state lifetime",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Doppler broadening: atoms moving toward or away from the detector shift the observed frequency up or down; the spread of velocities broadens the line",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "Collisional and Doppler broadening increase with temperature",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r5",
+        "criterion": "Typical widths: natural about 10⁻⁵–10⁻⁴ nm; collisional up to about 10⁻³ nm",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "a-hcl-narrow",
+     "perspectiveLabel": "Why lamp lines are narrower than flame lines (2 marks)",
+     "marks": 2,
+     "stem": "Why are the lines emitted by a **hollow-cathode lamp narrower** than the absorption lines of atoms in a flame, and why does that matter for AAS?",
+     "explanation": "The gas in the lamp is cooler and at lower pressure than the flame, so there is less Doppler and pressure broadening. A monochromator cannot isolate lines narrower than about 10⁻³ to 10⁻² nm, so a line source whose lines are narrower than the absorption lines is needed for Beer’s law to hold.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "The lamp is cooler and at lower pressure than the flame, so there is less Doppler and pressure broadening",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "A monochromator cannot isolate such narrow lines (below about 10⁻³–10⁻² nm), so AAS needs a line source",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "a-mol-vs-atom",
+     "perspectiveLabel": "Molecular bands vs atomic lines (4 marks)",
+     "marks": 4,
+     "stem": "Why are **molecular emission bands much broader than atomic emission lines**, and what controls the width of atomic lines?",
+     "explanation": "In molecules the electronic transitions have vibrational and rotational levels superimposed on them, so each transition spreads into a band. In atoms only electronic levels are involved, so the lines are narrow. Their widths are set by natural broadening (the Heisenberg uncertainty principle), collisional (pressure) broadening and Doppler broadening, the last two growing with temperature.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Molecular transitions include vibrational and rotational levels superimposed on the electronic change, so they spread into bands",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Atomic transitions are electronic only, so the lines are narrow",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "Atomic widths are controlled by natural (Heisenberg) broadening",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r4",
+        "criterion": "and by collisional (pressure) and Doppler broadening, which grow with temperature",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-s-icp",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "ICP-OES vs AAS and atomic vs molecular methods",
+    "source": "Topic 4c slides; past finals",
+    "week": 7,
+    "primaryTheme": "Atomic Spectroscopy",
+    "conceptTags": [
+     "icp",
+     "written"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 5,
+    "examStyle": "construct_4to6",
+    "family": "aes"
+   },
+   "variants": [
+    {
+     "variantId": "a-icp-aas",
+     "perspectiveLabel": "ICP-OES vs AAS (3 marks)",
+     "marks": 3,
+     "stem": "Outline the **advantages of inductively coupled plasma – optical emission spectroscopy (ICP-OES) compared with AAS**.",
+     "explanation": "ICP-OES measures many elements at once (a polychromator with many exit slits and detectors) without changing a lamp for each element. The argon plasma is much hotter (6,000 to 10,000 K, fairly uniform across its cross-section), so desolvation, vaporisation and atomisation are essentially complete and a good excited-state population is reached. The inert argon atmosphere also means fewer oxides form.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Many elements measured simultaneously, without a separate lamp for each element",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Much hotter plasma (6,000–10,000 K): more complete atomisation and excitation",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Inert argon atmosphere, so less oxide formation",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "a-mol-vs-atomic-pb",
+     "perspectiveLabel": "Molecular vs atomic method for lead (4 marks)",
+     "marks": 4,
+     "stem": "Lead can be determined by UV-vis spectroscopy after complexing Pb²⁺ with a ligand, or by atomic absorption or emission. Give **one advantage of each approach** (two points each).",
+     "explanation": "Molecular (complexation and UV-vis): it measures only free Pb²⁺, which is what you want if speciation matters, and it needs no flame or high temperature, which is cheaper and safer. Atomic methods: they measure all forms of lead at once (total lead), and because only a very narrow wavelength is measured there are fewer interferences.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Molecular: measures only the free Pb²⁺ (useful when speciation matters)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "Molecular: no flame or high temperature needed (cheaper, safer)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "Atomic: measures all forms of lead, so gives the total lead",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r4",
+        "criterion": "Atomic: only a very narrow wavelength is measured, so fewer interferences",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "a-pm-prep",
+     "perspectiveLabel": "Preparing PM2.5 for atomic analysis (2 marks)",
+     "marks": 2,
+     "stem": "How must **PM2.5 samples be prepared** before elemental analysis by atomic spectroscopy?",
+     "explanation": "The particles are collected on filter paper. The filter is digested by microwave-assisted acid digestion so that the particulate matter dissolves completely, and the solution is then analysed by ICP spectroscopy.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Collect the particles on a filter, then dissolve them completely by microwave-assisted acid digestion",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Analyse the resulting solution by ICP spectroscopy (ICP-OES or ICP-MS)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-g-detectors",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "GC detectors: TCD, FID and MS",
+    "source": "GC and HPLC slides; final Q4 style",
+    "week": 10,
+    "primaryTheme": "Gas chromatography",
+    "conceptTags": [
+     "gc",
+     "detectors"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 6,
+    "examStyle": "construct_4to6",
+    "family": "gc-detect"
+   },
+   "variants": [
+    {
+     "variantId": "g-tcd",
+     "perspectiveLabel": "TCD principle (3 marks)",
+     "marks": 3,
+     "stem": "Describe the principle of the **thermal conductivity detector (TCD)** used in gas chromatography.",
+     "explanation": "A heated filament sits in the gas leaving the column. Helium carries heat away from it at a steady rate. When an analyte elutes, the thermal conductivity of the gas changes, so the filament temperature and resistance change (a Wheatstone bridge goes out of balance) and that is the signal. The TCD responds to almost any compound, does not destroy the sample, and is less sensitive than the FID.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "A heated filament sits in the gas leaving the column; the carrier gas (usually helium, a good heat conductor) carries heat away at a steady rate",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "When an analyte elutes, the thermal conductivity of the gas changes, so the filament temperature and resistance change (Wheatstone bridge unbalanced) and this is the signal",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Near-universal and non-destructive, but less sensitive than the FID",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "g-fid",
+     "perspectiveLabel": "FID principle (3 marks)",
+     "marks": 3,
+     "stem": "Describe the principle of the **flame ionisation detector (FID)** used in gas chromatography.",
+     "explanation": "The column effluent is burned in a hydrogen–air flame. Organic compounds form ions in the flame, and the resulting ion current is the signal. The FID is very sensitive to organic compounds (including the small samples from capillary columns) but it destroys the sample.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "The column effluent is burned in a hydrogen–air flame",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Organic compounds form ions in the flame and the resulting ion current is measured as the signal",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Highly sensitive to organic compounds (suits the small samples of capillary columns) but destructive",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "g-ms",
+     "perspectiveLabel": "Mass spectrometer as a detector (3 marks)",
+     "marks": 3,
+     "stem": "Explain how a **mass spectrometer** works as a GC detector and what it adds compared with the TCD and FID.",
+     "explanation": "Molecules from the sample are converted into ions; the ions are separated in the mass analyser by their mass-to-charge ratio (m/z); the detector records each ion signal and the result is a mass spectrum. Unlike the TCD and FID, which only say that something eluted, the spectrum identifies each compound.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Sample molecules are first converted into ions",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "The ions are separated in the mass analyser according to their mass-to-charge ratio (m/z)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "The signals form a mass spectrum, giving specific identification of each compound (TCD and FID only show that something eluted)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "g-choose-det",
+     "perspectiveLabel": "Choosing a detector (4 marks)",
+     "marks": 4,
+     "stem": "One GC analysis must detect **trace hydrocarbons**; another must detect **permanent gases and water** that give no response in a flame. Which detector would you use for each, and why?",
+     "explanation": "Trace hydrocarbons: the FID, because it is highly sensitive to organic compounds; destroying the sample does not matter for a trace determination. Permanent gases and water: the TCD, because it responds to almost anything whose thermal conductivity differs from the carrier gas (helium), and it does not destroy the sample, although it is less sensitive.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Trace hydrocarbons: FID",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Reason: highly sensitive to organic compounds (ions formed in the flame); destroying the sample is acceptable",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "Permanent gases and water: TCD",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "Reason: near-universal response to anything whose thermal conductivity differs from the carrier gas (helium); non-destructive but less sensitive",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-g-columns",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "GC columns: open tubular and packed",
+    "source": "GC and HPLC slides; final Q4 style",
+    "week": 10,
+    "primaryTheme": "Gas chromatography",
+    "conceptTags": [
+     "gc",
+     "columns"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 6,
+    "examStyle": "construct_4to6",
+    "family": "gc-column"
+   },
+   "variants": [
+    {
+     "variantId": "g-open-packed",
+     "perspectiveLabel": "Open tubular vs packed (5 marks)",
+     "marks": 5,
+     "stem": "Compare **open tubular (capillary)** and **packed** GC columns in construction and performance, and give **two applications** for which capillary columns are preferred.",
+     "explanation": "An open tubular column is a narrow tube with the stationary phase coated on its inner wall and nothing packed inside. A packed column is filled with particles of support coated with liquid phase (or the solid is the phase). Open tubular columns give higher resolution, shorter analysis times and higher sensitivity but hold less sample; packed columns hold more sample but give broader peaks, longer retention and lower resolution. Capillary columns are preferred for complex mixtures that need high resolution and for trace analysis (including GC–MS).",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Open tubular: narrow tube with the stationary phase on the inner wall, nothing packed inside",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "Packed: tube filled with particles of coated support (or the solid itself is the stationary phase)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "Open tubular: higher resolution, shorter analysis time and higher sensitivity, but lower sample capacity",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "Packed: higher sample capacity, but broader peaks, longer retention times and lower resolution",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r5",
+        "criterion": "Two applications for capillary columns, for example complex mixtures needing high resolution, and trace analysis (including GC–MS)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "g-ot-types",
+     "perspectiveLabel": "Kinds of open tubular column (3 marks)",
+     "marks": 3,
+     "stem": "Name the **three kinds of open tubular column** and say what is on the wall of each.",
+     "explanation": "WCOT (wall-coated): a thin film of liquid stationary phase on the inner wall. PLOT (porous layer): a layer of solid particles that is itself the active phase, used for gases so volatile that a liquid film retains them poorly, such as O₂, N₂ and CO. SCOT (support-coated): solid support particles coated with liquid phase and attached to the wall; it holds more sample than WCOT and performs between WCOT and PLOT.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "WCOT: a thin film of liquid stationary phase on the inner wall",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "PLOT: a porous layer of solid particles is the active phase (for very volatile gases such as O₂, N₂, CO)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "SCOT: solid support coated with liquid phase attached to the wall; larger sample than WCOT, performance between WCOT and PLOT",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "g-no-A",
+     "perspectiveLabel": "Why no A term (2 marks)",
+     "marks": 2,
+     "stem": "Why does band spreading by **multiple paths** (the A term of the van Deemter equation) not occur in an open tubular column, and what does that do to efficiency and flow?",
+     "explanation": "There are no packed particles, so every molecule follows essentially the same single path along the open tube and the multiple-path term is about zero. Plate height is therefore lower (efficiency higher), and for the same length and pressure the linear flow rate is much higher than in a packed column.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "No packing, so there is a single open flow path and the multiple-path (eddy diffusion) term A is essentially zero",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "So plate height is lower (efficiency higher), and the linear flow for the same length and pressure is much higher than in a packed column",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-g-tprog",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Temperature and pressure programming",
+    "source": "GC and HPLC slides; final Q4 style",
+    "week": 10,
+    "primaryTheme": "Gas chromatography",
+    "conceptTags": [
+     "gc",
+     "temperature-programming"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 5,
+    "examStyle": "construct_4to6",
+    "family": "gc-prog"
+   },
+   "variants": [
+    {
+     "variantId": "g-tprog",
+     "perspectiveLabel": "Temperature programming (3 marks)",
+     "marks": 3,
+     "stem": "How does **column temperature programming** affect the separation in gas chromatography?",
+     "explanation": "A sample with a wide boiling range cannot be separated well at one temperature: if the oven is cool the heavy compounds are held too long and give broad peaks, and if it is hot the light compounds all leave together. The program starts low to separate the volatile compounds, then raises the temperature (about 5–20 °C/min) so the less volatile compounds gain vapour pressure and elute sooner, and ends with a hold to clean the column. All compounds elute with adequate resolution in a shorter run and the late peaks are sharper.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Problem: a wide boiling range cannot be run well isothermally (cool: heavy compounds retained too long, broad peaks; hot: volatiles bunch together)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "Start low to separate the volatile compounds, then raise the temperature so less volatile compounds gain vapour pressure and elute sooner",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Result: every compound elutes with adequate resolution in a shorter run, with sharper late peaks (better sensitivity)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "g-tprog-pros",
+     "perspectiveLabel": "Advantages, drawbacks, alternative (4 marks)",
+     "marks": 4,
+     "stem": "Give **two advantages** and **two disadvantages** of temperature programming, and name an alternative that avoids high temperatures.",
+     "explanation": "Advantages: compounds with very different boiling points all elute with resolution in a reasonable time, and later peaks are sharper so sensitivity improves (a low starting temperature also focuses the band in splitless or on-column injection). Disadvantages: the baseline can slope because the stationary phase bleeds at high temperature, and the oven needs time to cool between runs. Alternative: pressure programming raises the flow instead, shortening the retention of late peaks without high temperature and so sparing thermally sensitive compounds; it needs a costly high-pressure system.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Advantage: compounds with very different boiling points all elute with resolution in a reasonable time",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "Advantage: later peaks are sharper, so sensitivity improves (a low start also focuses the band for splitless or on-column injection)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "Disadvantages: sloping baseline from stationary-phase bleed at high temperature; time needed to cool the oven between runs",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r4",
+        "criterion": "Alternative: pressure programming (higher flow shortens retention of late peaks without heat, sparing thermally sensitive compounds; costly high-pressure pump)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-g-inject",
+   "moduleCode": "CM2011",
+   "tier": "atomic",
+   "metadata": {
+    "title": "GC injection modes and derivatisation",
+    "source": "GC and HPLC slides; final Q4 style",
+    "week": 10,
+    "primaryTheme": "Gas chromatography",
+    "conceptTags": [
+     "gc",
+     "injection"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "gc-inject"
+   },
+   "variants": [
+    {
+     "variantId": "g-inj-split",
+     "perspectiveLabel": "Concentrated sample",
+     "marks": 1,
+     "stem": "A sample is so concentrated that the column would be overloaded. Which injection mode is used?",
+     "explanation": "**Split** injection sends only a small fraction of the vaporised sample onto the column and vents the rest, which avoids overload and keeps the peaks sharp.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "split injection"
+       },
+       {
+        "id": "b",
+        "label": "splitless injection"
+       },
+       {
+        "id": "c",
+        "label": "on-column injection"
+       },
+       {
+        "id": "d",
+        "label": "none: the sample must be diluted by 100 times first"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "g-inj-splitless",
+     "perspectiveLabel": "Trace analyte",
+     "marks": 1,
+     "stem": "A trace-level analyte must reach the column with as little loss as possible. Which injection mode is used?",
+     "explanation": "**Splitless** injection keeps the split vent closed at first so nearly all the vaporised sample enters the column, then opens it to flush out the remaining solvent vapour. That maximises sensitivity for trace analytes.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "splitless injection"
+       },
+       {
+        "id": "b",
+        "label": "split injection with a high split ratio"
+       },
+       {
+        "id": "c",
+        "label": "no injection port is needed"
+       },
+       {
+        "id": "d",
+        "label": "split injection at the lowest temperature"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "g-inj-oncol",
+     "perspectiveLabel": "Thermally labile sample",
+     "marks": 1,
+     "stem": "A thermally labile, high-boiling compound would decompose in a hot injector. Which injection mode suits it?",
+     "explanation": "**On-column** injection puts the liquid sample directly onto the cool column, which concentrates the analytes near the entrance; heating the column then starts the separation. Thermal degradation and sample loss are minimal.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "on-column injection"
+       },
+       {
+        "id": "b",
+        "label": "split injection"
+       },
+       {
+        "id": "c",
+        "label": "splitless injection"
+       },
+       {
+        "id": "d",
+        "label": "injection into the detector"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "g-deriv",
+     "perspectiveLabel": "Derivatisation",
+     "marks": 1,
+     "stem": "A carboxylic acid is not volatile enough for GC. What is the standard remedy?",
+     "explanation": "**Derivatisation** converts the analyte into a form that is more volatile or easier to detect. A carboxylic acid is converted into its trimethylsilyl ester, which is volatile.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "convert it into a volatile derivative such as the trimethylsilyl ester"
+       },
+       {
+        "id": "b",
+        "label": "run the oven above 500 °C"
+       },
+       {
+        "id": "c",
+        "label": "switch the carrier gas to nitrogen"
+       },
+       {
+        "id": "d",
+        "label": "use a thicker packed column"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-g-carrier",
+   "moduleCode": "CM2011",
+   "tier": "atomic",
+   "metadata": {
+    "title": "GC carrier gases",
+    "source": "GC and HPLC slides; final Q4 style",
+    "week": 10,
+    "primaryTheme": "Gas chromatography",
+    "conceptTags": [
+     "gc",
+     "carrier-gas"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "gc-carrier"
+   },
+   "variants": [
+    {
+     "variantId": "g-car-order",
+     "perspectiveLabel": "Optimum flow",
+     "marks": 1,
+     "stem": "Arranged from lowest to highest optimum flow rate, the usual GC carrier gases are:",
+     "explanation": "The optimum flow rate rises in the order N₂ < He < H₂, so He and H₂ allow faster analyses than N₂ at the same efficiency.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "N₂ < He < H₂"
+       },
+       {
+        "id": "b",
+        "label": "H₂ < He < N₂"
+       },
+       {
+        "id": "c",
+        "label": "He < N₂ < H₂"
+       },
+       {
+        "id": "d",
+        "label": "all three have the same optimum"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "g-car-h2",
+     "perspectiveLabel": "Hydrogen carrier",
+     "marks": 1,
+     "stem": "Which statement about hydrogen as a carrier gas matches the updated lecture slides?",
+     "explanation": "Hydrogen has a particularly broad, flat van Deemter optimum, so efficient operation at higher linear velocity gives faster analysis. Its drawbacks are that it is flammable and explosive, and GC–MS use needs a compatible instrument and precautions. (The older slide said it simply cannot be used with MS; use the updated wording.)",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "broad flat optimum and faster analysis, but flammable; GC–MS needs a compatible instrument"
+       },
+       {
+        "id": "b",
+        "label": "the slowest of the three carriers"
+       },
+       {
+        "id": "c",
+        "label": "inert, non-flammable and ideal for every detector"
+       },
+       {
+        "id": "d",
+        "label": "it cannot be used with an FID"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "g-car-tcd",
+     "perspectiveLabel": "Carrier for a TCD",
+     "marks": 1,
+     "stem": "Which carrier gas is normally used with a TCD, and why?",
+     "explanation": "Helium: its high thermal conductivity gives a large contrast with most analytes, so an eluting compound changes the thermal conductivity of the gas leaving the column and the filament temperature clearly.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "helium, because of its high thermal conductivity"
+       },
+       {
+        "id": "b",
+        "label": "nitrogen, because it is the cheapest"
+       },
+       {
+        "id": "c",
+        "label": "air, because it supports the flame"
+       },
+       {
+        "id": "d",
+        "label": "argon, because it ionises easily"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-h-column",
+   "moduleCode": "CM2011",
+   "tier": "atomic",
+   "metadata": {
+    "title": "HPLC columns: reading the label",
+    "source": "GC and HPLC slides; final Q4 style",
+    "week": 10,
+    "primaryTheme": "Liquid chromatography",
+    "conceptTags": [
+     "hplc",
+     "columns"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "hplc-column"
+   },
+   "variants": [
+    {
+     "variantId": "h-lab-dim",
+     "perspectiveLabel": "Dimensions on the label",
+     "marks": 1,
+     "stem": "An HPLC column is labelled **C18, 60 Å, 4 µm, 3.9 × 150 mm**. In the updated lecture, “3.9 × 150 mm” gives:",
+     "explanation": "Inner diameter × length: the column is 150 mm long with an inner diameter of 3.9 mm. C18 is the bonded stationary phase, 60 Å the pore size and 4 µm the particle size.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "inner diameter 3.9 mm × length 150 mm"
+       },
+       {
+        "id": "b",
+        "label": "length 3.9 mm × inner diameter 150 mm"
+       },
+       {
+        "id": "c",
+        "label": "particle size 3.9 µm and pore size 150 Å"
+       },
+       {
+        "id": "d",
+        "label": "a pressure rating"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "h-lab-pore",
+     "perspectiveLabel": "Pore size",
+     "marks": 1,
+     "stem": "Which pore size is chosen for peptides and proteins, compared with small molecules?",
+     "explanation": "Small molecules use pores of about 100 Å; peptides and proteins are larger and need pores of about 300 Å so that they can enter.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "about 300 Å for peptides and proteins, about 100 Å for small molecules"
+       },
+       {
+        "id": "b",
+        "label": "about 100 Å for peptides and proteins, about 300 Å for small molecules"
+       },
+       {
+        "id": "c",
+        "label": "the same pore size for both"
+       },
+       {
+        "id": "d",
+        "label": "no pores: peptides need non-porous glass"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "h-c8",
+     "perspectiveLabel": "C8 vs C18",
+     "marks": 1,
+     "stem": "Replacing a C18 column by a C8 column, with the same mobile phase, will usually give:",
+     "explanation": "C8 has shorter (8-carbon) chains, so the stationary phase is less hydrophobic, hydrophobic analytes stick less and retention is generally shorter.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "shorter retention, because C8 is less hydrophobic"
+       },
+       {
+        "id": "b",
+        "label": "longer retention, because C8 is more polar and more selective"
+       },
+       {
+        "id": "c",
+        "label": "identical retention"
+       },
+       {
+        "id": "d",
+        "label": "no retention of non-polar compounds"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "h-guard",
+     "perspectiveLabel": "Guard column",
+     "marks": 1,
+     "stem": "What is a guard column for?",
+     "explanation": "It protects the analytical column from particulate matter and contaminants in the sample and solvents. It has the same packing and stationary phase, but is shorter and cheaper, so it is the part that gets replaced.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "to protect the analytical column: same packing, shorter and cheaper"
+       },
+       {
+        "id": "b",
+        "label": "to raise the number of plates"
+       },
+       {
+        "id": "c",
+        "label": "to detect the analytes"
+       },
+       {
+        "id": "d",
+        "label": "to degas the mobile phase"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "h-silica-ph",
+     "perspectiveLabel": "Silica and pH",
+     "marks": 1,
+     "stem": "What limits the use of silica-based HPLC columns?",
+     "explanation": "Silica has limited stability at high pH, so other support materials are used when a wider pH range is needed.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "silica is unstable at high pH"
+       },
+       {
+        "id": "b",
+        "label": "silica dissolves in organic solvents"
+       },
+       {
+        "id": "c",
+        "label": "silica cannot be bonded to alkyl chains"
+       },
+       {
+        "id": "d",
+        "label": "silica absorbs UV light so no detector can be used"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-h-mode",
+   "moduleCode": "CM2011",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Normal and reversed phase, eluent strength",
+    "source": "GC and HPLC slides; final Q4 style",
+    "week": 10,
+    "primaryTheme": "Liquid chromatography",
+    "conceptTags": [
+     "hplc",
+     "reversed-phase"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "hplc-mode"
+   },
+   "variants": [
+    {
+     "variantId": "h-mode-id",
+     "perspectiveLabel": "Identify the mode",
+     "marks": 1,
+     "stem": "An HPLC column has a **polar** stationary phase (amino or diol groups) and a **non-polar** mobile phase. Which mode is this and which solutes elute first?",
+     "explanation": "This is **normal-phase** chromatography. In normal phase the least polar component elutes first, and making the mobile phase more polar increases eluent strength, so solutes elute sooner.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "normal phase; the least polar elutes first"
+       },
+       {
+        "id": "b",
+        "label": "reversed phase; the most polar elutes first"
+       },
+       {
+        "id": "c",
+        "label": "normal phase; the most polar elutes first"
+       },
+       {
+        "id": "d",
+        "label": "reversed phase; the least polar elutes first"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "h-mode-first",
+     "perspectiveLabel": "Reversed phase: who elutes first",
+     "marks": 1,
+     "stem": "On a C18 column with an aqueous–organic mobile phase, which kind of solute elutes first?",
+     "explanation": "Reversed phase has a non-polar stationary phase and a polar mobile phase. The most polar solute interacts least with the C18 chains and spends most of its time in the mobile phase, so it elutes first. Retention rises with hydrophobicity.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "the most polar solute"
+       },
+       {
+        "id": "b",
+        "label": "the most hydrophobic solute"
+       },
+       {
+        "id": "c",
+        "label": "the largest solute whatever its polarity"
+       },
+       {
+        "id": "d",
+        "label": "the solute present at the highest concentration"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "h-mode-strength",
+     "perspectiveLabel": "More organic solvent",
+     "marks": 1,
+     "stem": "In reversed-phase HPLC the percentage of organic solvent (%B, for example acetonitrile) is increased. What happens?",
+     "explanation": "The mobile phase becomes less polar, so its eluent strength rises. Analytes spend less time on the hydrophobic C18 surface and elute sooner, so retention times fall.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "the eluent is stronger and retention times fall"
+       },
+       {
+        "id": "b",
+        "label": "the eluent is weaker and retention times rise"
+       },
+       {
+        "id": "c",
+        "label": "retention times are unchanged"
+       },
+       {
+        "id": "d",
+        "label": "the elution order reverses completely"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-h-order",
+   "moduleCode": "CM2011",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Elution order in HPLC",
+    "source": "GC and HPLC slides; final Q4 style",
+    "week": 10,
+    "primaryTheme": "Liquid chromatography",
+    "conceptTags": [
+     "hplc",
+     "elution-order"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "hplc-order"
+   },
+   "variants": [
+    {
+     "variantId": "h-ord-final",
+     "perspectiveLabel": "Reversed phase: final-paper set",
+     "marks": 4,
+     "stem": "Put these compounds in the order they elute from a **reversed-phase (C18)** HPLC column: toluene, phenol, butanol, cyclohexane.",
+     "explanation": "In reversed phase retention rises with hydrophobicity, so the most polar compound leaves first: **butanol → phenol → toluene → cyclohexane**. Butanol and phenol carry an –OH group, toluene is an aromatic hydrocarbon, and cyclohexane is a saturated hydrocarbon with no polar group.",
+     "inputSlot": {
+      "type": "ordered_list",
+      "directionLabel": "Elution order: first → last",
+      "items": [
+       {
+        "id": "but",
+        "label": "butanol"
+       },
+       {
+        "id": "phe",
+        "label": "phenol"
+       },
+       {
+        "id": "tol",
+        "label": "toluene"
+       },
+       {
+        "id": "cyc",
+        "label": "cyclohexane"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "order_match",
+      "targetOrder": [
+       "but",
+       "phe",
+       "tol",
+       "cyc"
+      ]
+     }
+    },
+    {
+     "variantId": "h-ord-alc",
+     "perspectiveLabel": "Reversed phase: alcohols",
+     "marks": 4,
+     "stem": "Put these alcohols in the order they elute from a **reversed-phase (C18)** column: 1-butanol, ethanol, 1-pentanol, 1-propanol.",
+     "explanation": "All four have the same –OH group, so the difference is the length of the hydrocarbon chain. A longer chain is more hydrophobic and interacts more with C18, so retention rises: **ethanol → 1-propanol → 1-butanol → 1-pentanol**.",
+     "inputSlot": {
+      "type": "ordered_list",
+      "directionLabel": "Elution order: first → last",
+      "items": [
+       {
+        "id": "eth",
+        "label": "ethanol"
+       },
+       {
+        "id": "pro",
+        "label": "1-propanol"
+       },
+       {
+        "id": "but",
+        "label": "1-butanol"
+       },
+       {
+        "id": "pen",
+        "label": "1-pentanol"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "order_match",
+      "targetOrder": [
+       "eth",
+       "pro",
+       "but",
+       "pen"
+      ]
+     }
+    },
+    {
+     "variantId": "h-ord-hal",
+     "perspectiveLabel": "Reversed phase: ethyl halides",
+     "marks": 4,
+     "stem": "Put these ethyl halides in the order they elute from a **reversed-phase (C18)** column: C₂H₅Br, C₂H₅F, C₂H₅I, C₂H₅Cl.",
+     "explanation": "Hydrophobicity increases down the halogen series F < Cl < Br < I, so interaction with C18 and retention increase in the same order: **C₂H₅F → C₂H₅Cl → C₂H₅Br → C₂H₅I**.",
+     "inputSlot": {
+      "type": "ordered_list",
+      "directionLabel": "Elution order: first → last",
+      "items": [
+       {
+        "id": "f",
+        "label": "C₂H₅F"
+       },
+       {
+        "id": "cl",
+        "label": "C₂H₅Cl"
+       },
+       {
+        "id": "br",
+        "label": "C₂H₅Br"
+       },
+       {
+        "id": "i",
+        "label": "C₂H₅I"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "order_match",
+      "targetOrder": [
+       "f",
+       "cl",
+       "br",
+       "i"
+      ]
+     }
+    },
+    {
+     "variantId": "h-ord-mix",
+     "perspectiveLabel": "Reversed phase: methanol to hexadecane",
+     "marks": 4,
+     "stem": "Put these in the order they elute from a **reversed-phase (C18)** column: toluene, hexadecane, methanol, acetone.",
+     "explanation": "The –OH group makes methanol very polar, the C=O group of acetone is polar but less hydrophilic, toluene has only C and H (an aromatic hydrocarbon), and hexadecane has a long hydrocarbon chain and is the most hydrophobic: **methanol → acetone → toluene → hexadecane**.",
+     "inputSlot": {
+      "type": "ordered_list",
+      "directionLabel": "Elution order: first → last",
+      "items": [
+       {
+        "id": "meoh",
+        "label": "methanol"
+       },
+       {
+        "id": "ace",
+        "label": "acetone"
+       },
+       {
+        "id": "tol",
+        "label": "toluene"
+       },
+       {
+        "id": "hex",
+        "label": "hexadecane"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "order_match",
+      "targetOrder": [
+       "meoh",
+       "ace",
+       "tol",
+       "hex"
+      ]
+     }
+    },
+    {
+     "variantId": "h-ord-np-alc",
+     "perspectiveLabel": "Normal phase: alcohols",
+     "marks": 4,
+     "stem": "Put these alcohols in the order they elute from a **normal-phase (polar silica-type)** column: ethanol, 1-pentanol, 1-propanol, 1-butanol.",
+     "explanation": "In normal phase the least polar component elutes first. A longer hydrocarbon chain makes the alcohol less polar, so the order is the reverse of reversed phase: **1-pentanol → 1-butanol → 1-propanol → ethanol**.",
+     "inputSlot": {
+      "type": "ordered_list",
+      "directionLabel": "Elution order: first → last",
+      "items": [
+       {
+        "id": "pen",
+        "label": "1-pentanol"
+       },
+       {
+        "id": "but",
+        "label": "1-butanol"
+       },
+       {
+        "id": "pro",
+        "label": "1-propanol"
+       },
+       {
+        "id": "eth",
+        "label": "ethanol"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "order_match",
+      "targetOrder": [
+       "pen",
+       "but",
+       "pro",
+       "eth"
+      ]
+     }
+    },
+    {
+     "variantId": "h-ord-np-mix",
+     "perspectiveLabel": "Normal phase: methanol to hexadecane",
+     "marks": 4,
+     "stem": "Put these in the order they elute from a **normal-phase (polar silica-type)** column: acetone, methanol, hexadecane, toluene.",
+     "explanation": "In normal phase the least polar compound elutes first, so the order is the reverse of reversed phase: **hexadecane → toluene → acetone → methanol**.",
+     "inputSlot": {
+      "type": "ordered_list",
+      "directionLabel": "Elution order: first → last",
+      "items": [
+       {
+        "id": "hex",
+        "label": "hexadecane"
+       },
+       {
+        "id": "tol",
+        "label": "toluene"
+       },
+       {
+        "id": "ace",
+        "label": "acetone"
+       },
+       {
+        "id": "meoh",
+        "label": "methanol"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "order_match",
+      "targetOrder": [
+       "hex",
+       "tol",
+       "ace",
+       "meoh"
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-h-gradient",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Isocratic and gradient elution",
+    "source": "GC and HPLC slides; final Q4 style",
+    "week": 10,
+    "primaryTheme": "Liquid chromatography",
+    "conceptTags": [
+     "hplc",
+     "gradient"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 4,
+    "examStyle": "construct_4to6",
+    "family": "hplc-gradient"
+   },
+   "variants": [
+    {
+     "variantId": "h-grad-vs-iso",
+     "perspectiveLabel": "Isocratic vs gradient (4 marks)",
+     "marks": 4,
+     "stem": "Explain the difference between **isocratic** and **gradient** elution in HPLC, and give one advantage of gradient elution.",
+     "explanation": "In isocratic elution the mobile-phase composition stays constant. In gradient elution the composition changes during the run, continuously or in steps; in reversed phase this means more organic solvent as the run proceeds, which raises the eluent strength. The advantage is that strongly retained compounds elute sooner, so the run is shorter and late peaks are sharper, and one run copes with a sample that contains both weakly and strongly retained compounds.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Isocratic: the mobile-phase composition is constant throughout the run",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "Gradient: the composition is changed during the run, continuously or stepwise (in reversed phase, more organic solvent with time)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Advantage: strongly retained compounds elute sooner, giving a shorter run",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "Late peaks are sharper, so one run copes with a mixture of weakly and strongly retained solutes",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "h-grad-when",
+     "perspectiveLabel": "When to use a gradient",
+     "marks": 1,
+     "stem": "A sample contains both weakly and strongly retained compounds. A single constant solvent composition would either leave the early peaks unresolved or take very long to elute the last ones. What is the usual solution?",
+     "explanation": "**Gradient elution**: start with a weaker mobile phase to resolve the early peaks, then increase the eluent strength so the strongly retained compounds leave in reasonable time.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "gradient elution"
+       },
+       {
+        "id": "b",
+        "label": "a longer isocratic run"
+       },
+       {
+        "id": "c",
+        "label": "a shorter column only"
+       },
+       {
+        "id": "d",
+        "label": "switch from HPLC to a TCD"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "h-grad-B",
+     "perspectiveLabel": "Reading a gradient",
+     "marks": 1,
+     "stem": "In a reversed-phase gradient, mobile phase A is water and B is acetonitrile. As the run proceeds %B rises. Which statement is correct?",
+     "explanation": "Raising %B makes the mobile phase less polar, so the eluent strength increases and retained hydrophobic compounds elute sooner.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "the mobile phase becomes less polar and a stronger eluent"
+       },
+       {
+        "id": "b",
+        "label": "the mobile phase becomes more polar and a stronger eluent"
+       },
+       {
+        "id": "c",
+        "label": "the eluent strength falls, so retention increases"
+       },
+       {
+        "id": "d",
+        "label": "the stationary phase changes to normal phase"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-h-detect",
+   "moduleCode": "CM2011",
+   "tier": "atomic",
+   "metadata": {
+    "title": "HPLC detectors",
+    "source": "GC and HPLC slides; final Q4 style",
+    "week": 10,
+    "primaryTheme": "Liquid chromatography",
+    "conceptTags": [
+     "hplc",
+     "detectors"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "hplc-detect"
+   },
+   "variants": [
+    {
+     "variantId": "h-det-uv",
+     "perspectiveLabel": "The usual detector",
+     "marks": 1,
+     "stem": "Which is the most common HPLC detector?",
+     "explanation": "The **UV (spectroscopic) detector**, with a lamp and a monochromator or a photodiode array. It is linear over about five orders of magnitude of solute concentration.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "UV absorbance (photodiode array)"
+       },
+       {
+        "id": "b",
+        "label": "refractive index"
+       },
+       {
+        "id": "c",
+        "label": "flame ionisation"
+       },
+       {
+        "id": "d",
+        "label": "thermal conductivity"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "h-det-ri",
+     "perspectiveLabel": "Universal detector",
+     "marks": 1,
+     "stem": "Which HPLC detector responds to almost any solute but is much less sensitive than UV?",
+     "explanation": "The **refractive index detector** is universal, but its detection limit is far poorer than that of the UV detector (the slides say by about a factor of 1000).",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "refractive index"
+       },
+       {
+        "id": "b",
+        "label": "electrochemical"
+       },
+       {
+        "id": "c",
+        "label": "UV absorbance"
+       },
+       {
+        "id": "d",
+        "label": "mass spectrometer"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "h-det-ec",
+     "perspectiveLabel": "Electroactive analytes",
+     "marks": 1,
+     "stem": "Which HPLC detector is highly selective and sensitive but only responds to electroactive compounds?",
+     "explanation": "The **electrochemical detector**: only compounds that can be oxidised or reduced at the electrode respond, which makes it selective as well as sensitive.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "electrochemical"
+       },
+       {
+        "id": "b",
+        "label": "refractive index"
+       },
+       {
+        "id": "c",
+        "label": "UV absorbance"
+       },
+       {
+        "id": "d",
+        "label": "flame ionisation"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-h-particles",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Why HPLC columns use small packed particles",
+    "source": "GC and HPLC slides; final Q4 style",
+    "week": 10,
+    "primaryTheme": "Liquid chromatography",
+    "conceptTags": [
+     "hplc",
+     "van-deemter"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 3,
+    "examStyle": "construct_4to6",
+    "family": "hplc-particles"
+   },
+   "variants": [
+    {
+     "variantId": "h-small-particles",
+     "perspectiveLabel": "Small particles (3 marks)",
+     "marks": 3,
+     "stem": "Why do HPLC columns use **small, uniformly packed particles**, and what is the cost?",
+     "explanation": "Diffusion in liquids is slow, so long diffusion paths cause band broadening. Small particles shorten the distances molecules must diffuse (smaller mass-transfer C term) and pack more uniformly (smaller multiple-path A term). Efficiency rises, N ∝ L/dₚ, so resolution improves or the run can be faster at the same resolution. The cost is that the narrow gaps between small particles resist flow, so a higher pressure is needed.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Liquid diffusion is slow, so small particles shorten the diffusion paths and reduce mass-transfer broadening (smaller C term)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "More uniform packing reduces multiple-path broadening (smaller A term); efficiency rises (N ∝ L/dₚ), so resolution improves",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Cost: smaller particles resist flow, so a higher pressure is needed",
+        "marks": 1,
+        "isCritical": true
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-g-ms",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Coupling to mass spectrometry: GC–MS and LC–MS",
+    "source": "GC and HPLC slides; final Q4 style",
+    "week": 10,
+    "primaryTheme": "Liquid chromatography",
+    "conceptTags": [
+     "gc",
+     "hplc",
+     "ms"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 5,
+    "examStyle": "construct_4to6",
+    "family": "gc-ms"
+   },
+   "variants": [
+    {
+     "variantId": "g-gcms-lcms",
+     "perspectiveLabel": "GC–MS vs LC–MS (5 marks)",
+     "marks": 5,
+     "stem": "Why is **GC–MS** generally easier to interface than **LC–MS**? Describe **two** technical challenges of coupling LC to MS.",
+     "explanation": "The GC effluent is already a gas and is compatible with the vacuum of the mass spectrometer. The LC effluent is a liquid, so (1) it must be converted into gas-phase ions by an interface such as electrospray (ESI) or atmospheric-pressure chemical ionisation (APCI); (2) the large amount of solvent must be removed (desolvation) before the ions reach the high vacuum; and (3) the mobile phase must be MS-compatible, because non-volatile salts and buffers contaminate the source and suppress ionisation.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "GC: the effluent is already a gas and is compatible with the MS vacuum",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "LC challenge 1: the liquid effluent must be converted into gas-phase ions, using an interface such as ESI or APCI",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "LC challenge 2: the large solvent load must be removed (desolvated) before the ions enter the high vacuum",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "Further LC point: the mobile phase must be MS-compatible (volatile buffers); non-volatile salts contaminate the source and suppress ionisation",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r5",
+        "criterion": "Clear statement of why this makes GC–MS easier (no solvent removal or ion-generation interface needed)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "g-hplc-suits",
+     "perspectiveLabel": "What HPLC suits (2 marks)",
+     "marks": 2,
+     "stem": "Which kinds of analyte suit **HPLC** rather than GC, and why does that make LC–MS attractive?",
+     "explanation": "HPLC suits polar, non-volatile and thermally labile compounds, which cannot be vaporised without decomposing. Soft ionisation such as electrospray makes gas-phase ions from these compounds without needing to vaporise them by heat, so LC–MS can analyse compounds that GC–MS cannot.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "HPLC suits polar, non-volatile or thermally labile analytes (they cannot be vaporised without decomposing)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "Electrospray-type interfaces give gas-phase ions without heating the analyte to vaporise it, so LC–MS reaches compounds GC–MS cannot",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-g-choose",
+   "moduleCode": "CM2011",
+   "tier": "atomic",
+   "metadata": {
+    "title": "GC or HPLC?",
+    "source": "GC and HPLC slides; final Q4 style",
+    "week": 10,
+    "primaryTheme": "Liquid chromatography",
+    "conceptTags": [
+     "gc",
+     "hplc",
+     "method-selection"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "gc-or-hplc"
+   },
+   "variants": [
+    {
+     "variantId": "g-sel-gc",
+     "perspectiveLabel": "Volatile mixture",
+     "marks": 1,
+     "stem": "You must separate a mixture of volatile hydrocarbons that are stable at 200 °C. Which technique is the natural choice?",
+     "explanation": "**GC**: the analytes are volatile and thermally stable, which is exactly what GC needs (gas or volatile liquid stable at roughly 50–300 °C). An FID would detect them sensitively.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "GC with an FID"
+       },
+       {
+        "id": "b",
+        "label": "HPLC with a refractive index detector"
+       },
+       {
+        "id": "c",
+        "label": "LC–MS with electrospray"
+       },
+       {
+        "id": "d",
+        "label": "size-exclusion chromatography"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "g-sel-hplc1",
+     "perspectiveLabel": "Thermally labile biomolecule",
+     "marks": 1,
+     "stem": "You must analyse a thermally labile, non-volatile peptide. Which technique is the natural choice?",
+     "explanation": "**HPLC** (and LC–MS with electrospray if identification is needed): the peptide would decompose long before it vaporised in a GC oven.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "HPLC (or LC–MS)"
+       },
+       {
+        "id": "b",
+        "label": "GC with a TCD"
+       },
+       {
+        "id": "c",
+        "label": "GC with on-column injection at 300 °C"
+       },
+       {
+        "id": "d",
+        "label": "GC–MS with a packed column"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "g-sel-hplc2",
+     "perspectiveLabel": "Polar non-volatile drug",
+     "marks": 1,
+     "stem": "A polar, non-volatile drug must be separated from its metabolites in a urine extract. Which technique is the natural choice?",
+     "explanation": "**Reversed-phase HPLC**: the polar, non-volatile analytes cannot be vaporised for GC without derivatisation, and reversed phase handles polar compounds well (most polar elutes first).",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "reversed-phase HPLC"
+       },
+       {
+        "id": "b",
+        "label": "GC with a splitless injector"
+       },
+       {
+        "id": "c",
+        "label": "GC with a PLOT column"
+       },
+       {
+        "id": "d",
+        "label": "GC with an FID at 400 °C"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
      }
     }
    ]

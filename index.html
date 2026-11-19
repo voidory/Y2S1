@@ -943,8 +943,20 @@
         const resolvedExplanation = variant.explanation ? Expr.interpolate(variant.explanation, scope) : '';
         const resolvedCaveat = variant.overallCaveat ? Expr.interpolate(variant.overallCaveat, scope) : '';
 
+        // Pick-one options are authored with the key first; shuffle them (opt-in, seeded) so the position gives nothing away.
+        let shown = variant;
+        const slot = variant?.inputSlot;
+        if (slot?.type === 'choice' && slot.shuffleOptions && Array.isArray(slot.options) && slot.options.length > 1) {
+          const opts = slot.options.slice();
+          for (let i = opts.length - 1; i > 0; i--) {
+            const j = Math.floor(rand() * (i + 1));
+            [opts[i], opts[j]] = [opts[j], opts[i]];
+          }
+          shown = { ...variant, inputSlot: { ...slot, options: opts } };
+        }
+
         return {
-          variant,
+          variant: shown,
           scope,
           resolvedStem,
           resolvedHint,
@@ -2592,7 +2604,7 @@
         title: 'Analytical Chemistry',
         examTimestamp: null,
         targetRetention: 0.9,
-        // The seven lecture topics of the course outline (weeks 1-7); the test is in week 6.
+        // The lecture topics of the course outline: weeks 1-7 (the test is in week 6), then the second half.
         weeks: [
           { weekNum: 1, title: 'Topic 1: Errors and confidence intervals', examWeight: 1.0 },
           { weekNum: 2, title: 'Topic 2: Air pollution in Singapore', examWeight: 1.0 },
@@ -2601,9 +2613,26 @@
           { weekNum: 5, title: 'Topic 4a: Molecular absorption spectroscopy', examWeight: 1.0 },
           { weekNum: 6, title: 'Topic 4b: Molecular fluorescence spectroscopy', examWeight: 1.0 },
           { weekNum: 7, title: 'Topic 4c: Atomic spectroscopy', examWeight: 1.0 },
+          { weekNum: 8, title: 'Extraction', examWeight: 1.0 },
+          { weekNum: 9, title: 'Chromatography: retention, efficiency and band spreading', examWeight: 1.0 },
+          { weekNum: 10, title: 'GC and HPLC', examWeight: 1.0 },
         ],
       },
     ];
+
+    /* Pure: chapters that the seed lists for a module but the stored module row lacks, added without touching anything the
+       user edited. Returns the module rows to write (empty when nothing is missing). */
+    function addMissingWeeks(storedMods, seedMods) {
+      const patches = [];
+      for (const seedMod of seedMods) {
+        const prev = (storedMods || []).find((m) => m.moduleCode === seedMod.moduleCode);
+        if (!prev) continue;
+        const have = new Set((prev.weeks || []).map((w) => Number(w.weekNum)));
+        const add = (seedMod.weeks || []).filter((w) => !have.has(Number(w.weekNum)));
+        if (add.length) patches.push({ ...prev, weeks: [...(prev.weeks || []), ...add].sort((x, y) => Number(x.weekNum) - Number(y.weekNum)) });
+      }
+      return patches;
+    }
 
     const SVG_CF_SPLIT = `<svg viewBox="0 0 420 175" class="w-full max-w-md mx-auto" xmlns="http://www.w3.org/2000/svg">
       <rect x="0" y="0" width="420" height="175" fill="#ffffff" rx="8"/>
@@ -10775,6 +10804,11 @@
             const missingMods = SEED_MODULES.filter((m) => !haveMods.has(m.moduleCode));
             if (missingMods.length) await db.modules.bulkPut(missingMods);
           }
+          // A chapter added in a later release must show up for installs that are already on this content version.
+          {
+            const patches = addMissingWeeks(await db.modules.toArray(), SEED_MODULES);
+            if (patches.length) await db.modules.bulkPut(patches);
+          }
           // Bundled content: neither call throws; the app keeps working on whatever is already stored.
           appState.content.bank = await Content.syncAllBanks(db);
           appState.content.swept = await Content.sweepOrphanedProgress(db);
@@ -10859,6 +10893,7 @@
       REMOVED_NODE_IDS,
       SEED_MODULES,
       SEED_NODES,
+      addMissingWeeks,
     };
 
     if (typeof document !== 'undefined') {

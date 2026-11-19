@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "date": "2026-11-18",
+ "date": "2026-11-19",
  "module": "CM2011",
  "chunks": [
   {
@@ -67,7 +67,25 @@
    "id": "s-atomic",
    "part": "Topic 4: Spectroscopy",
    "name": "Atomic spectroscopy",
-   "summary": "AAS components, lamps, atomisers"
+   "summary": "AAS components, lamps, atomisers, Boltzmann populations, line widths, ICP"
+  },
+  {
+   "id": "g-gc",
+   "part": "GC and HPLC",
+   "name": "GC: columns, programming, injection, carrier gas",
+   "summary": "Open tubular vs packed, temperature and pressure programming, split/splitless/on-column, derivatisation, carrier gases"
+  },
+  {
+   "id": "g-detect",
+   "part": "GC and HPLC",
+   "name": "GC detectors and coupling to MS",
+   "summary": "TCD, FID, MS; GC–MS vs LC–MS; what HPLC suits"
+  },
+  {
+   "id": "g-hplc",
+   "part": "GC and HPLC",
+   "name": "HPLC: columns, modes, elution order, detection",
+   "summary": "Column label, C18/C8, normal vs reversed phase, elution order, isocratic vs gradient, detectors, particle size, choosing GC or HPLC"
   }
  ],
  "skills": [
@@ -86,7 +104,7 @@
    "ids": [
     "bk-m11-t1-meansd"
    ],
-   "weight": 0.02963,
+   "weight": 0.01826,
    "nodes": [
     "bk-m11-t1-meansd"
    ],
@@ -107,7 +125,7 @@
    "ids": [
     "bk-m11-t1-sem"
    ],
-   "weight": 0.02222,
+   "weight": 0.0137,
    "nodes": [
     "bk-m11-t1-sem"
    ],
@@ -128,7 +146,7 @@
    "ids": [
     "bk-m11-t1-qtest"
    ],
-   "weight": 0.02963,
+   "weight": 0.01826,
    "nodes": [
     "bk-m11-t1-qtest"
    ],
@@ -149,7 +167,7 @@
    "ids": [
     "bk-m11-t1-ci"
    ],
-   "weight": 0.03704,
+   "weight": 0.02283,
    "nodes": [
     "bk-m11-t1-ci"
    ],
@@ -170,7 +188,7 @@
    "ids": [
     "bk-m11-t1-ttest2"
    ],
-   "weight": 0.04444,
+   "weight": 0.0274,
    "nodes": [
     "bk-m11-t1-ttest2"
    ],
@@ -192,7 +210,7 @@
    "ids": [
     "bk-m11-t1-paired"
    ],
-   "weight": 0.04444,
+   "weight": 0.0274,
    "nodes": [
     "bk-m11-t1-paired"
    ],
@@ -213,7 +231,7 @@
    "ids": [
     "bk-m11-t1-errprop"
    ],
-   "weight": 0.02963,
+   "weight": 0.01826,
    "nodes": [
     "bk-m11-t1-errprop"
    ],
@@ -234,7 +252,7 @@
    "ids": [
     "bk-m11-t1-concepts"
    ],
-   "weight": 0.00741,
+   "weight": 0.00457,
    "nodes": [
     "bk-m11-t1-concepts"
    ],
@@ -255,7 +273,7 @@
    "ids": [
     "bk-m11-q-ppm"
    ],
-   "weight": 0.01481,
+   "weight": 0.00913,
    "nodes": [
     "bk-m11-q-ppm"
    ],
@@ -276,7 +294,7 @@
    "ids": [
     "bk-m11-q-dilution"
    ],
-   "weight": 0.02222,
+   "weight": 0.0137,
    "nodes": [
     "bk-m11-q-dilution"
    ],
@@ -297,7 +315,7 @@
    "ids": [
     "bk-m11-q-kjeldahl"
    ],
-   "weight": 0.03704,
+   "weight": 0.02283,
    "nodes": [
     "bk-m11-q-kjeldahl"
    ],
@@ -318,7 +336,7 @@
    "ids": [
     "bk-m11-e-ionic"
    ],
-   "weight": 0.01481,
+   "weight": 0.00913,
    "nodes": [
     "bk-m11-e-ionic"
    ],
@@ -339,7 +357,7 @@
    "ids": [
     "bk-m11-e-gamma"
    ],
-   "weight": 0.02963,
+   "weight": 0.01826,
    "nodes": [
     "bk-m11-e-gamma"
    ],
@@ -360,7 +378,7 @@
    "ids": [
     "bk-m11-e-half"
    ],
-   "weight": 0.03704,
+   "weight": 0.02283,
    "nodes": [
     "bk-m11-e-half"
    ],
@@ -382,7 +400,7 @@
    "ids": [
     "bk-m11-e-fe"
    ],
-   "weight": 0.05185,
+   "weight": 0.03196,
    "nodes": [
     "bk-m11-e-fe"
    ],
@@ -403,7 +421,7 @@
    "ids": [
     "bk-m11-e-cell"
    ],
-   "weight": 0.05926,
+   "weight": 0.03653,
    "nodes": [
     "bk-m11-e-cell"
    ],
@@ -424,7 +442,7 @@
    "ids": [
     "bk-m11-e-ksp"
    ],
-   "weight": 0.04444,
+   "weight": 0.0274,
    "nodes": [
     "bk-m11-e-ksp"
    ],
@@ -445,7 +463,7 @@
    "ids": [
     "bk-m11-e-thermo"
    ],
-   "weight": 0.02222,
+   "weight": 0.0137,
    "nodes": [
     "bk-m11-e-thermo"
    ],
@@ -466,7 +484,7 @@
    "ids": [
     "bk-m11-e-concepts"
    ],
-   "weight": 0.00741,
+   "weight": 0.00457,
    "nodes": [
     "bk-m11-e-concepts"
    ],
@@ -487,7 +505,7 @@
    "ids": [
     "bk-m11-p-slope"
    ],
-   "weight": 0.02222,
+   "weight": 0.0137,
    "nodes": [
     "bk-m11-p-slope"
    ],
@@ -508,7 +526,7 @@
    "ids": [
     "bk-m11-p-cal"
    ],
-   "weight": 0.02963,
+   "weight": 0.01826,
    "nodes": [
     "bk-m11-p-cal"
    ],
@@ -529,7 +547,7 @@
    "ids": [
     "bk-m11-p-sel"
    ],
-   "weight": 0.05926,
+   "weight": 0.03653,
    "nodes": [
     "bk-m11-p-sel"
    ],
@@ -550,7 +568,7 @@
    "ids": [
     "bk-m11-p-intf"
    ],
-   "weight": 0.02963,
+   "weight": 0.01826,
    "nodes": [
     "bk-m11-p-intf"
    ],
@@ -571,7 +589,7 @@
    "ids": [
     "bk-m11-p-ag2s"
    ],
-   "weight": 0.02963,
+   "weight": 0.01826,
    "nodes": [
     "bk-m11-p-ag2s"
    ],
@@ -592,7 +610,7 @@
    "ids": [
     "bk-m11-p-gas"
    ],
-   "weight": 0.01481,
+   "weight": 0.00913,
    "nodes": [
     "bk-m11-p-gas"
    ],
@@ -613,7 +631,7 @@
    "ids": [
     "bk-m11-p-facts"
    ],
-   "weight": 0.02222,
+   "weight": 0.0137,
    "nodes": [
     "bk-m11-p-facts"
    ],
@@ -634,7 +652,7 @@
    "ids": [
     "bk-m11-p-concepts"
    ],
-   "weight": 0.00741,
+   "weight": 0.00457,
    "nodes": [
     "bk-m11-p-concepts"
    ],
@@ -655,7 +673,7 @@
    "ids": [
     "bk-m11-p-calib-order"
    ],
-   "weight": 0.01481,
+   "weight": 0.00913,
    "nodes": [
     "bk-m11-p-calib-order"
    ],
@@ -676,7 +694,7 @@
    "ids": [
     "bk-m11-p-written"
    ],
-   "weight": 0.03704,
+   "weight": 0.02283,
    "nodes": [
     "bk-m11-p-written"
    ],
@@ -697,7 +715,7 @@
    "ids": [
     "bk-m11-s-beer"
    ],
-   "weight": 0.02963,
+   "weight": 0.01826,
    "nodes": [
     "bk-m11-s-beer"
    ],
@@ -718,7 +736,7 @@
    "ids": [
     "bk-m11-s-wave"
    ],
-   "weight": 0.02963,
+   "weight": 0.01826,
    "nodes": [
     "bk-m11-s-wave"
    ],
@@ -739,7 +757,7 @@
    "ids": [
     "bk-m11-s-layout"
    ],
-   "weight": 0.01481,
+   "weight": 0.00913,
    "nodes": [
     "bk-m11-s-layout"
    ],
@@ -760,7 +778,7 @@
    "ids": [
     "bk-m11-s-fl-layout"
    ],
-   "weight": 0.01481,
+   "weight": 0.00913,
    "nodes": [
     "bk-m11-s-fl-layout"
    ],
@@ -781,7 +799,7 @@
    "ids": [
     "bk-m11-s-aas-layout"
    ],
-   "weight": 0.01481,
+   "weight": 0.00913,
    "nodes": [
     "bk-m11-s-aas-layout"
    ],
@@ -802,7 +820,7 @@
    "ids": [
     "bk-m11-s-fl-concepts"
    ],
-   "weight": 0.00741,
+   "weight": 0.00457,
    "nodes": [
     "bk-m11-s-fl-concepts"
    ],
@@ -823,7 +841,7 @@
    "ids": [
     "bk-m11-s-aas-concepts"
    ],
-   "weight": 0.00741,
+   "weight": 0.00457,
    "nodes": [
     "bk-m11-s-aas-concepts"
    ],
@@ -844,11 +862,475 @@
    "ids": [
     "bk-m11-s-written"
    ],
-   "weight": 0.02963,
+   "weight": 0.01826,
    "nodes": [
     "bk-m11-s-written"
    ],
    "chunk": "s-fluorescence"
+  },
+  {
+   "id": "m11.s.jablonski",
+   "ch": 6,
+   "name": "Jablonski diagram: label the arrows, trace the paths, fluorescence vs phosphorescence",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 5,
+   "basis": "notes",
+   "ref": "Topic 4b slides; past finals",
+   "tags": [
+    "fluorescence",
+    "jablonski"
+   ],
+   "ids": [
+    "bk-m11-s-jablonski"
+   ],
+   "weight": 0.02283,
+   "nodes": [
+    "bk-m11-s-jablonski"
+   ],
+   "chunk": "s-fluorescence"
+  },
+  {
+   "id": "m11.s.flexplain",
+   "ch": 6,
+   "name": "Fluorescence: sensitivity, which molecules, broad bands, Stokes shift, quenching, instrument",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Topic 4b slides; past finals",
+   "tags": [
+    "fluorescence",
+    "written"
+   ],
+   "ids": [
+    "bk-m11-s-fl-explain"
+   ],
+   "weight": 0.01826,
+   "nodes": [
+    "bk-m11-s-fl-explain"
+   ],
+   "chunk": "s-fluorescence"
+  },
+  {
+   "id": "m11.s.flcal",
+   "ch": 6,
+   "name": "Two-point linear calibration of a fluorescence signal",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Topic 4b slides; past finals",
+   "tags": [
+    "fluorescence",
+    "calibration"
+   ],
+   "ids": [
+    "bk-m11-s-fl-cal"
+   ],
+   "weight": 0.01826,
+   "nodes": [
+    "bk-m11-s-fl-cal"
+   ],
+   "chunk": "s-fluorescence"
+  },
+  {
+   "id": "m11.s.aastable",
+   "ch": 7,
+   "name": "AAS: lamp, flame, monochromator, detector and the block diagram",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 10,
+   "basis": "notes",
+   "ref": "Topic 4c slides; past finals",
+   "tags": [
+    "aas",
+    "instrumentation"
+   ],
+   "ids": [
+    "bk-m11-s-aas-table"
+   ],
+   "weight": 0.04566,
+   "nodes": [
+    "bk-m11-s-aas-table"
+   ],
+   "chunk": "s-atomic"
+  },
+  {
+   "id": "m11.s.boltz",
+   "ch": 7,
+   "name": "Boltzmann: excited-state fraction and its change with temperature",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 5,
+   "basis": "notes",
+   "ref": "Topic 4c slides; past finals",
+   "tags": [
+    "boltzmann",
+    "aes"
+   ],
+   "ids": [
+    "bk-m11-s-boltz"
+   ],
+   "weight": 0.02283,
+   "nodes": [
+    "bk-m11-s-boltz"
+   ],
+   "chunk": "s-atomic"
+  },
+  {
+   "id": "m11.s.aesaas",
+   "ch": 7,
+   "name": "AES vs AAS: temperature sensitivity, types of atomic spectroscopy, no Stokes shift",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 5,
+   "basis": "notes",
+   "ref": "Topic 4c slides; past finals",
+   "tags": [
+    "aes",
+    "aas"
+   ],
+   "ids": [
+    "bk-m11-s-aes-aas"
+   ],
+   "weight": 0.02283,
+   "nodes": [
+    "bk-m11-s-aes-aas"
+   ],
+   "chunk": "s-atomic"
+  },
+  {
+   "id": "m11.s.broad",
+   "ch": 7,
+   "name": "Atomic line broadening: natural, collisional, Doppler; why lamp lines are narrow",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 5,
+   "basis": "notes",
+   "ref": "Topic 4c slides; past finals",
+   "tags": [
+    "linewidth",
+    "broadening"
+   ],
+   "ids": [
+    "bk-m11-s-broad"
+   ],
+   "weight": 0.02283,
+   "nodes": [
+    "bk-m11-s-broad"
+   ],
+   "chunk": "s-atomic"
+  },
+  {
+   "id": "m11.s.icp",
+   "ch": 7,
+   "name": "ICP-OES vs AAS, atomic vs molecular methods, sample preparation",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "Topic 4c slides; past finals",
+   "tags": [
+    "icp",
+    "written"
+   ],
+   "ids": [
+    "bk-m11-s-icp"
+   ],
+   "weight": 0.01826,
+   "nodes": [
+    "bk-m11-s-icp"
+   ],
+   "chunk": "s-atomic"
+  },
+  {
+   "id": "m11.g.detectors",
+   "ch": 10,
+   "name": "GC detectors: TCD, FID, MS and choosing between them",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 6,
+   "basis": "notes",
+   "ref": "GC and HPLC slides; final Q4 style",
+   "tags": [
+    "gc",
+    "detectors"
+   ],
+   "ids": [
+    "bk-m11-g-detectors"
+   ],
+   "weight": 0.0274,
+   "nodes": [
+    "bk-m11-g-detectors"
+   ],
+   "chunk": "g-detect"
+  },
+  {
+   "id": "m11.g.columns",
+   "ch": 10,
+   "name": "Open tubular vs packed GC columns",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 5,
+   "basis": "notes",
+   "ref": "GC and HPLC slides; final Q4 style",
+   "tags": [
+    "gc",
+    "columns"
+   ],
+   "ids": [
+    "bk-m11-g-columns"
+   ],
+   "weight": 0.02283,
+   "nodes": [
+    "bk-m11-g-columns"
+   ],
+   "chunk": "g-gc"
+  },
+  {
+   "id": "m11.g.tprog",
+   "ch": 10,
+   "name": "Temperature programming and pressure programming",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 3,
+   "basis": "notes",
+   "ref": "GC and HPLC slides; final Q4 style",
+   "tags": [
+    "gc",
+    "temperature-programming"
+   ],
+   "ids": [
+    "bk-m11-g-tprog"
+   ],
+   "weight": 0.0137,
+   "nodes": [
+    "bk-m11-g-tprog"
+   ],
+   "chunk": "g-gc"
+  },
+  {
+   "id": "m11.g.inject",
+   "ch": 10,
+   "name": "Split, splitless and on-column injection; derivatisation",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "GC and HPLC slides; final Q4 style",
+   "tags": [
+    "gc",
+    "injection"
+   ],
+   "ids": [
+    "bk-m11-g-inject"
+   ],
+   "weight": 0.00913,
+   "nodes": [
+    "bk-m11-g-inject"
+   ],
+   "chunk": "g-gc"
+  },
+  {
+   "id": "m11.g.carrier",
+   "ch": 10,
+   "name": "GC carrier gases: speed, H₂ and the TCD",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "GC and HPLC slides; final Q4 style",
+   "tags": [
+    "gc",
+    "carrier-gas"
+   ],
+   "ids": [
+    "bk-m11-g-carrier"
+   ],
+   "weight": 0.00913,
+   "nodes": [
+    "bk-m11-g-carrier"
+   ],
+   "chunk": "g-gc"
+  },
+  {
+   "id": "m11.h.column",
+   "ch": 10,
+   "name": "HPLC column label, pore size, C8 vs C18, guard column",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "GC and HPLC slides; final Q4 style",
+   "tags": [
+    "hplc",
+    "columns"
+   ],
+   "ids": [
+    "bk-m11-h-column"
+   ],
+   "weight": 0.00913,
+   "nodes": [
+    "bk-m11-h-column"
+   ],
+   "chunk": "g-hplc"
+  },
+  {
+   "id": "m11.h.mode",
+   "ch": 10,
+   "name": "Normal vs reversed phase and eluent strength",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "GC and HPLC slides; final Q4 style",
+   "tags": [
+    "hplc",
+    "reversed-phase"
+   ],
+   "ids": [
+    "bk-m11-h-mode"
+   ],
+   "weight": 0.00913,
+   "nodes": [
+    "bk-m11-h-mode"
+   ],
+   "chunk": "g-hplc"
+  },
+  {
+   "id": "m11.h.order",
+   "ch": 10,
+   "name": "Order of elution in reversed-phase and normal-phase HPLC",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "GC and HPLC slides; final Q4 style",
+   "tags": [
+    "hplc",
+    "elution-order"
+   ],
+   "ids": [
+    "bk-m11-h-order"
+   ],
+   "weight": 0.01826,
+   "nodes": [
+    "bk-m11-h-order"
+   ],
+   "chunk": "g-hplc"
+  },
+  {
+   "id": "m11.h.gradient",
+   "ch": 10,
+   "name": "Isocratic vs gradient elution, and reading %B",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 4,
+   "basis": "notes",
+   "ref": "GC and HPLC slides; final Q4 style",
+   "tags": [
+    "hplc",
+    "gradient"
+   ],
+   "ids": [
+    "bk-m11-h-gradient"
+   ],
+   "weight": 0.01826,
+   "nodes": [
+    "bk-m11-h-gradient"
+   ],
+   "chunk": "g-hplc"
+  },
+  {
+   "id": "m11.h.detect",
+   "ch": 10,
+   "name": "HPLC detectors: UV, refractive index, electrochemical",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "GC and HPLC slides; final Q4 style",
+   "tags": [
+    "hplc",
+    "detectors"
+   ],
+   "ids": [
+    "bk-m11-h-detect"
+   ],
+   "weight": 0.00913,
+   "nodes": [
+    "bk-m11-h-detect"
+   ],
+   "chunk": "g-hplc"
+  },
+  {
+   "id": "m11.h.particles",
+   "ch": 10,
+   "name": "Why small particles improve efficiency and what they cost",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 3,
+   "basis": "notes",
+   "ref": "GC and HPLC slides; final Q4 style",
+   "tags": [
+    "hplc",
+    "van-deemter"
+   ],
+   "ids": [
+    "bk-m11-h-particles"
+   ],
+   "weight": 0.0137,
+   "nodes": [
+    "bk-m11-h-particles"
+   ],
+   "chunk": "g-hplc"
+  },
+  {
+   "id": "m11.g.ms",
+   "ch": 10,
+   "name": "GC–MS vs LC–MS and what HPLC suits",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 5,
+   "basis": "notes",
+   "ref": "GC and HPLC slides; final Q4 style",
+   "tags": [
+    "ms",
+    "gc",
+    "hplc"
+   ],
+   "ids": [
+    "bk-m11-g-ms"
+   ],
+   "weight": 0.02283,
+   "nodes": [
+    "bk-m11-g-ms"
+   ],
+   "chunk": "g-detect"
+  },
+  {
+   "id": "m11.g.choose",
+   "ch": 10,
+   "name": "Choose GC or HPLC for an analyte",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 2,
+   "basis": "notes",
+   "ref": "GC and HPLC slides; final Q4 style",
+   "tags": [
+    "gc",
+    "hplc",
+    "method-selection"
+   ],
+   "ids": [
+    "bk-m11-g-choose"
+   ],
+   "weight": 0.00913,
+   "nodes": [
+    "bk-m11-g-choose"
+   ],
+   "chunk": "g-hplc"
   }
  ],
  "nodeSkills": {
@@ -962,6 +1444,69 @@
   ],
   "bk-m11-s-written": [
    "m11.s.written"
+  ],
+  "bk-m11-s-jablonski": [
+   "m11.s.jablonski"
+  ],
+  "bk-m11-s-fl-explain": [
+   "m11.s.flexplain"
+  ],
+  "bk-m11-s-fl-cal": [
+   "m11.s.flcal"
+  ],
+  "bk-m11-s-aas-table": [
+   "m11.s.aastable"
+  ],
+  "bk-m11-s-boltz": [
+   "m11.s.boltz"
+  ],
+  "bk-m11-s-aes-aas": [
+   "m11.s.aesaas"
+  ],
+  "bk-m11-s-broad": [
+   "m11.s.broad"
+  ],
+  "bk-m11-s-icp": [
+   "m11.s.icp"
+  ],
+  "bk-m11-g-detectors": [
+   "m11.g.detectors"
+  ],
+  "bk-m11-g-columns": [
+   "m11.g.columns"
+  ],
+  "bk-m11-g-tprog": [
+   "m11.g.tprog"
+  ],
+  "bk-m11-g-inject": [
+   "m11.g.inject"
+  ],
+  "bk-m11-g-carrier": [
+   "m11.g.carrier"
+  ],
+  "bk-m11-h-column": [
+   "m11.h.column"
+  ],
+  "bk-m11-h-mode": [
+   "m11.h.mode"
+  ],
+  "bk-m11-h-order": [
+   "m11.h.order"
+  ],
+  "bk-m11-h-gradient": [
+   "m11.h.gradient"
+  ],
+  "bk-m11-h-detect": [
+   "m11.h.detect"
+  ],
+  "bk-m11-h-particles": [
+   "m11.h.particles"
+  ],
+  "bk-m11-g-ms": [
+   "m11.g.ms"
+  ],
+  "bk-m11-g-choose": [
+   "m11.g.choose"
   ]
  }
 }

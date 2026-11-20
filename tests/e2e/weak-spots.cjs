@@ -87,8 +87,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.evaluate(() => { window.__MASTERY_ENGINE__.UI.appState.retryAfterCards = 2; window.__MASTERY_ENGINE__.UI.appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null }; });
   await open('bk-c1-vsepr-ex1'); await answerStep();
   await p.fill('#mf_a', 'linear'); await p.fill('#mf_b', 'T-shaped'); await p.fill('#mf_c', 'square pyramidal'); await submit();
-  await p.evaluate(() => document.querySelector('#btnRetryLater').click()); await p.waitForTimeout(250);
-  ok(!!(await p.$('[data-retry-queued]')), 'the button turns into "Coming back in N cards"');
+  await p.waitForTimeout(250);
+  ok(!!(await p.$('[data-retry-queued]')) && !(await p.$('#btnRetryLater')), 'a miss is queued automatically: "Coming back in N cards", no button to press');
   const served = [];
   for (let i = 0; i < 4; i++) {
     await p.evaluate(() => document.querySelector('#btnNextQuestion')?.click()); await p.waitForTimeout(300);

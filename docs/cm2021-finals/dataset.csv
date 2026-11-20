@@ -1,0 +1,59 @@
+paper,q,part,marks,skills,template,kind,note
+2023-24,1,a,5,c4.ox-number,OXN,derive,oxidation state of P in the acid made from PCl3 and water
+2023-24,1,b,5,c4.g1-oxides,G1OX,recall,Na burns to the peroxide; spin multiplicity of that oxide
+2023-24,1,c,5,c3.homo-count,HOMO,derive,electrons in the HOMO set of SF6
+2023-24,1,d,5,c4.balance,AQR,write-equation,aqua regia dissolving gold; balanced equations
+2023-24,1,e,5,c4.crown,CRYPT,draw,Lewis structure of the 2.2.1 cryptand
+2023-24,2,a,5,c3.3c4e,3C4E,explain,why the symmetric Zundel O-H-O bond beats an ordinary water dimer H-bond (MO)
+2023-24,2,b,5,c4.bx3-acidity,BX3,explain,BBr3 more Lewis acidic than BF3
+2023-24,2,c,5,c3.hyperconj,HYPER,explain,first ionisation energy of PhSiMe3 above toluene
+2023-24,2,d,10,c3.polyatomic,POLYMO,draw+derive,pi MOs of ozone; filling; bond orders
+2023-24,3,a,6,c7.metal-id+c6.name+c7.cfse,MID,identify,[M(H2O)6]3+ with one unpaired electron
+2023-24,3,b,6,c7.metal-id+c6.name+c7.cfse,MID,identify,[MBr4]- with the most unpaired electrons
+2023-24,3,c,6,c7.metal-id+c6.name+c7.cfse,MID,identify,diamagnetic [M(CN)6]3-
+2023-24,3,d,6,c7.metal-id+c6.name+c7.cfse,MID,identify,[MCl4]- with five unpaired electrons
+2023-24,3,e,6,c7.metal-id+c6.name,MID,identify,[M(H2O)6]2+ with LFSE of 0.6 Do (LFSE given)
+2023-24,4,a,2,c8.tanabe-sugano,TSREAD,read-diagram,ground molecular terms HS and LS (d7 diagram)
+2023-24,4,b,3,c8.tanabe-sugano,TSREAD,read-diagram,unpaired electrons below the crossover
+2023-24,4,c,3,c8.tanabe-sugano,TSREAD,read-diagram,unpaired electrons above the crossover
+2023-24,4,d,2,c8.tanabe-sugano,TSREAD,read-diagram,dn of the complex
+2023-24,4,e,4,c8.spin-only,SPINONLY,calc,spin-only moment HS and LS
+2023-24,4,f,6,c8.tanabe-sugano,TSREAD,read-diagram,all spin-allowed transitions HS and LS
+2024-25,1,a,5,c4.g1-oxides,G1OX,recall,principal product of K with O2 (no water)
+2024-25,1,b,5,c4.phosphorus,PCHEM,recall,white phosphorus plus F2
+2024-25,1,c,5,c2.hbond-anomaly,DIHYD,explain,ethane a gas but ammonia borane a solid
+2024-25,1,d,5,c4.ox-number+c4.halogens,OXN,derive,oxidation state of Cl in the product of chlorate reduced by SO2
+2024-25,1,e,5,c4.nuclear,NUC,derive,22Ne captures an alpha then loses a neutron
+2024-25,2,a,6,c3.hetero-diatomic,MOHET,draw,MO diagram of NH and spin multiplicity
+2024-25,2,b,6,c4.isotope-zpe,ISO,explain,H2 bond enthalpy below D2 (zero-point energy)
+2024-25,2,c,6,c2.double-bond-rule,TRANSBENT,explain,why the lead alkyne analogue is trans-bent near 90 degrees
+2024-25,2,d,7,c3.polyatomic,POLYMO,explain+derive,why S-F bond order in SF6 is not one; its value
+2024-25,3,a,6,c7.metal-id+c6.name+c7.cfse,MID,identify,[M(H2O)6]Cl3 with four unpaired electrons
+2024-25,3,b,6,c7.metal-id+c6.name+c7.cfse,MID,identify,K2[MF4] with half-filled doubly degenerate e set
+2024-25,3,c,6,c7.metal-id+c6.name+c7.cfse,MID,identify,Na2[M(NH3)2(H2O)2(SCN)2] with spin-only 5.92 BM
+2024-25,3,d,6,c7.metal-id+c6.name,MID,identify,[M(en)3]F3 with LFSE of 2 Do - 2P (LFSE given)
+2024-25,3,e,6,c7.metal-id+c6.name,MID,identify,[M(H2O)6]SO4 with LFSE of 0.4 Do (LFSE given)
+2024-25,4,a,2,c8.terms,TERMGS,derive,ground free-ion term and dn from the d4 diagram
+2024-25,4,b,4,c8.tanabe-sugano,TSREAD,read-diagram,ground molecular terms HS and LS
+2024-25,4,c,2,c8.tanabe-sugano,TSREAD,read-diagram,unpaired electrons high-spin
+2024-25,4,d,2,c8.tanabe-sugano,TSREAD,read-diagram,unpaired electrons low-spin
+2024-25,4,e,6,c8.tanabe-sugano,TSREAD,read-diagram,all spin-allowed transitions HS and LS
+2024-25,4,f,4,c8.spin-only,MAGINSTR,explain,instrument that tells HS from LS and what each shows
+2025-26,1,a,5,c4.balance,AQR,recall,two species in aqua regia that oxidise gold
+2025-26,1,b,5,c4.hydration,HYDR,recall,largest hydration energy among six ions
+2025-26,1,c,5,c4.ox-number,OXN,derive,average oxidation numbers of Mn in Mn3O4 and Ga in Mg5Ga2
+2025-26,1,d,5,c3.homo-count,HOMO,derive,electrons in the HOMO set of CH4
+2025-26,1,e,5,c4.nuclear,NUC,derive,238U neutron capture then two beta-minus decays (periodic table given)
+2025-26,2,a,10,c4.reaction-scheme,RXSCHEME,recall,identify A to E in the phosphorus scheme from Ca3(PO4)2
+2025-26,2,b,5,c4.named-process,NAMEDPROC,recall,Wislicenus process with equations
+2025-26,2,c,5,c4.gauche,GAUCHE,explain,most stable conformer of the Olin Raschig product and why not anti
+2025-26,2,d,5,c4.kie,ISO,explain,CH4 photochlorination faster than CD4
+2025-26,3,a-i,5,c6.name+c6.ox-dn-cn+c7.splitting+c7.cfse,COORD5,derive+draw,KMnO4: name; oxidation state; dn; splitting diagram; CFSE
+2025-26,3,a-ii,5,c6.name+c6.ox-dn-cn+c7.splitting+c7.cfse,COORD5,derive+draw,K[Cr(H2O)2(C2O4)2].3H2O: same five outputs
+2025-26,3,a-iii,5,c6.name+c6.ox-dn-cn+c7.splitting+c7.cfse,COORD5,derive+draw,[Ni(NH3)Cl(NH2CH3)2]Cl: same five outputs
+2025-26,3,b,5,c7.cft-essay,CFTESSAY,explain,principles of crystal field theory and the octahedral splitting
+2025-26,3,c,5,c7.lft-essay,LFTESSAY,explain,principles of ligand field theory and the octahedral splitting
+2025-26,3,d,5,c7.cft-essay,CFTLIM,explain,limitations of crystal field theory
+2025-26,4,a,2,c8.microstates,MICRO,derive,number of microstates for d2
+2025-26,4,b,2,c8.microstates,MICRO,derive,number of microstates for d8
+2025-26,4,c,16,c8.terms,TERMS,derive,all atomic term symbols from d8

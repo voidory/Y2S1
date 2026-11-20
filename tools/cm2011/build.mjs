@@ -8,6 +8,8 @@ import p3b from './p3b.mjs';
 import s4 from './s4.mjs';
 import f5 from './f5.mjs';
 import g5 from './g5.mjs';
+import x6 from './x6.mjs';
+import t7 from './t7.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const outDir = path.resolve(here, '..', '..', 'public', 'content', 'cm2011');
@@ -24,16 +26,27 @@ const CHUNKS = [
   { id: 's-absorption', part: 'Topic 4: Spectroscopy', name: 'Absorption spectroscopy', summary: 'Beer–Lambert, %T, dilutions, unit conversions, instrument layout' },
   { id: 's-fluorescence', part: 'Topic 4: Spectroscopy', name: 'Fluorescence', summary: 'Stokes shift, 90° geometry, sensitivity, layout' },
   { id: 's-atomic', part: 'Topic 4: Spectroscopy', name: 'Atomic spectroscopy', summary: 'AAS components, lamps, atomisers, Boltzmann populations, line widths, ICP' },
+  { id: 'x-calc', part: 'Extraction', name: 'Extraction calculations: D at a pH, fraction left, number of portions', summary: 'Acid and base D(pH), fraction left when the solute starts in either phase, repeated extractions' },
+  { id: 'x-concepts', part: 'Extraction', name: 'Extraction concepts and conventions', summary: 'Which pH leaves more behind, several small portions, K vs D, which fraction formula' },
   { id: 'g-gc', part: 'GC and HPLC', name: 'GC: columns, programming, injection, carrier gas', summary: 'Open tubular vs packed, temperature and pressure programming, split/splitless/on-column, derivatisation, carrier gases' },
   { id: 'g-detect', part: 'GC and HPLC', name: 'GC detectors and coupling to MS', summary: 'TCD, FID, MS; GC–MS vs LC–MS; what HPLC suits' },
   { id: 'g-hplc', part: 'GC and HPLC', name: 'HPLC: columns, modes, elution order, detection', summary: 'Column label, C18/C8, normal vs reversed phase, elution order, isocratic vs gradient, detectors, particle size, choosing GC or HPLC' },
 ];
 
-const all = [...t1, ...e3a, ...p3b, ...s4, ...f5, ...g5];
+const all = [...t1, ...t7, ...e3a, ...p3b, ...s4, ...f5, ...g5, ...x6];
 const nodes = all.map((x) => x.node);
 const ids = new Set();
 for (const n of nodes) { if (ids.has(n.id)) throw new Error('duplicate node id ' + n.id); ids.add(n.id); }
 
+// Skill marks follow the shape of the final (docs/cm2011-finals/analysis.md): a 4 x 25 paper whose first half (Q1-Q2) splits
+// statistics 19%, electrochemistry 20%, potentiometry 28%, spectroscopy 26% (Topic 2 has no skills yet), Q3 extraction 25, Q4 GC/HPLC 25.
+// Within a block the authored marks keep their relative sizes; the whole map is scaled to 100.
+const BLOCK_OF = (c) => ({ t: 'stats', e: 'elec', p: 'ise', s: 'spec', x: 'extr', g: 'gc' })[c[0]];
+const BLOCK_MARKS = { stats: 9.5, elec: 10, ise: 14, spec: 13, extr: 25, gc: 25 };
+const blockSum = {};
+for (const x of all) blockSum[BLOCK_OF(x.skill.chunk)] = (blockSum[BLOCK_OF(x.skill.chunk)] || 0) + x.skill.marks;
+const blockTotal = Object.values(BLOCK_MARKS).reduce((a, b) => a + b, 0);
+for (const x of all) { const b = BLOCK_OF(x.skill.chunk); x.skill = { ...x.skill, marks: Number(((BLOCK_MARKS[b] / blockTotal) * 100 * x.skill.marks / blockSum[b]).toFixed(3)) }; }
 const totalMarks = all.reduce((a, x) => a + x.skill.marks, 0);
 const skills = all.map(({ node, skill }) => ({
   id: skill.id, ch: node.metadata.week, name: skill.name, mode: node.variants.some((v) => v.variables) ? 'calc' : 'recall', engine: 'gen',

@@ -139,3 +139,11 @@ Non-radiative quenching takes roughly 10⁻⁹–10⁻⁶ s, so it competes with
 5. Cells: E_cell = E_right − E_left, ½ half-cells, ionic strength from each compartment's own salt, ΔG° from E° with the n of the reaction as written.
 6. Extraction: decide which phase the solute starts in before choosing f; use D (not K) when the pH matters.
 7. Anything unfamiliar: name what the signal is proportional to, write the booklet equation, check direction, state assumptions.
+
+## 6. Where to drill in the app (after the pull request that adds these)
+
+- **Chapter 10 GC and HPLC:** the written prompts above (tick the rubric points after writing), the six elution-order lists, and short pick-one checks.
+- **Chapter 6 fluorescence and chapter 7 atomic:** Jablonski labelling, the explanation prompts, the AAS component table and block diagram, Boltzmann and two-point calibration generators.
+- **Chapter 8 extraction:** the full chain from the final's Q3 (eight answer fields) with fresh numbers each time, a short version, the base version, and one-large-versus-several-small.
+- **Chapter 1, "Two-method t-tests at 99% and 99.9%":** paired with the d column, pooled from summary statistics, a df the table does not list, and the highest level at which a verdict still holds. The critical value is an answer field; the table rows are in the hint.
+- **Mock → choose chapters 8 and 10** for a timed second-half set.

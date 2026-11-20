@@ -91,6 +91,7 @@
     .seg > button { flex: 1 1 0%; padding: 0.4rem 0.5rem; font-size: 0.75rem; font-weight: 600; color: #475569; border-radius: 0.5rem; white-space: nowrap; }
     .seg > button[aria-selected="true"] { background: #FFFFFF; color: #0F172A; box-shadow: 0 1px 2px rgba(15,23,42,.12); }
     .seg > button:disabled { opacity: .4; }
+    .seg-tight > button { padding: 0.4rem 0.1rem; font-size: 0.68rem; }
     .katex { font-size: 1.03em; }
     .katex-display { margin: 0.75rem 0; overflow-x: auto; overflow-y: hidden; }
     .prose-math p { margin: 0.4rem 0; line-height: 1.6; }
@@ -654,6 +655,7 @@
         contentVersion: null,
         fsrs: { requestRetention: 0.90, maxIntervalDays: 90, initialStabilityDays: 1.5 },
         includeGoldenBankInQueue: true,
+        allocByMarks: true,
         pTermMode: 'relative',
         includeD0D10InDiamagnetic: false,
         textbookExceptions: false,
@@ -833,6 +835,98 @@
         return null;
       }
 
+      /* Pure. Attention follows marks: a multiplier per node that lifts topics whose share of recent cards is below their share of
+         the exam's marks and damps topics that have had more than their share. target = sum of skill weights in the chunk;
+         actual = share of the last `window` cards of this module (smoothed). Clamped so it nudges, never dictates. */
+      function allocationMultipliers(nodes, map, logs, opts = {}) {
+        const out = new Map();
+        if (!map?.skills?.length) return out;
+        const win = opts.window ?? 150, power = opts.power ?? 0.6;
+        const skillById = Object.fromEntries(map.skills.map((k) => [k.id, k]));
+        const chunkOf = (id) => {
+          let best = null;
+          for (const sid of map.nodeSkills?.[id] || []) { const k = skillById[sid]; if (k && (!best || k.weight > best.weight)) best = k; }
+          return best?.chunk || null;
+        };
+        const target = {};
+        let tot = 0;
+        for (const k of map.skills) { if (!k.chunk) continue; target[k.chunk] = (target[k.chunk] || 0) + (k.weight || 0); tot += k.weight || 0; }
+        if (tot <= 0) return out;
+        const ids = new Set(nodes.map((n) => n.id));
+        const recent = [...(logs || [])].filter((l) => ids.has(l.nodeId)).sort((a, b) => b.timestamp - a.timestamp).slice(0, win);
+        const served = {};
+        for (const l of recent) { const c = chunkOf(l.nodeId); if (c) served[c] = (served[c] || 0) + 1; }
+        for (const n of nodes) {
+          const c = chunkOf(n.id);
+          if (!c || !target[c]) continue;
+          const t = target[c] / tot;
+          const a = ((served[c] || 0) + 1) / (recent.length + 12);
+          out.set(n.id, clamp(Math.pow(t / a, power), 0.35, 4));
+        }
+        return out;
+      }
+
+      /* Pure. Per topic (chunk) of one module: marks at stake, how well you do now, and the marks recoverable per hour of work.
+         Your latest grade per question counts; an untried question counts as your own rating of the topic (0 never seen, 1 shaky, 2 ok, 3 solid). */
+      const PRIOR = [0, 0.4, 0.7, 0.9];
+      function planChunks(nodes, map, logs, ratings = {}, moduleCode = '') {
+        if (!map?.skills?.length) return [];
+        const skillById = Object.fromEntries(map.skills.map((k) => [k.id, k]));
+        const chunkOf = (id) => {
+          let best = null;
+          for (const sid of map.nodeSkills?.[id] || []) { const k = skillById[sid]; if (k && (!best || k.weight > best.weight)) best = k; }
+          return best?.chunk || null;
+        };
+        const latest = {};
+        for (const l of [...(logs || [])].sort((a, b) => a.timestamp - b.timestamp)) latest[l.nodeId] = Number(l.normalizedGrade) || 0;
+        const marks = {};
+        for (const k of map.skills) if (k.chunk) marks[k.chunk] = (marks[k.chunk] || 0) + (k.weight || 0) * 100;
+        const rows = {};
+        for (const n of nodes) {
+          const c = chunkOf(n.id);
+          if (!c) continue;
+          const r = (rows[c] ||= { chunk: c, marks: marks[c] || 0, n: 0, tried: 0, sum: 0, minutes: 0, needed: 0 });
+          const prior = PRIOR[ratings[`${moduleCode}:${c}`] ?? 0] ?? 0;
+          const g = latest[n.id] !== undefined ? latest[n.id] : prior;
+          r.n += 1; r.sum += g; if (latest[n.id] !== undefined) r.tried += 1;
+          if (g < 0.7) { r.minutes += Number(n.metadata?.estimatedMinutes) || 3; r.needed += 1; }
+        }
+        const names = Object.fromEntries((map.chunks || []).map((c) => [c.id, c]));
+        return Object.values(rows).map((r) => {
+          const score = r.n ? r.sum / r.n : 0;
+          const recoverable = r.marks * Math.max(0, 0.85 - score);
+          return { ...r, name: names[r.chunk]?.name || r.chunk, part: names[r.chunk]?.part || '', score, recoverable, perHour: r.minutes > 0 ? recoverable / (r.minutes / 60) : 0 };
+        }).sort((a, b) => b.perHour - a.perHour);
+      }
+
+      /* Pure. Today's blocks: `hours` of work cut into blocks, shared between modules by `shares`, each block on the module's best remaining topic. */
+      function planBlocks(rowsByModule, hours, shares, blockMin = 40) {
+        const total = Math.max(1, Math.round((hours * 60) / blockMin));
+        const codes = Object.keys(rowsByModule);
+        const sumShare = codes.reduce((a, c) => a + (shares[c] ?? 1 / codes.length), 0) || 1;
+        const want = {};
+        let given = 0;
+        for (const c of codes) { want[c] = Math.round(total * ((shares[c] ?? 1 / codes.length) / sumShare)); given += want[c]; }
+        while (given < total) { const c = codes.slice().sort((a, b) => (shares[b] ?? 0) - (shares[a] ?? 0))[0]; want[c] += 1; given += 1; }
+        while (given > total) { const c = codes.slice().sort((a, b) => want[b] - want[a])[0]; want[c] -= 1; given -= 1; }
+        const queues = {};
+        for (const c of codes) queues[c] = rowsByModule[c].filter((r) => r.perHour > 0).slice(0, 4);
+        const out = [];
+        const idx = Object.fromEntries(codes.map((c) => [c, 0]));
+        const left = { ...want };
+        while (out.length < total) {
+          let any = false;
+          for (const c of codes) {
+            if (left[c] <= 0 || !queues[c].length) continue;
+            const r = queues[c][idx[c] % queues[c].length]; idx[c] += 1; left[c] -= 1; any = true;
+            const per = r.needed ? r.minutes / r.needed : 3;
+            out.push({ module: c, chunk: r.chunk, name: r.name, minutes: blockMin, cards: Math.max(1, Math.round(blockMin / Math.max(1, per))), marks: r.marks, score: r.score, perHour: r.perHour });
+          }
+          if (!any) break;
+        }
+        return out;
+      }
+
       function selectNextNode(nodes, reviewMap, moduleMap, attemptLogs, settings = DEFAULT_SETTINGS, filters = {}, nowMs = Date.now()) {
         const faultMap = computeFaultSkillMap(attemptLogs, nowMs);
         const includeGolden = (settings?.includeGoldenBankInQueue ?? true) || Boolean(filters.includeGolden);
@@ -869,6 +963,8 @@
           const meta = priorityScore(node, reviewMap[node.id], moduleMap, faultMap, nowMs);
           const m = filters.masteryAdj?.mult.get(node.id);
           if (m != null) { meta.score *= m; meta.masteryMult = m; } // retired skill: rarely comes up
+          const am = filters.allocMult?.get(node.id);
+          if (am != null) { meta.score *= am; meta.allocMult = am; }
           return { node, meta };
         }).sort((a, b) => b.meta.score - a.meta.score);
 
@@ -1390,6 +1486,9 @@
         computeFaultSkillMap,
         priorityScore,
         selectNextNode,
+        allocationMultipliers,
+        planChunks,
+        planBlocks,
         selectVariant,
         instantiateVariant,
         computeModuleReadiness,
@@ -7663,7 +7762,8 @@
         session: { cards: 0, retry: [] },   // cards answered this session, and misses queued to come back
         retryAfterCards: 5,
         content: { bank: null, skillMap: null },
-        ui: { sheet: null, readinessTab: 'overview', settingsTab: 'module', bankLimit: 60 },
+        plan: { hoursPerDay: 6, split: 50, ratings: {} },
+        ui: { sheet: null, readinessTab: 'plan', settingsTab: 'module', bankLimit: 60 },
         reviewMap: {},
         attemptLogs: [],
         settings: Scheduler.DEFAULT_SETTINGS,
@@ -7830,7 +7930,8 @@
         appState.attemptLogs = logs;
         // the student's own choices live in settings rows; reload them here so an import cannot leave a stale copy that the next save overwrites
         try {
-          const [hooksRow, prefsRow] = await Promise.all([db.settings.get('myHooks'), db.settings.get('skillMastery')]);
+          const [hooksRow, prefsRow, planRow] = await Promise.all([db.settings.get('myHooks'), db.settings.get('skillMastery'), db.settings.get('plan')]);
+          appState.plan = { hoursPerDay: Number(planRow?.hoursPerDay) > 0 ? Number(planRow.hoursPerDay) : 6, split: Number.isFinite(Number(planRow?.split)) && planRow?.split != null ? Number(planRow.split) : 50, ratings: planRow?.ratings || {} };
           appState.myHooks = hooksRow?.hooks || {};
           appState.masteryPrefs = { removed: prefsRow?.removed || {}, resetAt: prefsRow?.resetAt || {} };
         } catch (err) { console.warn('[Store] own settings not loaded:', err.message); }
@@ -8074,6 +8175,10 @@
             { ignoreRetired: Boolean(appState.filters.chunkNodeIds || appState.filters.skillTag) },
             appState.nodes.filter((n) => String(n.id).startsWith('lf-inv-')).map((n) => n.id));
         }
+        // exam-week allocation: not for a topic or weak-spot drill, nor a forced question
+        if (appState.settings?.allocByMarks !== false && appState.skillMap && !filters.forceNodeId && !filters.chunkNodeIds && !filters.skillTag) {
+          filters.allocMult = Scheduler.allocationMultipliers(appState.nodes, appState.skillMap, appState.masteryLogs);
+        }
         const pick = Scheduler.selectNextNode(
           filters.forceNodeId ? [...appState.nodes, ...appState.composerNodes] : appState.nodes,
           appState.reviewMap,
@@ -8180,6 +8285,16 @@
             const name = appState.skillMap.skills.find((k) => k.id === sid)?.name || sid;
             if (was !== 'retired' && now === 'retired') showToast(`Mastered: ${name}. It will come up rarely now.`);
             else if (was === 'retired' && now === 'active') showToast(`Re-opened: ${name} (missed a check).`);
+          }
+        }
+        // a miss comes back by itself after a few cards (up to twice a session); testing right after feedback is what stops the error returning
+        if (!evalResult.passed) {
+          const sess = appState.session;
+          sess.retryCount ||= {};
+          if (!sess.retry.some((r) => r.nodeId === cur.node.id) && (sess.retryCount[cur.node.id] || 0) < 2) {
+            sess.retryCount[cur.node.id] = (sess.retryCount[cur.node.id] || 0) + 1;
+            sess.retry.push({ nodeId: cur.node.id, after: sess.cards + appState.retryAfterCards });
+            cur.retryQueued = true;
           }
         }
         cur.evalResult = evalResult;
@@ -10023,7 +10138,7 @@
           }).join('') : '<p class="text-sm text-slate-500">Topics are ranked once you have answered at least two questions in them.</p>';
           const moreBtn = ranked.length > 5 ? `<button type="button" id="btnWeakShowAll" class="text-xs font-medium text-blue-700 hover:underline">${appState.ui.weakAll ? 'Show the weakest 5' : `Show all ${ranked.length} topics`}</button>` : '';
 
-          const missesHtml = misses.length ? `<ul class="divide-y divide-slate-100">${misses.map((m) => `
+          const missesHtml = misses.length ? `<button type="button" id="btnLastPass" class="mb-2 px-3 py-1.5 text-xs font-medium bg-slate-900 text-white rounded-md hover:bg-slate-800">Last pass: redo all ${Weakness.unresolvedMisses(appState.masteryLogs, () => '', map, 99).length}</button><ul class="divide-y divide-slate-100">${misses.map((m) => `
               <li class="flex items-center gap-3 py-2" data-weak-miss="${esc(m.nodeId)}">
                 <div class="min-w-0 flex-1">
                   <div class="text-sm font-medium text-slate-900 truncate">${esc(m.title)}</div>
@@ -10047,9 +10162,60 @@
             ${card(`<div><h2 class="font-display text-base font-semibold text-slate-900">Recurring slips</h2><p class="text-xs text-slate-500">The same kind of mistake, twice or more, in your last answers.</p></div>${slipsHtml}`)}`;
         })();
 
-        const body = { overview: overviewHtml, chapters: chaptersHtml, skills: `<section class="space-y-3">${skillParts.summary}${skillParts.list}</section>`, weak: weakHtml }[tab] || overviewHtml;
+        const planHtml = (() => {
+          const nowMs = Date.now();
+          const card = (inner) => `<section class="bg-white border border-slate-200 rounded-xl p-4 space-y-3">${inner}</section>`;
+          const pl = appState.plan;
+          const mods = appState.modules.slice().sort((a, b) => a.moduleCode.localeCompare(b.moduleCode));
+          const rowsBy = {};
+          for (const m of mods) {
+            rowsBy[m.moduleCode] = Scheduler.planChunks(appState.allNodes.filter((n) => n.moduleCode === m.moduleCode), appState.skillMaps[m.moduleCode], appState.masteryLogs, pl.ratings, m.moduleCode);
+          }
+          const first = mods[0];
+          const shares = mods.length > 1 ? { [first.moduleCode]: pl.split / 100, [mods[1].moduleCode]: 1 - pl.split / 100 } : {};
+          const blocks = Scheduler.planBlocks(rowsBy, pl.hoursPerDay, shares);
+          const countdown = (m) => {
+            if (m.examTimestamp == null) return '<span class="text-xs text-amber-700 font-semibold">Set the date</span>';
+            const h = (m.examTimestamp - nowMs) / 3600000;
+            return h <= 0 ? '<span class="text-xs text-slate-500">exam passed</span>' : `<span class="font-mono text-lg font-bold text-slate-900">${h >= 48 ? Math.floor(h / 24) + 'd ' + Math.round(h % 24) + 'h' : Math.round(h) + 'h'}</span>`;
+          };
+          const head = card(`
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">${mods.map((m) => `
+              <div class="border border-slate-200 rounded-lg p-3 space-y-1.5">
+                <div class="flex items-center justify-between"><span class="text-xs font-mono font-semibold text-blue-700">${esc(m.moduleCode)}</span>${countdown(m)}</div>
+                <input type="datetime-local" data-plan-exam="${esc(m.moduleCode)}" value="${esc(toDatetimeLocalValue(m.examTimestamp))}" aria-label="${esc(m.moduleCode)} exam date and time" class="w-full text-xs font-mono border border-slate-300 rounded-md px-2 py-1.5" />
+              </div>`).join('')}
+            </div>
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-slate-700">
+              <label class="flex items-center gap-1.5">Hours a day <input type="number" min="1" max="14" step="0.5" value="${pl.hoursPerDay}" data-plan-hours class="w-16 font-mono border border-slate-300 rounded-md px-2 py-1" /></label>
+              ${mods.length > 1 ? `<label class="flex items-center gap-1.5">% of time on ${esc(first.moduleCode)} <input type="number" min="0" max="100" step="5" value="${pl.split}" data-plan-split class="w-16 font-mono border border-slate-300 rounded-md px-2 py-1" /></label>` : ''}
+            </div>
+            <p class="text-[11px] text-slate-500">Blocks are 40 minutes. A half and half split held up better than any automatic rule I tried; change it only for a reason.</p>`);
+          const blockHtml = card(`<div><h2 class="font-display text-base font-semibold text-slate-900">Today's blocks</h2><p class="text-xs text-slate-500">Each block is the best remaining topic for its module: most marks you can still win per hour of work.</p></div>
+            ${blocks.length ? `<ol class="space-y-2">${blocks.map((b, i) => `
+              <li class="flex items-center gap-3 border border-slate-200 rounded-lg p-2.5" data-plan-block>
+                <span class="w-6 text-center font-mono text-xs text-slate-500">${i + 1}</span>
+                <div class="min-w-0 flex-1"><div class="text-sm font-medium text-slate-900 truncate">${esc(b.name)}</div>
+                  <div class="text-[11px] text-slate-500"><span class="font-mono">${esc(b.module)}</span> · about ${b.cards} cards · ${Math.round(b.marks)} marks · you score ${Math.round(b.score * 100)}%</div></div>
+                <button type="button" data-plan-start="${esc(b.module)}|${esc(b.chunk)}" class="shrink-0 px-3 py-1.5 text-xs font-medium bg-slate-900 text-white rounded-md hover:bg-slate-800">Start</button>
+              </li>`).join('')}</ol>` : '<p class="text-sm text-slate-500">Nothing left that is worth a block.</p>'}`);
+          const grid = mods.map((m) => card(`<div><h2 class="font-display text-sm font-semibold text-slate-900">${esc(m.moduleCode)} topics, best return first</h2></div>
+            <div class="divide-y divide-slate-100">${rowsBy[m.moduleCode].map((r) => `
+              <div class="py-2 text-xs" data-plan-row="${esc(m.moduleCode)}:${esc(r.chunk)}">
+                <div class="flex items-center justify-between gap-2"><span class="font-medium text-slate-900 truncate">${esc(r.name)}</span><span class="shrink-0 font-mono text-slate-500">${Math.round(r.marks)} marks</span></div>
+                <div class="mt-1 flex items-center gap-2">
+                  <div class="flex-1 h-1.5 rounded-full bg-slate-100 overflow-hidden"><div class="h-full ${r.score < 0.5 ? 'bg-rose-500' : r.score < 0.7 ? 'bg-amber-500' : 'bg-emerald-500'}" style="width:${Math.max(2, Math.round(r.score * 100))}%"></div></div>
+                  <span class="font-mono text-slate-600 w-20 text-right">${r.tried}/${r.n} tried</span>
+                  <span class="font-mono text-slate-600 w-16 text-right">${r.perHour >= 0.05 ? r.perHour.toFixed(1) + '/h' : '·'}</span>
+                </div>
+                ${r.tried === 0 ? `<label class="mt-1 flex items-center gap-1.5 text-[11px] text-slate-500">Where are you now? <select data-plan-rate="${esc(m.moduleCode)}:${esc(r.chunk)}" class="border border-slate-300 rounded-md px-1.5 py-0.5 text-[11px]">${['Never seen', 'Shaky', 'OK', 'Solid'].map((t, i) => `<option value="${i}" ${(pl.ratings[m.moduleCode + ':' + r.chunk] ?? 0) === i ? 'selected' : ''}>${t}</option>`).join('')}</select></label>` : ''}
+              </div>`).join('')}</div>`)).join('');
+          return head + blockHtml + grid;
+        })();
+
+        const body = { plan: planHtml, overview: overviewHtml, chapters: chaptersHtml, skills: `<section class="space-y-3">${skillParts.summary}${skillParts.list}</section>`, weak: weakHtml }[tab] || planHtml;
         const toFix = appState.skillMap ? Weakness.unresolvedMisses(appState.masteryLogs, () => '', appState.skillMap, 99).length : 0;
-        const tabs = [['overview', 'Overview'], ['chapters', 'Chapters'], ['skills', 'Skills'], ['weak', toFix ? `Weak spots · ${toFix}` : 'Weak spots']];
+        const tabs = [['plan', 'Plan'], ['overview', 'Overview'], ['chapters', 'Chapters'], ['skills', 'Skills'], ['weak', toFix ? `Weak spots · ${toFix}` : 'Weak spots']];
 
         root.innerHTML = `
           <div class="view">
@@ -10057,7 +10223,7 @@
               <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900">Finals Readiness</h1>
               <div class="text-xs font-mono text-slate-500">${appState.attemptLogs.length} attempts logged</div>
             </div>
-            <div class="seg shrink-0" role="tablist" aria-label="Readiness sections">
+            <div class="seg seg-tight shrink-0" role="tablist" aria-label="Readiness sections">
               ${tabs.map(([k, label]) => `<button type="button" role="tab" data-seg-ready="${k}" aria-selected="${tab === k}">${label}</button>`).join('')}
             </div>
             <div class="view-scroll space-y-3">${body}</div>
@@ -10090,6 +10256,32 @@
         });
         $$('[data-weak-drill]', root).forEach((btn) => btn.addEventListener('click', () => drillTopic(btn.dataset.weakDrill)));
         $$('[data-seg-jump]', root).forEach((btn) => btn.addEventListener('click', () => { appState.ui.readinessTab = btn.dataset.segJump; render(); }));
+        const savePlan = async () => { try { const db = await DB.init(); await db.settings.put({ key: 'plan', ...appState.plan }); } catch (err) { console.warn('[Plan] not saved:', err.message); } };
+        $$('[data-plan-exam]', root).forEach((inp) => inp.addEventListener('change', async () => {
+          const m = appState.modules.find((x) => x.moduleCode === inp.dataset.planExam);
+          if (!m) return;
+          const ts = inp.value ? new Date(inp.value).getTime() : null;
+          const db = await DB.init();
+          await db.modules.put({ ...m, examTimestamp: Number.isFinite(ts) ? ts : null });
+          await refreshStore();
+          render();
+        }));
+        $('[data-plan-hours]', root)?.addEventListener('change', async (e) => { const v = Number(e.target.value); if (v > 0) { appState.plan.hoursPerDay = v; await savePlan(); render(); } });
+        $('[data-plan-split]', root)?.addEventListener('change', async (e) => { const v = Number(e.target.value); if (Number.isFinite(v)) { appState.plan.split = Math.max(0, Math.min(100, v)); await savePlan(); render(); } });
+        $$('[data-plan-rate]', root).forEach((sel) => sel.addEventListener('change', async () => { appState.plan.ratings[sel.dataset.planRate] = Number(sel.value); await savePlan(); render(); }));
+        $$('[data-plan-start]', root).forEach((btn) => btn.addEventListener('click', async () => {
+          const [code, chunk] = btn.dataset.planStart.split('|');
+          if (code !== appState.activeModule) await setActiveModule(code);
+          drillTopic(chunk);
+        }));
+        $('#btnLastPass', root)?.addEventListener('click', () => {
+          const all = appState.skillMap ? Weakness.unresolvedMisses(appState.masteryLogs, () => '', appState.skillMap, 99) : [];
+          if (!all.length) return;
+          appState.session.retry = all.map((m) => ({ nodeId: m.nodeId, after: appState.session.cards }));
+          appState.route = 'study';
+          appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null };
+          loadNextQuestion();
+        });
         $$('[data-weak-redo]', root).forEach((btn) => btn.addEventListener('click', () => redoNode(btn.dataset.weakRedo)));
         $('#btnWeakShowAll', root)?.addEventListener('click', () => { appState.ui.weakAll = !appState.ui.weakAll; render(); });
         $('[data-go-study]', root)?.addEventListener('click', () => { appState.route = 'study'; render(); });

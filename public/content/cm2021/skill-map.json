@@ -131,7 +131,7 @@
    "name": "Draw Lewis structures incl. incomplete and expanded octets",
    "mode": "mixed",
    "engine": "gen",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Ch1 octet exceptions; Tut1 C, D",
    "tags": [
@@ -140,7 +140,7 @@
    "ids": [
     "bk-c1-resonance-count"
    ],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c1-resonance-count",
     "bk-c1-of4",
@@ -155,14 +155,14 @@
    "name": "Assign formal charges; choose the best resonance form",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Ch1 formal charge; SCN⁻ table",
    "tags": [
     "formal-charge"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c1-resonance-count",
     "bk-c1-formal-charge-bridge",
@@ -178,14 +178,14 @@
    "name": "Resonance structures and averaged bond order",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch1 resonance",
    "tags": [
     "lewis-resonance"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c1-resonance-count",
     "bk-c1-octet-exceptions",
@@ -199,14 +199,14 @@
    "name": "Electron-pair and molecular geometry from a formula (VSEPR)",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.5,
+   "marks": 0.545,
    "basis": "notes",
    "ref": "Ch1 VSEPR; Tut1 A",
    "tags": [
     "vsepr-geometry"
    ],
    "ids": [],
-   "weight": 0.0097,
+   "weight": 0.00545,
    "nodes": [
     "bk-c1-vsepr-tut1",
     "bk-c1-polar-pick",
@@ -227,14 +227,14 @@
    "name": "Decide molecular polarity from geometry",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Tut1 B",
    "tags": [
     "molecular-polarity"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c1-vsepr-tut1",
     "bk-c1-polar-pick"
@@ -247,14 +247,14 @@
    "name": "Rank lp/bp repulsions and predict angle distortions",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch1 VSEPR rules",
    "tags": [],
    "ids": [
     "bk-c1-repulsion-order"
    ],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c1-repulsion-order"
    ],
@@ -266,14 +266,14 @@
    "name": "Identify dative bonds and Lewis acid/base adducts",
    "mode": "auto",
    "engine": "db",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch1 H3N→BF3",
    "tags": [
     "lewis-acid-base"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c1-dative",
     "bk-c3-bh3",
@@ -290,14 +290,14 @@
    "name": "VB overlap: count σ and π bonds, bond strength vs overlap",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch1 VB theory",
    "tags": [
     "valence-bond-sigma-pi"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c1-sigma-pi"
    ],
@@ -309,7 +309,7 @@
    "name": "Explain boiling-point trends from intermolecular forces",
    "mode": "self",
    "engine": "skel",
-   "marks": 1.5,
+   "marks": 0.545,
    "basis": "notes",
    "ref": "Ch2 IMFs; Tut1 E; ExX Q1",
    "tags": [
@@ -317,7 +317,7 @@
     "boiling-point-trends"
    ],
    "ids": [],
-   "weight": 0.0097,
+   "weight": 0.00545,
    "nodes": [
     "bk-c2-bp-pairs",
     "bk-c2-bp-picks",
@@ -332,7 +332,7 @@
    "name": "Explain H-bond / dihydrogen-bond anomalies (ice, NH3BH3)",
    "mode": "self",
    "engine": "skel",
-   "marks": 1,
+   "marks": 1.333,
    "basis": "notes",
    "ref": "Ch2; ExX Q11 → P2 Q1c",
    "tags": [
@@ -340,7 +340,7 @@
     "ice-structure"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.01333,
    "nodes": [
     "bk-c2-ammonia-borane",
     "bk-c2-ice"
@@ -353,7 +353,7 @@
    "name": "Count ions per unit cell and derive the formula",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "tutorial",
    "ref": "Tut1 F (CsCl, TiO2, CaF2, perovskite)",
    "tags": [
@@ -361,7 +361,7 @@
     "ionic-solids"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c2-unit-cells"
    ],
@@ -373,14 +373,14 @@
    "name": "Classify bonding/solid type (ionic, covalent network, metallic, molecular)",
    "mode": "auto",
    "engine": "db",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch2 solids",
    "tags": [
     "solid-types"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c2-bond-classes"
    ],
@@ -392,7 +392,7 @@
    "name": "Born–Haber cycle and lattice energy arithmetic",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "MO ch. 5.3.2 LiF cycle",
    "tags": [
@@ -400,7 +400,7 @@
     "ionic-bonding"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c2-lif-energetics",
     "bk-c4-hsab-solubility"
@@ -413,7 +413,7 @@
    "name": "Explain the double-bond rule / trans-bent heavy alkenes",
    "mode": "self",
    "engine": "skel",
-   "marks": 2,
+   "marks": 1.6,
    "basis": "notes",
    "ref": "Ch2 heavy elements; P2 Q2c (RPbPbR)",
    "tags": [
@@ -421,7 +421,7 @@
     "double-bond-rule"
    ],
    "ids": [],
-   "weight": 0.013,
+   "weight": 0.016,
    "nodes": [
     "bk-c2-heavy-hybrid",
     "bk-c4-sio2-co2"
@@ -434,7 +434,7 @@
    "name": "Periodic trends: IE, EA, radius, EN, metallic bp",
    "mode": "auto",
    "engine": "db",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Ch1–2 IE plots; ExX Q2–3",
    "tags": [
@@ -442,7 +442,7 @@
     "periodic-trends"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c4-g2-ie",
     "bk-c2-ionisation-energy",
@@ -456,7 +456,7 @@
    "name": "Orbital overlap rules: σ/π/δ, g/u, energy match, no-interaction cases",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "MO ch. 5.1",
    "tags": [
@@ -464,7 +464,7 @@
     "orbital-symmetry"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c3-mo-principles",
     "bk-c3-overlap-types"
@@ -477,7 +477,7 @@
    "name": "Homonuclear diatomic configuration, bond order, bond length",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.5,
+   "marks": 0.545,
    "basis": "notes",
    "ref": "MO ch. 5.2, Table 5.1",
    "tags": [
@@ -485,7 +485,7 @@
     "bond-order"
    ],
    "ids": [],
-   "weight": 0.0097,
+   "weight": 0.00545,
    "nodes": [
     "bk-c3-diatomic-length",
     "bk-c3-xyz-puzzle",
@@ -505,7 +505,7 @@
    "name": "Unpaired electrons / spin multiplicity of diatomics and ions",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.5,
+   "marks": 0.545,
    "basis": "notes",
    "ref": "MO ch. 5.2; P1 Q1b (O2²⁻)",
    "tags": [
@@ -513,7 +513,7 @@
     "spin-multiplicity"
    ],
    "ids": [],
-   "weight": 0.0097,
+   "weight": 0.00545,
    "nodes": [
     "bk-c3-xyz-puzzle",
     "bk-c3-diatomic-table",
@@ -530,14 +530,14 @@
    "name": "Explain s–p mixing and its effect on B2, C2, N2 vs O2",
    "mode": "self",
    "engine": "skel",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "MO ch. 5.2.2",
    "tags": [
     "sp-mixing"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c3-sp-mixing"
    ],
@@ -549,14 +549,14 @@
    "name": "Count electrons in the HOMO (diatomic or simple polyatomic)",
    "mode": "auto",
    "engine": "gen",
-   "marks": 3.5,
+   "marks": 2.667,
    "basis": "notes",
    "ref": "MO ch.; ExX Q8 → P1 Q1c, P3 Q1d",
    "tags": [
     "homo-electron-count"
    ],
    "ids": [],
-   "weight": 0.0227,
+   "weight": 0.02667,
    "nodes": [
     "bk-c3-homo-past",
     "bk-c3-homo-drill"
@@ -569,14 +569,14 @@
    "name": "Heteronuclear diatomic MO diagram (CO, NO, CN⁻, HF, NF, NH)",
    "mode": "mixed",
    "engine": "gen",
-   "marks": 2,
+   "marks": 1.6,
    "basis": "notes",
    "ref": "MO ch. 5.3; Ex1 Q3 → P2 Q2a",
    "tags": [
     "heteronuclear-mo"
    ],
    "ids": [],
-   "weight": 0.013,
+   "weight": 0.016,
    "nodes": [
     "bk-c3-nf",
     "bk-c3-nitrene",
@@ -590,14 +590,14 @@
    "name": "Use HOMO/LUMO location to explain reactivity (CO binds via C, BF3 LUMO)",
    "mode": "self",
    "engine": "skel",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "MO ch. 5.3.1, 5.4.6",
    "tags": [
     "frontier-orbitals"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c3-co-binding",
     "bk-c3-water-ammonia-mo",
@@ -611,7 +611,7 @@
    "name": "Polyatomic MO diagrams: H2O, NH3, CO2, BF3, O3 π system",
    "mode": "mixed",
    "engine": "skel",
-   "marks": 1.5,
+   "marks": 4.533,
    "basis": "notes",
    "ref": "MO ch. 5.4; P1 Q2d (ozone)",
    "tags": [
@@ -619,7 +619,7 @@
     "pi-systems"
    ],
    "ids": [],
-   "weight": 0.0097,
+   "weight": 0.04533,
    "nodes": [
     "bk-c3-homo-past",
     "bk-c3-homo-drill",
@@ -639,7 +639,7 @@
    "name": "Draw ligand group orbitals qualitatively and match them to central-atom orbitals",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "LGO slides; Tutorial 3 Q D; qualitative treatment, no point-group derivation",
    "tags": [
@@ -647,7 +647,7 @@
     "group-theory-mo"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c3-lgo-oh",
     "bk-c3-co2-salcs"
@@ -660,7 +660,7 @@
    "name": "Explain 3c-4e bonding (FHF⁻, Zundel, I3⁻, XeF2)",
    "mode": "self",
    "engine": "skel",
-   "marks": 2,
+   "marks": 1.333,
    "basis": "notes",
    "ref": "H-bond slides; ExX Q12 → P1 Q2a",
    "tags": [],
@@ -668,7 +668,7 @@
     "bk-c3-3c4e",
     "bk-c4-oxonium"
    ],
-   "weight": 0.013,
+   "weight": 0.01333,
    "nodes": [
     "bk-c3-3c4e",
     "bk-c4-oxonium"
@@ -681,7 +681,7 @@
    "name": "Explain 3c-2e bonding (B2H6, BeMe2, (AlH3)n, H3⁺)",
    "mode": "mixed",
    "engine": "skel",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Group 2/13 slides; ExX Q7",
    "tags": [
@@ -691,7 +691,7 @@
    "ids": [
     "bk-c3-h3plus"
    ],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c3-h3plus",
     "bk-c3-multicentre-e-deficient",
@@ -705,14 +705,14 @@
    "name": "Photoelectron spectra: IE = hν − KE, vibrational fine structure",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "MO ch. 5.2.4",
    "tags": [
     "photoelectron-spectroscopy"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c3-pes"
    ],
@@ -724,14 +724,14 @@
    "name": "Explain α/β-silyl effects and (negative) hyperconjugation",
    "mode": "self",
    "engine": "skel",
-   "marks": 2,
+   "marks": 1.333,
    "basis": "notes",
    "ref": "Group 14 silyl slides; P1 Q2c",
    "tags": [
     "hyperconjugation"
    ],
    "ids": [],
-   "weight": 0.013,
+   "weight": 0.01333,
    "nodes": [
     "bk-c3-silyl-ie",
     "bk-c4-chlorosilanes",
@@ -745,14 +745,14 @@
    "name": "Valency, oxidation number, formal charge, CN of one atom (course definitions)",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.5,
+   "marks": 0.545,
    "basis": "notes",
    "ref": "Ch4 intro; ExX Q9",
    "tags": [
     "valency-oxidation-formal-charge"
    ],
    "ids": [],
-   "weight": 0.0097,
+   "weight": 0.00545,
    "nodes": [
     "bk-c4-vofc-cn"
    ],
@@ -764,7 +764,7 @@
    "name": "Oxidation numbers incl. averages in mixed-valence compounds",
    "mode": "auto",
    "engine": "gen",
-   "marks": 5,
+   "marks": 3.333,
    "basis": "notes",
    "ref": "Ch4; Ex2 Q8 → P1–P3 Q1",
    "tags": [
@@ -772,7 +772,7 @@
     "average-oxidation-number"
    ],
    "ids": [],
-   "weight": 0.0325,
+   "weight": 0.03333,
    "nodes": [
     "bk-c4-ox-numbers",
     "bk-c4-avg-on-past",
@@ -789,7 +789,7 @@
    "name": "Write and balance reaction equations from the notes",
    "mode": "auto",
    "engine": "db",
-   "marks": 2,
+   "marks": 2.667,
    "basis": "notes",
    "ref": "all Ch4 equations",
    "tags": [
@@ -798,7 +798,7 @@
     "redox-equations"
    ],
    "ids": [],
-   "weight": 0.013,
+   "weight": 0.02667,
    "nodes": [
     "bk-c4-hydride-reagents",
     "bk-c4-electrolysis",
@@ -826,7 +826,7 @@
    "name": "Named processes: reactants, conditions, catalyst, product",
    "mode": "auto",
    "engine": "db",
-   "marks": 4,
+   "marks": 1.333,
    "basis": "notes",
    "ref": "Haber, Olin–Raschig, Wislicenus, contact, steam reforming, WGS, chlor-alkali",
    "tags": [
@@ -835,7 +835,7 @@
     "named-test"
    ],
    "ids": [],
-   "weight": 0.026,
+   "weight": 0.01333,
    "nodes": [
     "bk-c4-h2-prep",
     "bk-c4-chloralkali",
@@ -859,14 +859,14 @@
    "name": "Identify A–E in a multi-step reaction scheme",
    "mode": "auto",
    "engine": "db",
-   "marks": 3,
+   "marks": 2.667,
    "basis": "notes",
    "ref": "P3 Q2a (P scheme); N chart",
    "tags": [
     "reaction-scheme"
    ],
    "ids": [],
-   "weight": 0.0195,
+   "weight": 0.02667,
    "nodes": [
     "bk-c4-n-chart",
     "bk-c4-p-scheme"
@@ -879,14 +879,14 @@
    "name": "Classify hydrides (saline, covalent, interstitial); hydride reagents",
    "mode": "auto",
    "engine": "db",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Ch4 hydrogen",
    "tags": [
     "hydride-classes"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c4-hydride-class",
     "bk-c4-hydride-reagents",
@@ -900,14 +900,14 @@
    "name": "Explain isotope effects on bond energy via ZPE",
    "mode": "self",
    "engine": "skel",
-   "marks": 2,
+   "marks": 1.6,
    "basis": "notes",
    "ref": "Ch4 isotope effect; Ex2 Q3 → P2 Q2b",
    "tags": [
     "zero-point-energy"
    ],
    "ids": [],
-   "weight": 0.013,
+   "weight": 0.016,
    "nodes": [
     "bk-c4-isotope-zpe",
     "bk-c4-kie"
@@ -920,14 +920,14 @@
    "name": "Explain a kinetic isotope effect (C–H vs C–D)",
    "mode": "self",
    "engine": "skel",
-   "marks": 2,
+   "marks": 1.333,
    "basis": "notes",
    "ref": "Ch4 isotope effect → P3 Q2d",
    "tags": [
     "kinetic-isotope-effect"
    ],
    "ids": [],
-   "weight": 0.013,
+   "weight": 0.01333,
    "nodes": [
     "bk-c4-kie"
    ],
@@ -939,7 +939,7 @@
    "name": "Isotope facts: D2O properties, tritium, electrolytic enrichment",
    "mode": "auto",
    "engine": "db",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch4 isotopes",
    "tags": [
@@ -947,7 +947,7 @@
     "electrolysis"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c4-isotope-zpe",
     "bk-c4-kie",
@@ -964,7 +964,7 @@
    "name": "Stoichiometry: H2 storage, airbag N2 volume, AgCl precipitation",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "past-paper",
    "ref": "data in notes; calculations from past papers",
    "tags": [
@@ -972,7 +972,7 @@
     "hydrogen-storage"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c4-naalh4",
     "bk-c4-azide-tnt",
@@ -986,7 +986,7 @@
    "name": "H2 activation: surfaces, Kubas σ-complex, oxidative addition (Vaska)",
    "mode": "mixed",
    "engine": "db",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch4 dihydrogen complexes",
    "tags": [
@@ -994,7 +994,7 @@
     "hydrogen-reactivity"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c4-h-activation",
     "bk-c4-h2-reactions"
@@ -1007,14 +1007,14 @@
    "name": "Order the steps of a radical-chain reaction (H2 + Cl2)",
    "mode": "auto",
    "engine": "db",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch4 HCl formation",
    "tags": [
     "radical-chain"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c4-hcl-chain"
    ],
@@ -1026,14 +1026,14 @@
    "name": "Group 1 + O2: oxide/peroxide/superoxide, with water, KO2 + CO2",
    "mode": "auto",
    "engine": "db",
-   "marks": 3,
+   "marks": 2.667,
    "basis": "notes",
    "ref": "Group 1 slides; Ex1 Q7 → P1 Q1b, P2 Q1a",
    "tags": [
     "alkali-oxides"
    ],
    "ids": [],
-   "weight": 0.0195,
+   "weight": 0.02667,
    "nodes": [
     "bk-c4-g1-o2",
     "bk-c4-g1-oxides-water",
@@ -1047,14 +1047,14 @@
    "name": "Group 1 reactivity: water, N2 (Li3N), H2, acetylene, RLi",
    "mode": "auto",
    "engine": "db",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Group 1 slides",
    "tags": [
     "alkali-reactivity"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c4-li-nitride",
     "bk-c4-acetylide",
@@ -1068,7 +1068,7 @@
    "name": "Rank hydration energies / charge density",
    "mode": "auto",
    "engine": "gen",
-   "marks": 2,
+   "marks": 1.333,
    "basis": "notes",
    "ref": "Group 1–2; ExX Q4 → P3 Q1b",
    "tags": [
@@ -1076,7 +1076,7 @@
     "charge-density"
    ],
    "ids": [],
-   "weight": 0.013,
+   "weight": 0.01333,
    "nodes": [
     "bk-c4-hydration"
    ],
@@ -1088,7 +1088,7 @@
    "name": "Explain solubility via HSAB and lattice-energy size matching (LiF vs LiClO4)",
    "mode": "self",
    "engine": "skel",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Group 1 solubility; ExX Q6",
    "tags": [
@@ -1096,7 +1096,7 @@
     "solubility"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c4-hsab-solubility"
    ],
@@ -1108,7 +1108,7 @@
    "name": "Crown ether / cryptand selectivity; electrides and alkalides",
    "mode": "mixed",
    "engine": "skel",
-   "marks": 1.5,
+   "marks": 1.333,
    "basis": "notes",
    "ref": "Group 1 complex ions; P1 Q1e",
    "tags": [
@@ -1118,7 +1118,7 @@
     "alkalide-electride"
    ],
    "ids": [],
-   "weight": 0.0097,
+   "weight": 0.01333,
    "nodes": [
     "bk-c4-crown-cryptand",
     "bk-c4-electride-alkalide"
@@ -1131,14 +1131,14 @@
    "name": "Explain C–H acidity by hybridisation (acetylene vs hexane)",
    "mode": "self",
    "engine": "skel",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Group 1 acetylides; ExX Q13",
    "tags": [
     "acidity-hybridization"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c4-acetylide"
    ],
@@ -1150,7 +1150,7 @@
    "name": "Diagonal relationships and Be/Li anomalies (amphoteric BeO)",
    "mode": "auto",
    "engine": "db",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Group 2 slides",
    "tags": [
@@ -1158,7 +1158,7 @@
     "amphoterism"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c4-li-nitride",
     "bk-c4-li-anomaly",
@@ -1172,7 +1172,7 @@
    "name": "Group 2 reactivity: oxides, hydroxides, carbonates, nitrides, halides",
    "mode": "auto",
    "engine": "db",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Group 2 slides",
    "tags": [
@@ -1180,7 +1180,7 @@
     "thermal-stability"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c4-limewater",
     "bk-c4-g2-oxides",
@@ -1195,14 +1195,14 @@
    "name": "Explain the inert-pair effect (Tl⁺, Pb²⁺)",
    "mode": "self",
    "engine": "skel",
-   "marks": 1.5,
+   "marks": 0.545,
    "basis": "notes",
    "ref": "Group 13/14 slides",
    "tags": [
     "inert-pair-effect"
    ],
    "ids": [],
-   "weight": 0.0097,
+   "weight": 0.00545,
    "nodes": [
     "bk-c4-inert-pair"
    ],
@@ -1214,14 +1214,14 @@
    "name": "Boron chemistry: isolation, diborane reactions, BX3 synthesis/hydrolysis",
    "mode": "auto",
    "engine": "db",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Group 13 slides",
    "tags": [
     "boron-chemistry"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c4-boron-misc",
     "bk-c4-boron-x3-reactions"
@@ -1234,14 +1234,14 @@
    "name": "Explain BX3 Lewis-acidity order via π back-donation",
    "mode": "self",
    "engine": "skel",
-   "marks": 2,
+   "marks": 1.333,
    "basis": "notes",
    "ref": "Group 13 π-bonding; Ex2 Q7 → P1 Q2b",
    "tags": [
     "pi-backbonding-main-group"
    ],
    "ids": [],
-   "weight": 0.013,
+   "weight": 0.01333,
    "nodes": [
     "bk-c4-bx3-acidity"
    ],
@@ -1253,7 +1253,7 @@
    "name": "Silicon chemistry: silanes, chlorosilanes, hydrosilylation, SiX4",
    "mode": "auto",
    "engine": "db",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Group 14 slides",
    "tags": [
@@ -1261,7 +1261,7 @@
     "silicon-chemistry"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c4-silanes",
     "bk-c4-chlorosilanes",
@@ -1275,7 +1275,7 @@
    "name": "Explain planar N(SiH3)3 (p,d-π model and its stated weakness)",
    "mode": "self",
    "engine": "skel",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Group 14 trisilylamine slides",
    "tags": [
@@ -1283,7 +1283,7 @@
     "p-d-pi-bonding"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c4-trisilylamine"
    ],
@@ -1295,14 +1295,14 @@
    "name": "Compare SiO2 network vs CO2 molecule from bond energies",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Group 14 SiO2 slide",
    "tags": [
     "bond-energy"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c4-sio2-co2"
    ],
@@ -1314,14 +1314,14 @@
    "name": "Silicate anion charge and formula from SiO4 sharing",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Group 14 silicates",
    "tags": [
     "silicate-structures"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c4-silicates"
    ],
@@ -1333,14 +1333,14 @@
    "name": "Allotropes of C, P, S and their structures",
    "mode": "auto",
    "engine": "db",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Groups 14–16",
    "tags": [
     "allotropes"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c4-carbon",
     "bk-c4-p-structures",
@@ -1354,7 +1354,7 @@
    "name": "Nitrogen chemistry: NH3, N2H4, azides, oxides, oxoacids",
    "mode": "auto",
    "engine": "db",
-   "marks": 2,
+   "marks": 0.727,
    "basis": "notes",
    "ref": "Group 15 slides",
    "tags": [
@@ -1363,7 +1363,7 @@
     "explosives"
    ],
    "ids": [],
-   "weight": 0.013,
+   "weight": 0.00727,
    "nodes": [
     "bk-c4-avg-on-n",
     "bk-c4-n-chart",
@@ -1384,14 +1384,14 @@
    "name": "Explain the gauche preference of hydrazine",
    "mode": "self",
    "engine": "skel",
-   "marks": 1.5,
+   "marks": 1.333,
    "basis": "notes",
    "ref": "Group 15 hydrazine; P3 Q2c (skeleton from key)",
    "tags": [
     "gauche-effect"
    ],
    "ids": [],
-   "weight": 0.0097,
+   "weight": 0.01333,
    "nodes": [
     "bk-c4-hydrazine-gauche"
    ],
@@ -1403,7 +1403,7 @@
    "name": "Phosphorus chemistry: P4 oxides/halides, oxoacid basicity (H3PO3)",
    "mode": "mixed",
    "engine": "db",
-   "marks": 3,
+   "marks": 1.333,
    "basis": "notes",
    "ref": "Group 15 P slides; P1 Q1a, P2 Q1b",
    "tags": [
@@ -1412,7 +1412,7 @@
     "oxoacid-strength"
    ],
    "ids": [],
-   "weight": 0.0195,
+   "weight": 0.01333,
    "nodes": [
     "bk-c4-h3po3",
     "bk-c4-oxoacid-strength",
@@ -1428,7 +1428,7 @@
    "name": "O/S chemistry: H2O2, SO2/SO3, contact process, oleum",
    "mode": "auto",
    "engine": "db",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Group 16 slides",
    "tags": [
@@ -1437,7 +1437,7 @@
     "sulfur-chemistry"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c4-h2o2",
     "bk-c4-contact",
@@ -1452,14 +1452,14 @@
    "name": "Distinguish kinetic inertness from thermodynamic stability (SF6, H2)",
    "mode": "self",
    "engine": "skel",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "SF6 slide; H2 reactivity",
    "tags": [
     "kinetic-vs-thermodynamic"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c4-sf6-inert",
     "bk-c9-labile-inert",
@@ -1473,7 +1473,7 @@
    "name": "Halogen chemistry: interhalogens, I3⁻, redox order, ClO2",
    "mode": "mixed",
    "engine": "db",
-   "marks": 2,
+   "marks": 0.667,
    "basis": "notes",
    "ref": "Group 17 slides; P2 Q1d",
    "tags": [
@@ -1482,7 +1482,7 @@
     "halogen-oxides"
    ],
    "ids": [],
-   "weight": 0.013,
+   "weight": 0.00667,
    "nodes": [
     "bk-c4-clo2",
     "bk-c4-interhalogens",
@@ -1496,14 +1496,14 @@
    "name": "Xenon fluorides: synthesis and VSEPR shapes",
    "mode": "auto",
    "engine": "db",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Group 18 slides",
    "tags": [
     "noble-gas-compounds"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c4-xenon"
    ],
@@ -1515,14 +1515,14 @@
    "name": "Balance nuclear equations (A and Z conservation)",
    "mode": "auto",
    "engine": "gen",
-   "marks": 3,
+   "marks": 2.667,
    "basis": "past-paper",
    "ref": "only ¹⁴N + n → T in notes; ExX Q10 → P2 Q1e, P3 Q1e",
    "tags": [
     "nuclear-arithmetic"
    ],
    "ids": [],
-   "weight": 0.0195,
+   "weight": 0.02667,
    "nodes": [
     "bk-c4-nuclear"
    ],
@@ -1534,14 +1534,14 @@
    "name": "Bioinorganic facts: ion pumps, valinomycin, nitrogenase, myoglobin/nitrite",
    "mode": "auto",
    "engine": "db",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Group 1 \"In Nature\"; nitrogenase; meat processing",
    "tags": [
     "bioinorganic"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c4-bioinorganic"
    ],
@@ -1553,7 +1553,7 @@
    "name": "Decide chirality from σ and Sₙ (read symmetry labels; no character tables)",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch6 optical isomerism (σ, S_n); symmetry labels are read, not manipulated",
    "tags": [
@@ -1563,7 +1563,7 @@
    "ids": [
     "bk-c5-symmetry-rules"
    ],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c5-symmetry-rules"
    ],
@@ -1575,14 +1575,14 @@
    "name": "Name a coordination compound from its formula",
    "mode": "auto",
    "engine": "gen",
-   "marks": 2,
+   "marks": 7.133,
    "basis": "notes",
    "ref": "Ch6 nomenclature; Tut4; P3 Q3a",
    "tags": [
     "nomenclature"
    ],
    "ids": [],
-   "weight": 0.013,
+   "weight": 0.07132,
    "nodes": [
     "bk-c6-name-tut4",
     "bk-c6-name-more",
@@ -1601,14 +1601,14 @@
    "name": "Write a formula/structure from a name",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Ch6 formula rules",
    "tags": [
     "formula-writing"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c6-formula-rules",
     "bk-c6-structure-from-name"
@@ -1621,7 +1621,7 @@
    "name": "Oxidation state, dⁿ count and CN of the metal",
    "mode": "auto",
    "engine": "gen",
-   "marks": 3,
+   "marks": 1,
    "basis": "notes",
    "ref": "Ch6 practice; Tut4; P3 Q3a",
    "tags": [
@@ -1630,7 +1630,7 @@
     "coordination-number"
    ],
    "ids": [],
-   "weight": 0.0195,
+   "weight": 0.01,
    "nodes": [
     "bk-c6-ox-dn-cn",
     "bk-c6-p3q3-cfse",
@@ -1646,7 +1646,7 @@
    "name": "Denticity, donor atoms, ambidentate ligands",
    "mode": "auto",
    "engine": "db",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch6 ligand types",
    "tags": [
@@ -1654,7 +1654,7 @@
     "ambidentate-ligand"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c6-denticity",
     "bk-c6-ambidentate"
@@ -1667,7 +1667,7 @@
    "name": "Hydrate, ionisation, coordination, linkage isomerism; Werner/AgCl tests",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch6 isomerism",
    "tags": [
@@ -1677,7 +1677,7 @@
     "werner-formula"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c6-ambidentate",
     "bk-c6-isomer-type",
@@ -1692,14 +1692,14 @@
    "name": "cis/trans and fac/mer isomers; fac/mer-directing ligands",
    "mode": "mixed",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch6 geometric isomerism",
    "tags": [
     "geometric-isomerism"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c6-isomer-counts",
     "bk-c6-geometric-misc",
@@ -1715,7 +1715,7 @@
    "name": "Chirality and Δ/Λ labelling",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch6 optical isomerism",
    "tags": [
@@ -1723,7 +1723,7 @@
     "chirality"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c5-symmetry-rules",
     "bk-c6-isomer-counts",
@@ -1740,14 +1740,14 @@
    "name": "Enumerate all stereoisomers of a formula",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch6 [MA2B2C2], [CoL3]³⁺",
    "tags": [
     "stereoisomer-count"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c6-isomer-counts"
    ],
@@ -1759,14 +1759,14 @@
    "name": "Stepwise and overall formation constants (βn = K1…Kn)",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch7 stability",
    "tags": [
     "formation-constants"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c7-stepwise-k",
     "bk-c7-cu-kf5"
@@ -1779,7 +1779,7 @@
    "name": "Rank complex stability from metal charge/radius and ligand basicity",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch7 factors",
    "tags": [
@@ -1788,7 +1788,7 @@
     "irving-williams"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c7-ligand-basicity",
     "bk-c7-metal-stability"
@@ -1801,7 +1801,7 @@
    "name": "Explain chelate and macrocyclic effects (entropy, kinetics)",
    "mode": "self",
    "engine": "skel",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch7 chelate effect",
    "tags": [
@@ -1809,7 +1809,7 @@
     "macrocyclic-effect"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c7-chelate"
    ],
@@ -1821,14 +1821,14 @@
    "name": "Valence-bond hybrids for complexes and why VBT fails ([CoF6]³⁻)",
    "mode": "mixed",
    "engine": "skel",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch7 VBT",
    "tags": [
     "valence-bond-theory"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c7-vbt"
    ],
@@ -1840,14 +1840,14 @@
    "name": "Explain crystal field theory and its limitations",
    "mode": "self",
    "engine": "skel",
-   "marks": 3,
+   "marks": 2.667,
    "basis": "notes",
    "ref": "Ch7 CFT; P3 Q3 essays",
    "tags": [
     "crystal-field-theory"
    ],
    "ids": [],
-   "weight": 0.0195,
+   "weight": 0.02667,
    "nodes": [
     "bk-c7-cft-principles",
     "bk-c7-cft-limits"
@@ -1860,14 +1860,14 @@
    "name": "Explain ligand field theory (MO picture of a complex)",
    "mode": "self",
    "engine": "skel",
-   "marks": 1.5,
+   "marks": 1.333,
    "basis": "notes",
    "ref": "Ch7 LFT; P3 Q3",
    "tags": [
     "ligand-field-theory"
    ],
    "ids": [],
-   "weight": 0.0097,
+   "weight": 0.01333,
    "nodes": [
     "bk-c7-lft-principles",
     "bk-c7-cr-delta",
@@ -1882,7 +1882,7 @@
    "name": "Draw d-orbital splitting for Oh, Td, square planar",
    "mode": "mixed",
    "engine": "gen",
-   "marks": 1.5,
+   "marks": 1,
    "basis": "notes",
    "ref": "Ch7 CFT; P3 Q3a",
    "tags": [
@@ -1891,7 +1891,7 @@
     "square-planar"
    ],
    "ids": [],
-   "weight": 0.0097,
+   "weight": 0.01,
    "nodes": [
     "bk-c7-cft-principles",
     "bk-c7-lft-principles",
@@ -1906,14 +1906,14 @@
    "name": "Compute CFSE (Oh and Td, high/low spin)",
    "mode": "auto",
    "engine": "gen",
-   "marks": 5,
+   "marks": 4.733,
    "basis": "notes",
    "ref": "Ch7 CFSE; P1–P3 Q3",
    "tags": [
     "cfse-calculation"
    ],
    "ids": [],
-   "weight": 0.0325,
+   "weight": 0.04733,
    "nodes": [
     "bk-c6-p3q3-cfse",
     "bk-c7-cfse-table",
@@ -1931,14 +1931,14 @@
    "name": "Decide high/low spin from ligand, metal and geometry",
    "mode": "auto",
    "engine": "gen",
-   "marks": 3,
+   "marks": 1.091,
    "basis": "notes",
    "ref": "Ch7 spectrochemical series",
    "tags": [
     "high-low-spin"
    ],
    "ids": [],
-   "weight": 0.0195,
+   "weight": 0.01091,
    "nodes": [
     "bk-c7-cfse-table",
     "bk-c7-hs-ls",
@@ -1957,7 +1957,7 @@
    "name": "Spectrochemical series and Δo factors",
    "mode": "auto",
    "engine": "db",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Ch7 factors affecting Δ",
    "tags": [
@@ -1965,7 +1965,7 @@
     "delta-o-factors"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c7-spectrochemical",
     "bk-c7-cr-delta"
@@ -1978,7 +1978,7 @@
    "name": "π-donor/π-acceptor effects on Δo; back-bonding in carbonyls; 18-e count",
    "mode": "mixed",
    "engine": "skel",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Ch7 LFT π-bonding; Kubas 18e",
    "tags": [
@@ -1986,7 +1986,7 @@
     "metal-carbonyls"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c7-cr-delta",
     "bk-c7-pi-classify",
@@ -2002,14 +2002,14 @@
    "name": "Td vs Oh preference from CFSE (Co(II) vs Ni(II))",
    "mode": "mixed",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch7 question",
    "tags": [
     "site-preference"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c7-co-ni-td"
    ],
@@ -2021,14 +2021,14 @@
    "name": "Predict and explain Jahn–Teller distortions",
    "mode": "mixed",
    "engine": "skel",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Ch7 Jahn–Teller",
    "tags": [
     "jahn-teller"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c7-cu-kf5",
     "bk-c7-jahn-teller"
@@ -2041,14 +2041,14 @@
    "name": "Identify a first-row metal from a dⁿ / spin / CFSE / μ constraint",
    "mode": "auto",
    "engine": "gen",
-   "marks": 12,
+   "marks": 6.133,
    "basis": "past-paper",
    "ref": "method from Ch7–8; P1 Q3, P2 Q3",
    "tags": [
     "metal-identification"
    ],
    "ids": [],
-   "weight": 0.0779,
+   "weight": 0.06132,
    "nodes": [
     "bk-c7-identify-p1",
     "bk-c7-identify-p2",
@@ -2062,7 +2062,7 @@
    "name": "Spin-only magnetic moment; infer n from μ",
    "mode": "auto",
    "engine": "gen",
-   "marks": 2,
+   "marks": 2.133,
    "basis": "notes",
    "ref": "Ch8 magnetism",
    "tags": [
@@ -2070,7 +2070,7 @@
     "magnetism"
    ],
    "ids": [],
-   "weight": 0.013,
+   "weight": 0.02133,
    "nodes": [
     "bk-c8-spin-only",
     "bk-c8-moment-infer",
@@ -2085,7 +2085,7 @@
    "name": "Colour from λmax via complementary colours; d¹ band energy = Δo",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch8 [Ti(H2O)6]³⁺",
    "tags": [
@@ -2093,7 +2093,7 @@
     "d-d-transition"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c8-colour",
     "bk-c8-identify-practice"
@@ -2106,14 +2106,14 @@
    "name": "Count microstates and build the microstate table",
    "mode": "auto",
    "engine": "gen",
-   "marks": 2,
+   "marks": 1.067,
    "basis": "notes",
    "ref": "Ch8; P3 Q4",
    "tags": [
     "microstates"
    ],
    "ids": [],
-   "weight": 0.013,
+   "weight": 0.01067,
    "nodes": [
     "bk-c8-microstates",
     "bk-c8-terms-d8"
@@ -2126,7 +2126,7 @@
    "name": "Derive all term symbols and the ground term (Hund)",
    "mode": "auto",
    "engine": "gen",
-   "marks": 4,
+   "marks": 4.8,
    "basis": "notes",
    "ref": "Ch8; P3 Q4 (d⁸)",
    "tags": [
@@ -2134,7 +2134,7 @@
     "ground-term"
    ],
    "ids": [],
-   "weight": 0.026,
+   "weight": 0.048,
    "nodes": [
     "bk-c8-terms-d8",
     "bk-c8-ground-terms",
@@ -2149,7 +2149,7 @@
    "name": "Split free-ion terms in Oh; A/E/T labels of configurations",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Ch8 Orgel",
    "tags": [
@@ -2157,7 +2157,7 @@
     "orgel-diagram"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c8-oh-terms",
     "bk-c8-ts-d7",
@@ -2172,14 +2172,14 @@
    "name": "Read a Tanabe–Sugano diagram: ground state, allowed bands, Δo/B, spin crossover",
    "mode": "mixed",
    "engine": "bank",
-   "marks": 13,
+   "marks": 8,
    "basis": "notes",
    "ref": "Ch8 TS; P1 Q4 (d⁷), P2 Q4 (d⁴)",
    "tags": [
     "tanabe-sugano"
    ],
    "ids": [],
-   "weight": 0.0844,
+   "weight": 0.07999,
    "nodes": [
     "bk-c8-ts-d7",
     "bk-c8-ts-d4",
@@ -2194,7 +2194,7 @@
    "name": "Apply spin and Laporte selection rules to rank intensities",
    "mode": "mixed",
    "engine": "gen",
-   "marks": 1,
+   "marks": 0.364,
    "basis": "notes",
    "ref": "Ch8 selection rules",
    "tags": [
@@ -2202,7 +2202,7 @@
     "laporte"
    ],
    "ids": [],
-   "weight": 0.0065,
+   "weight": 0.00364,
    "nodes": [
     "bk-c8-selection-rules"
    ],
@@ -2214,14 +2214,14 @@
    "name": "Assign LMCT/MLCT bands",
    "mode": "mixed",
    "engine": "skel",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch8 charge transfer (MnO4⁻)",
    "tags": [
     "charge-transfer"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c8-charge-transfer"
    ],
@@ -2233,14 +2233,14 @@
    "name": "Predict labile vs inert from dⁿ / CFSE",
    "mode": "mixed",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch9 labile/inert",
    "tags": [
     "labile-inert"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c9-labile-inert",
     "bk-c9-cr-labile"
@@ -2253,7 +2253,7 @@
    "name": "D/A/I mechanisms: rate laws, steady state, evidence",
    "mode": "mixed",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch9 mechanisms",
    "tags": [
@@ -2261,7 +2261,7 @@
     "rate-law"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c9-mechanisms",
     "bk-c9-evidence",
@@ -2275,14 +2275,14 @@
    "name": "Stereochemical outcome via square-pyramidal vs trigonal-bipyramidal intermediates",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch9 stereochemistry",
    "tags": [
     "stereochemistry"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c9-stereo"
    ],
@@ -2294,7 +2294,7 @@
    "name": "Use the trans effect to predict products and design syntheses",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.5,
+   "marks": 0.182,
    "basis": "notes",
    "ref": "Ch9 trans effect",
    "tags": [
@@ -2302,7 +2302,7 @@
     "square-planar-substitution"
    ],
    "ids": [],
-   "weight": 0.0032,
+   "weight": 0.00182,
    "nodes": [
     "bk-c9-trans-series",
     "bk-c9-trans-products"

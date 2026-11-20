@@ -11,7 +11,7 @@ Written 19 Nov 2026. Numbers come from `dataset.csv` (one hand-coded row per pri
 ## 1. Format [data]
 
 - NTU Semester I, **2 hours, four compulsory questions, 100 marks, closed book**, each question on a fresh page. That is 1.2 minutes a mark.
-- The Chemistry Databook "may be used as reference material" in 2023-24 and 2024-25. The 2025-26 cover says closed book only and supplies a periodic table (Annex A) instead. Plan as if no Databook.
+- The Chemistry Databook "may be used as reference material" in 2023-24 and 2024-25. The 2025-26 cover says closed book only and supplies a periodic table (Annex A) instead. The owner confirms the Databook is always allowed.
 - Identical skeleton in all three years: **Q1 = five 5-mark parts (25); Q2 = four parts (25); Q3 = 30; Q4 = 20.** Parts per paper: 20, 20, 18; sizes 2 to 16 marks.
 - **Q1 + Q2 = Kinjo's chapters 1-5 (50 marks); Q3 + Q4 = Hiang Kwee's chapters 6-9 (50 marks), exactly, three years running.**
 
@@ -66,7 +66,6 @@ Isomerism and chirality, substitution kinetics (labile and inert, trans effect),
 ## 8. Caveats
 
 - Three papers; one lecturer per half; the template coding and the equal split of marks across a part's outputs are mine.
-- Whether the Databook is allowed this year is unknown; two of three papers allowed it.
 - The 2024-25 Q1(d) names the reactant sodium chlorate but prints the formula NaClO4 in the sentence; the equation (NaClO3) is what the question works from.
 - 2024-25 Q3(c) (a 2- complex with two thiocyanates and a moment of 5.92 BM) is consistent only with a d5 metal in the zero oxidation state (vanadium), so it may be deliberate; it is not necessarily a typo.
 

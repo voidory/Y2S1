@@ -101,7 +101,7 @@ const BANNED = [
   await p.fill('#mf_a', 'linear'); await p.fill('#mf_b', 'seesaw'); await p.fill('#mf_c', 'octahedral'); await submit();
 
   // progress
-  await nav('readiness'); await guard('overview (with history)');
+  await nav('readiness'); await p.evaluate(() => document.querySelector('[data-seg-ready="overview"]').click()); await p.waitForTimeout(200); await guard('overview (with history)');
   const ov = await p.evaluate(() => document.querySelector('#appRoot').innerText);
   ok(/Where to start/.test(ov) && /Your weakest topic/.test(ov) && /Exam readiness/.test(ov) && /Questions tried/.test(ov) && /Answered well/.test(ov), 'the Overview leads with where to start, then plain readiness numbers');
   ok(!!(await p.$('details summary')) && /About these numbers/.test(ov), 'the model-based figure sits behind "About these numbers"');

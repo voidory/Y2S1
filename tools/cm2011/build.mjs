@@ -38,6 +38,15 @@ const nodes = all.map((x) => x.node);
 const ids = new Set();
 for (const n of nodes) { if (ids.has(n.id)) throw new Error('duplicate node id ' + n.id); ids.add(n.id); }
 
+// Skill marks follow the shape of the final (docs/cm2011-finals/analysis.md): a 4 x 25 paper whose first half (Q1-Q2) splits
+// statistics 19%, electrochemistry 20%, potentiometry 28%, spectroscopy 26% (Topic 2 has no skills yet), Q3 extraction 25, Q4 GC/HPLC 25.
+// Within a block the authored marks keep their relative sizes; the whole map is scaled to 100.
+const BLOCK_OF = (c) => ({ t: 'stats', e: 'elec', p: 'ise', s: 'spec', x: 'extr', g: 'gc' })[c[0]];
+const BLOCK_MARKS = { stats: 9.5, elec: 10, ise: 14, spec: 13, extr: 25, gc: 25 };
+const blockSum = {};
+for (const x of all) blockSum[BLOCK_OF(x.skill.chunk)] = (blockSum[BLOCK_OF(x.skill.chunk)] || 0) + x.skill.marks;
+const blockTotal = Object.values(BLOCK_MARKS).reduce((a, b) => a + b, 0);
+for (const x of all) { const b = BLOCK_OF(x.skill.chunk); x.skill = { ...x.skill, marks: Number(((BLOCK_MARKS[b] / blockTotal) * 100 * x.skill.marks / blockSum[b]).toFixed(3)) }; }
 const totalMarks = all.reduce((a, x) => a + x.skill.marks, 0);
 const skills = all.map(({ node, skill }) => ({
   id: skill.id, ch: node.metadata.week, name: skill.name, mode: node.variants.some((v) => v.variables) ? 'calc' : 'recall', engine: 'gen',

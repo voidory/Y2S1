@@ -835,33 +835,56 @@
         return null;
       }
 
-      /* Pure. Attention follows marks: a multiplier per node that lifts topics whose share of recent cards is below their share of
-         the exam's marks and damps topics that have had more than their share. target = sum of skill weights in the chunk;
-         actual = share of the last `window` cards of this module (smoothed). Clamped so it nudges, never dictates. */
+      /* Pure. Attention follows marks AND your level. Two parts, both a multiplier per node:
+         probe: a topic with fewer than `probeN` questions tried (and some left) is lifted in proportion to its marks, so a few cards
+                in every topic come first and the queue learns your level across the whole syllabus instead of walking it in order;
+         focus: the target share of cards is marks x (1 - level), level = your latest grades shrunk toward a prior (your own rating of
+                the topic, else 0.5), so a topic you have shown you know fades after two or three cards and a weak one keeps its share.
+         Actual share = the last `window` cards (smoothed). Clamped so it nudges, never dictates. */
       function allocationMultipliers(nodes, map, logs, opts = {}) {
         const out = new Map();
         if (!map?.skills?.length) return out;
-        const win = opts.window ?? 150, power = opts.power ?? 0.6;
+        const win = opts.window ?? 150, power = opts.power ?? 0.6, probeN = opts.probeN ?? 3, K0 = 2;
+        const ratings = opts.ratings || {}, mod = opts.moduleCode || '';
         const skillById = Object.fromEntries(map.skills.map((k) => [k.id, k]));
         const chunkOf = (id) => {
           let best = null;
           for (const sid of map.nodeSkills?.[id] || []) { const k = skillById[sid]; if (k && (!best || k.weight > best.weight)) best = k; }
           return best?.chunk || null;
         };
-        const target = {};
+        const marks = {};
         let tot = 0;
-        for (const k of map.skills) { if (!k.chunk) continue; target[k.chunk] = (target[k.chunk] || 0) + (k.weight || 0); tot += k.weight || 0; }
+        for (const k of map.skills) { if (!k.chunk) continue; marks[k.chunk] = (marks[k.chunk] || 0) + (k.weight || 0); tot += k.weight || 0; }
         if (tot <= 0) return out;
         const ids = new Set(nodes.map((n) => n.id));
-        const recent = [...(logs || [])].filter((l) => ids.has(l.nodeId)).sort((a, b) => b.timestamp - a.timestamp).slice(0, win);
+        const mine = [...(logs || [])].filter((l) => ids.has(l.nodeId)).sort((a, b) => a.timestamp - b.timestamp);
+        const latest = {};
+        for (const l of mine) latest[l.nodeId] = Number.isFinite(Number(l.normalizedGrade)) && l.normalizedGrade != null ? Number(l.normalizedGrade) : 0.5;
+        const tried = {}, sum = {}, size = {};
+        for (const n of nodes) { const c = chunkOf(n.id); if (c) size[c] = (size[c] || 0) + 1; }
+        for (const [id, g] of Object.entries(latest)) { const c = chunkOf(id); if (c) { tried[c] = (tried[c] || 0) + 1; sum[c] = (sum[c] || 0) + g; } }
+        const need = {};
+        let needTot = 0;
+        for (const c of Object.keys(marks)) {
+          const prior = PRIOR[ratings[`${mod}:${c}`] ?? -1] ?? 0.5;
+          const level = ((sum[c] || 0) + K0 * (prior || 0.5)) / ((tried[c] || 0) + K0);
+          need[c] = marks[c] * Math.max(0.2, 1 - level);
+          needTot += need[c];
+        }
+        if (needTot <= 0) return out;
+        const recent = mine.slice().reverse().slice(0, win);
         const served = {};
         for (const l of recent) { const c = chunkOf(l.nodeId); if (c) served[c] = (served[c] || 0) + 1; }
+        const nChunks = Object.keys(marks).length;
         for (const n of nodes) {
           const c = chunkOf(n.id);
-          if (!c || !target[c]) continue;
-          const t = target[c] / tot;
+          if (!c || !marks[c]) continue;
+          const t = need[c] / needTot;
           const a = ((served[c] || 0) + 1) / (recent.length + 12);
-          out.set(n.id, clamp(Math.pow(t / a, power), 0.35, 4));
+          let m = Math.pow(t / a, power);
+          const t0 = tried[c] || 0;
+          if (t0 < probeN && t0 < (size[c] || 0) && latest[n.id] === undefined) m *= 1 + (probeN - t0) * 0.8 * Math.min(1, (marks[c] / tot) * nChunks);
+          out.set(n.id, clamp(m, 0.35, 6));
         }
         return out;
       }
@@ -965,6 +988,7 @@
           if (m != null) { meta.score *= m; meta.masteryMult = m; } // retired skill: rarely comes up
           const am = filters.allocMult?.get(node.id);
           if (am != null) { meta.score *= am; meta.allocMult = am; }
+          if (!reviewMap[node.id]) { let h = 0; for (const ch of String(node.id)) h = (h * 31 + ch.charCodeAt(0)) >>> 0; meta.score *= 1 + 0.06 * ((h % 1000) / 1000); } // unseen questions: scramble ties so the order is not the chapter order
           return { node, meta };
         }).sort((a, b) => b.meta.score - a.meta.score);
 
@@ -1207,12 +1231,12 @@
       const FINAL_RECIPES = {
         CM2011: {
           label: 'Final-style paper', durationMinutes: 120,
-          note: 'Four questions of about 20–25 marks, built like the 2011-12 final: calculations first, then explanation. The real format may differ, so treat the length as a guide.',
+          note: 'Built like the 2025-26 final: Q1 statistics, PSI, electrochemistry reasoning and propagation; Q2 ISE and Kjeldahl with spectrophotometry; Q3 the extraction chain with a pH; Q4 GC and HPLC, written. Part sizes and exact parts change from year to year, so treat the length as a guide.',
           sections: [
-            { label: 'Question 1 · Errors, statistics and quantitation', parts: [['bk-m11-t1-ci'], ['bk-m11-t1-ttest2', 'bk-m11-t1-paired'], ['bk-m11-t1-qtest'], ['bk-m11-t1-errprop'], ['bk-m11-q-kjeldahl']] },
-            { label: 'Question 2 · Electrochemistry', parts: [['bk-m11-e-cell'], ['bk-m11-e-ksp'], ['bk-m11-e-half', 'bk-m11-e-fe'], ['bk-m11-e-thermo']] },
-            { label: 'Question 3 · Potentiometry', parts: [['bk-m11-p-sel'], ['bk-m11-p-cal', 'bk-m11-p-slope'], ['bk-m11-p-intf'], ['bk-m11-p-gas', 'bk-m11-p-facts'], ['bk-m11-p-written']] },
-            { label: 'Question 4 · Spectroscopy', parts: [['bk-m11-s-beer'], ['bk-m11-s-beer'], ['bk-m11-s-wave'], ['bk-m11-s-layout', 'bk-m11-s-fl-layout', 'bk-m11-s-aas-layout'], ['bk-m11-s-written']] },
+            { label: 'Question 1 · Statistics, air quality, electrochemistry, propagation', parts: [['bk-m11-t1-ttest-final'], ['bk-m11-a-sub'], ['bk-m11-a-written'], ['bk-m11-e-ksp'], ['bk-m11-e-ionic'], ['bk-m11-t1-errprop']] },
+            { label: 'Question 2 · Ion-selective electrode, Kjeldahl and spectrophotometry', parts: [['bk-m11-q-kjeldahl'], ['bk-m11-p-cal'], ['bk-m11-p-written'], ['bk-m11-s-beer'], ['bk-m11-s-beer'], ['bk-m11-s-fl-explain']] },
+            { label: 'Question 3 · Extraction', parts: [['bk-m11-x-acid/x-acid-chain']] },
+            { label: 'Question 4 · GC and HPLC', parts: [['bk-m11-g-detectors/g-tcd'], ['bk-m11-g-detectors/g-fid'], ['bk-m11-g-columns/g-open-packed'], ['bk-m11-g-tprog/g-tprog'], ['bk-m11-h-gradient/h-grad-vs-iso'], ['bk-m11-h-order/h-ord-final'], ['bk-m11-g-ms/g-gcms-lcms']] },
           ],
         },
       };
@@ -1227,11 +1251,14 @@
         for (const sec of recipe.sections) {
           let secMarks = 0;
           for (const part of sec.parts) {
-            const avail = part.filter((id) => byId[id]);
+            // an entry is a node id, or node/variant to fix the variant (the final's Q3 chain, the named Q4 parts)
+            const avail = part.filter((id) => byId[String(id).split('/')[0]]);
             if (!avail.length) continue;
-            const node = byId[avail[Math.floor(rnd() * avail.length)]];
+            const pickedEntry = String(avail[Math.floor(rnd() * avail.length)]);
+            const [pickedId, pinned] = pickedEntry.split('/');
+            const node = byId[pickedId];
             // the same node may appear twice in a recipe, but never as the same variant
-            let variant = null;
+            let variant = pinned ? node.variants.find((x) => x.variantId === pinned) || null : null;
             for (let tries = 0; tries < 8 && !variant; tries++) {
               const v = selectVariant(node, options.reviewMap?.[node.id]);
               if (v && !usedVariants.has(`${node.id}/${v.variantId}`)) variant = v;
@@ -8177,7 +8204,7 @@
         }
         // exam-week allocation: not for a topic or weak-spot drill, nor a forced question
         if (appState.settings?.allocByMarks !== false && appState.skillMap && !filters.forceNodeId && !filters.chunkNodeIds && !filters.skillTag) {
-          filters.allocMult = Scheduler.allocationMultipliers(appState.nodes, appState.skillMap, appState.masteryLogs);
+          filters.allocMult = Scheduler.allocationMultipliers(appState.nodes, appState.skillMap, appState.masteryLogs, { ratings: appState.plan?.ratings || {}, moduleCode: appState.activeModule });
         }
         const pick = Scheduler.selectNextNode(
           filters.forceNodeId ? [...appState.nodes, ...appState.composerNodes] : appState.nodes,
@@ -8999,9 +9026,21 @@
               if (!cur.userInput || typeof cur.userInput !== 'object') cur.userInput = {};
               cur.userInput[inp.dataset.mfKey] = e.target.value;
             });
+            // Enter submits once every field has something in it; until then it jumps to the next empty field
+            inp.addEventListener('keydown', (e) => {
+              if (e.key !== 'Enter' || phase !== 'answering' || e.isComposing) return;
+              e.preventDefault();
+              const all = $$('[data-mf-key]', root);
+              const empty = all.find((el, i) => i > all.indexOf(inp) && !String(el.value || '').trim()) || all.find((el) => !String(el.value || '').trim());
+              if (empty && empty !== inp) empty.focus();
+              else $('#btnSubmitAnswer', root)?.click();
+            });
           });
         } else if (slot.type === 'choice') {
           $$('input[name="choiceInput"]', root).forEach((inp) => {
+            inp.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' && phase === 'answering') { e.preventDefault(); inp.checked = true; inp.dispatchEvent(new Event('change')); $('#btnSubmitAnswer', root)?.click(); }
+            });
             inp.addEventListener('change', () => {
               if (slot.selectionMode === 'multi') {
                 cur.userInput = $$('input[name="choiceInput"]:checked', root).map((el) => el.value);

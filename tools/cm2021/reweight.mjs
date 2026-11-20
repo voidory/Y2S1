@@ -1,6 +1,6 @@
 /*
- * Re-cuts the CM2021 skill marks from the three finals (docs/cm2021-finals): 80% the mean share of marks in the finals,
- * 20% spread over skills no final has tested, in proportion to their current marks. Marks are scaled to total 100 and
+ * Re-cuts the CM2021 skill marks from the three finals (docs/cm2021-finals): 70% the mean share of marks in the finals,
+ * 30% spread over skills no final has tested, in proportion to their current marks. Marks are scaled to total 100 and
  * weight = marks / total (the content test requires this). Safe to re-run: the result does not depend on the starting scale.
  *   node tools/cm2021/reweight.mjs
  */
@@ -15,9 +15,9 @@ for (const k of Object.keys(tested)) if (!known.has(k)) throw new Error('unknown
 const untested = map.skills.filter((s) => !tested[s.id]);
 const uSum = untested.reduce((a, s) => a + s.marks, 0);
 for (const s of map.skills) {
-  s.marks = Number((100 * (0.8 * ((tested[s.id] || 0) / 300) + 0.2 * (tested[s.id] ? 0 : s.marks / uSum))).toFixed(3));
+  s.marks = Number((100 * (0.7 * ((tested[s.id] || 0) / 300) + 0.3 * (tested[s.id] ? 0 : s.marks / uSum))).toFixed(3));
 }
 const total = map.skills.reduce((a, s) => a + s.marks, 0);
 for (const s of map.skills) s.weight = Number((s.marks / total).toFixed(5));
 fs.writeFileSync(file, JSON.stringify(map, null, 1) + '\n');
-console.log(`CM2021 skill marks re-cut: total ${total.toFixed(2)}, ${untested.length} untested skills share 20%`);
+console.log(`CM2021 skill marks re-cut: total ${total.toFixed(2)}, ${untested.length} untested skills share 30%`);

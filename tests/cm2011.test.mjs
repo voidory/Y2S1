@@ -262,6 +262,16 @@ test('mastery: CM2011 questions map to their skills, so card-time retirement wor
   assert.ok(ev, 'evaluates against the CM2011 map');
 });
 
+test('final-style paper follows the real final: Q3 is the full extraction chain and Q4 the GC/HPLC parts', () => {
+  const paper = Scheduler.assembleRecipePaper(bank.questionNodes, Scheduler.FINAL_RECIPES.CM2011, { random: Math.random });
+  const q3 = paper.questions.filter((q) => /Question 3/.test(q.section));
+  assert.equal(q3.length, 1);
+  assert.equal(q3[0].inst.variant.variantId, 'x-acid-chain');
+  assert.equal(paper.sections[2].marks, 25);
+  assert.ok(paper.questions.filter((q) => /Question 4/.test(q.section)).every((q) => /^bk-m11-[gh]-/.test(q.node.id)));
+  assert.ok(paper.sections[3].marks >= 24 && paper.sections[3].marks <= 30, `Q4 ${paper.sections[3].marks}`);
+});
+
 test('final-style paper: four sections, only CM2011 questions, sensible marks, fresh data each time', () => {
   const recipe = Scheduler.FINAL_RECIPES.CM2011;
   assert.equal(recipe.sections.length, 4);
@@ -270,7 +280,7 @@ test('final-style paper: four sections, only CM2011 questions, sensible marks, f
     const paper = Scheduler.assembleRecipePaper(bank.questionNodes, recipe, { random: Math.random });
     assert.equal(paper.sections.length, 4);
     assert.ok(paper.questions.length >= 15 && paper.questions.length <= 22, `${paper.questions.length} parts`);
-    assert.ok(paper.totalMarks >= 70 && paper.totalMarks <= 120, `${paper.totalMarks} marks`);
+    assert.ok(paper.totalMarks >= 85 && paper.totalMarks <= 115, `${paper.totalMarks} marks`);
     assert.ok(paper.sections.every((s) => s.marks >= 15 && s.marks <= 32), paper.sections.map((s) => s.marks).join());
     assert.equal(new Set(paper.questions.map((q) => q.node.id + q.inst.variant.variantId)).size, paper.questions.length, 'no question is used twice');
     assert.ok(paper.questions.every((q) => q.node.moduleCode === 'CM2011' && q.inst && q.section && q.userInput !== undefined));
@@ -280,7 +290,11 @@ test('final-style paper: four sections, only CM2011 questions, sensible marks, f
   assert.ok(seenStems.size > 10, 'each paper has fresh random data');
   // every id in the recipe exists in the bundle
   const ids = new Set(bank.questionNodes.map((n) => n.id));
-  for (const s of recipe.sections) for (const part of s.parts) for (const id of part) assert.ok(ids.has(id), id);
+  for (const s of recipe.sections) for (const part of s.parts) for (const id of part) {
+    const [nid, vid] = id.split('/');
+    assert.ok(ids.has(nid), id);
+    if (vid) assert.ok(bank.questionNodes.find((n) => n.id === nid).variants.some((v) => v.variantId === vid), id);
+  }
 });
 
 test('pick-one options are shuffled (the key is not always first), keep their ids, and are seeded', () => {
@@ -456,4 +470,71 @@ test('the booklet t table: next lower row for a df that is not listed, and the v
   // 99% and 99.9% are different answers for a drop-down, even though one is the start of the other
   const r = Evaluators.evaluate(lv, { lvl: '99%' }, scopeWith(lv, { tc: 7.5, dfv: 7 }), {}, byId['bk-m11-t1-levels']);
   assert.equal(r.normalizedGrade, 0);
+});
+
+test('golden: PSI sub-indices from the lecture and the finals (PM2.5 70 → 116, 6 → 25, 24 → 64, 44 → 87, 30.86 → 72; PM10 70 → 60; SO2 9 → 6)', () => {
+  const sub = (variantId, nodeId, c) => {
+    const v = variantOf(nodeId, variantId);
+    return target(v.evaluator.targets.psi, scopeWith(v, { c }));
+  };
+  const cases = [['psi-sub-pm25', 70, 116], ['psi-sub-pm25', 6, 25], ['psi-sub-pm25', 24, 64], ['psi-sub-pm25', 44, 87], ['psi-sub-pm25', 31, 72], ['psi-sub-pm10', 70, 60], ['psi-sub-so2', 9, 6]];
+  for (const [id, c, want] of cases) assert.equal(sub(id, 'bk-m11-a-sub', c), want, `${id} at ${c}`);
+});
+
+test('PSI: the overall value is the largest sub-index, and the bottom-of-band slip is named', () => {
+  const v = variantOf('bk-m11-a-overall', 'psi-overall');
+  const scope = scopeWith(v, { a: 70, b: 70, s: 100 });
+  assert.equal(scope.top, 116); assert.equal(scope.who, 'PM2.5'); assert.equal(scope.cat, 'unhealthy');
+  const w = variantOf('bk-m11-a-sub', 'psi-sub-pm25');
+  const res = Evaluators.evaluate(w, { psi: '117.0', cat: 'unhealthy' }, scopeWith(w, { c: 70 }), {}, byId['bk-m11-a-sub']);
+  assert.ok(res.normalizedGrade > 0, 'within a whole-number tolerance');
+  const bad = Evaluators.evaluate(w, { psi: '291.7', cat: 'unhealthy' }, scopeWith(w, { c: 70 }), {}, byId['bk-m11-a-sub']);
+  assert.ok(/straight ratio/.test(JSON.stringify(bad.fieldResults.psi)), 'the ratio slip is named');
+});
+
+test('golden: breathing chain (8 L/min is 11.52 m3 a day; 40 ug/m3 is 168 mg a year, 14 cigarettes) and 3.6e-4 g in a day is 31.25 ug/m3 (PSI 72)', () => {
+  const v = variantOf('bk-m11-a-cig', 'cig-year');
+  const s = scopeWith(v, { rate: 8, c: 40 });
+  assert.ok(close(s.vday, 11.52) && close(s.mgyr, 168.2, 0.01) && close(s.cigs, 14, 0.02));
+  const b = variantOf('bk-m11-a-cig', 'cig-back');
+  const t = scopeWith(b, { m: 360 });
+  assert.ok(close(t.c, 31.25, 0.001) && t.psi === 72);
+});
+
+test('golden: chromatography theory against the lecture and practice-deck answers', () => {
+  const t = (nodeId, vid, sampled, key) => target(variantOf(nodeId, vid).evaluator.targets[key], scopeWith(variantOf(nodeId, vid), sampled));
+  // butyric acid 7.63 min, isobutyric 5.98 min, t_M 0.31 min: k 23.6, alpha 1.29
+  assert.ok(close(t('bk-m11-c-retention', 'ret-times', { tM: 0.31, tA: 5.98, dt: 1.65 }, 'kB'), 23.61, 0.005));
+  assert.ok(close(t('bk-m11-c-retention', 'ret-times', { tM: 0.31, tA: 5.98, dt: 1.65 }, 'al'), 1.291, 0.005));
+  // K_A 4, K_B 8, V_S 5, V_M 20: k 1 and 2, alpha 2
+  assert.ok(close(t('bk-m11-c-retention', 'ret-partition', { KA: 4, r: 2, VS: 5, VM: 20 }, 'kB'), 2.0, 0.001));
+  // open tube, t_M 40 s, toluene 200 s, 320 um, 2 um film: k 4, K 160
+  assert.ok(close(t('bk-m11-c-retention', 'ret-open', { dc: 320, df: 2, tM: 40, tR: 200 }, 'K'), 160, 0.001));
+  // 7.20/8.10 min, widths 0.48/0.60: R_S 1.67; widths +25%: 1.33
+  assert.ok(close(t('bk-m11-c-resolution', 'rs-base', { tA: 7.2, gap: 0.9, WA: 0.48, wd: 0.12 }, 'rs'), 1.667, 0.002));
+  assert.ok(close(t('bk-m11-c-resolution', 'rs-wider', { tA: 7.2, gap: 0.9, WA: 0.48, wd: 0.12, p: 25 }, 'rs2'), 1.333, 0.002));
+  // w1/2 0.30 and 0.37 at 5.80 and 6.65 min: 1.49
+  assert.ok(close(t('bk-m11-c-resolution', 'rs-half', { tA: 5.8, gap: 0.85, hA: 0.30, hd: 0.07 }, 'rs'), 1.49, 0.005));
+  // 7.50 min, W 0.25, 1.80 m: N 14400, H 0.125 mm
+  assert.ok(close(t('bk-m11-c-plates', 'n-base', { tR: 7.5, W: 0.25, L: 1.8 }, 'N'), 14400, 0.001));
+  assert.ok(close(t('bk-m11-c-plates', 'n-base', { tR: 7.5, W: 0.25, L: 1.8 }, 'H'), 0.125, 0.001));
+  // alpha 1.12, k_B 4.20: N 2.14e3 for R_S 1.0 and 8.55e3 for 2.0; alpha 1.09, k_B 3.43: 3915 and L 783 mm at H 0.2 mm
+  assert.ok(close(t('bk-m11-c-plates', 'n-purnell', { al: 1.12, kB: 4.2, Rt: 1, Hmm: 0.2 }, 'N'), 2136, 0.003));
+  assert.ok(close(t('bk-m11-c-plates', 'n-purnell', { al: 1.12, kB: 4.2, Rt: 2, Hmm: 0.2 }, 'N'), 8546, 0.003));
+  assert.ok(close(t('bk-m11-c-plates', 'n-purnell', { al: 1.09, kB: 3.43, Rt: 1, Hmm: 0.2 }, 'L'), 783, 0.005));
+  // 0.60 cm i.d., eps 0.20, 0.30 mL/min: 5.3 cm/min; 2 mg on 1.0 cm at 0.5 mL/min to 20 mg: 3.16 cm and 5 mL/min
+  assert.ok(close(t('bk-m11-c-flow', 'flow-ux', { d: 0.6, eps: 0.2, uv: 0.3 }, 'ux'), 5.31, 0.005));
+  assert.ok(close(t('bk-m11-c-flow', 'flow-scale', { d1: 1, m1: 2, F1: 0.5, qq: 10 }, 'd2'), 3.162, 0.002));
+  assert.ok(close(t('bk-m11-c-flow', 'flow-scale', { d1: 1, m1: 2, F1: 0.5, qq: 10 }, 'F2'), 5, 0.001));
+});
+
+test('chromatography slips are named: missing factor 2 in R_S, t_R/t_M for k', () => {
+  const v = variantOf('bk-m11-c-resolution', 'rs-base');
+  const sc = scopeWith(v, { tA: 7.2, gap: 0.9, WA: 0.48, wd: 0.12 });
+  const bad = Evaluators.evaluate(v, { rs: '0.833', v: 'partial' }, sc, {}, byId['bk-m11-c-resolution']);
+  assert.ok(/factor 2/.test(JSON.stringify(bad.fieldResults.rs)));
+  const r = variantOf('bk-m11-c-retention', 'ret-times');
+  const sr = scopeWith(r, { tM: 0.31, tA: 5.98, dt: 1.65 });
+  const bk = Evaluators.evaluate(r, { kA: String(5.98 / 0.31), kB: '24.6', al: '1.29' }, sr, {}, byId['bk-m11-c-retention']);
+  assert.ok(/Subtract/.test(JSON.stringify(bk.fieldResults.kA)));
 });

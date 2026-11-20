@@ -48,6 +48,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(ov && !ov.flag, 'a CM2011 page carries no "not from your slides" flag');
   ok(ov && !ov.raw, 'no raw markdown or tags show');
   ok(await p.evaluate(() => !!document.querySelector('[data-method-hit]')), 'the slip you made is named at the top');
+  ok(await p.evaluate(() => document.querySelectorAll('#methodOverlay [data-method-body] .mfrac').length >= 3), 'formulas are typeset as real stacked fractions');
+  ok(await p.evaluate(() => { const w = document.querySelector('[data-method-worked]'); const q = window.__MASTERY_ENGINE__.UI.appState.current.inst.resolvedExplanation; return !!w && !!q && w.querySelector('.katex, strong, p') && !/{{|}}/.test(w.innerText); }), 'the sheet carries this question\'s own worked solution, with its numbers filled in');
   ok(await p.evaluate(() => document.documentElement.scrollHeight <= innerHeight + 1), 'the page behind does not scroll');
   await p.keyboard.press('Escape'); await p.waitForTimeout(200);
   ok(await p.evaluate(() => !document.querySelector('#methodOverlay')), 'Escape closes it');
@@ -63,6 +65,18 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.evaluate(() => document.querySelector('#btnMethod').click()); await p.waitForTimeout(400);
   ok(await p.evaluate(() => /slides/.test((document.querySelector('[data-method-flag]') || document.querySelector('[data-method-checked]'))?.textContent || '')), 'a CM2021 page says whether it was checked against your slides');
   await p.keyboard.press('Escape');
+
+  // every page in both modules typesets: no formula falls back to red error text
+  for (const mod of ['CM2011', 'CM2021']) {
+    await p.selectOption('#moduleSwitch', mod); await p.waitForTimeout(700);
+    const res = await p.evaluate(() => { const a = window.__MASTERY_ENGINE__.UI.appState; return a.methods[a.activeModule].methods.map((m) => ({ id: m.id, chunk: m.chunks[0] })); });
+    for (const m of res) {
+      await p.evaluate((c) => window.__MASTERY_ENGINE__.UI.showMethod(c), m.chunk); await p.waitForTimeout(120);
+      const n = await p.evaluate(() => document.querySelectorAll('#methodOverlay .katex-error').length);
+      ok(n === 0, `${mod} ${m.id}: all formulas typeset`);
+      await p.keyboard.press('Escape');
+    }
+  }
 
   // a topic with no page offers nothing
   const bare = await p.evaluate(() => { const { UI, Weakness, Content } = window.__MASTERY_ENGINE__; const a = UI.appState; const n = a.nodes.find((x) => { const c = Weakness.chunksOf(a.skillMap, x.id)[0]; return c && !Content.methodForChunk(a.methods.CM2021, c) && x.variants.every((v) => v.inputSlot.type === 'mapped_fields' || v.inputSlot.type === 'typed_short'); }); return n ? n.id : null; });

@@ -7754,8 +7754,82 @@
         return { n, total, counts, maxMl, maxMs2, steps, ground: steps[0] ? steps[0].symbol : '' };
       }
 
+      /* A printed-style Tanabe–Sugano diagram as an SVG string (pure: pass an ion's data from ts.json). 4 SVG units = 1 mm, so a ruler tool can
+         report millimetres; the scale is 3.6 mm per unit of Delta_o/B and 1.2 mm per unit of E/B. `marker` draws a dashed vertical line. */
+      const TS_GEO = { L: 56, T: 16, PW: 576, PH: 384, W: 716, H: 448, xMax: 40, yMax: 80, unitsPerMm: 4 };
+      function tsSvg(ion, o = {}) {
+        const G = TS_GEO, sx = (x) => G.L + (x / G.xMax) * G.PW, sy = (y) => G.T + G.PH - (y / G.yMax) * G.PH;
+        const pretty = (l) => l.replace(/^(\d)/, (m, d) => '⁰¹²³⁴⁵⁶'[d]).replace(/([ATE])(\d)/, (m, a, d) => a + '₀₁₂'[d]);
+        let grid = '', axes = '', curves = '', labels = [];
+        for (let x = 0; x <= 40; x += 10) grid += `<line x1="${sx(x)}" y1="${G.T}" x2="${sx(x)}" y2="${G.T + G.PH}" stroke="#e2e8f0"/>`;
+        for (let y = 0; y <= 80; y += 10) grid += `<line x1="${G.L}" y1="${sy(y)}" x2="${G.L + G.PW}" y2="${sy(y)}" stroke="#e2e8f0"/>`;
+        for (let x = 0; x <= 40; x += 2) axes += `<line x1="${sx(x)}" y1="${sy(0)}" x2="${sx(x)}" y2="${sy(0) + (x % 10 ? 4 : 8)}" stroke="#475569"/>${x % 10 === 0 ? `<text x="${sx(x)}" y="${sy(0) + 21}" text-anchor="middle" font-size="13" fill="#334155">${x}</text>` : ''}`;
+        for (let y = 0; y <= 80; y += 2) axes += `<line x1="${G.L}" y1="${sy(y)}" x2="${G.L - (y % 10 ? 4 : 8)}" y2="${sy(y)}" stroke="#475569"/>${y % 10 === 0 ? `<text x="${G.L - 12}" y="${sy(y) + 4}" text-anchor="end" font-size="13" fill="#334155">${y}</text>` : ''}`;
+        axes += `<rect x="${G.L}" y="${G.T}" width="${G.PW}" height="${G.PH}" fill="none" stroke="#475569"/><text x="${G.L + G.PW / 2}" y="${G.H - 6}" text-anchor="middle" font-size="14" fill="#0f172a">Δ<tspan font-size="10" dy="3">o</tspan><tspan dy="-3">/B</tspan></text><text x="14" y="${G.T + G.PH / 2}" font-size="14" fill="#0f172a" text-anchor="middle" transform="rotate(-90 14 ${G.T + G.PH / 2})">E/B</text>`;
+        for (const c of ion.curves) {
+          let run = [], last = null;
+          const flush = () => { if (run.length > 1) curves += `<polyline points="${run.map((q) => `${sx(q[0]).toFixed(1)},${sy(q[1]).toFixed(1)}`).join(' ')}" fill="none" stroke="#0f172a" stroke-width="1.3" stroke-linejoin="round"/>`; run = []; };
+          c.E.forEach((v, i) => { if (v == null || v > G.yMax) { flush(); } else { run.push([ion.x[i], v]); last = [ion.x[i], v]; } });
+          flush();
+          if (o.hl && o.hl(c)) { let r2 = []; const f2 = () => { if (r2.length > 1) curves += `<polyline points="${r2.map((q) => `${sx(q[0]).toFixed(1)},${sy(q[1]).toFixed(1)}`).join(' ')}" fill="none" stroke="#2563eb" stroke-width="3" stroke-linejoin="round"/>`; r2 = []; }; c.E.forEach((v, i) => { if (v == null || v > G.yMax) f2(); else r2.push([ion.x[i], v]); }); f2(); }
+          if (last && last[0] > 30) labels.push({ x: last[0], y: last[1], text: pretty(c.label) });
+        }
+        labels.sort((a, b) => b.y - a.y);
+        let prevY = -99;
+        const lab = labels.map((l) => { let y = sy(l.y); if (y < prevY + 11) y = prevY + 11; prevY = y; return `<text x="${G.L + G.PW + 5}" y="${y + 4}" font-size="12" fill="#0f172a">${l.text}</text>`; }).join('');
+        const gl = o.groundLine ? `<line x1="${G.L}" y1="${sy(0)}" x2="${G.L + G.PW}" y2="${sy(0)}" stroke="#2563eb" stroke-width="4"/>` : '';
+        const mk = o.marker != null ? `<line x1="${sx(o.marker)}" y1="${G.T}" x2="${sx(o.marker)}" y2="${G.T + G.PH}" stroke="#e11d48" stroke-width="1.4" stroke-dasharray="6 4"/><text x="${sx(o.marker) + 4}" y="${G.T + 13}" font-size="12" fill="#be123c">Δo/B = ${o.marker}</text>` : '';
+        return `<svg viewBox="0 0 ${G.W} ${G.H}" class="w-full h-auto select-none" style="min-width:680px" role="img" aria-label="Tanabe–Sugano diagram for d${o.ion || ''}" data-ruler="${G.unitsPerMm}" data-geo="${[G.L, G.T, G.PW, G.PH, G.xMax, G.yMax].join(',')}">${grid}${axes}${curves}${gl}${lab}${mk}</svg>`;
+      }
+
+      /* Drag-to-measure for any svg[data-ruler]: a ruler that reports millimetres (to 0.5 mm, as a ruler would) and, as a practice aid, a
+         coordinate read-out in axis units. Attach once per svg; the toolbar is added under it. */
+      function attachRuler(svg) {
+        if (!svg || svg.dataset.rulerReady) return;
+        svg.dataset.rulerReady = '1';
+        const upm = Number(svg.dataset.ruler) || 4, [L, T, PW, PH, xMax, yMax] = String(svg.dataset.geo || '').split(',').map(Number);
+        const bar = document.createElement('div');
+        bar.className = 'mt-2 flex flex-wrap items-center gap-1.5 text-xs';
+        bar.innerHTML = `<button type="button" data-ruler-mode="ruler" class="px-2.5 py-1 rounded-full border font-medium">Ruler</button><button type="button" data-ruler-mode="coord" class="px-2.5 py-1 rounded-full border font-medium">Coordinates (practice aid)</button><button type="button" data-ruler-clear class="px-2.5 py-1 rounded-full border border-slate-300 bg-white text-slate-700">Clear</button><span class="font-mono text-slate-800" data-ruler-out>Choose Ruler, then drag across the diagram. Scale: 10 units of Δo/B = ${(10 * PW / xMax / upm).toFixed(0)} mm, 10 units of E/B = ${(10 * PH / yMax / upm).toFixed(0)} mm.</span>`;
+        const hostEl = svg.closest('[data-ts-scroll]') || svg; hostEl.parentNode.insertBefore(bar, hostEl.nextSibling);
+        const out = bar.querySelector('[data-ruler-out]');
+        let mode = null, a = null, layer = null;
+        const NS = 'http://www.w3.org/2000/svg';
+        const pt = (e) => { const m = svg.getScreenCTM(); if (!m) return null; const q = new DOMPoint(e.clientX, e.clientY).matrixTransform(m.inverse()); return { x: q.x, y: q.y }; };
+        const G_T = (y) => ((T + PH - y) / PH) * yMax;
+        const half = (mm) => Math.round(mm * 2) / 2;
+        const paint = () => bar.querySelectorAll('[data-ruler-mode]').forEach((b) => { const on = b.dataset.rulerMode === mode; b.setAttribute('aria-pressed', String(on)); b.className = `px-2.5 py-1 rounded-full border font-medium ${on ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-300 text-slate-700'}`; });
+        const clear = () => { layer?.remove(); layer = null; a = null; out.textContent = mode === 'coord' ? 'Move the pointer over the diagram.' : 'Drag across the diagram to measure.'; };
+        bar.querySelectorAll('[data-ruler-mode]').forEach((b) => b.addEventListener('click', () => { mode = mode === b.dataset.rulerMode ? null : b.dataset.rulerMode; svg.style.touchAction = mode ? 'none' : ''; svg.style.cursor = mode ? 'crosshair' : ''; paint(); clear(); if (!mode) out.textContent = 'Choose Ruler, then drag across the diagram.'; }));
+        bar.querySelector('[data-ruler-clear]').addEventListener('click', clear);
+        const draw = (p1, p2) => {
+          layer?.remove(); layer = document.createElementNS(NS, 'g'); layer.setAttribute('pointer-events', 'none');
+          layer.innerHTML = `<line x1="${p1.x}" y1="${p1.y}" x2="${p2.x}" y2="${p2.y}" stroke="#2563eb" stroke-width="2"/><circle cx="${p1.x}" cy="${p1.y}" r="4" fill="#2563eb"/><circle cx="${p2.x}" cy="${p2.y}" r="4" fill="#2563eb"/>`;
+          svg.appendChild(layer);
+        };
+        svg.addEventListener('pointerdown', (e) => { if (mode !== 'ruler') return; e.preventDefault(); a = pt(e); svg.setPointerCapture?.(e.pointerId); draw(a, a); });
+        svg.addEventListener('pointermove', (e) => {
+          const q = pt(e); if (!q) return;
+          if (mode === 'ruler' && a) {
+            draw(a, q);
+            const dx = Math.abs(q.x - a.x) / upm, dy = Math.abs(q.y - a.y) / upm;
+            out.textContent = `${half(Math.hypot(dx, dy)).toFixed(1)} mm  (across ${half(dx).toFixed(1)}, up ${half(dy).toFixed(1)})`;
+          } else if (mode === 'coord') {
+            const dx = ((q.x - L) / PW) * xMax, dy = G_T(q.y);
+            out.textContent = dx < 0 || dx > xMax || dy < 0 || dy > yMax ? 'Outside the plot.' : `Δo/B ≈ ${dx.toFixed(1)},  E/B ≈ ${dy.toFixed(1)}`;
+          }
+        });
+        svg.addEventListener('pointerup', (e) => { if (mode === 'ruler') { svg.releasePointerCapture?.(e.pointerId); a = null; } });
+        paint();
+      }
+
       /* Tanabe–Sugano data (public/content/figures/ts.json, computed by tools/figures/ts.mjs). tsAt reads one Delta_o/B off an ion's curves. */
       const tsStore = { data: null, loading: null };
+      function tsLoad() {
+        if (tsStore.data) return Promise.resolve();
+        tsStore.loading ||= Content.fetchContent('content/figures/ts.json').then((d) => { tsStore.data = d; }).catch(() => { tsStore.loading = null; });
+        return tsStore.loading;
+      }
       function tsAt(ion, x) {
         const xs = ion.x;
         let i = 0;
@@ -7767,12 +7841,16 @@
         const allowed = levels.filter((c) => c.S === gS && c.E > 0.05).sort((a, b) => a.E - b.E);
         return { ground, gS, levels, allowed };
       }
-      /* The Delta_o/B at which the first two spin-allowed bands have the energy ratio nu2/nu1 (first match scanning up from Delta_o/B = 1). */
+      /* The two bands used to find Delta_o/B: the lowest spin-allowed band and the lowest T1g band above it (T1g(F) for d3/d8, T1g(P) for d2/d7). */
+      const tsPair = (allowed) => { const b2 = allowed.slice(1).find((b) => /T1g$/.test(b.label)); return b2 ? [allowed[0], b2] : null; };
+      /* The Delta_o/B at which that pair of bands has the energy ratio nu2/nu1 (first match scanning up from Delta_o/B = 1). */
       function tsSolve(ion, ratio) {
         let prev = null;
+        const m0 = tsAt(ion, 1).ground[0];
         for (let x = 1; x <= 40.001; x += 0.05) {
-          const a = tsAt(ion, x).allowed;
-          if (a.length < 2) { prev = null; continue; }
+          if (tsAt(ion, x + 0.6).ground[0] !== m0) break; // the weak-field side of any spin crossover (stop just short of it)
+          const a = tsPair(tsAt(ion, x).allowed);
+          if (!a) { prev = null; continue; }
           const r = a[1].E / a[0].E, cur = { x, r, E1: a[0].E };
           if (prev && (prev.r - ratio) * (r - ratio) <= 0) {
             const f = Math.abs(r - prev.r) < 1e-12 ? 0 : (ratio - prev.r) / (r - prev.r);
@@ -7893,6 +7971,30 @@
             return { svg, read: [['Spin', m.unpaired === hund && s.n >= 4 && s.n <= 7 ? 'high spin' : s.n >= 4 && s.n <= 7 ? 'low spin' : 'no choice for this d count'], ['Unpaired electrons', String(m.unpaired)], ['CFSE (before pairing cost)', `${m.cfse.toFixed(1)} Δo`]], note: s.n >= 4 && s.n <= 7 ? 'Only d4 to d7 can choose. Low spin wins when Δo exceeds the pairing energy P; otherwise the electrons spread over e_g first.' : 'd1 to d3 and d8 to d10 have only one sensible arrangement in an octahedral field.' };
           },
         },
+        'ts-lesson': {
+          title: 'Learn to read a Tanabe–Sugano diagram, step by step',
+          intro: 'One worked example, d⁷ with B = 900 cm⁻¹. Move through the six steps; each one adds a single idea to the same diagram. Try the Ruler under the diagram.',
+          controls: [{ k: 'step', label: 'Step', min: 1, max: 6, step: 1, val: 1 }],
+          load() { return tsLoad(); },
+          draw(s) {
+            if (!tsStore.data) return { html: '<div class="text-xs text-slate-500">Loading the diagram…</div>', note: '' };
+            const ion = tsStore.data.ions[7], P = (l) => l.replace(/^(\d)/, (m, d) => '⁰¹²³⁴⁵⁶'[d]).replace(/([ATE])(\d)/, (m, a, d) => a + '₀₁₂'[d]);
+            const B = 900, X = 12, a = tsAt(ion, X), pr = tsPair(a.allowed), [b1, b2] = pr;
+            const v1 = Math.round((b1.E * B) / 10) * 10, v2 = Math.round((b2.E * B) / 10) * 10, ratio = v2 / v1, sol = tsSolve(ion, ratio), Bs = v1 / sol.E1;
+            const k = ion.ground.findIndex((l) => l[0] !== ion.ground[0][0]), xc = (ion.x[k - 1] + ion.x[k]) / 2;
+            const quartet = (c) => c.S === 1.5;
+            const steps = [
+              { o: { groundLine: true }, t: `<b>The axes.</b> Along the bottom is Δ<sub>o</sub>/B (the ligand-field strength measured in units of B); up the side is E/B, the energy above the <b>ground state</b>. The ground state is the horizontal axis itself, so it is not drawn as a separate line: every labelled line is an excited state, and its height is how far it sits above the ground state (in units of B).` },
+              { o: { marker: X }, t: `<b>Find the ground state.</b> Choose Δ<sub>o</sub>/B = ${X} (the dashed line). Look at the line that runs along the bottom at that value and read its label at the right-hand edge: it is <b>${P(a.ground)}</b>. The small number in front is the spin multiplicity: ${a.ground[0]} means ${Number(a.ground[0]) - 1} unpaired electrons, so this is the high-spin arrangement.` },
+              { o: { marker: X, hl: quartet }, t: `<b>Which bands count.</b> A transition is spin-allowed only if the excited state has the <b>same multiplicity</b> as the ground state. Here that is every line starting with ⁴ (highlighted): ${a.allowed.map((c) => P(c.label)).join(', ')}. All the doublet lines (²) need a spin flip and give only weak bands, so ignore them.` },
+              { o: { marker: X, hl: (c) => c.label === b1.label && c.S === 1.5 }, t: `<b>Read a height.</b> Drag the ruler up from the axis to the highlighted line at the dashed line. The scale is 12 mm for 10 units of E/B, so a height of ${(b1.E * 1.2).toFixed(1)} mm means E/B = ${(b1.E * 1.2).toFixed(1)} ÷ 1.2 = <b>${b1.E.toFixed(1)}</b>. With B = ${B} cm⁻¹ the band is ${b1.E.toFixed(1)} × ${B} ≈ <b>${v1} cm⁻¹</b> (${P(b1.label)}).` },
+              { o: { marker: Number(sol.x.toFixed(1)) }, t: `<b>Two bands to Δ<sub>o</sub> and B.</b> Suppose all you know is two bands: ${v1} cm⁻¹ and ${v2} cm⁻¹ (to ${P(b2.label)}(P)). B is unknown, but it cancels in the ratio: ${v2} ÷ ${v1} = <b>${ratio.toFixed(2)}</b>. Slide a trial Δ<sub>o</sub>/B until the heights of those two lines have that ratio: it happens at Δ<sub>o</sub>/B ≈ <b>${sol.x.toFixed(1)}</b>, where the lower line is at E/B ≈ ${sol.E1.toFixed(1)}. Then B = ${v1} ÷ ${sol.E1.toFixed(1)} ≈ <b>${Math.round(Bs)} cm⁻¹</b> and Δ<sub>o</sub> = ${sol.x.toFixed(1)} × ${Math.round(Bs)} ≈ <b>${Math.round(sol.x * Bs)} cm⁻¹</b>.` },
+              { o: { marker: Number(xc.toFixed(1)), groundLine: true }, t: `<b>The spin crossover.</b> At about Δ<sub>o</sub>/B = ${xc.toFixed(1)} the line along the axis is replaced: the ground state changes from ${P(ion.ground[0])} (high spin, ${Number(ion.ground[0][0]) - 1} unpaired) to ${P(ion.ground[k])} (low spin, ${Number(ion.ground[k][0]) - 1} unpaired). Left of it the spin-allowed bands are quartet→quartet; right of it they are doublet→doublet. Check which side of the crossover a question's Δ<sub>o</sub>/B lies on before you pick the ground state.` },
+            ];
+            const st = steps[Math.max(1, Math.min(6, s.step)) - 1];
+            return { html: `<div data-ts-scroll class="overflow-x-auto">${tsSvg(ion, { ion: 7, ...st.o })}</div><p class="mt-2 text-sm text-slate-800 leading-relaxed" data-lesson-text>${st.t}</p>`, note: s.step < 6 ? 'Next: move the slider to the next step.' : 'Now try the Tanabe–Sugano questions: they use this same diagram.' };
+          },
+        },
         'terms-builder': {
           title: 'From microstates to terms',
           intro: 'Every way of placing the electrons is a microstate. Peel off one term at a time: the largest M_S, then the largest M_L in that row. The first term removed is the ground term.',
@@ -7926,11 +8028,7 @@
             { k: 'v1', type: 'num', label: 'Band 1 (cm⁻¹)', val: null },
             { k: 'v2', type: 'num', label: 'Band 2 (cm⁻¹)', val: null },
           ],
-          load() {
-            if (tsStore.data) return Promise.resolve();
-            tsStore.loading ||= Content.fetchContent('content/figures/ts.json').then((d) => { tsStore.data = d; }).catch(() => { tsStore.loading = null; });
-            return tsStore.loading;
-          },
+          load() { return tsLoad(); },
           draw(s) {
             if (!tsStore.data) return { svg: '', read: [], note: 'Loading the diagram data…' };
             const ion = tsStore.data.ions[s.n], YMAX = 70, f = frame(0, 40, 0, YMAX);
@@ -7950,12 +8048,12 @@
               <line x1="${f.sx(s.x)}" y1="${PT}" x2="${f.sx(s.x)}" y2="${H - PB}" stroke="#e11d48" stroke-dasharray="4 3"/>${curves}${dots}${lab}<text x="${PL + 6}" y="${PT + 9}" font-size="9" fill="#475569">ground state ${pretty(at.ground)}</text>`;
             const read = [['Ground state', pretty(at.ground)]];
             at.allowed.slice(0, 4).forEach((c, i) => read.push([`Band ${i + 1}: ${pretty(c.label)}${c.tag ? ` (${c.tag})` : ''}`, `${c.E.toFixed(1)} B`]));
-            if (at.allowed.length > 1) read.push(['Band 2 / band 1', (at.allowed[1].E / at.allowed[0].E).toFixed(2)]);
+            const pr = tsPair(at.allowed); if (pr) read.push([`Ratio ${pretty(pr[1].label)} / ${pretty(pr[0].label)}`, (pr[1].E / pr[0].E).toFixed(2)]);
             let note = `C/B = ${ion.CB} (Tanabe–Sugano's value for d${s.n}); your slide may use one C/B for every ion, which shifts energies slightly. `;
             note += at.ground !== ion.ground[0] ? 'Past the crossover the ground state is the low-spin one and the labels change: that kink is the high-spin to low-spin change. ' : '';
             if (s.v1 > 0 && s.v2 > s.v1) {
               const r = tsSolve(ion, s.v2 / s.v1);
-              if (r) { const B = s.v1 / r.E1; read.push(['Band ratio', (s.v2 / s.v1).toFixed(2)], ['Δo / B at that ratio', r.x.toFixed(1)], ['B', `${B.toFixed(0)} cm⁻¹`], ['Δo', `${(r.x * B).toFixed(0)} cm⁻¹`]); note += 'From your two bands: match the ratio of the first two spin-allowed bands to read Δo/B, then B = band 1 ÷ (E/B), then Δo = (Δo/B) × B.'; }
+              if (r) { const B = s.v1 / r.E1; read.push(['Band ratio', (s.v2 / s.v1).toFixed(2)], ['Δo / B at that ratio', r.x.toFixed(1)], ['B', `${B.toFixed(0)} cm⁻¹`], ['Δo', `${(r.x * B).toFixed(0)} cm⁻¹`]); note += 'From your two bands (the lowest, and the T₁g band above it): match their ratio to read Δo/B, then B = band 1 ÷ (E/B), then Δo = (Δo/B) × B.'; }
               else note += 'No Δo/B gives that band ratio for this ion; check the d count or the bands.';
             }
             return { svg, read, note };
@@ -7964,7 +8062,7 @@
       };
       function pKaLabel() { return 'pKa (of HA, or of BH⁺)'; }
 
-      const BY_CHUNK = { 'x-calc': 'extraction-ph', 'x-concepts': 'extraction-ph', 'c-concepts': 'van-deemter', 'c-calc': 'resolution', 'p-calibration': 'calibration', 'field-energetics': 'oh-splitting', 'terms-ts': ['terms-builder', 'tanabe-sugano'] };
+      const BY_CHUNK = { 'x-calc': 'extraction-ph', 'x-concepts': 'extraction-ph', 'c-concepts': 'van-deemter', 'c-calc': 'resolution', 'p-calibration': 'calibration', 'field-energetics': 'oh-splitting', 'terms-ts': ['ts-lesson', 'terms-builder', 'tanabe-sugano'] };
       function figuresForChunks(chunks) { return [...new Set((chunks || []).flatMap((c) => [].concat(BY_CHUNK[c] || [])))]; }
 
       /* Builds a figure inside `host`. Returns { state, redraw } so tests can drive it. */
@@ -7995,8 +8093,9 @@
           host.querySelectorAll('[data-fig-toggle]').forEach((b) => { const on = String(state[b.dataset.figToggle]) === b.dataset.v; b.setAttribute('aria-pressed', String(on)); b.className = `px-2.5 py-1 text-xs font-medium rounded-full border ${on ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-300 text-slate-700'}`; });
           const d = def.draw(s);
           if (d.html != null) { htmlEl.innerHTML = d.html; htmlEl.classList.remove('hidden'); svgEl.classList.add('hidden'); } else { svgEl.innerHTML = d.svg; svgEl.classList.remove('hidden'); htmlEl.classList.add('hidden'); }
-          readEl.innerHTML = d.read.map(([k, v]) => `<dt class="text-slate-500">${sub(k)}</dt><dd class="font-mono font-semibold text-slate-900 text-right">${v}</dd>`).join('');
+          readEl.innerHTML = (d.read || []).map(([k, v]) => `<dt class="text-slate-500">${sub(k)}</dt><dd class="font-mono font-semibold text-slate-900 text-right">${v}</dd>`).join('');
           noteEl.innerHTML = d.html != null ? d.note : sub(d.note);
+          host.querySelectorAll('svg[data-ruler]').forEach(attachRuler);
         };
         host.querySelectorAll('[data-fig-range]').forEach((r) => r.addEventListener('input', () => { state[r.dataset.figRange] = Number(r.value); redraw(); }));
         host.querySelectorAll('[data-fig-toggle]').forEach((b) => b.addEventListener('click', () => { state[b.dataset.figToggle] = b.dataset.v; redraw(); }));
@@ -8008,7 +8107,7 @@
         return { state, redraw };
       }
 
-      return { extraction, vanDeemter, resolution, calibration, ohFill, termsOf, tsAt, tsSolve, tsStore, figuresForChunks, mount, DEFS };
+      return { extraction, vanDeemter, resolution, calibration, ohFill, termsOf, tsAt, tsPair, tsSolve, tsStore, tsLoad, tsSvg, attachRuler, TS_GEO, figuresForChunks, mount, DEFS };
     })();
 
     /* =====================================================================
@@ -8459,6 +8558,15 @@
               ${asset.caption ? `<figcaption class="text-xs text-center text-slate-500 mt-2">${esc(asset.caption)}</figcaption>` : ''}
             </figure>
           `;
+        }
+        if (asset.type === 'ts-diagram') {
+          const ion = Figures.tsStore.data?.ions?.[asset.ion];
+          if (!ion) { Figures.tsLoad().then(() => { if (appState.current) render(); }); return `<figure class="${extraClass} p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-500" data-visual-asset="${esc(testAttr)}" data-asset-type="ts-diagram">Loading the diagram…</figure>`; }
+          return `
+            <figure class="${extraClass} p-3 bg-white border border-slate-200 rounded-xl" data-visual-asset="${esc(testAttr)}" data-asset-type="ts-diagram">
+              <div class="overflow-x-auto" data-ts-scroll>${Figures.tsSvg(ion, asset)}</div>
+              ${asset.caption ? `<figcaption class="text-xs text-center text-slate-500 mt-2">${esc(asset.caption)}</figcaption>` : ''}
+            </figure>`;
         }
         if (asset.type === 'image') {
           const src = asset.dataUrl || asset.src || asset.url || asset.payload || '';
@@ -11517,6 +11625,7 @@
         else if (appState.route === 'readiness') renderReadinessView(root);
         else if (appState.route === 'bank') renderBankView(root);
         else if (appState.route === 'settings') renderSettingsView(root);
+        root.querySelectorAll('svg[data-ruler]').forEach((svg) => Figures.attachRuler(svg));
       }
 
       async function bootstrap() {

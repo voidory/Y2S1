@@ -137,6 +137,49 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await F.set('r', 1.6);
   ok(/low spin/.test(await F.read()), 'd6 strong field: low spin');
   ok(await p.evaluate(() => document.documentElement.scrollHeight <= innerHeight + 1), 'the page behind the sheet does not scroll');
+  await p.evaluate(() => document.getElementById('methodOverlay')?.remove());
+  // a guided Tanabe-Sugano question: printed-style diagram, ruler in mm, coordinate aid, graded
+  await p.selectOption('#moduleSwitch', 'CM2021'); await p.waitForTimeout(700);
+  await force('bk-c8-tsg-read');
+  await p.waitForTimeout(500);
+  ok(await p.evaluate(() => !!document.querySelector('[data-visual-asset] svg[data-ruler] polyline')), 'the question shows a printed-style Tanabe-Sugano diagram');
+  ok(await p.evaluate(() => !!document.querySelector('[data-ruler-mode="ruler"]')), 'with a Ruler button under it');
+  await p.evaluate(() => document.querySelector('.seg [data-step-go="question"]')?.click()); await p.waitForTimeout(250);
+  await p.evaluate(() => document.querySelector('[data-ruler-mode="ruler"]').click());
+  await p.locator('svg[data-ruler]').scrollIntoViewIfNeeded(); await p.waitForTimeout(150);
+  const box = await p.evaluate(() => { const r = document.querySelector('svg[data-ruler]').getBoundingClientRect(); return { x: r.x, y: r.y, w: r.width, h: r.height }; });
+  const vb = { w: 716, h: 448 };
+  const toPx = (ux, uy) => ({ x: box.x + (ux / vb.w) * box.w, y: box.y + (uy / vb.h) * box.h });
+  const p1 = toPx(200, 100), p2 = toPx(200, 100 + 12 * 4 * 5); // 5 mm... 12 mm = 48 units; 60 mm = 240 units
+  await p.mouse.move(p1.x, p1.y); await p.mouse.down(); await p.mouse.move(p2.x, p2.y, { steps: 6 }); await p.mouse.up();
+  const rd = await p.evaluate(() => document.querySelector('[data-ruler-out]').textContent);
+  ok(/(\d+\.\d) mm/.test(rd) && Math.abs(Number(/(\d+\.\d) mm/.exec(rd)[1]) - 60) <= 1, `the ruler reads millimetres to the nearest 0.5 (${rd})`);
+  await p.evaluate(() => document.querySelector('[data-ruler-mode="coord"]').click());
+  const c = toPx(56 + 576 * 8 / 40, 16 + 384 - 20 * 4.8);
+  await p.mouse.move(c.x, c.y);
+  ok(await p.evaluate(() => /Δo\/B ≈ (7|8)\.\d,\s+E\/B ≈ (19|20)\.\d/.test(document.querySelector('[data-ruler-out]').textContent)), 'the coordinate aid reads axis units');
+  // grade it with the true values
+  const truth = await p.evaluate(() => { const c = window.__MASTERY_ENGINE__.UI.appState.current; const sc = c.inst.scope; return { e: sc.e, B: sc.B }; });
+  await p.evaluate(({ e, B }) => { const c = window.__MASTERY_ENGINE__.UI.appState.current; c.userInput = { e: String(e), nu: String(e * B) }; }, truth);
+  await p.evaluate(() => document.querySelector('#btnSubmitAnswer')?.click()); await p.waitForTimeout(500);
+  ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current.evalResult.passed), 'the right reading and conversion pass');
+  ok(await p.evaluate(() => document.documentElement.scrollHeight <= innerHeight + 1), 'no page scroll with the diagram on screen');
+  if (process.env.SHOTS) { await force('bk-c8-tsg-reverse'); await p.waitForTimeout(500); await p.screenshot({ path: process.env.SHOTS + '/q.png' }); }
+
+  // the step-by-step lesson
+  await p.evaluate(() => window.__MASTERY_ENGINE__.UI.showMethod('terms-ts')); await p.waitForTimeout(700);
+  const lessonText = () => p.evaluate(() => document.querySelector('#methodOverlay [data-fig="ts-lesson"] [data-lesson-text]')?.innerText || '');
+  const lessonStep = (n) => p.evaluate((v) => { const r = document.querySelector('#methodOverlay [data-fig="ts-lesson"] [data-fig-range="step"]'); r.value = v; r.dispatchEvent(new Event('input', { bubbles: true })); }, n);
+  ok(/ground state is the horizontal axis/i.test(await lessonText()), 'lesson step 1 explains the axes and that the ground state is the horizontal axis');
+  await lessonStep(2); ok(/⁴T₁g/.test(await lessonText()) && /3 unpaired/.test(await lessonText()), 'step 2 finds the ground state and its unpaired electrons');
+  await lessonStep(3); ok(/same multiplicity/i.test(await lessonText()) && await p.evaluate(() => !!document.querySelector('#methodOverlay [data-fig="ts-lesson"] svg polyline[stroke="#2563eb"]')), 'step 3 highlights the spin-allowed lines');
+  await lessonStep(4); ok(/mm means E\/B/.test(await lessonText()), 'step 4 teaches the ruler conversion');
+  await lessonStep(5); ok(/ratio/i.test(await lessonText()) && /cm⁻¹/.test(await lessonText()), 'step 5 goes from two bands to Δo and B');
+  await lessonStep(6); ok(/crossover/i.test(await lessonText()), 'step 6 covers the spin crossover');
+  ok(await p.evaluate(() => !!document.querySelector('#methodOverlay [data-fig="ts-lesson"] [data-ruler-mode="ruler"]')), 'the lesson diagram has the ruler too');
+  if (process.env.SHOTS) { await lessonStep(5); await p.locator('#methodOverlay [data-fig="ts-lesson"]').screenshot({ path: process.env.SHOTS + '/lesson.png' }); }
+  await p.evaluate(() => document.getElementById('methodOverlay')?.remove());
+
   // terms and Tanabe-Sugano on the CM2021 terms page
   F = await figCase('CM2021', 'terms-ts', 'terms-builder');
   await F.set('n', 2);

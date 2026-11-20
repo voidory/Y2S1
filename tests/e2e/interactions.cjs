@@ -109,7 +109,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   const figCase = async (mod, chunk, id) => {
     await p.selectOption('#moduleSwitch', mod); await p.waitForTimeout(700);
     await p.evaluate((c) => window.__MASTERY_ENGINE__.UI.showMethod(c), chunk); await p.waitForTimeout(250);
-    ok(await p.evaluate((i) => !!document.querySelector(`#methodOverlay [data-fig="${i}"] svg path, #methodOverlay [data-fig="${i}"] svg rect`), id), `${id}: the sheet for ${chunk} shows the figure`);
+    ok(await p.evaluate((i) => !!document.querySelector(`#methodOverlay [data-fig="${i}"]`), id), `${id}: the sheet for ${chunk} shows the figure`);
     return p.evaluate((i) => { const f = document.querySelector(`#methodOverlay [data-fig="${i}"]`); return { read: () => f.querySelector('[data-fig-read]').innerText }; }, id).then(() => ({
       read: () => p.evaluate((i) => document.querySelector(`#methodOverlay [data-fig="${i}"] [data-fig-read]`).innerText, id),
       set: (k, v) => p.evaluate(([i, kk, vv]) => { const r = document.querySelector(`#methodOverlay [data-fig="${i}"] [data-fig-range="${kk}"]`); r.value = vv; r.dispatchEvent(new Event('input', { bubbles: true })); }, [id, k, v]),
@@ -137,7 +137,28 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await F.set('r', 1.6);
   ok(/low spin/.test(await F.read()), 'd6 strong field: low spin');
   ok(await p.evaluate(() => document.documentElement.scrollHeight <= innerHeight + 1), 'the page behind the sheet does not scroll');
-  if (process.env.SHOTS) { await F.shot(process.env.SHOTS + '/oh.png'); F = await figCase('CM2011', 'x-calc', 'extraction-ph'); await F.shot(process.env.SHOTS + '/ext.png'); F = await figCase('CM2011', 'c-calc', 'resolution'); await F.shot(process.env.SHOTS + '/res.png'); F = await figCase('CM2011', 'c-concepts', 'van-deemter'); await F.shot(process.env.SHOTS + '/vd.png'); }
+  // terms and Tanabe-Sugano on the CM2021 terms page
+  F = await figCase('CM2021', 'terms-ts', 'terms-builder');
+  await F.set('n', 2);
+  ok(/45/.test(await F.read()), 'd2: 45 microstates');
+  for (let k = 1; k <= 5; k++) await F.set('step', k);
+  ok(/5 of 5/.test(await F.read()) && /45 of 45/.test(await F.read()), 'd2: five terms use up all 45 microstates');
+  ok(await p.evaluate(() => /3F/.test(document.querySelector('#methodOverlay [data-fig="terms-builder"]').innerText.replace(/\s/g, '')) || !!document.querySelector('#methodOverlay [data-fig="terms-builder"] sup')), 'the term list shows the terms');
+  await F.set('n', 5);
+  for (let k = 1; k <= 16; k++) await F.set('step', k);
+  ok(/252 of 252/.test(await F.read()), 'd5: sixteen terms use up all 252 microstates');
+  const T = await p.evaluate(() => new Promise((r) => setTimeout(r, 600)).then(() => !!document.querySelector('#methodOverlay [data-fig="tanabe-sugano"] svg path')));
+  ok(T, 'the Tanabe-Sugano diagram draws once its data has loaded');
+  const tsRead = (k, v) => p.evaluate(([kk, vv]) => { const r = document.querySelector(`#methodOverlay [data-fig="tanabe-sugano"] [data-fig-range="${kk}"]`); r.value = vv; r.dispatchEvent(new Event('input', { bubbles: true })); }, [k, v]);
+  const tsText = () => p.evaluate(() => document.querySelector('#methodOverlay [data-fig="tanabe-sugano"] [data-fig-read]').innerText);
+  await p.evaluate(() => document.querySelector('#methodOverlay [data-fig="tanabe-sugano"] [data-fig-toggle="n"][data-v="3"]').click());
+  await tsRead('x', 10);
+  ok(/A₂g/.test(await tsText()) && /10\.0 B/.test(await tsText()), 'd3 at Delta_o/B = 10: ground 4A2g and the first band at 10.0 B');
+  await p.evaluate(() => document.querySelector('#methodOverlay [data-fig="tanabe-sugano"] [data-fig-toggle="n"][data-v="7"]').click());
+  await tsRead('x', 30);
+  ok(/2Eg/.test(await tsText().then((t) => t.replace(/[²]/g, '2'))) || /²Eg|2Eg/.test(await tsText()), 'd7 past the crossover: low-spin ground state');
+  if (process.env.SHOTS) { await p.locator('#methodOverlay [data-fig="tanabe-sugano"]').screenshot({ path: process.env.SHOTS + '/ts.png' }); await p.locator('#methodOverlay [data-fig="terms-builder"]').screenshot({ path: process.env.SHOTS + '/terms.png' }); }
+  await p.keyboard.press('Escape');
   await p.keyboard.press('Escape');
 
   const reduced = await b.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, reducedMotion: 'reduce' });

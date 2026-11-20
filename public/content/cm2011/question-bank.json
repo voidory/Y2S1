@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-20T05:10:56.597Z",
+ "exportedAt": "2026-11-20T07:55:28.739Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -8709,6 +8709,485 @@
        "lev"
       ],
       "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-p-chain",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "ISE calibration with a dilution chain",
+    "source": "Topic 3b · calibration with a dilution chain (finals style)",
+    "week": 4,
+    "primaryTheme": "Potentiometry",
+    "conceptTags": [
+     "calibration",
+     "dilution"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 9,
+    "examStyle": "construct_4to6",
+    "family": "ise-chain"
+   },
+   "variants": [
+    {
+     "variantId": "chain-k",
+     "perspectiveLabel": "K⁺ electrode: calibration line and two dilutions (8 marks)",
+     "marks": 8,
+     "stem": "A K⁺ ion-selective electrode is calibrated with standards made up in a constant background electrolyte, so concentration can be used in place of activity:\n\n| c (M) | E (mV) |\n|---|---|\n| 1.0 × 10⁻⁴ | {{fix(E1,1)}} |\n| 1.0 × 10⁻³ | {{fix(Em,1)}} |\n| 1.0 × 10⁻² | {{fix(E3,1)}} |\n\nA serum sample is diluted in two steps: **{{fix(Va,0)}} mL** is made up to **{{fix(Vb,0)}} mL**, then **{{fix(Vc,0)}} mL** of that solution is made up to **{{fix(Vd,0)}} mL**. The final solution gives **{{fix(Ex,1)}} mV**. Use the line through the two end standards.\n\n(a) Find the slope of the calibration (mV per decade).\n(b) Find log c for the final solution, and its concentration.\n(c) What is the overall dilution factor?\n(d) What is the K⁺ concentration of the original serum?",
+     "hint": "Slope = (E at 10⁻² M − E at 10⁻⁴ M)/2 decades. log c = −4 + (E − E₁)/slope with E₁ the reading at 10⁻⁴ M. Dilution factor = (V_b/V_a) × (V_d/V_c); multiply the measured concentration by it.",
+     "explanation": "The two end standards are two decades apart, so the slope is (E₃ − E₁)/2 = {{fix(sl,2)}} mV per decade (close to the Nernstian 59 mV for a cation). A reading is converted by log c = −4 + (E − E₁)/slope = {{fix(lgx,2)}}, so the measured solution holds ${{sci(cx,2)}}$ M. Each dilution divides the concentration, so the original is the measured value times both factors: ({{fix(Vb,0)}}/{{fix(Va,0)}}) × ({{fix(Vd,0)}}/{{fix(Vc,0)}}) = {{fix(DF,1)}}, giving ${{sci(c0,2)}}$ M. Constant ionic strength is what lets concentration replace activity.",
+     "variables": {
+      "sampled": {
+       "s": {
+        "type": "choice",
+        "options": [
+         57,
+         57.8,
+         58.5,
+         59,
+         59.2
+        ]
+       },
+       "b0": {
+        "type": "range",
+        "min": 150,
+        "max": 260,
+        "step": 0.5,
+        "decimals": 1
+       },
+       "lg": {
+        "type": "range",
+        "min": -3.9,
+        "max": -2.6,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "Va": {
+        "type": "choice",
+        "options": [
+         10,
+         20,
+         25
+        ]
+       },
+       "Vb": {
+        "type": "choice",
+        "options": [
+         100,
+         250
+        ]
+       },
+       "Vc": {
+        "type": "choice",
+        "options": [
+         10,
+         20,
+         25
+        ]
+       },
+       "Vd": {
+        "type": "choice",
+        "options": [
+         50
+        ]
+       }
+      },
+      "derived": {
+       "E1": "round(b0, 1)",
+       "Em": "round(b0 + s, 1)",
+       "E3": "round(b0 + 2 * s, 1)",
+       "Ex": "round(b0 + s * (lg + 4), 1)",
+       "sl": "(E3 - E1) / 2",
+       "lgx": "-4 + (Ex - E1) / sl",
+       "cx": "10^lgx",
+       "DF": "(Vb / Va) * (Vd / Vc)",
+       "c0": "cx * DF"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "sl",
+        "label": "Slope",
+        "unit": "mV/decade",
+        "numeric": true
+       },
+       {
+        "key": "lgx",
+        "label": "log c of the final solution",
+        "numeric": true
+       },
+       {
+        "key": "cx",
+        "label": "Concentration of the final solution",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "DF",
+        "label": "Overall dilution factor",
+        "numeric": true
+       },
+       {
+        "key": "c0",
+        "label": "K⁺ in the original serum",
+        "unit": "M",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "sl": {
+        "type": "numeric",
+        "targetExpr": "sl",
+        "relTol": 0.01,
+        "sig": 3,
+        "unit": "mV/decade",
+        "paths": [
+         {
+          "label": "The end standards are two decades apart: divide the potential difference by 2.",
+          "expr": "E3 - E1"
+         }
+        ]
+       },
+       "lgx": {
+        "type": "numeric",
+        "targetExpr": "lgx",
+        "relTol": 0.01,
+        "sig": 3,
+        "tolerance": 0.04,
+        "ecf": [
+         {
+          "expr": "-4 + (Ex - E1) / u_sl",
+          "label": "Consistent with your own slope."
+         }
+        ]
+       },
+       "cx": {
+        "type": "numeric",
+        "targetExpr": "cx",
+        "relTol": 0.06,
+        "sig": 3,
+        "unit": "M",
+        "ecf": [
+         {
+          "expr": "10^u_lgx",
+          "label": "Consistent with your own log c."
+         }
+        ]
+       },
+       "DF": {
+        "type": "numeric",
+        "targetExpr": "DF",
+        "relTol": 0.005,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "Both dilutions count: multiply (V_b/V_a) by (V_d/V_c).",
+          "expr": "Vb / Va"
+         },
+         {
+          "label": "The dilution factor is final volume over the volume taken, not the reverse.",
+          "expr": "(Va / Vb) * (Vc / Vd)"
+         }
+        ]
+       },
+       "c0": {
+        "type": "numeric",
+        "targetExpr": "c0",
+        "relTol": 0.07,
+        "sig": 3,
+        "unit": "M",
+        "paths": [
+         {
+          "label": "The measured solution is dilute: multiply by the dilution factor to get back to the original, not divide.",
+          "expr": "cx / DF"
+         },
+         {
+          "label": "Both dilution steps must be undone, not just the first.",
+          "expr": "cx * Vb / Va"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_cx * u_DF",
+          "label": "Consistent with your own concentration and dilution factor."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "chain-nh3",
+     "perspectiveLabel": "Ammonia probe in a Kjeldahl analysis: calibration, dilution and weight % N (10 marks)",
+     "marks": 10,
+     "stem": "An ammonia gas-sensing electrode (its potential falls as the NH₃ concentration rises) is calibrated with standards in a constant background:\n\n| c (M) | E (mV) |\n|---|---|\n| 1.0 × 10⁻⁴ | {{fix(E1,1)}} |\n| 1.0 × 10⁻³ | {{fix(Em,1)}} |\n| 1.0 × 10⁻² | {{fix(E3,1)}} |\n\nA **{{fix(m,2)}} g** food sample is digested by the Kjeldahl method, made alkaline and made up to **{{fix(Vt,0)}} mL**. **{{fix(Va,0)}} mL** of this solution is diluted to **{{fix(Vb,0)}} mL** and gives **{{fix(Ex,1)}} mV**. Use the line through the two end standards.\n\n(a) Find the slope of the calibration.\n(b) Find log c and the NH₃ concentration of the diluted solution.\n(c) What was the concentration in the {{fix(Vt,0)}} mL solution?\n(d) How many mg of nitrogen does the sample contain (N = 14.01 g mol⁻¹)?\n(e) What is the weight percent nitrogen in the food?",
+     "hint": "Slope = (E at 10⁻² M − E at 10⁻⁴ M)/2; for a gas probe it is negative. log c = −4 + (E − E₁)/slope. Undo the dilution (× V_b/V_a), then n(N) = c × V_t, mass = n × 14.01, % N = mass/sample mass × 100.",
+     "explanation": "Slope = (E₃ − E₁)/2 = {{fix(sl,2)}} mV per decade (negative for a gas probe whose reading falls as NH₃ rises). log c = −4 + (E − E₁)/slope = {{fix(lgx,2)}}, so the diluted solution holds ${{sci(cm,2)}}$ M. Undoing the dilution: ${{sci(cd,2)}}$ M in the {{fix(Vt,0)}} mL. Moles of N = c × V = {{fix(nN * 1000,2)}} mmol, so {{fix(mN,1)}} mg of nitrogen, which is {{fix(pct,1)}}% of the {{fix(m,2)}} g sample. Each mole of nitrogen in the protein gives one mole of NH₃, which is why moles of NH₃ equal moles of N.",
+     "variables": {
+      "sampled": {
+       "s": {
+        "type": "choice",
+        "options": [
+         -57,
+         -58,
+         -59,
+         -59.2,
+         -60
+        ]
+       },
+       "b0": {
+        "type": "range",
+        "min": 380,
+        "max": 460,
+        "step": 0.5,
+        "decimals": 1
+       },
+       "m": {
+        "type": "choice",
+        "options": [
+         0.5,
+         0.75,
+         1
+        ]
+       },
+       "pct0": {
+        "type": "range",
+        "min": 8,
+        "max": 22,
+        "step": 0.1,
+        "decimals": 1
+       },
+       "Vt": {
+        "type": "choice",
+        "options": [
+         250,
+         500
+        ]
+       },
+       "Va": {
+        "type": "choice",
+        "options": [
+         5,
+         10
+        ]
+       },
+       "Vb": {
+        "type": "choice",
+        "options": [
+         100,
+         250
+        ]
+       }
+      },
+      "derived": {
+       "mN0": "pct0 * m * 10",
+       "c0m": "mN0 / 14.01 / Vt * Va / Vb",
+       "lg0": "log(c0m)",
+       "E1": "round(b0, 1)",
+       "Em": "round(b0 + s, 1)",
+       "E3": "round(b0 + 2 * s, 1)",
+       "Ex": "round(b0 + s * (lg0 + 4), 1)",
+       "sl": "(E3 - E1) / 2",
+       "lgx": "-4 + (Ex - E1) / sl",
+       "cm": "10^lgx",
+       "cd": "cm * Vb / Va",
+       "nN": "cd * Vt / 1000",
+       "mN": "nN * 14.01 * 1000",
+       "pct": "mN / (m * 10)"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "sl",
+        "label": "Slope",
+        "unit": "mV/decade",
+        "numeric": true
+       },
+       {
+        "key": "lgx",
+        "label": "log c of the diluted solution",
+        "numeric": true
+       },
+       {
+        "key": "cm",
+        "label": "NH₃ in the diluted solution",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "cd",
+        "label": "NH₃ in the digest solution",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "mN",
+        "label": "Nitrogen in the sample",
+        "unit": "mg",
+        "numeric": true
+       },
+       {
+        "key": "pct",
+        "label": "Weight % N",
+        "unit": "%",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "sl": {
+        "type": "numeric",
+        "targetExpr": "sl",
+        "relTol": 0.01,
+        "sig": 3,
+        "unit": "mV/decade",
+        "paths": [
+         {
+          "label": "The end standards are two decades apart: divide the potential difference by 2.",
+          "expr": "E3 - E1"
+         }
+        ]
+       },
+       "lgx": {
+        "type": "numeric",
+        "targetExpr": "lgx",
+        "relTol": 0.01,
+        "sig": 3,
+        "tolerance": 0.04,
+        "paths": [
+         {
+          "label": "A gas probe has a negative slope: use the sign you found in (a).",
+          "expr": "-4 + (Ex - E1) / abs(sl)"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "-4 + (Ex - E1) / u_sl",
+          "label": "Consistent with your own slope."
+         }
+        ]
+       },
+       "cm": {
+        "type": "numeric",
+        "targetExpr": "cm",
+        "relTol": 0.06,
+        "sig": 3,
+        "unit": "M",
+        "ecf": [
+         {
+          "expr": "10^u_lgx",
+          "label": "Consistent with your own log c."
+         }
+        ]
+       },
+       "cd": {
+        "type": "numeric",
+        "targetExpr": "cd",
+        "relTol": 0.07,
+        "sig": 3,
+        "unit": "M",
+        "paths": [
+         {
+          "label": "Undo the dilution by multiplying by V_b/V_a.",
+          "expr": "cm * Va / Vb"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_cm * Vb / Va",
+          "label": "Consistent with your own concentration."
+         }
+        ]
+       },
+       "mN": {
+        "type": "numeric",
+        "targetExpr": "mN",
+        "relTol": 0.08,
+        "sig": 3,
+        "unit": "mg",
+        "paths": [
+         {
+          "label": "You left out the dilution before scaling up to the full volume.",
+          "expr": "cm * Vt * 14.01"
+         },
+         {
+          "label": "That is the mass of NH₃ (17.04 g mol⁻¹); the question asks for nitrogen (14.01).",
+          "expr": "cd * Vt * 17.04"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_cd * Vt * 14.01",
+          "label": "Consistent with your own concentration."
+         }
+        ]
+       },
+       "pct": {
+        "type": "numeric",
+        "targetExpr": "pct",
+        "relTol": 0.08,
+        "sig": 3,
+        "unit": "%",
+        "ecf": [
+         {
+          "expr": "u_mN / (m * 10)",
+          "label": "Consistent with your own mass of nitrogen."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "chain-why",
+     "perspectiveLabel": "Why dilute the sample and keep the ionic strength constant (3 marks)",
+     "marks": 3,
+     "stem": "A K⁺ ISE is calibrated in a constant background electrolyte, and a blood sample is diluted before measurement. Give **three** reasons for these choices.",
+     "hint": "Think about the electrode's working range, what the electrode really responds to, and the junction potential.",
+     "explanation": "Dilution brings the concentration into the electrode's linear range (about 10⁻⁵ to 10⁻¹ M). A constant background ionic strength keeps the activity coefficient the same in the standards and in the sample, so the electrode, which responds to activity, follows concentration. The same background also keeps the liquid junction potential the same in every solution.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Dilution brings the concentration into the linear range of the electrode",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "A constant ionic strength keeps the activity coefficient constant, so the response follows concentration",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "It keeps the junction potential constant between standards and sample",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
      }
     }
    ]

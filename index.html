@@ -7920,13 +7920,14 @@
         const sec = (txt) => { const [title, ...body] = txt.split('\n'); return `<section class="mb-5"><h3 class="font-display text-[15px] font-semibold text-slate-900 mb-1.5" data-method-h>${escSub(title.trim())}</h3><div class="text-sm text-slate-800 leading-relaxed prose-math [&>p]:mb-2 [&_ul]:list-disc [&_ul]:pl-5 [&_li]:mb-1">${renderMarkdownLite(body.join('\n').trim())}</div></section>`; };
         return (head.trim() ? `<div class="text-sm text-slate-800 mb-4">${renderMarkdownLite(head.trim())}</div>` : '') + parts.map(sec).join('');
       }
-      function showMethod(chunkId, traps = []) {
+      function showMethod(chunkId, traps = [], worked = '') {
         const doc = appState.methods?.[appState.activeModule];
         const m = Content.methodForChunk(doc, chunkId);
         if (!m) return false;
         document.getElementById('methodOverlay')?.remove();
         const el = document.createElement('div');
         el.id = 'methodOverlay';
+        if (!document.getElementById('methodKatexSize')) { const st = document.createElement('style'); st.id = 'methodKatexSize'; st.textContent = '#methodOverlay .katex{font-size:1.12em}#methodOverlay .katex .mfrac{margin:0 .08em}'; document.head.appendChild(st); }
         el.className = 'fixed inset-0 z-50 bg-slate-900/40 flex md:items-center md:justify-center';
         el.innerHTML = `
           <div class="bg-white w-full md:max-w-3xl h-[100dvh] md:h-[92dvh] md:rounded-2xl shadow-xl flex flex-col" role="dialog" aria-modal="true" aria-label="${esc(m.title)}">
@@ -7934,7 +7935,7 @@
               <div class="min-w-0">
                 <div class="text-[11px] uppercase tracking-wider text-slate-500 font-medium">How to do this</div>
                 <h2 class="font-display text-lg font-semibold text-slate-900 leading-snug" data-method-title>${escSub(m.title)}</h2>
-                ${m.summary ? `<p class="text-xs text-slate-600 mt-0.5">${esc(m.summary)}</p>` : ''}
+                ${m.summary ? `<p class="text-xs text-slate-600 mt-0.5">${escSub(m.summary)}</p>` : ''}
               </div>
               <button type="button" data-method-close aria-label="Close" class="w-9 h-9 shrink-0 rounded-lg text-slate-500 hover:bg-slate-100">✕</button>
             </div>
@@ -7942,6 +7943,7 @@
               ${m.flag ? `<div class="mb-4 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs text-amber-900" data-method-flag>${esc(m.flag)}</div>` : ''}
               ${m.checked ? `<div class="mb-4 rounded-lg border border-emerald-300 bg-emerald-50 px-3 py-2 text-xs text-emerald-900" data-method-checked>${esc(m.checked)}</div>` : ''}
               ${traps.length ? `<div class="mb-4 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-900" data-method-hit><div class="text-[11px] uppercase tracking-wider font-semibold mb-1">What went wrong in your answer</div><ul class="list-disc pl-5">${traps.map((t) => `<li>${renderMarkdownLite(t).replace(/<\/?p>/g, '')}</li>`).join('')}</ul></div>` : ''}
+              ${worked ? `<div class="mb-5 rounded-lg border border-blue-200 bg-blue-50/60 px-3 py-2.5 text-sm text-slate-800 prose-math" data-method-worked><div class="text-[11px] uppercase tracking-wider font-semibold text-blue-900 mb-1">Your question, worked through</div>${renderMarkdownLite(worked)}</div>` : ''}
               ${renderMethodHtml(m.md)}
             </div>
             <div class="px-4 py-3 border-t border-slate-200 flex items-center justify-between gap-2">
@@ -9242,7 +9244,7 @@
         $('#btnDrillTopic', root)?.addEventListener('click', (e) => drillTopic(e.currentTarget.dataset.chunk));
         $('#btnMethod', root)?.addEventListener('click', (e) => {
           const tags = (cur.evalResult ? safeErrorTags(cur.inst.variant, cur.userInput, cur.evalResult, cur.rubricChecks) : []) || [];
-          showMethod(e.currentTarget.dataset.chunk, tags.filter((t) => String(t).startsWith('calc:')).map((t) => String(t).slice(5)));
+          showMethod(e.currentTarget.dataset.chunk, tags.filter((t) => String(t).startsWith('calc:')).map((t) => String(t).slice(5)), cur.inst?.resolvedExplanation || '');
         });
         $('#btnRetryLater', root)?.addEventListener('click', () => {
           if (!appState.session.retry.some((r) => r.nodeId === node.id)) appState.session.retry.push({ nodeId: node.id, after: appState.session.cards + appState.retryAfterCards });
@@ -11177,6 +11179,7 @@
         bootstrap,
         appState,
         loadNextQuestion,
+        showMethod,
         openExplorerModal,
         openNodeInspector,
         startMockPaper,

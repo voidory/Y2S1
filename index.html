@@ -7827,6 +7827,14 @@
           .replace(/"/g, '&quot;');
       }
 
+      /* Real subscripts for the plain-text notation in the content (K_a, R_S, V_org, d_xy, d_x²−y²): applied to already-escaped text,
+         never inside <code>, and only where a letter or ")" precedes the underscore, so snake_case words are left alone. */
+      function subText(html) {
+        return String(html).split(/(<code>[\s\S]*?<\/code>)/).map((part, i) => (i % 2 ? part : part.replace(
+          /(?<![A-Za-z0-9_])([A-Za-z]{1,2}|\))_([A-Za-z0-9]+(?:[²³](?:[−-][A-Za-z][²³]?)?)?)/g, '$1<sub>$2</sub>'))).join('');
+      }
+      const escSub = (str) => subText(esc(str));
+
       function renderMarkdownLite(raw) {
         if (!raw) return '';
         // Preserve $...$ and $$...$$ blocks while converting basic Markdown
@@ -7837,7 +7845,8 @@
           return `@@MATH_${idx}@@`;
         });
         safe = esc(safe)
-          .replace(/`([^`]+)`/g, '<code>$1</code>')
+          .replace(/`([^`]+)`/g, '<code>$1</code>');
+        safe = subText(safe)
           .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
           .replace(/\*([^*\n]+)\*/g, '<em>$1</em>');
         const lines = safe.split(/\n{2,}/).map((block) => {
@@ -8090,7 +8099,7 @@
           return `
             <div class="rounded-lg border ${tone} bg-white p-3 space-y-2" data-review-row="${esc(r.key)}">
               <div class="flex items-center justify-between gap-2">
-                <div class="text-sm font-medium text-slate-900 min-w-0">${esc(r.label)}</div>
+                <div class="text-sm font-medium text-slate-900 min-w-0">${escSub(r.label)}</div>
                 ${status}
               </div>
               ${body}
@@ -8170,7 +8179,7 @@
         // ---- ordering: the correct order, and where you put each item
         if (rv.kind === 'order') {
           if (rv.passed) return '';
-          const rows = rv.rows.map((r) => `<li class="flex items-center gap-2.5 rounded-lg border px-3 py-2 ${r.ok ? 'border-emerald-200 bg-emerald-50/60' : 'border-rose-200 bg-rose-50/60'}"><span class="w-6 shrink-0 text-center font-mono text-xs font-semibold ${r.ok ? 'text-emerald-800' : 'text-rose-800'}">${r.correctPos}</span><span class="min-w-0 text-sm text-slate-900 flex-1">${esc(r.label)}</span><span class="text-[11px] ${r.ok ? 'text-emerald-800' : 'text-rose-800'} shrink-0">${r.ok ? '✓' : (r.yourPos ? `you put it ${r.yourPos}` : 'you left it out')}</span></li>`).join('');
+          const rows = rv.rows.map((r) => `<li class="flex items-center gap-2.5 rounded-lg border px-3 py-2 ${r.ok ? 'border-emerald-200 bg-emerald-50/60' : 'border-rose-200 bg-rose-50/60'}"><span class="w-6 shrink-0 text-center font-mono text-xs font-semibold ${r.ok ? 'text-emerald-800' : 'text-rose-800'}">${r.correctPos}</span><span class="min-w-0 text-sm text-slate-900 flex-1">${escSub(r.label)}</span><span class="text-[11px] ${r.ok ? 'text-emerald-800' : 'text-rose-800'} shrink-0">${r.ok ? '✓' : (r.yourPos ? `you put it ${r.yourPos}` : 'you left it out')}</span></li>`).join('');
           return wrap('order', head('<span class="text-[11px] text-slate-500">correct order</span>') + `<ol class="space-y-1.5">${rows}</ol>`);
         }
 
@@ -8493,7 +8502,7 @@
                     const ring = fRes ? (fRes.passed ? 'border-emerald-500 bg-emerald-50/40' : 'border-rose-400 bg-rose-50/40') : 'border-slate-300 bg-white';
                     return `
                       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 space-y-1.5">
-                        <label for="sf_${esc(f.key)}" class="block text-xs font-medium text-slate-700">${esc(f.label)}</label>
+                        <label for="sf_${esc(f.key)}" class="block text-xs font-medium text-slate-700">${escSub(f.label)}</label>
                         <input id="sf_${esc(f.key)}" data-set-field-key="${esc(f.key)}" type="text" value="${esc(fieldVals[f.key] ?? '')}" ${disabledAttr} placeholder="${esc(f.placeholder || '')}" class="w-full font-mono text-sm px-2.5 py-1.5 border ${ring} rounded-md focus:outline-none focus:ring-2 focus:ring-blue-700" />
                         ${fRes ? `<div class="text-xs font-mono ${fRes.passed ? 'text-emerald-700' : 'text-rose-700'}">${fRes.passed ? `Correct (${Math.round(fRes.normalizedGrade * 100)}%)` : `Expected: ${esc(fRes.expectedDisplay)}`}</div>` : ''}
                       </div>
@@ -8520,7 +8529,7 @@
                   if (slot.layout === 'table') {
                     return `
                       <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-3.5 py-2.5">
-                        <label for="mf_${esc(f.key)}" class="text-sm text-slate-800 font-medium">${esc(f.label)}</label>
+                        <label for="mf_${esc(f.key)}" class="text-sm text-slate-800 font-medium">${escSub(f.label)}</label>
                         <div class="flex items-center gap-2">
                           ${ctl('w-40')}
                           ${fRes ? `<span class="text-xs font-mono ${fRes.passed ? 'text-emerald-700' : 'text-rose-700'}">${fRes.passed ? '✓' : `→ ${esc(fRes.expectedDisplay)}`}</span>` : ''}
@@ -8530,7 +8539,7 @@
                   }
                   return `
                     <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 space-y-1.5">
-                      <label for="mf_${esc(f.key)}" class="block text-xs font-medium text-slate-700">${esc(f.label)}</label>
+                      <label for="mf_${esc(f.key)}" class="block text-xs font-medium text-slate-700">${escSub(f.label)}</label>
                       <div class="flex items-center gap-2">${ctl('w-full')}</div>
                       ${fRes ? `<div class="text-xs font-mono ${fRes.passed ? 'text-emerald-700' : 'text-rose-700'}">${fRes.passed ? 'Correct' : `Expected: ${esc(fRes.expectedDisplay)}`}</div>` : ''}
                     </div>
@@ -8859,8 +8868,8 @@
                 <div class="text-xs font-mono text-slate-500 mb-2">
                   ${variant.marks} mark${variant.marks === 1 ? '' : 's'} · ~${node.metadata.estimatedMinutes} min${node.metadata.family ? ` · ${esc(node.metadata.family)}` : ''}
                 </div>
-                <h1 class="font-display text-lg sm:text-xl font-semibold text-slate-900 leading-snug">${esc(node.metadata.title)}</h1>
-                <div class="text-xs text-slate-500 mt-0.5 mb-3">${esc(variant.perspectiveLabel)}${node.metadata.source ? ` · ${esc(node.metadata.source)}` : ''}</div>
+                <h1 class="font-display text-lg sm:text-xl font-semibold text-slate-900 leading-snug">${escSub(node.metadata.title)}</h1>
+                <div class="text-xs text-slate-500 mt-0.5 mb-3">${escSub(variant.perspectiveLabel)}${node.metadata.source ? ` · ${escSub(node.metadata.source)}` : ''}</div>
 
                 <div class="prose-math text-[15px] text-slate-800 leading-relaxed mb-4" id="questionStemBlock">
                   ${renderMarkdownLite(inst.resolvedStem)}
@@ -9575,7 +9584,7 @@
                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 border-t border-slate-200">
                     ${extraFields.map((f) => `
                       <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 space-y-1">
-                        <label class="block text-xs font-medium text-slate-700">${esc(f.label)}</label>
+                        <label class="block text-xs font-medium text-slate-700">${escSub(f.label)}</label>
                         <input type="text" data-mock-sf="${esc(f.key)}" value="${esc(fieldVals[f.key] ?? '')}" placeholder="${esc(f.placeholder || '')}" class="w-full font-mono text-sm px-2.5 py-1.5 border border-slate-300 bg-white rounded-md" />
                       </div>
                     `).join('')}
@@ -9589,7 +9598,7 @@
               <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 ${slot.fields.map((f) => `
                   <div class="bg-slate-50 border border-slate-200 rounded-lg p-3 space-y-1">
-                    <label class="block text-xs font-medium text-slate-700">${esc(f.label)}</label>
+                    <label class="block text-xs font-medium text-slate-700">${escSub(f.label)}</label>
                     ${Array.isArray(f.options) && f.options.length
                       ? `<select data-mock-mf="${esc(f.key)}" class="w-full text-sm px-2 py-1.5 border border-slate-300 bg-white rounded-md"><option value="">Choose…</option>${f.options.map((o) => `<option value="${esc(o)}" ${vals[f.key] === o ? 'selected' : ''}>${esc(o)}</option>`).join('')}</select>`
                       : `<div class="flex items-center gap-2"><input type="text" inputmode="${f.unit || f.numeric ? 'decimal' : 'text'}" data-mock-mf="${esc(f.key)}" value="${esc(vals[f.key] ?? '')}" placeholder="${esc(f.placeholder || '')}" class="w-full font-mono text-sm px-2.5 py-1.5 border border-slate-300 bg-white rounded-md" />${f.unit ? `<span class="text-xs text-slate-500 whitespace-nowrap">${esc(f.unit)}</span>` : ''}</div>`}

@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-18T10:21:52.000Z",
+ "exportedAt": "2026-11-20T12:00:00.000Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -6984,27 +6984,27 @@
      "variantId": "c4-be-anomaly-v3",
      "perspectiveLabel": "Why covalent",
      "marks": 2,
-     "stem": "Why are beryllium compounds largely covalent? Select all that apply.",
-     "explanation": "Strong polarisation → orbital overlap → covalent bonding: BeCl₂ forms chains (solid) and is a strong Lewis acid; BeF₂ is the most ionic Be compound yet has low mp and conductivity.",
+     "stem": "Why do beryllium compounds generally show greater covalent character than the corresponding compounds of the heavier Group 2 metals? Select all that apply.",
+     "explanation": "Both keys come from Be being small: its Be²⁺ ion is highly polarising (strong distortion of the anion, so electron sharing), and the same small size makes Be the most electronegative Group 2 element, so the electronegativity difference with a given anion is smaller. They are two views of one cause, not two independent reasons. Be has no occupied d orbitals and the smallest, not the largest, atomic radius in Group 2. BeCl₂ forms chains (solid) and is a strong Lewis acid; BeF₂ is the most ionic Be compound yet has a low mp and low conductivity.",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "multi",
       "options": [
        {
         "id": "a",
-        "label": "Be²⁺ is very small with high charge density, strongly polarising anions"
+        "label": "Be²⁺ is very small with a high charge density, so it strongly distorts the electron clouds of neighbouring anions and increases electron sharing"
        },
        {
         "id": "b",
-        "label": "Be has the highest IE and electronegativity in Group 2"
+        "label": "Be is more electronegative than the heavier Group 2 metals, so its electronegativity difference with a given anion is smaller and the bond is less ionic"
        },
        {
         "id": "c",
-        "label": "Be has filled d orbitals"
+        "label": "Be has filled d orbitals that allow it to form covalent bonds"
        },
        {
         "id": "d",
-        "label": "Be has the largest atomic radius in Group 2"
+        "label": "Be has the largest atomic radius in Group 2, allowing greater overlap with neighbouring atoms"
        }
       ]
      },

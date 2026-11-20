@@ -1231,12 +1231,12 @@
       const FINAL_RECIPES = {
         CM2011: {
           label: 'Final-style paper', durationMinutes: 120,
-          note: 'Four questions of about 20–25 marks, built like the 2011-12 final: calculations first, then explanation. The real format may differ, so treat the length as a guide.',
+          note: 'Built like the 2025-26 final: Q1 statistics, PSI, electrochemistry reasoning and propagation; Q2 ISE and Kjeldahl with spectrophotometry; Q3 the extraction chain with a pH; Q4 GC and HPLC, written. Part sizes and exact parts change from year to year, so treat the length as a guide.',
           sections: [
-            { label: 'Question 1 · Errors, statistics and quantitation', parts: [['bk-m11-t1-ci'], ['bk-m11-t1-ttest2', 'bk-m11-t1-paired'], ['bk-m11-t1-qtest'], ['bk-m11-t1-errprop'], ['bk-m11-q-kjeldahl']] },
-            { label: 'Question 2 · Electrochemistry', parts: [['bk-m11-e-cell'], ['bk-m11-e-ksp'], ['bk-m11-e-half', 'bk-m11-e-fe'], ['bk-m11-e-thermo']] },
-            { label: 'Question 3 · Potentiometry', parts: [['bk-m11-p-sel'], ['bk-m11-p-cal', 'bk-m11-p-slope'], ['bk-m11-p-intf'], ['bk-m11-p-gas', 'bk-m11-p-facts'], ['bk-m11-p-written']] },
-            { label: 'Question 4 · Spectroscopy', parts: [['bk-m11-s-beer'], ['bk-m11-s-beer'], ['bk-m11-s-wave'], ['bk-m11-s-layout', 'bk-m11-s-fl-layout', 'bk-m11-s-aas-layout'], ['bk-m11-s-written']] },
+            { label: 'Question 1 · Statistics, air quality, electrochemistry, propagation', parts: [['bk-m11-t1-ttest-final'], ['bk-m11-a-sub'], ['bk-m11-a-written'], ['bk-m11-e-ksp'], ['bk-m11-e-ionic'], ['bk-m11-t1-errprop']] },
+            { label: 'Question 2 · Ion-selective electrode, Kjeldahl and spectrophotometry', parts: [['bk-m11-q-kjeldahl'], ['bk-m11-p-cal'], ['bk-m11-p-written'], ['bk-m11-s-beer'], ['bk-m11-s-beer'], ['bk-m11-s-fl-explain']] },
+            { label: 'Question 3 · Extraction', parts: [['bk-m11-x-acid/x-acid-chain']] },
+            { label: 'Question 4 · GC and HPLC', parts: [['bk-m11-g-detectors/g-tcd'], ['bk-m11-g-detectors/g-fid'], ['bk-m11-g-columns/g-open-packed'], ['bk-m11-g-tprog/g-tprog'], ['bk-m11-h-gradient/h-grad-vs-iso'], ['bk-m11-h-order/h-ord-final'], ['bk-m11-g-ms/g-gcms-lcms']] },
           ],
         },
       };
@@ -1251,11 +1251,14 @@
         for (const sec of recipe.sections) {
           let secMarks = 0;
           for (const part of sec.parts) {
-            const avail = part.filter((id) => byId[id]);
+            // an entry is a node id, or node/variant to fix the variant (the final's Q3 chain, the named Q4 parts)
+            const avail = part.filter((id) => byId[String(id).split('/')[0]]);
             if (!avail.length) continue;
-            const node = byId[avail[Math.floor(rnd() * avail.length)]];
+            const pickedEntry = String(avail[Math.floor(rnd() * avail.length)]);
+            const [pickedId, pinned] = pickedEntry.split('/');
+            const node = byId[pickedId];
             // the same node may appear twice in a recipe, but never as the same variant
-            let variant = null;
+            let variant = pinned ? node.variants.find((x) => x.variantId === pinned) || null : null;
             for (let tries = 0; tries < 8 && !variant; tries++) {
               const v = selectVariant(node, options.reviewMap?.[node.id]);
               if (v && !usedVariants.has(`${node.id}/${v.variantId}`)) variant = v;

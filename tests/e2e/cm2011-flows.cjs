@@ -42,7 +42,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   // 2. a calculation answered with the exact numbers
   const open = async (id, wantLabel) => {
     for (let i = 0; i < 40; i++) {
-      await p.evaluate(async (nodeId) => { const { UI } = window.__MASTERY_ENGINE__; const a = UI.appState; a.route = 'study'; a.current = null; a.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: nodeId }; UI.loadNextQuestion(); await new Promise((r) => setTimeout(r, 150)); }, id);
+      await p.evaluate(async (nodeId) => { const { UI } = window.__MASTERY_ENGINE__; const a = UI.appState; delete a.reviewMap[nodeId]; a.route = 'study'; a.current = null; a.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: nodeId }; UI.loadNextQuestion(); await new Promise((r) => setTimeout(r, 150)); }, id);
       if (!wantLabel || (await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current?.inst.variant.perspectiveLabel)) === wantLabel) return true;
     }
     return false;
@@ -117,7 +117,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(mock.phase === 'in_progress' && mock.n > 0 && mock.mods === 'CM2011', `a mock paper is built from CM2011 only (${mock.n} questions)`);
   await p.evaluate(() => { const { UI } = window.__MASTERY_ENGINE__; UI.appState.mock.phase = 'setup'; UI.render(); }); await p.waitForTimeout(300);
   await p.evaluate(() => document.querySelector('#btnStartFinalPaper')?.click()); await p.waitForTimeout(700);
-  const fin = await p.evaluate(() => { const m = window.__MASTERY_ENGINE__.UI.appState.mock; return { phase: m.phase, n: m.questions.length, secs: [...new Set(m.questions.map((q) => q.section))].length, label: /question 1 · errors/i.test(document.querySelector('#appRoot').innerText), marks: m.totalMarks }; });
+  const fin = await p.evaluate(() => { const m = window.__MASTERY_ENGINE__.UI.appState.mock; return { phase: m.phase, n: m.questions.length, secs: [...new Set(m.questions.map((q) => q.section))].length, label: /question 1 · statistics/i.test(document.querySelector('#appRoot').innerText), marks: m.totalMarks }; });
   ok(fin.phase === 'in_progress' && fin.secs === 4 && fin.n >= 14 && fin.label, `the final-style paper has 4 sections and ${fin.n} parts (${fin.marks} marks), labelled on screen`);
   // answer every calculation in that paper with the exact numbers and submit it: they must all score in full
   const scored = await p.evaluate(async () => {

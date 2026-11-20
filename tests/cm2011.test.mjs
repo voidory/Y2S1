@@ -262,6 +262,16 @@ test('mastery: CM2011 questions map to their skills, so card-time retirement wor
   assert.ok(ev, 'evaluates against the CM2011 map');
 });
 
+test('final-style paper follows the real final: Q3 is the full extraction chain and Q4 the GC/HPLC parts', () => {
+  const paper = Scheduler.assembleRecipePaper(bank.questionNodes, Scheduler.FINAL_RECIPES.CM2011, { random: Math.random });
+  const q3 = paper.questions.filter((q) => /Question 3/.test(q.section));
+  assert.equal(q3.length, 1);
+  assert.equal(q3[0].inst.variant.variantId, 'x-acid-chain');
+  assert.equal(paper.sections[2].marks, 25);
+  assert.ok(paper.questions.filter((q) => /Question 4/.test(q.section)).every((q) => /^bk-m11-[gh]-/.test(q.node.id)));
+  assert.ok(paper.sections[3].marks >= 24 && paper.sections[3].marks <= 30, `Q4 ${paper.sections[3].marks}`);
+});
+
 test('final-style paper: four sections, only CM2011 questions, sensible marks, fresh data each time', () => {
   const recipe = Scheduler.FINAL_RECIPES.CM2011;
   assert.equal(recipe.sections.length, 4);
@@ -270,7 +280,7 @@ test('final-style paper: four sections, only CM2011 questions, sensible marks, f
     const paper = Scheduler.assembleRecipePaper(bank.questionNodes, recipe, { random: Math.random });
     assert.equal(paper.sections.length, 4);
     assert.ok(paper.questions.length >= 15 && paper.questions.length <= 22, `${paper.questions.length} parts`);
-    assert.ok(paper.totalMarks >= 70 && paper.totalMarks <= 120, `${paper.totalMarks} marks`);
+    assert.ok(paper.totalMarks >= 85 && paper.totalMarks <= 115, `${paper.totalMarks} marks`);
     assert.ok(paper.sections.every((s) => s.marks >= 15 && s.marks <= 32), paper.sections.map((s) => s.marks).join());
     assert.equal(new Set(paper.questions.map((q) => q.node.id + q.inst.variant.variantId)).size, paper.questions.length, 'no question is used twice');
     assert.ok(paper.questions.every((q) => q.node.moduleCode === 'CM2011' && q.inst && q.section && q.userInput !== undefined));
@@ -280,7 +290,11 @@ test('final-style paper: four sections, only CM2011 questions, sensible marks, f
   assert.ok(seenStems.size > 10, 'each paper has fresh random data');
   // every id in the recipe exists in the bundle
   const ids = new Set(bank.questionNodes.map((n) => n.id));
-  for (const s of recipe.sections) for (const part of s.parts) for (const id of part) assert.ok(ids.has(id), id);
+  for (const s of recipe.sections) for (const part of s.parts) for (const id of part) {
+    const [nid, vid] = id.split('/');
+    assert.ok(ids.has(nid), id);
+    if (vid) assert.ok(bank.questionNodes.find((n) => n.id === nid).variants.some((v) => v.variantId === vid), id);
+  }
 });
 
 test('pick-one options are shuffled (the key is not always first), keep their ids, and are seeded', () => {

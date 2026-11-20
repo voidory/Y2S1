@@ -12,6 +12,7 @@ import x6 from './x6.mjs';
 import t7 from './t7.mjs';
 import a8 from './a8.mjs';
 import c9 from './c9.mjs';
+import c10 from './c10.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const outDir = path.resolve(here, '..', '..', 'public', 'content', 'cm2011');
@@ -38,7 +39,7 @@ const CHUNKS = [
   { id: 'g-hplc', part: 'GC and HPLC', name: 'HPLC: columns, modes, elution order, detection', summary: 'Column label, C18/C8, normal vs reversed phase, elution order, isocratic vs gradient, detectors, particle size, choosing GC or HPLC' },
 ];
 
-const all = [...t1, ...t7, ...a8, ...c9, ...e3a, ...p3b, ...s4, ...f5, ...g5, ...x6];
+const all = [...t1, ...t7, ...a8, ...c9, ...c10, ...e3a, ...p3b, ...s4, ...f5, ...g5, ...x6];
 const nodes = all.map((x) => x.node);
 const ids = new Set();
 for (const n of nodes) { if (ids.has(n.id)) throw new Error('duplicate node id ' + n.id); ids.add(n.id); }

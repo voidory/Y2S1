@@ -538,3 +538,28 @@ test('chromatography slips are named: missing factor 2 in R_S, t_R/t_M for k', (
   const bk = Evaluators.evaluate(r, { kA: String(5.98 / 0.31), kB: '24.6', al: '1.29' }, sr, {}, byId['bk-m11-c-retention']);
   assert.ok(/Subtract/.test(JSON.stringify(bk.fieldResults.kA)));
 });
+
+test('calibration chain: hand-calculated K+ serum and ammonia-probe Kjeldahl answers, and the slips are named', () => {
+  const k = variantOf('bk-m11-p-chain', 'chain-k');
+  const sk = scopeWith(k, { s: 59, b0: 200, lg: -3.5, Va: 10, Vb: 100, Vc: 10, Vd: 50 });
+  assert.ok(close(sk.sl, 59, 0.001) && close(sk.cx, 3.162e-4, 0.005) && close(sk.DF, 50, 0.001) && close(sk.c0, 1.581e-2, 0.005));
+  const bad = Evaluators.evaluate(k, { sl: '59', lgx: '-3.5', cx: '3.16e-4', DF: '50', c0: String(3.162e-4 / 50) }, sk, {}, byId['bk-m11-p-chain']);
+  assert.ok(/multiply by the dilution factor/.test(JSON.stringify(bad.fieldResults.c0)), 'dividing instead of multiplying is named');
+  const n = variantOf('bk-m11-p-chain', 'chain-nh3');
+  const sn = scopeWith(n, { s: -59, b0: 400, m: 1, pct0: 15, Vt: 250, Va: 10, Vb: 100 });
+  assert.ok(close(sn.sl, -59, 0.001) && close(sn.pct, 15, 0.01), `wt% N ${sn.pct}`);
+  const miss = Evaluators.evaluate(n, { sl: '-59', lgx: String(sn.lgx), cm: String(sn.cm), cd: String(sn.cd), mN: String(sn.cm * 250 * 14.01), pct: String(sn.pct) }, sn, {}, byId['bk-m11-p-chain']);
+  assert.ok(/left out the dilution/.test(JSON.stringify(miss.fieldResults.mN)), 'skipping the dilution is named');
+});
+
+test('calibration chain: sampled data stay in the electrode\'s working range', () => {
+  for (const vid of ['chain-k', 'chain-nh3']) {
+    const v = variantOf('bk-m11-p-chain', vid);
+    for (let seed = 1; seed <= 200; seed++) {
+      const sc = Scheduler.instantiateVariant(v, seed * 7919).scope;
+      assert.ok(sc.lgx > -4.05 && sc.lgx < -1.9, `${vid}#${seed}: log c ${sc.lgx}`);
+      if (vid === 'chain-k') assert.ok(sc.c0 < 0.5 && sc.c0 > 1e-4, `${vid}#${seed}: c0 ${sc.c0}`);
+      else assert.ok(sc.pct > 7 && sc.pct < 23, `${vid}#${seed}: ${sc.pct}% N`);
+    }
+  }
+});

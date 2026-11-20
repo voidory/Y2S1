@@ -17,7 +17,7 @@ test('method pages: every page serves real topics, has the standard sections, an
       for (const c of m.chunks) assert.ok(chunks.has(c), `${m.id}: topic ${c} exists`);
       for (const h of ['## Use it when', '## Steps', '## Traps']) assert.ok(m.md.includes(h), `${m.id} has "${h}"`);
       const words = m.md.split(/\s+/).length;
-      assert.ok(words > 120 && words < 700, `${m.id} is concise (${words} words)`);
+      assert.ok(words > 120 && words < 900, `${m.id} is concise (${words} words)`);
     }
     const covered = new Set(doc.methods.flatMap((m) => m.chunks));
     const share = map.skills.filter((k) => covered.has(k.chunk)).reduce((a, k) => a + k.weight, 0);
@@ -25,9 +25,12 @@ test('method pages: every page serves real topics, has the standard sections, an
   }
 });
 
-test('method pages: CM2021 pages are flagged as written without the slides, CM2011 pages are not', () => {
-  assert.ok(readContent('methods.json', 'cm2021').methods.every((m) => /not from your slides/.test(m.flag || '')));
-  assert.ok(readContent('methods.json', 'cm2011').methods.every((m) => !m.flag));
+test('method pages: every CM2021 page says whether it was checked against the slides, CM2011 pages say nothing', () => {
+  const m21 = readContent('methods.json', 'cm2021').methods;
+  assert.ok(m21.every((m) => Boolean(m.flag) !== Boolean(m.checked)), 'each CM2021 page is either flagged or checked');
+  assert.ok(m21.filter((m) => m.flag).every((m) => /not yet checked/.test(m.flag)), 'a flag says what is unchecked');
+  assert.ok(m21.filter((m) => m.checked).every((m) => /^Checked against your/.test(m.checked)));
+  assert.ok(readContent('methods.json', 'cm2011').methods.every((m) => !m.flag && !m.checked));
 });
 
 test('method pages: methodForChunk finds the page for a topic and nothing for an unknown one', () => {

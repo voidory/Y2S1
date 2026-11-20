@@ -7940,6 +7940,7 @@
             </div>
             <div class="flex-1 overflow-y-auto px-4 py-4" data-bounded-scroll data-method-body>
               ${m.flag ? `<div class="mb-4 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs text-amber-900" data-method-flag>${esc(m.flag)}</div>` : ''}
+              ${m.checked ? `<div class="mb-4 rounded-lg border border-emerald-300 bg-emerald-50 px-3 py-2 text-xs text-emerald-900" data-method-checked>${esc(m.checked)}</div>` : ''}
               ${traps.length ? `<div class="mb-4 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-900" data-method-hit><div class="text-[11px] uppercase tracking-wider font-semibold mb-1">What went wrong in your answer</div><ul class="list-disc pl-5">${traps.map((t) => `<li>${renderMarkdownLite(t).replace(/<\/?p>/g, '')}</li>`).join('')}</ul></div>` : ''}
               ${renderMethodHtml(m.md)}
             </div>

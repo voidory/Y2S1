@@ -1,5 +1,5 @@
 /* Builds public/content/<dir>/methods.json from tools/methods/<dir>.md.   node tools/methods/build.mjs
-   Page format: "=== id | Title | chunk1,chunk2", then optional "flag:" and "summary:" lines, a blank line, then markdown
+   Page format: "=== id | Title | chunk1,chunk2", then optional "flag:" (not yet checked against the slides), "checked:" (checked against them) and "summary:" lines, a blank line, then markdown
    (## headings, lists, tables, **bold**). Each page serves the listed topics (chunks of the skill map). */
 import fs from 'node:fs';
 import path from 'node:path';
@@ -13,9 +13,9 @@ for (const [dir, module] of [['cm2011', 'CM2011'], ['cm2021', 'CM2021']]) {
     const [id, title, chunks] = head.split('|').map((x) => x.trim());
     const meta = {};
     let i = 0;
-    for (; i < rest.length && rest[i].trim() !== ''; i++) { const m = rest[i].match(/^(flag|summary):\s*(.*)$/); if (m) meta[m[1]] = m[2].trim(); else break; }
+    for (; i < rest.length && rest[i].trim() !== ''; i++) { const m = rest[i].match(/^(flag|checked|summary):\s*(.*)$/); if (m) meta[m[1]] = m[2].trim(); else break; }
     const md = rest.slice(i).join('\n').trim();
-    return { id, title, chunks: chunks.split(',').map((c) => c.trim()), ...(meta.flag ? { flag: meta.flag } : {}), summary: meta.summary || '', md };
+    return { id, title, chunks: chunks.split(',').map((c) => c.trim()), ...(meta.flag ? { flag: meta.flag } : {}), ...(meta.checked ? { checked: meta.checked } : {}), summary: meta.summary || '', md };
   });
   const skill = JSON.parse(fs.readFileSync(path.join(root, 'public', 'content', dir, 'skill-map.json'), 'utf8'));
   const known = new Set(skill.chunks.map((c) => c.id));

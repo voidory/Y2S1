@@ -61,7 +61,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await submitWrong();
   ok(await p.evaluate(() => !!document.querySelector('#btnMethod')), 'a CM2021 miss offers the page too');
   await p.evaluate(() => document.querySelector('#btnMethod').click()); await p.waitForTimeout(400);
-  ok(await p.evaluate(() => /slides/.test(document.querySelector('[data-method-flag]')?.textContent || '')), 'a CM2021 page is flagged as written without your slides');
+  ok(await p.evaluate(() => /slides/.test((document.querySelector('[data-method-flag]') || document.querySelector('[data-method-checked]'))?.textContent || '')), 'a CM2021 page says whether it was checked against your slides');
   await p.keyboard.press('Escape');
 
   // a topic with no page offers nothing

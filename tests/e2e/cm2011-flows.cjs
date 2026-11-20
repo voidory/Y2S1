@@ -188,6 +188,23 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await fillAll(await exact()); await submit();
   ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current.evalResult?.normalizedGrade === 1), 'the exact slope, intercept and concentration earn full marks');
 
+  // Topic 2 PSI, and Enter submits
+  ok(await open('bk-m11-a-overall', 'Sub-indices, overall PSI and the pollutant that sets it (6 marks)'), 'opened the overall PSI question');
+  await answerStep();
+  ok(await p.evaluate(() => document.querySelectorAll('#studyView input[id^="mf_"], #studyView select[id^="mf_"]').length === 6), 'six answer fields: three sub-indices, the PSI, the pollutant, the descriptor');
+  const psiAns = await exact();
+  await p.fill('#mf_p1', psiAns.p1); await p.press('#mf_p1', 'Enter');
+  ok(await p.evaluate(() => document.activeElement?.id === 'mf_p2'), 'Enter on a filled field jumps to the next empty one');
+  await p.fill('#mf_p2', psiAns.p2); await p.fill('#mf_p3', psiAns.p3); await p.fill('#mf_top', psiAns.top);
+  await p.selectOption('select#mf_who', psiAns.who); await p.selectOption('select#mf_cat', psiAns.cat);
+  await p.press('#mf_top', 'Enter'); await p.waitForTimeout(500);
+  ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current.evalResult?.normalizedGrade === 1), 'Enter submits once every field is filled, and the exact PSI answer earns full marks');
+  ok(await open('bk-m11-a-sub', 'PM2.5 sub-index and category (4 marks)'), 'opened the PM2.5 sub-index question');
+  await answerStep();
+  const subAns = await exact();
+  await p.fill('#mf_psi', subAns.psi); await p.selectOption('select#mf_cat', subAns.cat); await p.press('#mf_psi', 'Enter'); await p.waitForTimeout(500);
+  ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current.evalResult?.normalizedGrade === 1), 'Enter in the sub-index box submits when the descriptor is chosen');
+
   // 7. the choice survives a reload, and switching back restores CM2021
   await boot();
   ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.activeModule === 'CM2011' && document.querySelector('#moduleSwitch').value === 'CM2011'), 'after a reload the app is still on CM2011');
@@ -206,6 +223,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(wk.nums === '1,2,3,4,5,6,7,8,9,10' && wk.t4 === 'My ISE chapter' && wk.x4 === 2, `an install with seven chapters gains the three new ones and keeps its own edits (${wk.nums})`);
   ok(errs.length === 0, 'no page errors' + (errs.length ? ': ' + errs.join(' | ') : ''));
   await b.close(); srv.close();
+
   console.log(fails ? `\n${fails} FAILED` : '\nall CM2011 flows ok');
   process.exit(fails ? 1 : 0);
 })().catch((e) => { console.error(e); process.exit(2); });

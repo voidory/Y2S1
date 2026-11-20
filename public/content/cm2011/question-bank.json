@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-19T20:54:15.720Z",
+ "exportedAt": "2026-11-20T04:31:55.266Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -5864,6 +5864,764 @@
         }
        }
       }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-a-sub",
+   "moduleCode": "CM2011",
+   "tier": "atomic",
+   "metadata": {
+    "title": "PSI sub-index from a 24-hour concentration",
+    "source": "Topic 2 · PSI (booklet)",
+    "week": 2,
+    "primaryTheme": "Air quality",
+    "conceptTags": [
+     "psi",
+     "sub-index"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "psi"
+   },
+   "variants": [
+    {
+     "variantId": "psi-sub-pm25",
+     "perspectiveLabel": "PM2.5 sub-index and category (4 marks)",
+     "marks": 4,
+     "stem": "The 24-hour mean concentration of PM2.5 at a monitoring station in Singapore was **{{fix(c,0)}} µg m⁻³**. Using the booklet, calculate the PM2.5 sub-index (round to a whole number) and state the air-quality descriptor for that value.",
+     "hint": "Booklet, 24-hour values at PSI 50 / 100 / 200 / 300 / 400 (µg m⁻³): PM2.5 12 / 55 / 150 / 250 / 350. Sub-index I = [(PSI_upper − PSI_lower)/(C_upper − C_lower)] × (C − C_lower) + PSI_lower, where C_lower and PSI_lower are the values at the **top of the band below** (0 and 0 for the lowest band). The overall PSI is the largest sub-index.",
+     "explanation": "Find the band that holds {{fix(c,0)}} µg m⁻³, take the **top of the band below** as the lower anchor (concentration and PSI), and interpolate: I = {{fix(psi,0)}}. The descriptor follows the PSI: up to 50 good, 51–100 moderate, 101–200 unhealthy, 201–300 very unhealthy, above 300 hazardous.",
+     "variables": {
+      "sampled": {
+       "c": {
+        "type": "range",
+        "min": 3,
+        "max": 140,
+        "step": 1,
+        "decimals": 0
+       }
+      },
+      "derived": {
+       "psi": "round(c <= 12 ? ((50 - 0) / (12 - 0)) * (c - 0) + 0 : (c <= 55 ? ((100 - 50) / (55 - 12)) * (c - 12) + 50 : (c <= 150 ? ((200 - 100) / (150 - 55)) * (c - 55) + 100 : (c <= 250 ? ((300 - 200) / (250 - 150)) * (c - 150) + 200 : (((400 - 300) / (350 - 250)) * (c - 250) + 300)))), 0)",
+       "cat": "psi <= 50 ? 'good' : (psi <= 100 ? 'moderate' : (psi <= 200 ? 'unhealthy' : (psi <= 300 ? 'very unhealthy' : 'hazardous')))"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "psi",
+        "label": "PM2.5 sub-index",
+        "numeric": true
+       },
+       {
+        "key": "cat",
+        "label": "Descriptor",
+        "options": [
+         "good",
+         "moderate",
+         "unhealthy",
+         "very unhealthy",
+         "hazardous"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "psi": {
+        "type": "numeric",
+        "targetExpr": "psi",
+        "relTol": 0.015,
+        "sig": 3,
+        "tolerance": 1,
+        "paths": [
+         {
+          "label": "A straight ratio from zero is only right inside the lowest band; interpolate between the band limits.",
+          "expr": "c / 12 * 50"
+         }
+        ]
+       },
+       "cat": {
+        "type": "keyword",
+        "expectedExpr": "cat",
+        "synonyms": {
+         "good": [
+          "good"
+         ],
+         "moderate": [
+          "moderate"
+         ],
+         "unhealthy": [
+          "unhealthy"
+         ],
+         "very unhealthy": [
+          "very unhealthy"
+         ],
+         "hazardous": [
+          "hazardous"
+         ]
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "psi-sub-pm10",
+     "perspectiveLabel": "PM10 sub-index and category (4 marks)",
+     "marks": 4,
+     "stem": "The 24-hour mean concentration of PM10 at a monitoring station in Singapore was **{{fix(c,0)}} µg m⁻³**. Using the booklet, calculate the PM10 sub-index (round to a whole number) and state the air-quality descriptor for that value.",
+     "hint": "Booklet, 24-hour values at PSI 50 / 100 / 200 / 300 / 400 (µg m⁻³): PM10 50 / 150 / 350 / 420 / 500. Sub-index I = [(PSI_upper − PSI_lower)/(C_upper − C_lower)] × (C − C_lower) + PSI_lower, where C_lower and PSI_lower are the values at the **top of the band below** (0 and 0 for the lowest band). The overall PSI is the largest sub-index.",
+     "explanation": "Find the band that holds {{fix(c,0)}} µg m⁻³, take the **top of the band below** as the lower anchor (concentration and PSI), and interpolate: I = {{fix(psi,0)}}. The descriptor follows the PSI: up to 50 good, 51–100 moderate, 101–200 unhealthy, 201–300 very unhealthy, above 300 hazardous.",
+     "variables": {
+      "sampled": {
+       "c": {
+        "type": "range",
+        "min": 8,
+        "max": 190,
+        "step": 1,
+        "decimals": 0
+       }
+      },
+      "derived": {
+       "psi": "round(c <= 50 ? ((50 - 0) / (50 - 0)) * (c - 0) + 0 : (c <= 150 ? ((100 - 50) / (150 - 50)) * (c - 50) + 50 : (c <= 350 ? ((200 - 100) / (350 - 150)) * (c - 150) + 100 : (c <= 420 ? ((300 - 200) / (420 - 350)) * (c - 350) + 200 : (((400 - 300) / (500 - 420)) * (c - 420) + 300)))), 0)",
+       "cat": "psi <= 50 ? 'good' : (psi <= 100 ? 'moderate' : (psi <= 200 ? 'unhealthy' : (psi <= 300 ? 'very unhealthy' : 'hazardous')))"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "psi",
+        "label": "PM10 sub-index",
+        "numeric": true
+       },
+       {
+        "key": "cat",
+        "label": "Descriptor",
+        "options": [
+         "good",
+         "moderate",
+         "unhealthy",
+         "very unhealthy",
+         "hazardous"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "psi": {
+        "type": "numeric",
+        "targetExpr": "psi",
+        "relTol": 0.015,
+        "sig": 3,
+        "tolerance": 1,
+        "paths": [
+         {
+          "label": "A straight ratio from zero is only right inside the lowest band; interpolate between the band limits.",
+          "expr": "c / 50 * 50"
+         }
+        ]
+       },
+       "cat": {
+        "type": "keyword",
+        "expectedExpr": "cat",
+        "synonyms": {
+         "good": [
+          "good"
+         ],
+         "moderate": [
+          "moderate"
+         ],
+         "unhealthy": [
+          "unhealthy"
+         ],
+         "very unhealthy": [
+          "very unhealthy"
+         ],
+         "hazardous": [
+          "hazardous"
+         ]
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "psi-sub-so2",
+     "perspectiveLabel": "SO₂ sub-index and category (4 marks)",
+     "marks": 4,
+     "stem": "The 24-hour mean concentration of SO₂ at a monitoring station in Singapore was **{{fix(c,0)}} µg m⁻³**. Using the booklet, calculate the SO₂ sub-index (round to a whole number) and state the air-quality descriptor for that value.",
+     "hint": "Booklet, 24-hour values at PSI 50 / 100 / 200 / 300 / 400 (µg m⁻³): SO₂ 80 / 365 / 800 / 1600 / 2100. Sub-index I = [(PSI_upper − PSI_lower)/(C_upper − C_lower)] × (C − C_lower) + PSI_lower, where C_lower and PSI_lower are the values at the **top of the band below** (0 and 0 for the lowest band). The overall PSI is the largest sub-index.",
+     "explanation": "Find the band that holds {{fix(c,0)}} µg m⁻³, take the **top of the band below** as the lower anchor (concentration and PSI), and interpolate: I = {{fix(psi,0)}}. The descriptor follows the PSI: up to 50 good, 51–100 moderate, 101–200 unhealthy, 201–300 very unhealthy, above 300 hazardous.",
+     "variables": {
+      "sampled": {
+       "c": {
+        "type": "range",
+        "min": 6,
+        "max": 330,
+        "step": 1,
+        "decimals": 0
+       }
+      },
+      "derived": {
+       "psi": "round(c <= 80 ? ((50 - 0) / (80 - 0)) * (c - 0) + 0 : (c <= 365 ? ((100 - 50) / (365 - 80)) * (c - 80) + 50 : (c <= 800 ? ((200 - 100) / (800 - 365)) * (c - 365) + 100 : (c <= 1600 ? ((300 - 200) / (1600 - 800)) * (c - 800) + 200 : (((400 - 300) / (2100 - 1600)) * (c - 1600) + 300)))), 0)",
+       "cat": "psi <= 50 ? 'good' : (psi <= 100 ? 'moderate' : (psi <= 200 ? 'unhealthy' : (psi <= 300 ? 'very unhealthy' : 'hazardous')))"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "psi",
+        "label": "SO₂ sub-index",
+        "numeric": true
+       },
+       {
+        "key": "cat",
+        "label": "Descriptor",
+        "options": [
+         "good",
+         "moderate",
+         "unhealthy",
+         "very unhealthy",
+         "hazardous"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "psi": {
+        "type": "numeric",
+        "targetExpr": "psi",
+        "relTol": 0.015,
+        "sig": 3,
+        "tolerance": 1,
+        "paths": [
+         {
+          "label": "A straight ratio from zero is only right inside the lowest band; interpolate between the band limits.",
+          "expr": "c / 80 * 50"
+         }
+        ]
+       },
+       "cat": {
+        "type": "keyword",
+        "expectedExpr": "cat",
+        "synonyms": {
+         "good": [
+          "good"
+         ],
+         "moderate": [
+          "moderate"
+         ],
+         "unhealthy": [
+          "unhealthy"
+         ],
+         "very unhealthy": [
+          "very unhealthy"
+         ],
+         "hazardous": [
+          "hazardous"
+         ]
+        }
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-a-overall",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Overall PSI from three pollutants",
+    "source": "Topic 2 · PSI (booklet)",
+    "week": 2,
+    "primaryTheme": "Air quality",
+    "conceptTags": [
+     "psi",
+     "overall"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 5,
+    "examStyle": "short_2to3",
+    "family": "psi"
+   },
+   "variants": [
+    {
+     "variantId": "psi-overall",
+     "perspectiveLabel": "Sub-indices, overall PSI and the pollutant that sets it (6 marks)",
+     "marks": 6,
+     "stem": "The 24-hour concentrations at one station were:\n\n| Pollutant | 24-h mean (µg m⁻³) |\n|---|---|\n| PM2.5 | {{fix(a,0)}} |\n| PM10 | {{fix(b,0)}} |\n| SO₂ | {{fix(s,0)}} |\n\nCalculate the three sub-indices, give the overall PSI (whole number), say which pollutant sets it and name the descriptor.",
+     "hint": "Booklet, 24-hour values at PSI 50 / 100 / 200 / 300 / 400 (µg m⁻³): PM2.5 12 / 55 / 150 / 250 / 350; PM10 50 / 150 / 350 / 420 / 500; SO₂ 80 / 365 / 800 / 1600 / 2100. Sub-index I = [(PSI_upper − PSI_lower)/(C_upper − C_lower)] × (C − C_lower) + PSI_lower, where C_lower and PSI_lower are the values at the **top of the band below** (0 and 0 for the lowest band). The overall PSI is the largest sub-index.",
+     "explanation": "Each pollutant gets its own sub-index by interpolation inside its own band table; the **largest** sub-index is the PSI, and the pollutant that produced it is the one reported. PM10 limits are larger than PM2.5 limits, so the same concentration gives a lower PM10 sub-index.",
+     "variables": {
+      "sampled": {
+       "a": {
+        "type": "range",
+        "min": 14,
+        "max": 130,
+        "step": 1,
+        "decimals": 0
+       },
+       "b": {
+        "type": "range",
+        "min": 30,
+        "max": 230,
+        "step": 1,
+        "decimals": 0
+       },
+       "s": {
+        "type": "range",
+        "min": 20,
+        "max": 330,
+        "step": 1,
+        "decimals": 0
+       }
+      },
+      "derived": {
+       "p1": "round(a <= 12 ? ((50 - 0) / (12 - 0)) * (a - 0) + 0 : (a <= 55 ? ((100 - 50) / (55 - 12)) * (a - 12) + 50 : (a <= 150 ? ((200 - 100) / (150 - 55)) * (a - 55) + 100 : (a <= 250 ? ((300 - 200) / (250 - 150)) * (a - 150) + 200 : (((400 - 300) / (350 - 250)) * (a - 250) + 300)))), 0)",
+       "p2": "round(b <= 50 ? ((50 - 0) / (50 - 0)) * (b - 0) + 0 : (b <= 150 ? ((100 - 50) / (150 - 50)) * (b - 50) + 50 : (b <= 350 ? ((200 - 100) / (350 - 150)) * (b - 150) + 100 : (b <= 420 ? ((300 - 200) / (420 - 350)) * (b - 350) + 200 : (((400 - 300) / (500 - 420)) * (b - 420) + 300)))), 0)",
+       "p3": "round(s <= 80 ? ((50 - 0) / (80 - 0)) * (s - 0) + 0 : (s <= 365 ? ((100 - 50) / (365 - 80)) * (s - 80) + 50 : (s <= 800 ? ((200 - 100) / (800 - 365)) * (s - 365) + 100 : (s <= 1600 ? ((300 - 200) / (1600 - 800)) * (s - 800) + 200 : (((400 - 300) / (2100 - 1600)) * (s - 1600) + 300)))), 0)",
+       "top": "max(p1, p2, p3)",
+       "who": "p1 >= p2 && p1 >= p3 ? 'PM2.5' : (p2 >= p3 ? 'PM10' : 'SO2')",
+       "cat": "top <= 50 ? 'good' : (top <= 100 ? 'moderate' : (top <= 200 ? 'unhealthy' : (top <= 300 ? 'very unhealthy' : 'hazardous')))"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "p1",
+        "label": "PM2.5 sub-index",
+        "numeric": true
+       },
+       {
+        "key": "p2",
+        "label": "PM10 sub-index",
+        "numeric": true
+       },
+       {
+        "key": "p3",
+        "label": "SO₂ sub-index",
+        "numeric": true
+       },
+       {
+        "key": "top",
+        "label": "Overall PSI",
+        "numeric": true
+       },
+       {
+        "key": "who",
+        "label": "Pollutant that sets the PSI",
+        "options": [
+         "PM2.5",
+         "PM10",
+         "SO2"
+        ]
+       },
+       {
+        "key": "cat",
+        "label": "Descriptor",
+        "options": [
+         "good",
+         "moderate",
+         "unhealthy",
+         "very unhealthy",
+         "hazardous"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "p1": {
+        "type": "numeric",
+        "targetExpr": "p1",
+        "relTol": 0.015,
+        "sig": 3,
+        "tolerance": 1
+       },
+       "p2": {
+        "type": "numeric",
+        "targetExpr": "p2",
+        "relTol": 0.015,
+        "sig": 3,
+        "tolerance": 1
+       },
+       "p3": {
+        "type": "numeric",
+        "targetExpr": "p3",
+        "relTol": 0.015,
+        "sig": 3,
+        "tolerance": 1
+       },
+       "top": {
+        "type": "numeric",
+        "targetExpr": "top",
+        "relTol": 0.015,
+        "sig": 3,
+        "tolerance": 1,
+        "paths": [
+         {
+          "label": "The PSI is the largest sub-index, not the mean.",
+          "expr": "(p1 + p2 + p3) / 3"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "max(u_p1, u_p2, u_p3)",
+          "label": "The largest of your own sub-indices: right method, built on an earlier slip."
+         }
+        ]
+       },
+       "who": {
+        "type": "keyword",
+        "expectedExpr": "who",
+        "synonyms": {
+         "PM2.5": [
+          "pm2.5",
+          "pm 2.5",
+          "pm25"
+         ],
+         "PM10": [
+          "pm10",
+          "pm 10"
+         ],
+         "SO2": [
+          "so2",
+          "so₂",
+          "sulfur dioxide",
+          "sulphur dioxide"
+         ]
+        }
+       },
+       "cat": {
+        "type": "keyword",
+        "expectedExpr": "cat",
+        "synonyms": {
+         "good": [
+          "good"
+         ],
+         "moderate": [
+          "moderate"
+         ],
+         "unhealthy": [
+          "unhealthy"
+         ],
+         "very unhealthy": [
+          "very unhealthy"
+         ],
+         "hazardous": [
+          "hazardous"
+         ]
+        }
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-a-cig",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Breathing and cigarette-equivalent chain",
+    "source": "Topic 2 · PSI (booklet)",
+    "week": 2,
+    "primaryTheme": "Air quality",
+    "conceptTags": [
+     "psi",
+     "cigarette"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 5,
+    "examStyle": "construct_4to6",
+    "family": "psi-chain"
+   },
+   "variants": [
+    {
+     "variantId": "cig-year",
+     "perspectiveLabel": "Air breathed, PM2.5 inhaled and cigarette equivalents (4 marks)",
+     "marks": 4,
+     "stem": "A person breathes at **{{fix(rate,0)}} L min⁻¹**. The year-round 24-hour PM2.5 concentration is **{{fix(c,0)}} µg m⁻³**. One cigarette is estimated to contain 12 mg of PM2.5. Calculate (a) the volume of air breathed in one day, (b) the mass of PM2.5 inhaled in a year (365 days) and (c) how many cigarettes that is equivalent to.",
+     "hint": "1 m³ = 1000 L. Mass inhaled = concentration × volume. 12 mg = 12 000 µg.",
+     "explanation": "Volume per day = rate × 60 × 24 / 1000 = {{fix(vday,2)}} m³. Mass per year = c × V × 365 = {{fix(mgyr,0)}} mg (convert µg to mg). Divide by 12 mg per cigarette: about {{fix(cigs,0)}} cigarettes a year. The comparison ignores what the particles are made of, which is one reason the PSI descriptors can mislead.",
+     "variables": {
+      "sampled": {
+       "rate": {
+        "type": "choice",
+        "options": [
+         6,
+         8,
+         10
+        ]
+       },
+       "c": {
+        "type": "choice",
+        "options": [
+         15,
+         20,
+         25,
+         30,
+         35,
+         40,
+         45,
+         50,
+         60,
+         70
+        ]
+       }
+      },
+      "derived": {
+       "vday": "rate * 60 * 24 / 1000",
+       "mgyr": "c * vday * 365 / 1000",
+       "cigs": "mgyr / 12"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "vday",
+        "label": "Air breathed per day",
+        "unit": "m³",
+        "numeric": true
+       },
+       {
+        "key": "mgyr",
+        "label": "PM2.5 inhaled per year",
+        "unit": "mg",
+        "numeric": true
+       },
+       {
+        "key": "cigs",
+        "label": "Cigarette equivalents per year",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "vday": {
+        "type": "numeric",
+        "targetExpr": "vday",
+        "relTol": 0.02,
+        "sig": 4,
+        "unit": "m³"
+       },
+       "mgyr": {
+        "type": "numeric",
+        "targetExpr": "mgyr",
+        "relTol": 0.02,
+        "sig": 4,
+        "unit": "mg",
+        "ecf": [
+         {
+          "expr": "c * u_vday * 365 / 1000",
+          "label": "Consistent with your own daily volume."
+         }
+        ]
+       },
+       "cigs": {
+        "type": "numeric",
+        "targetExpr": "cigs",
+        "relTol": 0.03,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "That is one day, not a year: multiply by 365.",
+          "expr": "c * vday / 12000"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_mgyr / 12",
+          "label": "Consistent with your own yearly mass."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "cig-back",
+     "perspectiveLabel": "Concentration from the mass breathed, and its PSI (4 marks)",
+     "marks": 4,
+     "stem": "A person breathing at 8 L min⁻¹ inhaled **{{fix(m,0)}} µg** of PM2.5 in 24 hours. Calculate the average PM2.5 concentration in the air (µg m⁻³) and, using the booklet, the PM2.5 sub-index (whole number).",
+     "hint": "Booklet, 24-hour values at PSI 50 / 100 / 200 / 300 / 400 (µg m⁻³): PM2.5 12 / 55 / 150 / 250 / 350. Sub-index I = [(PSI_upper − PSI_lower)/(C_upper − C_lower)] × (C − C_lower) + PSI_lower, where C_lower and PSI_lower are the values at the **top of the band below** (0 and 0 for the lowest band). The overall PSI is the largest sub-index.",
+     "explanation": "Air breathed in 24 h = 8 × 60 × 24 / 1000 = 11.52 m³, so c = m / V = {{fix(c,1)}} µg m⁻³. That lies in the band whose top below is given by the booklet; interpolate to get PSI {{fix(psi,0)}}.",
+     "variables": {
+      "sampled": {
+       "m": {
+        "type": "range",
+        "min": 150,
+        "max": 900,
+        "step": 10,
+        "decimals": 0
+       }
+      },
+      "derived": {
+       "c": "m / 11.52",
+       "psi": "round(c <= 12 ? ((50 - 0) / (12 - 0)) * (c - 0) + 0 : (c <= 55 ? ((100 - 50) / (55 - 12)) * (c - 12) + 50 : (c <= 150 ? ((200 - 100) / (150 - 55)) * (c - 55) + 100 : (c <= 250 ? ((300 - 200) / (250 - 150)) * (c - 150) + 200 : (((400 - 300) / (350 - 250)) * (c - 250) + 300)))), 0)"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "c",
+        "label": "PM2.5 concentration",
+        "unit": "µg m⁻³",
+        "numeric": true
+       },
+       {
+        "key": "psi",
+        "label": "PM2.5 sub-index",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "c": {
+        "type": "numeric",
+        "targetExpr": "c",
+        "relTol": 0.02,
+        "sig": 4,
+        "unit": "µg m⁻³"
+       },
+       "psi": {
+        "type": "numeric",
+        "targetExpr": "psi",
+        "relTol": 0.015,
+        "sig": 3,
+        "tolerance": 1.5,
+        "ecf": [
+         {
+          "expr": "round(u_c <= 12 ? ((50 - 0) / (12 - 0)) * (u_c - 0) + 0 : (u_c <= 55 ? ((100 - 50) / (55 - 12)) * (u_c - 12) + 50 : (u_c <= 150 ? ((200 - 100) / (150 - 55)) * (u_c - 55) + 100 : (u_c <= 250 ? ((300 - 200) / (250 - 150)) * (u_c - 150) + 200 : (((400 - 300) / (350 - 250)) * (u_c - 250) + 300)))), 0)",
+          "label": "Consistent with your own concentration."
+         }
+        ]
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-a-written",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "PSI: 24-hour versus 1-hour, and why the descriptors can mislead",
+    "source": "Topic 2 · PSI (booklet)",
+    "week": 2,
+    "primaryTheme": "Air quality",
+    "conceptTags": [
+     "psi",
+     "explain"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 4,
+    "examStyle": "short_2to3",
+    "family": "psi-written"
+   },
+   "variants": [
+    {
+     "variantId": "psi-24h",
+     "perspectiveLabel": "Why the 24-hour PSI barely changes from hour to hour (2 marks)",
+     "marks": 2,
+     "stem": "The 24-hour PM2.5 value reported each hour hardly changes from one hour to the next, yet a fire nearby can make the air much worse within an hour. Explain why the 24-hour value changes slowly and why the 1-hour value is sometimes reported as well.",
+     "explanation": "The 24-hour value is an average of the present hourly reading and the previous 23, so one new hour changes it by only about 1/24 of the difference. The 1-hour value tracks the present, so it shows a sudden event (haze, fire) that the 24-hour value would take many hours to reflect.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "The 24-hour value is an average of the latest and the previous 23 hourly values, so one new hour moves it only a little",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "The 1-hour value responds quickly to a sudden change such as haze or a fire, so it is reported when conditions are changing",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "psi-mislead",
+     "perspectiveLabel": "Reasons the PSI descriptors may mislead (4 marks)",
+     "marks": 4,
+     "stem": "The PSI descriptor (\"moderate\", \"unhealthy\") is sometimes read as a direct statement about health. Give **four** reasons it can mislead.",
+     "hint": "Think about where the bands come from, what the number leaves out, and what it does not say about time.",
+     "explanation": "The health thresholds are extrapolated from studies with assumptions; the number gives no uncertainty; it ignores what the particles are made of (cigarette smoke is mostly carbon and tar, haze particles carry metals and other material); it has no time dimension (the exposure that matters is cumulative) and an equivalence with smoking compares unlike particles.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "The bands rest on extrapolated health data and assumptions",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "No error analysis or uncertainty is attached to the number",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "It ignores the composition of the particles (carbon and tar versus metals and industrial particles)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r4",
+        "criterion": "No time dimension: short exposure and long cumulative exposure are not distinguished",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
      }
     }
    ]

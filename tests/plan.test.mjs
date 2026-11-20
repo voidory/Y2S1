@@ -47,7 +47,7 @@ test('plan blocks: right count, shares respected, only topics with something to 
 });
 
 test('skill maps: both modules total 100 marks and weights follow marks', () => {
-  for (const [dir, expectChunks] of [['cm2011', 16], ['cm2021', 20]]) {
+  for (const [dir, expectChunks] of [['cm2011', 17], ['cm2021', 20]]) {
     const m = readContent('skill-map.json', dir);
     const tot = m.skills.reduce((a, k) => a + k.marks, 0);
     assert.ok(Math.abs(tot - 100) < 0.5, `${dir} marks ${tot}`);

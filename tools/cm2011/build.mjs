@@ -10,12 +10,14 @@ import f5 from './f5.mjs';
 import g5 from './g5.mjs';
 import x6 from './x6.mjs';
 import t7 from './t7.mjs';
+import a8 from './a8.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const outDir = path.resolve(here, '..', '..', 'public', 'content', 'cm2011');
 
 const CHUNKS = [
   { id: 't1-stats', part: 'Topic 1: Errors & confidence intervals', name: 'Statistics and uncertainty', summary: 'Mean, s, %RSD, Q-test, confidence interval, t-tests, error propagation' },
+  { id: 'a-psi', part: 'Topic 2: Air pollution in Singapore', name: 'PSI and air quality', summary: 'Sub-index from a 24-hour concentration, overall PSI, descriptors, breathing and cigarette equivalents, 24-hour versus 1-hour' },
   { id: 't1-quant', part: 'Topic 1: Errors & confidence intervals', name: 'Units, dilutions & Kjeldahl', summary: 'ppm and molarity, dilution factors, Kjeldahl nitrogen and adulterants' },
   { id: 'e-activity', part: 'Topic 3a: Electrochemistry', name: 'Ionic strength and activity', summary: 'I, extended Debye–Hückel γ, activities' },
   { id: 'e-nernst', part: 'Topic 3a: Electrochemistry', name: 'Nernst equation and cells', summary: 'Half-cells and cells with activities, spontaneity, Ksp → E°, ΔG and K' },
@@ -33,16 +35,16 @@ const CHUNKS = [
   { id: 'g-hplc', part: 'GC and HPLC', name: 'HPLC: columns, modes, elution order, detection', summary: 'Column label, C18/C8, normal vs reversed phase, elution order, isocratic vs gradient, detectors, particle size, choosing GC or HPLC' },
 ];
 
-const all = [...t1, ...t7, ...e3a, ...p3b, ...s4, ...f5, ...g5, ...x6];
+const all = [...t1, ...t7, ...a8, ...e3a, ...p3b, ...s4, ...f5, ...g5, ...x6];
 const nodes = all.map((x) => x.node);
 const ids = new Set();
 for (const n of nodes) { if (ids.has(n.id)) throw new Error('duplicate node id ' + n.id); ids.add(n.id); }
 
 // Skill marks follow the shape of the final (docs/cm2011-finals/analysis.md): a 4 x 25 paper whose first half (Q1-Q2) splits
-// statistics 19%, electrochemistry 20%, potentiometry 28%, spectroscopy 26% (Topic 2 has no skills yet), Q3 extraction 25, Q4 GC/HPLC 25.
+// statistics 19%, electrochemistry 20%, potentiometry 28%, spectroscopy 26% (Topic 2 PSI 3.5), Q3 extraction 25, Q4 GC/HPLC 25.
 // Within a block the authored marks keep their relative sizes; the whole map is scaled to 100.
-const BLOCK_OF = (c) => ({ t: 'stats', e: 'elec', p: 'ise', s: 'spec', x: 'extr', g: 'gc' })[c[0]];
-const BLOCK_MARKS = { stats: 9.5, elec: 10, ise: 14, spec: 13, extr: 25, gc: 25 };
+const BLOCK_OF = (c) => ({ t: 'stats', a: 'air', e: 'elec', p: 'ise', s: 'spec', x: 'extr', g: 'gc' })[c[0]];
+const BLOCK_MARKS = { stats: 9.5, air: 3.5, elec: 10, ise: 14, spec: 13, extr: 25, gc: 25 };
 const blockSum = {};
 for (const x of all) blockSum[BLOCK_OF(x.skill.chunk)] = (blockSum[BLOCK_OF(x.skill.chunk)] || 0) + x.skill.marks;
 const blockTotal = Object.values(BLOCK_MARKS).reduce((a, b) => a + b, 0);

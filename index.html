@@ -8999,9 +8999,21 @@
               if (!cur.userInput || typeof cur.userInput !== 'object') cur.userInput = {};
               cur.userInput[inp.dataset.mfKey] = e.target.value;
             });
+            // Enter submits once every field has something in it; until then it jumps to the next empty field
+            inp.addEventListener('keydown', (e) => {
+              if (e.key !== 'Enter' || phase !== 'answering' || e.isComposing) return;
+              e.preventDefault();
+              const all = $$('[data-mf-key]', root);
+              const empty = all.find((el, i) => i > all.indexOf(inp) && !String(el.value || '').trim()) || all.find((el) => !String(el.value || '').trim());
+              if (empty && empty !== inp) empty.focus();
+              else $('#btnSubmitAnswer', root)?.click();
+            });
           });
         } else if (slot.type === 'choice') {
           $$('input[name="choiceInput"]', root).forEach((inp) => {
+            inp.addEventListener('keydown', (e) => {
+              if (e.key === 'Enter' && phase === 'answering') { e.preventDefault(); inp.checked = true; inp.dispatchEvent(new Event('change')); $('#btnSubmitAnswer', root)?.click(); }
+            });
             inp.addEventListener('change', () => {
               if (slot.selectionMode === 'multi') {
                 cur.userInput = $$('input[name="choiceInput"]:checked', root).map((el) => el.value);

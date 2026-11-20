@@ -457,3 +457,32 @@ test('the booklet t table: next lower row for a df that is not listed, and the v
   const r = Evaluators.evaluate(lv, { lvl: '99%' }, scopeWith(lv, { tc: 7.5, dfv: 7 }), {}, byId['bk-m11-t1-levels']);
   assert.equal(r.normalizedGrade, 0);
 });
+
+test('golden: PSI sub-indices from the lecture and the finals (PM2.5 70 → 116, 6 → 25, 24 → 64, 44 → 87, 30.86 → 72; PM10 70 → 60; SO2 9 → 6)', () => {
+  const sub = (variantId, nodeId, c) => {
+    const v = variantOf(nodeId, variantId);
+    return target(v.evaluator.targets.psi, scopeWith(v, { c }));
+  };
+  const cases = [['psi-sub-pm25', 70, 116], ['psi-sub-pm25', 6, 25], ['psi-sub-pm25', 24, 64], ['psi-sub-pm25', 44, 87], ['psi-sub-pm25', 31, 72], ['psi-sub-pm10', 70, 60], ['psi-sub-so2', 9, 6]];
+  for (const [id, c, want] of cases) assert.equal(sub(id, 'bk-m11-a-sub', c), want, `${id} at ${c}`);
+});
+
+test('PSI: the overall value is the largest sub-index, and the bottom-of-band slip is named', () => {
+  const v = variantOf('bk-m11-a-overall', 'psi-overall');
+  const scope = scopeWith(v, { a: 70, b: 70, s: 100 });
+  assert.equal(scope.top, 116); assert.equal(scope.who, 'PM2.5'); assert.equal(scope.cat, 'unhealthy');
+  const w = variantOf('bk-m11-a-sub', 'psi-sub-pm25');
+  const res = Evaluators.evaluate(w, { psi: '117.0', cat: 'unhealthy' }, scopeWith(w, { c: 70 }), {}, byId['bk-m11-a-sub']);
+  assert.ok(res.normalizedGrade > 0, 'within a whole-number tolerance');
+  const bad = Evaluators.evaluate(w, { psi: '291.7', cat: 'unhealthy' }, scopeWith(w, { c: 70 }), {}, byId['bk-m11-a-sub']);
+  assert.ok(/straight ratio/.test(JSON.stringify(bad.fieldResults.psi)), 'the ratio slip is named');
+});
+
+test('golden: breathing chain (8 L/min is 11.52 m3 a day; 40 ug/m3 is 168 mg a year, 14 cigarettes) and 3.6e-4 g in a day is 31.25 ug/m3 (PSI 72)', () => {
+  const v = variantOf('bk-m11-a-cig', 'cig-year');
+  const s = scopeWith(v, { rate: 8, c: 40 });
+  assert.ok(close(s.vday, 11.52) && close(s.mgyr, 168.2, 0.01) && close(s.cigs, 14, 0.02));
+  const b = variantOf('bk-m11-a-cig', 'cig-back');
+  const t = scopeWith(b, { m: 360 });
+  assert.ok(close(t.c, 31.25, 0.001) && t.psi === 72);
+});

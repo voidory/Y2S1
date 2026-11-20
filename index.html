@@ -7114,6 +7114,23 @@
         }
       }
 
+      /* Method pages ("how to do this class of question"), one file per module: content/<dir>/methods.json. Never throws; the app works without them. */
+      const methodsUrl = (mod) => `content/${mod.dir}/methods.json`;
+      async function loadAllMethods(fetchFn) {
+        const out = {};
+        for (const mod of MODULES) {
+          try {
+            const doc = await fetchContent(methodsUrl(mod), fetchFn);
+            if (doc && Array.isArray(doc.methods)) out[mod.code] = doc;
+          } catch (err) { /* no pages for this module */ }
+        }
+        return out;
+      }
+      /* Pure: the page that serves a topic (chunk), or null. */
+      function methodForChunk(doc, chunkId) {
+        return (doc?.methods || []).find((m) => (m.chunks || []).includes(chunkId)) || null;
+      }
+
       /* I/O: never throws. One map per module, keyed by module code. */
       async function loadAllSkillMaps(fetchFn) {
         const maps = {};
@@ -7218,7 +7235,7 @@
       return {
         MODULES, BANK_URL, SKILL_MAP_URL, RECORD_KEY, chunkNodeIds,
         fetchJson, fetchContent, bankKey, isReservedNodeId, planBankSync, syncBank, syncAllBanks, sweepOrphanedProgress,
-        validateSkillMap, loadSkillMap, loadAllSkillMaps, analyzeSkillMap, nodeProgress, skillRows,
+        validateSkillMap, loadSkillMap, loadAllSkillMaps, loadAllMethods, methodForChunk, methodsUrl, analyzeSkillMap, nodeProgress, skillRows,
       };
     })();
 
@@ -7791,6 +7808,7 @@
         content: { bank: null, skillMap: null },
         plan: { hoursPerDay: 6, split: 50, ratings: {} },
         ui: { sheet: null, readinessTab: 'plan', settingsTab: 'module', bankLimit: 60 },
+        methods: {},
         reviewMap: {},
         attemptLogs: [],
         settings: Scheduler.DEFAULT_SETTINGS,
@@ -7892,6 +7910,53 @@
       /* Tagging the kind of slip is a bonus: if it ever throws, the attempt must still be saved. */
       function safeErrorTags(variant, userInput, evalResult, rubricChecks) {
         try { return Review.errorTags(variant, userInput, evalResult, rubricChecks); } catch (err) { console.warn('[Review] could not tag the slip:', err.message); return []; }
+      }
+
+      /* A full-page "how to do this" sheet for a topic. Lives on document.body so any screen can open it; `traps` are the named wrong
+         routes the learner just hit, shown on top. Escape or the close button dismisses it. */
+      function renderMethodHtml(md) {
+        const parts = String(md || '').split(/^## /m);
+        const head = parts.shift();
+        const sec = (txt) => { const [title, ...body] = txt.split('\n'); return `<section class="mb-5"><h3 class="font-display text-[15px] font-semibold text-slate-900 mb-1.5" data-method-h>${escSub(title.trim())}</h3><div class="text-sm text-slate-800 leading-relaxed prose-math [&>p]:mb-2 [&_ul]:list-disc [&_ul]:pl-5 [&_li]:mb-1">${renderMarkdownLite(body.join('\n').trim())}</div></section>`; };
+        return (head.trim() ? `<div class="text-sm text-slate-800 mb-4">${renderMarkdownLite(head.trim())}</div>` : '') + parts.map(sec).join('');
+      }
+      function showMethod(chunkId, traps = []) {
+        const doc = appState.methods?.[appState.activeModule];
+        const m = Content.methodForChunk(doc, chunkId);
+        if (!m) return false;
+        document.getElementById('methodOverlay')?.remove();
+        const el = document.createElement('div');
+        el.id = 'methodOverlay';
+        el.className = 'fixed inset-0 z-50 bg-slate-900/40 flex md:items-center md:justify-center';
+        el.innerHTML = `
+          <div class="bg-white w-full md:max-w-3xl h-[100dvh] md:h-[92dvh] md:rounded-2xl shadow-xl flex flex-col" role="dialog" aria-modal="true" aria-label="${esc(m.title)}">
+            <div class="flex items-start justify-between gap-3 px-4 py-3 border-b border-slate-200">
+              <div class="min-w-0">
+                <div class="text-[11px] uppercase tracking-wider text-slate-500 font-medium">How to do this</div>
+                <h2 class="font-display text-lg font-semibold text-slate-900 leading-snug" data-method-title>${escSub(m.title)}</h2>
+                ${m.summary ? `<p class="text-xs text-slate-600 mt-0.5">${esc(m.summary)}</p>` : ''}
+              </div>
+              <button type="button" data-method-close aria-label="Close" class="w-9 h-9 shrink-0 rounded-lg text-slate-500 hover:bg-slate-100">✕</button>
+            </div>
+            <div class="flex-1 overflow-y-auto px-4 py-4" data-bounded-scroll data-method-body>
+              ${m.flag ? `<div class="mb-4 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-xs text-amber-900" data-method-flag>${esc(m.flag)}</div>` : ''}
+              ${traps.length ? `<div class="mb-4 rounded-lg border border-rose-200 bg-rose-50 px-3 py-2 text-sm text-rose-900" data-method-hit><div class="text-[11px] uppercase tracking-wider font-semibold mb-1">What went wrong in your answer</div><ul class="list-disc pl-5">${traps.map((t) => `<li>${renderMarkdownLite(t).replace(/<\/?p>/g, '')}</li>`).join('')}</ul></div>` : ''}
+              ${renderMethodHtml(m.md)}
+            </div>
+            <div class="px-4 py-3 border-t border-slate-200 flex items-center justify-between gap-2">
+              <span class="text-xs text-slate-500">Then try the question again.</span>
+              <button type="button" data-method-close class="px-4 py-2 text-sm font-medium bg-slate-900 text-white rounded-lg hover:bg-slate-800">Back to practice</button>
+            </div>
+          </div>`;
+        const close = () => { el.remove(); document.removeEventListener('keydown', onKey); };
+        const onKey = (e) => { if (e.key === 'Escape') close(); };
+        document.addEventListener('keydown', onKey);
+        el.addEventListener('click', (e) => { if (e.target === el) close(); });
+        el.querySelectorAll('[data-method-close]').forEach((b) => b.addEventListener('click', close));
+        document.body.appendChild(el);
+        renderMath(el);
+        if (traps.length) { const h = [...el.querySelectorAll('[data-method-h]')].find((x) => /^traps/i.test(x.textContent.trim())); h?.scrollIntoView({ block: 'start' }); }
+        return true;
       }
 
       function drillTopic(chunkId) {
@@ -8808,6 +8873,7 @@
                     const topicId = appState.skillMap ? Weakness.chunksOf(appState.skillMap, node.id)[0] : null;
                     const topicName = topicId ? appState.skillMap.chunks?.find((c) => c.id === topicId)?.name : '';
                     return `
+                      ${topicId && Content.methodForChunk(appState.methods?.[appState.activeModule], topicId) ? `<button type="button" id="btnMethod" data-chunk="${esc(topicId)}" class="px-3 py-1.5 text-xs font-medium rounded-lg ${evalResult.passed ? 'border border-slate-300 bg-white hover:bg-slate-50 text-slate-700' : 'border border-blue-300 bg-blue-50 hover:bg-blue-100 text-blue-900'}">How to do this</button>` : ''}
                       ${topicId ? `<button type="button" id="btnDrillTopic" data-chunk="${esc(topicId)}" title="${esc(topicName || '')}" class="px-3 py-1.5 text-xs font-medium border border-slate-300 bg-white hover:bg-slate-50 rounded-lg text-slate-700">Drill this topic</button>` : ''}
                       ${!evalResult.passed ? (cur.retryQueued
                         ? `<span class="text-xs font-medium text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-lg px-3 py-1.5" data-retry-queued>Coming back in ${appState.retryAfterCards} cards ✓</span>`
@@ -9173,6 +9239,10 @@
         });
         $('#btnNextQuestion', root)?.addEventListener('click', () => loadNextQuestion({ skipCurrent: true }));
         $('#btnDrillTopic', root)?.addEventListener('click', (e) => drillTopic(e.currentTarget.dataset.chunk));
+        $('#btnMethod', root)?.addEventListener('click', (e) => {
+          const tags = (cur.evalResult ? safeErrorTags(cur.inst.variant, cur.userInput, cur.evalResult, cur.rubricChecks) : []) || [];
+          showMethod(e.currentTarget.dataset.chunk, tags.filter((t) => String(t).startsWith('calc:')).map((t) => String(t).slice(5)));
+        });
         $('#btnRetryLater', root)?.addEventListener('click', () => {
           if (!appState.session.retry.some((r) => r.nodeId === node.id)) appState.session.retry.push({ nodeId: node.id, after: appState.session.cards + appState.retryAfterCards });
           cur.retryQueued = true;
@@ -10175,7 +10245,7 @@
                     <div class="text-sm font-semibold text-slate-900">${esc(t.name)}</div>
                     <div class="text-[11px] text-slate-500">${esc(t.part)} · ${t.missed} of your last ${t.window} answers missed</div>
                   </div>
-                  ${drillBtn(t.id)}
+                  <div class="flex flex-col gap-1.5 items-stretch">${drillBtn(t.id)}${Content.methodForChunk(appState.methods?.[appState.activeModule], t.id) ? `<button type="button" data-weak-method="${esc(t.id)}" class="shrink-0 px-3 py-1.5 text-xs font-medium bg-blue-50 border border-blue-300 text-blue-900 rounded-md hover:bg-blue-100">How to do this</button>` : ''}</div>
                 </div>
                 <div class="flex items-center gap-2">
                   <div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden" role="img" aria-label="Average score ${pctMean}%"><div class="h-full ${barTone(t.mean)}" style="width:${Math.max(3, pctMean)}%"></div></div>
@@ -10303,6 +10373,7 @@
           btn.addEventListener('click', () => drillTopic(btn.dataset.drillChunk));
         });
         $$('[data-weak-drill]', root).forEach((btn) => btn.addEventListener('click', () => drillTopic(btn.dataset.weakDrill)));
+        $$('[data-weak-method]', root).forEach((btn) => btn.addEventListener('click', () => showMethod(btn.dataset.weakMethod)));
         $$('[data-seg-jump]', root).forEach((btn) => btn.addEventListener('click', () => { appState.ui.readinessTab = btn.dataset.segJump; render(); }));
         const savePlan = async () => { try { const db = await DB.init(); await db.settings.put({ key: 'plan', ...appState.plan }); } catch (err) { console.warn('[Plan] not saved:', err.message); } };
         $$('[data-plan-exam]', root).forEach((inp) => inp.addEventListener('change', async () => {
@@ -11055,6 +11126,7 @@
           if (appState.content.swept.reviewStates || appState.content.swept.attemptLogs) console.info('[Content] removed orphaned progress', appState.content.swept);
           const loaded = await Content.loadAllSkillMaps();
           appState.skillMaps = loaded.maps;
+          appState.methods = await Content.loadAllMethods();
           appState.content.skillMap = { map: loaded.maps[appState.activeModule] || null, error: loaded.error };
           await refreshStore();
           appState.content.skillMap.map = appState.skillMap;

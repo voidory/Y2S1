@@ -1,0 +1,145 @@
+{
+ "version": 1,
+ "module": "CM2011",
+ "methods": [
+  {
+   "id": "stats",
+   "title": "Statistics and uncertainty",
+   "chunks": [
+    "t1-stats"
+   ],
+   "summary": "Mean and s, Q-test, confidence interval, the three t-tests, and error propagation, in the order the final asks them.",
+   "md": "## Use it when\nA question gives replicate data, asks you to reject a point, compare two methods, quote a confidence interval, or combine uncertainties.\n\n## Steps\n1. **Mean and s** (s uses N − 1). %RSD = s/mean × 100.\n2. **Q-test** (90% only in the booklet): Q = gap/range, where gap is the suspect value to its nearest neighbour. Reject if Q_calc > Q_table (n = 4 0.76, 5 0.64, 6 0.56, 7 0.51, 8 0.47, 9 0.44, 10 0.41). If you reject, recompute the mean and s without it.\n3. **Confidence interval:** x̄ ± t·s/√N, with t at df = N − 1 and the confidence level the question names.\n4. **Pick the t-test.** Measured against a known value: t = |x̄ − μ|·√N/s, df = N − 1. Two methods on one sample, several replicates each (pooled): s_pooled = √[(s₁²(N₁−1) + s₂²(N₂−1))/(N₁+N₂−2)], t = |x̄₁ − x̄₂|/s_pooled × √(N₁N₂/(N₁+N₂)), df = N₁ + N₂ − 2. Two methods on several different samples (paired): take each difference d, then t = |d̄|·√n/s_d, df = n − 1.\n5. **Decide in words:** if t_cal > t_table the results differ significantly at that confidence level; otherwise they do not. Say which, and quote both numbers.\n6. **Booklet table rule:** the t table lists df 1–10, 15, 20, 25, 30, 40, 60, 120. If your df is not listed, read the next **lower** row (11 df → row 10; 26 df → row 25). The recent finals use 99.9%.\n7. **Propagation:** add or subtract → absolute errors combine as √(e₁² + e₂²). Multiply or divide → percent errors combine as √(%e₁² + %e₂²). Mixed: do the bracket with absolute errors first, convert to a percent, then combine.\n\n## Worked mini-example\n[1.76(±0.03) − 0.59(±0.02)] / 1.89(±0.02): the bracket is 1.17 ± √(0.03² + 0.02²) = 1.17 ± 0.036, that is 3.1%. Then 3.1% and 0.02/1.89 = 1.1% give √(3.1² + 1.1²) = 3.3%. The answer is 0.619 ± 3%, or ± 0.020. Keep every digit until the end.\n\n## Traps\n- Using the 95% column when the question says 99% or 99.9%.\n- Using the wrong df: pooled is N₁ + N₂ − 2, paired is n − 1.\n- Forgetting √N in the t formula.\n- Applying the pooled test to paired data (or the reverse).\n- Combining percent errors for an addition, or absolute errors for a multiplication.\n- Using a different Q table than the 90% one in the booklet."
+  },
+  {
+   "id": "psi",
+   "title": "PSI and air quality",
+   "chunks": [
+    "a-psi"
+   ],
+   "summary": "Sub-index by interpolation, overall PSI, and the breathing and cigarette chain.",
+   "md": "## Use it when\nYou get a 24-hour pollutant concentration and must give a PSI, a descriptor, or an equivalent number of cigarettes.\n\n## Steps\n1. Find the band that holds your concentration in the booklet table.\n2. **Interpolate:** I = [(PSI_upper − PSI_lower)/(C_upper − C_lower)] × (C − C_lower) + PSI_lower. The lower anchor is the **top of the band below** (the booklet's I_max,J). For the lowest band use 0 and 0.\n3. **Overall PSI = the largest sub-index**; report that pollutant.\n4. **Descriptor:** 0–50 good, 51–100 moderate, 101–200 unhealthy, 201–300 very unhealthy, above 300 hazardous.\n5. **Air breathed:** rate (L/min) × 60 × 24 / 1000 = m³ per day. At 8 L/min that is 11.52 m³.\n6. **Mass inhaled** = concentration (µg m⁻³) × volume. One cigarette is taken as 12 mg = 12 000 µg of PM2.5. Cigarettes = mass / 12 mg.\n7. **24-hour versus 1-hour:** the 24-hour value averages the present hour and the previous 23, so it moves slowly. The 1-hour value tracks sudden haze or fires.\n\n## Worked mini-example\nPM2.5 = 70 µg m⁻³ lies between 55 (PSI 100) and 150 (PSI 200): I = (100/95) × (70 − 55) + 100 = 116, unhealthy. A year at 40 µg m⁻³: 11.52 × 365 = 4205 m³, × 40 = 168 mg, which is 14 cigarettes.\n\n## Traps\n- Using the bottom of the band as the lower anchor.\n- A straight ratio from zero (only right inside the lowest band).\n- Averaging the sub-indices instead of taking the largest.\n- Forgetting the ×365, or mixing µg and mg.\n- Why the descriptors can mislead: extrapolated health data, no error bars, composition ignored (cigarette tar versus haze metals), no time dimension."
+  },
+  {
+   "id": "quant",
+   "title": "Units, dilutions and Kjeldahl",
+   "chunks": [
+    "t1-quant"
+   ],
+   "summary": "ppm and molarity, dilution chains, Kjeldahl by back-titration, and the melamine ppm.",
+   "md": "## Use it when\nA question converts concentration units, undoes a dilution, or goes from a titration to % nitrogen.\n\n## Steps\n1. **ppm** in dilute water = mg per litre. Molarity = (ppm/1000) g L⁻¹ ÷ molar mass. 1 ppm = 1000 ppb.\n2. **Dilution factor** = final volume ÷ volume taken. For a chain multiply the factors, then **multiply the measured concentration by the factor** to get back to the original.\n3. **Kjeldahl by back-titration:** mmol N = mmol acid added − mmol base used (1 : 1 : 1). Mass N = mmol × 14.01 mg. %N = mass N ÷ sample mass × 100. % protein = %N × the stated factor.\n4. **Melamine** (C₃H₆N₆, M = 126.15, N = 84.06): melamine mass = nitrogen mass from melamine × 126.15/84.06. ppm = µg per g.\n\n## Worked mini-example\n25.00 mL made up to 250.0 mL, then 10.00 mL of that to 100.0 mL gives DF = 10 × 10 = 100. A reading of 4.0 ppm in the final solution means 400 ppm in the original.\n\n## Traps\n- Dividing by the dilution factor instead of multiplying.\n- Undoing only one step of a two-step dilution.\n- Forgetting that the acid you add is mostly used up by ammonia: subtract the back-titration.\n- Using the molar mass of the compound where the nitrogen mass is needed."
+  },
+  {
+   "id": "nernst",
+   "title": "Ionic strength, activity and cells",
+   "chunks": [
+    "e-activity",
+    "e-nernst"
+   ],
+   "summary": "I and γ, one-electron half-cells, E_cell, spontaneity, ΔG and K, E° from Ksp.",
+   "md": "## Use it when\nA question asks for an activity, a half-cell or cell potential with activities, spontaneity, ΔG°, or E° from a solubility product.\n\n## Steps\n1. **Ionic strength** I = ½Σcz². Shortcuts for the salt's I/c: 1:1 → c, 1:2 → 3c, 2:2 → 4c, 1:3 → 6c.\n2. **Activity coefficient:** look γ up in the booklet table (nearest I column, the ion's size α), or use −log γ = 0.51 z²√I/(1 + 3.3α√I) with α in nm. a = γ·c.\n3. **Half-reactions as one-electron reductions** (write ½Cu²⁺ + e⁻ → ½Cu). E = E° − 0.0592 log(Q) with Q built from **activities**; solids have a = 1.\n4. **Cell:** E_cell = E_right − E_left, with the **more positive** reduction potential on the right.\n5. **Spontaneous** if E_cell > 0 (ΔG < 0).\n6. ΔG° = −nFE°_cell, with n of the reaction as written. K from log K = nE°/0.0592.\n7. **E° from Ksp:** E°(salt couple) = E°(M⁺/M) + (0.0592/n) log Ksp, with n the electrons in the salt's half-reaction (Ag₂SO₃ + 2e⁻ → 2Ag + SO₃²⁻ has n = 2: E° = 0.799 + 0.0296 log Ksp).\n8. **Reference electrodes:** SCE → SHE add 0.242 V, SHE → SCE subtract it.\n\n## Worked mini-example\nAg₂SO₃ with Ksp = 1.5 × 10⁻¹⁴: E° = 0.799 + 0.0296 × (−13.82) = +0.390 V. Mixing LaCl₃ (0.05 M, I = 6c = 0.30 M) with 3 mol eq NaIO₃ precipitates La(IO₃)₃ and leaves 0.15 M NaCl, I = 0.15 M: ionic strength falls.\n\n## Traps\n- Using concentration in the log term when activity is asked.\n- Writing a two-electron half-reaction when the course convention is one electron (it changes ΔG, not E).\n- Swapping E_right and E_left.\n- Forgetting that solids are 1.\n- Using the 0.0592 slope for a different temperature."
+  },
+  {
+   "id": "electrodes",
+   "title": "How the electrodes work (written answers)",
+   "chunks": [
+    "p-principles",
+    "p-types"
+   ],
+   "summary": "The standard answer skeletons for ISE cells, junction potential, membranes, gas probes and TISAB.",
+   "md": "## Use it when\nA question says draw, label, explain, or why. Marks are one point per fact, so state each fact in its own sentence.\n\n## Steps\n1. **Cell notation:** reference electrode on the left, sensor on the right. E_cell = E_right − E_left = E_G + E_G′ + E_R′ − (E_R + E_J), where only E_G changes with the ion.\n2. **Junction potential:** ions diffuse at different rates (H⁺ faster than Cl⁻), so charge builds up across the junction. It is the largest error. Keep it constant by giving standards and sample the same ionic strength and temperature.\n3. **Why concentration is enough:** an ISE responds to activity. A constant background (ISA or TISAB) fixes γ, so the signal follows concentration.\n4. **Membranes:** glass (conditioned in 0.1 M HCl, a(H⁺), alkali ions interfere), LaF₃ (F⁻ hops between vacancies, OH⁻ interferes), Ag₂S (senses S²⁻ through Ksp), PVC with an ionophore (valinomycin for K⁺).\n5. **Gas probes:** gas-permeable membrane over an inner solution with an ISE; NH₃ with 0.1 M NH₄Cl and a pH glass electrode, E = const − 59.2 log[NH₃].\n6. **TISAB for fluoride:** NaCl for ionic strength, acetate buffer (pH 5–6, avoids OH⁻), CDTA to free F⁻ from Al(III) and Fe(III).\n7. **NH₄NO₃ bridge** keeps K⁺ from the saturated KCl reference out of the sample.\n\n## Traps\n- Saying \"the electrode measures concentration\" without the constant-γ reason.\n- Forgetting that the junction potential is constant only if the two solutions match.\n- For the NH₃ probe, forgetting that the slope is negative.\n- A list of words with no mechanism: markers give a mark per mechanism, not per keyword."
+  },
+  {
+   "id": "calibration",
+   "title": "ISE calibration and the dilution chain",
+   "chunks": [
+    "p-calibration"
+   ],
+   "summary": "Slope, reading an unknown, undoing the dilutions, and weight % N with the ammonia probe.",
+   "md": "## Use it when\nYou get standards (E against log c) and a sample reading, usually after one or two dilutions.\n\n## Steps\n1. **Slope** = ΔE per decade. Two standards n decades apart: (E_high − E_low)/n. Theory at 25 °C: ±59.2/z mV, positive for cations, negative for anions and the NH₃ probe. Nernstian if within about ±2 mV.\n2. **log c of the sample** = log c_ref + (E − E_ref)/slope.\n3. c = 10^(log c).\n4. **Undo each dilution:** multiply by V_final/V_taken for every step.\n5. **To a mass:** n = c × V (litres) of the solution you have just reached; mass = n × molar mass.\n6. **To weight %:** mass of the analyte ÷ sample mass × 100. For N from NH₃ the ratio is 1 : 1 and M = 14.01.\n7. State the assumption: constant ionic strength so concentration stands in for activity, and the reading is in the linear range (10⁻⁵ to 10⁻¹ M).\n\n## Worked mini-example\nStandards at 10⁻⁴ M and 10⁻² M read 400.0 and 282.0 mV: slope = (282.0 − 400.0)/2 = −59.0. A diluted sample reads 303.7 mV: log c = −4 + (303.7 − 400.0)/(−59.0) = −2.37, so 4.3 × 10⁻³ M. If 10 mL was diluted to 100 mL, the digest holds 4.3 × 10⁻² M; in 250 mL that is 10.7 mmol N, 150 mg.\n\n## Traps\n- Dropping the negative sign of a gas-probe slope.\n- Dividing by the number of standards instead of the number of decades.\n- Forgetting a dilution step, or dividing by the factor.\n- Using NH₃ (17.04) instead of N (14.01).\n- Reading a value outside the standards without saying so."
+  },
+  {
+   "id": "selectivity",
+   "title": "Interferents and selectivity",
+   "chunks": [
+    "p-selectivity"
+   ],
+   "summary": "The two-solution selectivity coefficient, step by step, and how to classify an interferent.",
+   "md": "## Use it when\nYou get E₁ (primary ion alone) and E₂ (primary ion plus interferent) and must find K^pot.\n\n## Steps\n1. Work out the **ionic strength of each solution** (the interferent salt dominates the second).\n2. **γ for each ion** at the right I (extended Debye–Hückel with the α values given, or the table).\n3. **Activities:** a_i in the pure solution, a_i′ in the mixture (different I, so different γ), a_j for the interferent in the mixture.\n4. **K = [a_i·10^((E₂−E₁)/s) − a_i′]/a_j^(n/x)** with n, x the charges of primary and interfering ion, s the slope.\n5. **Classify:** below 10⁻³ very weak, 10⁻³ to 1 intermediate, above 1 the electrode prefers the interferent (the papers say weak, intermediate, strong).\n6. **Interference error:** the interferent's contribution as an equivalent activity is K·a_j^(n/x).\n\n## Worked mini-example\nCa²⁺ electrode (s = 29.6 mV): 0.001 M CaCl₂ (I = 0.003, γ = 0.79, a_i = 7.9 × 10⁻⁴); with 0.1 M NaCl (I = 0.103, γ(Ca) = 0.40, γ(Na) = 0.77, a_i′ = 4.0 × 10⁻⁴, a_j = 7.7 × 10⁻²). With E₂ − E₁ = +0.3 mV the result is K ≈ 6.9 × 10⁻²: intermediate.\n\n## Traps\n- Using the same γ in both solutions.\n- Mixing up the exponent n/x (primary over interferent).\n- Keeping too few significant figures: the two numerator terms nearly cancel.\n- Calling 0.3 to 1 \"strong\": strong means above 1."
+  },
+  {
+   "id": "absorption",
+   "title": "Absorption spectroscopy",
+   "chunks": [
+    "s-absorption"
+   ],
+   "summary": "Beer–Lambert, %T, dilution chains, molar mass from absorbance, and wavenumber and energy conversions.",
+   "md": "## Use it when\nA question has A, %T, ε, a path length, a dilution, or a unit conversion for light.\n\n## Steps\n1. **T = %T/100.** A = −log T = εbc, with b in cm, c in M, ε in M⁻¹ cm⁻¹.\n2. Solve for the unknown; keep the units consistent.\n3. **Undo the dilutions** (multiply by V_final/V_taken for each step).\n4. **Molar mass** = mass dissolved ÷ (c_original × volume).\n5. **Conversions:** wavenumber (cm⁻¹) = 10⁷/λ(nm); 1 nm = 10 Å; E = hc/λ with h = 6.63 × 10⁻³⁴ J s, c = 3.00 × 10⁸ m s⁻¹.\n6. **Deviations from Beer's law:** high concentration, association or dissociation of the absorber, non-monochromatic or stray light.\n\n## Worked mini-example\nT = 44.1%, b = 2.10 cm, c = 7.25 × 10⁻⁵ M: A = −log 0.441 = 0.356, ε = 0.356/(2.10 × 7.25 × 10⁻⁵) = 2.34 × 10³ M⁻¹ cm⁻¹.\n\n## Traps\n- Using %T where T is needed.\n- A log of the wrong sign (A is positive).\n- Forgetting a dilution factor.\n- State the assumption when asked: only the analyte absorbs at that wavelength."
+  },
+  {
+   "id": "fluorescence",
+   "title": "Fluorescence",
+   "chunks": [
+    "s-fluorescence"
+   ],
+   "summary": "Label the Jablonski diagram, explain the sensitivity and the Stokes shift, and the two-point calibration.",
+   "md": "## Use it when\nA question labels processes, asks why fluorescence is sensitive, draws the instrument, or reads a concentration from a calibration.\n\n## Steps\n1. **Jablonski labels:** A absorption; R vibrational relaxation (to the lowest vibrational level, very fast); IC internal conversion (same spin, between electronic states); ISC intersystem crossing (S₁ → T₁, spin changes); F fluorescence (S₁ → S₀, same spin, fast); P phosphorescence (T₁ → S₀, spin-forbidden, slow, 10⁻⁴ to 10² s).\n2. **Stokes shift:** emission is at longer wavelength than excitation because of geometry re-optimisation in S₁ and solvent interactions.\n3. **Sensitivity:** the detector sits at 90° to the beam and sees only emitted light on a near-zero background; absorption measures a small difference between two large signals.\n4. **Instrument:** source, excitation monochromator, sample cell, emission monochromator, detector at 90°.\n5. **Quenching:** M* + Q → M + Q*, and Q* loses heat. It lowers the signal, and temperature rises lower the quantum yield.\n6. **Two-point calibration:** slope = ΔI/Δc, then c = (I − intercept)/slope.\n7. **Who fluoresces:** rigid, conjugated molecules (less internal conversion).\n\n## Traps\n- Putting the detector in line with the beam.\n- Confusing phosphorescence (spin change, slow) with fluorescence.\n- Saying the Stokes shift comes from \"energy loss to heat\" with no cause.\n- Atomic emission has no Stokes shift: do not apply this page to AES."
+  },
+  {
+   "id": "atomic",
+   "title": "Atomic spectroscopy",
+   "chunks": [
+    "s-atomic"
+   ],
+   "summary": "AAS layout, Boltzmann populations, temperature sensitivity, line widths, and ICP versus AAS.",
+   "md": "## Use it when\nA question asks for the AAS components, an excited-state fraction, a comparison of AES with AAS, or why atomic lines are narrow.\n\n## Steps\n1. **AAS order:** hollow-cathode lamp, atomiser (nebuliser and flame), monochromator, detector. The monochromator isolates the lamp line from flame emission.\n2. **Hollow-cathode lamp:** Ar⁺ sputters metal atoms from the cathode, which are excited and emit the line the analyte absorbs (lines narrower than 10⁻³ to 10⁻² nm).\n3. **Boltzmann:** N_e/N₀ = (g_e/g₀)·exp[−(E_e − E₀)/kT] with k = 1.381 × 10⁻²³ J K⁻¹. Compute it at both temperatures and compare.\n4. **AES is more temperature-sensitive than AAS** because the excited fraction changes strongly with T while the ground-state population (over 99.98%) barely does.\n5. **Line widths:** natural (Heisenberg, δE·δt ≥ h/4π), collisional (pressure) and Doppler (temperature) broadening. The lamp is cooler and at lower pressure than the flame, so its lines are narrower than the absorption lines.\n6. **ICP versus AAS:** hotter plasma, complete atomisation, many elements at once, less oxide formation.\n\n## Worked mini-example\nNa with E_e = 3.371 × 10⁻¹⁹ J and g_e/g₀ = 2: N_e/N₀ = 1.67 × 10⁻⁴ at 2600 K and 1.74 × 10⁻⁴ at 2610 K, a 4% rise for a 10 K change.\n\n## Traps\n- Using the booklet's h instead of k in the exponent.\n- Forgetting the g_e/g₀ factor.\n- Giving the AES wavelength a Stokes shift (it has none)."
+  },
+  {
+   "id": "chromcalc",
+   "title": "Retention, resolution and plates",
+   "chunks": [
+    "c-calc"
+   ],
+   "summary": "k and α, R_S from times and widths, N and H, Purnell, and the flow and scale-up calculations.",
+   "md": "## Use it when\nA question gives retention times, widths, a column length, or asks for plates or length needed.\n\n## Steps\n1. **Retention factor** k = (t_R − t_M)/t_M. **Selectivity** α = k_B/k_A (B the later peak). From K: k = K V_S/V_M.\n2. **Resolution:** R_S = 2(t_B − t_A)/(W_A + W_B) with baseline widths, or 1.178(t_B − t_A)/(w½A + w½B) with half-height widths (the two constants are not interchangeable). Below 1.0 poor, about 1.0 partial, 1.5 or more baseline.\n3. **Plates:** N = 16(t_R/W)² (baseline width) or 5.55(t_R/w½)². H = L/N.\n4. **Purnell:** R_S = (√N/4)((α − 1)/α)(k_B/(1 + k_B)). Solve for N: N = 16 R_S²(α/(α − 1))²((1 + k_B)/k_B)². Then L = N × H.\n5. **Length scaling:** R_S ∝ √L, so doubling R_S needs four times the length.\n6. **Flow:** packed column u_v = u_x·πr²·ε. Scale-up keeps length and u_x; sample mass and flow scale with the area (r²).\n7. **Open tube:** V_M/V_S ≈ d_c/(4d_f), then K = k × V_M/V_S.\n\n## Worked mini-example\nPeaks at 7.20 and 8.10 min, W = 0.48 and 0.60: R_S = 2(0.90)/1.08 = 1.67. Both widths +25%: R_S = 1.67/1.25 = 1.33.\n\n## Traps\n- The factor 2 missing in R_S, or using 1.178 with baseline widths.\n- Using 16 with a half-height width.\n- k as t_R/t_M.\n- Treating R_S as proportional to L.\n- Dropping a squared term in the Purnell rearrangement."
+  },
+  {
+   "id": "chromconcepts",
+   "title": "Band spreading, peak shape and types",
+   "chunks": [
+    "c-concepts"
+   ],
+   "summary": "The van Deemter terms, which dominates where, tailing and fronting, and the types of chromatography.",
+   "md": "## Use it when\nA question asks which term dominates, what causes a peak shape, or which mechanism a method uses.\n\n## Steps\n1. **H = A + B/u + Cu.** A: multiple flow paths (zero in an open tube). B/u: longitudinal diffusion (dominates at low flow, larger in GC). Cu: slow equilibration between phases (dominates at high flow).\n2. **At the optimum** velocity B/u = Cu, H is smallest and N largest.\n3. **Reduce each term:** small, uniform, well-packed particles for A; faster flow for B/u; slower flow, smaller particles, thin films for Cu.\n4. **Tailing:** some molecules held too strongly (silanols, active sites); cure by end-capping, a different pH or mobile phase, or a smaller injection. **Fronting:** overload. A/B > 1 is tailing in the lecture convention.\n5. **Types:** adsorption (solid, TLC), partition (liquid film), ion exchange (fixed charges, counter-ions), size exclusion (large elute first), affinity (specific binder).\n6. **Void time t_M** is the same for every solute. The solute with more affinity for the mobile phase leaves first.\n\n## Traps\n- Saying longitudinal diffusion is equal in GC and LC.\n- Putting the optimum where B/u dominates.\n- Saying a more hydrophobic solute has a longer t_M.\n- The direction of the isotherm effect on tailing is disputed between the decks: do not argue it, use the causes above."
+  },
+  {
+   "id": "extraction",
+   "title": "Extraction",
+   "chunks": [
+    "x-calc",
+    "x-concepts"
+   ],
+   "summary": "D at a pH, which formula for the fraction left, repeated portions, and the written reasons.",
+   "md": "## Use it when\nA solute is split between water and an organic solvent, with a pH, a K, volumes and a target concentration.\n\n## Steps\n1. **Which phase does it start in?** Acid–base problems in the exam start in the **organic** phase; plain K problems start in water.\n2. **Distribution coefficient:** acid D = K/(1 + K_a/[H⁺]); base D = K/(1 + [H⁺]/K_a) (K_a of BH⁺). At pH = pK_a an acid has D = K/2.\n3. **Fraction left after one extraction:** starting in the organic phase f = V_org/(V_org + V_aq/D); starting in water f = V_aq/(V_aq + D·V_org). With plain K use K in place of D.\n4. **Concentration left** = c₀·f. **% extracted** = 100(1 − f).\n5. **n portions:** c = c₀·fⁿ, so n = ln(c/c₀)/ln f, **rounded up**. Total volume = n × the portion volume.\n6. **Which pH leaves more behind?** An acid ionises at high pH and stays in water, so the organic solvent keeps more at the lower pH. A base is the reverse.\n7. **Several small portions beat one large one** with the same total solvent.\n\n## Worked mini-example\nK = 4.1, K_a = 6.3 × 10⁻⁵, pH 5 ([H⁺] = 10⁻⁵): D = 4.1/(1 + 6.3) = 0.562. With 25 mL ether and 100 mL water, f = 25/(25 + 100/0.562) = 0.123, so 0.15 M becomes 1.85 × 10⁻² M, and 87.7% is extracted.\n\n## Traps\n- Using the water-start formula for an acid that starts in the organic phase.\n- Using K where D is needed at a given pH.\n- Not rounding the number of portions up.\n- Using the first volume for the repeated extractions.\n- Mixing up which pH is higher when you explain."
+  },
+  {
+   "id": "gc",
+   "title": "GC: columns, programming and detectors",
+   "chunks": [
+    "g-gc",
+    "g-detect"
+   ],
+   "summary": "Answer skeletons for the descriptive GC parts, one point per fact.",
+   "md": "## Use it when\nThe question asks you to compare, explain or choose, and marks are one per point.\n\n## Steps\n1. **Open tubular versus packed:** open tubular gives higher resolution, shorter analysis, higher sensitivity and lower sample capacity; packed gives higher capacity, broader peaks and longer retention. Applications for capillary columns: complex mixtures (petrol, essential oils, environmental trace analysis).\n2. **Temperature programming:** a ramp lets a mixture of boiling points elute in one run, sharpening late peaks and shortening the time; pressure programming does the same without heat.\n3. **Injection:** split (high concentration, avoids overload), splitless (trace, vent opened later), on-column (thermally labile or high boiling).\n4. **Carrier gas:** He, N₂ or H₂; H₂ and He allow faster flow; H₂ is flammable.\n5. **Detectors:** TCD (heated filament in He; an analyte changes the thermal conductivity, filament temperature and resistance; universal, non-destructive, less sensitive); FID (H₂–air flame, ions from carbon compounds, very sensitive, destroys the sample); MS (m/z, identifies).\n6. **GC–MS versus LC–MS:** MS needs gas-phase ions under vacuum, so the GC effluent is already a gas, while LC must first be desolvated (ESI, APCI).\n\n## Traps\n- Giving a detector name without its mechanism.\n- Calling TCD destructive.\n- \"Better resolution\" without saying why (an open column has no packing, so A = 0)."
+  },
+  {
+   "id": "hplc",
+   "title": "HPLC: columns, modes and elution order",
+   "chunks": [
+    "g-hplc"
+   ],
+   "summary": "Column label, normal versus reversed phase, elution order, isocratic versus gradient, detectors.",
+   "md": "## Use it when\nYou must order solutes, explain a mode, or choose a method.\n\n## Steps\n1. **Column label:** inner diameter × length (3.9 × 150 mm). C18 and C8 are alkyl chains bonded to silica; C8 retains less. Silica degrades at high pH.\n2. **Normal phase:** polar stationary phase, non-polar mobile phase, **least polar elutes first**. **Reversed phase:** non-polar stationary phase, polar mobile phase, **most polar elutes first**.\n3. **Order the solutes:** for reversed phase rank by polarity, most polar first (more hydrophobic, longer chain, heavier halogen elutes later). Write the full order.\n4. **Raising the organic fraction** makes the mobile phase stronger and shortens retention.\n5. **Isocratic** keeps the composition fixed; **gradient** changes it during the run, which suits mixtures of weakly and strongly retained solutes.\n6. **Detectors:** UV (most common, diode array), refractive index (universal, about 1000× less sensitive), electrochemical (electroactive compounds only).\n7. **Smaller particles** give higher N but need higher pressure.\n8. **GC or HPLC?** GC for volatile, thermally stable compounds; HPLC for polar, non-volatile or thermally labile ones.\n\n## Traps\n- Reversing normal and reversed phase.\n- Thinking more organic solvent in reversed phase slows elution.\n- A gradient advantage with no reason attached."
+  }
+ ]
+}

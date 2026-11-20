@@ -47,7 +47,7 @@ test('plan blocks: right count, shares respected, only topics with something to 
 });
 
 test('skill maps: both modules total 100 marks and weights follow marks', () => {
-  for (const [dir, expectChunks] of [['cm2011', 17], ['cm2021', 20]]) {
+  for (const [dir, expectChunks] of [['cm2011', 19], ['cm2021', 20]]) {
     const m = readContent('skill-map.json', dir);
     const tot = m.skills.reduce((a, k) => a + k.marks, 0);
     assert.ok(Math.abs(tot - 100) < 0.5, `${dir} marks ${tot}`);
@@ -55,7 +55,7 @@ test('skill maps: both modules total 100 marks and weights follow marks', () => 
   }
   const m11 = readContent('skill-map.json', 'cm2011');
   const share = (p) => m11.skills.filter((k) => k.chunk.startsWith(p)).reduce((a, k) => a + k.weight, 0);
-  assert.ok(Math.abs(share('x') - 0.25) < 0.01 && Math.abs(share('g') - 0.25) < 0.01, 'extraction and GC/HPLC are a quarter each');
+  assert.ok(Math.abs(share('x') - 0.25) < 0.01 && Math.abs(share('g') - 0.17) < 0.01 && Math.abs(share('c') - 0.08) < 0.01, 'extraction a quarter, GC/HPLC 17%, chromatography theory 8%');
 });
 
 test('queue probes every topic before it settles, then fades topics you know and keeps the weak one', () => {

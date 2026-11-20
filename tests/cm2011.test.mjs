@@ -486,3 +486,41 @@ test('golden: breathing chain (8 L/min is 11.52 m3 a day; 40 ug/m3 is 168 mg a y
   const t = scopeWith(b, { m: 360 });
   assert.ok(close(t.c, 31.25, 0.001) && t.psi === 72);
 });
+
+test('golden: chromatography theory against the lecture and practice-deck answers', () => {
+  const t = (nodeId, vid, sampled, key) => target(variantOf(nodeId, vid).evaluator.targets[key], scopeWith(variantOf(nodeId, vid), sampled));
+  // butyric acid 7.63 min, isobutyric 5.98 min, t_M 0.31 min: k 23.6, alpha 1.29
+  assert.ok(close(t('bk-m11-c-retention', 'ret-times', { tM: 0.31, tA: 5.98, dt: 1.65 }, 'kB'), 23.61, 0.005));
+  assert.ok(close(t('bk-m11-c-retention', 'ret-times', { tM: 0.31, tA: 5.98, dt: 1.65 }, 'al'), 1.291, 0.005));
+  // K_A 4, K_B 8, V_S 5, V_M 20: k 1 and 2, alpha 2
+  assert.ok(close(t('bk-m11-c-retention', 'ret-partition', { KA: 4, r: 2, VS: 5, VM: 20 }, 'kB'), 2.0, 0.001));
+  // open tube, t_M 40 s, toluene 200 s, 320 um, 2 um film: k 4, K 160
+  assert.ok(close(t('bk-m11-c-retention', 'ret-open', { dc: 320, df: 2, tM: 40, tR: 200 }, 'K'), 160, 0.001));
+  // 7.20/8.10 min, widths 0.48/0.60: R_S 1.67; widths +25%: 1.33
+  assert.ok(close(t('bk-m11-c-resolution', 'rs-base', { tA: 7.2, gap: 0.9, WA: 0.48, wd: 0.12 }, 'rs'), 1.667, 0.002));
+  assert.ok(close(t('bk-m11-c-resolution', 'rs-wider', { tA: 7.2, gap: 0.9, WA: 0.48, wd: 0.12, p: 25 }, 'rs2'), 1.333, 0.002));
+  // w1/2 0.30 and 0.37 at 5.80 and 6.65 min: 1.49
+  assert.ok(close(t('bk-m11-c-resolution', 'rs-half', { tA: 5.8, gap: 0.85, hA: 0.30, hd: 0.07 }, 'rs'), 1.49, 0.005));
+  // 7.50 min, W 0.25, 1.80 m: N 14400, H 0.125 mm
+  assert.ok(close(t('bk-m11-c-plates', 'n-base', { tR: 7.5, W: 0.25, L: 1.8 }, 'N'), 14400, 0.001));
+  assert.ok(close(t('bk-m11-c-plates', 'n-base', { tR: 7.5, W: 0.25, L: 1.8 }, 'H'), 0.125, 0.001));
+  // alpha 1.12, k_B 4.20: N 2.14e3 for R_S 1.0 and 8.55e3 for 2.0; alpha 1.09, k_B 3.43: 3915 and L 783 mm at H 0.2 mm
+  assert.ok(close(t('bk-m11-c-plates', 'n-purnell', { al: 1.12, kB: 4.2, Rt: 1, Hmm: 0.2 }, 'N'), 2136, 0.003));
+  assert.ok(close(t('bk-m11-c-plates', 'n-purnell', { al: 1.12, kB: 4.2, Rt: 2, Hmm: 0.2 }, 'N'), 8546, 0.003));
+  assert.ok(close(t('bk-m11-c-plates', 'n-purnell', { al: 1.09, kB: 3.43, Rt: 1, Hmm: 0.2 }, 'L'), 783, 0.005));
+  // 0.60 cm i.d., eps 0.20, 0.30 mL/min: 5.3 cm/min; 2 mg on 1.0 cm at 0.5 mL/min to 20 mg: 3.16 cm and 5 mL/min
+  assert.ok(close(t('bk-m11-c-flow', 'flow-ux', { d: 0.6, eps: 0.2, uv: 0.3 }, 'ux'), 5.31, 0.005));
+  assert.ok(close(t('bk-m11-c-flow', 'flow-scale', { d1: 1, m1: 2, F1: 0.5, qq: 10 }, 'd2'), 3.162, 0.002));
+  assert.ok(close(t('bk-m11-c-flow', 'flow-scale', { d1: 1, m1: 2, F1: 0.5, qq: 10 }, 'F2'), 5, 0.001));
+});
+
+test('chromatography slips are named: missing factor 2 in R_S, t_R/t_M for k', () => {
+  const v = variantOf('bk-m11-c-resolution', 'rs-base');
+  const sc = scopeWith(v, { tA: 7.2, gap: 0.9, WA: 0.48, wd: 0.12 });
+  const bad = Evaluators.evaluate(v, { rs: '0.833', v: 'partial' }, sc, {}, byId['bk-m11-c-resolution']);
+  assert.ok(/factor 2/.test(JSON.stringify(bad.fieldResults.rs)));
+  const r = variantOf('bk-m11-c-retention', 'ret-times');
+  const sr = scopeWith(r, { tM: 0.31, tA: 5.98, dt: 1.65 });
+  const bk = Evaluators.evaluate(r, { kA: String(5.98 / 0.31), kB: '24.6', al: '1.29' }, sr, {}, byId['bk-m11-c-retention']);
+  assert.ok(/Subtract/.test(JSON.stringify(bk.fieldResults.kA)));
+});

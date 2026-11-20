@@ -76,6 +76,18 @@
    "summary": "AAS components, lamps, atomisers, Boltzmann populations, line widths, ICP"
   },
   {
+   "id": "c-calc",
+   "part": "Chromatography theory",
+   "name": "Retention, resolution and plates",
+   "summary": "k and α, R_S from times and widths, N and H, Purnell, linear velocity and scale-up"
+  },
+  {
+   "id": "c-concepts",
+   "part": "Chromatography theory",
+   "name": "Band spreading, peak shape and types",
+   "summary": "van Deemter terms and the optimum, tailing and fronting, size exclusion, ion exchange, affinity"
+  },
+  {
    "id": "x-calc",
    "part": "Extraction",
    "name": "Extraction calculations: D at a pH, fraction left, number of portions",
@@ -467,6 +479,154 @@
     "bk-m11-a-written"
    ],
    "chunk": "a-psi"
+  },
+  {
+   "id": "m11.c.retention",
+   "ch": 9,
+   "name": "Retention factor k and selectivity α",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 1.455,
+   "basis": "notes",
+   "ref": "Chromatography slides; booklet (efficiency and band spreading)",
+   "tags": [
+    "retention"
+   ],
+   "ids": [
+    "bk-m11-c-retention"
+   ],
+   "weight": 0.01455,
+   "nodes": [
+    "bk-m11-c-retention"
+   ],
+   "chunk": "c-calc"
+  },
+  {
+   "id": "m11.c.resolution",
+   "ch": 9,
+   "name": "Resolution from times and widths; R_S and column length",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 1.818,
+   "basis": "notes",
+   "ref": "Chromatography slides; booklet (efficiency and band spreading)",
+   "tags": [
+    "resolution"
+   ],
+   "ids": [
+    "bk-m11-c-resolution"
+   ],
+   "weight": 0.01818,
+   "nodes": [
+    "bk-m11-c-resolution"
+   ],
+   "chunk": "c-calc"
+  },
+  {
+   "id": "m11.c.plates",
+   "ch": 9,
+   "name": "Plate number, plate height and the plates needed for a target R_S",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 1.818,
+   "basis": "notes",
+   "ref": "Chromatography slides; booklet (efficiency and band spreading)",
+   "tags": [
+    "plates",
+    "purnell"
+   ],
+   "ids": [
+    "bk-m11-c-plates"
+   ],
+   "weight": 0.01818,
+   "nodes": [
+    "bk-m11-c-plates"
+   ],
+   "chunk": "c-calc"
+  },
+  {
+   "id": "m11.c.flow",
+   "ch": 9,
+   "name": "Linear velocity versus volume flow; scale-up",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 0.727,
+   "basis": "notes",
+   "ref": "Chromatography slides; booklet (efficiency and band spreading)",
+   "tags": [
+    "flow"
+   ],
+   "ids": [
+    "bk-m11-c-flow"
+   ],
+   "weight": 0.00727,
+   "nodes": [
+    "bk-m11-c-flow"
+   ],
+   "chunk": "c-calc"
+  },
+  {
+   "id": "m11.c.vd",
+   "ch": 9,
+   "name": "Band spreading: A, B/u and Cu terms and the optimum",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 1.091,
+   "basis": "notes",
+   "ref": "Chromatography slides; booklet (efficiency and band spreading)",
+   "tags": [
+    "van-deemter"
+   ],
+   "ids": [
+    "bk-m11-c-vd"
+   ],
+   "weight": 0.01091,
+   "nodes": [
+    "bk-m11-c-vd"
+   ],
+   "chunk": "c-concepts"
+  },
+  {
+   "id": "m11.c.shape",
+   "ch": 9,
+   "name": "Peak asymmetry: tailing and fronting",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 0.364,
+   "basis": "notes",
+   "ref": "Chromatography slides; booklet (efficiency and band spreading)",
+   "tags": [
+    "peak-shape"
+   ],
+   "ids": [
+    "bk-m11-c-shape"
+   ],
+   "weight": 0.00364,
+   "nodes": [
+    "bk-m11-c-shape"
+   ],
+   "chunk": "c-concepts"
+  },
+  {
+   "id": "m11.c.types",
+   "ch": 9,
+   "name": "Types of chromatography and general rules",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 0.727,
+   "basis": "notes",
+   "ref": "Chromatography slides; booklet (efficiency and band spreading)",
+   "tags": [
+    "types"
+   ],
+   "ids": [
+    "bk-m11-c-types"
+   ],
+   "weight": 0.00727,
+   "nodes": [
+    "bk-m11-c-types"
+   ],
+   "chunk": "c-concepts"
   },
   {
    "id": "m11.e.ionic",
@@ -1197,7 +1357,7 @@
    "name": "GC detectors: TCD, FID, MS and choosing between them",
    "mode": "recall",
    "engine": "gen",
-   "marks": 3.571,
+   "marks": 2.429,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1207,7 +1367,7 @@
    "ids": [
     "bk-m11-g-detectors"
    ],
-   "weight": 0.03571,
+   "weight": 0.02429,
    "nodes": [
     "bk-m11-g-detectors"
    ],
@@ -1219,7 +1379,7 @@
    "name": "Open tubular vs packed GC columns",
    "mode": "recall",
    "engine": "gen",
-   "marks": 2.976,
+   "marks": 2.024,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1229,7 +1389,7 @@
    "ids": [
     "bk-m11-g-columns"
    ],
-   "weight": 0.02976,
+   "weight": 0.02024,
    "nodes": [
     "bk-m11-g-columns"
    ],
@@ -1241,7 +1401,7 @@
    "name": "Temperature programming and pressure programming",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.786,
+   "marks": 1.214,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1251,7 +1411,7 @@
    "ids": [
     "bk-m11-g-tprog"
    ],
-   "weight": 0.01786,
+   "weight": 0.01214,
    "nodes": [
     "bk-m11-g-tprog"
    ],
@@ -1263,7 +1423,7 @@
    "name": "Split, splitless and on-column injection; derivatisation",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.19,
+   "marks": 0.81,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1273,7 +1433,7 @@
    "ids": [
     "bk-m11-g-inject"
    ],
-   "weight": 0.0119,
+   "weight": 0.0081,
    "nodes": [
     "bk-m11-g-inject"
    ],
@@ -1285,7 +1445,7 @@
    "name": "GC carrier gases: speed, H₂ and the TCD",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.19,
+   "marks": 0.81,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1295,7 +1455,7 @@
    "ids": [
     "bk-m11-g-carrier"
    ],
-   "weight": 0.0119,
+   "weight": 0.0081,
    "nodes": [
     "bk-m11-g-carrier"
    ],
@@ -1307,7 +1467,7 @@
    "name": "HPLC column label, pore size, C8 vs C18, guard column",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.19,
+   "marks": 0.81,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1317,7 +1477,7 @@
    "ids": [
     "bk-m11-h-column"
    ],
-   "weight": 0.0119,
+   "weight": 0.0081,
    "nodes": [
     "bk-m11-h-column"
    ],
@@ -1329,7 +1489,7 @@
    "name": "Normal vs reversed phase and eluent strength",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.19,
+   "marks": 0.81,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1339,7 +1499,7 @@
    "ids": [
     "bk-m11-h-mode"
    ],
-   "weight": 0.0119,
+   "weight": 0.0081,
    "nodes": [
     "bk-m11-h-mode"
    ],
@@ -1351,7 +1511,7 @@
    "name": "Order of elution in reversed-phase and normal-phase HPLC",
    "mode": "recall",
    "engine": "gen",
-   "marks": 2.381,
+   "marks": 1.619,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1361,7 +1521,7 @@
    "ids": [
     "bk-m11-h-order"
    ],
-   "weight": 0.02381,
+   "weight": 0.01619,
    "nodes": [
     "bk-m11-h-order"
    ],
@@ -1373,7 +1533,7 @@
    "name": "Isocratic vs gradient elution, and reading %B",
    "mode": "recall",
    "engine": "gen",
-   "marks": 2.381,
+   "marks": 1.619,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1383,7 +1543,7 @@
    "ids": [
     "bk-m11-h-gradient"
    ],
-   "weight": 0.02381,
+   "weight": 0.01619,
    "nodes": [
     "bk-m11-h-gradient"
    ],
@@ -1395,7 +1555,7 @@
    "name": "HPLC detectors: UV, refractive index, electrochemical",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.19,
+   "marks": 0.81,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1405,7 +1565,7 @@
    "ids": [
     "bk-m11-h-detect"
    ],
-   "weight": 0.0119,
+   "weight": 0.0081,
    "nodes": [
     "bk-m11-h-detect"
    ],
@@ -1417,7 +1577,7 @@
    "name": "Why small particles improve efficiency and what they cost",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.786,
+   "marks": 1.214,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1427,7 +1587,7 @@
    "ids": [
     "bk-m11-h-particles"
    ],
-   "weight": 0.01786,
+   "weight": 0.01214,
    "nodes": [
     "bk-m11-h-particles"
    ],
@@ -1439,7 +1599,7 @@
    "name": "GC–MS vs LC–MS and what HPLC suits",
    "mode": "recall",
    "engine": "gen",
-   "marks": 2.976,
+   "marks": 2.024,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1450,7 +1610,7 @@
    "ids": [
     "bk-m11-g-ms"
    ],
-   "weight": 0.02976,
+   "weight": 0.02024,
    "nodes": [
     "bk-m11-g-ms"
    ],
@@ -1462,7 +1622,7 @@
    "name": "Choose GC or HPLC for an analyte",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.19,
+   "marks": 0.81,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1473,7 +1633,7 @@
    "ids": [
     "bk-m11-g-choose"
    ],
-   "weight": 0.0119,
+   "weight": 0.0081,
    "nodes": [
     "bk-m11-g-choose"
    ],
@@ -1495,7 +1655,7 @@
    "ids": [
     "bk-m11-x-acid"
    ],
-   "weight": 0.12255,
+   "weight": 0.12254,
    "nodes": [
     "bk-m11-x-acid"
    ],
@@ -1619,6 +1779,27 @@
   ],
   "bk-m11-a-written": [
    "m11.a.written"
+  ],
+  "bk-m11-c-retention": [
+   "m11.c.retention"
+  ],
+  "bk-m11-c-resolution": [
+   "m11.c.resolution"
+  ],
+  "bk-m11-c-plates": [
+   "m11.c.plates"
+  ],
+  "bk-m11-c-flow": [
+   "m11.c.flow"
+  ],
+  "bk-m11-c-vd": [
+   "m11.c.vd"
+  ],
+  "bk-m11-c-shape": [
+   "m11.c.shape"
+  ],
+  "bk-m11-c-types": [
+   "m11.c.types"
   ],
   "bk-m11-e-ionic": [
    "m11.e.ionic"

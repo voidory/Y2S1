@@ -116,6 +116,20 @@
       width: 100%;
       height: 100%;
     }
+    @keyframes cardIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+    @keyframes verdictIn { from { opacity: 0; transform: translateY(8px) scale(0.985); } to { opacity: 1; transform: none; } }
+    @keyframes okPulse { 0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); } 100% { box-shadow: 0 0 0 9px rgba(16, 185, 129, 0); } }
+    @keyframes badShake { 0%, 100% { transform: none; } 20% { transform: translateX(-5px); } 40% { transform: translateX(5px); } 60% { transform: translateX(-3px); } 80% { transform: translateX(2px); } }
+    .anim-card-in { animation: cardIn 240ms ease-out both; }
+    .anim-verdict { animation: verdictIn 280ms cubic-bezier(.2,.8,.2,1) both; }
+    .anim-ok { animation: okPulse 650ms ease-out 1; }
+    .anim-bad { animation: badShake 420ms ease-in-out 1; }
+    .ord-grip { touch-action: none; cursor: grab; color: #94a3b8; letter-spacing: -3px; font-size: 15px; line-height: 1; padding: 6px 6px 6px 0; margin-right: 2px; user-select: none; }
+    .ord-grip:hover { color: #475569; }
+    .ord-dragging { user-select: none; -webkit-user-select: none; }
+    .ord-dragging [data-order-item] { will-change: transform; }
+    .ord-lift { position: relative; z-index: 5; box-shadow: 0 12px 26px -8px rgba(15, 23, 42, 0.35); border-color: #60a5fa !important; cursor: grabbing; }
+    .ord-moving { position: relative; z-index: 2; }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
     }
@@ -7601,6 +7615,7 @@
 
       /* ---------- error tags: the kind of slip behind a wrong answer, stored with the attempt ---------- */
       const ERROR_LABELS = {
+        'confident-miss': 'Sure, but wrong',
         'shape:missed-lp': 'Missed lone pairs on the central atom',
         'shape:extra-lp': 'Added lone pairs that are not there',
         'shape:same-geometry': 'Right electron geometry, wrong bonded/lone split',
@@ -7667,6 +7682,208 @@
     })();
 
     /* =====================================================================
+       NAMESPACE: Figures — drag-a-slider pictures for the ideas the finals ask you to explain
+       ---------------------------------------------------------------------
+       Pure models (extraction, vanDeemter, resolution, calibration, ohFill) plus a small mount() that draws an SVG and live read-outs
+       and re-draws as sliders move. Opened from the "How to do this" sheet of the topic they belong to (figuresForChunks).
+       ===================================================================== */
+    const Figures = (() => {
+      const sub = (t) => String(t).replace(/(?<![A-Za-z0-9_])([A-Za-z]{1,2})_([A-Za-z0-9]+)/g, '$1<sub>$2</sub>');
+      const SUP = ['⁰', '¹', '²', '³', '⁴', '⁵', '⁶'];
+      /* Acid HA (K the neutral form's partition ratio, pKa of HA) or base B (pKa of BH+): fraction neutral, D = K x neutral, and the
+         share of the solute in the organic layer when both layers have the same volume. */
+      function extraction(K, pKa, pH, kind = 'acid') {
+        const x = Math.pow(10, kind === 'acid' ? pH - pKa : pKa - pH);
+        const neutral = 1 / (1 + x), D = K * neutral;
+        return { neutral, D, orgFrac: D / (1 + D) };
+      }
+      function vanDeemter(A, B, C, u) {
+        const uOpt = C > 0 && B > 0 ? Math.sqrt(B / C) : NaN;
+        return { H: A + B / u + C * u, uOpt, Hmin: A + 2 * Math.sqrt(Math.max(0, B * C)) };
+      }
+      /* Two peaks with t_M = 1: k_A = k_B/alpha, t_R = t_M(1 + k), sigma = t_R/sqrt(N). Rs from Purnell (the booklet form) and from the peaks. */
+      function resolution(alpha, kB, N) {
+        const kA = kB / alpha, tA = 1 + kA, tB = 1 + kB, sA = tA / Math.sqrt(N), sB = tB / Math.sqrt(N);
+        return { kA, tA, tB, sA, sB, RsPurnell: (Math.sqrt(N) / 4) * ((alpha - 1) / alpha) * (kB / (1 + kB)), RsPeaks: (tB - tA) / (2 * (sA + sB)) };
+      }
+      /* Calibration through the 1e-4 M reading E1 with slope s (mV per decade), a sample reading Ex and a dilution factor DF. */
+      function calibration(E1, s, Ex, DF) {
+        const logc = -4 + (Ex - E1) / s, c = Math.pow(10, logc);
+        return { E3: E1 + 2 * s, logc, c, c0: c * DF };
+      }
+      /* d^n in an octahedral field with Delta_o/P = ratio: the lowest-energy split of the electrons between t2g and eg. Ties go to high spin. */
+      function ohFill(n, ratio) {
+        let best = null;
+        for (let nt = 0; nt <= 6; nt++) {
+          const ne = n - nt;
+          if (ne < 0 || ne > 4) continue;
+          const pairs = Math.max(0, nt - 3) + Math.max(0, ne - 2);
+          const E = -0.4 * ratio * nt + 0.6 * ratio * ne + pairs; // energy in units of P
+          if (!best || E < best.E - 1e-9 || (Math.abs(E - best.E) < 1e-9 && ne > best.ne)) best = { nt, ne, E, pairs };
+        }
+        const up = (best.nt <= 3 ? best.nt : 6 - best.nt) + (best.ne <= 2 ? best.ne : 4 - best.ne);
+        const hund = n <= 5 ? n : 10 - n;
+        return { nt: best.nt, ne: best.ne, unpaired: up, cfse: 0.4 * best.nt - 0.6 * best.ne, extraPairs: best.pairs - Math.max(0, n - 5), spin: up >= hund ? 'high' : 'low' };
+      }
+
+      /* ---- drawing ---- */
+      const W = 320, H = 190, PL = 34, PR = 10, PT = 10, PB = 28;
+      const frame = (x0, x1, y0, y1) => ({ sx: (x) => PL + ((x - x0) / (x1 - x0)) * (W - PL - PR), sy: (y) => H - PB - ((y - y0) / (y1 - y0)) * (H - PT - PB) });
+      const path = (pts, f, cls) => `<path d="${pts.map((p, i) => `${i ? 'L' : 'M'}${f.sx(p[0]).toFixed(1)},${f.sy(p[1]).toFixed(1)}`).join('')}" fill="none" stroke="${cls}" stroke-width="2" stroke-linejoin="round"/>`;
+      const axes = (xl, yl) => `<line x1="${PL}" y1="${H - PB}" x2="${W - PR}" y2="${H - PB}" stroke="#94a3b8"/><line x1="${PL}" y1="${PT}" x2="${PL}" y2="${H - PB}" stroke="#94a3b8"/><text x="${(PL + W - PR) / 2}" y="${H - 6}" text-anchor="middle" font-size="10" fill="#475569">${xl}</text><text x="9" y="${(PT + H - PB) / 2}" font-size="10" fill="#475569" transform="rotate(-90 9 ${(PT + H - PB) / 2})" text-anchor="middle">${yl}</text>`;
+      const dot = (x, y, c = '#1d4ed8') => `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" fill="${c}" stroke="#fff" stroke-width="1.5"/>`;
+      const tick = (f, x, label, dy = 12) => `<line x1="${f.sx(x)}" y1="${H - PB}" x2="${f.sx(x)}" y2="${H - PB + 3}" stroke="#94a3b8"/><text x="${f.sx(x)}" y="${H - PB + dy}" text-anchor="middle" font-size="9" fill="#64748b">${label}</text>`;
+      const f1 = (x, d = 1) => (Math.abs(x) >= 1e4 || (x !== 0 && Math.abs(x) < 0.01) ? x.toExponential(2).replace('e', ' × 10^').replace('^+', '^').replace(/\^(-?\d+)/, (m, e) => `<sup>${e}</sup>`) : x.toFixed(d));
+
+      const DEFS = {
+        'extraction-ph': {
+          title: 'Where does the solute go as the pH changes?',
+          intro: 'Drag the pH across the pKa. The neutral form is what dissolves in the organic layer; the ion stays in the water.',
+          controls: [
+            { k: 'kind', type: 'toggle', options: [['acid', 'Weak acid HA'], ['base', 'Weak base B']], val: 'acid' },
+            { k: 'K', label: 'K (neutral form, organic/water)', min: -1, max: 2, step: 0.05, val: 0.6, log: true },
+            { k: 'pKa', label: pKaLabel(), min: 3, max: 11, step: 0.1, val: 5 },
+            { k: 'pH', label: 'pH of the water', min: 0, max: 14, step: 0.1, val: 3 },
+          ],
+          draw(s) {
+            const f = frame(0, 14, 0, 1), pts = [];
+            for (let p = 0; p <= 14.01; p += 0.25) pts.push([p, extraction(s.K, s.pKa, p, s.kind).orgFrac]);
+            const m = extraction(s.K, s.pKa, s.pH, s.kind);
+            const svg = `${axes('pH of the water', 'share in organic layer')}${[0, 0.5, 1].map((y) => `<text x="${PL - 4}" y="${f.sy(y) + 3}" text-anchor="end" font-size="9" fill="#64748b">${y}</text>`).join('')}${[0, 2, 4, 6, 8, 10, 12, 14].map((x) => tick(f, x, x)).join('')}
+              <line x1="${f.sx(s.pKa)}" y1="${PT}" x2="${f.sx(s.pKa)}" y2="${H - PB}" stroke="#f59e0b" stroke-dasharray="4 3"/><text x="${f.sx(s.pKa) + 3}" y="${PT + 9}" font-size="9" fill="#b45309">pKa</text>
+              ${path(pts, f, '#1d4ed8')}${dot(f.sx(s.pH), f.sy(m.orgFrac))}`;
+            const note = s.kind === 'acid'
+              ? (s.pH < s.pKa - 1 ? 'The acid is mostly un-ionised, so it sits in the organic layer.' : s.pH > s.pKa + 1 ? 'The acid is mostly ionised (A⁻), so it is held in the water: D falls.' : 'Near the pKa the acid is half ionised, so D is about K/2.')
+              : (s.pH > s.pKa + 1 ? 'The base is mostly neutral B, so it sits in the organic layer: D approaches K.' : s.pH < s.pKa - 1 ? 'The base is mostly BH⁺, held in the water: D falls (K itself does not change).' : 'Near the pKa the base is half protonated, so D is about K/2.');
+            return { svg, read: [['Neutral fraction', `${(m.neutral * 100).toFixed(1)}%`], ['D', f1(m.D, 3)], ['In organic (equal volumes)', `${(m.orgFrac * 100).toFixed(1)}%`]], note };
+          },
+        },
+        'van-deemter': {
+          title: 'Why there is a best flow rate',
+          intro: 'H = A + B/u + Cu. Slide each term and watch where the minimum moves.',
+          controls: [
+            { k: 'A', label: 'A  (multiple paths)', min: 0, max: 5, step: 0.1, val: 2 },
+            { k: 'B', label: 'B  (longitudinal diffusion)', min: 0.1, max: 10, step: 0.1, val: 3 },
+            { k: 'C', label: 'C  (mass transfer)', min: 0.02, max: 2, step: 0.02, val: 0.3 },
+            { k: 'open', type: 'check', label: 'Open tubular column (A = 0)', val: false },
+          ],
+          draw(s) {
+            const A = s.open ? 0 : s.A, v = vanDeemter(A, s.B, s.C, 1), uMax = Math.max(4, v.uOpt * 3), yMax = Math.max(1, v.Hmin * 2.4);
+            const f = frame(0, uMax, 0, yMax), a = [], b = [], c = [], t = [];
+            for (let i = 1; i <= 120; i++) { const u = (uMax * i) / 120; a.push([u, A]); b.push([u, s.B / u]); c.push([u, s.C * u]); t.push([u, A + s.B / u + s.C * u]); }
+            const clip = (arr) => arr.filter((p) => p[1] <= yMax);
+            const svg = `${axes('flow velocity u', 'plate height H')}
+              ${path(clip(a), f, '#94a3b8')}${path(clip(b), f, '#f59e0b')}${path(clip(c), f, '#f43f5e')}${path(clip(t), f, '#1d4ed8')}
+              ${dot(f.sx(v.uOpt), f.sy(v.Hmin), '#047857')}<line x1="${f.sx(v.uOpt)}" y1="${f.sy(v.Hmin)}" x2="${f.sx(v.uOpt)}" y2="${H - PB}" stroke="#047857" stroke-dasharray="3 3"/>
+              <text x="${W - PR}" y="${PT + 8}" text-anchor="end" font-size="9" fill="#475569"><tspan fill="#94a3b8">A</tspan> · <tspan fill="#f59e0b">B/u</tspan> · <tspan fill="#f43f5e">Cu</tspan> · <tspan fill="#1d4ed8">H</tspan></text>`;
+            return { svg, read: [['u optimum', f1(v.uOpt, 2)], ['H minimum', f1(v.Hmin, 2)], ['A at optimum', s.open ? '0 (open tube)' : f1(A, 1)]], note: 'Below the optimum B/u dominates (molecules diffuse along the column); above it Cu dominates (equilibration cannot keep up). At the optimum B/u = Cu and N is greatest. An open tube has no A term, so its minimum is lower.' };
+          },
+        },
+        resolution: {
+          title: 'What it takes to separate two peaks',
+          intro: 'R_S needs selectivity (α), retention (k) and efficiency (N). Move each and see which one the peaks respond to.',
+          controls: [
+            { k: 'alpha', label: 'α  (selectivity)', min: 1, max: 1.6, step: 0.01, val: 1.1 },
+            { k: 'kB', label: 'k of the later peak', min: 0.3, max: 15, step: 0.1, val: 3 },
+            { k: 'N', label: 'N  (plates)', min: 500, max: 20000, step: 100, val: 4000 },
+          ],
+          draw(s) {
+            const m = resolution(s.alpha, s.kB, s.N), tMax = m.tB + 6 * m.sB + 0.5, tMin = Math.max(0, m.tA - 6 * m.sA - 0.5);
+            const g = (t, mu, sg) => Math.exp(-0.5 * ((t - mu) / sg) ** 2) / sg;
+            const top = Math.max(g(m.tA, m.tA, m.sA), g(m.tB, m.tB, m.sB)) * 1.1, f = frame(tMin, tMax, 0, top), A = [], B = [], S = [];
+            for (let i = 0; i <= 200; i++) { const t = tMin + ((tMax - tMin) * i) / 200; const a = g(t, m.tA, m.sA), b = g(t, m.tB, m.sB); A.push([t, a]); B.push([t, b]); S.push([t, a + b]); }
+            const svg = `${axes('time (units of t<tspan font-size="7" dy="2">M</tspan>)', 'signal')}${path(S, f, '#cbd5e1')}${path(A, f, '#1d4ed8')}${path(B, f, '#f43f5e')}
+              <text x="${f.sx(m.tA)}" y="${PT + 8}" text-anchor="middle" font-size="9" fill="#1d4ed8">A</text><text x="${f.sx(m.tB)}" y="${PT + 8}" text-anchor="middle" font-size="9" fill="#e11d48">B</text>`;
+            const R = m.RsPurnell, verdict = R >= 1.5 ? 'baseline separation' : R >= 1 ? 'partly resolved' : 'poor';
+            return { svg, read: [['R_S (Purnell)', `${R.toFixed(2)}: ${verdict}`], ['t_R(A), t_R(B)', `${m.tA.toFixed(2)}, ${m.tB.toFixed(2)}`], ['k of the earlier peak', m.kA.toFixed(2)]], tone: R >= 1.5 ? 'good' : R >= 1 ? 'mid' : 'bad', note: 'Doubling N only raises R_S by √2, while a small gain in α moves the peaks apart for free. Above k of about 5 more retention barely helps: k/(1 + k) levels off.' };
+          },
+        },
+        calibration: {
+          title: 'From a reading to the original sample',
+          intro: 'The standards fix a line of E against log c. Read the sample off it, then undo the dilution.',
+          controls: [
+            { k: 'sign', type: 'toggle', options: [['1', 'Cation electrode (+ slope)'], ['-1', 'Anion or NH₃ probe (− slope)']], val: '1' },
+            { k: 'mag', label: 'Slope size (mV per decade)', min: 25, max: 62, step: 0.5, val: 59.2 },
+            { k: 'lgx', label: 'log c of the final solution', min: -4.8, max: -2.2, step: 0.05, val: -3.2 },
+            { k: 'DF', label: 'Overall dilution factor', type: 'select', options: [['1', '1 (no dilution)'], ['10', '10'], ['25', '25'], ['50', '50'], ['250', '250']], val: '50' },
+          ],
+          draw(s) {
+            const sl = Number(s.sign) * s.mag, E1 = 200, Ex = E1 + sl * (s.lgx + 4), m = calibration(E1, sl, Ex, Number(s.DF));
+            const E = (l) => E1 + sl * (l + 4), lo = Math.min(E(-5), E(-2)) - 15, hi = Math.max(E(-5), E(-2)) + 15, f = frame(-5, -2, lo, hi);
+            const svg = `${axes('log c', 'E (mV)')}${[-5, -4, -3, -2].map((x) => tick(f, x, x)).join('')}
+              ${path([[-5, E(-5)], [-2, E(-2)]], f, '#94a3b8')}
+              <line x1="${PL}" y1="${f.sy(Ex)}" x2="${f.sx(s.lgx)}" y2="${f.sy(Ex)}" stroke="#e11d48" stroke-dasharray="4 3"/><line x1="${f.sx(s.lgx)}" y1="${f.sy(Ex)}" x2="${f.sx(s.lgx)}" y2="${H - PB}" stroke="#e11d48" stroke-dasharray="4 3"/>
+              ${[-4, -3, -2].map((x) => dot(f.sx(x), f.sy(E(x)), '#475569')).join('')}${dot(f.sx(s.lgx), f.sy(Ex), '#e11d48')}`;
+            return { svg, read: [['Slope from the standards', `${f1(sl, 1)} mV/decade`], ['Sample reads', `${f1(Ex, 1)} mV`], ['c of the final solution', `${f1(m.c, 2)} M`], ['Original sample', `${f1(m.c0, 2)} M`]], note: 'Multiply by the dilution factor to go back to the original: the measured solution is the dilute one. For a negative slope, a higher reading means a lower concentration.' };
+          },
+        },
+        'oh-splitting': {
+          title: 'Filling the octahedral d orbitals',
+          intro: 'Choose the d count and the field strength. The electrons go wherever the total energy is lowest: climb to e_g, or pay to pair in t₂g.',
+          controls: [
+            { k: 'n', label: 'd electrons', min: 1, max: 9, step: 1, val: 6 },
+            { k: 'r', label: 'Field strength Δo / P  (weak ← → strong)', min: 0.3, max: 2, step: 0.05, val: 0.7 },
+          ],
+          draw(s) {
+            const m = ohFill(s.n, s.r);
+            const orb = (count, nOrb, x0, y) => Array.from({ length: nOrb }, (_, i) => { const first = i < Math.min(count, nOrb) ? 1 : 0; const second = i < count - nOrb ? 1 : 0; const x = x0 + i * 42; return `<rect x="${x}" y="${y}" width="34" height="22" rx="3" fill="#fff" stroke="#64748b"/>${first ? `<text x="${x + 8}" y="${y + 17}" font-size="15" fill="#1d4ed8">↑</text>` : ''}${second ? `<text x="${x + 19}" y="${y + 17}" font-size="15" fill="#e11d48">↓</text>` : ''}`; }).join('');
+            const svg = `<text x="${W / 2}" y="16" text-anchor="middle" font-size="11" fill="#475569">Δo/P = ${s.r.toFixed(2)}  ·  ${s.r > 1 ? 'strong field' : s.r < 1 ? 'weak field' : 'borderline'}</text>
+              <text x="20" y="${58}" font-size="10" fill="#475569">e<tspan font-size="7" dy="2">g</tspan></text><line x1="40" y1="${72}" x2="${W - 40}" y2="${72}" stroke="#e2e8f0"/>${orb(m.ne, 2, 118, 52)}
+              <text x="20" y="${134}" font-size="10" fill="#475569">t<tspan font-size="7" dy="2">2g</tspan></text>${orb(m.nt, 3, 97, 118)}
+              <line x1="${W - 34}" y1="75" x2="${W - 34}" y2="118" stroke="#94a3b8"/><text x="${W - 30}" y="100" font-size="10" fill="#475569">Δo</text>
+              <text x="${W / 2}" y="${H - 14}" text-anchor="middle" font-size="12" fill="#0f172a" font-weight="600">t<tspan font-size="8" dy="3">2g</tspan><tspan dy="-3">${SUP[m.nt]}</tspan>  e<tspan font-size="8" dy="3">g</tspan><tspan dy="-3">${SUP[m.ne]}</tspan></text>`;
+            const hund = s.n <= 5 ? s.n : 10 - s.n;
+            return { svg, read: [['Spin', m.unpaired === hund && s.n >= 4 && s.n <= 7 ? 'high spin' : s.n >= 4 && s.n <= 7 ? 'low spin' : 'no choice for this d count'], ['Unpaired electrons', String(m.unpaired)], ['CFSE (before pairing cost)', `${m.cfse.toFixed(1)} Δo`]], note: s.n >= 4 && s.n <= 7 ? 'Only d4 to d7 can choose. Low spin wins when Δo exceeds the pairing energy P; otherwise the electrons spread over e_g first.' : 'd1 to d3 and d8 to d10 have only one sensible arrangement in an octahedral field.' };
+          },
+        },
+      };
+      function pKaLabel() { return 'pKa (of HA, or of BH⁺)'; }
+
+      const BY_CHUNK = { 'x-calc': 'extraction-ph', 'x-concepts': 'extraction-ph', 'c-concepts': 'van-deemter', 'c-calc': 'resolution', 'p-calibration': 'calibration', 'field-energetics': 'oh-splitting', 'terms-ts': null };
+      function figuresForChunks(chunks) { return [...new Set((chunks || []).map((c) => BY_CHUNK[c]).filter(Boolean))]; }
+
+      /* Builds a figure inside `host`. Returns { state, redraw } so tests can drive it. */
+      function mount(host, id) {
+        const def = DEFS[id];
+        if (!def) return null;
+        const state = {};
+        const ctl = def.controls.map((c, i) => {
+          state[c.k] = c.val;
+          if (c.type === 'toggle') return `<div class="flex flex-wrap gap-1.5" role="group">${c.options.map(([v, l]) => `<button type="button" data-fig-toggle="${c.k}" data-v="${v}" class="px-2.5 py-1 text-xs font-medium rounded-full border">${l}</button>`).join('')}</div>`;
+          if (c.type === 'check') return `<label class="flex items-center gap-2 text-xs text-slate-700"><input type="checkbox" data-fig-check="${c.k}" ${c.val ? 'checked' : ''}/>${c.label}</label>`;
+          if (c.type === 'select') return `<label class="flex items-center justify-between gap-2 text-xs text-slate-700"><span>${c.label}</span><select data-fig-select="${c.k}" class="border border-slate-300 rounded px-1.5 py-1 text-xs">${c.options.map(([v, l]) => `<option value="${v}" ${v === c.val ? 'selected' : ''}>${l}</option>`).join('')}</select></label>`;
+          return `<label class="block text-xs text-slate-700"><span class="flex justify-between"><span>${sub(c.label)}</span><span class="font-mono text-slate-900" data-fig-val="${c.k}"></span></span><input type="range" data-fig-range="${c.k}" min="${c.min}" max="${c.max}" step="${c.step}" value="${c.val}" class="w-full accent-blue-700"/></label>`;
+        }).join('');
+        host.innerHTML = `<div class="rounded-xl border border-slate-200 bg-white p-3" data-fig="${id}">
+          <div class="font-display text-[15px] font-semibold text-slate-900">${def.title}</div><p class="text-xs text-slate-600 mt-0.5 mb-2">${sub(def.intro)}</p>
+          <svg viewBox="0 0 ${W} ${H}" class="w-full h-auto rounded-lg bg-slate-50 border border-slate-200" role="img" aria-label="${def.title}" data-fig-svg></svg>
+          <div class="mt-2 space-y-2">${ctl}</div>
+          <dl class="mt-3 grid grid-cols-2 gap-x-3 gap-y-1 text-xs" data-fig-read></dl>
+          <p class="mt-2 rounded-lg bg-blue-50/70 border border-blue-200 px-2.5 py-2 text-xs text-slate-800" data-fig-note></p></div>`;
+        const svgEl = host.querySelector('[data-fig-svg]'), readEl = host.querySelector('[data-fig-read]'), noteEl = host.querySelector('[data-fig-note]');
+        const show = (c) => { const v = state[c.k]; const el = host.querySelector(`[data-fig-val="${c.k}"]`); if (el) el.textContent = c.log ? (10 ** v).toPrecision(3) : String(Math.round(v * 100) / 100); };
+        const redraw = () => {
+          // a "log" slider stores the exponent, the model gets the value
+          const s = { ...state }; for (const c of def.controls) if (c.log) s[c.k] = 10 ** state[c.k];
+          for (const c of def.controls) if (c.min !== undefined) show(c);
+          host.querySelectorAll('[data-fig-toggle]').forEach((b) => { const on = String(state[b.dataset.figToggle]) === b.dataset.v; b.setAttribute('aria-pressed', String(on)); b.className = `px-2.5 py-1 text-xs font-medium rounded-full border ${on ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-300 text-slate-700'}`; });
+          const d = def.draw(s);
+          svgEl.innerHTML = d.svg;
+          readEl.innerHTML = d.read.map(([k, v]) => `<dt class="text-slate-500">${sub(k)}</dt><dd class="font-mono font-semibold text-slate-900 text-right">${v}</dd>`).join('');
+          noteEl.innerHTML = sub(d.note);
+        };
+        host.querySelectorAll('[data-fig-range]').forEach((r) => r.addEventListener('input', () => { state[r.dataset.figRange] = Number(r.value); redraw(); }));
+        host.querySelectorAll('[data-fig-toggle]').forEach((b) => b.addEventListener('click', () => { state[b.dataset.figToggle] = b.dataset.v; redraw(); }));
+        host.querySelectorAll('[data-fig-check]').forEach((c) => c.addEventListener('change', () => { state[c.dataset.figCheck] = c.checked; redraw(); }));
+        host.querySelectorAll('[data-fig-select]').forEach((c) => c.addEventListener('change', () => { state[c.dataset.figSelect] = c.value; redraw(); }));
+        redraw();
+        return { state, redraw };
+      }
+
+      return { extraction, vanDeemter, resolution, calibration, ohFill, figuresForChunks, mount, DEFS };
+    })();
+
+    /* =====================================================================
        NAMESPACE: Weakness — where you are losing marks, and what to do about it
        ---------------------------------------------------------------------
        Pure functions over the attempt history and the skill map: topics ranked by recent misses, the questions
@@ -7691,7 +7908,7 @@
         const skillMiss = {};
         for (const l of sorted) {
           const g = Number(l.normalizedGrade) || 0;
-          for (const c of chunksOf(map, l.nodeId)) (grades[c] ||= []).push({ g, ts: l.timestamp, nodeId: l.nodeId });
+          for (const c of chunksOf(map, l.nodeId)) (grades[c] ||= []).push({ g, ts: l.timestamp, nodeId: l.nodeId, sure: l.confidence === 'sure' });
         }
         const names = Object.fromEntries((map.chunks || []).map((c) => [c.id, c]));
         const out = Object.entries(grades).map(([id, list]) => {
@@ -7700,13 +7917,15 @@
           const sum = recent.reduce((a, x) => a + x.g, 0);
           const mean = sum / recent.length;
           // rank on the same score the bar shows, pulled toward 70% so one or two answers cannot dominate
-          const rankScore = (sum + 0.7 * 2) / (recent.length + 2);
+          const sureMisses = recent.filter((x) => x.sure && x.g < PASS).length;
+          // a miss you were sure about is a belief to fix, so it pulls the topic up the list (at most 0.12 of score)
+          const rankScore = (sum + 0.7 * 2) / (recent.length + 2) - Math.min(0.12, 0.04 * sureMisses);
           // which skills inside the topic account for the recent misses
           const bySkill = {};
           for (const x of recent) if (x.g < PASS) for (const sid of Mastery.skillsOfNode(map, x.nodeId)) { const sk = (map.skills || []).find((k) => k.id === sid); if (sk?.chunk === id) bySkill[sid] = (bySkill[sid] || 0) + 1; }
           const weakSkills = Object.entries(bySkill).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([sid, n]) => ({ id: sid, name: (map.skills || []).find((k) => k.id === sid)?.name || sid, misses: n }));
           return {
-            id, name: names[id]?.name || id, part: names[id]?.part || '', attempts: list.length, window: recent.length, missed, mean,
+            id, name: names[id]?.name || id, part: names[id]?.part || '', attempts: list.length, window: recent.length, missed, sureMisses, mean,
             rankScore, ranked: list.length >= (opts.minAttempts ?? 2), lastTs: list[list.length - 1].ts, weakSkills,
           };
         });
@@ -7957,6 +8176,15 @@
         el.addEventListener('click', (e) => { if (e.target === el) close(); });
         el.querySelectorAll('[data-method-close]').forEach((b) => b.addEventListener('click', close));
         document.body.appendChild(el);
+        const figIds = Figures.figuresForChunks(m.chunks);
+        if (figIds.length) {
+          const wrap = document.createElement('section');
+          wrap.className = 'mt-2 mb-4';
+          wrap.setAttribute('data-method-figs', '');
+          wrap.innerHTML = '<h3 class="font-display text-[15px] font-semibold text-slate-900 mb-1.5" data-method-h>Play with it</h3>' + figIds.map((id) => `<div class="mb-3" data-fig-host="${id}"></div>`).join('');
+          el.querySelector('[data-method-body]').appendChild(wrap);
+          figIds.forEach((id) => Figures.mount(wrap.querySelector(`[data-fig-host="${id}"]`), id));
+        }
         renderMath(el);
         if (traps.length) { const h = [...el.querySelectorAll('[data-method-h]')].find((x) => /^traps/i.test(x.textContent.trim())); h?.scrollIntoView({ block: 'start' }); }
         return true;
@@ -8029,7 +8257,7 @@
         appState.skillMap = appState.skillMaps[appState.activeModule] || null;
         // mastery needs the whole history (attemptLogs above is only the latest 500), without the heavy payloads
         const allLogs = await db.attemptLogs.orderBy('timestamp').toArray();
-        appState.masteryLogs = allLogs.map((l) => ({ nodeId: l.nodeId, variantId: l.variantId, timestamp: l.timestamp, normalizedGrade: l.normalizedGrade }));
+        appState.masteryLogs = allLogs.map((l) => ({ nodeId: l.nodeId, variantId: l.variantId, timestamp: l.timestamp, normalizedGrade: l.normalizedGrade, confidence: l.confidence || null }));
         appState.reviewMap = Object.fromEntries(reviews.map((r) => [r.nodeId, r]));
         appState.attemptLogs = logs;
         // the student's own choices live in settings rows; reload them here so an import cannot leave a stale copy that the next save overwrites
@@ -8341,6 +8569,36 @@
         return s ? s.split(/\s+/).length : 0;
       }
 
+      /* How well you do in this card's topic right now (the Plan tab's score), so a card can show the move it caused. */
+      function topicScoreFor(nodeId) {
+        try {
+          const chunk = Weakness.chunksOf(appState.skillMap, nodeId)[0];
+          if (!chunk) return null;
+          const r = Scheduler.planChunks(appState.nodes, appState.skillMap, appState.masteryLogs, appState.plan?.ratings || {}, appState.activeModule).find((x) => x.chunk === chunk);
+          return r ? { chunk, name: r.name, score: r.score } : null;
+        } catch (_) { return null; }
+      }
+
+      /* Motion that says something: a new card slides in; on grading the verdict rises, right fields pulse, wrong ones shake, the
+         score counts up and the topic bar moves. Plays once per card; the reduced-motion rule shortens every duration. */
+      function playStudyMotion(root, cur) {
+        if (appState._motionCard !== cur) { appState._motionCard = cur; appState._motionGraded = false; root.firstElementChild?.classList.add('anim-card-in'); }
+        if (cur.phase !== 'graded' || appState._motionGraded) return;
+        appState._motionGraded = true;
+        root.querySelector('[data-verdict]')?.classList.add('anim-verdict');
+        root.querySelectorAll('[class*="border-emerald-500"]').forEach((el) => el.classList.add('anim-ok'));
+        root.querySelectorAll('[class*="border-rose-400"]').forEach((el) => el.classList.add('anim-bad'));
+        const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const num = root.querySelector('[data-countup]');
+        if (num && !reduce) {
+          const to = Number(num.dataset.countup), t0 = performance.now();
+          const tick = (now) => { const k = Math.min(1, (now - t0) / 550); num.textContent = `${Math.round(to * (1 - Math.pow(1 - k, 3)))}%`; if (k < 1 && num.isConnected) requestAnimationFrame(tick); };
+          num.textContent = '0%'; requestAnimationFrame(tick);
+        }
+        const fill = root.querySelector('[data-level-fill]');
+        if (fill) requestAnimationFrame(() => requestAnimationFrame(() => { fill.style.width = `${fill.dataset.to}%`; }));
+      }
+
       async function commitAttempt(evalResult) {
         const cur = appState.current;
         if (!cur) return;
@@ -8369,7 +8627,8 @@
           userInput: cur.userInput,
           rubricChecks: cur.rubricChecks || null,
           missedSkillTags: evalResult.missedSkillTags || [],
-          errorTags: safeErrorTags(cur.inst.variant, cur.userInput, evalResult, cur.rubricChecks),
+          errorTags: [...safeErrorTags(cur.inst.variant, cur.userInput, evalResult, cur.rubricChecks), ...(cur.confidence === 'sure' && !evalResult.passed ? ['confident-miss'] : [])],
+          confidence: cur.confidence || null,
         };
 
         await db.transaction('rw', db.reviewStates, db.attemptLogs, async () => {
@@ -8379,10 +8638,13 @@
 
         appState.session.cards += 1;
         const masteryBefore = masteryNow();
+        const lvBefore = topicScoreFor(cur.node.id);
         appState.reviewMap[cur.node.id] = nextRs;
         appState.attemptLogs.unshift(logEntry);
-        appState.masteryLogs.push({ nodeId: logEntry.nodeId, variantId: logEntry.variantId, timestamp: logEntry.timestamp, normalizedGrade: logEntry.normalizedGrade });
+        appState.masteryLogs.push({ nodeId: logEntry.nodeId, variantId: logEntry.variantId, timestamp: logEntry.timestamp, normalizedGrade: logEntry.normalizedGrade, confidence: logEntry.confidence });
         const masteryAfter = masteryNow();
+        const lvAfter = topicScoreFor(cur.node.id);
+        cur.levelMove = lvBefore && lvAfter ? { name: lvAfter.name, before: lvBefore.score, after: lvAfter.score } : null;
         if (masteryBefore && masteryAfter) {
           for (const sid of appState.skillMap.nodeSkills?.[cur.node.id] || []) {
             const was = masteryBefore.states[sid]?.status, now = masteryAfter.states[sid]?.status;
@@ -8397,7 +8659,7 @@
           sess.retryCount ||= {};
           if (!sess.retry.some((r) => r.nodeId === cur.node.id) && (sess.retryCount[cur.node.id] || 0) < 2) {
             sess.retryCount[cur.node.id] = (sess.retryCount[cur.node.id] || 0) + 1;
-            sess.retry.push({ nodeId: cur.node.id, after: sess.cards + appState.retryAfterCards });
+            sess.retry.push({ nodeId: cur.node.id, after: sess.cards + (cur.confidence === 'sure' ? Math.min(3, appState.retryAfterCards) : appState.retryAfterCards) });
             cur.retryQueued = true;
           }
         }
@@ -8806,15 +9068,18 @@
 
           feedbackHtml = `
             <div class="mt-6 space-y-4">
-              <div class="border rounded-xl p-4 ${tone}">
+              <div class="border rounded-xl p-4 ${tone}" data-verdict>
                 <div class="flex flex-wrap items-center justify-between gap-2">
                   <div class="font-display font-semibold text-base">
-                    Score: <span class="font-mono">${pct}%</span>
+                    Score: <span class="font-mono" data-countup="${pct}">${pct}%</span>
                     ${evalResult.vetoApplied ? ' · Capped at 45%' : evalResult.passed ? ' · Passed' : ' · Not there yet'}
                   </div>
                   ${nextDueRs ? `<div class="text-xs">Due for review ${Weakness.humanDue(nextDueRs.dueMs)}</div>` : ''}
                 </div>
                 <p class="text-sm mt-1">${esc(evalResult.feedback)}</p>
+                ${cur.confidence === 'sure' && !evalResult.passed ? `<p class="text-sm mt-1.5 font-medium" data-conf-note>You were sure, and it was wrong. That is the kind of miss most worth fixing: it will come back in a few cards.</p>` : ''}
+                ${cur.confidence === 'guess' && evalResult.passed ? `<p class="text-sm mt-1.5" data-conf-note>Right, but you called it a guess: do not count this one as learned yet.</p>` : ''}
+                ${cur.levelMove ? `<div class="mt-2.5 flex items-center gap-2 text-xs" data-level-move><span class="shrink-0 font-medium">${escSub(cur.levelMove.name)}</span><div class="flex-1 h-1.5 rounded-full bg-black/10 overflow-hidden"><div data-level-fill data-to="${Math.round(cur.levelMove.after * 100)}" class="h-full rounded-full bg-current opacity-70" style="width:${Math.round(cur.levelMove.before * 100)}%;transition:width 700ms cubic-bezier(.2,.8,.2,1)"></div></div><span class="shrink-0 font-mono">${Math.round(cur.levelMove.before * 100)}% → ${Math.round(cur.levelMove.after * 100)}%</span></div>` : ''}
                 ${missedTags.length ? `
                   <div class="mt-3 pt-3 border-t border-rose-200 flex flex-wrap items-center gap-2">
                     <span class="text-xs font-semibold uppercase tracking-wider">Drill the weak sub-skills:</span>
@@ -8966,7 +9231,12 @@
                 <div class="blk-answer">
                   ${inputHtml}
                   ${phase === 'answering' && slot.type !== 'typed_synthesis' ? `
-                    <div class="sticky bottom-0 bg-white mt-4 max-lg:mt-auto py-3 border-t border-slate-200 flex justify-end gap-2">
+                    <div class="sticky bottom-0 bg-white mt-4 max-lg:mt-auto py-3 border-t border-slate-200 flex flex-wrap items-center justify-end gap-2">
+                      ${appState.settings?.confidence !== false && !drawThenCompare ? `
+                        <div class="w-full sm:w-auto sm:mr-auto flex items-center gap-1.5" data-confidence role="group" aria-label="How sure are you?">
+                          <span class="text-[11px] uppercase tracking-wider font-medium text-slate-500 mr-0.5">How sure?</span>
+                          ${[['sure', 'Sure'], ['think', 'Think so'], ['guess', 'Guess']].map(([k, l]) => `<button type="button" data-conf="${k}" aria-pressed="${cur.confidence === k}" class="flex-1 sm:flex-none px-3 py-1.5 text-xs font-medium rounded-full border transition-colors ${cur.confidence === k ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50'}">${l}</button>`).join('')}
+                        </div>` : ''}
                       ${drawThenCompare && variant.evaluator?.type === 'atomic_rubric' ? `
                         <button type="button" id="btnCommitDrawCompare" class="w-full sm:w-auto px-5 py-3 sm:py-2 text-sm font-medium bg-blue-700 text-white rounded-lg hover:bg-blue-800">
                           Commit &amp; Compare with Rubric
@@ -9212,6 +9482,14 @@
           });
         }
 
+        $$('[data-conf]', root).forEach((btn) => btn.addEventListener('click', () => {
+          cur.confidence = cur.confidence === btn.dataset.conf ? null : btn.dataset.conf;
+          $$('[data-conf]', root).forEach((b) => {
+            const on = b.dataset.conf === cur.confidence;
+            b.setAttribute('aria-pressed', String(on));
+            b.className = `flex-1 sm:flex-none px-3 py-1.5 text-xs font-medium rounded-full border transition-colors ${on ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-300 text-slate-700 hover:bg-slate-50'}`;
+          });
+        }));
         $('#btnSubmitAnswer', root)?.addEventListener('click', async () => {
           if (slot.type === 'unordered_set') {
             const pending = $('#setTokenInput', root)?.value?.trim();
@@ -9260,43 +9538,122 @@
         });
 
         renderMath(root);
+        playStudyMotion(root, cur);
+      }
+
+      /* Sortable list (ordered_list slot). Pointer events, so it works with a finger as well as a mouse: the held row lifts and follows
+         the pointer, the others slide aside to open a gap, and on release the row settles into its slot. The up/down buttons animate
+         the same way (FLIP: measure, let the render happen, then play the move from the old positions). Touch drags start from the grip
+         only, so scrolling a long list is not hijacked. Motion durations collapse under prefers-reduced-motion (global rule). */
+      const orderFlip = { pending: null };
+      function flipOrderRows(listEl, before) {
+        const rows = $$('[data-order-item]', listEl);
+        let moved = false;
+        rows.forEach((r) => {
+          const old = before.get(r.dataset.orderItem);
+          if (old == null) return;
+          const dy = old - r.getBoundingClientRect().top;
+          if (Math.abs(dy) < 1) return;
+          r.style.transition = 'none';
+          r.style.transform = `translateY(${dy}px)`;
+          r.classList.add('ord-moving');
+          moved = true;
+        });
+        if (!moved) return;
+        void listEl.offsetHeight;
+        rows.forEach((r) => {
+          if (!r.classList.contains('ord-moving')) return;
+          r.style.transition = 'transform 240ms cubic-bezier(.2,.8,.2,1)';
+          r.style.transform = '';
+          setTimeout(() => { r.style.transition = ''; r.classList.remove('ord-moving'); }, 280);
+        });
       }
 
       function bindOrderedListInteractions(listEl, getOrder, setOrder) {
         if (!listEl) return;
+        if (orderFlip.pending && orderFlip.pending.id === listEl.id) { const { before } = orderFlip.pending; orderFlip.pending = null; flipOrderRows(listEl, before); }
+        const rects = () => new Map($$('[data-order-item]', listEl).map((r) => [r.dataset.orderItem, r.getBoundingClientRect().top]));
+        const commit = (arr) => { orderFlip.pending = { id: listEl.id, before: rects() }; setOrder(arr); };
+
         $$('[data-order-move]', listEl).forEach((btn) => {
           btn.addEventListener('click', () => {
             const [idxStr, deltaStr] = btn.dataset.orderMove.split(':');
             const idx = Number(idxStr);
-            const delta = Number(deltaStr);
+            const targetIdx = idx + Number(deltaStr);
             const arr = (getOrder() || []).slice();
-            const targetIdx = idx + delta;
             if (targetIdx < 0 || targetIdx >= arr.length) return;
-            const tmp = arr[idx];
-            arr[idx] = arr[targetIdx];
-            arr[targetIdx] = tmp;
-            setOrder(arr);
+            [arr[idx], arr[targetIdx]] = [arr[targetIdx], arr[idx]];
+            commit(arr);
           });
         });
 
-        let dragFromIdx = null;
-        $$('[data-order-item]', listEl).forEach((row) => {
-          row.addEventListener('dragstart', (e) => {
-            dragFromIdx = Number(row.dataset.orderIdx);
-            if (e.dataTransfer) e.dataTransfer.effectAllowed = 'move';
-          });
-          row.addEventListener('dragover', (e) => {
+        const rows = $$('[data-order-item]', listEl);
+        const sortable = rows.length > 1 && rows.some((r) => r.querySelector('[data-order-move]'));
+        if (!sortable) return;
+        rows.forEach((row) => {
+          row.draggable = false;
+          const lead = row.firstElementChild;
+          if (lead && !lead.querySelector('[data-order-handle]')) {
+            lead.insertAdjacentHTML('afterbegin', '<span data-order-handle class="ord-grip" aria-hidden="true">⋮⋮</span>');
+          }
+          row.addEventListener('pointerdown', (e) => {
+            if (e.button > 0 || e.target.closest('[data-order-move]')) return;
+            if (e.pointerType === 'touch' && !e.target.closest('[data-order-handle]')) return;
             e.preventDefault();
-          });
-          row.addEventListener('drop', (e) => {
-            e.preventDefault();
-            const toIdx = Number(row.dataset.orderIdx);
-            if (dragFromIdx === null || dragFromIdx === toIdx) return;
-            const arr = (getOrder() || []).slice();
-            const [moved] = arr.splice(dragFromIdx, 1);
-            arr.splice(toIdx, 0, moved);
-            dragFromIdx = null;
-            setOrder(arr);
+            const items = $$('[data-order-item]', listEl);
+            const from = items.indexOf(row);
+            const top0 = items.map((r) => r.offsetTop);
+            const h = items.map((r) => r.offsetHeight);
+            const gap = items.length > 1 ? top0[1] - (top0[0] + h[0]) : 8;
+            const centre0 = items.map((r, i) => top0[i] + h[i] / 2);
+            const startY = e.clientY;
+            let to = from;
+            row.setPointerCapture?.(e.pointerId);
+            listEl.classList.add('ord-dragging');
+            row.classList.add('ord-lift');
+            items.forEach((r) => { if (r !== row) r.style.transition = 'transform 180ms cubic-bezier(.2,.8,.2,1)'; });
+            row.style.transition = 'none';
+
+            const move = (ev) => {
+              const dy = Math.max(-top0[from], Math.min(ev.clientY - startY, top0[items.length - 1] + h[items.length - 1] - top0[from] - h[from]));
+              row.style.transform = `translateY(${dy}px) scale(1.015)`;
+              const tt = top0[from] + dy, tb = tt + h[from]; // the dragged row's top and bottom edges: a neighbour yields once the edge passes its centre
+              let n = from;
+              items.forEach((r, i) => { if (i > from && centre0[i] < tb) n++; else if (i < from && centre0[i] > tt) n--; });
+              to = n;
+              items.forEach((r, i) => {
+                if (i === from) return;
+                const shift = i > from && i <= to ? -(h[from] + gap) : i < from && i >= to ? (h[from] + gap) : 0;
+                r.style.transform = shift ? `translateY(${shift}px)` : '';
+              });
+            };
+            const finish = (ev, cancelled) => {
+              row.removeEventListener('pointermove', move);
+              row.removeEventListener('pointerup', up);
+              row.removeEventListener('pointercancel', cancel);
+              row.releasePointerCapture?.(e.pointerId);
+              const final = cancelled ? from : to;
+              const slotTop = final > from ? top0[final] + h[final] - h[from] : final < from ? top0[final] : top0[from];
+              row.style.transition = 'transform 170ms cubic-bezier(.2,.8,.2,1)';
+              row.style.transform = `translateY(${slotTop - top0[from]}px)`;
+              row.classList.remove('ord-lift');
+              setTimeout(() => {
+                listEl.classList.remove('ord-dragging');
+                if (final === from) {
+                  items.forEach((r) => { r.style.transition = ''; r.style.transform = ''; });
+                  return;
+                }
+                const arr = (getOrder() || []).slice();
+                const [moved] = arr.splice(from, 1);
+                arr.splice(final, 0, moved);
+                setOrder(arr);
+              }, 190);
+            };
+            const up = (ev) => finish(ev, false);
+            const cancel = (ev) => finish(ev, true);
+            row.addEventListener('pointermove', move);
+            row.addEventListener('pointerup', up);
+            row.addEventListener('pointercancel', cancel);
           });
         });
       }
@@ -10254,6 +10611,7 @@
                   <div class="flex-1 h-2 rounded-full bg-slate-100 overflow-hidden" role="img" aria-label="Average score ${pctMean}%"><div class="h-full ${barTone(t.mean)}" style="width:${Math.max(3, pctMean)}%"></div></div>
                   <span class="text-[11px] font-mono text-slate-600 w-9 text-right">${pctMean}%</span>
                 </div>
+                ${t.sureMisses ? `<div class="text-[11px] font-medium text-rose-800" data-sure-misses>Sure but wrong ×${t.sureMisses}: check these beliefs first</div>` : ''}
                 ${t.weakSkills.length ? `<div class="text-[11px] text-slate-600">Most misses: ${t.weakSkills.map((k) => `${esc(k.name)} ×${k.misses}`).join(' · ')}</div>` : ''}
               </div>`;
           }).join('') : '<p class="text-sm text-slate-500">Topics are ranked once you have answered at least two questions in them.</p>';
@@ -11204,6 +11562,7 @@
       Evaluators,
       Widgets,
       UI,
+      Figures,
       migrateGoldenBankToNodes,
       CONTENT_VERSION,
       REMOVED_NODE_IDS,

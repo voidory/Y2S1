@@ -164,3 +164,20 @@ test('grader wording: the veto message is plain language', () => {
   assert.match(res.feedback, /critical step was missed/i);
   assert.doesNotMatch(res.feedback, /Zero-Step|Veto/);
 });
+
+test('topicStats: a miss you were sure about pulls its topic up the list and is counted', () => {
+  const mk = (conf) => { const logs = []; for (let i = 0; i < 6; i++) logs.push(log(vsepr[i % vsepr.length], i < 3 ? 0.2 : 1, i < 3 ? { confidence: conf } : {})); for (let i = 0; i < 6; i++) logs.push(log(ts[i % ts.length], i < 3 ? 0.2 : 1)); return J(Weakness.topicStats(logs, map)); };
+  const plain = mk('guess'), sure = mk('sure');
+  const get = (st, id) => st.find((t) => t.id === id);
+  assert.equal(get(plain, 'vsepr').sureMisses, 0);
+  assert.equal(get(sure, 'vsepr').sureMisses, 3);
+  assert.ok(get(sure, 'vsepr').rankScore < get(plain, 'vsepr').rankScore, 'sure-but-wrong lowers the rank score');
+  assert.ok(get(sure, 'vsepr').rankScore >= get(plain, 'vsepr').rankScore - 0.12 - 1e-9, 'by at most 0.12');
+});
+
+test('slipCounts: "Sure, but wrong" is a named recurring slip', () => {
+  const logs = [0, 1, 2].map((i) => log(vsepr[0], 0, { errorTags: ['confident-miss'], confidence: 'sure' }));
+  const s = J(Weakness.slipCounts(logs, map));
+  assert.equal(s[0].label, 'Sure, but wrong');
+  assert.equal(s[0].count, 3);
+});

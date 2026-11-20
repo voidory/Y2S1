@@ -1,0 +1,82 @@
+{
+ "version": 1,
+ "module": "CM2021",
+ "methods": [
+  {
+   "id": "terms",
+   "title": "Terms, microstates and Tanabe–Sugano",
+   "chunks": [
+    "terms-ts"
+   ],
+   "flag": "Written from the question bank and standard theory, not from your slides. Check conventions and notation against your notes.",
+   "summary": "Count microstates, derive all terms of a dⁿ configuration, find the ground term, and read a Tanabe–Sugano diagram.",
+   "md": "## Use it when\nA question asks for the number of microstates, all atomic terms of d² or d⁸, the ground term, an O_h term symbol, or which dⁿ a Tanabe–Sugano diagram shows.\n\n## Steps\n1. **Microstates** of n electrons in 10 d spin-orbitals: 10!/(n!(10 − n)!). d² and d⁸: 45. d³ and d⁷: 120. d⁴ and d⁶: 210. d⁵: 252.\n2. **Term symbol** ²ˢ⁺¹L with L = S, P, D, F, G, H, I for 0, 1, 2, 3, 4, 5, 6. Each term holds (2L + 1)(2S + 1) microstates. **Always check that the terms add back to the total.**\n3. **All terms of d² (and d⁸, which has the same terms):** triplets (parallel spins, different m_l) give M_L up to 3: ³F, then ³P. Singlets (any two m_l) give M_L up to 4: ¹G, then ¹D, ¹S. Check: 21 + 9 + 9 + 5 + 1 = 45.\n4. **d³ (and d⁷):** ⁴F, ⁴P, ²H, ²G, ²F, ²D, ²D, ²P (28 + 12 + 22 + 18 + 14 + 10 + 10 + 6 = 120). **d⁴ (and d⁶):** ⁵D; ³H, ³G, ³F, ³F, ³D, ³P, ³P; ¹I, ¹G, ¹G, ¹F, ¹D, ¹D, ¹S, ¹S (210).\n5. **Ground term (Hund):** maximise S first, then L. d³: ⁴F. d⁵: ⁶S. d² and d⁸: ³F. d⁶: ⁵D. For a given spin the highest L is lowest.\n6. **Molecular (O_h) terms:** one electron or hole in t₂g gives T; in e_g gives E; a filled or half-filled symmetric set gives A.\n7. **Tanabe–Sugano diagram:** read the free-ion ground term at the left axis to find dⁿ (⁴F with ⁴P above → d⁷; ⁵D with triplets above → d⁴). Left of the vertical line is high spin, right is low spin. Count the unpaired electrons from the spin state; μ = √(n(n + 2)) BM.\n\n## Worked mini-example\nd⁷ diagram: left of the line the ground term is ⁴T₁g (t₂g⁵e_g², three unpaired, 3.87 BM); right of it ²E_g (t₂g⁶e_g¹, one unpaired, 1.73 BM).\n\n## Traps\n- Not checking the microstate sum, which is what exposes a missing term.\n- Counting a term once when it appears twice (d³ has two ²D).\n- Maximising L before S for the ground term.\n- Reading d⁶ for d⁴: d⁶'s low-spin state is a singlet ¹A₁g, not a triplet."
+  },
+  {
+   "id": "field",
+   "title": "Crystal field, spin state and colour",
+   "chunks": [
+    "field-energetics",
+    "bonding-models",
+    "magnetism-colour"
+   ],
+   "flag": "Written from the question bank and standard theory, not from your slides. Check conventions and notation against your notes.",
+   "summary": "Splitting diagrams, CFSE, high or low spin, the spectrochemical series, magnetic moment, d–d colour, and identifying M.",
+   "md": "## Use it when\nA question names a complex or gives properties and asks for dⁿ, a splitting diagram, CFSE, spin state, moment, colour, or the identity of the metal.\n\n## Steps\n1. **Oxidation state:** sum of ligand charges plus M = overall charge. **dⁿ:** group number minus oxidation state for first-row metals (remove 4s first: V³⁺ is d², Fe³⁺ d⁵, Cu⁺ d¹⁰).\n2. **Geometry:** six ligands O_h (t₂g below e_g, gap Δo); four ligands T_d (e below t₂, Δt ≈ 4/9 Δo, always high spin); square planar for d⁸ with strong-field ligands.\n3. **Spin state matters only for d⁴ to d⁷.** Strong field (Δo larger than the pairing energy) gives low spin. Order of the spectrochemical series: I⁻ < Cl⁻ < F⁻ < H₂O < NH₃ < en < CN⁻ < CO. Δo also rises with oxidation state and down a group.\n4. **CFSE (octahedral)** = (0.4 n(t₂g) − 0.6 n(e_g))Δo, minus a pairing energy P for each extra pair. d³: 1.2 Δo. HS d⁴: 0.6. LS d⁴: 1.6 − P. HS d⁵: 0.\n5. **Unpaired electrons n** then μ = √(n(n + 2)) BM (spin-only).\n6. **Colour:** λ (nm) = 10⁷ / ν̃ (cm⁻¹). The colour you see is complementary to the light absorbed. d–d bands are weak (Laporte-forbidden in O_h); charge-transfer bands (MnO₄⁻ LMCT, d⁰) are intense.\n7. **Identify M:** use the unpaired-electron count and the ligand strength (H₂O is weak, so high spin) to find dⁿ, then find the ion with that dⁿ and the stated charge (M³⁺ with 4 unpaired in H₂O: d⁴ Mn³⁺ or d⁶ Co³⁺). Give both when \"more than one answer may be possible\".\n8. **Jahn–Teller:** strong for an odd electron in e_g (d⁹, HS d⁴, LS d⁷), weak for t₂g asymmetry.\n9. **σ and π:** π-donors (halides, OH⁻, H₂O) lower Δo; π-acceptors (CO, CN⁻, PR₃) raise it by back-bonding, which lowers the C–O bond order in CO.\n\n## Worked mini-example\n[Ti(H₂O)₆]³⁺ is d¹: one t₂g electron, CFSE 0.4 Δo, one band at 20 300 cm⁻¹, λ = 10⁷/20 300 = 493 nm. It absorbs blue-green and looks purple.\n\n## Traps\n- Giving a high or low spin answer for d¹ to d³ or d⁸ to d¹⁰.\n- Forgetting P in the low-spin CFSE.\n- Using the T_d formula in O_h.\n- Counting the 4s electrons in dⁿ.\n- Answering with one metal when two fit."
+  },
+  {
+   "id": "naming",
+   "title": "Naming complexes and oxidation states",
+   "chunks": [
+    "naming"
+   ],
+   "flag": "Written from the question bank and standard theory, not from your slides. Check conventions and notation against your notes.",
+   "summary": "Ligand names, ordering, -ate endings, oxidation state, dⁿ, coordination number and denticity.",
+   "md": "## Use it when\nA question gives a formula and asks for the name, oxidation state, dⁿ or coordination number, or the reverse.\n\n## Steps\n1. **Cation first, then the anion.** Inside the complex: ligands in **alphabetical order** (ignore di-, tri-), then the metal with its oxidation state in roman numerals.\n2. **Ligand names:** H₂O aqua, NH₃ ammine, CO carbonyl, Cl⁻ chloro, CN⁻ cyano, O²⁻ oxo, oxalate oxalato. Complex ligand names take bis, tris, tetrakis.\n3. **Anionic complexes end in -ate**, with Latin roots for some metals: ferrate, cuprate, argentate, aurate, plumbate, stannate.\n4. **Oxidation state:** sum ligand charges, then M = overall charge − that sum. **dⁿ:** from the oxidation state (4s electrons go first).\n5. **Coordination number** = donor atoms attached. Count denticity: oxalate 2 (O,O), glycinate 2 (N,O), en 2, dien 3, edta 6.\n6. **Ambidentate ligands** bind through one of two atoms; write the donor atom nearest the metal (M–NCS, M–SCN).\n7. **Hydrates:** lattice water comes last, e.g. trihydrate.\n8. **Bridging** ligands take μ; hapticity is η.\n\n## Worked mini-example\nK[Cr(ox)₂(H₂O)₂]·3H₂O: two oxalate (2−) and two neutral water give a complex of Cr + (−4) = −1, so Cr(III), d³, coordination number 6. Name: potassium diaquabis(oxalato)chromate(III) trihydrate.\n\n## Traps\n- Alphabetising by prefix (di, bis) rather than by ligand name.\n- Forgetting -ate for an anionic complex.\n- Confusing ammine (NH₃) with methylamine.\n- Writing the ligands in the wrong order in a formula."
+  },
+  {
+   "id": "reactions",
+   "title": "Oxidation numbers, formal charge and reactions",
+   "chunks": [
+    "reaction-toolkit",
+    "hydrogen"
+   ],
+   "flag": "Written from the question bank and standard theory, not from your slides. Check conventions and notation against your notes.",
+   "summary": "Oxidation numbers (including averages), formal charge, balancing, and the reaction patterns that recur.",
+   "md": "## Use it when\nA question assigns oxidation numbers or formal charges, balances an equation, or writes a nuclear or redox reaction.\n\n## Steps\n1. **Oxidation number:** H is +1 with non-metals but −1 in metal hydrides; O is −2 (peroxide −1, superoxide −½); halogens −1 in halides; the electropositive partner takes its usual positive value (Mg +2 in Mg₅Ga₂ gives Ga −5).\n2. **Average oxidation number** when atoms are not equivalent: solve for the average (Mn₃O₄: 3x − 8 = 0, +8/3, which is Mn(II)Mn(III)₂).\n3. **Formal charge** = valence electrons of the free atom − non-bonding electrons − number of bonds. **Valency** (course key) = valence electrons minus lone-pair electrons. **Coordination number** = atoms attached.\n4. **Balance a redox equation:** write half-reactions, balance atoms then charge, equalise electrons, add.\n5. **Nuclear equations:** the mass numbers and the atomic numbers each balance on both sides.\n6. **Recurring patterns:** steam reforming CH₄ + H₂O → CO + 3H₂; hydride reagents (8LiH + Al₂Cl₆ → 6LiCl + 2Li[AlH₄]); electrolysis of molten KBr (anode 2Br⁻ → Br₂ + 2e⁻, cathode K⁺ + e⁻ → K); acids with phosphorus (below).\n7. **Isotopes:** the kinetic isotope effect comes from the lower zero-point energy of the heavier isotope's bond, so it breaks more slowly.\n\n## Worked mini-example\nH₃PO₃ is HP(O)(OH)₂: 3(+1) + P + 3(−2) = 0, so P is +3. [ReH₉]²⁻: Re + 9(−1) = −2, so Re is +7.\n\n## Traps\n- Giving H +1 in a metal hydride.\n- Taking oxidation number and formal charge as the same thing.\n- Not balancing charge as well as atoms.\n- A fractional oxidation number with no explanation when the atoms differ."
+  },
+  {
+   "id": "mo",
+   "title": "Molecular orbitals: diatomics, polyatomics and multicentre bonds",
+   "chunks": [
+    "mo-diatomic",
+    "mo-polyatomic",
+    "delocalised"
+   ],
+   "flag": "Written from the question bank and standard theory, not from your slides. Check conventions and notation against your notes.",
+   "summary": "Fill the diagram, find bond order, magnetism and HOMO, build ligand group orbitals, and count multicentre bonds.",
+   "md": "## Use it when\nA question asks for bond order, magnetism, bond length, the HOMO, ligand group orbitals, or a multicentre bond.\n\n## Steps\n1. **Diatomics:** for O₂, F₂ the order is σ2s, σ*2s, σ2p, π2p, π*2p, σ*2p. For B₂, C₂, N₂, s–p mixing puts π2p **below** σ2p.\n2. **Bond order** = ½(bonding − antibonding electrons). Higher order means a shorter and stronger bond; at equal order, larger orbitals give a longer bond (Li₂ is longer than F₂).\n3. **Magnetism:** unpaired electrons are paramagnetic (B₂, O₂); none is diamagnetic (C₂, N₂, F₂).\n4. **HOMO:** N₂ σg(2p)²; O₂ π*¹π*¹ (2); F₂ π*⁴; B₂ π_u¹π_u¹ (2); CO 3σ² (the carbon lone pair).\n5. **Isoelectronic species** share the diagram (NF has 12 valence electrons like O₂: bond order 2, two unpaired).\n6. **Heteronuclear:** the more electronegative atom's orbitals lie lower and dominate the bonding MOs.\n7. **Polyatomics:** build group orbitals from the ligands, then combine only those with the **same symmetry** as a central-atom orbital. Six ligand σ orbitals in O_h: a₁g + t₁u + e_g (a₁g has no node and is lowest). Orbitals with no partner stay non-bonding.\n8. **Three-centre four-electron bonds** (HF₂⁻, H₅O₂⁺): three orbitals, four electrons fill bonding and non-bonding, so each link has order 0.5. **Electron-deficient** bonds share two electrons over three or four centres (B₂H₆, Li₄(CH₃)₄).\n9. **Hyperconjugation:** a lone pair on N donating into σ*(Si–H) makes N(SiH₃)₃ planar; the gauche effect in N₂H₄ and H₂O₂ comes from lone pair to σ*(X–H) donation.\n\n## Worked mini-example\nBond-order ranking O₂²⁻ 1 < O₂⁻ 1.5 < O₂ 2 < O₂⁺ 2.5 gives lengths 150 > 135 > 121 > 112 pm. CH₄ (T_d): a₁² t₂⁶, so the HOMO is the triply degenerate t₂ with 6 electrons.\n\n## Traps\n- The wrong order for B₂, C₂, N₂ (forgetting s–p mixing).\n- Counting a 3c-4e link as a full bond.\n- Combining orbitals of different symmetry."
+  },
+  {
+   "id": "sblock",
+   "title": "Groups 1–2: trends, anomalies and ion binding",
+   "chunks": [
+    "s-block",
+    "group13-14"
+   ],
+   "flag": "Written from the question bank and standard theory, not from your slides. Check conventions and notation against your notes.",
+   "summary": "Alkali metal oxides, carbonate stability, hydration energy, Be and Li anomalies, crown ethers, and diborane and silicon.",
+   "md": "## Use it when\nA question asks why a trend holds, what a metal forms with O₂, how a cation is bound, or why Be, Li or B behaves unusually.\n\n## Steps\n1. **Charge density** = charge/radius. It sets hydration energy, polarising power, and lattice preferences.\n2. **Group 1 + O₂:** Li gives the oxide Li₂O, Na the peroxide Na₂O₂, K, Rb and Cs the superoxide MO₂. Larger cations stabilise larger anions.\n3. **Group 2 carbonates:** decomposition temperature rises down the group (MgCO₃ 813 K < CaCO₃ 1173 K < SrCO₃ 1563 K) because the smaller, more polarising cation distorts CO₃²⁻ more.\n4. **Beryllium:** small and highly charged, so its compounds are covalent. It is amphoteric (Be(OH)₂ + 2NaOH → Na₂[Be(OH)₄]) and diagonal to Al; also Li–Mg and B–Si.\n5. **Lithium** forms organolithiums (2Li + RCl → RLi + LiCl) and a nitride.\n6. **Hydrides and acetylides:** 2M + HC≡CH → M₂C₂ + H₂.\n7. **Crown ethers and cryptands** bind a cation whose size fits the cavity (Li⁺ 1.36, Na⁺ 1.9, K⁺ 2.66, Cs⁺ 3.38 Å).\n8. **Boron and silicon:** diborane (2BF₃ + 6NaH → B₂H₆ + 6NaF) has three-centre two-electron bonds; silicon is purified through SiHCl₃ (Si + 3HCl → SiHCl₃ + H₂, then thermal decomposition).\n9. **Bioinorganic:** Na⁺ and Ca²⁺ mostly outside cells, K⁺ and Mg²⁺ inside; pumps use energy to hold the gradient.\n\n## Traps\n- Predicting the oxide for every alkali metal.\n- Reversing the carbonate stability trend.\n- Using atomic radius alone for hydration energy (use charge density).\n- \"Be is covalent\" with no reason (small size, high polarising power)."
+  },
+  {
+   "id": "maingroup",
+   "title": "Groups 15–18",
+   "chunks": [
+    "group15-18"
+   ],
+   "flag": "Written from the question bank and standard theory, not from your slides. Check conventions and notation against your notes.",
+   "summary": "Oxoacids and phosphorus chemistry, hydrogen peroxide, SF₆ and P₄O₁₀.",
+   "md": "## Use it when\nA question names a p-block compound and asks for its structure, acidity, oxidation state or a reaction.\n\n## Steps\n1. **Draw the acid's real structure.** Only O–H protons ionise: H₃PO₄ is triprotic, H₃PO₃ = HP(O)(OH)₂ is diprotic (P +3, one P–H), H₃PO₂ = H₂P(O)OH is monoprotic (P +1, two P–H).\n2. **Oxoacid strength** rises with the number of terminal O atoms and with the central atom's electronegativity.\n3. **P₄O₁₀** is a powerful dehydrating agent: P₄O₁₀ + 6H₂O → 4H₃PO₄. PCl₃ + 3H₂O → H₃PO₃ + 3HCl.\n4. **Hydrogen peroxide:** BaO₂ + H₂SO₄ → BaSO₄ + H₂O₂; gauche in the gas phase.\n5. **SF₆** is thermodynamically a reactive-looking molecule but kinetically inert (crowded S, strong S–F, no low-energy pathway). Only fluorine takes sulfur to +6 by direct combination.\n6. **Chlorine dioxide:** 2NaClO₃ + SO₂ + H₂SO₄ → 2ClO₂ + 2NaHSO₄; ClO₂ is a yellow-green, odd-electron (paramagnetic) gas.\n7. **Always assign oxidation numbers** to show what is oxidised and reduced.\n\n## Traps\n- Counting P–H hydrogens as acidic.\n- Calling H₃PO₃ triprotic.\n- Writing the wrong formula for the chlorate in the ClO₂ equation."
+  }
+ ]
+}

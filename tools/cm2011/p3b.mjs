@@ -134,24 +134,24 @@ const SLOPE = 59.16;
     { id: 'm11.p.ag2s', name: 'Slope for an ion sensed indirectly through Ksp', chunk: 'p-types', marks: 4, tags: ['ksp'] });
 }
 
-/* ---------- gas-sensing probes (table from the lecture) ---------- */
+/* ---------- gas-sensing probes ----------
+   Only the ammonia probe has ever been examined (2011/12, 2017/18, 2025/26 finals); the lecture's wider gas table (H2S, HCN, SO2, HF)
+   never appears in 11 finals, so it was dropped. CO2 stays as the one other example of the same principle. */
 {
   const G = [
-    ['co2', 'CO₂', 'NaHCO₃', has('nahco[3₃]', 'sodium (?:hydrogen ?)?carbonate', 'sodium bicarbonate', 'hco[3₃]'), 'pH glass electrode', has('ph', 'glass')],
-    ['so2', 'SO₂', 'NaHSO₃', has('nahso[3₃]', 'sodium (?:hydrogen ?)?sulfite', 'sodium (?:hydrogen ?)?sulphite', 'bisulfite', 'bisulphite'), 'pH glass electrode', has('ph', 'glass')],
-    ['hf', 'HF', 'H⁺ (acid)', has('h\\+', 'h⁺', 'acid', 'hcl', 'proton', 'h\\^\\+'), 'F⁻ (LaF₃) electrode', has('laf', 'f-', 'f⁻', 'fluoride')],
-    ['h2s', 'H₂S', 'pH 5 buffer', has('buffer', 'ph ?5', 'ph 5'), 'S²⁻ (Ag₂S) electrode', has('ag[2₂]s', 's2-', 's²⁻', 'sulfide', 'sulphide')],
-    ['hcn', 'HCN', 'KAg(CN)₂', has('kag\\(cn\\)', 'ag\\(cn\\)', 'silver cyanide', 'dicyanoargentate'), 'Ag⁺ (silver) electrode', has('ag\\+', 'ag⁺', 'silver', '\\bag\\b')],
-    ['nh3', 'NH₃', '0.1 M NH₄Cl', has('nh[4₄]\\+? ?cl', 'nh[4₄]cl', 'ammonium chloride', 'ammonium'), 'pH glass electrode', has('ph', 'glass')],
+    ['nh3', 'NH₃', '0.1 M NH₄Cl', has('nh[4₄]\\+? ?cl', 'nh[4₄]cl', 'ammonium chloride', 'ammonium'), 'pH glass electrode', has('ph', 'glass'),
+      'NH₃ crosses the membrane and raises the pH of the thin NH₄Cl layer (NH₃ + H₂O ⇌ NH₄⁺ + OH⁻); the glass electrode reads that pH change. More NH₃ means higher pH, so the potential falls as log[NH₃] rises: the slope is negative, about −59 mV per decade.'],
+    ['co2', 'CO₂', 'NaHCO₃', has('nahco[3₃]', 'sodium (?:hydrogen ?)?carbonate', 'sodium bicarbonate', 'hco[3₃]'), 'pH glass electrode', has('ph', 'glass'),
+      'CO₂ crosses the membrane and acidifies the thin NaHCO₃ layer (CO₂ + H₂O ⇌ H⁺ + HCO₃⁻); the glass electrode reads the pH fall. Same principle as the ammonia probe, opposite direction: more CO₂ gives a lower pH.'],
   ];
-  const variants = G.map(([id, gas, inner, innerRe, sensor, sensorRe]) => recall({
+  const variants = G.map(([id, gas, inner, innerRe, sensor, sensorRe, why]) => recall({
     id: `p-gas-${id}`, label: gas, marks: 2,
     stem: `A dissolved-gas sensing probe for **${gas}** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. What is the inner filling solution, and which electrode senses the change?`,
-    explanation: `${gas}: inner solution ${inner}; sensing electrode ${sensor}. The gas crosses the membrane and shifts an equilibrium in the inner layer, and the inner electrode follows that change (for ${gas} the sensed species changes with ${gas === 'NH₃' ? 'pH: NH₃ + H₂O ⇌ NH₄⁺ + OH⁻' : 'the equilibrium of the gas in the inner solution'}).`,
+    explanation: `${gas}: inner solution ${inner}; sensing electrode ${sensor}. ${why}`,
     fields: [['inner', 'Inner solution', inner, [`^.*${innerRe}.*$`]], ['sensor', 'Sensing electrode', sensor, [`^.*${sensorRe}.*$`]]],
   }));
-  add(node({ id: 'bk-m11-p-gas', week: WEEK, title: 'Gas-sensing probes: inner solution and sensor', theme: THEME, tags: ['gas-sensing-probe'], source: SRC + ' · lecture gas-probe table', family: 'ise-recall', tier: 'atomic', exam: 'short_2to3', mins: 2, variants }),
-    { id: 'm11.p.gas', name: 'Gas probes: which inner solution and electrode for which gas', chunk: 'p-types', marks: 2, tags: ['gas-sensing-probe'] });
+  add(node({ id: 'bk-m11-p-gas', week: WEEK, title: 'Gas-sensing probes: how the ammonia probe works', theme: THEME, tags: ['gas-sensing-probe'], source: SRC + ' · gas-probe lecture slides', family: 'ise-recall', tier: 'atomic', exam: 'short_2to3', mins: 2, variants }),
+    { id: 'm11.p.gas', name: 'Gas probes: the ammonia probe (and CO₂ as the same idea)', chunk: 'p-types', marks: 1, tags: ['gas-sensing-probe'] });
 }
 
 /* ---------- membranes and their facts ---------- */

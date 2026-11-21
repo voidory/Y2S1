@@ -10,6 +10,8 @@ The owner wants a critical peer: say so when something looks wrong, give a recom
 npm test                      # 100+ unit tests (Node vm sandbox, no browser, no install needed)
 node tools/cm2011/build.mjs   # regenerate public/content/cm2011/*.json from tools/cm2011/*.mjs
 node tools/methods/build.mjs  # regenerate public/content/*/methods.json from tools/methods/*.md
+node tools/bundle.mjs           # one self-contained dist/y2s1-standalone.html to share (banks, libraries, fonts inlined; works offline; needs network once, cached in .bundle-cache/)
+node tests/e2e/standalone.cjs  # opens that file from disk with the network blocked
 # browser suites (need Playwright + Chromium; set DEXIE_FILE if unpkg is blocked):
 npm run test:e2e              # layout, study flows, answer review, weak spots, copy, data safety
 npm run test:cm2011           # CM2011 flows

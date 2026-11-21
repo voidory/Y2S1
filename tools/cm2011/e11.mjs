@@ -1,4 +1,5 @@
 import { choice, range, num, calc, pick, written, node } from './lib.mjs';
+import { dhSlips, dhDerived, dhLine } from './e3a.mjs';
 
 /* pH of a strong acid by concentrations and by activities (Topic 3a). Anchor: the 2024/25 final, 0.025 M HCl in 0.025 M Na₂SO₄
    (I = 0.1, γ(H⁺) = 0.83 from the booklet table, pH 1.60 by concentration and 1.68 by activity). The pH meter reports −log a(H⁺). */
@@ -26,19 +27,19 @@ const BG = [
     id: `e-ph-${b.id}`, label: `HCl in ${b.f}`, marks: 5,
     stem: `A solution contains **{{fix(ca,3)}} M HCl** and **{{fix(cs,3)}} M ${b.f}**. Give the pH (a) from concentrations and (b) from activities, which is what a pH meter responds to. Use the extended Debye–Hückel equation with α(H₃O⁺) = 0.9 nm, and give the ionic strength and γ(H⁺) on the way.`,
     hint: HINT,
-    explanation: `By concentration: pH = −log {{fix(ca,3)}} = {{fix(pc,2)}}. Ionic strength: HCl gives H⁺ and Cl⁻ (I = ½ × 2 × {{fix(ca,3)}} = {{fix(ca,3)}} M) and ${b.f} gives ${b.ions}, which adds ${b.k}c = {{fix(Ibg,3)}} M, so I = {{fix(I,3)}} M. Then −log γ = 0.51 √I / (1 + 3.3 × 0.9 √I) gives γ(H⁺) = {{fix(g,3)}}. Activity: a(H⁺) = γ × [H⁺] = {{fix(g,3)}} × {{fix(ca,3)}} = {{fix(aH,4)}} M, so pH = {{fix(pa,2)}}. The activity pH is higher by {{fix(d,2)}} because the ionic atmosphere lowers the effective concentration of H⁺ (γ < 1).`,
+    explanation: `By concentration: pH = −log {{fix(ca,3)}} = {{fix(pc,2)}}. Ionic strength: HCl gives H⁺ and Cl⁻ (I = ½ × 2 × {{fix(ca,3)}} = {{fix(ca,3)}} M) and ${b.f} gives ${b.ions}, which adds ${b.k}c = {{fix(Ibg,3)}} M, so I = {{fix(I,3)}} M. Then ${dhLine('H⁺', 1, 0.9)}. Activity: a(H⁺) = γ × [H⁺] = {{fix(g,3)}} × {{fix(ca,3)}} = {{fix(aH,4)}} M, so pH = −log {{fix(aH,4)}} = {{fix(pa,2)}}. The activity pH is higher by {{fix(d,2)}} because the ionic atmosphere lowers the effective concentration of H⁺ (γ < 1).`,
     sampled: { ca: choice([0.01, 0.02, 0.025, 0.05]), cs: choice(b.cs) },
     derived: {
-      Ibg: `${b.k} * cs`, I: 'ca + Ibg', g: gH('I'), pc: '-log(ca)', aH: 'g * ca', pa: '-log(g * ca)', d: 'pa - pc',
-      onlyBg: `-log(${gH('Ibg')} * ca)`, lim: `-log(${gLimit('I')} * ca)`,
+      Ibg: `${b.k} * cs`, I: 'ca + Ibg', g: gH('I'), ...dhDerived(1, 0.9), pc: '-log(ca)', aH: 'g * ca', pa: '-log(g * ca)', d: 'pa - pc',
+      onlyBg: `-log(${gH('Ibg')} * ca)`, lim: `-log(${gLimit('I')} * ca)`, divided: '-log(ca / g)', lnSlip: '-ln(g * ca)', gOnly: '-log(g)',
     },
     fields: [
       num('pc', 'pH from concentration', '', 'pc', { relTol: 0.004, tol: 0.01, sig: 3 }),
       num('I', 'Ionic strength I', 'M', 'I', { relTol: 0.01, paths: [{ label: 'You counted only the background salt; the HCl contributes too.', expr: 'Ibg' }, { label: 'You counted only the HCl; the background salt contributes too.', expr: 'ca' }] }),
-      num('g', 'γ(H⁺)', '', 'g', { relTol: 0.015, sig: 3, paths: [{ label: 'You used the limiting law and left out the 1 + 3.3α√I term.', expr: gLimit('I') }], ecf: [{ expr: gH('u_I'), label: 'Consistent with your own ionic strength, so the method earns part credit.' }] }),
+      num('g', 'γ(H⁺)', '', 'g', { relTol: 0.015, sig: 3, paths: dhSlips(1, 0.9), ecf: [{ expr: gH('u_I'), label: 'Consistent with your own ionic strength, so the method earns part credit.' }] }),
       num('pa', 'pH from activity', '', 'pa', {
         relTol: 0.004, tol: 0.01, sig: 3,
-        paths: [{ label: 'You used the concentration (γ = 1); a pH meter responds to activity.', expr: 'pc' }, { label: 'You used the limiting law (no 1 + 3.3α√I term).', expr: 'lim' }],
+        paths: [{ label: 'You used the concentration (γ = 1); a pH meter responds to activity.', expr: 'pc' }, { label: 'You used the limiting law (no 1 + 3.3α√I term).', expr: 'lim' }, { label: 'You divided by γ; the activity is a = γ × [H⁺], so multiply.', expr: 'divided' }, { label: 'You used ln instead of log10: pH = −log10 a(H⁺).', expr: 'lnSlip' }, { label: 'You took −log γ on its own; pH = −log(γ × [H⁺]), which includes the concentration.', expr: 'gOnly' }],
         ecf: [{ expr: '-log(u_g * ca)', label: 'Consistent with your own γ, so the method earns part credit.' }],
       }),
     ],
@@ -53,25 +54,25 @@ const BG = [
     id: `e-ph-alone-${acid === 'HCl' ? 'hcl' : 'hno3'}`, label: `${acid} in water`, marks: 4,
     stem: `A solution of **{{fix(ca,4)}} M ${acid}** in pure water (fully dissociated). Calculate the ionic strength, γ(H⁺) (extended Debye–Hückel, α(H₃O⁺) = 0.9 nm), and the pH both from concentration and from activity.`,
     hint: HINT,
-    explanation: `${acid} gives H⁺ and its anion, so I = ½ (c + c) = {{fix(I,4)}} M. Then γ(H⁺) = {{fix(g,3)}}. pH from concentration = −log {{fix(ca,4)}} = {{fix(pc,2)}}; from activity = −log({{fix(g,3)}} × {{fix(ca,4)}}) = {{fix(pa,2)}}. In a dilute solution the two nearly agree; the gap widens as I rises.`,
+    explanation: `${acid} gives H⁺ and its anion, so I = ½ (c + c) = ½ ({{fix(ca,4)}} + {{fix(ca,4)}}) = {{fix(I,4)}} M. Then ${dhLine('H⁺', 1, 0.9)}. pH from concentration = −log {{fix(ca,4)}} = {{fix(pc,2)}}; from activity = −log({{fix(g,3)}} × {{fix(ca,4)}}) = {{fix(pa,2)}}. In a dilute solution the two nearly agree; the gap widens as I rises.`,
     sampled: { ca: choice([0.002, 0.005, 0.01, 0.02, 0.05, 0.1]) },
-    derived: { I: 'ca', g: gH('I'), pc: '-log(ca)', pa: '-log(g * ca)', lim: `-log(${gLimit('I')} * ca)` },
+    derived: { I: 'ca', g: gH('I'), ...dhDerived(1, 0.9), pc: '-log(ca)', pa: '-log(g * ca)', lim: `-log(${gLimit('I')} * ca)`, divided: '-log(ca / g)' },
     fields: [
-      num('g', 'γ(H⁺)', '', 'g', { relTol: 0.015, sig: 3 }),
+      num('g', 'γ(H⁺)', '', 'g', { relTol: 0.015, sig: 3, paths: dhSlips(1, 0.9) }),
       num('pc', 'pH from concentration', '', 'pc', { relTol: 0.004, tol: 0.01, sig: 3 }),
-      num('pa', 'pH from activity', '', 'pa', { relTol: 0.003, tol: 0.006, sig: 3, paths: [{ label: 'You used the concentration (γ = 1); a pH meter responds to activity.', expr: 'pc' }], ecf: [{ expr: '-log(u_g * ca)', label: 'Consistent with your own γ, so the method earns part credit.' }] }),
+      num('pa', 'pH from activity', '', 'pa', { relTol: 0.003, tol: 0.006, sig: 3, paths: [{ label: 'You used the concentration (γ = 1); a pH meter responds to activity.', expr: 'pc' }, { label: 'You divided by γ; the activity is a = γ × [H⁺], so multiply.', expr: 'divided' }], ecf: [{ expr: '-log(u_g * ca)', label: 'Consistent with your own γ, so the method earns part credit.' }] }),
     ],
   }));
   const reverse = BG.map((b) => calc({
     id: `e-ph-rev-${b.id}`, label: `Find [H⁺] from a meter reading (${b.f})`, marks: 4,
     stem: `A pH meter reads **{{fix(pm,2)}}** in a solution of HCl made up in **{{fix(cs,3)}} M ${b.f}**. The acid is dilute, so take the ionic strength as that of the ${b.f} alone. Calculate γ(H⁺) (extended Debye–Hückel, α = 0.9 nm), a(H⁺) and the molar concentration of H⁺.`,
     hint: 'The meter reports −log a(H⁺), so a(H⁺) = 10^(−pH). Concentration = activity ÷ γ.',
-    explanation: `I = ${b.k}c = {{fix(I,3)}} M, so γ(H⁺) = {{fix(g,3)}}. The meter reading is the activity pH: a(H⁺) = 10^(−{{fix(pm,2)}}) = {{fix(aH,5)}} M. Concentration = a/γ = {{fix(aH,5)}} / {{fix(g,3)}} = {{fix(cH,5)}} M, larger than the activity because γ < 1.`,
+    explanation: `I = ${b.k} × {{fix(cs,3)}} = {{fix(I,3)}} M (${b.f}: ${b.ions}), so ${dhLine('H⁺', 1, 0.9)}. The meter reading is the activity pH: a(H⁺) = 10^(−{{fix(pm,2)}}) = {{fix(aH,5)}} M. Concentration = a/γ = {{fix(aH,5)}} / {{fix(g,3)}} = {{fix(cH,5)}} M, larger than the activity because γ < 1.`,
     sampled: { pm: range(1.50, 3.00, 0.01, 2), cs: choice(b.cs) },
-    derived: { I: `${b.k} * cs`, g: gH('I'), aH: '10^(-pm)', cH: 'aH / g', times: 'aH * g' },
+    derived: { I: `${b.k} * cs`, g: gH('I'), ...dhDerived(1, 0.9), aH: '10^(-pm)', cH: 'aH / g', times: 'aH * g' },
     fields: [
-      num('g', 'γ(H⁺)', '', 'g', { relTol: 0.015, sig: 3 }),
-      num('aH', 'a(H⁺)', 'M', 'aH', { relTol: 0.02, sig: 3 }),
+      num('g', 'γ(H⁺)', '', 'g', { relTol: 0.015, sig: 3, paths: dhSlips(1, 0.9) }),
+      num('aH', 'a(H⁺)', 'M', 'aH', { relTol: 0.02, sig: 3, paths: [{ label: 'You took 10^(+pH); the activity is 10^(−pH).', expr: '10^(pm)' }, { label: 'You used ln-style decay: a(H⁺) = 10^(−pH), a base-10 power, not e^(−pH).', expr: 'exp(-pm)' }] }),
       num('cH', '[H⁺]', 'M', 'cH', { relTol: 0.025, sig: 3, paths: [{ label: 'You took the activity as the concentration; divide by γ.', expr: 'aH' }, { label: 'You multiplied by γ; the concentration is the activity divided by γ.', expr: 'times' }], ecf: [{ expr: 'u_aH / u_g', label: 'Consistent with your own a(H⁺) and γ, so the method earns part credit.' }] }),
     ],
   }));

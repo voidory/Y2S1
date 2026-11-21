@@ -25,7 +25,7 @@
    "id": "e-activity",
    "part": "Topic 3a: Electrochemistry",
    "name": "Ionic strength and activity",
-   "summary": "I, extended Debye–Hückel γ, activities"
+   "summary": "I, extended Debye–Hückel γ, activities, pH from activity"
   },
   {
    "id": "e-nernst",
@@ -656,7 +656,7 @@
    "name": "Ionic strength of a salt or a mixture",
    "mode": "calc",
    "engine": "gen",
-   "marks": 0.556,
+   "marks": 0.444,
    "basis": "notes",
    "ref": "Topic 3a · electrochemistry",
    "tags": [
@@ -665,7 +665,7 @@
    "ids": [
     "bk-m11-e-ionic"
    ],
-   "weight": 0.00556,
+   "weight": 0.00444,
    "nodes": [
     "bk-m11-e-ionic"
    ],
@@ -677,7 +677,7 @@
    "name": "Extended Debye–Hückel: γ and activity",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.111,
+   "marks": 0.889,
    "basis": "notes",
    "ref": "Topic 3a · electrochemistry",
    "tags": [
@@ -686,7 +686,7 @@
    "ids": [
     "bk-m11-e-gamma"
    ],
-   "weight": 0.01111,
+   "weight": 0.00889,
    "nodes": [
     "bk-m11-e-gamma"
    ],
@@ -698,7 +698,7 @@
    "name": "Electrode potential of M/Mⁿ⁺ using activities",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.389,
+   "marks": 1.111,
    "basis": "notes",
    "ref": "Topic 3a · electrochemistry",
    "tags": [
@@ -707,7 +707,7 @@
    "ids": [
     "bk-m11-e-half"
    ],
-   "weight": 0.01389,
+   "weight": 0.01111,
    "nodes": [
     "bk-m11-e-half"
    ],
@@ -719,7 +719,7 @@
    "name": "Redox couple in a mixed-electrolyte solution",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.944,
+   "marks": 1.556,
    "basis": "notes",
    "ref": "Topic 3a · electrochemistry · 2011-12 final Q2(a)",
    "tags": [
@@ -729,7 +729,7 @@
    "ids": [
     "bk-m11-e-fe"
    ],
-   "weight": 0.01944,
+   "weight": 0.01556,
    "nodes": [
     "bk-m11-e-fe"
    ],
@@ -741,7 +741,7 @@
    "name": "Full cell potential from two half-cells; spontaneity",
    "mode": "calc",
    "engine": "gen",
-   "marks": 2.222,
+   "marks": 1.778,
    "basis": "notes",
    "ref": "Topic 3a · electrochemistry · 2011-12 final Q2(a)",
    "tags": [
@@ -750,7 +750,7 @@
    "ids": [
     "bk-m11-e-cell"
    ],
-   "weight": 0.02222,
+   "weight": 0.01778,
    "nodes": [
     "bk-m11-e-cell"
    ],
@@ -762,7 +762,7 @@
    "name": "Combine Ksp with E° to get E° of a metal / insoluble-salt electrode",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.667,
+   "marks": 1.333,
    "basis": "notes",
    "ref": "Topic 3a · electrochemistry · 2011-12 final Q2(c)",
    "tags": [
@@ -771,7 +771,7 @@
    "ids": [
     "bk-m11-e-ksp"
    ],
-   "weight": 0.01667,
+   "weight": 0.01333,
    "nodes": [
     "bk-m11-e-ksp"
    ],
@@ -783,7 +783,7 @@
    "name": "Convert between E°, ΔG° and K",
    "mode": "calc",
    "engine": "gen",
-   "marks": 0.833,
+   "marks": 0.667,
    "basis": "notes",
    "ref": "Topic 3a · electrochemistry",
    "tags": [
@@ -792,7 +792,7 @@
    "ids": [
     "bk-m11-e-thermo"
    ],
-   "weight": 0.00833,
+   "weight": 0.00667,
    "nodes": [
     "bk-m11-e-thermo"
    ],
@@ -804,7 +804,7 @@
    "name": "Activity, spontaneity and the Nernst equation: concepts",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.278,
+   "marks": 0.222,
    "basis": "notes",
    "ref": "Topic 3a · electrochemistry",
    "tags": [
@@ -813,9 +813,75 @@
    "ids": [
     "bk-m11-e-concepts"
    ],
-   "weight": 0.00278,
+   "weight": 0.00222,
    "nodes": [
     "bk-m11-e-concepts"
+   ],
+   "chunk": "e-activity"
+  },
+  {
+   "id": "m11.e.ph",
+   "ch": 3,
+   "name": "pH from concentration and from activity (acid in a background salt)",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 0.889,
+   "basis": "notes",
+   "ref": "Topic 3a · electrochemistry · 2024/25 final Q2",
+   "tags": [
+    "ph",
+    "activity"
+   ],
+   "ids": [
+    "bk-m11-e-ph"
+   ],
+   "weight": 0.00889,
+   "nodes": [
+    "bk-m11-e-ph"
+   ],
+   "chunk": "e-activity"
+  },
+  {
+   "id": "m11.e.ph2",
+   "ch": 3,
+   "name": "pH of an acid in water, and [H⁺] from a pH reading",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 0.667,
+   "basis": "notes",
+   "ref": "Topic 3a · electrochemistry · 2024/25 final Q2",
+   "tags": [
+    "ph",
+    "activity"
+   ],
+   "ids": [
+    "bk-m11-e-ph2"
+   ],
+   "weight": 0.00667,
+   "nodes": [
+    "bk-m11-e-ph2"
+   ],
+   "chunk": "e-activity"
+  },
+  {
+   "id": "m11.e.ph3",
+   "ch": 3,
+   "name": "Why activity pH differs from concentration pH",
+   "mode": "recall",
+   "engine": "gen",
+   "marks": 0.444,
+   "basis": "notes",
+   "ref": "Topic 3a · electrochemistry · 2024/25 final Q2",
+   "tags": [
+    "ph",
+    "concepts"
+   ],
+   "ids": [
+    "bk-m11-e-ph3"
+   ],
+   "weight": 0.00444,
+   "nodes": [
+    "bk-m11-e-ph3"
    ],
    "chunk": "e-activity"
   },
@@ -1849,6 +1915,15 @@
   ],
   "bk-m11-e-concepts": [
    "m11.e.concepts"
+  ],
+  "bk-m11-e-ph": [
+   "m11.e.ph"
+  ],
+  "bk-m11-e-ph2": [
+   "m11.e.ph2"
+  ],
+  "bk-m11-e-ph3": [
+   "m11.e.ph3"
   ],
   "bk-m11-p-slope": [
    "m11.p.slope"

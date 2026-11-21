@@ -4,6 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import t1 from './t1.mjs';
 import e3a from './e3a.mjs';
+import e11 from './e11.mjs';
 import p3b from './p3b.mjs';
 import s4 from './s4.mjs';
 import f5 from './f5.mjs';
@@ -21,7 +22,7 @@ const CHUNKS = [
   { id: 't1-stats', part: 'Topic 1: Errors & confidence intervals', name: 'Statistics and uncertainty', summary: 'Mean, s, %RSD, Q-test, confidence interval, t-tests, error propagation' },
   { id: 'a-psi', part: 'Topic 2: Air pollution in Singapore', name: 'PSI and air quality', summary: 'Sub-index from a 24-hour concentration, overall PSI, descriptors, breathing and cigarette equivalents, 24-hour versus 1-hour' },
   { id: 't1-quant', part: 'Topic 1: Errors & confidence intervals', name: 'Units, dilutions & Kjeldahl', summary: 'ppm and molarity, dilution factors, Kjeldahl nitrogen and adulterants' },
-  { id: 'e-activity', part: 'Topic 3a: Electrochemistry', name: 'Ionic strength and activity', summary: 'I, extended Debye–Hückel γ, activities' },
+  { id: 'e-activity', part: 'Topic 3a: Electrochemistry', name: 'Ionic strength and activity', summary: 'I, extended Debye–Hückel γ, activities, pH from activity' },
   { id: 'e-nernst', part: 'Topic 3a: Electrochemistry', name: 'Nernst equation and cells', summary: 'Half-cells and cells with activities, spontaneity, Ksp → E°, ΔG and K' },
   { id: 'p-principles', part: 'Topic 3b: Potentiometry', name: 'How the electrodes work', summary: 'Glass electrode, junction potential, cell notation, written explanations' },
   { id: 'p-types', part: 'Topic 3b: Potentiometry', name: 'Membrane types and probes', summary: 'Glass, LaF₃, Ag₂S, PVC; gas-sensing probes; TISAB' },
@@ -39,7 +40,7 @@ const CHUNKS = [
   { id: 'g-hplc', part: 'GC and HPLC', name: 'HPLC: columns, modes, elution order, detection', summary: 'Column label, C18/C8, normal vs reversed phase, elution order, isocratic vs gradient, detectors, particle size, choosing GC or HPLC' },
 ];
 
-const all = [...t1, ...t7, ...a8, ...c9, ...c10, ...e3a, ...p3b, ...s4, ...f5, ...g5, ...x6];
+const all = [...t1, ...t7, ...a8, ...c9, ...c10, ...e3a, ...e11, ...p3b, ...s4, ...f5, ...g5, ...x6];
 const nodes = all.map((x) => x.node);
 const ids = new Set();
 for (const n of nodes) { if (ids.has(n.id)) throw new Error('duplicate node id ' + n.id); ids.add(n.id); }

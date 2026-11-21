@@ -271,9 +271,9 @@ add(node(mk({
     }),
     pick({
       id: 'sh-fix', label: 'Reducing a fronting peak', marks: 1,
-      stem: 'A peak shows fronting. Which change is most likely to help?',
-      options: [['less', 'Inject a smaller amount or a more dilute sample'], ['more', 'Inject more sample'], ['len', 'Use a longer column of the same kind'], ['oh', 'Add silanol groups to the packing']], correct: 'less',
-      explanation: 'Fronting from overload is relieved by reducing the amount injected (or using a column of higher capacity).',
+      stem: 'A peak shows fronting on a non-polar (reversed-phase) column. Assume the usual cause. Which change is most likely to help?',
+      options: [['less', 'Inject a smaller amount or a more dilute sample'], ['more', 'Inject more sample'], ['len', 'Use a longer column of the same kind'], ['oh', 'Add more free silanol groups to the packing']], correct: 'less',
+      explanation: 'On a non-polar column the usual cause of fronting is overload: too much analyte saturates the retention sites, so part of the band is retained less strongly and comes out early. The fix is to inject less or dilute the sample. Silanol groups are the cause of tailing (some molecules held too strongly), so adding them would not cure fronting. A longer column only adds plates; it does not change the overload.',
     }),
   ],
 })), { id: 'm11.c.shape', name: 'Peak asymmetry: tailing and fronting', chunk: 'c-concepts', marks: 1, tags: ['peak-shape'] });

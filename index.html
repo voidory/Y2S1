@@ -1086,7 +1086,10 @@
             const j = Math.floor(rand() * (i + 1));
             [opts[i], opts[j]] = [opts[j], opts[i]];
           }
-          shown = { ...variant, inputSlot: { ...slot, options: opts } };
+          // "None of the above" and "All of the above" only make sense at the end.
+          const pinned = (o) => /^\s*(none|all) of the (above|these)\b/i.test(o.label || '');
+          const ordered = [...opts.filter((o) => !pinned(o)), ...opts.filter(pinned)];
+          shown = { ...variant, inputSlot: { ...slot, options: ordered } };
         }
 
         return {

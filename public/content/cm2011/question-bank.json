@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-20T07:55:28.739Z",
+ "exportedAt": "2026-11-21T07:56:43.905Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -8435,8 +8435,8 @@
      "variantId": "sh-fix",
      "perspectiveLabel": "Reducing a fronting peak",
      "marks": 1,
-     "stem": "A peak shows fronting. Which change is most likely to help?",
-     "explanation": "Fronting from overload is relieved by reducing the amount injected (or using a column of higher capacity).",
+     "stem": "A peak shows fronting on a non-polar (reversed-phase) column. Assume the usual cause. Which change is most likely to help?",
+     "explanation": "On a non-polar column the usual cause of fronting is overload: too much analyte saturates the retention sites, so part of the band is retained less strongly and comes out early. The fix is to inject less or dilute the sample. Silanol groups are the cause of tailing (some molecules held too strongly), so adding them would not cure fronting. A longer column only adds plates; it does not change the overload.",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -8456,7 +8456,7 @@
        },
        {
         "id": "oh",
-        "label": "Add silanol groups to the packing"
+        "label": "Add more free silanol groups to the packing"
        }
       ]
      },
@@ -11932,6 +11932,1071 @@
       "type": "choice_match",
       "targetIds": [
        "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-e-ph",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "pH from activities: a strong acid in a salt solution",
+    "source": "Topic 3a · electrochemistry · 2024/25 final Q2",
+    "week": 3,
+    "primaryTheme": "Electrochemistry & Activities",
+    "conceptTags": [
+     "ph",
+     "activity",
+     "ionic-strength"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 6,
+    "examStyle": "construct_4to6",
+    "family": "elec-ph"
+   },
+   "variants": [
+    {
+     "variantId": "e-ph-na2so4",
+     "perspectiveLabel": "HCl in Na₂SO₄",
+     "marks": 5,
+     "stem": "A solution contains **{{fix(ca,3)}} M HCl** and **{{fix(cs,3)}} M Na₂SO₄**. Give the pH (a) from concentrations and (b) from activities, which is what a pH meter responds to. Use the extended Debye–Hückel equation with α(H₃O⁺) = 0.9 nm, and give the ionic strength and γ(H⁺) on the way.",
+     "hint": "a(H⁺) = γ·[H⁺] and pH = −log a(H⁺). Ionic strength I = ½ Σ cᵢzᵢ² over every ion, including the acid and its anion. γ from −log γ = 0.51 z² √I / (1 + 3.3 α √I), with α(H₃O⁺) = 0.9 nm (or read the booklet table).",
+     "explanation": "By concentration: pH = −log {{fix(ca,3)}} = {{fix(pc,2)}}. Ionic strength: HCl gives H⁺ and Cl⁻ (I = ½ × 2 × {{fix(ca,3)}} = {{fix(ca,3)}} M) and Na₂SO₄ gives Na⁺ ×2 and SO₄²⁻, which adds 3c = {{fix(Ibg,3)}} M, so I = {{fix(I,3)}} M. Then −log γ = 0.51 √I / (1 + 3.3 × 0.9 √I) gives γ(H⁺) = {{fix(g,3)}}. Activity: a(H⁺) = γ × [H⁺] = {{fix(g,3)}} × {{fix(ca,3)}} = {{fix(aH,4)}} M, so pH = {{fix(pa,2)}}. The activity pH is higher by {{fix(d,2)}} because the ionic atmosphere lowers the effective concentration of H⁺ (γ < 1).",
+     "variables": {
+      "sampled": {
+       "ca": {
+        "type": "choice",
+        "options": [
+         0.01,
+         0.02,
+         0.025,
+         0.05
+        ]
+       },
+       "cs": {
+        "type": "choice",
+        "options": [
+         0.02,
+         0.025,
+         0.05,
+         0.1
+        ]
+       }
+      },
+      "derived": {
+       "Ibg": "3 * cs",
+       "I": "ca + Ibg",
+       "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "pc": "-log(ca)",
+       "aH": "g * ca",
+       "pa": "-log(g * ca)",
+       "d": "pa - pc",
+       "onlyBg": "-log(10^(-(0.51 * sqrt(Ibg)) / (1 + 3.3 * 0.9 * sqrt(Ibg))) * ca)",
+       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "pc",
+        "label": "pH from concentration",
+        "numeric": true
+       },
+       {
+        "key": "I",
+        "label": "Ionic strength I",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "g",
+        "label": "γ(H⁺)",
+        "numeric": true
+       },
+       {
+        "key": "pa",
+        "label": "pH from activity",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "pc": {
+        "type": "numeric",
+        "targetExpr": "pc",
+        "relTol": 0.004,
+        "sig": 3,
+        "tolerance": 0.01
+       },
+       "I": {
+        "type": "numeric",
+        "targetExpr": "I",
+        "relTol": 0.01,
+        "sig": 4,
+        "unit": "M",
+        "paths": [
+         {
+          "label": "You counted only the background salt; the HCl contributes too.",
+          "expr": "Ibg"
+         },
+         {
+          "label": "You counted only the HCl; the background salt contributes too.",
+          "expr": "ca"
+         }
+        ]
+       },
+       "g": {
+        "type": "numeric",
+        "targetExpr": "g",
+        "relTol": 0.015,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term.",
+          "expr": "10^(-0.51 * sqrt(I))"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "10^(-(0.51 * sqrt(u_I)) / (1 + 3.3 * 0.9 * sqrt(u_I)))",
+          "label": "Consistent with your own ionic strength, so the method earns part credit."
+         }
+        ]
+       },
+       "pa": {
+        "type": "numeric",
+        "targetExpr": "pa",
+        "relTol": 0.004,
+        "sig": 3,
+        "tolerance": 0.01,
+        "paths": [
+         {
+          "label": "You used the concentration (γ = 1); a pH meter responds to activity.",
+          "expr": "pc"
+         },
+         {
+          "label": "You used the limiting law (no 1 + 3.3α√I term).",
+          "expr": "lim"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "-log(u_g * ca)",
+          "label": "Consistent with your own γ, so the method earns part credit."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "e-ph-nacl",
+     "perspectiveLabel": "HCl in NaCl",
+     "marks": 5,
+     "stem": "A solution contains **{{fix(ca,3)}} M HCl** and **{{fix(cs,3)}} M NaCl**. Give the pH (a) from concentrations and (b) from activities, which is what a pH meter responds to. Use the extended Debye–Hückel equation with α(H₃O⁺) = 0.9 nm, and give the ionic strength and γ(H⁺) on the way.",
+     "hint": "a(H⁺) = γ·[H⁺] and pH = −log a(H⁺). Ionic strength I = ½ Σ cᵢzᵢ² over every ion, including the acid and its anion. γ from −log γ = 0.51 z² √I / (1 + 3.3 α √I), with α(H₃O⁺) = 0.9 nm (or read the booklet table).",
+     "explanation": "By concentration: pH = −log {{fix(ca,3)}} = {{fix(pc,2)}}. Ionic strength: HCl gives H⁺ and Cl⁻ (I = ½ × 2 × {{fix(ca,3)}} = {{fix(ca,3)}} M) and NaCl gives Na⁺ and Cl⁻, which adds 1c = {{fix(Ibg,3)}} M, so I = {{fix(I,3)}} M. Then −log γ = 0.51 √I / (1 + 3.3 × 0.9 √I) gives γ(H⁺) = {{fix(g,3)}}. Activity: a(H⁺) = γ × [H⁺] = {{fix(g,3)}} × {{fix(ca,3)}} = {{fix(aH,4)}} M, so pH = {{fix(pa,2)}}. The activity pH is higher by {{fix(d,2)}} because the ionic atmosphere lowers the effective concentration of H⁺ (γ < 1).",
+     "variables": {
+      "sampled": {
+       "ca": {
+        "type": "choice",
+        "options": [
+         0.01,
+         0.02,
+         0.025,
+         0.05
+        ]
+       },
+       "cs": {
+        "type": "choice",
+        "options": [
+         0.025,
+         0.05,
+         0.1,
+         0.2
+        ]
+       }
+      },
+      "derived": {
+       "Ibg": "1 * cs",
+       "I": "ca + Ibg",
+       "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "pc": "-log(ca)",
+       "aH": "g * ca",
+       "pa": "-log(g * ca)",
+       "d": "pa - pc",
+       "onlyBg": "-log(10^(-(0.51 * sqrt(Ibg)) / (1 + 3.3 * 0.9 * sqrt(Ibg))) * ca)",
+       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "pc",
+        "label": "pH from concentration",
+        "numeric": true
+       },
+       {
+        "key": "I",
+        "label": "Ionic strength I",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "g",
+        "label": "γ(H⁺)",
+        "numeric": true
+       },
+       {
+        "key": "pa",
+        "label": "pH from activity",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "pc": {
+        "type": "numeric",
+        "targetExpr": "pc",
+        "relTol": 0.004,
+        "sig": 3,
+        "tolerance": 0.01
+       },
+       "I": {
+        "type": "numeric",
+        "targetExpr": "I",
+        "relTol": 0.01,
+        "sig": 4,
+        "unit": "M",
+        "paths": [
+         {
+          "label": "You counted only the background salt; the HCl contributes too.",
+          "expr": "Ibg"
+         },
+         {
+          "label": "You counted only the HCl; the background salt contributes too.",
+          "expr": "ca"
+         }
+        ]
+       },
+       "g": {
+        "type": "numeric",
+        "targetExpr": "g",
+        "relTol": 0.015,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term.",
+          "expr": "10^(-0.51 * sqrt(I))"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "10^(-(0.51 * sqrt(u_I)) / (1 + 3.3 * 0.9 * sqrt(u_I)))",
+          "label": "Consistent with your own ionic strength, so the method earns part credit."
+         }
+        ]
+       },
+       "pa": {
+        "type": "numeric",
+        "targetExpr": "pa",
+        "relTol": 0.004,
+        "sig": 3,
+        "tolerance": 0.01,
+        "paths": [
+         {
+          "label": "You used the concentration (γ = 1); a pH meter responds to activity.",
+          "expr": "pc"
+         },
+         {
+          "label": "You used the limiting law (no 1 + 3.3α√I term).",
+          "expr": "lim"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "-log(u_g * ca)",
+          "label": "Consistent with your own γ, so the method earns part credit."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "e-ph-mgso4",
+     "perspectiveLabel": "HCl in MgSO₄",
+     "marks": 5,
+     "stem": "A solution contains **{{fix(ca,3)}} M HCl** and **{{fix(cs,3)}} M MgSO₄**. Give the pH (a) from concentrations and (b) from activities, which is what a pH meter responds to. Use the extended Debye–Hückel equation with α(H₃O⁺) = 0.9 nm, and give the ionic strength and γ(H⁺) on the way.",
+     "hint": "a(H⁺) = γ·[H⁺] and pH = −log a(H⁺). Ionic strength I = ½ Σ cᵢzᵢ² over every ion, including the acid and its anion. γ from −log γ = 0.51 z² √I / (1 + 3.3 α √I), with α(H₃O⁺) = 0.9 nm (or read the booklet table).",
+     "explanation": "By concentration: pH = −log {{fix(ca,3)}} = {{fix(pc,2)}}. Ionic strength: HCl gives H⁺ and Cl⁻ (I = ½ × 2 × {{fix(ca,3)}} = {{fix(ca,3)}} M) and MgSO₄ gives Mg²⁺ and SO₄²⁻, which adds 4c = {{fix(Ibg,3)}} M, so I = {{fix(I,3)}} M. Then −log γ = 0.51 √I / (1 + 3.3 × 0.9 √I) gives γ(H⁺) = {{fix(g,3)}}. Activity: a(H⁺) = γ × [H⁺] = {{fix(g,3)}} × {{fix(ca,3)}} = {{fix(aH,4)}} M, so pH = {{fix(pa,2)}}. The activity pH is higher by {{fix(d,2)}} because the ionic atmosphere lowers the effective concentration of H⁺ (γ < 1).",
+     "variables": {
+      "sampled": {
+       "ca": {
+        "type": "choice",
+        "options": [
+         0.01,
+         0.02,
+         0.025,
+         0.05
+        ]
+       },
+       "cs": {
+        "type": "choice",
+        "options": [
+         0.01,
+         0.02,
+         0.025,
+         0.05
+        ]
+       }
+      },
+      "derived": {
+       "Ibg": "4 * cs",
+       "I": "ca + Ibg",
+       "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "pc": "-log(ca)",
+       "aH": "g * ca",
+       "pa": "-log(g * ca)",
+       "d": "pa - pc",
+       "onlyBg": "-log(10^(-(0.51 * sqrt(Ibg)) / (1 + 3.3 * 0.9 * sqrt(Ibg))) * ca)",
+       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "pc",
+        "label": "pH from concentration",
+        "numeric": true
+       },
+       {
+        "key": "I",
+        "label": "Ionic strength I",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "g",
+        "label": "γ(H⁺)",
+        "numeric": true
+       },
+       {
+        "key": "pa",
+        "label": "pH from activity",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "pc": {
+        "type": "numeric",
+        "targetExpr": "pc",
+        "relTol": 0.004,
+        "sig": 3,
+        "tolerance": 0.01
+       },
+       "I": {
+        "type": "numeric",
+        "targetExpr": "I",
+        "relTol": 0.01,
+        "sig": 4,
+        "unit": "M",
+        "paths": [
+         {
+          "label": "You counted only the background salt; the HCl contributes too.",
+          "expr": "Ibg"
+         },
+         {
+          "label": "You counted only the HCl; the background salt contributes too.",
+          "expr": "ca"
+         }
+        ]
+       },
+       "g": {
+        "type": "numeric",
+        "targetExpr": "g",
+        "relTol": 0.015,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term.",
+          "expr": "10^(-0.51 * sqrt(I))"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "10^(-(0.51 * sqrt(u_I)) / (1 + 3.3 * 0.9 * sqrt(u_I)))",
+          "label": "Consistent with your own ionic strength, so the method earns part credit."
+         }
+        ]
+       },
+       "pa": {
+        "type": "numeric",
+        "targetExpr": "pa",
+        "relTol": 0.004,
+        "sig": 3,
+        "tolerance": 0.01,
+        "paths": [
+         {
+          "label": "You used the concentration (γ = 1); a pH meter responds to activity.",
+          "expr": "pc"
+         },
+         {
+          "label": "You used the limiting law (no 1 + 3.3α√I term).",
+          "expr": "lim"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "-log(u_g * ca)",
+          "label": "Consistent with your own γ, so the method earns part credit."
+         }
+        ]
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-e-ph2",
+   "moduleCode": "CM2011",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "pH from activities: acid alone, and finding [H⁺] from a reading",
+    "source": "Topic 3a · electrochemistry · 2024/25 final Q2",
+    "week": 3,
+    "primaryTheme": "Electrochemistry & Activities",
+    "conceptTags": [
+     "ph",
+     "activity"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 5,
+    "examStyle": "construct_4to6",
+    "family": "elec-ph"
+   },
+   "variants": [
+    {
+     "variantId": "e-ph-alone-hcl",
+     "perspectiveLabel": "HCl in water",
+     "marks": 4,
+     "stem": "A solution of **{{fix(ca,4)}} M HCl** in pure water (fully dissociated). Calculate the ionic strength, γ(H⁺) (extended Debye–Hückel, α(H₃O⁺) = 0.9 nm), and the pH both from concentration and from activity.",
+     "hint": "a(H⁺) = γ·[H⁺] and pH = −log a(H⁺). Ionic strength I = ½ Σ cᵢzᵢ² over every ion, including the acid and its anion. γ from −log γ = 0.51 z² √I / (1 + 3.3 α √I), with α(H₃O⁺) = 0.9 nm (or read the booklet table).",
+     "explanation": "HCl gives H⁺ and its anion, so I = ½ (c + c) = {{fix(I,4)}} M. Then γ(H⁺) = {{fix(g,3)}}. pH from concentration = −log {{fix(ca,4)}} = {{fix(pc,2)}}; from activity = −log({{fix(g,3)}} × {{fix(ca,4)}}) = {{fix(pa,2)}}. In a dilute solution the two nearly agree; the gap widens as I rises.",
+     "variables": {
+      "sampled": {
+       "ca": {
+        "type": "choice",
+        "options": [
+         0.002,
+         0.005,
+         0.01,
+         0.02,
+         0.05,
+         0.1
+        ]
+       }
+      },
+      "derived": {
+       "I": "ca",
+       "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "pc": "-log(ca)",
+       "pa": "-log(g * ca)",
+       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "g",
+        "label": "γ(H⁺)",
+        "numeric": true
+       },
+       {
+        "key": "pc",
+        "label": "pH from concentration",
+        "numeric": true
+       },
+       {
+        "key": "pa",
+        "label": "pH from activity",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "g": {
+        "type": "numeric",
+        "targetExpr": "g",
+        "relTol": 0.015,
+        "sig": 3
+       },
+       "pc": {
+        "type": "numeric",
+        "targetExpr": "pc",
+        "relTol": 0.004,
+        "sig": 3,
+        "tolerance": 0.01
+       },
+       "pa": {
+        "type": "numeric",
+        "targetExpr": "pa",
+        "relTol": 0.003,
+        "sig": 3,
+        "tolerance": 0.006,
+        "paths": [
+         {
+          "label": "You used the concentration (γ = 1); a pH meter responds to activity.",
+          "expr": "pc"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "-log(u_g * ca)",
+          "label": "Consistent with your own γ, so the method earns part credit."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "e-ph-alone-hno3",
+     "perspectiveLabel": "HNO₃ in water",
+     "marks": 4,
+     "stem": "A solution of **{{fix(ca,4)}} M HNO₃** in pure water (fully dissociated). Calculate the ionic strength, γ(H⁺) (extended Debye–Hückel, α(H₃O⁺) = 0.9 nm), and the pH both from concentration and from activity.",
+     "hint": "a(H⁺) = γ·[H⁺] and pH = −log a(H⁺). Ionic strength I = ½ Σ cᵢzᵢ² over every ion, including the acid and its anion. γ from −log γ = 0.51 z² √I / (1 + 3.3 α √I), with α(H₃O⁺) = 0.9 nm (or read the booklet table).",
+     "explanation": "HNO₃ gives H⁺ and its anion, so I = ½ (c + c) = {{fix(I,4)}} M. Then γ(H⁺) = {{fix(g,3)}}. pH from concentration = −log {{fix(ca,4)}} = {{fix(pc,2)}}; from activity = −log({{fix(g,3)}} × {{fix(ca,4)}}) = {{fix(pa,2)}}. In a dilute solution the two nearly agree; the gap widens as I rises.",
+     "variables": {
+      "sampled": {
+       "ca": {
+        "type": "choice",
+        "options": [
+         0.002,
+         0.005,
+         0.01,
+         0.02,
+         0.05,
+         0.1
+        ]
+       }
+      },
+      "derived": {
+       "I": "ca",
+       "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "pc": "-log(ca)",
+       "pa": "-log(g * ca)",
+       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "g",
+        "label": "γ(H⁺)",
+        "numeric": true
+       },
+       {
+        "key": "pc",
+        "label": "pH from concentration",
+        "numeric": true
+       },
+       {
+        "key": "pa",
+        "label": "pH from activity",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "g": {
+        "type": "numeric",
+        "targetExpr": "g",
+        "relTol": 0.015,
+        "sig": 3
+       },
+       "pc": {
+        "type": "numeric",
+        "targetExpr": "pc",
+        "relTol": 0.004,
+        "sig": 3,
+        "tolerance": 0.01
+       },
+       "pa": {
+        "type": "numeric",
+        "targetExpr": "pa",
+        "relTol": 0.003,
+        "sig": 3,
+        "tolerance": 0.006,
+        "paths": [
+         {
+          "label": "You used the concentration (γ = 1); a pH meter responds to activity.",
+          "expr": "pc"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "-log(u_g * ca)",
+          "label": "Consistent with your own γ, so the method earns part credit."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "e-ph-rev-na2so4",
+     "perspectiveLabel": "Find [H⁺] from a meter reading (Na₂SO₄)",
+     "marks": 4,
+     "stem": "A pH meter reads **{{fix(pm,2)}}** in a solution of HCl made up in **{{fix(cs,3)}} M Na₂SO₄**. The acid is dilute, so take the ionic strength as that of the Na₂SO₄ alone. Calculate γ(H⁺) (extended Debye–Hückel, α = 0.9 nm), a(H⁺) and the molar concentration of H⁺.",
+     "hint": "The meter reports −log a(H⁺), so a(H⁺) = 10^(−pH). Concentration = activity ÷ γ.",
+     "explanation": "I = 3c = {{fix(I,3)}} M, so γ(H⁺) = {{fix(g,3)}}. The meter reading is the activity pH: a(H⁺) = 10^(−{{fix(pm,2)}}) = {{fix(aH,5)}} M. Concentration = a/γ = {{fix(aH,5)}} / {{fix(g,3)}} = {{fix(cH,5)}} M, larger than the activity because γ < 1.",
+     "variables": {
+      "sampled": {
+       "pm": {
+        "type": "range",
+        "min": 1.5,
+        "max": 3,
+        "step": 0.01,
+        "decimals": 2
+       },
+       "cs": {
+        "type": "choice",
+        "options": [
+         0.02,
+         0.025,
+         0.05,
+         0.1
+        ]
+       }
+      },
+      "derived": {
+       "I": "3 * cs",
+       "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "aH": "10^(-pm)",
+       "cH": "aH / g",
+       "times": "aH * g"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "g",
+        "label": "γ(H⁺)",
+        "numeric": true
+       },
+       {
+        "key": "aH",
+        "label": "a(H⁺)",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "cH",
+        "label": "[H⁺]",
+        "unit": "M",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "g": {
+        "type": "numeric",
+        "targetExpr": "g",
+        "relTol": 0.015,
+        "sig": 3
+       },
+       "aH": {
+        "type": "numeric",
+        "targetExpr": "aH",
+        "relTol": 0.02,
+        "sig": 3,
+        "unit": "M"
+       },
+       "cH": {
+        "type": "numeric",
+        "targetExpr": "cH",
+        "relTol": 0.025,
+        "sig": 3,
+        "unit": "M",
+        "paths": [
+         {
+          "label": "You took the activity as the concentration; divide by γ.",
+          "expr": "aH"
+         },
+         {
+          "label": "You multiplied by γ; the concentration is the activity divided by γ.",
+          "expr": "times"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_aH / u_g",
+          "label": "Consistent with your own a(H⁺) and γ, so the method earns part credit."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "e-ph-rev-nacl",
+     "perspectiveLabel": "Find [H⁺] from a meter reading (NaCl)",
+     "marks": 4,
+     "stem": "A pH meter reads **{{fix(pm,2)}}** in a solution of HCl made up in **{{fix(cs,3)}} M NaCl**. The acid is dilute, so take the ionic strength as that of the NaCl alone. Calculate γ(H⁺) (extended Debye–Hückel, α = 0.9 nm), a(H⁺) and the molar concentration of H⁺.",
+     "hint": "The meter reports −log a(H⁺), so a(H⁺) = 10^(−pH). Concentration = activity ÷ γ.",
+     "explanation": "I = 1c = {{fix(I,3)}} M, so γ(H⁺) = {{fix(g,3)}}. The meter reading is the activity pH: a(H⁺) = 10^(−{{fix(pm,2)}}) = {{fix(aH,5)}} M. Concentration = a/γ = {{fix(aH,5)}} / {{fix(g,3)}} = {{fix(cH,5)}} M, larger than the activity because γ < 1.",
+     "variables": {
+      "sampled": {
+       "pm": {
+        "type": "range",
+        "min": 1.5,
+        "max": 3,
+        "step": 0.01,
+        "decimals": 2
+       },
+       "cs": {
+        "type": "choice",
+        "options": [
+         0.025,
+         0.05,
+         0.1,
+         0.2
+        ]
+       }
+      },
+      "derived": {
+       "I": "1 * cs",
+       "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "aH": "10^(-pm)",
+       "cH": "aH / g",
+       "times": "aH * g"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "g",
+        "label": "γ(H⁺)",
+        "numeric": true
+       },
+       {
+        "key": "aH",
+        "label": "a(H⁺)",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "cH",
+        "label": "[H⁺]",
+        "unit": "M",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "g": {
+        "type": "numeric",
+        "targetExpr": "g",
+        "relTol": 0.015,
+        "sig": 3
+       },
+       "aH": {
+        "type": "numeric",
+        "targetExpr": "aH",
+        "relTol": 0.02,
+        "sig": 3,
+        "unit": "M"
+       },
+       "cH": {
+        "type": "numeric",
+        "targetExpr": "cH",
+        "relTol": 0.025,
+        "sig": 3,
+        "unit": "M",
+        "paths": [
+         {
+          "label": "You took the activity as the concentration; divide by γ.",
+          "expr": "aH"
+         },
+         {
+          "label": "You multiplied by γ; the concentration is the activity divided by γ.",
+          "expr": "times"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_aH / u_g",
+          "label": "Consistent with your own a(H⁺) and γ, so the method earns part credit."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "e-ph-rev-mgso4",
+     "perspectiveLabel": "Find [H⁺] from a meter reading (MgSO₄)",
+     "marks": 4,
+     "stem": "A pH meter reads **{{fix(pm,2)}}** in a solution of HCl made up in **{{fix(cs,3)}} M MgSO₄**. The acid is dilute, so take the ionic strength as that of the MgSO₄ alone. Calculate γ(H⁺) (extended Debye–Hückel, α = 0.9 nm), a(H⁺) and the molar concentration of H⁺.",
+     "hint": "The meter reports −log a(H⁺), so a(H⁺) = 10^(−pH). Concentration = activity ÷ γ.",
+     "explanation": "I = 4c = {{fix(I,3)}} M, so γ(H⁺) = {{fix(g,3)}}. The meter reading is the activity pH: a(H⁺) = 10^(−{{fix(pm,2)}}) = {{fix(aH,5)}} M. Concentration = a/γ = {{fix(aH,5)}} / {{fix(g,3)}} = {{fix(cH,5)}} M, larger than the activity because γ < 1.",
+     "variables": {
+      "sampled": {
+       "pm": {
+        "type": "range",
+        "min": 1.5,
+        "max": 3,
+        "step": 0.01,
+        "decimals": 2
+       },
+       "cs": {
+        "type": "choice",
+        "options": [
+         0.01,
+         0.02,
+         0.025,
+         0.05
+        ]
+       }
+      },
+      "derived": {
+       "I": "4 * cs",
+       "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "aH": "10^(-pm)",
+       "cH": "aH / g",
+       "times": "aH * g"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "g",
+        "label": "γ(H⁺)",
+        "numeric": true
+       },
+       {
+        "key": "aH",
+        "label": "a(H⁺)",
+        "unit": "M",
+        "numeric": true
+       },
+       {
+        "key": "cH",
+        "label": "[H⁺]",
+        "unit": "M",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "g": {
+        "type": "numeric",
+        "targetExpr": "g",
+        "relTol": 0.015,
+        "sig": 3
+       },
+       "aH": {
+        "type": "numeric",
+        "targetExpr": "aH",
+        "relTol": 0.02,
+        "sig": 3,
+        "unit": "M"
+       },
+       "cH": {
+        "type": "numeric",
+        "targetExpr": "cH",
+        "relTol": 0.025,
+        "sig": 3,
+        "unit": "M",
+        "paths": [
+         {
+          "label": "You took the activity as the concentration; divide by γ.",
+          "expr": "aH"
+         },
+         {
+          "label": "You multiplied by γ; the concentration is the activity divided by γ.",
+          "expr": "times"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_aH / u_g",
+          "label": "Consistent with your own a(H⁺) and γ, so the method earns part credit."
+         }
+        ]
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-m11-e-ph3",
+   "moduleCode": "CM2011",
+   "tier": "atomic",
+   "metadata": {
+    "title": "pH and activity: explanations",
+    "source": "Topic 3a · electrochemistry · 2024/25 final Q2",
+    "week": 3,
+    "primaryTheme": "Electrochemistry & Activities",
+    "conceptTags": [
+     "ph",
+     "activity",
+     "concepts"
+    ],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "elec-ph-concept"
+   },
+   "variants": [
+    {
+     "variantId": "e-ph-why",
+     "perspectiveLabel": "Why the two pH values differ",
+     "marks": 3,
+     "stem": "The pH of a 0.025 M HCl solution that also contains 0.025 M Na₂SO₄ is higher when calculated from activities than from concentrations. Explain why, and say which value a pH meter reports.",
+     "explanation": "A pH meter responds to the activity of H⁺, a = γ[H⁺], so it reports −log a(H⁺). In a solution of appreciable ionic strength each H⁺ is surrounded by an ionic atmosphere of oppositely charged ions that reduces its effective concentration, so γ < 1 and a < [H⁺]. A smaller activity means a higher pH than the concentration alone predicts, and the gap grows with ionic strength (it vanishes as I → 0).",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "A pH meter (glass electrode) responds to the activity of H⁺, a = γ[H⁺], not to its concentration",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "The other ions (Na⁺, SO₄²⁻, Cl⁻) form an ionic atmosphere around H⁺ so it behaves as if less concentrated: γ < 1",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "So a(H⁺) is smaller than [H⁺] and pH = −log a is higher; the difference grows with ionic strength",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "e-ph-salt",
+     "perspectiveLabel": "Adding an inert salt to an acid",
+     "marks": 1,
+     "stem": "A 0.010 M HCl solution is read on a pH meter, then NaCl is dissolved in it to 0.10 M. Na⁺ and Cl⁻ do not react with H⁺. The meter reading:",
+     "explanation": "The added salt raises the ionic strength, so γ(H⁺) falls and a(H⁺) falls even though [H⁺] is unchanged. The meter reports −log a(H⁺), so the reading rises slightly.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "up",
+        "label": "rises slightly, because γ(H⁺) falls as the ionic strength rises"
+       },
+       {
+        "id": "down",
+        "label": "falls, because the extra Cl⁻ makes the solution more acidic"
+       },
+       {
+        "id": "same",
+        "label": "stays the same, because Na⁺ and Cl⁻ do not react with H⁺"
+       },
+       {
+        "id": "neut",
+        "label": "moves towards 7, because the salt is neutral"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "up"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "e-ph-meter",
+     "perspectiveLabel": "What a pH meter measures",
+     "marks": 1,
+     "stem": "The glass electrode in a pH meter responds to which quantity?",
+     "explanation": "The interface potential depends on a(H⁺), so the meter reads −log a(H⁺). It equals −log [H⁺] only when γ ≈ 1, in dilute solution.",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "act",
+        "label": "the activity of H⁺, a = γ[H⁺]"
+       },
+       {
+        "id": "conc",
+        "label": "the molar concentration of H⁺"
+       },
+       {
+        "id": "tot",
+        "label": "the total acid concentration, including undissociated HA"
+       },
+       {
+        "id": "ion",
+        "label": "the ionic strength of the solution"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "act"
       ],
       "gradingMode": "exact"
      }

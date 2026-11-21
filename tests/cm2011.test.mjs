@@ -129,6 +129,29 @@ test('golden: Zn | Fe cell with activities (E_LHS −0.8242, E_RHS +0.6998, E_ce
   assert.ok(Math.abs(s.gz - 0.427) < 0.003 && Math.abs(s.g3 - 0.24) < 0.005 && Math.abs(s.g2 - 0.48) < 0.005, 'activity coefficients match the key (0.427, 0.24, 0.48)');
 });
 
+test('golden: pH of 0.025 M HCl in 0.025 M Na2SO4 (2024/25 final: I = 0.1, γ(H+) 0.83, pH 1.60 by concentration and 1.68 by activity)', () => {
+  const v = variantOf('bk-m11-e-ph', 'e-ph-na2so4');
+  const s = scopeWith(v, { ca: 0.025, cs: 0.025 });
+  assert.ok(Math.abs(s.I - 0.1) < 1e-9, `I ${s.I}`);
+  assert.ok(Math.abs(s.pc - 1.602) < 0.002, `pH conc ${s.pc}`);
+  assert.ok(Math.abs(s.g - 0.83) < 0.01, `γ ${s.g} (the booklet table gives 0.83)`);
+  assert.ok(Math.abs(s.pa - 1.68) < 0.01, `pH act ${s.pa}`);
+  // the printed pair is accepted whichever way γ is obtained (table 0.83 or Debye–Hückel 0.826)
+  const inst = Scheduler.instantiateVariant(v, 7);
+  const ok = Evaluators.evaluate(v, { pc: '1.60', I: '0.1', g: '0.83', pa: '1.68' }, scopeWith(v, { ca: 0.025, cs: 0.025 }), {}, byId['bk-m11-e-ph']);
+  assert.equal(ok.normalizedGrade, 1, JSON.stringify(ok.fieldResults));
+  assert.ok(inst);
+  // the slips are named: concentration used as activity
+  const slip = Evaluators.evaluate(v, { pc: '1.60', I: '0.1', g: '0.83', pa: '1.60' }, scopeWith(v, { ca: 0.025, cs: 0.025 }), {}, byId['bk-m11-e-ph']);
+  assert.ok(JSON.stringify(slip.fieldResults.pa).includes('activity'), JSON.stringify(slip.fieldResults.pa));
+});
+
+test('golden: [H+] from a meter reading (reading 2.00 in 0.10 M NaCl: γ 0.826, a = 0.0100, c = 0.0121 M)', () => {
+  const v = variantOf('bk-m11-e-ph2', 'e-ph-rev-nacl');
+  const s = scopeWith(v, { pm: 2.0, cs: 0.1 });
+  assert.ok(Math.abs(s.g - 0.826) < 0.003 && Math.abs(s.aH - 0.01) < 1e-9 && Math.abs(s.cH - 0.01211) < 0.0001, JSON.stringify(s));
+});
+
 test('golden: E° of Al(OH)3 from Ksp (−0.6611 V then −2.323 V)', () => {
   const v = variantOf('bk-m11-e-ksp', 'e-ksp-al');
   const s = scopeWith(v, { km: 3 });

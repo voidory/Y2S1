@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-20T20:29:02.446Z",
+ "exportedAt": "2026-11-21T07:19:00.973Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -150,7 +150,8 @@
         "id": "e",
         "label": "IF₇"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -226,7 +227,8 @@
         "id": "h",
         "label": "SO₃"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -954,7 +956,8 @@
         "id": "f",
         "label": "H₂O"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -999,7 +1002,8 @@
         "id": "f",
         "label": "CH₄"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -1493,7 +1497,8 @@
         "id": "d",
         "label": "Si₃H₈"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -1525,7 +1530,8 @@
         "id": "c",
         "label": "H₂O"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -1557,7 +1563,8 @@
         "id": "c",
         "label": "n-butane"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -1589,7 +1596,8 @@
         "id": "c",
         "label": "Al"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -1621,7 +1629,8 @@
         "id": "c",
         "label": "comparable to"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -1653,7 +1662,8 @@
         "id": "c",
         "label": "comparable to"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -1997,7 +2007,8 @@
         "id": "e",
         "label": "Si has no 3p orbitals"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -3555,7 +3566,8 @@
         "id": "d",
         "label": "Every LGO overlaps with the metal d_xy, d_xz, d_yz"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -3748,7 +3760,8 @@
         "id": "d",
         "label": "4-centre-4-electron"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -3784,7 +3797,8 @@
         "id": "d",
         "label": "4-centre-6-electron"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -3941,7 +3955,8 @@
         "id": "e",
         "label": "Both atoms must be identical"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -3979,7 +3994,8 @@
         "id": "d",
         "label": "Bonding MOs have more A character"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -4017,7 +4033,8 @@
         "id": "d",
         "label": "antibonding MO only"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -4079,7 +4096,8 @@
         "id": "e",
         "label": "O 2s interacts strongly with the H 1s orbitals"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -4117,7 +4135,8 @@
         "id": "d",
         "label": "an empty N 2p orbital"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -4153,7 +4172,8 @@
         "id": "d",
         "label": "The σ framework uses B 2s, 2p_x, 2p_y (a₁′ + e′)"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -4257,7 +4277,8 @@
         "id": "d",
         "label": "They are filled"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -5018,7 +5039,8 @@
         "id": "h",
         "label": "TiH₁.₈"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -5231,7 +5253,8 @@
         "id": "c",
         "label": "the same as"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -5382,7 +5405,7 @@
      "perspectiveLabel": "Recall",
      "marks": 2,
      "stem": "Which reaction is most likely to give the highest proportion of HD?",
-     "explanation": "NaH + D₂O → NaOD + HD: the H⁻ combines with one D⁺, giving essentially pure HD. (a) gives a statistical H₂/HD/D₂ mixture; (c) also gives a mixture (and H is released preferentially, since H₂O electrolyses faster than D₂O).",
+     "explanation": "NaH + D₂O → NaOD + HD: the H⁻ combines with one D⁺, giving essentially pure HD. Equilibrating H₂ with D₂ over platinum gives a statistical H₂/HD/D₂ mixture; electrolysis of HDO also gives a mixture (and H is released preferentially, since H₂O electrolyses faster than D₂O).",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -5399,7 +5422,8 @@
         "id": "c",
         "label": "Electrolysis of HDO"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -5627,7 +5651,8 @@
         "id": "d",
         "label": "H₂ cleavage on Pt is favourable because two Pt–H bonds (>70 kcal mol⁻¹ each) outweigh H–H (104 kcal mol⁻¹)"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -5665,7 +5690,8 @@
         "id": "d",
         "label": "H forms H₂ molecules"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -6047,7 +6073,8 @@
         "id": "f",
         "label": "Cl⁻"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -6079,7 +6106,8 @@
         "id": "c",
         "label": "Cs⁺"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -6177,7 +6205,8 @@
         "id": "c",
         "label": "worse than"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -6492,7 +6521,8 @@
         "id": "e",
         "label": "Li readily forms Li⁻ alkalides"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -6651,7 +6681,8 @@
         "id": "e",
         "label": "LiF is very soluble in water"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -6858,7 +6889,8 @@
         "id": "e",
         "label": "BeO is basic like the other Group 2 oxides"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -7006,7 +7038,8 @@
         "id": "d",
         "label": "Be has the largest atomic radius in Group 2, allowing greater overlap with neighbouring atoms"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -7142,7 +7175,8 @@
         "id": "c",
         "label": "Sr"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -7174,7 +7208,8 @@
         "id": "c",
         "label": "between Br and I"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -7361,7 +7396,8 @@
         "id": "c",
         "label": "BBr₃"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -7502,7 +7538,8 @@
         "id": "e",
         "label": "BN (from amorphous B + NH₃) has a graphite-like layer structure"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -7711,7 +7748,8 @@
         "id": "d",
         "label": "Weak electronic interactions suffice because pyramidal vs planar NH₃ differ by only ~5.9 kcal mol⁻¹"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -7906,7 +7944,8 @@
         "id": "d",
         "label": "C₆₀ consists of sp² carbons"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -8101,7 +8140,8 @@
         "id": "d",
         "label": "H₂ is kinetically unreactive only at high pressure"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -8173,7 +8213,8 @@
         "id": "f",
         "label": "water–gas shift"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -8249,7 +8290,8 @@
         "id": "c",
         "label": "gauche (≈ 110°)"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -8361,7 +8403,8 @@
         "id": "f",
         "label": "Grotthuss mechanism"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -8494,7 +8537,8 @@
         "id": "d",
         "label": "fertiliser"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -8735,7 +8779,8 @@
         "id": "f",
         "label": "Hyponitrous acid H₂N₂O₂ is formed reversibly from N₂O + H₂O"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -8917,7 +8962,8 @@
         "id": "d",
         "label": "HNO₂ is not planar"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -9217,7 +9263,8 @@
         "id": "e",
         "label": "PF₅ is a Lewis base"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -9407,7 +9454,8 @@
         "id": "d",
         "label": "Water poisons the V₂O₅ catalyst"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -9512,7 +9560,8 @@
         "id": "e",
         "label": "Most sulfates are insoluble in water"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -9632,7 +9681,8 @@
         "id": "d",
         "label": "IF₇ forms at room temperature while IF₅ needs 250–300 °C"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -9688,7 +9738,8 @@
         "id": "d",
         "label": "Boiling points decrease down the group"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -9818,7 +9869,8 @@
         "id": "d",
         "label": "strong dispersion forces"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -10060,7 +10112,8 @@
         "id": "d",
         "label": "Olin–Raschig process"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -10125,7 +10178,8 @@
         "id": "e",
         "label": "square planar [Pt(NH₃)(py)ClBr]"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -10162,7 +10216,8 @@
         "id": "d",
         "label": "planar molecules have no symmetry elements"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -10198,7 +10253,8 @@
         "id": "d",
         "label": "identity operation"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -11646,7 +11702,8 @@
         "id": "d",
         "label": "none of the above"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -11682,7 +11739,8 @@
         "id": "d",
         "label": "geometric isomers"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -11718,7 +11776,8 @@
         "id": "d",
         "label": "optical"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -11755,7 +11814,8 @@
         "id": "d",
         "label": "linkage isomers"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -11791,7 +11851,8 @@
         "id": "d",
         "label": "[Co(NH₃)₆]Cl₃ — geometric"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -12043,7 +12104,8 @@
         "id": "f",
         "label": "False"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -12079,7 +12141,8 @@
         "id": "d",
         "label": "None of the above"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -12115,7 +12178,8 @@
         "id": "d",
         "label": "None of the above"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -12151,7 +12215,8 @@
         "id": "d",
         "label": "i and iii"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -12208,7 +12273,8 @@
         "id": "d",
         "label": "neither reacts"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -12248,7 +12314,8 @@
         "id": "e",
         "label": "[MA₄B₂] shows fac/mer isomerism"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -12287,7 +12354,8 @@
         "id": "d",
         "label": "neither"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -12345,7 +12413,8 @@
         "id": "d",
         "label": "Propeller chirality needs two or more bidentate ligands in an octahedral complex"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -12525,7 +12594,8 @@
         "id": "e",
         "label": "Bulky ligands"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -12698,7 +12768,8 @@
         "id": "f",
         "label": "Bridging ligands are prefixed with η"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -12758,7 +12829,8 @@
         "id": "d",
         "label": "Later ligands are always weaker bases"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -12896,7 +12968,8 @@
         "id": "d",
         "label": "Steric strain in the methylamine complex"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -12967,7 +13040,8 @@
         "id": "d",
         "label": "The chelate effect arises because chelating ligands are always stronger σ-donors"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -13171,7 +13245,8 @@
         "id": "e",
         "label": "Synergic σ-donation / π-back-donation"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -13294,7 +13369,8 @@
         "id": "d",
         "label": "F⁻ cannot donate electron pairs"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -13844,7 +13920,8 @@
         "id": "d9",
         "label": "d⁹"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -13883,7 +13960,8 @@
         "id": "d",
         "label": "always for first-row metals"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -13919,7 +13997,8 @@
         "id": "d",
         "label": "Their ligands are always π-acceptors"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -14275,7 +14354,8 @@
         "id": "d",
         "label": "In a σ-only complex the t₂g set is nonbonding"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -14370,7 +14450,8 @@
         "id": "d",
         "label": "breaks"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -14432,7 +14513,8 @@
         "id": "e",
         "label": "d_xy, d_xz, d_yz point at the ligands in T_d"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -14531,7 +14613,8 @@
         "id": "d",
         "label": "Elongation preserves the barycentre"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -14748,7 +14831,8 @@
         "id": "e",
         "label": "Its magnitude and direction can be predicted exactly from dⁿ"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -14786,7 +14870,8 @@
         "id": "d",
         "label": "Two different Ti oxidation states"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -16954,7 +17039,8 @@
         "id": "d",
         "label": "low spin, 0 BM"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -17006,7 +17092,8 @@
         "id": "d",
         "label": "Magnetic measurements cannot distinguish high- and low-spin d⁶"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -17114,7 +17201,8 @@
         "id": "d",
         "label": "yellow"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -17722,7 +17810,8 @@
         "id": "d",
         "label": "L has no influence on term energy"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -17758,7 +17847,8 @@
         "id": "d",
         "label": "None of the above"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -18451,7 +18541,8 @@
         "id": "e",
         "label": "Unlike Orgel diagrams, Tanabe–Sugano diagrams contain only spin-allowed states"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -18564,7 +18655,8 @@
         "id": "e",
         "label": "Charge-transfer bands are spin- and Laporte-allowed, hence intense"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -18634,7 +18726,8 @@
         "id": "c",
         "label": "same intensity"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -18670,7 +18763,8 @@
         "id": "d",
         "label": "Tetrahedral complexes show only charge-transfer bands"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -18727,7 +18821,8 @@
         "id": "d",
         "label": "CT bands are usually much weaker than d–d bands"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -18904,7 +18999,8 @@
         "id": "d",
         "label": "more unpaired electrons"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -18962,7 +19058,8 @@
         "id": "d",
         "label": "[Hg(CN)₄]²⁻ (K_f ≈ 10⁴²) exchanges ¹⁴CN⁻ very fast: thermodynamically stable yet labile"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -19000,7 +19097,8 @@
         "id": "d",
         "label": "Temperature has no effect on product distribution"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -19167,7 +19265,8 @@
         "id": "d",
         "label": "A: rate independent of [Y]"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -19225,7 +19324,8 @@
         "id": "d",
         "label": "electron transfer"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -19261,7 +19361,8 @@
         "id": "d",
         "label": "outer-sphere electron transfer"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -19297,7 +19398,8 @@
         "id": "d",
         "label": "a trans effect"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -19333,7 +19435,8 @@
         "id": "d",
         "label": "Chelates react only by an associative mechanism"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -19391,7 +19494,8 @@
         "id": "d",
         "label": "The stereochemistry cannot reveal anything about the intermediate"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -19502,7 +19606,8 @@
         "id": "d",
         "label": "The trans effect is seen only in octahedral complexes"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -19562,7 +19667,8 @@
         "id": "d",
         "label": "no reaction"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -19598,7 +19704,8 @@
         "id": "d",
         "label": "[PtCl₃(PR₃)]⁻ only"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -19791,7 +19898,8 @@
         "id": "d",
         "label": "A π bond can exist between two atoms without a σ bond"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -19891,7 +19999,8 @@
         "id": "c",
         "label": "C"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -19926,7 +20035,8 @@
         "id": "d",
         "label": "SCN⁻ is mainly structure C, with a C≡S triple bond"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -20001,7 +20111,8 @@
         "id": "h",
         "label": "Si"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -20133,7 +20244,8 @@
         "id": "d",
         "label": "Successive ionisation energies always double"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -20220,7 +20332,7 @@
        },
        "d": {
         "acceptedPatterns": [
-         "^\\s*(?:none|no\\s*overlap|zero|nonbonding|non-bonding|no\\s*interaction|0)\\s*$"
+         "^\\s*(?:none|no\\s*overlap|zero|zero\\s*(?:net\\s*)?overlap|nonbonding|non-bonding|no\\s*interaction|0)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
         ],
         "caseSensitive": false,
         "expectedDisplay": "none (zero net overlap)"
@@ -20254,7 +20366,8 @@
         "id": "d",
         "label": "2px on A with 2px on B"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -20316,7 +20429,8 @@
         "id": "e",
         "label": "D₂O boils higher (101.4 °C vs 100.0 °C)"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -20395,7 +20509,8 @@
         "id": "d",
         "label": "H₂ is inert because its reactions with other elements are always endothermic"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -20448,7 +20563,8 @@
         "id": "d",
         "label": "Water is thermodynamically unstable with respect to H₂ and O₂"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -20550,7 +20666,8 @@
         "id": "d",
         "label": "It has no lone pair on oxygen"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -21010,7 +21127,8 @@
         "id": "d",
         "label": "Carbon has no valence p orbitals"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -21130,7 +21248,8 @@
         "id": "d",
         "label": "Fe, Cr and Al"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -21245,7 +21364,8 @@
         "id": "d",
         "label": "It is a one-electron oxidant"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -21303,7 +21423,8 @@
         "id": "d",
         "label": "Tetrahedral S₄ molecules"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -21439,7 +21560,8 @@
         "id": "d",
         "label": "Br₂ + 2F⁻ → 2Br⁻ + F₂"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -21496,7 +21618,8 @@
         "id": "d",
         "label": "Ca²⁺"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -21533,7 +21656,8 @@
         "id": "d",
         "label": "Li⁺, with no selectivity"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -21644,7 +21768,8 @@
         "id": "d",
         "label": "cis/trans and optical isomers (Δ/Λ)"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -21679,7 +21804,8 @@
         "id": "d",
         "label": "Optical only"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -21726,7 +21852,8 @@
         "id": "g",
         "label": "K[Cr(H₂O)₂(C₂O₄)₂]·3H₂O"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -21856,7 +21983,7 @@
      "perspectiveLabel": "Formula",
      "marks": 2,
      "stem": "Which is the formula of potassium diaquabis(oxalato)chromate(III) trihydrate?",
-     "explanation": "Cr(III) (+3) with two oxalate (2−) ligands (−4) and two neutral aqua ligands gives a complex anion of charge −1, balanced by one K⁺. The cation is written first; ligands in the formula are listed with the formula of the water of crystallisation last. (Option d lists the ligands in the wrong order for the course convention.)",
+     "explanation": "Cr(III) (+3) with two oxalate (2−) ligands (−4) and two neutral aqua ligands gives a complex anion of charge −1, balanced by one K⁺. The cation is written first; ligands in the formula are listed with the formula of the water of crystallisation last. (The version with the oxalate written before the aqua ligands has them in the wrong order for the course convention.)",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -21877,7 +22004,8 @@
         "id": "d",
         "label": "K[Cr(C₂O₄)₂(H₂O)₂]·3H₂O"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -21963,7 +22091,8 @@
         "id": "c",
         "label": "No change"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -21994,7 +22123,8 @@
         "id": "c",
         "label": "Same M–C bond length"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -22218,7 +22348,8 @@
         "id": "d",
         "label": "N(SiH₃)₃ is pyramidal; N(CH₃)₃ is planar"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",
@@ -22296,7 +22427,8 @@
         "id": "d",
         "label": "The Si–N bond is longer than a normal single bond"
        }
-      ]
+      ],
+      "shuffleOptions": true
      },
      "evaluator": {
       "type": "choice_match",

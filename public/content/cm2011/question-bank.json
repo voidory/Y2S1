@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-20T07:55:28.739Z",
+ "exportedAt": "2026-11-21T07:12:47.791Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -8435,8 +8435,8 @@
      "variantId": "sh-fix",
      "perspectiveLabel": "Reducing a fronting peak",
      "marks": 1,
-     "stem": "A peak shows fronting. Which change is most likely to help?",
-     "explanation": "Fronting from overload is relieved by reducing the amount injected (or using a column of higher capacity).",
+     "stem": "A peak shows fronting on a non-polar (reversed-phase) column. Assume the usual cause. Which change is most likely to help?",
+     "explanation": "On a non-polar column the usual cause of fronting is overload: too much analyte saturates the retention sites, so part of the band is retained less strongly and comes out early. The fix is to inject less or dilute the sample. Silanol groups are the cause of tailing (some molecules held too strongly), so adding them would not cure fronting. A longer column only adds plates; it does not change the overload.",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -8456,7 +8456,7 @@
        },
        {
         "id": "oh",
-        "label": "Add silanol groups to the packing"
+        "label": "Add more free silanol groups to the packing"
        }
       ]
      },

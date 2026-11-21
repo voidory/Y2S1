@@ -146,6 +146,26 @@ test('golden: pH of 0.025 M HCl in 0.025 M Na2SO4 (2024/25 final: I = 0.1, γ(H+
   assert.ok(JSON.stringify(slip.fieldResults.pa).includes('activity'), JSON.stringify(slip.fieldResults.pa));
 });
 
+test('Debye–Hückel slips are pinpointed: each specific wrong γ comes back with its own message', () => {
+  for (const [nodeId, variantId, vals] of [['bk-m11-e-gamma', 'e-gamma-CaCl', { c: 0.01 }], ['bk-m11-e-gamma', 'e-gamma-FeNO', { c: 0.001 }], ['bk-m11-e-ph', 'e-ph-na2so4', { ca: 0.025, cs: 0.05 }]]) {
+    const v = variantOf(nodeId, variantId);
+    const sc = scopeWith(v, vals);
+    const paths = v.evaluator.targets.g.paths;
+    assert.ok(paths.length >= 6, `${variantId}: ${paths.length} named γ slips`);
+    const labels = new Set();
+    for (const pth of paths) {
+      const val = Number(Expr.evaluate(pth.expr, sc));
+      const input = Object.fromEntries(Object.keys(v.evaluator.targets).map((k) => [k, ''])); input.g = String(val);
+      const r = Evaluators.evaluate(v, input, sc, {}, byId[nodeId]);
+      assert.equal(r.fieldResults.g.passed, false, `${variantId}: "${pth.label.slice(0, 40)}" scores as correct`);
+      const said = JSON.stringify(r.fieldResults.g);
+      assert.ok(said.includes(pth.label.slice(0, 40)) || /sign|factor of 10/.test(said), `${variantId}: ${pth.label.slice(0, 40)} was reported as ${said.slice(0, 160)}`);
+      labels.add(pth.label);
+    }
+    assert.equal(labels.size, paths.length, 'every slip has its own message');
+  }
+});
+
 test('golden: [H+] from a meter reading (reading 2.00 in 0.10 M NaCl: γ 0.826, a = 0.0100, c = 0.0121 M)', () => {
   const v = variantOf('bk-m11-e-ph2', 'e-ph-rev-nacl');
   const s = scopeWith(v, { pm: 2.0, cs: 0.1 });

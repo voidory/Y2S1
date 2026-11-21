@@ -38,7 +38,7 @@ Dexie for the browser tests: `DEXIE_FILE=/path/to/dexie@4.0.10/dist/dexie.mjs`. 
 
 ## Content pipeline for CM2011
 
-Source of truth is `tools/cm2011/*.mjs` (`lib.mjs` helpers; `t1`, `e3a`, `p3b`, `s4` families; `build.mjs`). Edit those, run the build, run `npm test`. Never hand-edit the JSON. `tests/cm2011.test.mjs` has fuzz tests (every variant, 150 seeds), golden tests against printed answers, and checks that every listed wrong route scores as wrong and is named. Add a golden test whenever a formula is added.
+Source of truth is `tools/cm2011/*.mjs` (`lib.mjs` helpers; `t1`, `e3a`, `p3b`, `s4` families; `build.mjs`). Edit those, run the build, run `npm test`. Never hand-edit the JSON. `tests/cm2011.test.mjs` has fuzz tests (every variant, 150 seeds), golden tests against printed answers, and checks that every listed wrong route scores as wrong and is named. Add a golden test whenever a formula is added. **Wrong-route naming for Debye–Hückel** lives in `e3a.mjs` (`dhSlips` for γ: limiting law, √I forgotten, z not z², exponent given instead of γ, ln for log, sign, α in Å; `halfSlips` for half-cell E; ionic-strength slips per salt); `dhDerived`/`dhLine` print a numeric worked γ in explanations. Use them for any new activity question; derived values that depend on `I` must be listed after `I`.
 
 Rules for new generators:
 1. Compute the answer in `derived` from the displayed (rounded) data, not from hidden unrounded values.

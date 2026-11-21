@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-21T07:56:43.905Z",
+ "exportedAt": "2026-11-21T23:32:38.040Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -9217,7 +9217,7 @@
      "marks": 2,
      "stem": "Calculate the ionic strength of a **{{fix(c,4)}} M NaCl** solution (fully dissociated).",
      "hint": "I = ½ Σ cᵢ zᵢ² over every ion in solution, cations and anions.",
-     "explanation": "NaCl gives 1 Na⁺ (z = 1) and 1 Cl⁻ (z = 1) per formula unit, so I = ½ c (1×1² + 1×1²).",
+     "explanation": "NaCl gives 1 Na⁺ (z = 1) and 1 Cl⁻ (z = 1) per formula unit, so the ion concentrations are 1 × {{fix(c,4)}} = {{fix(cc,4)}} M Na⁺ and 1 × {{fix(c,4)}} = {{fix(cn,4)}} M Cl⁻. Then I = ½ [{{fix(cc,4)}} × 1² + {{fix(cn,4)}} × 1²] = ½ [{{fix(tc,5)}} + {{fix(tn,5)}}] = {{fix(I,4)}} M (for a 1:1 salt I equals c).",
      "variables": {
       "sampled": {
        "c": {
@@ -9235,8 +9235,15 @@
       },
       "derived": {
        "I": "0.5 * c * (1 * 1^2 + 1 * 1^2)",
+       "cc": "1 * c",
+       "cn": "1 * c",
+       "tc": "1 * c * 1^2",
+       "tn": "1 * c * 1^2",
        "noHalf": "2 * (0.5 * c * (1 * 1^2 + 1 * 1^2))",
-       "noSq": "0.5 * c * (1 * 1 + 1 * 1)"
+       "noSq": "0.5 * c * (1 * 1 + 1 * 1)",
+       "catOnly": "0.5 * 1 * c * 1^2",
+       "anOnly": "0.5 * 1 * c * 1^2",
+       "noStoich": "0.5 * c * (1^2 + 1^2)"
       }
      },
      "inputSlot": {
@@ -9268,6 +9275,14 @@
          {
           "label": "You used z instead of z² (the charge must be squared).",
           "expr": "noSq"
+         },
+         {
+          "label": "You counted only the cation; the anion contributes to the ionic strength too.",
+          "expr": "catOnly"
+         },
+         {
+          "label": "You counted only the anion; the cation contributes too.",
+          "expr": "anOnly"
          }
         ]
        }
@@ -9280,7 +9295,7 @@
      "marks": 2,
      "stem": "Calculate the ionic strength of a **{{fix(c,4)}} M CaCl₂** solution (fully dissociated).",
      "hint": "I = ½ Σ cᵢ zᵢ² over every ion in solution, cations and anions.",
-     "explanation": "CaCl₂ gives 1 Ca²⁺ (z = 2) and 2 Cl⁻ (z = 1) per formula unit, so I = ½ c (1×2² + 2×1²).",
+     "explanation": "CaCl₂ gives 1 Ca²⁺ (z = 2) and 2 Cl⁻ (z = 1) per formula unit, so the ion concentrations are 1 × {{fix(c,4)}} = {{fix(cc,4)}} M Ca²⁺ and 2 × {{fix(c,4)}} = {{fix(cn,4)}} M Cl⁻. Then I = ½ [{{fix(cc,4)}} × 2² + {{fix(cn,4)}} × 1²] = ½ [{{fix(tc,5)}} + {{fix(tn,5)}}] = {{fix(I,4)}} M, which is 3 × c, not c.",
      "variables": {
       "sampled": {
        "c": {
@@ -9298,8 +9313,15 @@
       },
       "derived": {
        "I": "0.5 * c * (1 * 2^2 + 2 * 1^2)",
+       "cc": "1 * c",
+       "cn": "2 * c",
+       "tc": "1 * c * 2^2",
+       "tn": "2 * c * 1^2",
        "noHalf": "2 * (0.5 * c * (1 * 2^2 + 2 * 1^2))",
-       "noSq": "0.5 * c * (1 * 2 + 2 * 1)"
+       "noSq": "0.5 * c * (1 * 2 + 2 * 1)",
+       "catOnly": "0.5 * 1 * c * 2^2",
+       "anOnly": "0.5 * 2 * c * 1^2",
+       "noStoich": "0.5 * c * (2^2 + 1^2)"
       }
      },
      "inputSlot": {
@@ -9331,6 +9353,22 @@
          {
           "label": "You used z instead of z² (the charge must be squared).",
           "expr": "noSq"
+         },
+         {
+          "label": "You counted only the cation; the anion contributes to the ionic strength too.",
+          "expr": "catOnly"
+         },
+         {
+          "label": "You counted only the anion; the cation contributes too.",
+          "expr": "anOnly"
+         },
+         {
+          "label": "You forgot the stoichiometry: each formula unit of CaCl₂ gives 1 Ca²⁺ and 2 Cl⁻, so the ion concentrations are not both c.",
+          "expr": "noStoich"
+         },
+         {
+          "label": "You took I equal to the formula concentration c. That is true only for a 1:1 salt.",
+          "expr": "c"
          }
         ]
        }
@@ -9343,7 +9381,7 @@
      "marks": 2,
      "stem": "Calculate the ionic strength of a **{{fix(c,4)}} M ZnSO₄** solution (fully dissociated).",
      "hint": "I = ½ Σ cᵢ zᵢ² over every ion in solution, cations and anions.",
-     "explanation": "ZnSO₄ gives 1 Zn²⁺ (z = 2) and 1 SO₄²⁻ (z = 2) per formula unit, so I = ½ c (1×2² + 1×2²).",
+     "explanation": "ZnSO₄ gives 1 Zn²⁺ (z = 2) and 1 SO₄²⁻ (z = 2) per formula unit, so the ion concentrations are 1 × {{fix(c,4)}} = {{fix(cc,4)}} M Zn²⁺ and 1 × {{fix(c,4)}} = {{fix(cn,4)}} M SO₄²⁻. Then I = ½ [{{fix(cc,4)}} × 2² + {{fix(cn,4)}} × 2²] = ½ [{{fix(tc,5)}} + {{fix(tn,5)}}] = {{fix(I,4)}} M, which is 4 × c, not c.",
      "variables": {
       "sampled": {
        "c": {
@@ -9361,8 +9399,15 @@
       },
       "derived": {
        "I": "0.5 * c * (1 * 2^2 + 1 * 2^2)",
+       "cc": "1 * c",
+       "cn": "1 * c",
+       "tc": "1 * c * 2^2",
+       "tn": "1 * c * 2^2",
        "noHalf": "2 * (0.5 * c * (1 * 2^2 + 1 * 2^2))",
-       "noSq": "0.5 * c * (1 * 2 + 1 * 2)"
+       "noSq": "0.5 * c * (1 * 2 + 1 * 2)",
+       "catOnly": "0.5 * 1 * c * 2^2",
+       "anOnly": "0.5 * 1 * c * 2^2",
+       "noStoich": "0.5 * c * (2^2 + 2^2)"
       }
      },
      "inputSlot": {
@@ -9394,6 +9439,18 @@
          {
           "label": "You used z instead of z² (the charge must be squared).",
           "expr": "noSq"
+         },
+         {
+          "label": "You counted only the cation; the anion contributes to the ionic strength too.",
+          "expr": "catOnly"
+         },
+         {
+          "label": "You counted only the anion; the cation contributes too.",
+          "expr": "anOnly"
+         },
+         {
+          "label": "You took I equal to the formula concentration c. That is true only for a 1:1 salt.",
+          "expr": "c"
          }
         ]
        }
@@ -9406,7 +9463,7 @@
      "marks": 2,
      "stem": "Calculate the ionic strength of a **{{fix(c,4)}} M K₂SO₄** solution (fully dissociated).",
      "hint": "I = ½ Σ cᵢ zᵢ² over every ion in solution, cations and anions.",
-     "explanation": "K₂SO₄ gives 2 K⁺ (z = 1) and 1 SO₄²⁻ (z = 2) per formula unit, so I = ½ c (2×1² + 1×2²).",
+     "explanation": "K₂SO₄ gives 2 K⁺ (z = 1) and 1 SO₄²⁻ (z = 2) per formula unit, so the ion concentrations are 2 × {{fix(c,4)}} = {{fix(cc,4)}} M K⁺ and 1 × {{fix(c,4)}} = {{fix(cn,4)}} M SO₄²⁻. Then I = ½ [{{fix(cc,4)}} × 1² + {{fix(cn,4)}} × 2²] = ½ [{{fix(tc,5)}} + {{fix(tn,5)}}] = {{fix(I,4)}} M, which is 3 × c, not c.",
      "variables": {
       "sampled": {
        "c": {
@@ -9424,8 +9481,15 @@
       },
       "derived": {
        "I": "0.5 * c * (2 * 1^2 + 1 * 2^2)",
+       "cc": "2 * c",
+       "cn": "1 * c",
+       "tc": "2 * c * 1^2",
+       "tn": "1 * c * 2^2",
        "noHalf": "2 * (0.5 * c * (2 * 1^2 + 1 * 2^2))",
-       "noSq": "0.5 * c * (2 * 1 + 1 * 2)"
+       "noSq": "0.5 * c * (2 * 1 + 1 * 2)",
+       "catOnly": "0.5 * 2 * c * 1^2",
+       "anOnly": "0.5 * 1 * c * 2^2",
+       "noStoich": "0.5 * c * (1^2 + 2^2)"
       }
      },
      "inputSlot": {
@@ -9457,6 +9521,22 @@
          {
           "label": "You used z instead of z² (the charge must be squared).",
           "expr": "noSq"
+         },
+         {
+          "label": "You counted only the cation; the anion contributes to the ionic strength too.",
+          "expr": "catOnly"
+         },
+         {
+          "label": "You counted only the anion; the cation contributes too.",
+          "expr": "anOnly"
+         },
+         {
+          "label": "You forgot the stoichiometry: each formula unit of K₂SO₄ gives 2 K⁺ and 1 SO₄²⁻, so the ion concentrations are not both c.",
+          "expr": "noStoich"
+         },
+         {
+          "label": "You took I equal to the formula concentration c. That is true only for a 1:1 salt.",
+          "expr": "c"
          }
         ]
        }
@@ -9469,7 +9549,7 @@
      "marks": 2,
      "stem": "Calculate the ionic strength of a **{{fix(c,4)}} M Fe(NO₃)₃** solution (fully dissociated).",
      "hint": "I = ½ Σ cᵢ zᵢ² over every ion in solution, cations and anions.",
-     "explanation": "Fe(NO₃)₃ gives 1 Fe³⁺ (z = 3) and 3 NO₃⁻ (z = 1) per formula unit, so I = ½ c (1×3² + 3×1²).",
+     "explanation": "Fe(NO₃)₃ gives 1 Fe³⁺ (z = 3) and 3 NO₃⁻ (z = 1) per formula unit, so the ion concentrations are 1 × {{fix(c,4)}} = {{fix(cc,4)}} M Fe³⁺ and 3 × {{fix(c,4)}} = {{fix(cn,4)}} M NO₃⁻. Then I = ½ [{{fix(cc,4)}} × 3² + {{fix(cn,4)}} × 1²] = ½ [{{fix(tc,5)}} + {{fix(tn,5)}}] = {{fix(I,4)}} M, which is 6 × c, not c.",
      "variables": {
       "sampled": {
        "c": {
@@ -9487,8 +9567,15 @@
       },
       "derived": {
        "I": "0.5 * c * (1 * 3^2 + 3 * 1^2)",
+       "cc": "1 * c",
+       "cn": "3 * c",
+       "tc": "1 * c * 3^2",
+       "tn": "3 * c * 1^2",
        "noHalf": "2 * (0.5 * c * (1 * 3^2 + 3 * 1^2))",
-       "noSq": "0.5 * c * (1 * 3 + 3 * 1)"
+       "noSq": "0.5 * c * (1 * 3 + 3 * 1)",
+       "catOnly": "0.5 * 1 * c * 3^2",
+       "anOnly": "0.5 * 3 * c * 1^2",
+       "noStoich": "0.5 * c * (3^2 + 1^2)"
       }
      },
      "inputSlot": {
@@ -9520,6 +9607,22 @@
          {
           "label": "You used z instead of z² (the charge must be squared).",
           "expr": "noSq"
+         },
+         {
+          "label": "You counted only the cation; the anion contributes to the ionic strength too.",
+          "expr": "catOnly"
+         },
+         {
+          "label": "You counted only the anion; the cation contributes too.",
+          "expr": "anOnly"
+         },
+         {
+          "label": "You forgot the stoichiometry: each formula unit of Fe(NO₃)₃ gives 1 Fe³⁺ and 3 NO₃⁻, so the ion concentrations are not both c.",
+          "expr": "noStoich"
+         },
+         {
+          "label": "You took I equal to the formula concentration c. That is true only for a 1:1 salt.",
+          "expr": "c"
          }
         ]
        }
@@ -9532,7 +9635,7 @@
      "marks": 2,
      "stem": "Calculate the ionic strength of a **{{fix(c,4)}} M MgCl₂** solution (fully dissociated).",
      "hint": "I = ½ Σ cᵢ zᵢ² over every ion in solution, cations and anions.",
-     "explanation": "MgCl₂ gives 1 Mg²⁺ (z = 2) and 2 Cl⁻ (z = 1) per formula unit, so I = ½ c (1×2² + 2×1²).",
+     "explanation": "MgCl₂ gives 1 Mg²⁺ (z = 2) and 2 Cl⁻ (z = 1) per formula unit, so the ion concentrations are 1 × {{fix(c,4)}} = {{fix(cc,4)}} M Mg²⁺ and 2 × {{fix(c,4)}} = {{fix(cn,4)}} M Cl⁻. Then I = ½ [{{fix(cc,4)}} × 2² + {{fix(cn,4)}} × 1²] = ½ [{{fix(tc,5)}} + {{fix(tn,5)}}] = {{fix(I,4)}} M, which is 3 × c, not c.",
      "variables": {
       "sampled": {
        "c": {
@@ -9550,8 +9653,15 @@
       },
       "derived": {
        "I": "0.5 * c * (1 * 2^2 + 2 * 1^2)",
+       "cc": "1 * c",
+       "cn": "2 * c",
+       "tc": "1 * c * 2^2",
+       "tn": "2 * c * 1^2",
        "noHalf": "2 * (0.5 * c * (1 * 2^2 + 2 * 1^2))",
-       "noSq": "0.5 * c * (1 * 2 + 2 * 1)"
+       "noSq": "0.5 * c * (1 * 2 + 2 * 1)",
+       "catOnly": "0.5 * 1 * c * 2^2",
+       "anOnly": "0.5 * 2 * c * 1^2",
+       "noStoich": "0.5 * c * (2^2 + 1^2)"
       }
      },
      "inputSlot": {
@@ -9583,6 +9693,22 @@
          {
           "label": "You used z instead of z² (the charge must be squared).",
           "expr": "noSq"
+         },
+         {
+          "label": "You counted only the cation; the anion contributes to the ionic strength too.",
+          "expr": "catOnly"
+         },
+         {
+          "label": "You counted only the anion; the cation contributes too.",
+          "expr": "anOnly"
+         },
+         {
+          "label": "You forgot the stoichiometry: each formula unit of MgCl₂ gives 1 Mg²⁺ and 2 Cl⁻, so the ion concentrations are not both c.",
+          "expr": "noStoich"
+         },
+         {
+          "label": "You took I equal to the formula concentration c. That is true only for a 1:1 salt.",
+          "expr": "c"
          }
         ]
        }
@@ -9594,7 +9720,7 @@
      "perspectiveLabel": "CaCl₂ + NaCl",
      "marks": 3,
      "stem": "A solution contains **{{fix(ca,4)}} M CaCl₂** and **{{fix(cb,3)}} M NaCl**. Calculate the ionic strength of the mixture, and the ionic strength if only the CaCl₂ were present.",
-     "explanation": "Add the contribution of every ion from both salts: I = ½ Σ cᵢ zᵢ². The second salt dominates because its concentration is much higher.",
+     "explanation": "Work out each salt's contribution and add them. CaCl₂: I = ½ × {{fix(ca,4)}} × (1×2² + 2×1²) = {{fix(Ia,5)}} M. NaCl: I = ½ × {{fix(cb,3)}} × (1×1² + 1×1²) = {{fix(Ib,4)}} M. Mixture: I = {{fix(Ia,5)}} + {{fix(Ib,4)}} = {{fix(I,4)}} M. The salt at the higher concentration dominates.",
      "variables": {
       "sampled": {
        "ca": {
@@ -9658,6 +9784,10 @@
          {
           "label": "You gave the ionic strength of one salt only; add both.",
           "expr": "Ib"
+         },
+         {
+          "label": "You added the two concentrations (ca + cb). Convert each to its own ionic strength first (½Σcz²), then add.",
+          "expr": "ca + cb"
          }
         ]
        }
@@ -9669,7 +9799,7 @@
      "perspectiveLabel": "ZnSO₄ + KCl",
      "marks": 3,
      "stem": "A solution contains **{{fix(ca,4)}} M ZnSO₄** and **{{fix(cb,3)}} M KCl**. Calculate the ionic strength of the mixture, and the ionic strength if only the ZnSO₄ were present.",
-     "explanation": "Add the contribution of every ion from both salts: I = ½ Σ cᵢ zᵢ². The second salt dominates because its concentration is much higher.",
+     "explanation": "Work out each salt's contribution and add them. ZnSO₄: I = ½ × {{fix(ca,4)}} × (1×2² + 1×2²) = {{fix(Ia,5)}} M. KCl: I = ½ × {{fix(cb,3)}} × (1×1² + 1×1²) = {{fix(Ib,4)}} M. Mixture: I = {{fix(Ia,5)}} + {{fix(Ib,4)}} = {{fix(I,4)}} M. The salt at the higher concentration dominates.",
      "variables": {
       "sampled": {
        "ca": {
@@ -9732,6 +9862,10 @@
          {
           "label": "You gave the ionic strength of one salt only; add both.",
           "expr": "Ib"
+         },
+         {
+          "label": "You added the two concentrations (ca + cb). Convert each to its own ionic strength first (½Σcz²), then add.",
+          "expr": "ca + cb"
          }
         ]
        }
@@ -9766,7 +9900,7 @@
      "marks": 4,
      "stem": "A solution is **{{fix(c,4)}} M NaCl**. Using the extended Debye–Hückel equation (−log γ = 0.51 z² √I / (1 + 3.3 α √I), α(Na⁺) = 0.4 nm), calculate the ionic strength, the activity coefficient of Na⁺, and its activity.",
      "hint": "Use −log γ = 0.51 z² √I / (1 + 3.3 α √I) with α in nm.",
-     "explanation": "I = ½ Σ cz². Then −log γ = 0.51 z² √I / (1 + 3.3 α √I) with z = 1 and α = 0.4. The activity a = γ × [Na⁺] = γ × 1c.",
+     "explanation": "Ionic strength: I = ½ [1 × {{fix(c,4)}} × 1² + 1 × {{fix(c,4)}} × 1²] = {{fix(I,4)}} M. Activity coefficient: √I = {{fix(rI,4)}}; numerator 0.51 × 1² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.4 × √I = {{fix(dn,3)}}; so −log γ(Na⁺) = {{fix(mlg,4)}} and γ(Na⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. Activity: a(Na⁺) = γ × [Na⁺] = {{fix(g,3)}} × 1 × {{fix(c,4)}} = {{fix(a,5)}} M. Check: γ is below 1 and falls as I rises.",
      "variables": {
       "sampled": {
        "c": {
@@ -9786,7 +9920,11 @@
        "I": "0.5 * c * (1 * 1^2 + 1 * 1^2)",
        "g": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.4 * sqrt(I)))",
        "a": "g * 1 * c",
-       "gLim": "10^(-0.51 * 1^2 * sqrt(I))"
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 1^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.4 * sqrt(I)",
+       "mlg": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.4 * sqrt(I))",
+       "aNoN": "g * c"
       }
      },
      "inputSlot": {
@@ -9829,8 +9967,28 @@
         "sig": 3,
         "paths": [
          {
-          "label": "You used the limiting law and left out the 1 + 3.3α√I term.",
-          "expr": "gLim"
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 1^2 * sqrt(I))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 1^2 * I) / (1 + 3.3 * 0.4 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.4 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.4 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.4 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.4 * 10 * sqrt(I)))"
          }
         ],
         "ecf": [
@@ -9846,6 +10004,12 @@
         "relTol": 0.02,
         "sig": 3,
         "unit": "M",
+        "paths": [
+         {
+          "label": "You gave the activity coefficient again; a = γ × concentration.",
+          "expr": "g"
+         }
+        ],
         "ecf": [
          {
           "expr": "u_g * 1 * c",
@@ -9862,7 +10026,7 @@
      "marks": 4,
      "stem": "A solution is **{{fix(c,4)}} M CaCl₂**. Using the extended Debye–Hückel equation (−log γ = 0.51 z² √I / (1 + 3.3 α √I), α(Ca²⁺) = 0.6 nm), calculate the ionic strength, the activity coefficient of Ca²⁺, and its activity.",
      "hint": "Use −log γ = 0.51 z² √I / (1 + 3.3 α √I) with α in nm.",
-     "explanation": "I = ½ Σ cz². Then −log γ = 0.51 z² √I / (1 + 3.3 α √I) with z = 2 and α = 0.6. The activity a = γ × [Ca²⁺] = γ × 1c.",
+     "explanation": "Ionic strength: I = ½ [1 × {{fix(c,4)}} × 2² + 2 × {{fix(c,4)}} × 1²] = {{fix(I,4)}} M. Activity coefficient: √I = {{fix(rI,4)}}; numerator 0.51 × 2² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.6 × √I = {{fix(dn,3)}}; so −log γ(Ca²⁺) = {{fix(mlg,4)}} and γ(Ca²⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. Activity: a(Ca²⁺) = γ × [Ca²⁺] = {{fix(g,3)}} × 1 × {{fix(c,4)}} = {{fix(a,5)}} M. Check: γ is below 1 and falls as I rises.",
      "variables": {
       "sampled": {
        "c": {
@@ -9882,7 +10046,11 @@
        "I": "0.5 * c * (1 * 2^2 + 2 * 1^2)",
        "g": "10^(-(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))",
        "a": "g * 1 * c",
-       "gLim": "10^(-0.51 * 2^2 * sqrt(I))"
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 2^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.6 * sqrt(I)",
+       "mlg": "(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))",
+       "aNoN": "g * c"
       }
      },
      "inputSlot": {
@@ -9925,8 +10093,32 @@
         "sig": 3,
         "paths": [
          {
-          "label": "You used the limiting law and left out the 1 + 3.3α√I term.",
-          "expr": "gLim"
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 2^2 * sqrt(I))"
+         },
+         {
+          "label": "You used z instead of z²: the charge is squared (z² = 4 here).",
+          "expr": "10^(-(0.51 * 2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 2^2 * I) / (1 + 3.3 * 0.6 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * 10 * sqrt(I)))"
          }
         ],
         "ecf": [
@@ -9942,6 +10134,12 @@
         "relTol": 0.02,
         "sig": 3,
         "unit": "M",
+        "paths": [
+         {
+          "label": "You gave the activity coefficient again; a = γ × concentration.",
+          "expr": "g"
+         }
+        ],
         "ecf": [
          {
           "expr": "u_g * 1 * c",
@@ -9958,7 +10156,7 @@
      "marks": 4,
      "stem": "A solution is **{{fix(c,4)}} M ZnSO₄**. Using the extended Debye–Hückel equation (−log γ = 0.51 z² √I / (1 + 3.3 α √I), α(Zn²⁺) = 0.6 nm), calculate the ionic strength, the activity coefficient of Zn²⁺, and its activity.",
      "hint": "Use −log γ = 0.51 z² √I / (1 + 3.3 α √I) with α in nm.",
-     "explanation": "I = ½ Σ cz². Then −log γ = 0.51 z² √I / (1 + 3.3 α √I) with z = 2 and α = 0.6. The activity a = γ × [Zn²⁺] = γ × 1c.",
+     "explanation": "Ionic strength: I = ½ [1 × {{fix(c,4)}} × 2² + 1 × {{fix(c,4)}} × 2²] = {{fix(I,4)}} M. Activity coefficient: √I = {{fix(rI,4)}}; numerator 0.51 × 2² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.6 × √I = {{fix(dn,3)}}; so −log γ(Zn²⁺) = {{fix(mlg,4)}} and γ(Zn²⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. Activity: a(Zn²⁺) = γ × [Zn²⁺] = {{fix(g,3)}} × 1 × {{fix(c,4)}} = {{fix(a,5)}} M. Check: γ is below 1 and falls as I rises.",
      "variables": {
       "sampled": {
        "c": {
@@ -9978,7 +10176,11 @@
        "I": "0.5 * c * (1 * 2^2 + 1 * 2^2)",
        "g": "10^(-(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))",
        "a": "g * 1 * c",
-       "gLim": "10^(-0.51 * 2^2 * sqrt(I))"
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 2^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.6 * sqrt(I)",
+       "mlg": "(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))",
+       "aNoN": "g * c"
       }
      },
      "inputSlot": {
@@ -10021,8 +10223,32 @@
         "sig": 3,
         "paths": [
          {
-          "label": "You used the limiting law and left out the 1 + 3.3α√I term.",
-          "expr": "gLim"
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 2^2 * sqrt(I))"
+         },
+         {
+          "label": "You used z instead of z²: the charge is squared (z² = 4 here).",
+          "expr": "10^(-(0.51 * 2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 2^2 * I) / (1 + 3.3 * 0.6 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * 10 * sqrt(I)))"
          }
         ],
         "ecf": [
@@ -10038,6 +10264,12 @@
         "relTol": 0.02,
         "sig": 3,
         "unit": "M",
+        "paths": [
+         {
+          "label": "You gave the activity coefficient again; a = γ × concentration.",
+          "expr": "g"
+         }
+        ],
         "ecf": [
          {
           "expr": "u_g * 1 * c",
@@ -10054,7 +10286,7 @@
      "marks": 4,
      "stem": "A solution is **{{fix(c,4)}} M K₂SO₄**. Using the extended Debye–Hückel equation (−log γ = 0.51 z² √I / (1 + 3.3 α √I), α(K⁺) = 0.3 nm), calculate the ionic strength, the activity coefficient of K⁺, and its activity.",
      "hint": "Use −log γ = 0.51 z² √I / (1 + 3.3 α √I) with α in nm.",
-     "explanation": "I = ½ Σ cz². Then −log γ = 0.51 z² √I / (1 + 3.3 α √I) with z = 1 and α = 0.3. The activity a = γ × [K⁺] = γ × 2c.",
+     "explanation": "Ionic strength: I = ½ [2 × {{fix(c,4)}} × 1² + 1 × {{fix(c,4)}} × 2²] = {{fix(I,4)}} M. Activity coefficient: √I = {{fix(rI,4)}}; numerator 0.51 × 1² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.3 × √I = {{fix(dn,3)}}; so −log γ(K⁺) = {{fix(mlg,4)}} and γ(K⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. Activity: a(K⁺) = γ × [K⁺] = {{fix(g,3)}} × 2 × {{fix(c,4)}} = {{fix(a,5)}} M (the ion concentration is 2c, not c). Check: γ is below 1 and falls as I rises.",
      "variables": {
       "sampled": {
        "c": {
@@ -10074,7 +10306,11 @@
        "I": "0.5 * c * (2 * 1^2 + 1 * 2^2)",
        "g": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.3 * sqrt(I)))",
        "a": "g * 2 * c",
-       "gLim": "10^(-0.51 * 1^2 * sqrt(I))"
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 1^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.3 * sqrt(I)",
+       "mlg": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.3 * sqrt(I))",
+       "aNoN": "g * c"
       }
      },
      "inputSlot": {
@@ -10117,8 +10353,28 @@
         "sig": 3,
         "paths": [
          {
-          "label": "You used the limiting law and left out the 1 + 3.3α√I term.",
-          "expr": "gLim"
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 1^2 * sqrt(I))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 1^2 * I) / (1 + 3.3 * 0.3 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.3 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.3 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.3 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.3 * 10 * sqrt(I)))"
          }
         ],
         "ecf": [
@@ -10134,6 +10390,12 @@
         "relTol": 0.02,
         "sig": 3,
         "unit": "M",
+        "paths": [
+         {
+          "label": "You multiplied γ by c; the ion concentration is 2c (2 K⁺ per formula unit).",
+          "expr": "aNoN"
+         }
+        ],
         "ecf": [
          {
           "expr": "u_g * 2 * c",
@@ -10150,7 +10412,7 @@
      "marks": 4,
      "stem": "A solution is **{{fix(c,4)}} M Fe(NO₃)₃**. Using the extended Debye–Hückel equation (−log γ = 0.51 z² √I / (1 + 3.3 α √I), α(Fe³⁺) = 0.9 nm), calculate the ionic strength, the activity coefficient of Fe³⁺, and its activity.",
      "hint": "Use −log γ = 0.51 z² √I / (1 + 3.3 α √I) with α in nm.",
-     "explanation": "I = ½ Σ cz². Then −log γ = 0.51 z² √I / (1 + 3.3 α √I) with z = 3 and α = 0.9. The activity a = γ × [Fe³⁺] = γ × 1c.",
+     "explanation": "Ionic strength: I = ½ [1 × {{fix(c,4)}} × 3² + 3 × {{fix(c,4)}} × 1²] = {{fix(I,4)}} M. Activity coefficient: √I = {{fix(rI,4)}}; numerator 0.51 × 3² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.9 × √I = {{fix(dn,3)}}; so −log γ(Fe³⁺) = {{fix(mlg,4)}} and γ(Fe³⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. Activity: a(Fe³⁺) = γ × [Fe³⁺] = {{fix(g,3)}} × 1 × {{fix(c,4)}} = {{fix(a,5)}} M. Check: γ is below 1 and falls as I rises.",
      "variables": {
       "sampled": {
        "c": {
@@ -10170,7 +10432,11 @@
        "I": "0.5 * c * (1 * 3^2 + 3 * 1^2)",
        "g": "10^(-(0.51 * 3^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
        "a": "g * 1 * c",
-       "gLim": "10^(-0.51 * 3^2 * sqrt(I))"
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 3^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.9 * sqrt(I)",
+       "mlg": "(0.51 * 3^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))",
+       "aNoN": "g * c"
       }
      },
      "inputSlot": {
@@ -10213,8 +10479,32 @@
         "sig": 3,
         "paths": [
          {
-          "label": "You used the limiting law and left out the 1 + 3.3α√I term.",
-          "expr": "gLim"
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 3^2 * sqrt(I))"
+         },
+         {
+          "label": "You used z instead of z²: the charge is squared (z² = 9 here).",
+          "expr": "10^(-(0.51 * 3 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 3^2 * I) / (1 + 3.3 * 0.9 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 3^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 3^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 3^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 3^2 * sqrt(I)) / (1 + 3.3 * 0.9 * 10 * sqrt(I)))"
          }
         ],
         "ecf": [
@@ -10230,6 +10520,12 @@
         "relTol": 0.02,
         "sig": 3,
         "unit": "M",
+        "paths": [
+         {
+          "label": "You gave the activity coefficient again; a = γ × concentration.",
+          "expr": "g"
+         }
+        ],
         "ecf": [
          {
           "expr": "u_g * 1 * c",
@@ -10246,7 +10542,7 @@
      "marks": 4,
      "stem": "A solution is **{{fix(c,4)}} M MgCl₂**. Using the extended Debye–Hückel equation (−log γ = 0.51 z² √I / (1 + 3.3 α √I), α(Mg²⁺) = 0.8 nm), calculate the ionic strength, the activity coefficient of Mg²⁺, and its activity.",
      "hint": "Use −log γ = 0.51 z² √I / (1 + 3.3 α √I) with α in nm.",
-     "explanation": "I = ½ Σ cz². Then −log γ = 0.51 z² √I / (1 + 3.3 α √I) with z = 2 and α = 0.8. The activity a = γ × [Mg²⁺] = γ × 1c.",
+     "explanation": "Ionic strength: I = ½ [1 × {{fix(c,4)}} × 2² + 2 × {{fix(c,4)}} × 1²] = {{fix(I,4)}} M. Activity coefficient: √I = {{fix(rI,4)}}; numerator 0.51 × 2² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.8 × √I = {{fix(dn,3)}}; so −log γ(Mg²⁺) = {{fix(mlg,4)}} and γ(Mg²⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. Activity: a(Mg²⁺) = γ × [Mg²⁺] = {{fix(g,3)}} × 1 × {{fix(c,4)}} = {{fix(a,5)}} M. Check: γ is below 1 and falls as I rises.",
      "variables": {
       "sampled": {
        "c": {
@@ -10266,7 +10562,11 @@
        "I": "0.5 * c * (1 * 2^2 + 2 * 1^2)",
        "g": "10^(-(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.8 * sqrt(I)))",
        "a": "g * 1 * c",
-       "gLim": "10^(-0.51 * 2^2 * sqrt(I))"
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 2^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.8 * sqrt(I)",
+       "mlg": "(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.8 * sqrt(I))",
+       "aNoN": "g * c"
       }
      },
      "inputSlot": {
@@ -10309,8 +10609,32 @@
         "sig": 3,
         "paths": [
          {
-          "label": "You used the limiting law and left out the 1 + 3.3α√I term.",
-          "expr": "gLim"
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 2^2 * sqrt(I))"
+         },
+         {
+          "label": "You used z instead of z²: the charge is squared (z² = 4 here).",
+          "expr": "10^(-(0.51 * 2 * sqrt(I)) / (1 + 3.3 * 0.8 * sqrt(I)))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 2^2 * I) / (1 + 3.3 * 0.8 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.8 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.8 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.8 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.8 * 10 * sqrt(I)))"
          }
         ],
         "ecf": [
@@ -10326,6 +10650,12 @@
         "relTol": 0.02,
         "sig": 3,
         "unit": "M",
+        "paths": [
+         {
+          "label": "You gave the activity coefficient again; a = γ × concentration.",
+          "expr": "g"
+         }
+        ],
         "ecf": [
          {
           "expr": "u_g * 1 * c",
@@ -10364,7 +10694,7 @@
      "marks": 5,
      "stem": "Calculate the electrode potential of a Zn electrode in **{{fix(c,4)}} M ZnSO₄** (Zn²⁺ + 2e⁻ → Zn(s), E° = −0.763 V vs SHE; α(Zn²⁺) = 0.6 nm). Use **activities**.",
      "hint": "E = E° − (0.0592/n) log (1/a) = E° + (0.0592/n) log a. Use −log γ = 0.51 z² √I / (1 + 3.3 α √I) with α in nm.",
-     "explanation": "I = ½ c(1×2² + 1×2²). γ from the extended Debye–Hückel equation. Then E = E° + (0.0592/2) log(γ·c) because the solid metal has unit activity.",
+     "explanation": "Ionic strength: I = ½ × {{fix(c,4)}} × (1×2² + 1×2²) = {{fix(I,4)}} M. Activity coefficient: √I = {{fix(rI,4)}}; numerator 0.51 × 2² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.6 × √I = {{fix(dn,3)}}; so −log γ(Zn²⁺) = {{fix(mlg,4)}} and γ(Zn²⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. Potential: the metal is a solid (activity 1), so E = E° + (0.05916/2) log(γ × c) = -0.763 + (0.05916/2) log({{fix(g,3)}} × {{fix(c,4)}}) = -0.763 + (0.05916/2) × ({{fix(lg,4)}}) = {{fix(E,4)}} V. With γ = 1 you would get {{fix(Ec,4)}} V.",
      "variables": {
       "sampled": {
        "c": {
@@ -10383,6 +10713,12 @@
       "derived": {
        "I": "0.5 * c * (1 * 2^2 + 1 * 2^2)",
        "g": "10^(-(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))",
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 2^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.6 * sqrt(I)",
+       "mlg": "(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))",
+       "lg": "log(g * c)",
+       "n1": "-0.763 + 0.05916 * log(g * c)",
        "E": "-0.763 + 0.05916 / 2 * log(g * c)",
        "Ec": "-0.763 + 0.05916 / 2 * log(c)",
        "Ewrong": "-0.763 - 0.05916 / 2 * log(g * c)"
@@ -10425,7 +10761,37 @@
         "type": "numeric",
         "targetExpr": "g",
         "relTol": 0.015,
-        "sig": 3
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 2^2 * sqrt(I))"
+         },
+         {
+          "label": "You used z instead of z²: the charge is squared (z² = 4 here).",
+          "expr": "10^(-(0.51 * 2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 2^2 * I) / (1 + 3.3 * 0.6 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * 10 * sqrt(I)))"
+         }
+        ]
        },
        "E": {
         "type": "numeric",
@@ -10435,6 +10801,10 @@
         "tolerance": 0.002,
         "unit": "V",
         "paths": [
+         {
+          "label": "You used n = 1; this half-reaction transfers 2 electrons, so the slope is 0.05916/2.",
+          "expr": "n1"
+         },
          {
           "label": "You used concentration instead of activity (γ = 1).",
           "expr": "Ec"
@@ -10460,7 +10830,7 @@
      "marks": 5,
      "stem": "Calculate the electrode potential of a Cu electrode in **{{fix(c,4)}} M CuSO₄** (Cu²⁺ + 2e⁻ → Cu(s), E° = +0.337 V vs SHE; α(Cu²⁺) = 0.6 nm). Use **activities**.",
      "hint": "E = E° − (0.0592/n) log (1/a) = E° + (0.0592/n) log a. Use −log γ = 0.51 z² √I / (1 + 3.3 α √I) with α in nm.",
-     "explanation": "I = ½ c(1×2² + 1×2²). γ from the extended Debye–Hückel equation. Then E = E° + (0.0592/2) log(γ·c) because the solid metal has unit activity.",
+     "explanation": "Ionic strength: I = ½ × {{fix(c,4)}} × (1×2² + 1×2²) = {{fix(I,4)}} M. Activity coefficient: √I = {{fix(rI,4)}}; numerator 0.51 × 2² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.6 × √I = {{fix(dn,3)}}; so −log γ(Cu²⁺) = {{fix(mlg,4)}} and γ(Cu²⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. Potential: the metal is a solid (activity 1), so E = E° + (0.05916/2) log(γ × c) = 0.337 + (0.05916/2) log({{fix(g,3)}} × {{fix(c,4)}}) = 0.337 + (0.05916/2) × ({{fix(lg,4)}}) = {{fix(E,4)}} V. With γ = 1 you would get {{fix(Ec,4)}} V.",
      "variables": {
       "sampled": {
        "c": {
@@ -10479,6 +10849,12 @@
       "derived": {
        "I": "0.5 * c * (1 * 2^2 + 1 * 2^2)",
        "g": "10^(-(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))",
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 2^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.6 * sqrt(I)",
+       "mlg": "(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))",
+       "lg": "log(g * c)",
+       "n1": "0.337 + 0.05916 * log(g * c)",
        "E": "0.337 + 0.05916 / 2 * log(g * c)",
        "Ec": "0.337 + 0.05916 / 2 * log(c)",
        "Ewrong": "0.337 - 0.05916 / 2 * log(g * c)"
@@ -10521,7 +10897,37 @@
         "type": "numeric",
         "targetExpr": "g",
         "relTol": 0.015,
-        "sig": 3
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 2^2 * sqrt(I))"
+         },
+         {
+          "label": "You used z instead of z²: the charge is squared (z² = 4 here).",
+          "expr": "10^(-(0.51 * 2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 2^2 * I) / (1 + 3.3 * 0.6 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * 10 * sqrt(I)))"
+         }
+        ]
        },
        "E": {
         "type": "numeric",
@@ -10531,6 +10937,10 @@
         "tolerance": 0.002,
         "unit": "V",
         "paths": [
+         {
+          "label": "You used n = 1; this half-reaction transfers 2 electrons, so the slope is 0.05916/2.",
+          "expr": "n1"
+         },
          {
           "label": "You used concentration instead of activity (γ = 1).",
           "expr": "Ec"
@@ -10556,7 +10966,7 @@
      "marks": 5,
      "stem": "Calculate the electrode potential of a Ag electrode in **{{fix(c,4)}} M AgNO₃** (Ag⁺ + e⁻ → Ag(s), E° = +0.799 V vs SHE; α(Ag⁺) = 0.25 nm). Use **activities**.",
      "hint": "E = E° − (0.0592/n) log (1/a) = E° + (0.0592/n) log a. Use −log γ = 0.51 z² √I / (1 + 3.3 α √I) with α in nm.",
-     "explanation": "I = ½ c(1×1² + 1×1²). γ from the extended Debye–Hückel equation. Then E = E° + (0.0592/1) log(γ·c) because the solid metal has unit activity.",
+     "explanation": "Ionic strength: I = ½ × {{fix(c,4)}} × (1×1² + 1×1²) = {{fix(I,4)}} M. Activity coefficient: √I = {{fix(rI,4)}}; numerator 0.51 × 1² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.25 × √I = {{fix(dn,3)}}; so −log γ(Ag⁺) = {{fix(mlg,4)}} and γ(Ag⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. Potential: the metal is a solid (activity 1), so E = E° + (0.05916/1) log(γ × c) = 0.799 + (0.05916/1) log({{fix(g,3)}} × {{fix(c,4)}}) = 0.799 + (0.05916/1) × ({{fix(lg,4)}}) = {{fix(E,4)}} V. With γ = 1 you would get {{fix(Ec,4)}} V.",
      "variables": {
       "sampled": {
        "c": {
@@ -10575,6 +10985,12 @@
       "derived": {
        "I": "0.5 * c * (1 * 1^2 + 1 * 1^2)",
        "g": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.25 * sqrt(I)))",
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 1^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.25 * sqrt(I)",
+       "mlg": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.25 * sqrt(I))",
+       "lg": "log(g * c)",
+       "n1": "0.799 + 0.05916 * log(g * c)",
        "E": "0.799 + 0.05916 / 1 * log(g * c)",
        "Ec": "0.799 + 0.05916 / 1 * log(c)",
        "Ewrong": "0.799 - 0.05916 / 1 * log(g * c)"
@@ -10617,7 +11033,33 @@
         "type": "numeric",
         "targetExpr": "g",
         "relTol": 0.015,
-        "sig": 3
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 1^2 * sqrt(I))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 1^2 * I) / (1 + 3.3 * 0.25 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.25 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.25 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.25 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.25 * 10 * sqrt(I)))"
+         }
+        ]
        },
        "E": {
         "type": "numeric",
@@ -10675,7 +11117,7 @@
      "marks": 7,
      "stem": "A platinum electrode dips into a solution of **{{fix(c3,5)}} M Fe(NO₃)₃** and **{{fix(c2,5)}} M Fe(NO₃)₂** (Fe³⁺ + e⁻ → Fe²⁺, E° = +0.771 V vs SHE; α(Fe³⁺) = 0.9 nm, α(Fe²⁺) = 0.6 nm). Calculate the total ionic strength, both activity coefficients, and the electrode potential using activities.",
      "hint": "Both salts contribute to I: Fe(NO₃)₃ gives ½c(9 + 3) = 6c; Fe(NO₃)₂ gives ½c(4 + 2) = 3c. E = E° − 0.0592 log(a(Fe²⁺)/a(Fe³⁺)).",
-     "explanation": "I = 6c₃ + 3c₂. γ(Fe³⁺) and γ(Fe²⁺) from the extended Debye–Hückel equation at that I. E = 0.771 − 0.0592 log[(γ₂c₂)/(γ₃c₃)] (the ratio is reduced over oxidised).",
+     "explanation": "Ionic strength: Fe(NO₃)₃ gives ½ c₃ (9 + 3) = 6c₃ = {{fix(6*c3,5)}} M and Fe(NO₃)₂ gives ½ c₂ (4 + 2) = 3c₂ = {{fix(3*c2,5)}} M, so I = {{fix(I,4)}} M. Fe³⁺: √I = {{fix(farI,4)}}; numerator 0.51 × 3² × √I = {{fix(fanm,4)}}; denominator 1 + 3.3 × 0.9 × √I = {{fix(fadn,3)}}; so −log γ(Fe³⁺) = {{fix(famlg,4)}} and γ(Fe³⁺) = 10^(−{{fix(famlg,4)}}) = {{fix(g3,3)}}. Fe²⁺: √I = {{fix(fbrI,4)}}; numerator 0.51 × 2² × √I = {{fix(fbnm,4)}}; denominator 1 + 3.3 × 0.6 × √I = {{fix(fbdn,3)}}; so −log γ(Fe²⁺) = {{fix(fbmlg,4)}} and γ(Fe²⁺) = 10^(−{{fix(fbmlg,4)}}) = {{fix(g2,3)}}. Potential: E = 0.771 − 0.05916 log[(γ₂c₂)/(γ₃c₃)] = 0.771 − 0.05916 log[({{fix(g2,3)}} × {{fix(c2,5)}}) / ({{fix(g3,3)}} × {{fix(c3,5)}})] = {{fix(E,4)}} V. The ratio is reduced over oxidised; with γ = 1 you would get {{fix(Econc,4)}} V.",
      "variables": {
       "sampled": {
        "c3": {
@@ -10701,6 +11143,14 @@
        "I": "6 * c3 + 3 * c2",
        "g3": "10^(-(0.51 * 3^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
        "g2": "10^(-(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))",
+       "farI": "sqrt(I)",
+       "fanm": "0.51 * 3^2 * sqrt(I)",
+       "fadn": "1 + 3.3 * 0.9 * sqrt(I)",
+       "famlg": "(0.51 * 3^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))",
+       "fbrI": "sqrt(I)",
+       "fbnm": "0.51 * 2^2 * sqrt(I)",
+       "fbdn": "1 + 3.3 * 0.6 * sqrt(I)",
+       "fbmlg": "(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))",
        "E": "0.771 - 0.05916 * log((g2 * c2) / (g3 * c3))",
        "Econc": "0.771 - 0.05916 * log(c2 / c3)",
        "Einv": "0.771 + 0.05916 * log((g2 * c2) / (g3 * c3))"
@@ -10745,8 +11195,16 @@
         "unit": "M",
         "paths": [
          {
-          "label": "You counted only one of the two salts.",
+          "label": "You counted only the Fe(NO₃)₃ (6c₃); the Fe(NO₃)₂ contributes 3c₂ as well.",
           "expr": "6 * c3"
+         },
+         {
+          "label": "You counted only the Fe(NO₃)₂ (3c₂); the Fe(NO₃)₃ contributes 6c₃ as well.",
+          "expr": "3 * c2"
+         },
+         {
+          "label": "You added the concentrations. Each salt needs its own ½Σcz² (6c₃ and 3c₂).",
+          "expr": "c3 + c2"
          }
         ]
        },
@@ -10755,6 +11213,36 @@
         "targetExpr": "g3",
         "relTol": 0.02,
         "sig": 3,
+        "paths": [
+         {
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 3^2 * sqrt(I))"
+         },
+         {
+          "label": "You used z instead of z²: the charge is squared (z² = 9 here).",
+          "expr": "10^(-(0.51 * 3 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 3^2 * I) / (1 + 3.3 * 0.9 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 3^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 3^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 3^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 3^2 * sqrt(I)) / (1 + 3.3 * 0.9 * 10 * sqrt(I)))"
+         }
+        ],
         "ecf": [
          {
           "expr": "10^(-(0.51 * 3^2 * sqrt(u_I)) / (1 + 3.3 * 0.9 * sqrt(u_I)))",
@@ -10767,6 +11255,36 @@
         "targetExpr": "g2",
         "relTol": 0.02,
         "sig": 3,
+        "paths": [
+         {
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 2^2 * sqrt(I))"
+         },
+         {
+          "label": "You used z instead of z²: the charge is squared (z² = 4 here).",
+          "expr": "10^(-(0.51 * 2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 2^2 * I) / (1 + 3.3 * 0.6 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 2^2 * sqrt(I)) / (1 + 3.3 * 0.6 * 10 * sqrt(I)))"
+         }
+        ],
         "ecf": [
          {
           "expr": "10^(-(0.51 * 2^2 * sqrt(u_I)) / (1 + 3.3 * 0.6 * sqrt(u_I)))",
@@ -10830,7 +11348,7 @@
      "marks": 8,
      "stem": "Calculate the potential of the cell (using activities) and say whether the reaction is spontaneous as written:\n\n**Zn | ZnSO₄ (c = {{fix(c1,4)}} M) ‖ Fe(NO₃)₃ (c = {{fix(c3,5)}} M), Fe(NO₃)₂ (c = {{fix(c2,5)}} M) | Pt**\n\nE°(Zn²⁺/Zn) = −0.763 V, E°(Fe³⁺/Fe²⁺) = +0.771 V; α(Zn²⁺) = 0.6, α(Fe³⁺) = 0.9, α(Fe²⁺) = 0.6 nm.",
      "hint": "Each half-cell has its own ionic strength. E_cell = E_RHS − E_LHS, both written as reduction potentials.",
-     "explanation": "LHS: I = 4c (ZnSO₄), E = E° + (0.0592/2) log(γc). RHS: I = 6c₃ + 3c₂, E = E° − 0.0592 log(a₂/a₃). E_cell = E_RHS − E_LHS. A positive E_cell means ΔG = −nFE is negative: spontaneous.",
+     "explanation": "LHS (ZnSO₄): I = 4c = {{fix(Il,4)}} M, γ(Zn²⁺) = {{fix(gz,3)}}, so E_LHS = −0.763 + (0.05916/2) log({{fix(gz,3)}} × {{fix(c1,4)}}) = {{fix(El,4)}} V. RHS (Fe³⁺/Fe²⁺): I = 6c₃ + 3c₂ = {{fix(Ir,4)}} M, γ(Fe³⁺) = {{fix(g3,3)}} and γ(Fe²⁺) = {{fix(g2,3)}}, so E_RHS = 0.771 − 0.05916 log[({{fix(g2,3)}} × {{fix(c2,5)}}) / ({{fix(g3,3)}} × {{fix(c3,5)}})] = {{fix(Er,4)}} V. Each half-cell has its own ionic strength. E_cell = E_RHS − E_LHS = {{fix(Er,4)}} − ({{fix(El,4)}}) = {{fix(Ec,4)}} V, so the reaction is {{verdict}} (ΔG = −nFE_cell).",
      "variables": {
       "sampled": {
        "c1": {
@@ -10870,7 +11388,10 @@
        "Er": "0.771 - 0.05916 * log((g2 * c2) / (g3 * c3))",
        "Ec": "Er - El",
        "sp": "Ec > 0 ? 'yes' : 'no'",
-       "Eswap": "El - Er"
+       "verdict": "Ec > 0 ? 'spontaneous as written' : 'not spontaneous as written (the reverse reaction is)'",
+       "Eswap": "El - Er",
+       "ErConc": "0.771 - 0.05916 * log(c2 / c3)",
+       "ErInv": "0.771 + 0.05916 * log((g2 * c2) / (g3 * c3))"
       }
      },
      "inputSlot": {
@@ -10914,7 +11435,17 @@
         "relTol": 0.002,
         "sig": 4,
         "tolerance": 0.002,
-        "unit": "V"
+        "unit": "V",
+        "paths": [
+         {
+          "label": "You used concentration instead of activity for this half-cell (γ = 1): a = γ × c.",
+          "expr": "-0.763 + 0.05916 / 2 * log(c1)"
+         },
+         {
+          "label": "You used n = 1 for this half-cell; it transfers 2 electrons, so the slope is 0.05916/2.",
+          "expr": "-0.763 + 0.05916 * log(gz * c1)"
+         }
+        ]
        },
        "Er": {
         "type": "numeric",
@@ -10922,7 +11453,17 @@
         "relTol": 0.002,
         "sig": 4,
         "tolerance": 0.002,
-        "unit": "V"
+        "unit": "V",
+        "paths": [
+         {
+          "label": "You used concentrations for the Fe³⁺/Fe²⁺ couple (γ = 1).",
+          "expr": "ErConc"
+         },
+         {
+          "label": "The ratio is upside down: E = E° − 0.0592 log(a_red / a_ox), reduced form on top.",
+          "expr": "ErInv"
+         }
+        ]
        },
        "Ec": {
         "type": "numeric",
@@ -10972,7 +11513,7 @@
      "marks": 6,
      "stem": "Calculate the cell potential (using activities) and state whether the cell reaction is spontaneous as written:\n\n**Cu | CuSO₄ ({{fix(c1,4)}} M) ‖ AgNO₃ ({{fix(c2,4)}} M) | Ag**\n\nE°(Cu²⁺/Cu) = +0.337 V, E°(Ag⁺/Ag) = +0.799 V; α(Cu²⁺) = 0.6, α(Ag⁺) = 0.25 nm.",
      "hint": "The left electrode is written as the oxidation half-cell in the cell diagram, but E_cell = E_RHS − E_LHS uses reduction potentials for both.",
-     "explanation": "For each half-cell: I from the salt, γ from extended Debye–Hückel, E = E° + (0.0592/n) log(γc). E_cell = E_RHS − E_LHS. Positive: spontaneous as written; negative: the reverse reaction is spontaneous.",
+     "explanation": "LHS (Cu): I = {{fix(IL,4)}} M, γ = {{fix(gL,3)}}, so E_LHS = 0.337 + (0.05916/2) log({{fix(gL,3)}} × {{fix(c1,4)}}) = {{fix(El,4)}} V. RHS (Ag): I = {{fix(IR,4)}} M, γ = {{fix(gR,3)}}, so E_RHS = 0.799 + (0.05916/1) log({{fix(gR,3)}} × {{fix(c2,4)}}) = {{fix(Er,4)}} V. E_cell = E_RHS − E_LHS = {{fix(Er,4)}} − ({{fix(El,4)}}) = {{fix(Ec,4)}} V, so the reaction is {{verdict}}. Both electrodes are written as reductions; the cell diagram shows the left one as the oxidation, but E_cell still uses E_RHS − E_LHS.",
      "variables": {
       "sampled": {
        "c1": {
@@ -10995,12 +11536,15 @@
        }
       },
       "derived": {
+       "IL": "4 * c1",
+       "IR": "c2",
        "gL": "10^(-(0.51 * 2^2 * sqrt(4 * c1)) / (1 + 3.3 * 0.6 * sqrt(4 * c1)))",
        "gR": "10^(-(0.51 * 1^2 * sqrt(c2)) / (1 + 3.3 * 0.25 * sqrt(c2)))",
        "El": "0.337 + 0.05916 / 2 * log(gL * c1)",
        "Er": "0.799 + 0.05916 / 1 * log(gR * c2)",
        "Ec": "Er - El",
        "sp": "Ec > 0 ? 'yes' : 'no'",
+       "verdict": "Ec > 0 ? 'spontaneous as written' : 'not spontaneous as written (the reverse reaction is)'",
        "Eswap": "El - Er"
       }
      },
@@ -11045,7 +11589,17 @@
         "relTol": 0.002,
         "sig": 4,
         "tolerance": 0.002,
-        "unit": "V"
+        "unit": "V",
+        "paths": [
+         {
+          "label": "You used concentration instead of activity for this half-cell (γ = 1): a = γ × c.",
+          "expr": "0.337 + 0.05916 / 2 * log(c1)"
+         },
+         {
+          "label": "You used n = 1 for this half-cell; it transfers 2 electrons, so the slope is 0.05916/2.",
+          "expr": "0.337 + 0.05916 * log(gL * c1)"
+         }
+        ]
        },
        "Er": {
         "type": "numeric",
@@ -11053,7 +11607,13 @@
         "relTol": 0.002,
         "sig": 4,
         "tolerance": 0.002,
-        "unit": "V"
+        "unit": "V",
+        "paths": [
+         {
+          "label": "You used concentration instead of activity for this half-cell (γ = 1): a = γ × c.",
+          "expr": "0.799 + 0.05916 / 1 * log(c2)"
+         }
+        ]
        },
        "Ec": {
         "type": "numeric",
@@ -11103,7 +11663,7 @@
      "marks": 6,
      "stem": "Calculate the cell potential (using activities) and state whether the cell reaction is spontaneous as written:\n\n**Ag | AgNO₃ ({{fix(c2,4)}} M) ‖ CuSO₄ ({{fix(c1,4)}} M) | Cu**\n\nE°(Cu²⁺/Cu) = +0.337 V, E°(Ag⁺/Ag) = +0.799 V; α(Cu²⁺) = 0.6, α(Ag⁺) = 0.25 nm.",
      "hint": "The left electrode is written as the oxidation half-cell in the cell diagram, but E_cell = E_RHS − E_LHS uses reduction potentials for both.",
-     "explanation": "For each half-cell: I from the salt, γ from extended Debye–Hückel, E = E° + (0.0592/n) log(γc). E_cell = E_RHS − E_LHS. Positive: spontaneous as written; negative: the reverse reaction is spontaneous.",
+     "explanation": "LHS (Ag): I = {{fix(IL,4)}} M, γ = {{fix(gL,3)}}, so E_LHS = 0.799 + (0.05916/1) log({{fix(gL,3)}} × {{fix(c2,4)}}) = {{fix(El,4)}} V. RHS (Cu): I = {{fix(IR,4)}} M, γ = {{fix(gR,3)}}, so E_RHS = 0.337 + (0.05916/2) log({{fix(gR,3)}} × {{fix(c1,4)}}) = {{fix(Er,4)}} V. E_cell = E_RHS − E_LHS = {{fix(Er,4)}} − ({{fix(El,4)}}) = {{fix(Ec,4)}} V, so the reaction is {{verdict}}. Both electrodes are written as reductions; the cell diagram shows the left one as the oxidation, but E_cell still uses E_RHS − E_LHS.",
      "variables": {
       "sampled": {
        "c1": {
@@ -11126,12 +11686,15 @@
        }
       },
       "derived": {
+       "IL": "c2",
+       "IR": "4 * c1",
        "gL": "10^(-(0.51 * 1^2 * sqrt(c2)) / (1 + 3.3 * 0.25 * sqrt(c2)))",
        "gR": "10^(-(0.51 * 2^2 * sqrt(4 * c1)) / (1 + 3.3 * 0.6 * sqrt(4 * c1)))",
        "El": "0.799 + 0.05916 / 1 * log(gL * c2)",
        "Er": "0.337 + 0.05916 / 2 * log(gR * c1)",
        "Ec": "Er - El",
        "sp": "Ec > 0 ? 'yes' : 'no'",
+       "verdict": "Ec > 0 ? 'spontaneous as written' : 'not spontaneous as written (the reverse reaction is)'",
        "Eswap": "El - Er"
       }
      },
@@ -11176,7 +11739,13 @@
         "relTol": 0.002,
         "sig": 4,
         "tolerance": 0.002,
-        "unit": "V"
+        "unit": "V",
+        "paths": [
+         {
+          "label": "You used concentration instead of activity for this half-cell (γ = 1): a = γ × c.",
+          "expr": "0.799 + 0.05916 / 1 * log(c2)"
+         }
+        ]
        },
        "Er": {
         "type": "numeric",
@@ -11184,7 +11753,17 @@
         "relTol": 0.002,
         "sig": 4,
         "tolerance": 0.002,
-        "unit": "V"
+        "unit": "V",
+        "paths": [
+         {
+          "label": "You used concentration instead of activity for this half-cell (γ = 1): a = γ × c.",
+          "expr": "0.337 + 0.05916 / 2 * log(c1)"
+         },
+         {
+          "label": "You used n = 1 for this half-cell; it transfers 2 electrons, so the slope is 0.05916/2.",
+          "expr": "0.337 + 0.05916 * log(gR * c1)"
+         }
+        ]
        },
        "Ec": {
         "type": "numeric",
@@ -11965,7 +12544,7 @@
      "marks": 5,
      "stem": "A solution contains **{{fix(ca,3)}} M HCl** and **{{fix(cs,3)}} M Na₂SO₄**. Give the pH (a) from concentrations and (b) from activities, which is what a pH meter responds to. Use the extended Debye–Hückel equation with α(H₃O⁺) = 0.9 nm, and give the ionic strength and γ(H⁺) on the way.",
      "hint": "a(H⁺) = γ·[H⁺] and pH = −log a(H⁺). Ionic strength I = ½ Σ cᵢzᵢ² over every ion, including the acid and its anion. γ from −log γ = 0.51 z² √I / (1 + 3.3 α √I), with α(H₃O⁺) = 0.9 nm (or read the booklet table).",
-     "explanation": "By concentration: pH = −log {{fix(ca,3)}} = {{fix(pc,2)}}. Ionic strength: HCl gives H⁺ and Cl⁻ (I = ½ × 2 × {{fix(ca,3)}} = {{fix(ca,3)}} M) and Na₂SO₄ gives Na⁺ ×2 and SO₄²⁻, which adds 3c = {{fix(Ibg,3)}} M, so I = {{fix(I,3)}} M. Then −log γ = 0.51 √I / (1 + 3.3 × 0.9 √I) gives γ(H⁺) = {{fix(g,3)}}. Activity: a(H⁺) = γ × [H⁺] = {{fix(g,3)}} × {{fix(ca,3)}} = {{fix(aH,4)}} M, so pH = {{fix(pa,2)}}. The activity pH is higher by {{fix(d,2)}} because the ionic atmosphere lowers the effective concentration of H⁺ (γ < 1).",
+     "explanation": "By concentration: pH = −log {{fix(ca,3)}} = {{fix(pc,2)}}. Ionic strength: HCl gives H⁺ and Cl⁻ (I = ½ × 2 × {{fix(ca,3)}} = {{fix(ca,3)}} M) and Na₂SO₄ gives Na⁺ ×2 and SO₄²⁻, which adds 3c = {{fix(Ibg,3)}} M, so I = {{fix(I,3)}} M. Then √I = {{fix(rI,4)}}; numerator 0.51 × 1² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.9 × √I = {{fix(dn,3)}}; so −log γ(H⁺) = {{fix(mlg,4)}} and γ(H⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. Activity: a(H⁺) = γ × [H⁺] = {{fix(g,3)}} × {{fix(ca,3)}} = {{fix(aH,4)}} M, so pH = −log {{fix(aH,4)}} = {{fix(pa,2)}}. The activity pH is higher by {{fix(d,2)}} because the ionic atmosphere lowers the effective concentration of H⁺ (γ < 1).",
      "variables": {
       "sampled": {
        "ca": {
@@ -11991,12 +12570,19 @@
        "Ibg": "3 * cs",
        "I": "ca + Ibg",
        "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 1^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.9 * sqrt(I)",
+       "mlg": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))",
        "pc": "-log(ca)",
        "aH": "g * ca",
        "pa": "-log(g * ca)",
        "d": "pa - pc",
        "onlyBg": "-log(10^(-(0.51 * sqrt(Ibg)) / (1 + 3.3 * 0.9 * sqrt(Ibg))) * ca)",
-       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)"
+       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)",
+       "divided": "-log(ca / g)",
+       "lnSlip": "-ln(g * ca)",
+       "gOnly": "-log(g)"
       }
      },
      "inputSlot": {
@@ -12060,8 +12646,28 @@
         "sig": 3,
         "paths": [
          {
-          "label": "You used the limiting law and left out the 1 + 3.3α√I term.",
-          "expr": "10^(-0.51 * sqrt(I))"
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 1^2 * sqrt(I))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 1^2 * I) / (1 + 3.3 * 0.9 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * 10 * sqrt(I)))"
          }
         ],
         "ecf": [
@@ -12085,6 +12691,18 @@
          {
           "label": "You used the limiting law (no 1 + 3.3α√I term).",
           "expr": "lim"
+         },
+         {
+          "label": "You divided by γ; the activity is a = γ × [H⁺], so multiply.",
+          "expr": "divided"
+         },
+         {
+          "label": "You used ln instead of log10: pH = −log10 a(H⁺).",
+          "expr": "lnSlip"
+         },
+         {
+          "label": "You took −log γ on its own; pH = −log(γ × [H⁺]), which includes the concentration.",
+          "expr": "gOnly"
          }
         ],
         "ecf": [
@@ -12103,7 +12721,7 @@
      "marks": 5,
      "stem": "A solution contains **{{fix(ca,3)}} M HCl** and **{{fix(cs,3)}} M NaCl**. Give the pH (a) from concentrations and (b) from activities, which is what a pH meter responds to. Use the extended Debye–Hückel equation with α(H₃O⁺) = 0.9 nm, and give the ionic strength and γ(H⁺) on the way.",
      "hint": "a(H⁺) = γ·[H⁺] and pH = −log a(H⁺). Ionic strength I = ½ Σ cᵢzᵢ² over every ion, including the acid and its anion. γ from −log γ = 0.51 z² √I / (1 + 3.3 α √I), with α(H₃O⁺) = 0.9 nm (or read the booklet table).",
-     "explanation": "By concentration: pH = −log {{fix(ca,3)}} = {{fix(pc,2)}}. Ionic strength: HCl gives H⁺ and Cl⁻ (I = ½ × 2 × {{fix(ca,3)}} = {{fix(ca,3)}} M) and NaCl gives Na⁺ and Cl⁻, which adds 1c = {{fix(Ibg,3)}} M, so I = {{fix(I,3)}} M. Then −log γ = 0.51 √I / (1 + 3.3 × 0.9 √I) gives γ(H⁺) = {{fix(g,3)}}. Activity: a(H⁺) = γ × [H⁺] = {{fix(g,3)}} × {{fix(ca,3)}} = {{fix(aH,4)}} M, so pH = {{fix(pa,2)}}. The activity pH is higher by {{fix(d,2)}} because the ionic atmosphere lowers the effective concentration of H⁺ (γ < 1).",
+     "explanation": "By concentration: pH = −log {{fix(ca,3)}} = {{fix(pc,2)}}. Ionic strength: HCl gives H⁺ and Cl⁻ (I = ½ × 2 × {{fix(ca,3)}} = {{fix(ca,3)}} M) and NaCl gives Na⁺ and Cl⁻, which adds 1c = {{fix(Ibg,3)}} M, so I = {{fix(I,3)}} M. Then √I = {{fix(rI,4)}}; numerator 0.51 × 1² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.9 × √I = {{fix(dn,3)}}; so −log γ(H⁺) = {{fix(mlg,4)}} and γ(H⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. Activity: a(H⁺) = γ × [H⁺] = {{fix(g,3)}} × {{fix(ca,3)}} = {{fix(aH,4)}} M, so pH = −log {{fix(aH,4)}} = {{fix(pa,2)}}. The activity pH is higher by {{fix(d,2)}} because the ionic atmosphere lowers the effective concentration of H⁺ (γ < 1).",
      "variables": {
       "sampled": {
        "ca": {
@@ -12129,12 +12747,19 @@
        "Ibg": "1 * cs",
        "I": "ca + Ibg",
        "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 1^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.9 * sqrt(I)",
+       "mlg": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))",
        "pc": "-log(ca)",
        "aH": "g * ca",
        "pa": "-log(g * ca)",
        "d": "pa - pc",
        "onlyBg": "-log(10^(-(0.51 * sqrt(Ibg)) / (1 + 3.3 * 0.9 * sqrt(Ibg))) * ca)",
-       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)"
+       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)",
+       "divided": "-log(ca / g)",
+       "lnSlip": "-ln(g * ca)",
+       "gOnly": "-log(g)"
       }
      },
      "inputSlot": {
@@ -12198,8 +12823,28 @@
         "sig": 3,
         "paths": [
          {
-          "label": "You used the limiting law and left out the 1 + 3.3α√I term.",
-          "expr": "10^(-0.51 * sqrt(I))"
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 1^2 * sqrt(I))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 1^2 * I) / (1 + 3.3 * 0.9 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * 10 * sqrt(I)))"
          }
         ],
         "ecf": [
@@ -12223,6 +12868,18 @@
          {
           "label": "You used the limiting law (no 1 + 3.3α√I term).",
           "expr": "lim"
+         },
+         {
+          "label": "You divided by γ; the activity is a = γ × [H⁺], so multiply.",
+          "expr": "divided"
+         },
+         {
+          "label": "You used ln instead of log10: pH = −log10 a(H⁺).",
+          "expr": "lnSlip"
+         },
+         {
+          "label": "You took −log γ on its own; pH = −log(γ × [H⁺]), which includes the concentration.",
+          "expr": "gOnly"
          }
         ],
         "ecf": [
@@ -12241,7 +12898,7 @@
      "marks": 5,
      "stem": "A solution contains **{{fix(ca,3)}} M HCl** and **{{fix(cs,3)}} M MgSO₄**. Give the pH (a) from concentrations and (b) from activities, which is what a pH meter responds to. Use the extended Debye–Hückel equation with α(H₃O⁺) = 0.9 nm, and give the ionic strength and γ(H⁺) on the way.",
      "hint": "a(H⁺) = γ·[H⁺] and pH = −log a(H⁺). Ionic strength I = ½ Σ cᵢzᵢ² over every ion, including the acid and its anion. γ from −log γ = 0.51 z² √I / (1 + 3.3 α √I), with α(H₃O⁺) = 0.9 nm (or read the booklet table).",
-     "explanation": "By concentration: pH = −log {{fix(ca,3)}} = {{fix(pc,2)}}. Ionic strength: HCl gives H⁺ and Cl⁻ (I = ½ × 2 × {{fix(ca,3)}} = {{fix(ca,3)}} M) and MgSO₄ gives Mg²⁺ and SO₄²⁻, which adds 4c = {{fix(Ibg,3)}} M, so I = {{fix(I,3)}} M. Then −log γ = 0.51 √I / (1 + 3.3 × 0.9 √I) gives γ(H⁺) = {{fix(g,3)}}. Activity: a(H⁺) = γ × [H⁺] = {{fix(g,3)}} × {{fix(ca,3)}} = {{fix(aH,4)}} M, so pH = {{fix(pa,2)}}. The activity pH is higher by {{fix(d,2)}} because the ionic atmosphere lowers the effective concentration of H⁺ (γ < 1).",
+     "explanation": "By concentration: pH = −log {{fix(ca,3)}} = {{fix(pc,2)}}. Ionic strength: HCl gives H⁺ and Cl⁻ (I = ½ × 2 × {{fix(ca,3)}} = {{fix(ca,3)}} M) and MgSO₄ gives Mg²⁺ and SO₄²⁻, which adds 4c = {{fix(Ibg,3)}} M, so I = {{fix(I,3)}} M. Then √I = {{fix(rI,4)}}; numerator 0.51 × 1² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.9 × √I = {{fix(dn,3)}}; so −log γ(H⁺) = {{fix(mlg,4)}} and γ(H⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. Activity: a(H⁺) = γ × [H⁺] = {{fix(g,3)}} × {{fix(ca,3)}} = {{fix(aH,4)}} M, so pH = −log {{fix(aH,4)}} = {{fix(pa,2)}}. The activity pH is higher by {{fix(d,2)}} because the ionic atmosphere lowers the effective concentration of H⁺ (γ < 1).",
      "variables": {
       "sampled": {
        "ca": {
@@ -12267,12 +12924,19 @@
        "Ibg": "4 * cs",
        "I": "ca + Ibg",
        "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 1^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.9 * sqrt(I)",
+       "mlg": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))",
        "pc": "-log(ca)",
        "aH": "g * ca",
        "pa": "-log(g * ca)",
        "d": "pa - pc",
        "onlyBg": "-log(10^(-(0.51 * sqrt(Ibg)) / (1 + 3.3 * 0.9 * sqrt(Ibg))) * ca)",
-       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)"
+       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)",
+       "divided": "-log(ca / g)",
+       "lnSlip": "-ln(g * ca)",
+       "gOnly": "-log(g)"
       }
      },
      "inputSlot": {
@@ -12336,8 +13000,28 @@
         "sig": 3,
         "paths": [
          {
-          "label": "You used the limiting law and left out the 1 + 3.3α√I term.",
-          "expr": "10^(-0.51 * sqrt(I))"
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 1^2 * sqrt(I))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 1^2 * I) / (1 + 3.3 * 0.9 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * 10 * sqrt(I)))"
          }
         ],
         "ecf": [
@@ -12361,6 +13045,18 @@
          {
           "label": "You used the limiting law (no 1 + 3.3α√I term).",
           "expr": "lim"
+         },
+         {
+          "label": "You divided by γ; the activity is a = γ × [H⁺], so multiply.",
+          "expr": "divided"
+         },
+         {
+          "label": "You used ln instead of log10: pH = −log10 a(H⁺).",
+          "expr": "lnSlip"
+         },
+         {
+          "label": "You took −log γ on its own; pH = −log(γ × [H⁺]), which includes the concentration.",
+          "expr": "gOnly"
          }
         ],
         "ecf": [
@@ -12401,7 +13097,7 @@
      "marks": 4,
      "stem": "A solution of **{{fix(ca,4)}} M HCl** in pure water (fully dissociated). Calculate the ionic strength, γ(H⁺) (extended Debye–Hückel, α(H₃O⁺) = 0.9 nm), and the pH both from concentration and from activity.",
      "hint": "a(H⁺) = γ·[H⁺] and pH = −log a(H⁺). Ionic strength I = ½ Σ cᵢzᵢ² over every ion, including the acid and its anion. γ from −log γ = 0.51 z² √I / (1 + 3.3 α √I), with α(H₃O⁺) = 0.9 nm (or read the booklet table).",
-     "explanation": "HCl gives H⁺ and its anion, so I = ½ (c + c) = {{fix(I,4)}} M. Then γ(H⁺) = {{fix(g,3)}}. pH from concentration = −log {{fix(ca,4)}} = {{fix(pc,2)}}; from activity = −log({{fix(g,3)}} × {{fix(ca,4)}}) = {{fix(pa,2)}}. In a dilute solution the two nearly agree; the gap widens as I rises.",
+     "explanation": "HCl gives H⁺ and its anion, so I = ½ (c + c) = ½ ({{fix(ca,4)}} + {{fix(ca,4)}}) = {{fix(I,4)}} M. Then √I = {{fix(rI,4)}}; numerator 0.51 × 1² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.9 × √I = {{fix(dn,3)}}; so −log γ(H⁺) = {{fix(mlg,4)}} and γ(H⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. pH from concentration = −log {{fix(ca,4)}} = {{fix(pc,2)}}; from activity = −log({{fix(g,3)}} × {{fix(ca,4)}}) = {{fix(pa,2)}}. In a dilute solution the two nearly agree; the gap widens as I rises.",
      "variables": {
       "sampled": {
        "ca": {
@@ -12419,9 +13115,14 @@
       "derived": {
        "I": "ca",
        "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 1^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.9 * sqrt(I)",
+       "mlg": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))",
        "pc": "-log(ca)",
        "pa": "-log(g * ca)",
-       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)"
+       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)",
+       "divided": "-log(ca / g)"
       }
      },
      "inputSlot": {
@@ -12452,7 +13153,33 @@
         "type": "numeric",
         "targetExpr": "g",
         "relTol": 0.015,
-        "sig": 3
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 1^2 * sqrt(I))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 1^2 * I) / (1 + 3.3 * 0.9 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * 10 * sqrt(I)))"
+         }
+        ]
        },
        "pc": {
         "type": "numeric",
@@ -12471,6 +13198,10 @@
          {
           "label": "You used the concentration (γ = 1); a pH meter responds to activity.",
           "expr": "pc"
+         },
+         {
+          "label": "You divided by γ; the activity is a = γ × [H⁺], so multiply.",
+          "expr": "divided"
          }
         ],
         "ecf": [
@@ -12489,7 +13220,7 @@
      "marks": 4,
      "stem": "A solution of **{{fix(ca,4)}} M HNO₃** in pure water (fully dissociated). Calculate the ionic strength, γ(H⁺) (extended Debye–Hückel, α(H₃O⁺) = 0.9 nm), and the pH both from concentration and from activity.",
      "hint": "a(H⁺) = γ·[H⁺] and pH = −log a(H⁺). Ionic strength I = ½ Σ cᵢzᵢ² over every ion, including the acid and its anion. γ from −log γ = 0.51 z² √I / (1 + 3.3 α √I), with α(H₃O⁺) = 0.9 nm (or read the booklet table).",
-     "explanation": "HNO₃ gives H⁺ and its anion, so I = ½ (c + c) = {{fix(I,4)}} M. Then γ(H⁺) = {{fix(g,3)}}. pH from concentration = −log {{fix(ca,4)}} = {{fix(pc,2)}}; from activity = −log({{fix(g,3)}} × {{fix(ca,4)}}) = {{fix(pa,2)}}. In a dilute solution the two nearly agree; the gap widens as I rises.",
+     "explanation": "HNO₃ gives H⁺ and its anion, so I = ½ (c + c) = ½ ({{fix(ca,4)}} + {{fix(ca,4)}}) = {{fix(I,4)}} M. Then √I = {{fix(rI,4)}}; numerator 0.51 × 1² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.9 × √I = {{fix(dn,3)}}; so −log γ(H⁺) = {{fix(mlg,4)}} and γ(H⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. pH from concentration = −log {{fix(ca,4)}} = {{fix(pc,2)}}; from activity = −log({{fix(g,3)}} × {{fix(ca,4)}}) = {{fix(pa,2)}}. In a dilute solution the two nearly agree; the gap widens as I rises.",
      "variables": {
       "sampled": {
        "ca": {
@@ -12507,9 +13238,14 @@
       "derived": {
        "I": "ca",
        "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 1^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.9 * sqrt(I)",
+       "mlg": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))",
        "pc": "-log(ca)",
        "pa": "-log(g * ca)",
-       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)"
+       "lim": "-log(10^(-0.51 * sqrt(I)) * ca)",
+       "divided": "-log(ca / g)"
       }
      },
      "inputSlot": {
@@ -12540,7 +13276,33 @@
         "type": "numeric",
         "targetExpr": "g",
         "relTol": 0.015,
-        "sig": 3
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 1^2 * sqrt(I))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 1^2 * I) / (1 + 3.3 * 0.9 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * 10 * sqrt(I)))"
+         }
+        ]
        },
        "pc": {
         "type": "numeric",
@@ -12559,6 +13321,10 @@
          {
           "label": "You used the concentration (γ = 1); a pH meter responds to activity.",
           "expr": "pc"
+         },
+         {
+          "label": "You divided by γ; the activity is a = γ × [H⁺], so multiply.",
+          "expr": "divided"
          }
         ],
         "ecf": [
@@ -12577,7 +13343,7 @@
      "marks": 4,
      "stem": "A pH meter reads **{{fix(pm,2)}}** in a solution of HCl made up in **{{fix(cs,3)}} M Na₂SO₄**. The acid is dilute, so take the ionic strength as that of the Na₂SO₄ alone. Calculate γ(H⁺) (extended Debye–Hückel, α = 0.9 nm), a(H⁺) and the molar concentration of H⁺.",
      "hint": "The meter reports −log a(H⁺), so a(H⁺) = 10^(−pH). Concentration = activity ÷ γ.",
-     "explanation": "I = 3c = {{fix(I,3)}} M, so γ(H⁺) = {{fix(g,3)}}. The meter reading is the activity pH: a(H⁺) = 10^(−{{fix(pm,2)}}) = {{fix(aH,5)}} M. Concentration = a/γ = {{fix(aH,5)}} / {{fix(g,3)}} = {{fix(cH,5)}} M, larger than the activity because γ < 1.",
+     "explanation": "I = 3 × {{fix(cs,3)}} = {{fix(I,3)}} M (Na₂SO₄: Na⁺ ×2 and SO₄²⁻), so √I = {{fix(rI,4)}}; numerator 0.51 × 1² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.9 × √I = {{fix(dn,3)}}; so −log γ(H⁺) = {{fix(mlg,4)}} and γ(H⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. The meter reading is the activity pH: a(H⁺) = 10^(−{{fix(pm,2)}}) = {{fix(aH,5)}} M. Concentration = a/γ = {{fix(aH,5)}} / {{fix(g,3)}} = {{fix(cH,5)}} M, larger than the activity because γ < 1.",
      "variables": {
       "sampled": {
        "pm": {
@@ -12600,6 +13366,10 @@
       "derived": {
        "I": "3 * cs",
        "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 1^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.9 * sqrt(I)",
+       "mlg": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))",
        "aH": "10^(-pm)",
        "cH": "aH / g",
        "times": "aH * g"
@@ -12635,14 +13405,50 @@
         "type": "numeric",
         "targetExpr": "g",
         "relTol": 0.015,
-        "sig": 3
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 1^2 * sqrt(I))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 1^2 * I) / (1 + 3.3 * 0.9 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * 10 * sqrt(I)))"
+         }
+        ]
        },
        "aH": {
         "type": "numeric",
         "targetExpr": "aH",
         "relTol": 0.02,
         "sig": 3,
-        "unit": "M"
+        "unit": "M",
+        "paths": [
+         {
+          "label": "You took 10^(+pH); the activity is 10^(−pH).",
+          "expr": "10^(pm)"
+         },
+         {
+          "label": "You used ln-style decay: a(H⁺) = 10^(−pH), a base-10 power, not e^(−pH).",
+          "expr": "exp(-pm)"
+         }
+        ]
        },
        "cH": {
         "type": "numeric",
@@ -12676,7 +13482,7 @@
      "marks": 4,
      "stem": "A pH meter reads **{{fix(pm,2)}}** in a solution of HCl made up in **{{fix(cs,3)}} M NaCl**. The acid is dilute, so take the ionic strength as that of the NaCl alone. Calculate γ(H⁺) (extended Debye–Hückel, α = 0.9 nm), a(H⁺) and the molar concentration of H⁺.",
      "hint": "The meter reports −log a(H⁺), so a(H⁺) = 10^(−pH). Concentration = activity ÷ γ.",
-     "explanation": "I = 1c = {{fix(I,3)}} M, so γ(H⁺) = {{fix(g,3)}}. The meter reading is the activity pH: a(H⁺) = 10^(−{{fix(pm,2)}}) = {{fix(aH,5)}} M. Concentration = a/γ = {{fix(aH,5)}} / {{fix(g,3)}} = {{fix(cH,5)}} M, larger than the activity because γ < 1.",
+     "explanation": "I = 1 × {{fix(cs,3)}} = {{fix(I,3)}} M (NaCl: Na⁺ and Cl⁻), so √I = {{fix(rI,4)}}; numerator 0.51 × 1² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.9 × √I = {{fix(dn,3)}}; so −log γ(H⁺) = {{fix(mlg,4)}} and γ(H⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. The meter reading is the activity pH: a(H⁺) = 10^(−{{fix(pm,2)}}) = {{fix(aH,5)}} M. Concentration = a/γ = {{fix(aH,5)}} / {{fix(g,3)}} = {{fix(cH,5)}} M, larger than the activity because γ < 1.",
      "variables": {
       "sampled": {
        "pm": {
@@ -12699,6 +13505,10 @@
       "derived": {
        "I": "1 * cs",
        "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 1^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.9 * sqrt(I)",
+       "mlg": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))",
        "aH": "10^(-pm)",
        "cH": "aH / g",
        "times": "aH * g"
@@ -12734,14 +13544,50 @@
         "type": "numeric",
         "targetExpr": "g",
         "relTol": 0.015,
-        "sig": 3
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 1^2 * sqrt(I))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 1^2 * I) / (1 + 3.3 * 0.9 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * 10 * sqrt(I)))"
+         }
+        ]
        },
        "aH": {
         "type": "numeric",
         "targetExpr": "aH",
         "relTol": 0.02,
         "sig": 3,
-        "unit": "M"
+        "unit": "M",
+        "paths": [
+         {
+          "label": "You took 10^(+pH); the activity is 10^(−pH).",
+          "expr": "10^(pm)"
+         },
+         {
+          "label": "You used ln-style decay: a(H⁺) = 10^(−pH), a base-10 power, not e^(−pH).",
+          "expr": "exp(-pm)"
+         }
+        ]
        },
        "cH": {
         "type": "numeric",
@@ -12775,7 +13621,7 @@
      "marks": 4,
      "stem": "A pH meter reads **{{fix(pm,2)}}** in a solution of HCl made up in **{{fix(cs,3)}} M MgSO₄**. The acid is dilute, so take the ionic strength as that of the MgSO₄ alone. Calculate γ(H⁺) (extended Debye–Hückel, α = 0.9 nm), a(H⁺) and the molar concentration of H⁺.",
      "hint": "The meter reports −log a(H⁺), so a(H⁺) = 10^(−pH). Concentration = activity ÷ γ.",
-     "explanation": "I = 4c = {{fix(I,3)}} M, so γ(H⁺) = {{fix(g,3)}}. The meter reading is the activity pH: a(H⁺) = 10^(−{{fix(pm,2)}}) = {{fix(aH,5)}} M. Concentration = a/γ = {{fix(aH,5)}} / {{fix(g,3)}} = {{fix(cH,5)}} M, larger than the activity because γ < 1.",
+     "explanation": "I = 4 × {{fix(cs,3)}} = {{fix(I,3)}} M (MgSO₄: Mg²⁺ and SO₄²⁻), so √I = {{fix(rI,4)}}; numerator 0.51 × 1² × √I = {{fix(nm,4)}}; denominator 1 + 3.3 × 0.9 × √I = {{fix(dn,3)}}; so −log γ(H⁺) = {{fix(mlg,4)}} and γ(H⁺) = 10^(−{{fix(mlg,4)}}) = {{fix(g,3)}}. The meter reading is the activity pH: a(H⁺) = 10^(−{{fix(pm,2)}}) = {{fix(aH,5)}} M. Concentration = a/γ = {{fix(aH,5)}} / {{fix(g,3)}} = {{fix(cH,5)}} M, larger than the activity because γ < 1.",
      "variables": {
       "sampled": {
        "pm": {
@@ -12798,6 +13644,10 @@
       "derived": {
        "I": "4 * cs",
        "g": "10^(-(0.51 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))",
+       "rI": "sqrt(I)",
+       "nm": "0.51 * 1^2 * sqrt(I)",
+       "dn": "1 + 3.3 * 0.9 * sqrt(I)",
+       "mlg": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))",
        "aH": "10^(-pm)",
        "cH": "aH / g",
        "times": "aH * g"
@@ -12833,14 +13683,50 @@
         "type": "numeric",
         "targetExpr": "g",
         "relTol": 0.015,
-        "sig": 3
+        "sig": 3,
+        "paths": [
+         {
+          "label": "You used the limiting law and left out the 1 + 3.3α√I term in the denominator.",
+          "expr": "10^(-0.51 * 1^2 * sqrt(I))"
+         },
+         {
+          "label": "You used I where the equation has √I: take the square root of the ionic strength first.",
+          "expr": "10^(-(0.51 * 1^2 * I) / (1 + 3.3 * 0.9 * I))"
+         },
+         {
+          "label": "That number is −log γ, the exponent. The activity coefficient is γ = 10^(−that number).",
+          "expr": "(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))"
+         },
+         {
+          "label": "You used e^(−x) (natural log) where the equation is a base-10 log: γ = 10^(−x).",
+          "expr": "exp(-((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I))))"
+         },
+         {
+          "label": "The sign of the exponent is wrong, which would make γ > 1. γ = 10^(−x), always below 1 for an ion in solution.",
+          "expr": "10^((0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * sqrt(I)))"
+         },
+         {
+          "label": "You put α in Å (or pm); the equation takes α in nm.",
+          "expr": "10^(-(0.51 * 1^2 * sqrt(I)) / (1 + 3.3 * 0.9 * 10 * sqrt(I)))"
+         }
+        ]
        },
        "aH": {
         "type": "numeric",
         "targetExpr": "aH",
         "relTol": 0.02,
         "sig": 3,
-        "unit": "M"
+        "unit": "M",
+        "paths": [
+         {
+          "label": "You took 10^(+pH); the activity is 10^(−pH).",
+          "expr": "10^(pm)"
+         },
+         {
+          "label": "You used ln-style decay: a(H⁺) = 10^(−pH), a base-10 power, not e^(−pH).",
+          "expr": "exp(-pm)"
+         }
+        ]
        },
        "cH": {
         "type": "numeric",

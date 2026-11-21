@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-21T23:32:38.040Z",
+ "exportedAt": "2026-11-21T23:49:16.783Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -15570,8 +15570,8 @@
    "moduleCode": "CM2011",
    "tier": "atomic",
    "metadata": {
-    "title": "Gas-sensing probes: inner solution and sensor",
-    "source": "Topic 3b · potentiometry · lecture gas-probe table",
+    "title": "Gas-sensing probes: how the ammonia probe works",
+    "source": "Topic 3b · potentiometry · gas-probe lecture slides",
     "week": 4,
     "primaryTheme": "Potentiometry & Ion-Selective Electrodes",
     "conceptTags": [
@@ -15584,211 +15584,11 @@
    },
    "variants": [
     {
-     "variantId": "p-gas-co2",
-     "perspectiveLabel": "CO₂",
-     "marks": 2,
-     "stem": "A dissolved-gas sensing probe for **CO₂** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. What is the inner filling solution, and which electrode senses the change?",
-     "explanation": "CO₂: inner solution NaHCO₃; sensing electrode pH glass electrode. The gas crosses the membrane and shifts an equilibrium in the inner layer, and the inner electrode follows that change (for CO₂ the sensed species changes with the equilibrium of the gas in the inner solution).",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "inner",
-        "label": "Inner solution"
-       },
-       {
-        "key": "sensor",
-        "label": "Sensing electrode"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "inner": {
-        "acceptedPatterns": [
-         "^.*(?:nahco[3₃]|sodium (?:hydrogen ?)?carbonate|sodium bicarbonate|hco[3₃]).*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "NaHCO₃"
-       },
-       "sensor": {
-        "acceptedPatterns": [
-         "^.*(?:ph|glass).*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "pH glass electrode"
-       }
-      }
-     }
-    },
-    {
-     "variantId": "p-gas-so2",
-     "perspectiveLabel": "SO₂",
-     "marks": 2,
-     "stem": "A dissolved-gas sensing probe for **SO₂** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. What is the inner filling solution, and which electrode senses the change?",
-     "explanation": "SO₂: inner solution NaHSO₃; sensing electrode pH glass electrode. The gas crosses the membrane and shifts an equilibrium in the inner layer, and the inner electrode follows that change (for SO₂ the sensed species changes with the equilibrium of the gas in the inner solution).",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "inner",
-        "label": "Inner solution"
-       },
-       {
-        "key": "sensor",
-        "label": "Sensing electrode"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "inner": {
-        "acceptedPatterns": [
-         "^.*(?:nahso[3₃]|sodium (?:hydrogen ?)?sulfite|sodium (?:hydrogen ?)?sulphite|bisulfite|bisulphite).*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "NaHSO₃"
-       },
-       "sensor": {
-        "acceptedPatterns": [
-         "^.*(?:ph|glass).*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "pH glass electrode"
-       }
-      }
-     }
-    },
-    {
-     "variantId": "p-gas-hf",
-     "perspectiveLabel": "HF",
-     "marks": 2,
-     "stem": "A dissolved-gas sensing probe for **HF** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. What is the inner filling solution, and which electrode senses the change?",
-     "explanation": "HF: inner solution H⁺ (acid); sensing electrode F⁻ (LaF₃) electrode. The gas crosses the membrane and shifts an equilibrium in the inner layer, and the inner electrode follows that change (for HF the sensed species changes with the equilibrium of the gas in the inner solution).",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "inner",
-        "label": "Inner solution"
-       },
-       {
-        "key": "sensor",
-        "label": "Sensing electrode"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "inner": {
-        "acceptedPatterns": [
-         "^.*(?:h\\+|h⁺|acid|hcl|proton|h\\^\\+).*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "H⁺ (acid)"
-       },
-       "sensor": {
-        "acceptedPatterns": [
-         "^.*(?:laf|f-|f⁻|fluoride).*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "F⁻ (LaF₃) electrode"
-       }
-      }
-     }
-    },
-    {
-     "variantId": "p-gas-h2s",
-     "perspectiveLabel": "H₂S",
-     "marks": 2,
-     "stem": "A dissolved-gas sensing probe for **H₂S** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. What is the inner filling solution, and which electrode senses the change?",
-     "explanation": "H₂S: inner solution pH 5 buffer; sensing electrode S²⁻ (Ag₂S) electrode. The gas crosses the membrane and shifts an equilibrium in the inner layer, and the inner electrode follows that change (for H₂S the sensed species changes with the equilibrium of the gas in the inner solution).",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "inner",
-        "label": "Inner solution"
-       },
-       {
-        "key": "sensor",
-        "label": "Sensing electrode"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "inner": {
-        "acceptedPatterns": [
-         "^.*(?:buffer|ph ?5|ph 5).*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "pH 5 buffer"
-       },
-       "sensor": {
-        "acceptedPatterns": [
-         "^.*(?:ag[2₂]s|s2-|s²⁻|sulfide|sulphide).*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "S²⁻ (Ag₂S) electrode"
-       }
-      }
-     }
-    },
-    {
-     "variantId": "p-gas-hcn",
-     "perspectiveLabel": "HCN",
-     "marks": 2,
-     "stem": "A dissolved-gas sensing probe for **HCN** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. What is the inner filling solution, and which electrode senses the change?",
-     "explanation": "HCN: inner solution KAg(CN)₂; sensing electrode Ag⁺ (silver) electrode. The gas crosses the membrane and shifts an equilibrium in the inner layer, and the inner electrode follows that change (for HCN the sensed species changes with the equilibrium of the gas in the inner solution).",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "inner",
-        "label": "Inner solution"
-       },
-       {
-        "key": "sensor",
-        "label": "Sensing electrode"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "inner": {
-        "acceptedPatterns": [
-         "^.*(?:kag\\(cn\\)|ag\\(cn\\)|silver cyanide|dicyanoargentate).*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "KAg(CN)₂"
-       },
-       "sensor": {
-        "acceptedPatterns": [
-         "^.*(?:ag\\+|ag⁺|silver|\\bag\\b).*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "Ag⁺ (silver) electrode"
-       }
-      }
-     }
-    },
-    {
      "variantId": "p-gas-nh3",
      "perspectiveLabel": "NH₃",
      "marks": 2,
      "stem": "A dissolved-gas sensing probe for **NH₃** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. What is the inner filling solution, and which electrode senses the change?",
-     "explanation": "NH₃: inner solution 0.1 M NH₄Cl; sensing electrode pH glass electrode. The gas crosses the membrane and shifts an equilibrium in the inner layer, and the inner electrode follows that change (for NH₃ the sensed species changes with pH: NH₃ + H₂O ⇌ NH₄⁺ + OH⁻).",
+     "explanation": "NH₃: inner solution 0.1 M NH₄Cl; sensing electrode pH glass electrode. NH₃ crosses the membrane and raises the pH of the thin NH₄Cl layer (NH₃ + H₂O ⇌ NH₄⁺ + OH⁻); the glass electrode reads that pH change. More NH₃ means higher pH, so the potential falls as log[NH₃] rises: the slope is negative, about −59 mV per decade.",
      "inputSlot": {
       "type": "mapped_fields",
       "layout": "table",
@@ -15812,6 +15612,46 @@
         ],
         "caseSensitive": false,
         "expectedDisplay": "0.1 M NH₄Cl"
+       },
+       "sensor": {
+        "acceptedPatterns": [
+         "^.*(?:ph|glass).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "pH glass electrode"
+       }
+      }
+     }
+    },
+    {
+     "variantId": "p-gas-co2",
+     "perspectiveLabel": "CO₂",
+     "marks": 2,
+     "stem": "A dissolved-gas sensing probe for **CO₂** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. What is the inner filling solution, and which electrode senses the change?",
+     "explanation": "CO₂: inner solution NaHCO₃; sensing electrode pH glass electrode. CO₂ crosses the membrane and acidifies the thin NaHCO₃ layer (CO₂ + H₂O ⇌ H⁺ + HCO₃⁻); the glass electrode reads the pH fall. Same principle as the ammonia probe, opposite direction: more CO₂ gives a lower pH.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "inner",
+        "label": "Inner solution"
+       },
+       {
+        "key": "sensor",
+        "label": "Sensing electrode"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "inner": {
+        "acceptedPatterns": [
+         "^.*(?:nahco[3₃]|sodium (?:hydrogen ?)?carbonate|sodium bicarbonate|hco[3₃]).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "NaHCO₃"
        },
        "sensor": {
         "acceptedPatterns": [

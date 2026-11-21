@@ -89,3 +89,77 @@ test('tsSolve: reading a d7-style ratio returns the Delta_o/B that reproduces it
   const ion = ts.ions[3], at = Figures.tsAt(ion, 22), r = at.allowed[1].E / at.allowed[0].E;
   const sol = Figures.tsSolve(ion, r); assert.ok(sol && Math.abs(sol.x - 22) < 0.3, JSON.stringify(sol));
 });
+
+/* ---- the guided Tanabe-Sugano questions (tools/cm2021/ts.mjs) ---- */
+import { readContent } from './helpers/load-engine.mjs';
+const E2 = loadEngine();
+const { Scheduler, Evaluators } = E2;
+const bank21 = readContent('question-bank.json'), map21 = readContent('skill-map.json');
+const tsg = bank21.questionNodes.filter((n) => n.id.startsWith('bk-c8-tsg-'));
+const ion = (n) => ts.ions[n];
+const labelsOf = (v) => Object.values(v.evaluator.targets).map((t) => t.expectedDisplay).filter(Boolean);
+const answerFor = (v, inst) => {
+  const out = {};
+  for (const [k, spec] of Object.entries(v.evaluator.targets)) {
+    if (spec.type === 'numeric') out[k] = String(Number(E2.Expr.evaluate(spec.targetExpr, inst.scope)));
+    else if (spec.type === 'keyword') out[k] = String(E2.Expr.evaluate(spec.expectedExpr, inst.scope));
+    else out[k] = spec.expectedDisplay;
+  }
+  return out;
+};
+
+test('guided TS questions: six nodes in the skill, every variant draws a diagram and scores 100% on its own answers', () => {
+  assert.equal(tsg.length, 6);
+  const skill = map21.skills.find((k) => k.id === 'c8.tanabe-sugano');
+  for (const n of tsg) assert.ok(skill.nodes.includes(n.id) && map21.nodeSkills[n.id].includes('c8.tanabe-sugano'), n.id);
+  let count = 0;
+  for (const n of tsg) for (const v of n.variants) {
+    count++;
+    if (n.id !== 'bk-c8-tsg-explain') assert.equal(v.visualAsset.type, 'ts-diagram', v.variantId);
+    if (v.inputSlot.type !== 'mapped_fields') continue;
+    const inst = Scheduler.instantiateVariant(v, 11);
+    const res = Evaluators.evaluate(v, answerFor(v, inst), inst.scope, {}, n);
+    assert.ok(res.passed, `${v.variantId}: ${JSON.stringify(res.fieldResults)}`);
+    const blank = Evaluators.evaluate(v, {}, inst.scope, {}, n);
+    assert.ok(!blank.passed, `${v.variantId} blank must fail`);
+  }
+  assert.ok(count >= 40, `${count} variants`);
+});
+
+test('guided TS questions: ground states, bands and crossovers agree with the diagram data', () => {
+  const key = (id) => /d(\d)-x(\d+)/.exec(id);
+  for (const v of tsg.find((n) => n.id === 'bk-c8-tsg-ground').variants) {
+    const [, n, x] = key(v.variantId); const a = Figures.tsAt(ion(n), Number(x));
+    assert.equal(v.evaluator.targets.gs.expectedDisplay.normalize('NFKD').replace(/[^\dA-Za-z]/g, '').replace(/^(\d)/, '$1'), v.evaluator.targets.gs.expectedDisplay.normalize('NFKD').replace(/[^\dA-Za-z]/g, ''));
+    const un = Number(a.ground[0]) - 1; assert.equal(Number(v.evaluator.targets.un.targetExpr), un, v.variantId);
+  }
+  for (const v of tsg.find((n) => n.id === 'bk-c8-tsg-allowed').variants) {
+    const [, n, x] = key(v.variantId); const a = Figures.tsAt(ion(n), Number(x));
+    assert.equal(Number(v.evaluator.targets.nb.targetExpr), a.allowed.length, v.variantId);
+  }
+  for (const v of tsg.find((n) => n.id === 'bk-c8-tsg-reverse').variants) {
+    const inst = Scheduler.instantiateVariant(v, 3), [, n] = key(v.variantId);
+    const sol = Figures.tsSolve(ion(n), inst.scope.v2 / inst.scope.v1);
+    assert.ok(sol && Math.abs(sol.x - inst.scope.x) < 0.05, `${v.variantId}: engine ${sol && sol.x} vs ${inst.scope.x}`);
+  }
+});
+
+test('guided TS questions: named wrong routes score as wrong and are named; a ruler length is not accepted as E/B', () => {
+  const read = tsg.find((n) => n.id === 'bk-c8-tsg-read').variants[0];
+  const inst = Scheduler.instantiateVariant(read, 5), e = inst.scope.e;
+  const slip = Evaluators.evaluate(read, { e: String(e * 1.2), nu: String(e * 1.2 * inst.scope.B) }, inst.scope, {}, tsg[2]);
+  assert.ok(!slip.fieldResults.e.passed && /mm/.test(slip.fieldResults.e.note || ''), JSON.stringify(slip.fieldResults.e));
+  const rev = tsg.find((n) => n.id === 'bk-c8-tsg-reverse').variants[0];
+  const ri = Scheduler.instantiateVariant(rev, 5);
+  const inv = Evaluators.evaluate(rev, { r: String(ri.scope.v1 / ri.scope.v2), x: String(ri.scope.x), B: String(ri.scope.Bs), D: String(ri.scope.x * ri.scope.Bs) }, ri.scope, {}, tsg[3]);
+  assert.ok(!inv.fieldResults.r.passed && /higher/.test(inv.fieldResults.r.note || ''));
+  const own = Evaluators.evaluate(rev, { r: String(ri.scope.v2 / ri.scope.v1), x: '15', B: '1200', D: String(15 * 1200) }, ri.scope, {}, tsg[3]);
+  assert.equal(own.fieldResults.D.normalizedGrade, 0.5, 'Δo = own Δo/B × own B earns carried-forward credit');
+});
+
+test('tsSvg: a printed-style diagram with a 4-units-per-mm scale, a marker and labelled curves', () => {
+  const svg = Figures.tsSvg(ts.ions[7], { ion: 7, marker: 12 });
+  assert.ok(/data-ruler="4"/.test(svg) && /data-geo="56,16,576,384,40,80"/.test(svg));
+  assert.ok(/Δo\/B = 12/.test(svg) && /⁴T₁g/.test(svg) && /²E_?g|²Eg/.test(svg));
+  const G = Figures.TS_GEO; assert.equal(G.PW / G.xMax / G.unitsPerMm * 10, 36); assert.equal(G.PH / G.yMax / G.unitsPerMm * 10, 12);
+});

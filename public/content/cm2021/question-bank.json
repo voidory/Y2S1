@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-20T12:00:00.000Z",
+ "exportedAt": "2026-11-20T20:29:02.446Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -22454,6 +22454,3329 @@
        {
         "id": "r3",
         "criterion": "Molten (fused) NaCl contains no water, so Na⁺ is reduced to Na(l) at the cathode and Cl⁻ oxidised to Cl₂ at the anode",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c8-tsg-ground",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Tanabe–Sugano 1: ground state and spin at a given Δo/B",
+    "source": "Guided Tanabe–Sugano practice (diagram computed in-app)",
+    "week": 8,
+    "primaryTheme": "Tanabe–Sugano Diagrams",
+    "conceptTags": [
+     "tanabe-sugano"
+    ],
+    "difficultyEstimate": 4,
+    "estimatedMinutes": 3,
+    "examStyle": "construct_4to6",
+    "family": "ts-guided"
+   },
+   "variants": [
+    {
+     "variantId": "c8-tsg-ground-d4-x12",
+     "perspectiveLabel": "d⁴, Δo/B = 12",
+     "marks": 3,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁴ octahedral complex. The dashed line marks Δo/B = 12.\n\nOn a Tanabe–Sugano diagram the **ground state is always the horizontal axis** (E/B = 0): every other level is drawn above it. Find the label of the line that lies along the axis at the dashed line.",
+     "hint": "Go up the dashed line to the bottom of the diagram. The line that runs along the axis there is the ground state; read its label at the right-hand edge. The number of unpaired electrons is the spin multiplicity minus 1 (a quintet has 4).",
+     "explanation": "At Δo/B = 12 the line along the axis is ⁵Eg. Its spin multiplicity is 5, so there are 4 unpaired electrons, which is the high-spin arrangement for d⁴ (the diagram's vertical kink is the spin crossover; the ground state changes there).",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 4,
+      "marker": 12,
+      "caption": "Tanabe–Sugano diagram for d4 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "gs",
+        "label": "Ground state (term symbol)"
+       },
+       {
+        "key": "sp",
+        "label": "High spin or low spin",
+        "options": [
+         "high",
+         "low"
+        ]
+       },
+       {
+        "key": "un",
+        "label": "Unpaired electrons"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "gs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[5⁵])\\s*E\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁵Eg"
+       },
+       "sp": {
+        "type": "keyword",
+        "expectedExpr": "'high'",
+        "synonyms": {
+         "high": [
+          "high",
+          "high spin",
+          "hs"
+         ],
+         "low": [
+          "low",
+          "low spin",
+          "ls"
+         ]
+        }
+       },
+       "un": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-ground-d4-x33",
+     "perspectiveLabel": "d⁴, Δo/B = 33",
+     "marks": 3,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁴ octahedral complex. The dashed line marks Δo/B = 33.\n\nOn a Tanabe–Sugano diagram the **ground state is always the horizontal axis** (E/B = 0): every other level is drawn above it. Find the label of the line that lies along the axis at the dashed line.",
+     "hint": "Go up the dashed line to the bottom of the diagram. The line that runs along the axis there is the ground state; read its label at the right-hand edge. The number of unpaired electrons is the spin multiplicity minus 1 (a quintet has 4).",
+     "explanation": "At Δo/B = 33 the line along the axis is ³T₁g. Its spin multiplicity is 3, so there are 2 unpaired electrons, which is the low-spin arrangement for d⁴ (the diagram's vertical kink is the spin crossover; the ground state changes there).",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 4,
+      "marker": 33,
+      "caption": "Tanabe–Sugano diagram for d4 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "gs",
+        "label": "Ground state (term symbol)"
+       },
+       {
+        "key": "sp",
+        "label": "High spin or low spin",
+        "options": [
+         "high",
+         "low"
+        ]
+       },
+       {
+        "key": "un",
+        "label": "Unpaired electrons"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "gs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³T₁g"
+       },
+       "sp": {
+        "type": "keyword",
+        "expectedExpr": "'low'",
+        "synonyms": {
+         "high": [
+          "high",
+          "high spin",
+          "hs"
+         ],
+         "low": [
+          "low",
+          "low spin",
+          "ls"
+         ]
+        }
+       },
+       "un": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-ground-d6-x12",
+     "perspectiveLabel": "d⁶, Δo/B = 12",
+     "marks": 3,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁶ octahedral complex. The dashed line marks Δo/B = 12.\n\nOn a Tanabe–Sugano diagram the **ground state is always the horizontal axis** (E/B = 0): every other level is drawn above it. Find the label of the line that lies along the axis at the dashed line.",
+     "hint": "Go up the dashed line to the bottom of the diagram. The line that runs along the axis there is the ground state; read its label at the right-hand edge. The number of unpaired electrons is the spin multiplicity minus 1 (a quintet has 4).",
+     "explanation": "At Δo/B = 12 the line along the axis is ⁵T₂g. Its spin multiplicity is 5, so there are 4 unpaired electrons, which is the high-spin arrangement for d⁶ (the diagram's vertical kink is the spin crossover; the ground state changes there).",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 6,
+      "marker": 12,
+      "caption": "Tanabe–Sugano diagram for d6 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "gs",
+        "label": "Ground state (term symbol)"
+       },
+       {
+        "key": "sp",
+        "label": "High spin or low spin",
+        "options": [
+         "high",
+         "low"
+        ]
+       },
+       {
+        "key": "un",
+        "label": "Unpaired electrons"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "gs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[5⁵])\\s*T\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁵T₂g"
+       },
+       "sp": {
+        "type": "keyword",
+        "expectedExpr": "'high'",
+        "synonyms": {
+         "high": [
+          "high",
+          "high spin",
+          "hs"
+         ],
+         "low": [
+          "low",
+          "low spin",
+          "ls"
+         ]
+        }
+       },
+       "un": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-ground-d6-x30",
+     "perspectiveLabel": "d⁶, Δo/B = 30",
+     "marks": 3,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁶ octahedral complex. The dashed line marks Δo/B = 30.\n\nOn a Tanabe–Sugano diagram the **ground state is always the horizontal axis** (E/B = 0): every other level is drawn above it. Find the label of the line that lies along the axis at the dashed line.",
+     "hint": "Go up the dashed line to the bottom of the diagram. The line that runs along the axis there is the ground state; read its label at the right-hand edge. The number of unpaired electrons is the spin multiplicity minus 1 (a quintet has 4).",
+     "explanation": "At Δo/B = 30 the line along the axis is ¹A₁g. Its spin multiplicity is 1, so there are 0 unpaired electrons, which is the low-spin arrangement for d⁶ (the diagram's vertical kink is the spin crossover; the ground state changes there).",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 6,
+      "marker": 30,
+      "caption": "Tanabe–Sugano diagram for d6 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "gs",
+        "label": "Ground state (term symbol)"
+       },
+       {
+        "key": "sp",
+        "label": "High spin or low spin",
+        "options": [
+         "high",
+         "low"
+        ]
+       },
+       {
+        "key": "un",
+        "label": "Unpaired electrons"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "gs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[1¹])\\s*A\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "¹A₁g"
+       },
+       "sp": {
+        "type": "keyword",
+        "expectedExpr": "'low'",
+        "synonyms": {
+         "high": [
+          "high",
+          "high spin",
+          "hs"
+         ],
+         "low": [
+          "low",
+          "low spin",
+          "ls"
+         ]
+        }
+       },
+       "un": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-ground-d7-x12",
+     "perspectiveLabel": "d⁷, Δo/B = 12",
+     "marks": 3,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁷ octahedral complex. The dashed line marks Δo/B = 12.\n\nOn a Tanabe–Sugano diagram the **ground state is always the horizontal axis** (E/B = 0): every other level is drawn above it. Find the label of the line that lies along the axis at the dashed line.",
+     "hint": "Go up the dashed line to the bottom of the diagram. The line that runs along the axis there is the ground state; read its label at the right-hand edge. The number of unpaired electrons is the spin multiplicity minus 1 (a quintet has 4).",
+     "explanation": "At Δo/B = 12 the line along the axis is ⁴T₁g. Its spin multiplicity is 4, so there are 3 unpaired electrons, which is the high-spin arrangement for d⁷ (the diagram's vertical kink is the spin crossover; the ground state changes there).",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 7,
+      "marker": 12,
+      "caption": "Tanabe–Sugano diagram for d7 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "gs",
+        "label": "Ground state (term symbol)"
+       },
+       {
+        "key": "sp",
+        "label": "High spin or low spin",
+        "options": [
+         "high",
+         "low"
+        ]
+       },
+       {
+        "key": "un",
+        "label": "Unpaired electrons"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "gs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴T₁g"
+       },
+       "sp": {
+        "type": "keyword",
+        "expectedExpr": "'high'",
+        "synonyms": {
+         "high": [
+          "high",
+          "high spin",
+          "hs"
+         ],
+         "low": [
+          "low",
+          "low spin",
+          "ls"
+         ]
+        }
+       },
+       "un": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-ground-d7-x30",
+     "perspectiveLabel": "d⁷, Δo/B = 30",
+     "marks": 3,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁷ octahedral complex. The dashed line marks Δo/B = 30.\n\nOn a Tanabe–Sugano diagram the **ground state is always the horizontal axis** (E/B = 0): every other level is drawn above it. Find the label of the line that lies along the axis at the dashed line.",
+     "hint": "Go up the dashed line to the bottom of the diagram. The line that runs along the axis there is the ground state; read its label at the right-hand edge. The number of unpaired electrons is the spin multiplicity minus 1 (a quintet has 4).",
+     "explanation": "At Δo/B = 30 the line along the axis is ²Eg. Its spin multiplicity is 2, so there are 1 unpaired electrons, which is the low-spin arrangement for d⁷ (the diagram's vertical kink is the spin crossover; the ground state changes there).",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 7,
+      "marker": 30,
+      "caption": "Tanabe–Sugano diagram for d7 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "gs",
+        "label": "Ground state (term symbol)"
+       },
+       {
+        "key": "sp",
+        "label": "High spin or low spin",
+        "options": [
+         "high",
+         "low"
+        ]
+       },
+       {
+        "key": "un",
+        "label": "Unpaired electrons"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "gs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[2²])\\s*E\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "²Eg"
+       },
+       "sp": {
+        "type": "keyword",
+        "expectedExpr": "'low'",
+        "synonyms": {
+         "high": [
+          "high",
+          "high spin",
+          "hs"
+         ],
+         "low": [
+          "low",
+          "low spin",
+          "ls"
+         ]
+        }
+       },
+       "un": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-ground-d2-x12",
+     "perspectiveLabel": "d², Δo/B = 12",
+     "marks": 2,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d² octahedral complex. The dashed line marks Δo/B = 12.\n\nOn a Tanabe–Sugano diagram the **ground state is always the horizontal axis** (E/B = 0): every other level is drawn above it. Find the label of the line that lies along the axis at the dashed line.",
+     "hint": "Go up the dashed line to the bottom of the diagram. The line that runs along the axis there is the ground state; read its label at the right-hand edge. The number of unpaired electrons is the spin multiplicity minus 1 (a quintet has 4).",
+     "explanation": "At Δo/B = 12 the line along the axis is ³T₁g. Its spin multiplicity is 3, so there are 2 unpaired electrons (a d² ion has only one possible octahedral arrangement).",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 2,
+      "marker": 12,
+      "caption": "Tanabe–Sugano diagram for d2 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "gs",
+        "label": "Ground state (term symbol)"
+       },
+       {
+        "key": "un",
+        "label": "Unpaired electrons"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "gs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³T₁g"
+       },
+       "un": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-ground-d3-x20",
+     "perspectiveLabel": "d³, Δo/B = 20",
+     "marks": 2,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d³ octahedral complex. The dashed line marks Δo/B = 20.\n\nOn a Tanabe–Sugano diagram the **ground state is always the horizontal axis** (E/B = 0): every other level is drawn above it. Find the label of the line that lies along the axis at the dashed line.",
+     "hint": "Go up the dashed line to the bottom of the diagram. The line that runs along the axis there is the ground state; read its label at the right-hand edge. The number of unpaired electrons is the spin multiplicity minus 1 (a quintet has 4).",
+     "explanation": "At Δo/B = 20 the line along the axis is ⁴A₂g. Its spin multiplicity is 4, so there are 3 unpaired electrons (a d³ ion has only one possible octahedral arrangement).",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 3,
+      "marker": 20,
+      "caption": "Tanabe–Sugano diagram for d3 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "gs",
+        "label": "Ground state (term symbol)"
+       },
+       {
+        "key": "un",
+        "label": "Unpaired electrons"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "gs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*A\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴A₂g"
+       },
+       "un": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-ground-d8-x12",
+     "perspectiveLabel": "d⁸, Δo/B = 12",
+     "marks": 2,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁸ octahedral complex. The dashed line marks Δo/B = 12.\n\nOn a Tanabe–Sugano diagram the **ground state is always the horizontal axis** (E/B = 0): every other level is drawn above it. Find the label of the line that lies along the axis at the dashed line.",
+     "hint": "Go up the dashed line to the bottom of the diagram. The line that runs along the axis there is the ground state; read its label at the right-hand edge. The number of unpaired electrons is the spin multiplicity minus 1 (a quintet has 4).",
+     "explanation": "At Δo/B = 12 the line along the axis is ³A₂g. Its spin multiplicity is 3, so there are 2 unpaired electrons (a d⁸ ion has only one possible octahedral arrangement).",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 8,
+      "marker": 12,
+      "caption": "Tanabe–Sugano diagram for d8 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "gs",
+        "label": "Ground state (term symbol)"
+       },
+       {
+        "key": "un",
+        "label": "Unpaired electrons"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "gs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*A\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³A₂g"
+       },
+       "un": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-ground-d5-x10",
+     "perspectiveLabel": "d⁵, Δo/B = 10",
+     "marks": 3,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁵ octahedral complex. The dashed line marks Δo/B = 10.\n\nOn a Tanabe–Sugano diagram the **ground state is always the horizontal axis** (E/B = 0): every other level is drawn above it. Find the label of the line that lies along the axis at the dashed line.",
+     "hint": "Go up the dashed line to the bottom of the diagram. The line that runs along the axis there is the ground state; read its label at the right-hand edge. The number of unpaired electrons is the spin multiplicity minus 1 (a quintet has 4).",
+     "explanation": "At Δo/B = 10 the line along the axis is ⁶A₁g. Its spin multiplicity is 6, so there are 5 unpaired electrons, which is the high-spin arrangement for d⁵ (the diagram's vertical kink is the spin crossover; the ground state changes there).",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 5,
+      "marker": 10,
+      "caption": "Tanabe–Sugano diagram for d5 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "gs",
+        "label": "Ground state (term symbol)"
+       },
+       {
+        "key": "sp",
+        "label": "High spin or low spin",
+        "options": [
+         "high",
+         "low"
+        ]
+       },
+       {
+        "key": "un",
+        "label": "Unpaired electrons"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "gs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[6⁶])\\s*A\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁶A₁g"
+       },
+       "sp": {
+        "type": "keyword",
+        "expectedExpr": "'high'",
+        "synonyms": {
+         "high": [
+          "high",
+          "high spin",
+          "hs"
+         ],
+         "low": [
+          "low",
+          "low spin",
+          "ls"
+         ]
+        }
+       },
+       "un": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-ground-d5-x34",
+     "perspectiveLabel": "d⁵, Δo/B = 34",
+     "marks": 3,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁵ octahedral complex. The dashed line marks Δo/B = 34.\n\nOn a Tanabe–Sugano diagram the **ground state is always the horizontal axis** (E/B = 0): every other level is drawn above it. Find the label of the line that lies along the axis at the dashed line.",
+     "hint": "Go up the dashed line to the bottom of the diagram. The line that runs along the axis there is the ground state; read its label at the right-hand edge. The number of unpaired electrons is the spin multiplicity minus 1 (a quintet has 4).",
+     "explanation": "At Δo/B = 34 the line along the axis is ²T₂g. Its spin multiplicity is 2, so there are 1 unpaired electrons, which is the low-spin arrangement for d⁵ (the diagram's vertical kink is the spin crossover; the ground state changes there).",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 5,
+      "marker": 34,
+      "caption": "Tanabe–Sugano diagram for d5 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "gs",
+        "label": "Ground state (term symbol)"
+       },
+       {
+        "key": "sp",
+        "label": "High spin or low spin",
+        "options": [
+         "high",
+         "low"
+        ]
+       },
+       {
+        "key": "un",
+        "label": "Unpaired electrons"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "gs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[2²])\\s*T\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "²T₂g"
+       },
+       "sp": {
+        "type": "keyword",
+        "expectedExpr": "'low'",
+        "synonyms": {
+         "high": [
+          "high",
+          "high spin",
+          "hs"
+         ],
+         "low": [
+          "low",
+          "low spin",
+          "ls"
+         ]
+        }
+       },
+       "un": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c8-tsg-allowed",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Tanabe–Sugano 2: the spin-allowed bands, in order",
+    "source": "Guided Tanabe–Sugano practice (diagram computed in-app)",
+    "week": 8,
+    "primaryTheme": "Tanabe–Sugano Diagrams",
+    "conceptTags": [
+     "tanabe-sugano"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 4,
+    "examStyle": "construct_4to6",
+    "family": "ts-guided"
+   },
+   "variants": [
+    {
+     "variantId": "c8-tsg-allowed-d3-x12",
+     "perspectiveLabel": "d³, Δo/B = 12",
+     "marks": 4,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d³ octahedral complex, and the dashed line marks Δo/B = 12.\n\nA transition is **spin-allowed** only if the excited state has the same spin multiplicity as the ground state. First find the ground state at the dashed line; then, among the labelled lines of that same multiplicity, name the ones above it in order of increasing height at the dashed line (use the ruler). Give each as a term symbol.",
+     "hint": "Read the multiplicity (the small number in front of the letter) of the ground state. Ignore every line with a different number. Order the rest by their height above the axis where the dashed line crosses them.",
+     "explanation": "The ground state at Δo/B = 12 is ⁴A₂g, multiplicity 4. The lines with multiplicity 4 above it, from the lowest up, are ⁴T₂g (E/B ≈ 12.0), ⁴T₁g (E/B ≈ 19.3), ⁴T₁g (E/B ≈ 31.7): 3 spin-allowed bands. Lines of any other multiplicity give spin-forbidden bands, which are weak.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 3,
+      "marker": 12,
+      "caption": "Tanabe–Sugano diagram for d3 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b1",
+        "label": "Lowest-energy spin-allowed band"
+       },
+       {
+        "key": "b2",
+        "label": "Next band up"
+       },
+       {
+        "key": "b3",
+        "label": "Highest band"
+       },
+       {
+        "key": "nb",
+        "label": "How many spin-allowed bands?"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b1": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*T\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴T₂g"
+       },
+       "b2": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴T₁g"
+       },
+       "b3": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴T₁g"
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-allowed-d3-x28",
+     "perspectiveLabel": "d³, Δo/B = 28",
+     "marks": 4,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d³ octahedral complex, and the dashed line marks Δo/B = 28.\n\nA transition is **spin-allowed** only if the excited state has the same spin multiplicity as the ground state. First find the ground state at the dashed line; then, among the labelled lines of that same multiplicity, name the ones above it in order of increasing height at the dashed line (use the ruler). Give each as a term symbol.",
+     "hint": "Read the multiplicity (the small number in front of the letter) of the ground state. Ignore every line with a different number. Order the rest by their height above the axis where the dashed line crosses them.",
+     "explanation": "The ground state at Δo/B = 28 is ⁴A₂g, multiplicity 4. The lines with multiplicity 4 above it, from the lowest up, are ⁴T₂g (E/B ≈ 28.0), ⁴T₁g (E/B ≈ 38.3), ⁴T₁g (E/B ≈ 60.7): 3 spin-allowed bands. Lines of any other multiplicity give spin-forbidden bands, which are weak.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 3,
+      "marker": 28,
+      "caption": "Tanabe–Sugano diagram for d3 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b1",
+        "label": "Lowest-energy spin-allowed band"
+       },
+       {
+        "key": "b2",
+        "label": "Next band up"
+       },
+       {
+        "key": "b3",
+        "label": "Highest band"
+       },
+       {
+        "key": "nb",
+        "label": "How many spin-allowed bands?"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b1": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*T\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴T₂g"
+       },
+       "b2": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴T₁g"
+       },
+       "b3": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴T₁g"
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-allowed-d7-x10",
+     "perspectiveLabel": "d⁷, Δo/B = 10",
+     "marks": 4,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁷ octahedral complex, and the dashed line marks Δo/B = 10.\n\nA transition is **spin-allowed** only if the excited state has the same spin multiplicity as the ground state. First find the ground state at the dashed line; then, among the labelled lines of that same multiplicity, name the ones above it in order of increasing height at the dashed line (use the ruler). Give each as a term symbol.",
+     "hint": "Read the multiplicity (the small number in front of the letter) of the ground state. Ignore every line with a different number. Order the rest by their height above the axis where the dashed line crosses them.",
+     "explanation": "The ground state at Δo/B = 10 is ⁴T₁g, multiplicity 4. The lines with multiplicity 4 above it, from the lowest up, are ⁴T₂g (E/B ≈ 8.7), ⁴A₂g (E/B ≈ 18.7), ⁴T₁g (E/B ≈ 22.5): 3 spin-allowed bands. Lines of any other multiplicity give spin-forbidden bands, which are weak.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 7,
+      "marker": 10,
+      "caption": "Tanabe–Sugano diagram for d7 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b1",
+        "label": "Lowest-energy spin-allowed band"
+       },
+       {
+        "key": "b2",
+        "label": "Next band up"
+       },
+       {
+        "key": "b3",
+        "label": "Highest band"
+       },
+       {
+        "key": "nb",
+        "label": "How many spin-allowed bands?"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b1": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*T\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴T₂g"
+       },
+       "b2": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*A\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴A₂g"
+       },
+       "b3": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴T₁g"
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-allowed-d7-x18",
+     "perspectiveLabel": "d⁷, Δo/B = 18",
+     "marks": 4,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁷ octahedral complex, and the dashed line marks Δo/B = 18.\n\nA transition is **spin-allowed** only if the excited state has the same spin multiplicity as the ground state. First find the ground state at the dashed line; then, among the labelled lines of that same multiplicity, name the ones above it in order of increasing height at the dashed line (use the ruler). Give each as a term symbol.",
+     "hint": "Read the multiplicity (the small number in front of the letter) of the ground state. Ignore every line with a different number. Order the rest by their height above the axis where the dashed line crosses them.",
+     "explanation": "The ground state at Δo/B = 18 is ⁴T₁g, multiplicity 4. The lines with multiplicity 4 above it, from the lowest up, are ⁴T₂g (E/B ≈ 16.3), ⁴T₁g (E/B ≈ 29.5), ⁴A₂g (E/B ≈ 34.3): 3 spin-allowed bands. Lines of any other multiplicity give spin-forbidden bands, which are weak.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 7,
+      "marker": 18,
+      "caption": "Tanabe–Sugano diagram for d7 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b1",
+        "label": "Lowest-energy spin-allowed band"
+       },
+       {
+        "key": "b2",
+        "label": "Next band up"
+       },
+       {
+        "key": "b3",
+        "label": "Highest band"
+       },
+       {
+        "key": "nb",
+        "label": "How many spin-allowed bands?"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b1": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*T\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴T₂g"
+       },
+       "b2": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴T₁g"
+       },
+       "b3": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*A\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴A₂g"
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-allowed-d2-x10",
+     "perspectiveLabel": "d², Δo/B = 10",
+     "marks": 4,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d² octahedral complex, and the dashed line marks Δo/B = 10.\n\nA transition is **spin-allowed** only if the excited state has the same spin multiplicity as the ground state. First find the ground state at the dashed line; then, among the labelled lines of that same multiplicity, name the ones above it in order of increasing height at the dashed line (use the ruler). Give each as a term symbol.",
+     "hint": "Read the multiplicity (the small number in front of the letter) of the ground state. Ignore every line with a different number. Order the rest by their height above the axis where the dashed line crosses them.",
+     "explanation": "The ground state at Δo/B = 10 is ³T₁g, multiplicity 3. The lines with multiplicity 3 above it, from the lowest up, are ³T₂g (E/B ≈ 8.7), ³A₂g (E/B ≈ 18.7), ³T₁g (E/B ≈ 22.5): 3 spin-allowed bands. Lines of any other multiplicity give spin-forbidden bands, which are weak.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 2,
+      "marker": 10,
+      "caption": "Tanabe–Sugano diagram for d2 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b1",
+        "label": "Lowest-energy spin-allowed band"
+       },
+       {
+        "key": "b2",
+        "label": "Next band up"
+       },
+       {
+        "key": "b3",
+        "label": "Highest band"
+       },
+       {
+        "key": "nb",
+        "label": "How many spin-allowed bands?"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b1": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*T\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³T₂g"
+       },
+       "b2": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*A\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³A₂g"
+       },
+       "b3": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³T₁g"
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-allowed-d2-x20",
+     "perspectiveLabel": "d², Δo/B = 20",
+     "marks": 4,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d² octahedral complex, and the dashed line marks Δo/B = 20.\n\nA transition is **spin-allowed** only if the excited state has the same spin multiplicity as the ground state. First find the ground state at the dashed line; then, among the labelled lines of that same multiplicity, name the ones above it in order of increasing height at the dashed line (use the ruler). Give each as a term symbol.",
+     "hint": "Read the multiplicity (the small number in front of the letter) of the ground state. Ignore every line with a different number. Order the rest by their height above the axis where the dashed line crosses them.",
+     "explanation": "The ground state at Δo/B = 20 is ³T₁g, multiplicity 3. The lines with multiplicity 3 above it, from the lowest up, are ³T₂g (E/B ≈ 18.2), ³T₁g (E/B ≈ 31.4), ³A₂g (E/B ≈ 38.2): 3 spin-allowed bands. Lines of any other multiplicity give spin-forbidden bands, which are weak.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 2,
+      "marker": 20,
+      "caption": "Tanabe–Sugano diagram for d2 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b1",
+        "label": "Lowest-energy spin-allowed band"
+       },
+       {
+        "key": "b2",
+        "label": "Next band up"
+       },
+       {
+        "key": "b3",
+        "label": "Highest band"
+       },
+       {
+        "key": "nb",
+        "label": "How many spin-allowed bands?"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b1": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*T\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³T₂g"
+       },
+       "b2": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³T₁g"
+       },
+       "b3": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*A\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³A₂g"
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-allowed-d8-x10",
+     "perspectiveLabel": "d⁸, Δo/B = 10",
+     "marks": 4,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁸ octahedral complex, and the dashed line marks Δo/B = 10.\n\nA transition is **spin-allowed** only if the excited state has the same spin multiplicity as the ground state. First find the ground state at the dashed line; then, among the labelled lines of that same multiplicity, name the ones above it in order of increasing height at the dashed line (use the ruler). Give each as a term symbol.",
+     "hint": "Read the multiplicity (the small number in front of the letter) of the ground state. Ignore every line with a different number. Order the rest by their height above the axis where the dashed line crosses them.",
+     "explanation": "The ground state at Δo/B = 10 is ³A₂g, multiplicity 3. The lines with multiplicity 3 above it, from the lowest up, are ³T₂g (E/B ≈ 10.0), ³T₁g (E/B ≈ 16.5), ³T₁g (E/B ≈ 28.5): 3 spin-allowed bands. Lines of any other multiplicity give spin-forbidden bands, which are weak.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 8,
+      "marker": 10,
+      "caption": "Tanabe–Sugano diagram for d8 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b1",
+        "label": "Lowest-energy spin-allowed band"
+       },
+       {
+        "key": "b2",
+        "label": "Next band up"
+       },
+       {
+        "key": "b3",
+        "label": "Highest band"
+       },
+       {
+        "key": "nb",
+        "label": "How many spin-allowed bands?"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b1": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*T\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³T₂g"
+       },
+       "b2": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³T₁g"
+       },
+       "b3": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³T₁g"
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-allowed-d8-x28",
+     "perspectiveLabel": "d⁸, Δo/B = 28",
+     "marks": 4,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁸ octahedral complex, and the dashed line marks Δo/B = 28.\n\nA transition is **spin-allowed** only if the excited state has the same spin multiplicity as the ground state. First find the ground state at the dashed line; then, among the labelled lines of that same multiplicity, name the ones above it in order of increasing height at the dashed line (use the ruler). Give each as a term symbol.",
+     "hint": "Read the multiplicity (the small number in front of the letter) of the ground state. Ignore every line with a different number. Order the rest by their height above the axis where the dashed line crosses them.",
+     "explanation": "The ground state at Δo/B = 28 is ³A₂g, multiplicity 3. The lines with multiplicity 3 above it, from the lowest up, are ³T₂g (E/B ≈ 28.0), ³T₁g (E/B ≈ 38.3), ³T₁g (E/B ≈ 60.7): 3 spin-allowed bands. Lines of any other multiplicity give spin-forbidden bands, which are weak.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 8,
+      "marker": 28,
+      "caption": "Tanabe–Sugano diagram for d8 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b1",
+        "label": "Lowest-energy spin-allowed band"
+       },
+       {
+        "key": "b2",
+        "label": "Next band up"
+       },
+       {
+        "key": "b3",
+        "label": "Highest band"
+       },
+       {
+        "key": "nb",
+        "label": "How many spin-allowed bands?"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b1": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*T\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³T₂g"
+       },
+       "b2": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³T₁g"
+       },
+       "b3": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³T₁g"
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-allowed-d4-x12",
+     "perspectiveLabel": "d⁴, Δo/B = 12",
+     "marks": 2,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁴ octahedral complex, and the dashed line marks Δo/B = 12.\n\nA transition is **spin-allowed** only if the excited state has the same spin multiplicity as the ground state. First find the ground state at the dashed line; then, among the labelled lines of that same multiplicity, name the ones above it in order of increasing height at the dashed line (use the ruler). Give each as a term symbol.",
+     "hint": "Read the multiplicity (the small number in front of the letter) of the ground state. Ignore every line with a different number. Order the rest by their height above the axis where the dashed line crosses them.",
+     "explanation": "The ground state at Δo/B = 12 is ⁵Eg, multiplicity 5. The lines with multiplicity 5 above it, from the lowest up, are ⁵T₂g (E/B ≈ 12.0): 1 spin-allowed band. Lines of any other multiplicity give spin-forbidden bands, which are weak.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 4,
+      "marker": 12,
+      "caption": "Tanabe–Sugano diagram for d4 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b1",
+        "label": "Lowest-energy spin-allowed band"
+       },
+       {
+        "key": "nb",
+        "label": "How many spin-allowed bands?"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b1": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[5⁵])\\s*T\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁵T₂g"
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-allowed-d6-x10",
+     "perspectiveLabel": "d⁶, Δo/B = 10",
+     "marks": 2,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁶ octahedral complex, and the dashed line marks Δo/B = 10.\n\nA transition is **spin-allowed** only if the excited state has the same spin multiplicity as the ground state. First find the ground state at the dashed line; then, among the labelled lines of that same multiplicity, name the ones above it in order of increasing height at the dashed line (use the ruler). Give each as a term symbol.",
+     "hint": "Read the multiplicity (the small number in front of the letter) of the ground state. Ignore every line with a different number. Order the rest by their height above the axis where the dashed line crosses them.",
+     "explanation": "The ground state at Δo/B = 10 is ⁵T₂g, multiplicity 5. The lines with multiplicity 5 above it, from the lowest up, are ⁵Eg (E/B ≈ 10.0): 1 spin-allowed band. Lines of any other multiplicity give spin-forbidden bands, which are weak.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 6,
+      "marker": 10,
+      "caption": "Tanabe–Sugano diagram for d6 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b1",
+        "label": "Lowest-energy spin-allowed band"
+       },
+       {
+        "key": "nb",
+        "label": "How many spin-allowed bands?"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b1": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[5⁵])\\s*E\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁵Eg"
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c8-tsg-read",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Tanabe–Sugano 3: measure E/B and convert to cm⁻¹",
+    "source": "Guided Tanabe–Sugano practice (diagram computed in-app)",
+    "week": 8,
+    "primaryTheme": "Tanabe–Sugano Diagrams",
+    "conceptTags": [
+     "tanabe-sugano"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 4,
+    "examStyle": "construct_4to6",
+    "family": "ts-guided"
+   },
+   "variants": [
+    {
+     "variantId": "c8-tsg-read-d7-x10",
+     "perspectiveLabel": "d⁷, Δo/B = 10, B = 900 cm⁻¹",
+     "marks": 2,
+     "stem": "A d⁷ octahedral complex has Δo/B = 10 (the dashed line) and B = 900 cm⁻¹. Use the ruler to read the height above the axis of the **lowest-energy spin-allowed band** at the dashed line, and convert it.\n\nGive E/B for that band, then its energy in cm⁻¹.",
+     "hint": "Measure the vertical distance in mm from the axis up to the line, then divide by 1.2 (10 units of E/B = 12 mm). Energy = (E/B) × B.",
+     "explanation": "The lowest spin-allowed band at Δo/B = 10 is ⁴T₂g, at E/B ≈ 8.7 (about 10.5 mm up the page on this scale). Its energy is 8.7 × 900 = 7862 cm⁻¹.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "e": "8.74",
+       "B": "900"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 7,
+      "marker": 10,
+      "caption": "Tanabe–Sugano diagram for d7 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "e",
+        "label": "E/B of the band",
+        "numeric": true
+       },
+       {
+        "key": "nu",
+        "label": "Band energy",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "e": {
+        "type": "numeric",
+        "targetExpr": "e",
+        "tolerance": 1.2,
+        "paths": [
+         {
+          "label": "That is the length in mm. Convert with the scale: 10 units of E/B = 12 mm, so divide by 1.2.",
+          "expr": "e * 1.2"
+         }
+        ]
+       },
+       "nu": {
+        "type": "numeric",
+        "targetExpr": "e * B",
+        "tolerance": 1080,
+        "relTol": 0.03,
+        "paths": [
+         {
+          "label": "Multiply E/B by B (in cm⁻¹); the E/B value alone is not an energy.",
+          "expr": "e"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_e * B",
+          "label": "Consistent with the E/B you read."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-read-d7-x16",
+     "perspectiveLabel": "d⁷, Δo/B = 16, B = 850 cm⁻¹",
+     "marks": 2,
+     "stem": "A d⁷ octahedral complex has Δo/B = 16 (the dashed line) and B = 850 cm⁻¹. Use the ruler to read the height above the axis of the **lowest-energy spin-allowed band** at the dashed line, and convert it.\n\nGive E/B for that band, then its energy in cm⁻¹.",
+     "hint": "Measure the vertical distance in mm from the axis up to the line, then divide by 1.2 (10 units of E/B = 12 mm). Energy = (E/B) × B.",
+     "explanation": "The lowest spin-allowed band at Δo/B = 16 is ⁴T₂g, at E/B ≈ 14.4 (about 17.2 mm up the page on this scale). Its energy is 14.4 × 850 = 12210 cm⁻¹.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "e": "14.37",
+       "B": "850"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 7,
+      "marker": 16,
+      "caption": "Tanabe–Sugano diagram for d7 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "e",
+        "label": "E/B of the band",
+        "numeric": true
+       },
+       {
+        "key": "nu",
+        "label": "Band energy",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "e": {
+        "type": "numeric",
+        "targetExpr": "e",
+        "tolerance": 1.2,
+        "paths": [
+         {
+          "label": "That is the length in mm. Convert with the scale: 10 units of E/B = 12 mm, so divide by 1.2.",
+          "expr": "e * 1.2"
+         }
+        ]
+       },
+       "nu": {
+        "type": "numeric",
+        "targetExpr": "e * B",
+        "tolerance": 1020,
+        "relTol": 0.03,
+        "paths": [
+         {
+          "label": "Multiply E/B by B (in cm⁻¹); the E/B value alone is not an energy.",
+          "expr": "e"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_e * B",
+          "label": "Consistent with the E/B you read."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-read-d3-x18",
+     "perspectiveLabel": "d³, Δo/B = 18, B = 700 cm⁻¹",
+     "marks": 2,
+     "stem": "A d³ octahedral complex has Δo/B = 18 (the dashed line) and B = 700 cm⁻¹. Use the ruler to read the height above the axis of the **lowest-energy spin-allowed band** at the dashed line, and convert it.\n\nGive E/B for that band, then its energy in cm⁻¹.",
+     "hint": "Measure the vertical distance in mm from the axis up to the line, then divide by 1.2 (10 units of E/B = 12 mm). Energy = (E/B) × B.",
+     "explanation": "The lowest spin-allowed band at Δo/B = 18 is ⁴T₂g, at E/B ≈ 18.0 (about 21.6 mm up the page on this scale). Its energy is 18.0 × 700 = 12600 cm⁻¹.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "e": "18.00",
+       "B": "700"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 3,
+      "marker": 18,
+      "caption": "Tanabe–Sugano diagram for d3 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "e",
+        "label": "E/B of the band",
+        "numeric": true
+       },
+       {
+        "key": "nu",
+        "label": "Band energy",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "e": {
+        "type": "numeric",
+        "targetExpr": "e",
+        "tolerance": 1.2,
+        "paths": [
+         {
+          "label": "That is the length in mm. Convert with the scale: 10 units of E/B = 12 mm, so divide by 1.2.",
+          "expr": "e * 1.2"
+         }
+        ]
+       },
+       "nu": {
+        "type": "numeric",
+        "targetExpr": "e * B",
+        "tolerance": 840,
+        "relTol": 0.03,
+        "paths": [
+         {
+          "label": "Multiply E/B by B (in cm⁻¹); the E/B value alone is not an energy.",
+          "expr": "e"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_e * B",
+          "label": "Consistent with the E/B you read."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-read-d2-x15",
+     "perspectiveLabel": "d², Δo/B = 15, B = 800 cm⁻¹",
+     "marks": 2,
+     "stem": "A d² octahedral complex has Δo/B = 15 (the dashed line) and B = 800 cm⁻¹. Use the ruler to read the height above the axis of the **lowest-energy spin-allowed band** at the dashed line, and convert it.\n\nGive E/B for that band, then its energy in cm⁻¹.",
+     "hint": "Measure the vertical distance in mm from the axis up to the line, then divide by 1.2 (10 units of E/B = 12 mm). Energy = (E/B) × B.",
+     "explanation": "The lowest spin-allowed band at Δo/B = 15 is ³T₂g, at E/B ≈ 13.4 (about 16.1 mm up the page on this scale). Its energy is 13.4 × 800 = 10733 cm⁻¹.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "e": "13.42",
+       "B": "800"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 2,
+      "marker": 15,
+      "caption": "Tanabe–Sugano diagram for d2 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "e",
+        "label": "E/B of the band",
+        "numeric": true
+       },
+       {
+        "key": "nu",
+        "label": "Band energy",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "e": {
+        "type": "numeric",
+        "targetExpr": "e",
+        "tolerance": 1.2,
+        "paths": [
+         {
+          "label": "That is the length in mm. Convert with the scale: 10 units of E/B = 12 mm, so divide by 1.2.",
+          "expr": "e * 1.2"
+         }
+        ]
+       },
+       "nu": {
+        "type": "numeric",
+        "targetExpr": "e * B",
+        "tolerance": 960,
+        "relTol": 0.03,
+        "paths": [
+         {
+          "label": "Multiply E/B by B (in cm⁻¹); the E/B value alone is not an energy.",
+          "expr": "e"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_e * B",
+          "label": "Consistent with the E/B you read."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-read-d8-x12",
+     "perspectiveLabel": "d⁸, Δo/B = 12, B = 1000 cm⁻¹",
+     "marks": 2,
+     "stem": "A d⁸ octahedral complex has Δo/B = 12 (the dashed line) and B = 1000 cm⁻¹. Use the ruler to read the height above the axis of the **lowest-energy spin-allowed band** at the dashed line, and convert it.\n\nGive E/B for that band, then its energy in cm⁻¹.",
+     "hint": "Measure the vertical distance in mm from the axis up to the line, then divide by 1.2 (10 units of E/B = 12 mm). Energy = (E/B) × B.",
+     "explanation": "The lowest spin-allowed band at Δo/B = 12 is ³T₂g, at E/B ≈ 12.0 (about 14.4 mm up the page on this scale). Its energy is 12.0 × 1000 = 12000 cm⁻¹.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "e": "12.00",
+       "B": "1000"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 8,
+      "marker": 12,
+      "caption": "Tanabe–Sugano diagram for d8 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "e",
+        "label": "E/B of the band",
+        "numeric": true
+       },
+       {
+        "key": "nu",
+        "label": "Band energy",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "e": {
+        "type": "numeric",
+        "targetExpr": "e",
+        "tolerance": 1.2,
+        "paths": [
+         {
+          "label": "That is the length in mm. Convert with the scale: 10 units of E/B = 12 mm, so divide by 1.2.",
+          "expr": "e * 1.2"
+         }
+        ]
+       },
+       "nu": {
+        "type": "numeric",
+        "targetExpr": "e * B",
+        "tolerance": 1200,
+        "relTol": 0.03,
+        "paths": [
+         {
+          "label": "Multiply E/B by B (in cm⁻¹); the E/B value alone is not an energy.",
+          "expr": "e"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_e * B",
+          "label": "Consistent with the E/B you read."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-read-d3-x8",
+     "perspectiveLabel": "d³, Δo/B = 8, B = 750 cm⁻¹",
+     "marks": 2,
+     "stem": "A d³ octahedral complex has Δo/B = 8 (the dashed line) and B = 750 cm⁻¹. Use the ruler to read the height above the axis of the **lowest-energy spin-allowed band** at the dashed line, and convert it.\n\nGive E/B for that band, then its energy in cm⁻¹.",
+     "hint": "Measure the vertical distance in mm from the axis up to the line, then divide by 1.2 (10 units of E/B = 12 mm). Energy = (E/B) × B.",
+     "explanation": "The lowest spin-allowed band at Δo/B = 8 is ⁴T₂g, at E/B ≈ 8.0 (about 9.6 mm up the page on this scale). Its energy is 8.0 × 750 = 6000 cm⁻¹.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "e": "8.00",
+       "B": "750"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 3,
+      "marker": 8,
+      "caption": "Tanabe–Sugano diagram for d3 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "e",
+        "label": "E/B of the band",
+        "numeric": true
+       },
+       {
+        "key": "nu",
+        "label": "Band energy",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "e": {
+        "type": "numeric",
+        "targetExpr": "e",
+        "tolerance": 1.2,
+        "paths": [
+         {
+          "label": "That is the length in mm. Convert with the scale: 10 units of E/B = 12 mm, so divide by 1.2.",
+          "expr": "e * 1.2"
+         }
+        ]
+       },
+       "nu": {
+        "type": "numeric",
+        "targetExpr": "e * B",
+        "tolerance": 900,
+        "relTol": 0.03,
+        "paths": [
+         {
+          "label": "Multiply E/B by B (in cm⁻¹); the E/B value alone is not an energy.",
+          "expr": "e"
+         }
+        ],
+        "ecf": [
+         {
+          "expr": "u_e * B",
+          "label": "Consistent with the E/B you read."
+         }
+        ]
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c8-tsg-reverse",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Tanabe–Sugano 4: from two bands to Δo/B, B and Δo",
+    "source": "Guided Tanabe–Sugano practice (diagram computed in-app)",
+    "week": 8,
+    "primaryTheme": "Tanabe–Sugano Diagrams",
+    "conceptTags": [
+     "tanabe-sugano"
+    ],
+    "difficultyEstimate": 7,
+    "estimatedMinutes": 8,
+    "examStyle": "construct_4to6",
+    "family": "ts-guided"
+   },
+   "variants": [
+    {
+     "variantId": "c8-tsg-reverse-d3-x8",
+     "perspectiveLabel": "d³, bands 5600 and 9440 cm⁻¹",
+     "marks": 4,
+     "stem": "A d³ octahedral complex has a lowest-energy spin-allowed band at **5600 cm⁻¹** and a band to the **⁴T₁g(F)** state at **9440 cm⁻¹**.\n\nUse the diagram to find Δo and B:\n1. the ratio (higher band) ÷ (lower band);\n2. the Δo/B at which those two lines (their heights above the axis) have that same ratio;\n3. B from the lower band; 4. Δo.",
+     "hint": "The ratio of the two band energies equals the ratio of their heights (E/B) at the right Δo/B, because B cancels. Measure both heights at a trial Δo/B, form the ratio, and move the trial value until it matches. Then B = (lower band) ÷ (its E/B), and Δo = (Δo/B) × B.",
+     "explanation": "Ratio = 9440 ÷ 5600 = 1.69. On the diagram the lowest spin-allowed line and the ⁴T₁g(F) line have this height ratio at Δo/B ≈ 7.9, where the lower line is at E/B ≈ 7.9. B = 5600 ÷ 7.9 ≈ 704 cm⁻¹, and Δo = 7.9 × 704 ≈ 5600 cm⁻¹. (The ratio changes slowly with Δo/B, so reading Δo/B to within about ±2 is as good as a ruler allows.)",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "v1": "5600",
+       "v2": "9440",
+       "x": "7.95",
+       "Bs": "704.4"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 3,
+      "caption": "Tanabe–Sugano diagram for d3 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "r",
+        "label": "Band ratio (higher ÷ lower)",
+        "numeric": true
+       },
+       {
+        "key": "x",
+        "label": "Δo/B",
+        "numeric": true
+       },
+       {
+        "key": "B",
+        "label": "B",
+        "unit": "cm⁻¹",
+        "numeric": true
+       },
+       {
+        "key": "D",
+        "label": "Δo",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "r": {
+        "type": "numeric",
+        "targetExpr": "v2 / v1",
+        "tolerance": 0.02,
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "Put the higher band on top: (higher) ÷ (lower), so the ratio is above 1.",
+          "expr": "v1 / v2"
+         }
+        ]
+       },
+       "x": {
+        "type": "numeric",
+        "targetExpr": "x",
+        "tolerance": 2,
+        "sig": 3
+       },
+       "B": {
+        "type": "numeric",
+        "targetExpr": "Bs",
+        "tolerance": 0,
+        "relTol": 0.12,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "B is the lower band divided by its E/B, not by Δo/B.",
+          "expr": "v1 / x"
+         }
+        ]
+       },
+       "D": {
+        "type": "numeric",
+        "targetExpr": "x * Bs",
+        "tolerance": 0,
+        "relTol": 0.15,
+        "sig": 3,
+        "ecf": [
+         {
+          "expr": "u_x * u_B",
+          "label": "Consistent with your own Δo/B and B."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-reverse-d3-x12",
+     "perspectiveLabel": "d³, bands 7800 and 12550 cm⁻¹",
+     "marks": 4,
+     "stem": "A d³ octahedral complex has a lowest-energy spin-allowed band at **7800 cm⁻¹** and a band to the **⁴T₁g(F)** state at **12550 cm⁻¹**.\n\nUse the diagram to find Δo and B:\n1. the ratio (higher band) ÷ (lower band);\n2. the Δo/B at which those two lines (their heights above the axis) have that same ratio;\n3. B from the lower band; 4. Δo.",
+     "hint": "The ratio of the two band energies equals the ratio of their heights (E/B) at the right Δo/B, because B cancels. Measure both heights at a trial Δo/B, form the ratio, and move the trial value until it matches. Then B = (lower band) ÷ (its E/B), and Δo = (Δo/B) × B.",
+     "explanation": "Ratio = 12550 ÷ 7800 = 1.61. On the diagram the lowest spin-allowed line and the ⁴T₁g(F) line have this height ratio at Δo/B ≈ 12.0, where the lower line is at E/B ≈ 12.0. B = 7800 ÷ 12.0 ≈ 648 cm⁻¹, and Δo = 12.0 × 648 ≈ 7800 cm⁻¹. (The ratio changes slowly with Δo/B, so reading Δo/B to within about ±2 is as good as a ruler allows.)",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "v1": "7800",
+       "v2": "12550",
+       "x": "12.03",
+       "Bs": "648.3"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 3,
+      "caption": "Tanabe–Sugano diagram for d3 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "r",
+        "label": "Band ratio (higher ÷ lower)",
+        "numeric": true
+       },
+       {
+        "key": "x",
+        "label": "Δo/B",
+        "numeric": true
+       },
+       {
+        "key": "B",
+        "label": "B",
+        "unit": "cm⁻¹",
+        "numeric": true
+       },
+       {
+        "key": "D",
+        "label": "Δo",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "r": {
+        "type": "numeric",
+        "targetExpr": "v2 / v1",
+        "tolerance": 0.02,
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "Put the higher band on top: (higher) ÷ (lower), so the ratio is above 1.",
+          "expr": "v1 / v2"
+         }
+        ]
+       },
+       "x": {
+        "type": "numeric",
+        "targetExpr": "x",
+        "tolerance": 2,
+        "sig": 3
+       },
+       "B": {
+        "type": "numeric",
+        "targetExpr": "Bs",
+        "tolerance": 0,
+        "relTol": 0.12,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "B is the lower band divided by its E/B, not by Δo/B.",
+          "expr": "v1 / x"
+         }
+        ]
+       },
+       "D": {
+        "type": "numeric",
+        "targetExpr": "x * Bs",
+        "tolerance": 0,
+        "relTol": 0.15,
+        "sig": 3,
+        "ecf": [
+         {
+          "expr": "u_x * u_B",
+          "label": "Consistent with your own Δo/B and B."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-reverse-d3-x16",
+     "perspectiveLabel": "d³, bands 11520 and 17680 cm⁻¹",
+     "marks": 4,
+     "stem": "A d³ octahedral complex has a lowest-energy spin-allowed band at **11520 cm⁻¹** and a band to the **⁴T₁g(F)** state at **17680 cm⁻¹**.\n\nUse the diagram to find Δo and B:\n1. the ratio (higher band) ÷ (lower band);\n2. the Δo/B at which those two lines (their heights above the axis) have that same ratio;\n3. B from the lower band; 4. Δo.",
+     "hint": "The ratio of the two band energies equals the ratio of their heights (E/B) at the right Δo/B, because B cancels. Measure both heights at a trial Δo/B, form the ratio, and move the trial value until it matches. Then B = (lower band) ÷ (its E/B), and Δo = (Δo/B) × B.",
+     "explanation": "Ratio = 17680 ÷ 11520 = 1.53. On the diagram the lowest spin-allowed line and the ⁴T₁g(F) line have this height ratio at Δo/B ≈ 16.0, where the lower line is at E/B ≈ 16.0. B = 11520 ÷ 16.0 ≈ 720 cm⁻¹, and Δo = 16.0 × 720 ≈ 11520 cm⁻¹. (The ratio changes slowly with Δo/B, so reading Δo/B to within about ±2 is as good as a ruler allows.)",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "v1": "11520",
+       "v2": "17680",
+       "x": "15.99",
+       "Bs": "720.3"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 3,
+      "caption": "Tanabe–Sugano diagram for d3 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "r",
+        "label": "Band ratio (higher ÷ lower)",
+        "numeric": true
+       },
+       {
+        "key": "x",
+        "label": "Δo/B",
+        "numeric": true
+       },
+       {
+        "key": "B",
+        "label": "B",
+        "unit": "cm⁻¹",
+        "numeric": true
+       },
+       {
+        "key": "D",
+        "label": "Δo",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "r": {
+        "type": "numeric",
+        "targetExpr": "v2 / v1",
+        "tolerance": 0.02,
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "Put the higher band on top: (higher) ÷ (lower), so the ratio is above 1.",
+          "expr": "v1 / v2"
+         }
+        ]
+       },
+       "x": {
+        "type": "numeric",
+        "targetExpr": "x",
+        "tolerance": 2,
+        "sig": 3
+       },
+       "B": {
+        "type": "numeric",
+        "targetExpr": "Bs",
+        "tolerance": 0,
+        "relTol": 0.12,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "B is the lower band divided by its E/B, not by Δo/B.",
+          "expr": "v1 / x"
+         }
+        ]
+       },
+       "D": {
+        "type": "numeric",
+        "targetExpr": "x * Bs",
+        "tolerance": 0,
+        "relTol": 0.15,
+        "sig": 3,
+        "ecf": [
+         {
+          "expr": "u_x * u_B",
+          "label": "Consistent with your own Δo/B and B."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-reverse-d7-x8",
+     "perspectiveLabel": "d⁷, bands 6210 and 18730 cm⁻¹",
+     "marks": 4,
+     "stem": "A d⁷ octahedral complex has a lowest-energy spin-allowed band at **6210 cm⁻¹** and a band to the **⁴T₁g(P)** state at **18730 cm⁻¹**.\n\nUse the diagram to find Δo and B:\n1. the ratio (higher band) ÷ (lower band);\n2. the Δo/B at which those two lines (their heights above the axis) have that same ratio;\n3. B from the lower band; 4. Δo.",
+     "hint": "The ratio of the two band energies equals the ratio of their heights (E/B) at the right Δo/B, because B cancels. Measure both heights at a trial Δo/B, form the ratio, and move the trial value until it matches. Then B = (lower band) ÷ (its E/B), and Δo = (Δo/B) × B.",
+     "explanation": "Ratio = 18730 ÷ 6210 = 3.02. On the diagram the lowest spin-allowed line and the ⁴T₁g(P) line have this height ratio at Δo/B ≈ 8.0, where the lower line is at E/B ≈ 6.9. B = 6210 ÷ 6.9 ≈ 900 cm⁻¹, and Δo = 8.0 × 900 ≈ 7196 cm⁻¹. (The ratio changes slowly with Δo/B, so reading Δo/B to within about ±1.3 is as good as a ruler allows.)",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "v1": "6210",
+       "v2": "18730",
+       "x": "7.99",
+       "Bs": "900.3"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 7,
+      "caption": "Tanabe–Sugano diagram for d7 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "r",
+        "label": "Band ratio (higher ÷ lower)",
+        "numeric": true
+       },
+       {
+        "key": "x",
+        "label": "Δo/B",
+        "numeric": true
+       },
+       {
+        "key": "B",
+        "label": "B",
+        "unit": "cm⁻¹",
+        "numeric": true
+       },
+       {
+        "key": "D",
+        "label": "Δo",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "r": {
+        "type": "numeric",
+        "targetExpr": "v2 / v1",
+        "tolerance": 0.02,
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "Put the higher band on top: (higher) ÷ (lower), so the ratio is above 1.",
+          "expr": "v1 / v2"
+         }
+        ]
+       },
+       "x": {
+        "type": "numeric",
+        "targetExpr": "x",
+        "tolerance": 1.3,
+        "sig": 3
+       },
+       "B": {
+        "type": "numeric",
+        "targetExpr": "Bs",
+        "tolerance": 0,
+        "relTol": 0.12,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "B is the lower band divided by its E/B, not by Δo/B.",
+          "expr": "v1 / x"
+         }
+        ]
+       },
+       "D": {
+        "type": "numeric",
+        "targetExpr": "x * Bs",
+        "tolerance": 0,
+        "relTol": 0.15,
+        "sig": 3,
+        "ecf": [
+         {
+          "expr": "u_x * u_B",
+          "label": "Consistent with your own Δo/B and B."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-reverse-d7-x12",
+     "perspectiveLabel": "d⁷, bands 9320 and 21280 cm⁻¹",
+     "marks": 4,
+     "stem": "A d⁷ octahedral complex has a lowest-energy spin-allowed band at **9320 cm⁻¹** and a band to the **⁴T₁g(P)** state at **21280 cm⁻¹**.\n\nUse the diagram to find Δo and B:\n1. the ratio (higher band) ÷ (lower band);\n2. the Δo/B at which those two lines (their heights above the axis) have that same ratio;\n3. B from the lower band; 4. Δo.",
+     "hint": "The ratio of the two band energies equals the ratio of their heights (E/B) at the right Δo/B, because B cancels. Measure both heights at a trial Δo/B, form the ratio, and move the trial value until it matches. Then B = (lower band) ÷ (its E/B), and Δo = (Δo/B) × B.",
+     "explanation": "Ratio = 21280 ÷ 9320 = 2.28. On the diagram the lowest spin-allowed line and the ⁴T₁g(P) line have this height ratio at Δo/B ≈ 12.0, where the lower line is at E/B ≈ 10.6. B = 9320 ÷ 10.6 ≈ 880 cm⁻¹, and Δo = 12.0 × 880 ≈ 10558 cm⁻¹. (The ratio changes slowly with Δo/B, so reading Δo/B to within about ±1.3 is as good as a ruler allows.)",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "v1": "9320",
+       "v2": "21280",
+       "x": "12.00",
+       "Bs": "879.8"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 7,
+      "caption": "Tanabe–Sugano diagram for d7 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "r",
+        "label": "Band ratio (higher ÷ lower)",
+        "numeric": true
+       },
+       {
+        "key": "x",
+        "label": "Δo/B",
+        "numeric": true
+       },
+       {
+        "key": "B",
+        "label": "B",
+        "unit": "cm⁻¹",
+        "numeric": true
+       },
+       {
+        "key": "D",
+        "label": "Δo",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "r": {
+        "type": "numeric",
+        "targetExpr": "v2 / v1",
+        "tolerance": 0.02,
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "Put the higher band on top: (higher) ÷ (lower), so the ratio is above 1.",
+          "expr": "v1 / v2"
+         }
+        ]
+       },
+       "x": {
+        "type": "numeric",
+        "targetExpr": "x",
+        "tolerance": 1.3,
+        "sig": 3
+       },
+       "B": {
+        "type": "numeric",
+        "targetExpr": "Bs",
+        "tolerance": 0,
+        "relTol": 0.12,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "B is the lower band divided by its E/B, not by Δo/B.",
+          "expr": "v1 / x"
+         }
+        ]
+       },
+       "D": {
+        "type": "numeric",
+        "targetExpr": "x * Bs",
+        "tolerance": 0,
+        "relTol": 0.15,
+        "sig": 3,
+        "ecf": [
+         {
+          "expr": "u_x * u_B",
+          "label": "Consistent with your own Δo/B and B."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-reverse-d7-x16",
+     "perspectiveLabel": "d⁷, bands 12210 and 23570 cm⁻¹",
+     "marks": 4,
+     "stem": "A d⁷ octahedral complex has a lowest-energy spin-allowed band at **12210 cm⁻¹** and a band to the **⁴T₁g(P)** state at **23570 cm⁻¹**.\n\nUse the diagram to find Δo and B:\n1. the ratio (higher band) ÷ (lower band);\n2. the Δo/B at which those two lines (their heights above the axis) have that same ratio;\n3. B from the lower band; 4. Δo.",
+     "hint": "The ratio of the two band energies equals the ratio of their heights (E/B) at the right Δo/B, because B cancels. Measure both heights at a trial Δo/B, form the ratio, and move the trial value until it matches. Then B = (lower band) ÷ (its E/B), and Δo = (Δo/B) × B.",
+     "explanation": "Ratio = 23570 ÷ 12210 = 1.93. On the diagram the lowest spin-allowed line and the ⁴T₁g(P) line have this height ratio at Δo/B ≈ 16.0, where the lower line is at E/B ≈ 14.4. B = 12210 ÷ 14.4 ≈ 850 cm⁻¹, and Δo = 16.0 × 850 ≈ 13600 cm⁻¹. (The ratio changes slowly with Δo/B, so reading Δo/B to within about ±1.3 is as good as a ruler allows.)",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "v1": "12210",
+       "v2": "23570",
+       "x": "16.00",
+       "Bs": "849.9"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 7,
+      "caption": "Tanabe–Sugano diagram for d7 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "r",
+        "label": "Band ratio (higher ÷ lower)",
+        "numeric": true
+       },
+       {
+        "key": "x",
+        "label": "Δo/B",
+        "numeric": true
+       },
+       {
+        "key": "B",
+        "label": "B",
+        "unit": "cm⁻¹",
+        "numeric": true
+       },
+       {
+        "key": "D",
+        "label": "Δo",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "r": {
+        "type": "numeric",
+        "targetExpr": "v2 / v1",
+        "tolerance": 0.02,
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "Put the higher band on top: (higher) ÷ (lower), so the ratio is above 1.",
+          "expr": "v1 / v2"
+         }
+        ]
+       },
+       "x": {
+        "type": "numeric",
+        "targetExpr": "x",
+        "tolerance": 1.3,
+        "sig": 3
+       },
+       "B": {
+        "type": "numeric",
+        "targetExpr": "Bs",
+        "tolerance": 0,
+        "relTol": 0.12,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "B is the lower band divided by its E/B, not by Δo/B.",
+          "expr": "v1 / x"
+         }
+        ]
+       },
+       "D": {
+        "type": "numeric",
+        "targetExpr": "x * Bs",
+        "tolerance": 0,
+        "relTol": 0.15,
+        "sig": 3,
+        "ecf": [
+         {
+          "expr": "u_x * u_B",
+          "label": "Consistent with your own Δo/B and B."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-reverse-d7-x20",
+     "perspectiveLabel": "d⁷, bands 15650 and 26990 cm⁻¹",
+     "marks": 4,
+     "stem": "A d⁷ octahedral complex has a lowest-energy spin-allowed band at **15650 cm⁻¹** and a band to the **⁴T₁g(P)** state at **26990 cm⁻¹**.\n\nUse the diagram to find Δo and B:\n1. the ratio (higher band) ÷ (lower band);\n2. the Δo/B at which those two lines (their heights above the axis) have that same ratio;\n3. B from the lower band; 4. Δo.",
+     "hint": "The ratio of the two band energies equals the ratio of their heights (E/B) at the right Δo/B, because B cancels. Measure both heights at a trial Δo/B, form the ratio, and move the trial value until it matches. Then B = (lower band) ÷ (its E/B), and Δo = (Δo/B) × B.",
+     "explanation": "Ratio = 26990 ÷ 15650 = 1.72. On the diagram the lowest spin-allowed line and the ⁴T₁g(P) line have this height ratio at Δo/B ≈ 20.0, where the lower line is at E/B ≈ 18.2. B = 15650 ÷ 18.2 ≈ 860 cm⁻¹, and Δo = 20.0 × 860 ≈ 17205 cm⁻¹. (The ratio changes slowly with Δo/B, so reading Δo/B to within about ±1.3 is as good as a ruler allows.)",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "v1": "15650",
+       "v2": "26990",
+       "x": "20.02",
+       "Bs": "859.6"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 7,
+      "caption": "Tanabe–Sugano diagram for d7 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "r",
+        "label": "Band ratio (higher ÷ lower)",
+        "numeric": true
+       },
+       {
+        "key": "x",
+        "label": "Δo/B",
+        "numeric": true
+       },
+       {
+        "key": "B",
+        "label": "B",
+        "unit": "cm⁻¹",
+        "numeric": true
+       },
+       {
+        "key": "D",
+        "label": "Δo",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "r": {
+        "type": "numeric",
+        "targetExpr": "v2 / v1",
+        "tolerance": 0.02,
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "Put the higher band on top: (higher) ÷ (lower), so the ratio is above 1.",
+          "expr": "v1 / v2"
+         }
+        ]
+       },
+       "x": {
+        "type": "numeric",
+        "targetExpr": "x",
+        "tolerance": 1.3,
+        "sig": 3
+       },
+       "B": {
+        "type": "numeric",
+        "targetExpr": "Bs",
+        "tolerance": 0,
+        "relTol": 0.12,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "B is the lower band divided by its E/B, not by Δo/B.",
+          "expr": "v1 / x"
+         }
+        ]
+       },
+       "D": {
+        "type": "numeric",
+        "targetExpr": "x * Bs",
+        "tolerance": 0,
+        "relTol": 0.15,
+        "sig": 3,
+        "ecf": [
+         {
+          "expr": "u_x * u_B",
+          "label": "Consistent with your own Δo/B and B."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-reverse-d2-x10",
+     "perspectiveLabel": "d², bands 6990 and 17980 cm⁻¹",
+     "marks": 4,
+     "stem": "A d² octahedral complex has a lowest-energy spin-allowed band at **6990 cm⁻¹** and a band to the **³T₁g(P)** state at **17980 cm⁻¹**.\n\nUse the diagram to find Δo and B:\n1. the ratio (higher band) ÷ (lower band);\n2. the Δo/B at which those two lines (their heights above the axis) have that same ratio;\n3. B from the lower band; 4. Δo.",
+     "hint": "The ratio of the two band energies equals the ratio of their heights (E/B) at the right Δo/B, because B cancels. Measure both heights at a trial Δo/B, form the ratio, and move the trial value until it matches. Then B = (lower band) ÷ (its E/B), and Δo = (Δo/B) × B.",
+     "explanation": "Ratio = 17980 ÷ 6990 = 2.57. On the diagram the lowest spin-allowed line and the ³T₁g(P) line have this height ratio at Δo/B ≈ 10.0, where the lower line is at E/B ≈ 8.7. B = 6990 ÷ 8.7 ≈ 800 cm⁻¹, and Δo = 10.0 × 800 ≈ 8001 cm⁻¹. (The ratio changes slowly with Δo/B, so reading Δo/B to within about ±1.3 is as good as a ruler allows.)",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "v1": "6990",
+       "v2": "17980",
+       "x": "10.00",
+       "Bs": "800.1"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 2,
+      "caption": "Tanabe–Sugano diagram for d2 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "r",
+        "label": "Band ratio (higher ÷ lower)",
+        "numeric": true
+       },
+       {
+        "key": "x",
+        "label": "Δo/B",
+        "numeric": true
+       },
+       {
+        "key": "B",
+        "label": "B",
+        "unit": "cm⁻¹",
+        "numeric": true
+       },
+       {
+        "key": "D",
+        "label": "Δo",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "r": {
+        "type": "numeric",
+        "targetExpr": "v2 / v1",
+        "tolerance": 0.02,
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "Put the higher band on top: (higher) ÷ (lower), so the ratio is above 1.",
+          "expr": "v1 / v2"
+         }
+        ]
+       },
+       "x": {
+        "type": "numeric",
+        "targetExpr": "x",
+        "tolerance": 1.3,
+        "sig": 3
+       },
+       "B": {
+        "type": "numeric",
+        "targetExpr": "Bs",
+        "tolerance": 0,
+        "relTol": 0.12,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "B is the lower band divided by its E/B, not by Δo/B.",
+          "expr": "v1 / x"
+         }
+        ]
+       },
+       "D": {
+        "type": "numeric",
+        "targetExpr": "x * Bs",
+        "tolerance": 0,
+        "relTol": 0.15,
+        "sig": 3,
+        "ecf": [
+         {
+          "expr": "u_x * u_B",
+          "label": "Consistent with your own Δo/B and B."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-reverse-d2-x16",
+     "perspectiveLabel": "d², bands 11200 and 21630 cm⁻¹",
+     "marks": 4,
+     "stem": "A d² octahedral complex has a lowest-energy spin-allowed band at **11200 cm⁻¹** and a band to the **³T₁g(P)** state at **21630 cm⁻¹**.\n\nUse the diagram to find Δo and B:\n1. the ratio (higher band) ÷ (lower band);\n2. the Δo/B at which those two lines (their heights above the axis) have that same ratio;\n3. B from the lower band; 4. Δo.",
+     "hint": "The ratio of the two band energies equals the ratio of their heights (E/B) at the right Δo/B, because B cancels. Measure both heights at a trial Δo/B, form the ratio, and move the trial value until it matches. Then B = (lower band) ÷ (its E/B), and Δo = (Δo/B) × B.",
+     "explanation": "Ratio = 21630 ÷ 11200 = 1.93. On the diagram the lowest spin-allowed line and the ³T₁g(P) line have this height ratio at Δo/B ≈ 16.0, where the lower line is at E/B ≈ 14.4. B = 11200 ÷ 14.4 ≈ 780 cm⁻¹, and Δo = 16.0 × 780 ≈ 12475 cm⁻¹. (The ratio changes slowly with Δo/B, so reading Δo/B to within about ±1.3 is as good as a ruler allows.)",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "v1": "11200",
+       "v2": "21630",
+       "x": "15.99",
+       "Bs": "780.3"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 2,
+      "caption": "Tanabe–Sugano diagram for d2 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "r",
+        "label": "Band ratio (higher ÷ lower)",
+        "numeric": true
+       },
+       {
+        "key": "x",
+        "label": "Δo/B",
+        "numeric": true
+       },
+       {
+        "key": "B",
+        "label": "B",
+        "unit": "cm⁻¹",
+        "numeric": true
+       },
+       {
+        "key": "D",
+        "label": "Δo",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "r": {
+        "type": "numeric",
+        "targetExpr": "v2 / v1",
+        "tolerance": 0.02,
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "Put the higher band on top: (higher) ÷ (lower), so the ratio is above 1.",
+          "expr": "v1 / v2"
+         }
+        ]
+       },
+       "x": {
+        "type": "numeric",
+        "targetExpr": "x",
+        "tolerance": 1.3,
+        "sig": 3
+       },
+       "B": {
+        "type": "numeric",
+        "targetExpr": "Bs",
+        "tolerance": 0,
+        "relTol": 0.12,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "B is the lower band divided by its E/B, not by Δo/B.",
+          "expr": "v1 / x"
+         }
+        ]
+       },
+       "D": {
+        "type": "numeric",
+        "targetExpr": "x * Bs",
+        "tolerance": 0,
+        "relTol": 0.15,
+        "sig": 3,
+        "ecf": [
+         {
+          "expr": "u_x * u_B",
+          "label": "Consistent with your own Δo/B and B."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-reverse-d8-x10",
+     "perspectiveLabel": "d⁸, bands 10000 and 16480 cm⁻¹",
+     "marks": 4,
+     "stem": "A d⁸ octahedral complex has a lowest-energy spin-allowed band at **10000 cm⁻¹** and a band to the **³T₁g(F)** state at **16480 cm⁻¹**.\n\nUse the diagram to find Δo and B:\n1. the ratio (higher band) ÷ (lower band);\n2. the Δo/B at which those two lines (their heights above the axis) have that same ratio;\n3. B from the lower band; 4. Δo.",
+     "hint": "The ratio of the two band energies equals the ratio of their heights (E/B) at the right Δo/B, because B cancels. Measure both heights at a trial Δo/B, form the ratio, and move the trial value until it matches. Then B = (lower band) ÷ (its E/B), and Δo = (Δo/B) × B.",
+     "explanation": "Ratio = 16480 ÷ 10000 = 1.65. On the diagram the lowest spin-allowed line and the ³T₁g(F) line have this height ratio at Δo/B ≈ 10.0, where the lower line is at E/B ≈ 10.0. B = 10000 ÷ 10.0 ≈ 1001 cm⁻¹, and Δo = 10.0 × 1001 ≈ 10000 cm⁻¹. (The ratio changes slowly with Δo/B, so reading Δo/B to within about ±2 is as good as a ruler allows.)",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "v1": "10000",
+       "v2": "16480",
+       "x": "9.99",
+       "Bs": "1000.6"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 8,
+      "caption": "Tanabe–Sugano diagram for d8 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "r",
+        "label": "Band ratio (higher ÷ lower)",
+        "numeric": true
+       },
+       {
+        "key": "x",
+        "label": "Δo/B",
+        "numeric": true
+       },
+       {
+        "key": "B",
+        "label": "B",
+        "unit": "cm⁻¹",
+        "numeric": true
+       },
+       {
+        "key": "D",
+        "label": "Δo",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "r": {
+        "type": "numeric",
+        "targetExpr": "v2 / v1",
+        "tolerance": 0.02,
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "Put the higher band on top: (higher) ÷ (lower), so the ratio is above 1.",
+          "expr": "v1 / v2"
+         }
+        ]
+       },
+       "x": {
+        "type": "numeric",
+        "targetExpr": "x",
+        "tolerance": 2,
+        "sig": 3
+       },
+       "B": {
+        "type": "numeric",
+        "targetExpr": "Bs",
+        "tolerance": 0,
+        "relTol": 0.12,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "B is the lower band divided by its E/B, not by Δo/B.",
+          "expr": "v1 / x"
+         }
+        ]
+       },
+       "D": {
+        "type": "numeric",
+        "targetExpr": "x * Bs",
+        "tolerance": 0,
+        "relTol": 0.15,
+        "sig": 3,
+        "ecf": [
+         {
+          "expr": "u_x * u_B",
+          "label": "Consistent with your own Δo/B and B."
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-reverse-d8-x14",
+     "perspectiveLabel": "d⁸, bands 13300 and 20900 cm⁻¹",
+     "marks": 4,
+     "stem": "A d⁸ octahedral complex has a lowest-energy spin-allowed band at **13300 cm⁻¹** and a band to the **³T₁g(F)** state at **20900 cm⁻¹**.\n\nUse the diagram to find Δo and B:\n1. the ratio (higher band) ÷ (lower band);\n2. the Δo/B at which those two lines (their heights above the axis) have that same ratio;\n3. B from the lower band; 4. Δo.",
+     "hint": "The ratio of the two band energies equals the ratio of their heights (E/B) at the right Δo/B, because B cancels. Measure both heights at a trial Δo/B, form the ratio, and move the trial value until it matches. Then B = (lower band) ÷ (its E/B), and Δo = (Δo/B) × B.",
+     "explanation": "Ratio = 20900 ÷ 13300 = 1.57. On the diagram the lowest spin-allowed line and the ³T₁g(F) line have this height ratio at Δo/B ≈ 14.0, where the lower line is at E/B ≈ 14.0. B = 13300 ÷ 14.0 ≈ 950 cm⁻¹, and Δo = 14.0 × 950 ≈ 13300 cm⁻¹. (The ratio changes slowly with Δo/B, so reading Δo/B to within about ±2 is as good as a ruler allows.)",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "v1": "13300",
+       "v2": "20900",
+       "x": "14.00",
+       "Bs": "950.0"
+      }
+     },
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 8,
+      "caption": "Tanabe–Sugano diagram for d8 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "r",
+        "label": "Band ratio (higher ÷ lower)",
+        "numeric": true
+       },
+       {
+        "key": "x",
+        "label": "Δo/B",
+        "numeric": true
+       },
+       {
+        "key": "B",
+        "label": "B",
+        "unit": "cm⁻¹",
+        "numeric": true
+       },
+       {
+        "key": "D",
+        "label": "Δo",
+        "unit": "cm⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "r": {
+        "type": "numeric",
+        "targetExpr": "v2 / v1",
+        "tolerance": 0.02,
+        "relTol": 0.01,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "Put the higher band on top: (higher) ÷ (lower), so the ratio is above 1.",
+          "expr": "v1 / v2"
+         }
+        ]
+       },
+       "x": {
+        "type": "numeric",
+        "targetExpr": "x",
+        "tolerance": 2,
+        "sig": 3
+       },
+       "B": {
+        "type": "numeric",
+        "targetExpr": "Bs",
+        "tolerance": 0,
+        "relTol": 0.12,
+        "sig": 3,
+        "paths": [
+         {
+          "label": "B is the lower band divided by its E/B, not by Δo/B.",
+          "expr": "v1 / x"
+         }
+        ]
+       },
+       "D": {
+        "type": "numeric",
+        "targetExpr": "x * Bs",
+        "tolerance": 0,
+        "relTol": 0.15,
+        "sig": 3,
+        "ecf": [
+         {
+          "expr": "u_x * u_B",
+          "label": "Consistent with your own Δo/B and B."
+         }
+        ]
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c8-tsg-cross",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Tanabe–Sugano 5: the spin crossover",
+    "source": "Guided Tanabe–Sugano practice (diagram computed in-app)",
+    "week": 8,
+    "primaryTheme": "Tanabe–Sugano Diagrams",
+    "conceptTags": [
+     "tanabe-sugano"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 4,
+    "examStyle": "construct_4to6",
+    "family": "ts-guided"
+   },
+   "variants": [
+    {
+     "variantId": "c8-tsg-cross-d4",
+     "perspectiveLabel": "d⁴",
+     "marks": 5,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁴ octahedral complex. Somewhere along the horizontal axis the ground state changes: the line along the axis bends and a different line takes its place.\n\nGive the Δo/B at which this spin crossover happens, the ground state before it (weak field) and after it (strong field), and the number of unpaired electrons on each side.",
+     "hint": "Follow the horizontal axis from the left: the first label is the weak-field (high-spin) ground state. The place where the axis line is replaced by another line is the crossover; the new label is the strong-field (low-spin) ground state. Unpaired electrons = multiplicity − 1.",
+     "explanation": "Weak field (left of Δo/B ≈ 27.3): ⁵Eg, 4 unpaired electrons (high spin). Strong field (right): ³T₁g, 2 unpaired (low spin). The crossover is where the pairing energy P equals the cost of putting an electron in e_g, so it marks the switch from high to low spin.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 4,
+      "caption": "Tanabe–Sugano diagram for d4 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "xc",
+        "label": "Δo/B at the crossover",
+        "numeric": true
+       },
+       {
+        "key": "hs",
+        "label": "Ground state, weak field"
+       },
+       {
+        "key": "ls",
+        "label": "Ground state, strong field"
+       },
+       {
+        "key": "uh",
+        "label": "Unpaired electrons, weak field",
+        "numeric": true
+       },
+       {
+        "key": "ul",
+        "label": "Unpaired electrons, strong field",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "xc": {
+        "type": "numeric",
+        "targetExpr": "27.3",
+        "tolerance": 2
+       },
+       "hs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[5⁵])\\s*E\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁵Eg"
+       },
+       "ls": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³T₁g"
+       },
+       "uh": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0.01
+       },
+       "ul": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-cross-d5",
+     "perspectiveLabel": "d⁵",
+     "marks": 5,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁵ octahedral complex. Somewhere along the horizontal axis the ground state changes: the line along the axis bends and a different line takes its place.\n\nGive the Δo/B at which this spin crossover happens, the ground state before it (weak field) and after it (strong field), and the number of unpaired electrons on each side.",
+     "hint": "Follow the horizontal axis from the left: the first label is the weak-field (high-spin) ground state. The place where the axis line is replaced by another line is the crossover; the new label is the strong-field (low-spin) ground state. Unpaired electrons = multiplicity − 1.",
+     "explanation": "Weak field (left of Δo/B ≈ 28.3): ⁶A₁g, 5 unpaired electrons (high spin). Strong field (right): ²T₂g, 1 unpaired (low spin). The crossover is where the pairing energy P equals the cost of putting an electron in e_g, so it marks the switch from high to low spin.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 5,
+      "caption": "Tanabe–Sugano diagram for d5 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "xc",
+        "label": "Δo/B at the crossover",
+        "numeric": true
+       },
+       {
+        "key": "hs",
+        "label": "Ground state, weak field"
+       },
+       {
+        "key": "ls",
+        "label": "Ground state, strong field"
+       },
+       {
+        "key": "uh",
+        "label": "Unpaired electrons, weak field",
+        "numeric": true
+       },
+       {
+        "key": "ul",
+        "label": "Unpaired electrons, strong field",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "xc": {
+        "type": "numeric",
+        "targetExpr": "28.3",
+        "tolerance": 2
+       },
+       "hs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[6⁶])\\s*A\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁶A₁g"
+       },
+       "ls": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[2²])\\s*T\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "²T₂g"
+       },
+       "uh": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0.01
+       },
+       "ul": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-cross-d6",
+     "perspectiveLabel": "d⁶",
+     "marks": 5,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁶ octahedral complex. Somewhere along the horizontal axis the ground state changes: the line along the axis bends and a different line takes its place.\n\nGive the Δo/B at which this spin crossover happens, the ground state before it (weak field) and after it (strong field), and the number of unpaired electrons on each side.",
+     "hint": "Follow the horizontal axis from the left: the first label is the weak-field (high-spin) ground state. The place where the axis line is replaced by another line is the crossover; the new label is the strong-field (low-spin) ground state. Unpaired electrons = multiplicity − 1.",
+     "explanation": "Weak field (left of Δo/B ≈ 20.3): ⁵T₂g, 4 unpaired electrons (high spin). Strong field (right): ¹A₁g, 0 unpaired (low spin). The crossover is where the pairing energy P equals the cost of putting an electron in e_g, so it marks the switch from high to low spin.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 6,
+      "caption": "Tanabe–Sugano diagram for d6 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "xc",
+        "label": "Δo/B at the crossover",
+        "numeric": true
+       },
+       {
+        "key": "hs",
+        "label": "Ground state, weak field"
+       },
+       {
+        "key": "ls",
+        "label": "Ground state, strong field"
+       },
+       {
+        "key": "uh",
+        "label": "Unpaired electrons, weak field",
+        "numeric": true
+       },
+       {
+        "key": "ul",
+        "label": "Unpaired electrons, strong field",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "xc": {
+        "type": "numeric",
+        "targetExpr": "20.3",
+        "tolerance": 2
+       },
+       "hs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[5⁵])\\s*T\\s*_?\\s*[2₂]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁵T₂g"
+       },
+       "ls": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[1¹])\\s*A\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "¹A₁g"
+       },
+       "uh": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0.01
+       },
+       "ul": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tsg-cross-d7",
+     "perspectiveLabel": "d⁷",
+     "marks": 5,
+     "stem": "The diagram is the Tanabe–Sugano diagram of a d⁷ octahedral complex. Somewhere along the horizontal axis the ground state changes: the line along the axis bends and a different line takes its place.\n\nGive the Δo/B at which this spin crossover happens, the ground state before it (weak field) and after it (strong field), and the number of unpaired electrons on each side.",
+     "hint": "Follow the horizontal axis from the left: the first label is the weak-field (high-spin) ground state. The place where the axis line is replaced by another line is the crossover; the new label is the strong-field (low-spin) ground state. Unpaired electrons = multiplicity − 1.",
+     "explanation": "Weak field (left of Δo/B ≈ 21.8): ⁴T₁g, 3 unpaired electrons (high spin). Strong field (right): ²Eg, 1 unpaired (low spin). The crossover is where the pairing energy P equals the cost of putting an electron in e_g, so it marks the switch from high to low spin.",
+     "visualAsset": {
+      "type": "ts-diagram",
+      "ion": 7,
+      "caption": "Tanabe–Sugano diagram for d7 (octahedral). The scale is 10 units of Δo/B = 36 mm along the bottom and 10 units of E/B = 12 mm up the side (so E/B = mm up ÷ 1.2)."
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "xc",
+        "label": "Δo/B at the crossover",
+        "numeric": true
+       },
+       {
+        "key": "hs",
+        "label": "Ground state, weak field"
+       },
+       {
+        "key": "ls",
+        "label": "Ground state, strong field"
+       },
+       {
+        "key": "uh",
+        "label": "Unpaired electrons, weak field",
+        "numeric": true
+       },
+       {
+        "key": "ul",
+        "label": "Unpaired electrons, strong field",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "xc": {
+        "type": "numeric",
+        "targetExpr": "21.8",
+        "tolerance": 2
+       },
+       "hs": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*T\\s*_?\\s*[1₁]\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴T₁g"
+       },
+       "ls": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[2²])\\s*E\\s*_?\\s*g?(?:\\s*\\([A-Za-z]\\))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "²Eg"
+       },
+       "uh": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "ul": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c8-tsg-explain",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Tanabe–Sugano 6: explain the method",
+    "source": "Guided Tanabe–Sugano practice (diagram computed in-app)",
+    "week": 8,
+    "primaryTheme": "Tanabe–Sugano Diagrams",
+    "conceptTags": [
+     "tanabe-sugano"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 4,
+    "examStyle": "construct_4to6",
+    "family": "ts-guided"
+   },
+   "variants": [
+    {
+     "variantId": "c8-tsg-explain-v1",
+     "perspectiveLabel": "explain the diagram",
+     "marks": 5,
+     "stem": "Explain how to use a Tanabe–Sugano diagram to get Δo and B for a d⁷ complex from two measured absorption bands. State what the axes mean, which bands to use, and what you do with the ratio.",
+     "explanation": "Both axes are scaled by B: the horizontal axis is Δo/B and the vertical axis is E/B, measured from the ground state (the horizontal axis itself). Only spin-allowed transitions are used: those to states with the same multiplicity as the ground state. Measure the energies of two such bands; their ratio is independent of B, so find the Δo/B at which the heights of the two corresponding lines have that ratio. Then B = (lower band) ÷ (E/B of that line) and Δo = (Δo/B) × B.",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Horizontal axis is Δo/B and vertical axis is E/B (energies in units of B above the ground state)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "The ground state is the horizontal axis (E/B = 0)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "Use only spin-allowed transitions: same spin multiplicity as the ground state",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "The ratio of the two band energies does not depend on B, so match it to the ratio of the line heights to find Δo/B",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r5",
+        "criterion": "Then B = band energy ÷ (E/B), and Δo = (Δo/B) × B",
         "marks": 1,
         "isCritical": false
        }

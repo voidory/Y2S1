@@ -2184,7 +2184,13 @@
     "bk-c8-ts-d7",
     "bk-c8-ts-d4",
     "bk-c8-ts-d6",
-    "bk-c8-ts-reading"
+    "bk-c8-ts-reading",
+    "bk-c8-tsg-ground",
+    "bk-c8-tsg-allowed",
+    "bk-c8-tsg-read",
+    "bk-c8-tsg-reverse",
+    "bk-c8-tsg-cross",
+    "bk-c8-tsg-explain"
    ],
    "chunk": "terms-ts"
   },
@@ -3014,6 +3020,24 @@
   ],
   "bk-c4-downs": [
    "c4.named-process"
+  ],
+  "bk-c8-tsg-ground": [
+   "c8.tanabe-sugano"
+  ],
+  "bk-c8-tsg-allowed": [
+   "c8.tanabe-sugano"
+  ],
+  "bk-c8-tsg-read": [
+   "c8.tanabe-sugano"
+  ],
+  "bk-c8-tsg-reverse": [
+   "c8.tanabe-sugano"
+  ],
+  "bk-c8-tsg-cross": [
+   "c8.tanabe-sugano"
+  ],
+  "bk-c8-tsg-explain": [
+   "c8.tanabe-sugano"
   ]
  }
 }

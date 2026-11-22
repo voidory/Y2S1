@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "rule": "A question in 'easier' is skipped once the latest attempt on anything in 'harder' passed (85%): the harder one already does the easier one's work, plus more steps. Refs are a node id, or node#variantId for one variant. Hand-authored; tests/supersedes.test.mjs checks every ref exists and nothing loops.",
+  "pairs": [
+    {
+      "id": "microstates-in-term-derivation",
+      "why": "Deriving the terms by the microstate table means counting the microstates first.",
+      "easier": [
+        "bk-c8-microstates"
+      ],
+      "harder": [
+        "bk-c8-terms-d8#c8-terms-d8-v4"
+      ]
+    },
+    {
+      "id": "cfse-small-in-table",
+      "why": "CFSE for d1-d3 and the high/low-spin d5, d6, d9 cases are rows of the full CFSE table (and of the past-paper chain's last step).",
+      "easier": [
+        "bk-c7-cfse-d1-d2"
+      ],
+      "harder": [
+        "bk-c7-cfse-table",
+        "bk-c6-p3q3-cfse"
+      ]
+    },
+    {
+      "id": "ox-dn-in-paper-chain",
+      "why": "The past-paper chain goes name, oxidation state, dn, geometry, splitting and CFSE: it contains the oxidation-state and dn questions.",
+      "easier": [
+        "bk-c6-ox-dn-cn"
+      ],
+      "harder": [
+        "bk-c6-p3q3-cfse"
+      ]
+    },
+    {
+      "id": "ox-or-dn-alone",
+      "why": "Oxidation state alone, or dn alone, is part of the oxidation state + dn + coordination number question.",
+      "easier": [
+        "bk-c6-ox-state-practice",
+        "bk-c6-dn-count"
+      ],
+      "harder": [
+        "bk-c6-ox-dn-cn",
+        "bk-c6-p3q3-cfse"
+      ]
+    },
+    {
+      "id": "ts-reading-parts",
+      "why": "The full d7 and d4 questions ask for the ground-state term and the spin of the high- and low-spin forms, which is the guided ground-state step.",
+      "easier": [
+        "bk-c8-tsg-ground"
+      ],
+      "harder": [
+        "bk-c8-ts-d7#c8-ts-d7-v1",
+        "bk-c8-ts-d4#c8-ts-d4-v1"
+      ]
+    },
+    {
+      "id": "ts-allowed-bands",
+      "why": "State all spin-allowed transitions for high and low spin is the guided 'spin-allowed bands, in order' step with both spin states.",
+      "easier": [
+        "bk-c8-tsg-allowed"
+      ],
+      "harder": [
+        "bk-c8-ts-d7#c8-ts-d7-v2",
+        "bk-c8-ts-d4#c8-ts-d4-v2"
+      ]
+    },
+    {
+      "id": "spin-only-in-ts",
+      "why": "The d7 diagram question asks for the spin-only moment of the high- and low-spin forms.",
+      "easier": [
+        "bk-c8-spin-only"
+      ],
+      "harder": [
+        "bk-c8-ts-d7#c8-ts-d7-v1"
+      ]
+    }
+  ]
+}

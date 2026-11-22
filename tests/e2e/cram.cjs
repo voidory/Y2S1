@@ -87,6 +87,28 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.click('#btnSkipNode'); await p.waitForTimeout(300);
   ok(await p.$('#methodOverlay') === null, 'the method sheet does not open again for the same topic');
 
+  // 5. "done a harder one, skip the easier one": seed a pass on the overall-PSI question, nothing else
+  await p.evaluate(async () => {
+    const E = window.__MASTERY_ENGINE__, db = await E.DB.init();
+    await db.attemptLogs.clear();
+    await db.attemptLogs.put({ id: 'seed-sup', nodeId: 'bk-m11-a-overall', variantId: 'psi-overall', timestamp: Date.now() - 5000, durationMs: 1000, normalizedGrade: 1, userInput: {}, errorTags: [], missedSkillTags: [] });
+  });
+  await boot(); await p.selectOption('#moduleSwitch', 'CM2011'); await p.waitForTimeout(800);
+  ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.retired.nodes.has('bk-m11-a-sub')), 'passing the overall PSI question retires the single sub-index question');
+  await openPlan();
+  const note = await p.evaluate(() => document.querySelector('[data-retired-note]')?.textContent.replace(/\s+/g, ' '));
+  ok(note && /1 easier question is skipped/.test(note), `the Plan tab says so (${note})`);
+  await p.click('.tabbar [data-nav="study"]'); await p.waitForTimeout(400);
+  const served = new Set();
+  for (let i = 0; i < 25; i++) {
+    served.add(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current?.node.id));
+    await p.evaluate(() => { (document.querySelector('#btnSubmitAnswer'))?.click(); });
+    await p.waitForTimeout(200);
+    await p.evaluate(() => { (document.querySelector('#btnSkipNode') || document.querySelector('#btnNextQuestion'))?.click(); });
+    await p.waitForTimeout(200);
+  }
+  ok(!served.has('bk-m11-a-sub') && served.size > 10, `25 cards later the easier question never came up (${served.size} different cards)`);
+
   ok(errs.length === 0, 'no page errors' + (errs.length ? ': ' + errs.join(' | ') : ''));
   await b.close(); srv.close();
   console.log(fails ? `\n${fails} FAILED` : '\ncram ok');

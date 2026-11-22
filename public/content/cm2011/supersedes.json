@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "rule": "A question in 'easier' is skipped once the latest attempt on anything in 'harder' passed (85%): the harder one already does the easier one's calculation, plus more steps. Refs are a node id, or node#variantId for one variant. Hand-authored; tests/supersedes.test.mjs checks every ref exists and nothing loops.",
+  "pairs": [
+    {
+      "id": "ionic-in-gamma",
+      "why": "The activity-coefficient question starts by finding I for the same single salts.",
+      "easier": [
+        "bk-m11-e-ionic#e-ionic-NaCl",
+        "bk-m11-e-ionic#e-ionic-CaCl",
+        "bk-m11-e-ionic#e-ionic-ZnSO",
+        "bk-m11-e-ionic#e-ionic-KSO",
+        "bk-m11-e-ionic#e-ionic-FeNO",
+        "bk-m11-e-ionic#e-ionic-MgCl"
+      ],
+      "harder": [
+        "bk-m11-e-gamma"
+      ]
+    },
+    {
+      "id": "ionic-mix-in-activity",
+      "why": "Finding I for a mixture of salts is the first step of the pH and Fe3+/Fe2+ activity questions.",
+      "easier": [
+        "bk-m11-e-ionic#e-ionic-mix-cacl-nacl",
+        "bk-m11-e-ionic#e-ionic-mix-znso4-kcl"
+      ],
+      "harder": [
+        "bk-m11-e-ph",
+        "bk-m11-e-fe"
+      ]
+    },
+    {
+      "id": "gamma-in-nernst",
+      "why": "Every one of these needs I, then gamma from Debye-Hückel, then an activity, which is the whole of the gamma question.",
+      "easier": [
+        "bk-m11-e-gamma"
+      ],
+      "harder": [
+        "bk-m11-e-half",
+        "bk-m11-e-ph",
+        "bk-m11-e-fe",
+        "bk-m11-e-cell"
+      ]
+    },
+    {
+      "id": "half-in-cell",
+      "why": "A cell potential is two half-cell Nernst calculations with activities, then a difference.",
+      "easier": [
+        "bk-m11-e-half"
+      ],
+      "harder": [
+        "bk-m11-e-cell"
+      ]
+    },
+    {
+      "id": "fe-half-in-fe-cell",
+      "why": "The Zn / Fe3+,Fe2+ cell contains the Fe3+/Fe2+ half-cell with activities.",
+      "easier": [
+        "bk-m11-e-fe"
+      ],
+      "harder": [
+        "bk-m11-e-cell#e-cell-znfe"
+      ]
+    },
+    {
+      "id": "ph-alone-in-ph-salt",
+      "why": "The salt version does I, gamma(H+) and pH from activity as well, with more ions in the ionic strength.",
+      "easier": [
+        "bk-m11-e-ph2#e-ph-alone-hcl",
+        "bk-m11-e-ph2#e-ph-alone-hno3"
+      ],
+      "harder": [
+        "bk-m11-e-ph"
+      ]
+    },
+    {
+      "id": "simple-cell-in-fe-cell",
+      "why": "Two metal half-cells with activities are a subset of the Zn / Fe3+,Fe2+ cell.",
+      "easier": [
+        "bk-m11-e-cell#e-cell-cuag",
+        "bk-m11-e-cell#e-cell-cuag-rev"
+      ],
+      "harder": [
+        "bk-m11-e-cell#e-cell-znfe"
+      ]
+    },
+    {
+      "id": "sub-in-overall-psi",
+      "why": "The overall PSI is three sub-index calculations and a maximum.",
+      "easier": [
+        "bk-m11-a-sub"
+      ],
+      "harder": [
+        "bk-m11-a-overall"
+      ]
+    },
+    {
+      "id": "slope-in-reading",
+      "why": "Reading an activity from two potentials needs the Nernstian slope for that charge.",
+      "easier": [
+        "bk-m11-p-slope"
+      ],
+      "harder": [
+        "bk-m11-p-cal#p-cal-ca",
+        "bk-m11-p-cal#p-cal-f",
+        "bk-m11-p-cal#p-cal-k"
+      ]
+    },
+    {
+      "id": "line-in-chain",
+      "why": "The dilution chain begins with reading a concentration off the calibration line.",
+      "easier": [
+        "bk-m11-p-cal#p-cal-line"
+      ],
+      "harder": [
+        "bk-m11-p-chain#chain-k",
+        "bk-m11-p-chain#chain-nh3"
+      ]
+    },
+    {
+      "id": "k-chain-in-nh3-chain",
+      "why": "The ammonia chain is the same calibration and dilutions with a negative slope and a Kjeldahl step on the end.",
+      "easier": [
+        "bk-m11-p-chain#chain-k"
+      ],
+      "harder": [
+        "bk-m11-p-chain#chain-nh3"
+      ]
+    },
+    {
+      "id": "one-dilution-in-two",
+      "why": "Same back-calculation, one dilution step instead of two.",
+      "easier": [
+        "bk-m11-q-dilution#q-dil-one"
+      ],
+      "harder": [
+        "bk-m11-q-dilution#q-dil-two"
+      ]
+    },
+    {
+      "id": "extraction-parts",
+      "why": "The short version is parts (a) to (c) of the full chain, word for word.",
+      "easier": [
+        "bk-m11-x-acid#x-acid-short"
+      ],
+      "harder": [
+        "bk-m11-x-acid#x-acid-chain"
+      ]
+    },
+    {
+      "id": "two-terms-in-three",
+      "why": "Adding or subtracting two terms is the same rule as three, with fewer terms.",
+      "easier": [
+        "bk-m11-t1-errprop#t1-prop-sub"
+      ],
+      "harder": [
+        "bk-m11-t1-errprop#t1-prop-sum"
+      ]
+    },
+    {
+      "id": "rs-in-wider",
+      "why": "The wider-peaks question computes the same R_S first, then recomputes it.",
+      "easier": [
+        "bk-m11-c-resolution#rs-base"
+      ],
+      "harder": [
+        "bk-m11-c-resolution#rs-wider"
+      ]
+    },
+    {
+      "id": "conc-from-A-in-dilution",
+      "why": "Concentration from absorbance is the first step of the dilution question.",
+      "easier": [
+        "bk-m11-s-beer#s-bl-c"
+      ],
+      "harder": [
+        "bk-m11-s-beer#s-bl-dil"
+      ]
+    },
+    {
+      "id": "meansd-in-ci",
+      "why": "The confidence interval starts from the mean and s of the replicates.",
+      "easier": [
+        "bk-m11-t1-meansd"
+      ],
+      "harder": [
+        "bk-m11-t1-ci"
+      ]
+    }
+  ]
+}

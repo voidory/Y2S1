@@ -91,6 +91,7 @@
     .seg > button { flex: 1 1 0%; padding: 0.4rem 0.5rem; font-size: 0.75rem; font-weight: 600; color: #475569; border-radius: 0.5rem; white-space: nowrap; }
     .seg > button[aria-selected="true"] { background: #FFFFFF; color: #0F172A; box-shadow: 0 1px 2px rgba(15,23,42,.12); }
     .seg > button:disabled { opacity: .4; }
+    details[data-rx-group]:not([open]) .rx-chev { transform: rotate(-90deg); }
     .seg-tight > button { padding: 0.4rem 0.1rem; font-size: 0.68rem; }
     .katex { font-size: 1.03em; }
     .katex-display { margin: 0.75rem 0; overflow-x: auto; overflow-y: hidden; }
@@ -155,6 +156,7 @@
         <button type="button" data-nav="study" data-variant="side" class="nav-link flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M8 7.5h7"/></svg><span>Study Session</span></button>
         <button type="button" data-nav="mock" data-variant="side" class="nav-link flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg><span>Mock Paper</span></button>
         <button type="button" data-nav="readiness" data-variant="side" class="nav-link flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V11M10 20V4M16 20v-6M2 20h20"/></svg><span>Finals Readiness</span></button>
+        <button type="button" data-nav="reactions" data-variant="side" class="nav-link hidden flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-5.5 9.2A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.8L14 9V3"/><path d="M7.5 15h9"/></svg><span>Reactions</span></button>
         <button type="button" data-nav="bank" data-variant="side" class="nav-link flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Question Bank</span></button>
         <button type="button" data-nav="settings" data-variant="side" class="nav-link flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-50"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></svg><span>Modules &amp; Data</span></button>
       </nav>
@@ -168,10 +170,11 @@
     </main>
   </div>
 
-  <nav aria-label="Primary (mobile)" class="tabbar md:hidden shrink-0 grid grid-cols-5 bg-white border-t border-slate-200">
+  <nav aria-label="Primary (mobile)" class="tabbar md:hidden shrink-0 grid bg-white border-t border-slate-200" style="grid-template-columns:repeat(var(--tabs,5),minmax(0,1fr))">
     <button type="button" data-nav="study" data-variant="tab" class="nav-link flex flex-col items-center justify-center gap-0.5 py-1.5 min-h-[52px] text-[11px] font-medium text-slate-500"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H19v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M8 7.5h7"/></svg><span>Study</span></button>
     <button type="button" data-nav="mock" data-variant="tab" class="nav-link flex flex-col items-center justify-center gap-0.5 py-1.5 min-h-[52px] text-[11px] font-medium text-slate-500"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h3"/></svg><span>Mock</span></button>
     <button type="button" data-nav="readiness" data-variant="tab" class="nav-link flex flex-col items-center justify-center gap-0.5 py-1.5 min-h-[52px] text-[11px] font-medium text-slate-500"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V11M10 20V4M16 20v-6M2 20h20"/></svg><span>Progress</span></button>
+    <button type="button" data-nav="reactions" data-variant="tab" class="nav-link hidden flex flex-col items-center justify-center gap-0.5 py-1.5 min-h-[52px] text-[11px] font-medium text-slate-500"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h6M10 3v6l-5.5 9.2A2 2 0 0 0 6.2 21h11.6a2 2 0 0 0 1.7-2.8L14 9V3"/><path d="M7.5 15h9"/></svg><span>Reactions</span></button>
     <button type="button" data-nav="bank" data-variant="tab" class="nav-link flex flex-col items-center justify-center gap-0.5 py-1.5 min-h-[52px] text-[11px] font-medium text-slate-500"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Bank</span></button>
     <button type="button" data-nav="settings" data-variant="tab" class="nav-link flex flex-col items-center justify-center gap-0.5 py-1.5 min-h-[52px] text-[11px] font-medium text-slate-500"><svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M18.7 5.3l-2.1 2.1M7.4 16.6l-2.1 2.1"/></svg><span>More</span></button>
   </nav>
@@ -8243,6 +8246,213 @@
     })();
 
     /* =====================================================================
+       NAMESPACE: Reactions — the Kinjo-half reaction list (CM2021): display, cards, grading, spaced boxes
+       Data: public/content/cm2021/reactions.json, built from tools/cm2021/reactions.mjs
+       ===================================================================== */
+    const Reactions = (() => {
+      const MIN = 60e3, DAY = 24 * 3600e3;
+      const INTERVALS_MS = [0, 20 * MIN, 1 * DAY, 3 * DAY, 7 * DAY];   // by box 0..4
+      const escH = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+      /* "Ca(OH)2" -> Ca(OH)<sub>2</sub>; "Br^-" -> Br<sup>−</sup>; "e-" -> e⁻ */
+      function fmtFormula(f) {
+        const s = String(f);
+        if (s === 'e-') return 'e<sup>−</sup>';
+        let out = '';
+        for (let i = 0; i < s.length; i++) {
+          const c = s[i];
+          if (c === '^') {
+            const m = s.slice(i + 1).match(/^\d*[+-]/);
+            if (m) { out += `<sup>${m[0].replace('-', '−')}</sup>`; i += m[0].length; continue; }
+          }
+          if (/\d/.test(c) && i > 0 && /[A-Za-z)\]]/.test(s[i - 1])) {
+            let j = i; while (j < s.length && /\d/.test(s[j])) j++;
+            out += `<sub>${s.slice(i, j)}</sub>`; i = j - 1; continue;
+          }
+          out += escH(c);
+        }
+        return out;
+      }
+      const splitTerms = (side) => String(side).split(/\s\+\s/).map((t) => t.trim()).filter(Boolean);
+      const termParts = (t) => { const m = String(t).match(/^(\d+)?\s*(.+)$/); return { coef: m[1] || '', f: m[2] }; };
+      const fmtTerm = (t) => { const { coef, f } = termParts(t); return `${coef}${fmtFormula(f)}`; };
+      function eqSides(eq) {
+        const arrow = eq.includes('<=>') ? '<=>' : '->';
+        const [l, r] = eq.split(arrow).map((x) => x.trim());
+        return { l: splitTerms(l), r: splitTerms(r), arrow: arrow === '<=>' ? '⇌' : '→' };
+      }
+      function fmtEq(eq) {
+        const { l, r, arrow } = eqSides(eq);
+        return `${l.map(fmtTerm).join(' + ')} ${arrow} ${r.map(fmtTerm).join(' + ')}`;
+      }
+      /* the left-hand side only, for cover mode */
+      function fmtReactants(eq) { const { l, arrow } = eqSides(eq); return `${l.map(fmtTerm).join(' + ')} ${arrow} <span class="text-slate-400">?</span>`; }
+
+      /* a short readable title from the prompt */
+      function label(r) {
+        if (r.kind === 'nuc') return 'Nuclear equation';
+        let t = String(r.ask || r.id).replace(/^(Write|Balance:?)\s+/i, '').replace(/^the\s+/i, '');
+        t = t.split(/(?<=[.?!])\s/)[0].replace(/[.?!]+$/, '');
+        if (t.length > 74) t = t.slice(0, 72).replace(/\s+\S*$/, '') + '…';
+        return t.charAt(0).toUpperCase() + t.slice(1);
+      }
+      const routesOf = (r) => [r.steps || [r.eq], ...(r.alt || []).map((a) => (Array.isArray(a) ? a : [a]))];
+
+      /* ---------- normalising typed formulas and isotopes ---------- */
+      const SUPS = { '⁰': '0', '¹': '1', '²': '2', '³': '3', '⁴': '4', '⁵': '5', '⁶': '6', '⁷': '7', '⁸': '8', '⁹': '9', '⁺': '+', '⁻': '-' };
+      function norm(s) {
+        return String(s ?? '')
+          .replace(/[₀-₉]/g, (c) => String(c.charCodeAt(0) - 0x2080))
+          .replace(/[⁰¹²³⁴-⁹⁺⁻]/g, (c) => SUPS[c] || c)
+          .replace(/[−–]/g, '-')
+          .replace(/\((?:aq|s|l|g)\)/gi, '')
+          .replace(/[\s^\[\]{}]/g, '');
+      }
+      const formulaKey = (s) => norm(s).replace(/^\d+/, '');
+
+      function parseIsotope(text) {
+        const t = norm(text).replace(/-/g, '').toLowerCase();
+        let m = t.match(/^(\d+)([a-z]+)$/);
+        if (m) return { A: Number(m[1]), word: m[2] };
+        m = t.match(/^([a-z]+)(\d+)$/);
+        if (m) return { A: Number(m[2]), word: m[1] };
+        return null;
+      }
+
+      /* ---------- cards ---------- */
+      function chooseKind(r, st, rnd) {
+        if (r.kind === 'nuc') return 'nuc';
+        const single = !r.steps && r.eq;
+        const nSpecies = single ? (() => { const s = eqSides(r.eq); return s.l.length + s.r.length; })() : 0;
+        if (!st || !st.seen) return single && nSpecies >= 3 ? 'gap' : 'write';
+        const box = st.box || 0;
+        if (box <= 1) return single && rnd < 0.3 ? 'gap' : 'write';
+        if (r.aka && rnd < 0.2) return 'name';
+        if (r.cond && rnd < 0.4) return 'cond';
+        return 'write';
+      }
+      function buildCard(r, kind, rnd = Math.random()) {
+        const card = { rid: r.id, kind };
+        if (kind === 'gap') {
+          const { l, r: rr, arrow } = eqSides(r.eq);
+          const all = [...l.map((t, i) => ({ side: 'l', i, t })), ...rr.map((t, i) => ({ side: 'r', i, t }))].filter((x) => termParts(x.t).f !== 'e-');
+          const pool = all.filter((x) => termParts(x.t).f !== 'H2O');
+          const list = pool.length ? pool : all;
+          const pick = list[Math.min(list.length - 1, Math.floor(rnd * list.length))];
+          const show = (arr, side) => arr.map((t, i) => (side === pick.side && i === pick.i ? `${termParts(t).coef}<span class="rx-blank" data-rx-blank>▢</span>` : fmtTerm(t))).join(' + ');
+          card.eqHtml = `${show(l, 'l')} ${arrow} ${show(rr, 'r')}`;
+          card.answer = termParts(pick.t).f;
+        }
+        return card;
+      }
+
+      /* say what is wrong when the species line up but the answer was still not accepted (side, number of equations) */
+      function diagnose(routes, text, fns) {
+        const lines = String(text).split(/\r?\n|;/).map((l) => l.trim()).filter(Boolean).map((l) => fns.parseEquationLine(l));
+        if (!lines.length || lines.some((l) => !l.valid)) return '';
+        const sides = (arr) => { const m = new Map(); arr.forEach((l) => { l.lhs.forEach((x) => (m.get(x.key) || m.set(x.key, { d: x.display, s: new Set() }).get(x.key)).s.add('L')); l.rhs.forEach((x) => (m.get(x.key) || m.set(x.key, { d: x.display, s: new Set() }).get(x.key)).s.add('R')); }); return m; };
+        const u = sides(lines);
+        let best = null;
+        for (const rt of routes) {
+          const model = rt.map((e) => fns.parseEquationLine(e));
+          const m = sides(model);
+          const wrong = [];
+          for (const [k, v] of m) { const w = u.get(k); if (w && [...v.s].sort().join() !== [...w.s].sort().join()) wrong.push(v.s.size === 2 ? `${v.d} should appear on both sides across the steps` : `${v.d} should be on the ${v.s.has('L') ? 'reactant' : 'product'} side`); }
+          const score = wrong.length + Math.abs(model.length - lines.length);
+          if (!best || score < best.score) best = { score, wrong, n: model.length };
+        }
+        if (!best) return '';
+        if (best.wrong.length) return best.wrong.join('; ') + '.';
+        if (best.n !== lines.length) return `This one takes ${best.n} equation${best.n === 1 ? '' : 's'} (one per line).`;
+        return '';
+      }
+
+      /* ---------- grading: returns { grade 0 | 0.5 | 1, feedback, missing, extra } ---------- */
+      function gradeCard(card, r, text, evalFns) {
+        const out = { grade: 0, feedback: '', missing: [], extra: [] };
+        const t = String(text ?? '').trim();
+        if (!t) { out.feedback = 'Nothing entered.'; return out; }
+        if (card.kind === 'write') {
+          const acc = routesOf(r).map((rt) => ({ equations: rt }));
+          const res = evalFns.gradeEquationMatch({ accepted: acc }, t);
+          out.grade = res.normalizedGrade >= 1 ? 1 : res.normalizedGrade > 0 ? 0.5 : 0;
+          out.feedback = res.feedback; out.missing = res.missingSpecies || []; out.extra = res.extraSpecies || [];
+          if (out.grade === 0 && !out.missing.length && !out.extra.length && evalFns.parseEquationLine) out.feedback = diagnose(routesOf(r), t, evalFns) || 'The species are right, but not as one reaction: check the lines and which side each is on.';
+          return out;
+        }
+        if (card.kind === 'gap') {
+          out.grade = formulaKey(t) === formulaKey(card.answer) ? 1 : 0;
+          out.feedback = out.grade ? 'That is the missing formula.' : `The missing formula is not ${t}.`;
+          return out;
+        }
+        if (card.kind === 'name') {
+          const n = norm(t).toLowerCase();
+          out.grade = (r.aka || []).some((k) => n.includes(norm(k).toLowerCase())) ? 1 : 0;
+          out.feedback = out.grade ? 'Yes, that is its name.' : 'That is not the name it goes by.';
+          return out;
+        }
+        if (card.kind === 'nuc') {
+          const iso = parseIsotope(t);
+          const a = r.answer;
+          out.grade = iso && iso.A === a.A && (iso.word === a.sym.toLowerCase() || iso.word === String(a.name || '').toLowerCase()) ? 1 : 0;
+          out.feedback = out.grade ? 'Mass number and element both right.' : (iso && iso.A !== a.A ? 'Check the mass number: A balances on both sides.' : 'Check the atomic number: Z balances, and Z names the element.');
+          return out;
+        }
+        return out;
+      }
+
+      /* ---------- spaced boxes (0 new/missed … 4 known) ---------- */
+      function applyResult(stats, rid, grade, nowMs) {
+        const st = { box: 0, seen: 0, right: 0, miss: 0, part: 0, ...(stats[rid] || {}) };
+        st.seen += 1; st.last = nowMs;
+        if (grade >= 1) { st.right += 1; st.box = Math.min(4, st.box + 1); }
+        else if (grade > 0) { st.part += 1; }
+        else { st.miss += 1; st.box = 0; }
+        st.due = nowMs + (grade > 0 && grade < 1 ? INTERVALS_MS[1] : INTERVALS_MS[st.box]);
+        return { ...stats, [rid]: st };
+      }
+      const isKnown = (st) => !!st && st.box >= 3;
+
+      function eligible(reactions, opts = {}) {
+        return reactions.filter((r) => (!opts.group || opts.group === 'ALL' || r.g === opts.group)
+          && (!opts.examOnly || r.x >= 3) && (!opts.namedOnly || r.aka));
+      }
+      /* priority: due first, then what a final has asked, then the weak and the unseen */
+      function pickQueue(reactions, stats, nowMs, opts = {}, rnd = Math.random) {
+        const pool = eligible(reactions, opts);
+        const scored = pool.map((r) => {
+          const st = stats[r.id];
+          let s = r.x * 0.9 + rnd() * 0.9;
+          if (!st || !st.seen) s += 2.2;
+          else if ((st.due || 0) <= nowMs) s += 3 + (4 - (st.box || 0)) * 0.8;
+          else s -= 2.5 + (st.box || 0) * 0.4;
+          return { id: r.id, s };
+        }).sort((a, b) => b.s - a.s);
+        return scored.slice(0, opts.n || 12).map((x) => x.id);
+      }
+      function summary(reactions, stats, nowMs) {
+        const out = { total: reactions.length, known: 0, learning: 0, unseen: 0, due: 0, groups: {} };
+        for (const r of reactions) {
+          const st = stats[r.id];
+          const g = (out.groups[r.g] ||= { n: 0, known: 0, unseen: 0 });
+          g.n += 1;
+          if (!st || !st.seen) { out.unseen += 1; g.unseen += 1; }
+          else if (isKnown(st)) { out.known += 1; g.known += 1; } else out.learning += 1;
+          if (st && st.seen && (st.due || 0) <= nowMs) out.due += 1;
+        }
+        return out;
+      }
+      /* 0 unseen, 1 learning, 2 getting there, 3 known */
+      const dotLevel = (st) => (!st || !st.seen ? 0 : st.box >= 4 ? 3 : st.box >= 2 ? 2 : 1);
+      const matches = (r, q, groups) => {
+        const hay = `${r.id} ${r.name || ''} ${r.ask} ${r.eq || ''} ${(r.steps || []).join(' ')} ${(r.aka || []).join(' ')} ${r.hook || ''}`.toLowerCase();
+        return q.toLowerCase().split(/\s+/).filter(Boolean).every((w) => hay.includes(w));
+      };
+
+      return { INTERVALS_MS, fmtFormula, fmtEq, fmtReactants, label, routesOf, norm, formulaKey, parseIsotope, chooseKind, buildCard, gradeCard, applyResult, isKnown, eligible, pickQueue, summary, dotLevel, matches };
+    })();
+
+    /* =====================================================================
        NAMESPACE 7: UI — Holistic 1-Question-1-Answer Renderer & Views
        ===================================================================== */
     const UI = (() => {
@@ -8264,6 +8474,9 @@
         content: { bank: null, skillMap: null },
         plan: { hoursPerDay: 6, split: 50, ratings: {} },
         ui: { sheet: null, readinessTab: 'plan', settingsTab: 'module', bankLimit: 60 },
+        reactions: null,          // CM2021 reaction list (content/cm2021/reactions.json)
+        rxStats: {},              // per-reaction spaced boxes (settings row 'reactionStats')
+        rx: { tab: 'train', mapView: 'chunks', q: '', filters: { finals: false, named: false, check: false, weak: false }, cover: false, revealed: new Set(), collapsed: new Set(), session: null, opts: { group: 'ALL', examOnly: false, namedOnly: false, n: 12 } },
         methods: {},
         reviewMap: {},
         attemptLogs: [],
@@ -8532,6 +8745,7 @@
         const db = await DB.init();
         await db.settings.put({ key: 'activeModule', code });
         appState.activeModule = code;
+        if (code !== 'CM2021' && appState.route === 'reactions') appState.route = 'study';
         appState.current = null;
         appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null };
         stopMockTimer();
@@ -11034,6 +11248,272 @@
         renderMath(root);
       }
 
+      /* =================== Reactions screen: Train and Map (CM2021, Kinjo half) =================== */
+      const rxList = () => appState.reactions?.reactions || [];
+      const rxGroups = () => Object.fromEntries((appState.reactions?.groups || []).map((g) => [g.id, g]));
+      const rxById = () => Object.fromEntries(rxList().map((r) => [r.id, r]));
+      const RX_DOT = ['bg-slate-300', 'bg-amber-400', 'bg-sky-500', 'bg-emerald-500'];
+      const RX_DOT_TEXT = ['not tried yet', 'learning', 'getting there', 'known'];
+      async function rxSave() {
+        try { const db = await DB.init(); await db.settings.put({ key: 'reactionStats', stats: appState.rxStats, updatedAt: Date.now() }); }
+        catch (err) { console.warn('[Reactions] progress not saved:', err.message); }
+      }
+
+      function rxBadges(r) {
+        const b = [];
+        if (r.fin && r.fin.length) b.push(`<span class="px-1.5 py-0.5 rounded bg-blue-50 border border-blue-200 text-blue-800 text-[10px] font-semibold" data-rx-badge="finals">Asked in finals ${esc(r.fin.join(', '))}</span>`);
+        if (r.name) b.push(`<span class="px-1.5 py-0.5 rounded bg-slate-900 text-white text-[10px] font-semibold">${esc(r.name)}</span>`);
+        if (r.flag === 'unchecked') b.push(`<span class="px-1.5 py-0.5 rounded bg-amber-50 border border-amber-300 text-amber-900 text-[10px] font-medium" title="The notes say this one is in no uploaded slide deck">not in your slides</span>`);
+        return b.join(' ');
+      }
+      function rxEqBlock(r, cover, revealed) {
+        if (r.kind === 'nuc') {
+          return `<div class="text-[13px] text-slate-700">${esc(r.ask)}</div>${revealed ? `<div class="mt-1 text-[15px] font-medium"><sup>${r.answer.A}</sup>${esc(r.answer.sym)} (Z = ${r.answer.Z}) <span class="text-xs text-slate-500 font-normal ml-1">${esc(r.hook)}</span></div>` : '<div class="text-slate-400 text-sm">tap to reveal the answer</div>'}`;
+        }
+        return (r.steps || [r.eq]).map((e, i) => `<div class="text-[15px] leading-relaxed">${r.steps ? `<span class="text-slate-400 text-xs mr-1.5">${i + 1}</span>` : ''}${revealed ? Reactions.fmtEq(e) : Reactions.fmtReactants(e)}</div>`).join('');
+      }
+      function rxRowHtml(r, cover) {
+        const lvl = Reactions.dotLevel(appState.rxStats[r.id]);
+        const revealed = !cover || appState.rx.revealed.has(r.id);
+        return `<li class="flex gap-2.5 py-2.5 border-t border-slate-100 first:border-t-0 ${cover ? 'cursor-pointer' : ''}" data-rx-row="${esc(r.id)}">
+          <span class="mt-1.5 w-2.5 h-2.5 rounded-full shrink-0 ${RX_DOT[lvl]}" title="${RX_DOT_TEXT[lvl]}"></span>
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-1.5 mb-0.5"><span class="text-[11px] text-slate-500">${esc(Reactions.label(r))}</span>${rxBadges(r)}</div>
+            ${rxEqBlock(r, cover, revealed)}
+            ${revealed && r.kind !== 'nuc' ? `<div class="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-0.5">${r.cond ? `<span class="text-[11px] font-medium text-amber-800 bg-amber-50 border border-amber-200 rounded px-1.5 py-0.5">${esc(r.cond)}</span>` : ''}<span class="text-xs text-slate-600 italic">${esc(r.hook)}</span></div>` : ''}
+          </div></li>`;
+      }
+
+      function rxMapHtml() {
+        const rx = appState.rx, groups = rxGroups();
+        const f = rx.filters;
+        const keep = (r) => (!f.finals || (r.fin && r.fin.length))
+          && (!f.named || r.aka)
+          && (!f.check || r.flag === 'unchecked')
+          && (!f.weak || Reactions.dotLevel(appState.rxStats[r.id]) < 2)
+          && (!rx.q.trim() || Reactions.matches(r, rx.q, groups));
+        const chip = (key, text) => `<button type="button" data-rx-filter="${key}" aria-pressed="${Boolean(f[key])}" class="px-2.5 py-1 text-[11px] font-medium rounded-full border ${f[key] ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-300 text-slate-700'}">${text}</button>`;
+        let body = '';
+        if (rx.mapView === 'chains') {
+          const byId = rxById();
+          body = (appState.reactions.chains || []).map((c) => `
+            <section class="bg-white border border-slate-200 rounded-xl p-3" data-rx-chain="${esc(c.id)}">
+              <h2 class="font-display text-sm font-semibold text-slate-900 mb-1.5">${esc(c.title)}</h2>
+              <ol class="space-y-1">${c.rows.map((row) => `<li class="flex flex-wrap items-center gap-1.5 text-[14px]"><span class="font-medium">${esc(row.from)}</span><span class="text-slate-400 text-xs">${row.label ? `—${esc(row.label)}→` : '→'}</span><span class="font-medium">${esc(row.to)}</span><span class="w-2 h-2 rounded-full ${RX_DOT[Reactions.dotLevel(appState.rxStats[row.rid])]}" title="${RX_DOT_TEXT[Reactions.dotLevel(appState.rxStats[row.rid])]}"></span></li>`).join('')}</ol>
+              <p class="mt-1.5 text-[11px] text-slate-500">Drill these: ${[...new Set(c.rows.map((x) => x.rid))].map((id) => `<button type="button" class="underline decoration-dotted" data-rx-drill-one="${esc(id)}">${esc(Reactions.label(byId[id]).slice(0, 32))}</button>`).join(' · ')}</p>
+            </section>`).join('');
+        } else {
+          let shown = 0;
+          body = (appState.reactions.groups || []).map((g) => {
+            const rows = rxList().filter((r) => r.g === g.id && keep(r));
+            shown += rows.length;
+            if (!rows.length) return '';
+            const known = rows.filter((r) => Reactions.isKnown(appState.rxStats[r.id])).length;
+            return `<details class="bg-white border border-slate-200 rounded-xl" ${rx.collapsed.has(g.id) ? '' : 'open'} data-rx-group="${esc(g.id)}">
+              <summary class="px-3 py-2.5 cursor-pointer list-none flex items-start justify-between gap-2">
+                <div class="min-w-0"><h2 class="font-display text-[15px] font-semibold text-slate-900">${esc(g.title)}</h2>
+                <p class="text-xs text-slate-700 mt-0.5">${esc(g.rule)}</p>
+                <p class="text-[11px] text-blue-800 font-medium mt-1">Remember: ${esc(g.hook)}</p></div>
+                <span class="shrink-0 text-[11px] font-mono text-slate-500 whitespace-nowrap">${known}/${rows.length} <span class="rx-chev inline-block text-slate-400">▾</span></span>
+              </summary>
+              <ul class="px-3 pb-2">${rows.map((r) => rxRowHtml(r, rx.cover)).join('')}</ul>
+              <div class="px-3 pb-2.5"><button type="button" data-rx-drill="${esc(g.id)}" class="px-3 py-1.5 text-xs font-medium border border-slate-300 rounded-lg bg-white hover:bg-slate-50">Drill this chunk</button></div>
+            </details>`;
+          }).join('');
+          if (!shown) body = '<p class="py-10 text-center text-sm text-slate-500">No reactions match those filters.</p>';
+        }
+        return `<div class="shrink-0 space-y-2">
+            <div class="flex items-center gap-2">
+              <input id="rxSearch" type="search" value="${esc(rx.q)}" placeholder="Search a reaction, name or species" class="flex-1 min-w-0 text-sm px-3 py-1.5 border border-slate-300 rounded-lg" />
+              <div class="seg w-44 shrink-0"><button type="button" data-rx-mapview="chunks" aria-selected="${rx.mapView !== 'chains'}">Chunks</button><button type="button" data-rx-mapview="chains" aria-selected="${rx.mapView === 'chains'}">Chains</button></div>
+            </div>
+            <div class="flex flex-wrap items-center gap-1.5">${chip('finals', 'Asked in finals')}${chip('named', 'Named')}${chip('weak', 'Needs work')}${chip('check', 'Not in slides')}
+              <button type="button" id="rxCover" aria-pressed="${rx.cover}" class="ml-auto px-2.5 py-1 text-[11px] font-medium rounded-full border ${rx.cover ? 'bg-blue-700 border-blue-700 text-white' : 'bg-white border-blue-300 text-blue-800'}">${rx.cover ? 'Covered: tap a row to check' : 'Cover answers'}</button></div>
+            <div class="flex items-center gap-3 text-[11px] text-slate-500">${RX_DOT.map((c, i) => `<span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full ${c}"></span>${RX_DOT_TEXT[i]}</span>`).join('')}</div>
+          </div>
+          <div class="view-scroll space-y-2.5 pb-3" id="rxMapBody">${body}</div>`;
+      }
+
+      function rxTrainHtml() {
+        const rx = appState.rx, s = rx.session, now = Date.now();
+        if (s && !s.done) return rxCardHtml();
+        if (s && s.done) {
+          const right = s.results.filter((x) => x.grade >= 1).length, byId = rxById();
+          const missed = [...new Set(s.results.filter((x) => x.grade < 1).map((x) => x.rid))];
+          return `<div class="view-scroll space-y-3" data-rx-summary>
+            <div class="bg-white border border-slate-200 rounded-xl p-4">
+              <h2 class="font-display text-lg font-semibold text-slate-900">Session done: ${right} of ${s.results.length} right first time</h2>
+              <p class="text-sm text-slate-600 mt-1">${missed.length ? 'These come back first next time.' : 'Nothing missed. They come back as the boxes space them out.'}</p>
+              ${missed.length ? `<ul class="mt-2 space-y-2">${missed.map((id) => `<li class="text-sm"><span class="text-[11px] text-slate-500">${esc(Reactions.label(byId[id]))}</span>${(byId[id].steps || [byId[id].eq]).filter(Boolean).map((e) => `<div class="text-[15px]">${Reactions.fmtEq(e)}</div>`).join('') || `<div class="text-[15px]">${esc(byId[id].hook)}</div>`}</li>`).join('')}</ul>` : ''}
+              <div class="mt-3 flex flex-wrap gap-2"><button type="button" id="rxAgain" class="px-4 py-2 text-sm font-medium bg-slate-900 text-white rounded-lg">Another session</button>
+              ${missed.length ? '<button type="button" id="rxRedo" class="px-4 py-2 text-sm font-medium border border-slate-300 rounded-lg bg-white">Redo the misses</button>' : ''}
+              <button type="button" id="rxBack" class="px-4 py-2 text-sm font-medium border border-slate-300 rounded-lg bg-white">Back</button></div>
+            </div></div>`;
+        }
+        const sum = Reactions.summary(rxList(), appState.rxStats, now);
+        const tile = (n, t, c) => `<div class="min-w-0 bg-white border border-slate-200 rounded-xl px-2.5 py-2"><div class="font-mono text-xl font-bold ${c}">${n}</div><div class="text-[11px] text-slate-500">${t}</div></div>`;
+        const groups = appState.reactions.groups;
+        return `<div class="view-scroll space-y-3" data-rx-start>
+          <div class="grid grid-cols-4 gap-2">${tile(sum.known, 'known', 'text-emerald-700')}${tile(sum.learning, 'learning', 'text-sky-700')}${tile(sum.unseen, 'not tried', 'text-slate-600')}${tile(sum.due, 'due now', 'text-amber-700')}</div>
+          <div class="bg-white border border-slate-200 rounded-xl p-3 space-y-2.5">
+            <p class="text-sm text-slate-700">12 cards a session: write the equation, fill the missing species, name the process, recall the conditions. Due cards first, then what the finals have asked, then the rest. Marking is the balanced equation only; conditions are a separate self-check.</p>
+            <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+              <label class="inline-flex items-center gap-1.5 text-xs text-slate-800"><input id="rxOptExam" type="checkbox" class="accent-blue-700" ${rx.opts.examOnly ? 'checked' : ''}/> Asked in finals only</label>
+              <label class="inline-flex items-center gap-1.5 text-xs text-slate-800"><input id="rxOptNamed" type="checkbox" class="accent-blue-700" ${rx.opts.namedOnly ? 'checked' : ''}/> Named processes only</label>
+              <select id="rxOptGroup" class="text-xs px-2 py-1 border border-slate-300 rounded-lg max-w-full"><option value="ALL">All chunks</option>${groups.map((g) => `<option value="${esc(g.id)}" ${rx.opts.group === g.id ? 'selected' : ''}>${esc(g.title)}</option>`).join('')}</select>
+            </div>
+            <button type="button" id="rxStart" class="px-5 py-2.5 text-sm font-semibold bg-slate-900 text-white rounded-lg hover:bg-slate-800">Start a session</button>
+          </div>
+          <div class="bg-white border border-slate-200 rounded-xl p-3">
+            <h2 class="font-display text-sm font-semibold text-slate-900 mb-2">By chunk</h2>
+            <ul class="space-y-1.5">${groups.map((g) => { const x = sum.groups[g.id] || { n: 0, known: 0, unseen: 0 }; const pct = x.n ? Math.round(100 * x.known / x.n) : 0; return `<li class="flex items-center gap-2"><button type="button" data-rx-drill="${esc(g.id)}" class="flex-1 min-w-0 text-left"><div class="flex justify-between gap-2 text-xs"><span class="truncate text-slate-800">${esc(g.title)}</span><span class="font-mono text-slate-500 shrink-0">${x.known}/${x.n}</span></div><div class="h-1.5 mt-0.5 rounded bg-slate-100 overflow-hidden"><div class="h-full bg-emerald-500" style="width:${pct}%"></div></div></button></li>`; }).join('')}</ul>
+          </div></div>`;
+      }
+
+      function rxCardHtml() {
+        const s = appState.rx.session, c = s.card, r = rxById()[c.rid], res = s.result;
+        const pos = `Card ${Math.min(s.i + 1, s.queue.length)} of ${s.queue.length}`;
+        const grp = rxGroups()[r.g]?.title || '';
+        const lines = r.kind === 'nuc' ? '' : (r.steps || [r.eq]).map((e) => `<div class="text-[16px] leading-relaxed">${Reactions.fmtEq(e)}</div>`).join('');
+        const alt = (r.alt || []).length && r.kind !== 'nuc' ? `<p class="text-[11px] text-slate-500 mt-1">Also accepted: ${r.alt.map((a) => (Array.isArray(a) ? a : [a]).map((e) => Reactions.fmtEq(e)).join('; ')).join(' | ')}</p>` : '';
+        let prompt = '', input = '';
+        const textInput = (multi, ph) => multi
+          ? `<textarea id="rxAnswer" rows="${Math.min(4, Math.max(2, (r.steps || []).length))}" placeholder="${ph}" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" class="w-full font-mono text-sm px-3 py-2 border border-slate-300 rounded-lg" ${res ? 'readonly' : ''}>${res ? esc(res.typed) : ''}</textarea>`
+          : `<input id="rxAnswer" type="text" placeholder="${ph}" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false" class="w-full font-mono text-sm px-3 py-2 border border-slate-300 rounded-lg" ${res ? `readonly value="${esc(res.typed)}"` : ''} />`;
+        const chips = '<div class="flex flex-wrap gap-1.5 mt-1.5" aria-label="Insert">' + ['->', '^-', '^+', '^2-', '^2+', 'e-', '[', ']'].map((t) => `<button type="button" data-rx-ins="${esc(t)}" class="px-2 py-0.5 text-xs font-mono border border-slate-300 rounded bg-white">${esc(t)}</button>`).join('') + '</div>';
+        if (c.kind === 'write') { prompt = esc(r.ask); input = textInput(Boolean(r.steps) || /one per line/i.test(r.ask), r.steps ? 'one equation per line, e.g. N2 + 3H2 -> 2NH3' : 'e.g. N2 + 3H2 -> 2NH3') + (res ? '' : chips); }
+        else if (c.kind === 'gap') { prompt = `Fill the missing species in this reaction.<div class="mt-2 text-[17px] leading-relaxed">${c.eqHtml}</div><p class="text-[11px] text-slate-500 mt-1">${esc(Reactions.label(r))}</p>`; input = textInput(false, 'formula, e.g. NH3') + (res ? '' : chips); }
+        else if (c.kind === 'name') { prompt = `What is this reaction or process called?<div class="mt-2">${lines}</div>`; input = textInput(false, 'name'); }
+        else if (c.kind === 'cond') { prompt = `Recall the conditions (catalyst, temperature, medium) for:<div class="mt-2">${lines}</div>`; }
+        else if (c.kind === 'nuc') { prompt = esc(r.ask); input = textInput(false, 'e.g. 25Mg'); }
+        let result = '';
+        if (res) {
+          const tone = res.grade >= 1 ? 'border-emerald-300 bg-emerald-50 text-emerald-900' : res.grade > 0 ? 'border-amber-300 bg-amber-50 text-amber-900' : 'border-rose-300 bg-rose-50 text-rose-900';
+          const head = res.grade >= 1 ? 'Correct' : res.grade > 0 ? 'Close: right species, not balanced' : 'Not quite';
+          const model = c.kind === 'nuc' ? `<div class="text-[16px] font-medium">${r.answer.A}${esc(r.answer.sym)} (Z = ${r.answer.Z})</div>` : lines;
+          result = `<div class="mt-3 space-y-2" data-rx-result>
+            <div class="border rounded-xl p-3 ${tone}"><div class="font-display font-semibold text-sm" data-rx-verdict>${head}</div>${res.feedback ? `<p class="text-xs mt-0.5">${esc(res.feedback)}</p>` : ''}</div>
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-3"><div class="text-[11px] uppercase tracking-wider text-slate-500 mb-1">Model answer</div>${model}${alt}
+              ${r.cond ? `<div class="mt-1.5"><span class="text-[11px] font-medium text-amber-800 bg-amber-50 border border-amber-200 rounded px-1.5 py-0.5">${esc(r.cond)}</span></div>` : ''}
+              <p class="text-xs text-slate-700 italic mt-1.5">${esc(r.hook)}</p></div>
+          </div>`;
+        }
+        const actions = res
+          ? `<div class="flex flex-wrap items-center gap-2 mt-3">${res.grade < 1 && !res.gaveUp && c.kind !== 'cond' ? '<button type="button" id="rxOverride" class="px-3 py-2 text-xs font-medium border border-slate-300 rounded-lg bg-white">I was right (another valid answer)</button>' : ''}<button type="button" id="rxNext" class="ml-auto px-5 py-2.5 text-sm font-semibold bg-slate-900 text-white rounded-lg">${s.i + 1 >= s.queue.length ? 'Finish' : 'Next →'}</button></div>`
+          : c.kind === 'cond'
+            ? `<div class="flex flex-wrap items-center gap-2 mt-3">${s.revealed ? '<button type="button" data-rx-rate="1" class="px-3 py-2 text-xs font-medium bg-emerald-600 text-white rounded-lg">I knew it</button><button type="button" data-rx-rate="0.5" class="px-3 py-2 text-xs font-medium bg-amber-500 text-white rounded-lg">Partly</button><button type="button" data-rx-rate="0" class="px-3 py-2 text-xs font-medium bg-rose-600 text-white rounded-lg">Not yet</button>' : '<button type="button" id="rxReveal" class="px-4 py-2 text-sm font-semibold bg-slate-900 text-white rounded-lg">Show the conditions</button>'}</div>${s.revealed ? `<div class="mt-2 bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm" data-rx-cond>${esc(r.cond)}<p class="text-xs italic text-slate-700 mt-1">${esc(r.hook)}</p></div>` : ''}`
+            : `<div class="flex flex-wrap items-center gap-2 mt-3"><button type="button" id="rxSkip" class="px-3 py-2 text-xs font-medium border border-slate-300 rounded-lg bg-white">Show answer (counts as a miss)</button><button type="button" id="rxCheck" class="ml-auto px-5 py-2.5 text-sm font-semibold bg-slate-900 text-white rounded-lg">Check</button></div>`;
+        return `<div class="view-scroll" data-rx-card="${esc(c.kind)}">
+          <div class="flex items-center justify-between gap-2 text-xs text-slate-500 mb-2"><span class="font-mono">${pos} · ${esc(grp)}</span><button type="button" id="rxStop" class="underline decoration-dotted">End session</button></div>
+          <div class="bg-white border border-slate-200 rounded-xl p-4">
+            <div class="flex flex-wrap items-center gap-1.5 mb-1.5"><span class="text-[10px] uppercase tracking-wider font-semibold text-slate-500">${({ write: 'Write the equation', gap: 'Missing species', name: 'Name it', cond: 'Conditions', nuc: 'Nuclear equation' })[c.kind]}</span>${rxBadges(r)}</div>
+            <div class="text-[15px] text-slate-900 leading-relaxed">${prompt}</div>
+            ${input ? `<div class="mt-3">${input}</div>` : ''}
+            ${actions}${result}
+          </div></div>`;
+      }
+
+      function renderReactionsView(root) {
+        const rx = appState.rx;
+        if (!appState.reactions) { root.innerHTML = '<div class="py-16 text-center text-sm text-slate-500">The reaction list did not load.</div>'; return; }
+        const total = rxList().length;
+        root.innerHTML = `<div class="view" id="rxView">
+          <div class="shrink-0 flex items-center justify-between gap-2">
+            <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900">Reactions <span class="font-mono text-xs font-normal text-slate-500">${total} to know</span></h1>
+            <div class="seg w-44 shrink-0" role="tablist"><button type="button" role="tab" data-rx-tab="train" aria-selected="${rx.tab === 'train'}">Train</button><button type="button" role="tab" data-rx-tab="map" aria-selected="${rx.tab === 'map'}">Map</button></div>
+          </div>
+          ${rx.tab === 'map' ? rxMapHtml() : rxTrainHtml()}
+        </div>`;
+        rxBind(root);
+      }
+
+      /* ---- session logic ---- */
+      function rxStartSession(opts) {
+        const queue = Reactions.pickQueue(rxList(), appState.rxStats, Date.now(), opts);
+        if (!queue.length) { showToast('No reactions match those options.', true); return; }
+        appState.rx.tab = 'train';
+        appState.rx.session = { queue, i: 0, results: [], retried: new Set(), card: null, result: null, revealed: false, opts };
+        rxNextCard();
+      }
+      function rxNextCard() {
+        const s = appState.rx.session;
+        if (!s) return;
+        if (s.i >= s.queue.length) { s.done = true; s.card = null; render(); return; }
+        const r = rxById()[s.queue[s.i]];
+        const kind = Reactions.chooseKind(r, appState.rxStats[r.id], Math.random());
+        s.card = Reactions.buildCard(r, kind, Math.random());
+        s.result = null; s.revealed = false;
+        render();
+        setTimeout(() => $('#rxAnswer')?.focus(), 30);
+      }
+      async function rxRecord(grade, extra = {}) {
+        const s = appState.rx.session, c = s.card;
+        s.result = { grade, feedback: '', prev: appState.rxStats[c.rid], typed: $('#rxAnswer')?.value ?? '', ...extra };
+        s.results.push({ rid: c.rid, kind: c.kind, grade });
+        appState.rxStats = Reactions.applyResult(appState.rxStats, c.rid, grade, Date.now());
+        await rxSave();
+      }
+      async function rxCheck() {
+        const s = appState.rx.session, c = s.card; if (!s || s.result) return;
+        const text = $('#rxAnswer')?.value ?? '';
+        if (!text.trim()) { showToast('Type your answer first, or use Show answer.'); return; }
+        const res = Reactions.gradeCard(c, rxById()[c.rid], text, { gradeEquationMatch: Evaluators.gradeEquationMatch, parseEquationLine: Evaluators.parseEquationLine });
+        await rxRecord(res.grade, { feedback: res.feedback });
+        render(); $('#rxNext')?.focus();
+      }
+      function rxAdvance() {
+        const s = appState.rx.session; if (!s || !s.result) return;
+        if (s.result.grade < 1 && !s.retried.has(s.card.rid)) { s.retried.add(s.card.rid); s.queue.splice(Math.min(s.queue.length, s.i + 5), 0, s.card.rid); }
+        s.i += 1; rxNextCard();
+      }
+
+      function rxBind(root) {
+        const rx = appState.rx;
+        $$('[data-rx-tab]', root).forEach((b) => b.addEventListener('click', () => { rx.tab = b.dataset.rxTab; render(); }));
+        $$('[data-rx-mapview]', root).forEach((b) => b.addEventListener('click', () => { rx.mapView = b.dataset.rxMapview; render(); }));
+        $$('[data-rx-filter]', root).forEach((b) => b.addEventListener('click', () => { rx.filters[b.dataset.rxFilter] = !rx.filters[b.dataset.rxFilter]; render(); }));
+        $('#rxSearch', root)?.addEventListener('input', (e) => { rx.q = e.target.value; const pos = e.target.selectionStart; render(); const el = $('#rxSearch'); if (el) { el.focus(); el.setSelectionRange(pos, pos); } });
+        $('#rxCover', root)?.addEventListener('click', () => { rx.cover = !rx.cover; rx.revealed.clear(); render(); });
+        $$('[data-rx-row]', root).forEach((li) => li.addEventListener('click', () => { if (!rx.cover) return; const id = li.dataset.rxRow; if (rx.revealed.has(id)) rx.revealed.delete(id); else rx.revealed.add(id); render(); }));
+        $$('details[data-rx-group]', root).forEach((d) => d.addEventListener('toggle', () => { if (d.open) rx.collapsed.delete(d.dataset.rxGroup); else rx.collapsed.add(d.dataset.rxGroup); }));
+        $$('[data-rx-drill]', root).forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); rxStartSession({ group: b.dataset.rxDrill, n: 12, examOnly: false, namedOnly: false }); }));
+        $$('[data-rx-drill-one]', root).forEach((b) => b.addEventListener('click', () => { const id = b.dataset.rxDrillOne; appState.rx.tab = 'train'; appState.rx.session = { queue: [id], i: 0, results: [], retried: new Set(), card: null, result: null, revealed: false, opts: {} }; rxNextCard(); }));
+        $('#rxStart', root)?.addEventListener('click', () => {
+          rx.opts = { group: $('#rxOptGroup', root).value, examOnly: $('#rxOptExam', root).checked, namedOnly: $('#rxOptNamed', root).checked, n: 12 };
+          rxStartSession(rx.opts);
+        });
+        $('#rxAgain', root)?.addEventListener('click', () => rxStartSession({ ...rx.opts, n: 12 }));
+        $('#rxRedo', root)?.addEventListener('click', () => { const s = rx.session; const ids = [...new Set(s.results.filter((x) => x.grade < 1).map((x) => x.rid))]; rx.session = { queue: ids, i: 0, results: [], retried: new Set(), card: null, result: null, revealed: false, opts: s.opts }; rxNextCard(); });
+        $('#rxBack', root)?.addEventListener('click', () => { rx.session = null; render(); });
+        $('#rxStop', root)?.addEventListener('click', () => { const s = rx.session; if (s && s.results.length) { s.done = true; s.card = null; } else rx.session = null; render(); });
+        $('#rxCheck', root)?.addEventListener('click', rxCheck);
+        $('#rxSkip', root)?.addEventListener('click', async () => { if (rx.session.result) return; await rxRecord(0, { feedback: 'Shown, not answered.', gaveUp: true }); render(); $('#rxNext')?.focus(); });
+        $('#rxReveal', root)?.addEventListener('click', () => { rx.session.revealed = true; render(); });
+        $$('[data-rx-rate]', root).forEach((b) => b.addEventListener('click', async () => { await rxRecord(Number(b.dataset.rxRate), { feedback: '' }); rx.session.revealed = true; render(); $('#rxNext')?.focus(); }));
+        $('#rxNext', root)?.addEventListener('click', rxAdvance);
+        $('#rxOverride', root)?.addEventListener('click', async () => {
+          const s = rx.session, c = s.card;
+          // take back the miss and record it as right
+          const prev = s.result.prev, next = { ...appState.rxStats };
+          if (prev) next[c.rid] = prev; else delete next[c.rid];
+          appState.rxStats = next;
+          s.results.pop();
+          await rxRecord(1, { feedback: 'Counted as right: you gave another valid answer.' });
+          render(); $('#rxNext')?.focus();
+        });
+        $$('[data-rx-ins]', root).forEach((b) => b.addEventListener('click', () => {
+          const el = $('#rxAnswer'); if (!el || el.readOnly) return;
+          const t = b.dataset.rxIns, a = el.selectionStart ?? el.value.length, z = el.selectionEnd ?? a;
+          const pad = t === '->' ? ' -> ' : t;
+          el.value = el.value.slice(0, a) + pad + el.value.slice(z); el.focus();
+          const p = a + pad.length; el.setSelectionRange(p, p);
+        }));
+        const ans = $('#rxAnswer', root);
+        ans?.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' && (ans.tagName === 'INPUT' || e.ctrlKey || e.metaKey)) { e.preventDefault(); rxCheck(); }
+        });
+      }
+
       function renderBankView(root) {
         const f = appState.bankFilters;
         const q = f.q.trim().toLowerCase();
@@ -11627,12 +12107,16 @@
       }
 
       function updateNavChrome() {
+        const showRx = appState.activeModule === 'CM2021' && Boolean(appState.reactions);
+        document.querySelector('.tabbar')?.style.setProperty('--tabs', showRx ? 6 : 5);
+        if (!showRx && appState.route === 'reactions') appState.route = 'study';
         $$('.nav-link').forEach((btn) => {
           const active = btn.dataset.nav === appState.route;
           const base = btn.dataset.variant === 'tab'
             ? `flex flex-col items-center justify-center gap-0.5 py-1.5 min-h-[52px] text-[11px] font-medium ${active ? 'text-blue-700 font-semibold' : 'text-slate-500'}`
             : `flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium ${active ? 'bg-slate-100 text-slate-900' : 'text-slate-600 hover:bg-slate-50'}`;
           btn.className = `nav-link ${base}`;
+          if (btn.dataset.nav === 'reactions' && !(appState.activeModule === 'CM2021' && appState.reactions)) btn.classList.add('hidden');
           if (active) btn.setAttribute('aria-current', 'page'); else btn.removeAttribute('aria-current');
         });
       }
@@ -11647,6 +12131,7 @@
         else if (appState.route === 'readiness') renderReadinessView(root);
         else if (appState.route === 'bank') renderBankView(root);
         else if (appState.route === 'settings') renderSettingsView(root);
+        else if (appState.route === 'reactions') renderReactionsView(root);
         root.querySelectorAll('svg[data-ruler]').forEach((svg) => Figures.attachRuler(svg));
       }
 
@@ -11747,6 +12232,8 @@
           const loaded = await Content.loadAllSkillMaps();
           appState.skillMaps = loaded.maps;
           appState.methods = await Content.loadAllMethods();
+          try { appState.reactions = await Content.fetchContent('content/cm2021/reactions.json'); } catch (err) { appState.reactions = null; }
+          try { appState.rxStats = (await db.settings.get('reactionStats'))?.stats || {}; } catch (err) { appState.rxStats = {}; }
           appState.content.skillMap = { map: loaded.maps[appState.activeModule] || null, error: loaded.error };
           await refreshStore();
           appState.content.skillMap.map = appState.skillMap;
@@ -11820,6 +12307,7 @@
       LF,
       Evaluators,
       Widgets,
+      Reactions,
       UI,
       Figures,
       migrateGoldenBankToNodes,

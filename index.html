@@ -981,6 +981,12 @@
           return true;
         });
 
+        // exam mode: the finals have no pick-one questions, so leave out cards that only offer options (unless nothing else is left)
+        if (filters.typedOnly && !filters.forceNodeId) {
+          const typed = pool.filter((n) => (n.variants || []).some((v) => v.inputSlot?.type !== 'choice'));
+          if (typed.length) pool = typed;
+        }
+
         if (!pool.length) {
           const filtered = (filters.moduleCode && filters.moduleCode !== 'ALL') || (filters.tier && filters.tier !== 'ALL') || filters.skillTag
             || filters.chunkNodeIds || (filters.masteryAdj && filters.masteryAdj.exclude.size > 0);
@@ -1027,8 +1033,9 @@
         };
       }
 
-      function selectVariant(node, reviewState) {
-        const variants = node?.variants || [];
+      function selectVariant(node, reviewState, opts = {}) {
+        let variants = node?.variants || [];
+        if (opts.typedOnly) { const typed = variants.filter((v) => v.inputSlot?.type !== 'choice'); if (typed.length) variants = typed; }
         if (variants.length <= 1) return variants[0] || null;
         const stats = reviewState?.variantStats || {};
         // Anti-rote: prefer least-recently-seen, fewest attempts, and lowest meanGrade
@@ -8261,6 +8268,7 @@
         reviewMap: {},
         attemptLogs: [],
         settings: Scheduler.DEFAULT_SETTINGS,
+        examMode: false, // study screen: no hints, no pick-one cards, pace shown (settings row 'examMode')
         filters: { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null },
         bankFilters: { q: '', moduleCode: 'ALL', tier: 'ALL', includeGolden: true },
         current: null, // { node, inst, userInput, setTokens, paperScratchpad, phase: 'answering'|'rubric'|'graded', rubricChecks, evalResult, startedAtMs }
@@ -8479,6 +8487,7 @@
           const row = await db.settings.get('activeModule');
           if (row?.code && modules.some((m) => m.moduleCode === row.code)) appState.activeModule = row.code;
         } catch (err) { /* keep the current module */ }
+        try { appState.examMode = Boolean((await db.settings.get('examMode'))?.on); } catch (err) { appState.examMode = false; }
         if (!modules.some((m) => m.moduleCode === appState.activeModule) && modules.length) appState.activeModule = modules[0].moduleCode;
         appState.allNodes = nodes.filter((n) => !n.metadata?.composerOnly);
         appState.allComposerNodes = nodes.filter((n) => n.metadata?.composerOnly);
@@ -8740,6 +8749,7 @@
           const due = appState.session.retry.find((r) => r.after <= appState.session.cards && r.nodeId !== prevNode?.id);
           if (due) { appState.session.retry = appState.session.retry.filter((r) => r !== due); filters.forceNodeId = due.nodeId; }
         }
+        if (appState.examMode) filters.typedOnly = true;
         if (appState.skillMap) {
           // a topic or weak-spot drill is practice you asked for, so retirement does not thin it; removals still hold
           filters.masteryAdj = Mastery.adjustments(masteryNow(), appState.skillMap, appState.masteryPrefs.removed,
@@ -8765,7 +8775,7 @@
           return;
         }
         const rs = appState.reviewMap[pick.node.id];
-        const variant = Scheduler.selectVariant(pick.node, rs);
+        const variant = Scheduler.selectVariant(pick.node, rs, { typedOnly: Boolean(appState.examMode) });
         const inst = Scheduler.instantiateVariant(variant);
         const slotType = variant.inputSlot.type;
         let initialInput = '';
@@ -8844,6 +8854,7 @@
         const db = await DB.init();
         const nowMs = Date.now();
         const durationMs = Math.max(500, nowMs - cur.startedAtMs);
+        cur.durationMs = durationMs;
         const prevRs = appState.reviewMap[cur.node.id];
         const mod = moduleMap()[cur.node.moduleCode] || null;
         const nextRs = Scheduler.updateReviewState(
@@ -9316,6 +9327,7 @@
                   ${nextDueRs ? `<div class="text-xs">Due for review ${Weakness.humanDue(nextDueRs.dueMs)}</div>` : ''}
                 </div>
                 <p class="text-sm mt-1">${esc(evalResult.feedback)}</p>
+                ${appState.examMode && cur.durationMs ? (() => { const took = cur.durationMs / 1000, budget = Math.max(1, Number(variant.marks) || 1) * 72, f = (x) => `${Math.floor(x / 60)}:${String(Math.round(x % 60)).padStart(2, '0')}`; return `<p class="text-xs mt-1.5 font-mono" data-pace>Took ${f(took)} · exam pace for ${variant.marks} mark${variant.marks === 1 ? '' : 's'} is ${f(budget)} (2 h for 100 marks)${took > budget * 1.25 ? ' · over pace' : ''}</p>`; })() : ''}
                 ${cur.confidence === 'sure' && !evalResult.passed ? `<p class="text-sm mt-1.5 font-medium" data-conf-note>You were sure, and it was wrong. That is the kind of miss most worth fixing: it will come back in a few cards.</p>` : ''}
                 ${cur.confidence === 'guess' && evalResult.passed ? `<p class="text-sm mt-1.5" data-conf-note>Right, but you called it a guess: do not count this one as learned yet.</p>` : ''}
                 ${cur.levelMove ? `<div class="mt-2.5 flex items-center gap-2 text-xs" data-level-move><span class="shrink-0 font-medium">${escSub(cur.levelMove.name)}</span><div class="flex-1 h-1.5 rounded-full bg-black/10 overflow-hidden"><div data-level-fill data-to="${Math.round(cur.levelMove.after * 100)}" class="h-full rounded-full bg-current opacity-70" style="width:${Math.round(cur.levelMove.before * 100)}%;transition:width 700ms cubic-bezier(.2,.8,.2,1)"></div></div><span class="shrink-0 font-mono">${Math.round(cur.levelMove.before * 100)}% → ${Math.round(cur.levelMove.after * 100)}%</span></div>` : ''}
@@ -9426,6 +9438,7 @@
                 · <span class="${node.tier === 'synthesis' ? 'text-blue-700 font-semibold' : 'hidden sm:inline'}">${tierLabel}</span>
               </div>
               <div class="flex items-center gap-1.5 shrink-0">
+                <button type="button" id="btnExamMode" aria-pressed="${Boolean(appState.examMode)}" title="Exam mode: no hints, no pick-one cards, pace shown after each card" class="px-2.5 py-1.5 text-xs font-medium border rounded-lg ${appState.examMode ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-200 text-slate-700'}">Exam mode</button>
                 <button type="button" data-open-sheet="queue" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700">Queue</button>
                 <button type="button" data-open-sheet="filters" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700">Filters</button>
                 <button type="button" id="btnSkipNode" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700 whitespace-nowrap">Skip →</button>
@@ -9452,7 +9465,7 @@
 
                 ${auditNote}
 
-                ${inst.resolvedHint ? `
+                ${inst.resolvedHint && !(appState.examMode && phase === 'answering') ? `
                   <div class="mb-4">
                     <button type="button" id="btnToggleHint" class="text-xs font-medium text-blue-700 hover:underline">
                       ${cur.hintOpen ? 'Hide Hint' : 'Show Hint'}
@@ -9523,6 +9536,12 @@
           render();
         });
         $('#btnSkipNode', root)?.addEventListener('click', () => loadNextQuestion({ skipCurrent: true }));
+        $('#btnExamMode', root)?.addEventListener('click', async () => {
+          appState.examMode = !appState.examMode;
+          try { const db = await DB.init(); await db.settings.put({ key: 'examMode', on: appState.examMode }); } catch (err) { console.warn('[Exam mode] not saved:', err.message); }
+          showToast(appState.examMode ? 'Exam mode on: no hints, no pick-one cards from the next card.' : 'Exam mode off.');
+          render();
+        });
         $('#btnToggleHint', root)?.addEventListener('click', () => {
           cur.hintOpen = !cur.hintOpen;
           render();

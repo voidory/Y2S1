@@ -910,6 +910,47 @@
          Your latest grade per question counts; an untried question counts as your own rating of the topic (0 never seen, 1 shaky, 2 ok, 3 solid). */
       /* One pass line everywhere (verdict, Weak spots, Plan, readiness, cram): a card is passed at 85% or more. */
       const PASS_GRADE = 0.85;
+      /* Pure. "Done a harder one, skip the easier one." `pairs` come from content/<dir>/supersedes.json (hand-authored):
+         { easier: [ref], harder: [ref] }, a ref being a node id or node#variantId. An easier ref is retired once the LATEST attempt on any
+         harder ref (or any ref harder still: the relation is followed transitively) scored at least the pass line. Missing the harder one
+         again brings the easier one back. Returns { nodes: Set of node ids with every variant retired, variants: Map nodeId -> Set of retired
+         variantIds (partial), why: Map ref -> [the harder refs that passed] }. */
+      function supersession(pairs, nodes, logs) {
+        const out = { nodes: new Set(), variants: new Map(), why: new Map() };
+        if (!pairs || !pairs.length) return out;
+        const lastNode = new Map(), lastVar = new Map();
+        for (const l of [...(logs || [])].sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0))) {
+          const g = Number(l.normalizedGrade) || 0;
+          lastNode.set(l.nodeId, g);
+          if (l.variantId) lastVar.set(l.nodeId + '#' + l.variantId, g);
+        }
+        const passed = (ref) => (ref.includes('#') ? lastVar : lastNode).get(ref) >= PASS_GRADE;
+        const harderOf = new Map();
+        for (const pr of pairs) for (const e of pr.easier || []) for (const h of pr.harder || []) { if (!harderOf.has(e)) harderOf.set(e, new Set()); harderOf.get(e).add(h); }
+        const reach = (ref) => {                                   // every ref harder than `ref`, followed through the chain
+          const seen = new Set(), stack = [ref];
+          while (stack.length) for (const h of harderOf.get(stack.pop()) || []) if (!seen.has(h)) { seen.add(h); stack.push(h); }
+          return seen;
+        };
+        const nodeById = new Map((nodes || []).map((n) => [n.id, n]));
+        const retired = new Set();
+        for (const e of harderOf.keys()) {
+          const by = [...reach(e)].filter(passed);
+          if (by.length) { retired.add(e); out.why.set(e, by); }
+        }
+        for (const ref of retired) {
+          const [id, vid] = ref.split('#');
+          const node = nodeById.get(id);
+          if (!node) continue;
+          if (vid) { if (!out.variants.has(id)) out.variants.set(id, new Set()); out.variants.get(id).add(vid); } else out.nodes.add(id);
+        }
+        for (const [id, set] of out.variants) {                    // a node whose variants are all retired is retired
+          const node = nodeById.get(id);
+          if (node && (node.variants || []).length && node.variants.every((v) => set.has(v.variantId))) { out.nodes.add(id); out.variants.delete(id); }
+        }
+        return out;
+      }
+      const noRetired = { nodes: new Set(), variants: new Map(), why: new Map() };
       /* newest-first grades per node from the attempt logs */
       function gradeHistory(logs) {
         const by = {};
@@ -938,11 +979,11 @@
 
       /* Pure. The one honest meter, weighted by the marks each topic carries (a topic's marks are shared by its questions):
          seen = marks on questions tried at least once, secure = last two attempts both passed, blind = never tried. */
-      function coverage(nodes, map, logs) {
+      function coverage(nodes, map, logs, retired = noRetired) {
         const hist = gradeHistory(logs), { chunkOf, marks, names } = chunkTools(map);
         const rows = {};
         for (const n of nodes) {
-          if (n.metadata?.composerOnly) continue;
+          if (n.metadata?.composerOnly || retired.nodes.has(n.id)) continue;
           const c = chunkOf(n.id); if (!c) continue;
           const r = (rows[c] ||= { chunk: c, name: names[c]?.name || c, marks: marks[c] || 0, n: 0, seen: 0, secure: 0, failed: 0, unseenMin: 0, failedMin: 0 });
           const h = hist[n.id], min = Number(n.metadata?.estimatedMinutes) || 3;
@@ -965,10 +1006,10 @@
          Pass 2 (fix): topics with a failed question, biggest marks x (1 - level) first; failed questions first, a fresh variant each time;
                        a topic is done after two passes in a row (cram.streak / cram.done, kept by cramRecord).
          pass 'auto' covers first and then fixes. Returns { node, pass, chunk, left } or null when nothing is left. */
-      function cramNext(nodes, map, logs, cram = {}) {
+      function cramNext(nodes, map, logs, cram = {}, retired = noRetired) {
         const hist = gradeHistory(logs), { chunkOf, marks } = chunkTools(map);
         const want = cram.pass || 'auto', done = new Set(cram.done || []), streak = cram.streak || {};
-        const pool = nodes.filter((n) => !n.metadata?.composerOnly && chunkOf(n.id));
+        const pool = nodes.filter((n) => !n.metadata?.composerOnly && chunkOf(n.id) && !retired.nodes.has(n.id));
         const count = {};
         for (const n of pool) { const c = chunkOf(n.id); count[c] = (count[c] || 0) + 1; }
         const minOf = (n) => Math.max(1, Number(n.metadata?.estimatedMinutes) || 3);
@@ -1011,14 +1052,14 @@
       }
 
       const PRIOR = [0, 0.4, 0.7, 0.9];
-      function planChunks(nodes, map, logs, ratings = {}, moduleCode = '') {
+      function planChunks(nodes, map, logs, ratings = {}, moduleCode = '', retired = noRetired) {
         if (!map?.skills?.length) return [];
         const { chunkOf, marks: chunkMarks, names } = chunkTools(map);
         const hist = gradeHistory(logs);
         const rows = {};
         for (const n of nodes) {
           const c = chunkOf(n.id);
-          if (!c) continue;
+          if (!c || retired.nodes.has(n.id)) continue;
           const r = (rows[c] ||= { chunk: c, marks: chunkMarks[c] || 0, n: 0, tried: 0, secure: 0, sum: 0, minutes: 0, needed: 0 });
           const prior = PRIOR[ratings[`${moduleCode}:${c}`] ?? 0] ?? 0;
           const h = hist[n.id];
@@ -1078,6 +1119,12 @@
           return true;
         });
 
+        // questions a passed harder one already covers are left out (unless that would leave nothing, e.g. a drill of a fully covered topic)
+        if (filters.retired?.nodes.size && !filters.forceNodeId) {
+          const kept = pool.filter((n) => !filters.retired.nodes.has(n.id));
+          if (kept.length) pool = kept;
+        }
+
         // exam mode: the finals have no pick-one questions, so leave out cards that only offer options (unless nothing else is left)
         if (filters.typedOnly && !filters.forceNodeId) {
           const typed = pool.filter((n) => (n.variants || []).some((v) => v.inputSlot?.type !== 'choice'));
@@ -1132,6 +1179,8 @@
 
       function selectVariant(node, reviewState, opts = {}) {
         let variants = node?.variants || [];
+        const gone = opts.retiredVariants;
+        if (gone && gone.size) { const rest = variants.filter((v) => !gone.has(v.variantId)); if (rest.length) variants = rest; }
         if (opts.typedOnly) { const typed = variants.filter((v) => v.inputSlot?.type !== 'choice'); if (typed.length) variants = typed; }
         if (variants.length <= 1) return variants[0] || null;
         const stats = reviewState?.variantStats || {};
@@ -1647,7 +1696,7 @@
         selectVariant,
         instantiateVariant,
         computeModuleReadiness,
-        PASS_GRADE, gradeHistory, nodeLevel, nodeSecure, coverage, cramNext, cramRecord,
+        PASS_GRADE, gradeHistory, nodeLevel, nodeSecure, coverage, cramNext, cramRecord, supersession, noRetired,
         inferNodeExamStyle,
         assembleMockPaper,
         assembleRecipePaper,
@@ -7255,6 +7304,17 @@
         }
         return out;
       }
+      /* Pairs "harder question covers an easier one" (content/<dir>/supersedes.json, hand-authored). Never throws. */
+      async function loadAllSupersedes(fetchFn) {
+        const out = {};
+        for (const mod of MODULES) {
+          try {
+            const doc = await fetchContent(`content/${mod.dir}/supersedes.json`, fetchFn);
+            if (doc && Array.isArray(doc.pairs)) out[mod.code] = doc;
+          } catch (err) { /* none for this module */ }
+        }
+        return out;
+      }
       /* Pure: the page that serves a topic (chunk), or null. */
       function methodForChunk(doc, chunkId) {
         return (doc?.methods || []).find((m) => (m.chunks || []).includes(chunkId)) || null;
@@ -7364,7 +7424,7 @@
       return {
         MODULES, BANK_URL, SKILL_MAP_URL, RECORD_KEY, chunkNodeIds,
         fetchJson, fetchContent, bankKey, isReservedNodeId, planBankSync, syncBank, syncAllBanks, sweepOrphanedProgress,
-        validateSkillMap, loadSkillMap, loadAllSkillMaps, loadAllMethods, methodForChunk, methodsUrl, analyzeSkillMap, nodeProgress, skillRows,
+        validateSkillMap, loadSkillMap, loadAllSkillMaps, loadAllMethods, loadAllSupersedes, methodForChunk, methodsUrl, analyzeSkillMap, nodeProgress, skillRows,
       };
     })();
 
@@ -8322,11 +8382,11 @@
       }
 
       /* Pure. Questions whose most recent attempt was a miss (so ones you later got right are gone), newest first. */
-      function unresolvedMisses(logs, titleOf, map, limit = 8) {
+      function unresolvedMisses(logs, titleOf, map, limit = 8, retired = null) {
         const latest = new Map();
         for (const l of [...(logs || [])].sort((a, b) => a.timestamp - b.timestamp)) latest.set(l.nodeId, l);
         return [...latest.values()]
-          .filter((l) => (Number(l.normalizedGrade) || 0) < PASS)
+          .filter((l) => (Number(l.normalizedGrade) || 0) < PASS && !retired?.nodes.has(l.nodeId))
           .sort((a, b) => b.timestamp - a.timestamp)
           .slice(0, limit)
           .map((l) => ({ nodeId: l.nodeId, title: titleOf(l.nodeId) || l.nodeId, grade: Number(l.normalizedGrade) || 0, timestamp: l.timestamp, chunk: chunksOf(map, l.nodeId)[0] || null }));
@@ -8624,6 +8684,8 @@
         plan: { hoursPerDay: 6, split: 50, ratings: {} },
         ui: { sheet: null, readinessTab: 'plan', settingsTab: 'module', bankLimit: 60 },
         reactions: null,          // CM2021 reaction list (content/cm2021/reactions.json)
+        supersedes: {},           // per module: pairs 'harder question covers an easier one' (content/<dir>/supersedes.json)
+        retired: null,            // Scheduler.supersession result for the current history (questions skipped because a harder one was passed)
         rxStats: {},              // per-reaction spaced boxes (settings row 'reactionStats')
         rx: { tab: 'train', mapView: 'chunks', q: '', filters: { finals: false, named: false, check: false, weak: false }, cover: false, revealed: new Set(), collapsed: new Set(), session: null, opts: { group: 'ALL', examOnly: false, namedOnly: false, n: 12 } },
         methods: {},
@@ -8836,6 +8898,15 @@
         showToast._t = setTimeout(() => el.classList.add('hidden'), 3200);
       }
 
+      /* Questions skipped because a harder one covering them was passed (see Scheduler.supersession). Returns the previous result. */
+      function refreshRetired() {
+        const before = appState.retired;
+        const pairs = Object.values(appState.supersedes || {}).flatMap((d) => d.pairs || []);
+        appState.retired = Scheduler.supersession(pairs, [...(appState.allNodes || []), ...(appState.allComposerNodes || [])], appState.masteryLogs);
+        return before;
+      }
+      const retiredNow = () => appState.retired || Scheduler.noRetired;
+
       async function refreshStore() {
         const db = await DB.init();
         const [modules, nodes, reviews, logs, settingsRow] = await Promise.all([
@@ -8862,6 +8933,7 @@
         appState.masteryLogs = allLogs.map((l) => ({ nodeId: l.nodeId, variantId: l.variantId, timestamp: l.timestamp, normalizedGrade: l.normalizedGrade, confidence: l.confidence || null }));
         appState.reviewMap = Object.fromEntries(reviews.map((r) => [r.nodeId, r]));
         appState.attemptLogs = logs;
+        refreshRetired();
         // the student's own choices live in settings rows; reload them here so an import cannot leave a stale copy that the next save overwrites
         try {
           const [hooksRow, prefsRow, planRow] = await Promise.all([db.settings.get('myHooks'), db.settings.get('skillMastery'), db.settings.get('plan')]);
@@ -9129,16 +9201,18 @@
         // cram mode picks the card itself (unseen first, then fixes); a pass that has nothing left switches cram off
         let cramPick = null;
         if (appState.cram?.on && !appState.filters.forceNodeId && appState.skillMap) {
-          cramPick = Scheduler.cramNext(appState.nodes, appState.skillMap, appState.masteryLogs, appState.cram);
+          cramPick = Scheduler.cramNext(appState.nodes, appState.skillMap, appState.masteryLogs, appState.cram, retiredNow());
           if (!cramPick) { appState.cram.on = false; showToast('Cram pass done: nothing left in it. Back to the normal queue.'); }
         }
         // a miss the student sent back: it returns once enough other cards have gone by
         if (!appState.filters.forceNodeId && !cramPick) {
+          appState.session.retry = appState.session.retry.filter((r) => !retiredNow().nodes.has(r.nodeId));
           const due = appState.session.retry.find((r) => r.after <= appState.session.cards && r.nodeId !== prevNode?.id);
           if (due) { appState.session.retry = appState.session.retry.filter((r) => r !== due); filters.forceNodeId = due.nodeId; }
         }
         if (cramPick) { filters.forceNodeId = cramPick.node.id; Object.assign(appState.cram, { last: cramPick.node.id, passNow: cramPick.pass, chunkNow: cramPick.chunk, left: cramPick.left }); }
         if (appState.examMode) filters.typedOnly = true;
+        filters.retired = retiredNow();
         if (appState.skillMap) {
           // a topic or weak-spot drill is practice you asked for, so retirement does not thin it; removals still hold
           filters.masteryAdj = Mastery.adjustments(masteryNow(), appState.skillMap, appState.masteryPrefs.removed,
@@ -9164,7 +9238,7 @@
           return;
         }
         const rs = appState.reviewMap[pick.node.id];
-        const variant = Scheduler.selectVariant(pick.node, rs, { typedOnly: Boolean(appState.examMode) });
+        const variant = Scheduler.selectVariant(pick.node, rs, { typedOnly: Boolean(appState.examMode), retiredVariants: retiredNow().variants.get(pick.node.id) });
         const inst = Scheduler.instantiateVariant(variant);
         const slotType = variant.inputSlot.type;
         let initialInput = '';
@@ -9217,7 +9291,7 @@
         try {
           const chunk = Weakness.chunksOf(appState.skillMap, nodeId)[0];
           if (!chunk) return null;
-          const r = Scheduler.planChunks(appState.nodes, appState.skillMap, appState.masteryLogs, appState.plan?.ratings || {}, appState.activeModule).find((x) => x.chunk === chunk);
+          const r = Scheduler.planChunks(appState.nodes, appState.skillMap, appState.masteryLogs, appState.plan?.ratings || {}, appState.activeModule, retiredNow()).find((x) => x.chunk === chunk);
           return r ? { chunk, name: r.name, score: r.score } : null;
         } catch (_) { return null; }
       }
@@ -9287,6 +9361,12 @@
         appState.attemptLogs.unshift(logEntry);
         appState.masteryLogs.push({ nodeId: logEntry.nodeId, variantId: logEntry.variantId, timestamp: logEntry.timestamp, normalizedGrade: logEntry.normalizedGrade, confidence: logEntry.confidence });
         if (appState.cram?.on) appState.cram = Scheduler.cramRecord(appState.cram, appState.cram.chunkNow, evalResult.normalizedGrade);
+        {
+          const before = refreshRetired(), after = appState.retired;
+          const fresh = [...after.why.keys()].filter((ref) => !before?.why.has(ref)).map((ref) => ref.split('#')[0]);
+          const titles = [...new Set(fresh)].map((id) => appState.allNodes.find((n) => n.id === id)?.metadata?.title).filter(Boolean);
+          if (titles.length) showToast(`Covers easier questions too: ${titles.slice(0, 2).join('; ')}${titles.length > 2 ? ` and ${titles.length - 2} more` : ''}. They will not come up unless you miss this one again.`);
+        }
         const masteryAfter = masteryNow();
         const lvAfter = topicScoreFor(cur.node.id);
         cur.levelMove = lvBefore && lvAfter ? { name: lvAfter.name, before: lvBefore.score, after: lvAfter.score } : null;
@@ -11172,7 +11252,7 @@
             const ranked = map ? Weakness.topicStats(appState.masteryLogs, map).filter((t) => t.ranked) : [];
             const weakest = ranked[0];
             const titles = Object.fromEntries([...appState.nodes, ...appState.composerNodes].map((n) => [n.id, n.metadata?.title]));
-            const toFixN = map ? Weakness.unresolvedMisses(appState.masteryLogs, (id) => titles[id], map, 99).length : 0;
+            const toFixN = map ? Weakness.unresolvedMisses(appState.masteryLogs, (id) => titles[id], map, 99, retiredNow()).length : 0;
             start = card(`<h2 class="font-display text-base font-semibold text-slate-900">Where to start</h2>
               ${weakest ? `<div class="flex items-start justify-between gap-3">
                   <div class="min-w-0"><div class="text-xs text-slate-500">Your weakest topic</div><div class="text-sm font-semibold text-slate-900">${esc(weakest.name)}</div><div class="text-[11px] text-slate-500">${weakest.missed} of your last ${weakest.window} answers missed</div></div>
@@ -11248,7 +11328,7 @@
           const shownTopics = appState.ui.weakAll ? ranked : ranked.slice(0, 5);
           const chunkName = (id) => map.chunks?.find((c) => c.id === id)?.name || '';
           const titles = Object.fromEntries([...appState.nodes, ...appState.composerNodes].map((n) => [n.id, n.metadata?.title]));
-          const misses = Weakness.unresolvedMisses(appState.masteryLogs, (id) => titles[id], map, 8);
+          const misses = Weakness.unresolvedMisses(appState.masteryLogs, (id) => titles[id], map, 8, retiredNow());
           const slips = Weakness.slipCounts(appState.attemptLogs, map);
           const now = Date.now();
           const barTone = (mean) => (mean < 0.5 ? 'bg-rose-500' : mean < 0.7 ? 'bg-amber-500' : 'bg-emerald-500');
@@ -11275,7 +11355,7 @@
           }).join('') : '<p class="text-sm text-slate-500">Topics are ranked once you have answered at least two questions in them.</p>';
           const moreBtn = ranked.length > 5 ? `<button type="button" id="btnWeakShowAll" class="text-xs font-medium text-blue-700 hover:underline">${appState.ui.weakAll ? 'Show the weakest 5' : `Show all ${ranked.length} topics`}</button>` : '';
 
-          const missesHtml = misses.length ? `<button type="button" id="btnLastPass" class="mb-2 px-3 py-1.5 text-xs font-medium bg-slate-900 text-white rounded-md hover:bg-slate-800">Last pass: redo all ${Weakness.unresolvedMisses(appState.masteryLogs, () => '', map, 99).length}</button><ul class="divide-y divide-slate-100">${misses.map((m) => `
+          const missesHtml = misses.length ? `<button type="button" id="btnLastPass" class="mb-2 px-3 py-1.5 text-xs font-medium bg-slate-900 text-white rounded-md hover:bg-slate-800">Last pass: redo all ${Weakness.unresolvedMisses(appState.masteryLogs, () => '', map, 99, retiredNow()).length}</button><ul class="divide-y divide-slate-100">${misses.map((m) => `
               <li class="flex items-center gap-3 py-2" data-weak-miss="${esc(m.nodeId)}">
                 <div class="min-w-0 flex-1">
                   <div class="text-sm font-medium text-slate-900 truncate">${esc(m.title)}</div>
@@ -11306,7 +11386,7 @@
           const mods = appState.modules.slice().sort((a, b) => a.moduleCode.localeCompare(b.moduleCode));
           const rowsBy = {};
           for (const m of mods) {
-            rowsBy[m.moduleCode] = Scheduler.planChunks(appState.allNodes.filter((n) => n.moduleCode === m.moduleCode), appState.skillMaps[m.moduleCode], appState.masteryLogs, pl.ratings, m.moduleCode);
+            rowsBy[m.moduleCode] = Scheduler.planChunks(appState.allNodes.filter((n) => n.moduleCode === m.moduleCode), appState.skillMaps[m.moduleCode], appState.masteryLogs, pl.ratings, m.moduleCode, retiredNow());
           }
           const first = mods[0];
           const shares = mods.length > 1 ? { [first.moduleCode]: pl.split / 100, [mods[1].moduleCode]: 1 - pl.split / 100 } : {};
@@ -11330,7 +11410,7 @@
             <p class="text-[11px] text-slate-500">Blocks are 40 minutes. A half and half split held up better than any automatic rule I tried; change it only for a reason.</p>`);
           const cramHtml = mods.map((m) => {
             const nodesM = appState.allNodes.filter((n) => n.moduleCode === m.moduleCode);
-            const cov = Scheduler.coverage(nodesM, appState.skillMaps[m.moduleCode], appState.masteryLogs);
+            const cov = Scheduler.coverage(nodesM, appState.skillMaps[m.moduleCode], appState.masteryLogs, retiredNow());
             const hoursLeft = m.examTimestamp == null ? null : Math.max(0, (m.examTimestamp - nowMs) / 3600000);
             const budgetMin = hoursLeft == null ? null : Math.round(Math.min((hoursLeft / 24) * pl.hoursPerDay * 60, hoursLeft * 60 * 0.6));
             const coverMin = Math.round(cov.unseenMin), fixMin = Math.round(cov.failedMin * 2), mockMin = 60;
@@ -11344,6 +11424,7 @@
               <div data-cram-meter="${esc(m.moduleCode)}"><div class="flex h-3 rounded-full overflow-hidden bg-slate-100">${seg(secure, 'bg-emerald-500')}${seg(seenOnly, 'bg-amber-400')}${seg(blind, 'bg-slate-300')}</div>
                 <div class="mt-1.5 grid grid-cols-3 gap-2 text-[11px]"><span><span class="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-1"></span><b class="font-mono">${Math.round(cov.securePct)}%</b> of marks secure</span><span><span class="inline-block w-2 h-2 rounded-full bg-amber-400 mr-1"></span><b class="font-mono">${Math.round(seenOnly)}%</b> seen, not secure</span><span><span class="inline-block w-2 h-2 rounded-full bg-slate-300 mr-1"></span><b class="font-mono">${Math.round(blind)}%</b> still blind</span></div></div>
               <p class="text-xs text-slate-600">${cov.unseenN} unseen question${cov.unseenN === 1 ? '' : 's'} (~${fmt(coverMin)}), ${cov.failedN} to fix (~${fmt(fixMin)}), plus a timed paper (~${fmt(mockMin)}): <b>${fmt(need)}</b>${budgetMin == null ? ' · set the exam date for a time budget' : ` against about <b>${fmt(budgetMin)}</b> you can give it${need > budgetMin ? `, so you are over by ${fmt(need - budgetMin)}: the order is marks per minute, so just stop when the time is gone` : ''}`}.</p>
+              ${(() => { const rn = nodesM.filter((n) => retiredNow().nodes.has(n.id)).length; return rn ? `<p class="text-[11px] text-slate-500" data-retired-note>${rn} easier question${rn === 1 ? ' is' : 's are'} skipped, because you passed a harder one that covers ${rn === 1 ? 'it' : 'them'}; ${rn === 1 ? 'it comes' : 'they come'} back if you miss that one.</p>` : ''; })()}
               <p class="text-[11px] text-slate-500">Unseen first: one question per topic, best marks per minute first, then a second per topic. Fix misses: the topic's method sheet once, then fresh-number cards until two pass in a row. "Secure" = the last two attempts both passed (85%).</p>`);
           }).join('');
           const blockHtml = card(`<div><h2 class="font-display text-base font-semibold text-slate-900">Today's blocks</h2><p class="text-xs text-slate-500">Each block is the best remaining topic for its module: most marks you can still win per hour of work.</p></div>
@@ -11369,7 +11450,7 @@
         })();
 
         const body = { plan: planHtml, overview: overviewHtml, chapters: chaptersHtml, skills: `<section class="space-y-3">${skillParts.summary}${skillParts.list}</section>`, weak: weakHtml }[tab] || planHtml;
-        const toFix = appState.skillMap ? Weakness.unresolvedMisses(appState.masteryLogs, () => '', appState.skillMap, 99).length : 0;
+        const toFix = appState.skillMap ? Weakness.unresolvedMisses(appState.masteryLogs, () => '', appState.skillMap, 99, retiredNow()).length : 0;
         const tabs = [['plan', 'Plan'], ['overview', 'Overview'], ['chapters', 'Chapters'], ['skills', 'Skills'], ['weak', toFix ? `Weak spots · ${toFix}` : 'Weak spots']];
 
         root.innerHTML = `
@@ -11436,7 +11517,7 @@
           drillTopic(chunk);
         }));
         $('#btnLastPass', root)?.addEventListener('click', () => {
-          const all = appState.skillMap ? Weakness.unresolvedMisses(appState.masteryLogs, () => '', appState.skillMap, 99) : [];
+          const all = appState.skillMap ? Weakness.unresolvedMisses(appState.masteryLogs, () => '', appState.skillMap, 99, retiredNow()) : [];
           if (!all.length) return;
           appState.session.retry = all.map((m) => ({ nodeId: m.nodeId, after: appState.session.cards }));
           appState.route = 'study';
@@ -12443,6 +12524,7 @@
           const loaded = await Content.loadAllSkillMaps();
           appState.skillMaps = loaded.maps;
           appState.methods = await Content.loadAllMethods();
+          appState.supersedes = await Content.loadAllSupersedes();
           try { appState.reactions = await Content.fetchContent('content/cm2021/reactions.json'); } catch (err) { appState.reactions = null; }
           try { appState.rxStats = (await db.settings.get('reactionStats'))?.stats || {}; } catch (err) { appState.rxStats = {}; }
           appState.content.skillMap = { map: loaded.maps[appState.activeModule] || null, error: loaded.error };

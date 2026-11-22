@@ -64,3 +64,21 @@ test('blank answers never earn marks on typed questions', () => {
   }
   assert.deepEqual(bad, []);
 });
+
+test('a sampled number is never printed rounder than it is (the key is computed from the displayed value)', () => {
+  const bad = [];
+  const cm11 = banks.cm2011;
+  for (const n of cm11.questionNodes) for (const v of n.variants) {
+    const sampled = Object.keys(v.variables?.sampled || {});
+    const seen = new Set();
+    for (const t of [v.stem, v.hint || '']) for (const m of t.matchAll(/\{\{fix\(\s*([A-Za-z_]\w*)\s*,\s*(\d)\s*\)\}\}/g)) {
+      if (!sampled.includes(m[1]) || seen.has(m[0])) continue;
+      seen.add(m[0]);
+      for (let seed = 1; seed <= 60; seed++) {
+        const x = Scheduler.instantiateVariant(v, seed * 7919).scope[m[1]];
+        if (Math.abs(Number(x.toFixed(Number(m[2]))) - x) > 1e-9) { bad.push(`${v.variantId}: ${m[1]} = ${x} printed to ${m[2]} d.p.`); break; }
+      }
+    }
+  }
+  assert.deepEqual(bad, []);
+});

@@ -188,7 +188,7 @@ add(node(mk({
       stem: 'An analytical column of inner diameter **{{fix(d1,1)}} cm** handles **{{fix(m1,0)}} mg** of sample at **{{fix(F1,1)}} mL min⁻¹**. You want to purify **{{fix(m2,0)}} mg** per run on a column of the same length and packing, at the same linear velocity. What inner diameter and what volume flow do you need?',
       hint: 'Sample capacity scales with the cross-sectional area (∝ d²). At the same linear velocity the volume flow scales with the same factor.',
       explanation: 'The mass ratio is {{fix(q,1)}}, and capacity ∝ area ∝ d², so d₂ = d₁ √{{fix(q,1)}} = {{fix(d2,2)}} cm. The same linear velocity through {{fix(q,1)}} times the area needs {{fix(q,1)}} times the volume flow: {{fix(F2,2)}} mL min⁻¹. Length and linear velocity are unchanged, so the separation is unchanged.',
-      sampled: { d1: choice([0.4, 0.46, 1.0]), m1: choice([1, 2, 5]), F1: choice([0.3, 0.5, 1.0]), qq: choice([4, 5, 9, 10, 16, 20]) },
+      sampled: { d1: choice([0.4, 0.5, 1.0]), m1: choice([1, 2, 5]), F1: choice([0.3, 0.5, 1.0]), qq: choice([4, 5, 9, 10, 16, 20]) },
       derived: { m2: 'm1 * qq', q: 'm2 / m1', d2: 'd1 * sqrt(q)', F2: 'F1 * q' },
       fields: [
         num('d2', 'New inner diameter', 'cm', 'd2', { relTol: 0.015, sig: 3, paths: [{ label: 'Capacity goes as the cross-sectional area, so the diameter scales as the square root of the mass ratio.', expr: 'd1 * q' }] }),

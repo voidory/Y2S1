@@ -7883,6 +7883,28 @@
       const tick = (f, x, label, dy = 12) => `<line x1="${f.sx(x)}" y1="${H - PB}" x2="${f.sx(x)}" y2="${H - PB + 3}" stroke="#94a3b8"/><text x="${f.sx(x)}" y="${H - PB + dy}" text-anchor="middle" font-size="9" fill="#64748b">${label}</text>`;
       const f1 = (x, d = 1) => (Math.abs(x) >= 1e4 || (x !== 0 && Math.abs(x) < 0.01) ? x.toExponential(2).replace('e', ' × 10^').replace('^+', '^').replace(/\^(-?\d+)/, (m, e) => `<sup>${e}</sup>`) : x.toFixed(d));
 
+      /* Gas-sensing probes (Topic 3b slide 24): the film holds a fixed partner of the gas's equilibrium, the other product is free and
+         follows the gas, and an ISE reads it. n = how the free ion scales with the gas (power of [gas]); slope = the ISE rule for that ion. */
+      const GAS_PROBES = {
+        nh3: { gas: 'NH₃', eq: 'NH₃ + H₂O ⇌ NH₄⁺ + OH⁻', held: 'NH₄⁺ (0.1 M NH₄Cl)', ion: 'H⁺', n: -1, slope: 59.2, sensor: 'pH glass',
+          note: 'NH₃ makes OH⁻, so the pH rises and H⁺ falls as 1/[NH₃]. The glass electrode reads +59.2 per decade of H⁺, so E falls as the gas rises. This is the slide (E = const − 59.2 log[NH₃]) and the one the finals ask.' },
+        co2: { gas: 'CO₂', eq: 'CO₂ + H₂O ⇌ H⁺ + HCO₃⁻', held: 'HCO₃⁻ (NaHCO₃)', ion: 'H⁺', n: 1, slope: 59.2, sensor: 'pH glass',
+          note: 'With HCO₃⁻ held fixed, H⁺ is proportional to the gas: more CO₂, lower pH, and the cation-reading glass electrode rises with log[CO₂].' },
+        so2: { gas: 'SO₂', eq: 'SO₂ + H₂O ⇌ H⁺ + HSO₃⁻', held: 'HSO₃⁻ (NaHSO₃)', ion: 'H⁺', n: 1, slope: 59.2, sensor: 'pH glass',
+          note: 'The same pattern as CO₂ with HSO₃⁻ as the held partner.' },
+        hf: { gas: 'HF', eq: 'HF ⇌ H⁺ + F⁻', held: 'H⁺ (acid)', ion: 'F⁻', n: 1, slope: -59.2, sensor: 'LaF₃ (F⁻)',
+          note: 'The free ion is the fluoride itself. It is an anion, so the electrode falls by 59.2 mV per decade as the gas rises.' },
+        h2s: { gas: 'H₂S', eq: 'H₂S ⇌ H⁺ + HS⁻ ; HS⁻ ⇌ H⁺ + S²⁻', held: 'H⁺ (pH 5 buffer)', ion: 'S²⁻', n: 1, slope: -29.6, sensor: 'Ag₂S (S²⁻)',
+          note: 'A buffer holds H⁺ because the gas is an acid. S²⁻ follows the gas, and a doubly charged anion gives −29.6 mV per decade.' },
+        hcn: { gas: 'HCN', eq: 'Ag(CN)₂⁻ ⇌ Ag⁺ + 2CN⁻', held: 'Ag(CN)₂⁻ (KAg(CN)₂)', ion: 'Ag⁺', n: -2, slope: 59.2, sensor: 'Ag⁺ (Ag)',
+          note: 'Backwards: the gas supplies CN⁻, which pulls the complex together, so free Ag⁺ falls as 1/[CN⁻]². A cation electrode then gives about −118 mV per decade.' },
+      };
+      /* lg = log10 of the gas in the sample; the reference point is lg = −3 (E = 0 there). */
+      function gasProbe(id, lg) {
+        const g = GAS_PROBES[id], ionLog = g.n * (lg + 3);
+        return { ...g, ionLog, E: g.slope * ionLog, slopePerDecade: g.slope * g.n };
+      }
+
       const DEFS = {
         'extraction-ph': {
           title: 'Where does the solute go as the pH changes?',
@@ -7904,6 +7926,31 @@
               ? (s.pH < s.pKa - 1 ? 'The acid is mostly un-ionised, so it sits in the organic layer.' : s.pH > s.pKa + 1 ? 'The acid is mostly ionised (A⁻), so it is held in the water: D falls.' : 'Near the pKa the acid is half ionised, so D is about K/2.')
               : (s.pH > s.pKa + 1 ? 'The base is mostly neutral B, so it sits in the organic layer: D approaches K.' : s.pH < s.pKa - 1 ? 'The base is mostly BH⁺, held in the water: D falls (K itself does not change).' : 'Near the pKa the base is half protonated, so D is about K/2.');
             return { svg, read: [['Neutral fraction', `${(m.neutral * 100).toFixed(1)}%`], ['D', f1(m.D, 3)], ['In organic (equal volumes)', `${(m.orgFrac * 100).toFixed(1)}%`]], note };
+          },
+        },
+        'gas-probe': {
+          title: 'Gas-sensing probe: what the electrode sees',
+          intro: 'Pick a gas and raise its level in the sample. The film holds one partner of the gas’s equilibrium fixed; the other follows the gas, and the electrode reads it.',
+          controls: [
+            { k: 'gas', type: 'toggle', options: [['nh3', 'NH₃'], ['co2', 'CO₂'], ['so2', 'SO₂'], ['hf', 'HF'], ['h2s', 'H₂S'], ['hcn', 'HCN']], val: 'nh3' },
+            { k: 'lg', label: 'log₁₀ [gas] in the sample', min: -5, max: -1, step: 0.1, val: -3 },
+          ],
+          draw(s) {
+            const m = gasProbe(s.gas, s.lg);
+            const dots = Math.max(2, Math.round(2 + (s.lg + 5) * 3));
+            const gx = [], cols = 4;
+            for (let i = 0; i < dots; i++) gx.push(`<circle cx="${18 + (i % cols) * 14}" cy="${48 + Math.floor(i / cols) * 14}" r="3.4" fill="#0369a1"/>`);
+            const freeH = Math.max(8, Math.min(104, 52 + 12 * m.ionLog));
+            const up = m.ionLog > 0.05 ? '↑' : m.ionLog < -0.05 ? '↓' : '=';
+            const svg = `<rect x="6" y="18" width="72" height="132" rx="4" fill="#e0f2fe" stroke="#7dd3fc"/><text x="42" y="30" text-anchor="middle" font-size="9" fill="#075985">sample</text>${gx.join('')}
+              <rect x="80" y="18" width="6" height="132" fill="#cbd5e1" stroke="#64748b" stroke-dasharray="3 2"/><text x="83" y="162" text-anchor="middle" font-size="7.5" fill="#475569">membrane: gas only</text>
+              <rect x="88" y="18" width="136" height="132" rx="4" fill="#fefce8" stroke="#facc15"/><text x="156" y="30" text-anchor="middle" font-size="9" fill="#854d0e">inner solution</text>
+              <rect x="106" y="${146 - 70}" width="34" height="70" fill="#94a3b8"/><text x="123" y="${146 - 70 - 4}" text-anchor="middle" font-size="8" fill="#334155">held</text>
+              <rect x="172" y="${146 - freeH}" width="34" height="${freeH}" fill="#f59e0b"/><text x="189" y="${146 - freeH - 4}" text-anchor="middle" font-size="8" fill="#92400e">${m.ion} ${up}</text>
+              <rect x="228" y="18" width="86" height="132" rx="4" fill="#f1f5f9" stroke="#94a3b8"/><text x="271" y="30" text-anchor="middle" font-size="9" fill="#334155">${m.sensor}</text><text x="271" y="52" text-anchor="middle" font-size="8" fill="#64748b">electrode</text>
+              <text x="271" y="92" text-anchor="middle" font-size="12" font-weight="700" fill="#0f172a">${Math.abs(m.E) < 0.5 ? '0' : (m.E >= 0 ? '+' : '−') + Math.abs(m.E).toFixed(0)} mV</text><text x="271" y="106" text-anchor="middle" font-size="7.5" fill="#64748b">relative to log[gas] = −3</text>
+              <text x="160" y="180" text-anchor="middle" font-size="8.5" fill="#0f172a">${m.eq}</text>`;
+            return { svg, read: [['Held fixed', m.held], ['Free ion read', `${m.ion} ${up}`], ['Slope vs log[gas]', `${m.slopePerDecade > 0 ? '+' : '−'}${Math.abs(m.slopePerDecade).toFixed(1)} mV`], ['E (relative)', `${Math.abs(m.E) < 0.5 ? '0' : (m.E >= 0 ? '+' : '−') + Math.abs(m.E).toFixed(0)} mV`]], note: m.note };
           },
         },
         'van-deemter': {
@@ -8075,7 +8122,7 @@
       };
       function pKaLabel() { return 'pKa (of HA, or of BH⁺)'; }
 
-      const BY_CHUNK = { 'x-calc': 'extraction-ph', 'x-concepts': 'extraction-ph', 'c-concepts': 'van-deemter', 'c-calc': 'resolution', 'p-calibration': 'calibration', 'field-energetics': 'oh-splitting', 'terms-ts': ['ts-lesson', 'terms-builder', 'tanabe-sugano'] };
+      const BY_CHUNK = { 'x-calc': 'extraction-ph', 'x-concepts': 'extraction-ph', 'c-concepts': 'van-deemter', 'c-calc': 'resolution', 'p-calibration': 'calibration', 'p-types': 'gas-probe', 'p-principles': 'gas-probe', 'field-energetics': 'oh-splitting', 'terms-ts': ['ts-lesson', 'terms-builder', 'tanabe-sugano'] };
       function figuresForChunks(chunks) { return [...new Set((chunks || []).flatMap((c) => [].concat(BY_CHUNK[c] || [])))]; }
 
       /* Builds a figure inside `host`. Returns { state, redraw } so tests can drive it. */
@@ -8120,7 +8167,7 @@
         return { state, redraw };
       }
 
-      return { extraction, vanDeemter, resolution, calibration, ohFill, termsOf, tsAt, tsPair, tsSolve, tsStore, tsLoad, tsSvg, attachRuler, TS_GEO, figuresForChunks, mount, DEFS };
+      return { extraction, vanDeemter, resolution, calibration, ohFill, gasProbe, GAS_PROBES, termsOf, tsAt, tsPair, tsSolve, tsStore, tsLoad, tsSvg, attachRuler, TS_GEO, figuresForChunks, mount, DEFS };
     })();
 
     /* =====================================================================

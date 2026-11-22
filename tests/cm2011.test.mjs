@@ -606,3 +606,22 @@ test('calibration chain: sampled data stay in the electrode\'s working range', (
     }
   }
 });
+
+test('gas probes: every row of the lecture table is derivable and the cards accept the derived answer', () => {
+  const E = loadEngine();
+  const G = E.Figures.GAS_PROBES;
+  // the slope rule: ISE slope of the free ion times how the ion scales with the gas
+  const want = { nh3: -59.2, co2: 59.2, so2: 59.2, hf: -59.2, h2s: -29.6, hcn: -118.4 };
+  for (const [id, w] of Object.entries(want)) assert.ok(Math.abs(E.Figures.gasProbe(id, -3).slopePerDecade - w) < 0.01, `${id} slope`);
+  assert.equal(Math.abs(E.Figures.gasProbe('nh3', -3).E), 0);
+  assert.ok(E.Figures.gasProbe('nh3', -1).E < 0 && E.Figures.gasProbe('co2', -1).E > 0, 'NH3 falls, CO2 rises');
+  const bank = readContent('question-bank.json', 'cm2011');
+  const node = bank.questionNodes.find((n) => n.id === 'bk-m11-p-gas');
+  assert.equal(node.variants.length, Object.keys(G).length, 'one card per gas');
+  for (const v of node.variants) {
+    const inst = E.Scheduler.instantiateVariant(v, 11);
+    const ans = Object.fromEntries(Object.entries(v.evaluator.targets).map(([k, t]) => [k, t.expectedDisplay]));
+    assert.equal(E.Evaluators.evaluate(v, ans, inst.scope, {}, node).normalizedGrade, 1, v.variantId);
+    assert.ok(E.Evaluators.evaluate(v, { inner: 'NaCl', sensor: 'Pt wire', sign: '?' }, inst.scope, {}, node).normalizedGrade < 0.5, `${v.variantId}: NaCl + Pt is not accepted`);
+  }
+});

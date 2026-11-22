@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-22T02:25:14.408Z",
+ "exportedAt": "2026-11-22T06:48:10.023Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -15422,15 +15422,15 @@
    "moduleCode": "CM2011",
    "tier": "atomic",
    "metadata": {
-    "title": "Gas-sensing probes: how the ammonia probe works",
-    "source": "Topic 3b · potentiometry · gas-probe lecture slides",
+    "title": "Gas-sensing probes: derive the inner solution and sensor",
+    "source": "Topic 3b · potentiometry · gas-probe lecture slides (slide 24 table)",
     "week": 4,
     "primaryTheme": "Potentiometry & Ion-Selective Electrodes",
     "conceptTags": [
      "gas-sensing-probe"
     ],
     "difficultyEstimate": 3,
-    "estimatedMinutes": 2,
+    "estimatedMinutes": 3,
     "examStyle": "short_2to3",
     "family": "ise-recall"
    },
@@ -15438,9 +15438,10 @@
     {
      "variantId": "p-gas-nh3",
      "perspectiveLabel": "NH₃",
-     "marks": 2,
-     "stem": "A dissolved-gas sensing probe for **NH₃** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. What is the inner filling solution, and which electrode senses the change?",
-     "explanation": "NH₃: inner solution 0.1 M NH₄Cl; sensing electrode pH glass electrode. NH₃ crosses the membrane and raises the pH of the thin NH₄Cl layer (NH₃ + H₂O ⇌ NH₄⁺ + OH⁻); the glass electrode reads that pH change. More NH₃ means higher pH, so the potential falls as log[NH₃] rises: the slope is negative, about −59 mV per decade.",
+     "marks": 3,
+     "stem": "A dissolved-gas sensing probe for **NH₃** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. Give (a) the inner filling solution, (b) the sensing electrode, (c) the sign of the slope of E against log[NH₃].",
+     "hint": "Write the equilibrium the gas sets up in water: NH₃ + H₂O ⇌ NH₄⁺ + OH⁻. Hold one product fixed in the inner solution; the other is free to follow the gas, and the electrode reads it.",
+     "explanation": "NH₃: NH₃ + H₂O ⇌ NH₄⁺ + OH⁻. Inner solution: 0.1 M NH₄Cl (holds NH₄⁺ fixed). Sensing electrode: pH glass electrode. NH₄⁺ is held fixed, so OH⁻ (and so pH) rises in step with NH₃ and H⁺ falls as 1/[NH₃]. A cation electrode gives +59.2 log[H⁺], so E = const − 59.2 log[NH₃]. This is the one the finals ask: it is neutral, so concentration is enough; amines that cross the membrane interfere.",
      "inputSlot": {
       "type": "mapped_fields",
       "layout": "table",
@@ -15452,6 +15453,10 @@
        {
         "key": "sensor",
         "label": "Sensing electrode"
+       },
+       {
+        "key": "sign",
+        "label": "Slope of E against log[gas]"
        }
       ]
      },
@@ -15460,10 +15465,10 @@
       "targets": {
        "inner": {
         "acceptedPatterns": [
-         "^.*(?:nh[4₄]\\+? ?cl|nh[4₄]cl|ammonium chloride|ammonium).*$"
+         "^.*(?:nh[4₄]\\+? ?cl|nh[4₄]cl|ammonium chloride|ammonium|nh[4₄]\\+).*$"
         ],
         "caseSensitive": false,
-        "expectedDisplay": "0.1 M NH₄Cl"
+        "expectedDisplay": "0.1 M NH₄Cl (holds NH₄⁺ fixed)"
        },
        "sensor": {
         "acceptedPatterns": [
@@ -15471,6 +15476,13 @@
         ],
         "caseSensitive": false,
         "expectedDisplay": "pH glass electrode"
+       },
+       "sign": {
+        "acceptedPatterns": [
+         "^.*(?:neg|minus|−|-|fall|down|decreas).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "negative (about −59 mV per decade)"
        }
       }
      }
@@ -15478,9 +15490,10 @@
     {
      "variantId": "p-gas-co2",
      "perspectiveLabel": "CO₂",
-     "marks": 2,
-     "stem": "A dissolved-gas sensing probe for **CO₂** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. What is the inner filling solution, and which electrode senses the change?",
-     "explanation": "CO₂: inner solution NaHCO₃; sensing electrode pH glass electrode. CO₂ crosses the membrane and acidifies the thin NaHCO₃ layer (CO₂ + H₂O ⇌ H⁺ + HCO₃⁻); the glass electrode reads the pH fall. Same principle as the ammonia probe, opposite direction: more CO₂ gives a lower pH.",
+     "marks": 3,
+     "stem": "A dissolved-gas sensing probe for **CO₂** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. Give (a) the inner filling solution, (b) the sensing electrode, (c) the sign of the slope of E against log[CO₂].",
+     "hint": "Write the equilibrium the gas sets up in water: CO₂ + H₂O ⇌ H⁺ + HCO₃⁻. Hold one product fixed in the inner solution; the other is free to follow the gas, and the electrode reads it.",
+     "explanation": "CO₂: CO₂ + H₂O ⇌ H⁺ + HCO₃⁻. Inner solution: NaHCO₃ (holds HCO₃⁻ fixed). Sensing electrode: pH glass electrode. HCO₃⁻ is held fixed, so H⁺ is proportional to [CO₂]: more CO₂ lowers the pH. The glass electrode is a cation sensor, so E = const + 59.2 log[CO₂]. (Na⁺ is only the spectator counter-ion.)",
      "inputSlot": {
       "type": "mapped_fields",
       "layout": "table",
@@ -15492,6 +15505,10 @@
        {
         "key": "sensor",
         "label": "Sensing electrode"
+       },
+       {
+        "key": "sign",
+        "label": "Slope of E against log[gas]"
        }
       ]
      },
@@ -15500,10 +15517,10 @@
       "targets": {
        "inner": {
         "acceptedPatterns": [
-         "^.*(?:nahco[3₃]|sodium (?:hydrogen ?)?carbonate|sodium bicarbonate|hco[3₃]).*$"
+         "^.*(?:nahco[3₃]|sodium (?:hydrogen ?)?carbonate|sodium bicarbonate|hco[3₃]|bicarbonate|hydrogen ?carbonate).*$"
         ],
         "caseSensitive": false,
-        "expectedDisplay": "NaHCO₃"
+        "expectedDisplay": "NaHCO₃ (holds HCO₃⁻ fixed)"
        },
        "sensor": {
         "acceptedPatterns": [
@@ -15511,6 +15528,221 @@
         ],
         "caseSensitive": false,
         "expectedDisplay": "pH glass electrode"
+       },
+       "sign": {
+        "acceptedPatterns": [
+         "^.*(?:pos|plus|\\+|rise|up|increas).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "positive (about +59 mV per decade)"
+       }
+      }
+     }
+    },
+    {
+     "variantId": "p-gas-so2",
+     "perspectiveLabel": "SO₂",
+     "marks": 3,
+     "stem": "A dissolved-gas sensing probe for **SO₂** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. Give (a) the inner filling solution, (b) the sensing electrode, (c) the sign of the slope of E against log[SO₂].",
+     "hint": "Write the equilibrium the gas sets up in water: SO₂ + H₂O ⇌ H⁺ + HSO₃⁻. Hold one product fixed in the inner solution; the other is free to follow the gas, and the electrode reads it.",
+     "explanation": "SO₂: SO₂ + H₂O ⇌ H⁺ + HSO₃⁻. Inner solution: NaHSO₃ (holds HSO₃⁻ fixed). Sensing electrode: pH glass electrode. Same pattern as CO₂: HSO₃⁻ is held fixed, so H⁺ is proportional to [SO₂] and the pH glass electrode gives E = const + 59.2 log[SO₂].",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "inner",
+        "label": "Inner solution"
+       },
+       {
+        "key": "sensor",
+        "label": "Sensing electrode"
+       },
+       {
+        "key": "sign",
+        "label": "Slope of E against log[gas]"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "inner": {
+        "acceptedPatterns": [
+         "^.*(?:nahso[3₃]|hso[3₃]|bisulfite|bisulphite|hydrogen ?sulfite|hydrogen ?sulphite|sodium (?:hydrogen ?)?sulfite|sodium (?:hydrogen ?)?sulphite).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "NaHSO₃ (holds HSO₃⁻ fixed)"
+       },
+       "sensor": {
+        "acceptedPatterns": [
+         "^.*(?:ph|glass).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "pH glass electrode"
+       },
+       "sign": {
+        "acceptedPatterns": [
+         "^.*(?:pos|plus|\\+|rise|up|increas).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "positive (about +59 mV per decade)"
+       }
+      }
+     }
+    },
+    {
+     "variantId": "p-gas-hf",
+     "perspectiveLabel": "HF",
+     "marks": 3,
+     "stem": "A dissolved-gas sensing probe for **HF** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. Give (a) the inner filling solution, (b) the sensing electrode, (c) the sign of the slope of E against log[HF].",
+     "hint": "Write the equilibrium the gas sets up in water: HF ⇌ H⁺ + F⁻. Hold one product fixed in the inner solution; the other is free to follow the gas, and the electrode reads it.",
+     "explanation": "HF: HF ⇌ H⁺ + F⁻. Inner solution: an acid solution (holds H⁺ fixed). Sensing electrode: F⁻ (LaF₃) electrode. Here the free ion is F⁻ itself: with H⁺ held fixed, [F⁻] = Ka[HF]/[H⁺] is proportional to [HF]. The fluoride electrode is an anion sensor, so E falls by 59.2 mV per decade. (Slope worked out from the ISE rule: the slide gives only the table.)",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "inner",
+        "label": "Inner solution"
+       },
+       {
+        "key": "sensor",
+        "label": "Sensing electrode"
+       },
+       {
+        "key": "sign",
+        "label": "Slope of E against log[gas]"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "inner": {
+        "acceptedPatterns": [
+         "^.*(?:h\\+|h⁺|acid|hcl|proton|h\\^\\+).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "an acid solution (holds H⁺ fixed)"
+       },
+       "sensor": {
+        "acceptedPatterns": [
+         "^.*(?:laf|f-|f⁻|fluoride).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "F⁻ (LaF₃) electrode"
+       },
+       "sign": {
+        "acceptedPatterns": [
+         "^.*(?:neg|minus|−|-|fall|down|decreas).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "negative (about −59 mV per decade)"
+       }
+      }
+     }
+    },
+    {
+     "variantId": "p-gas-h2s",
+     "perspectiveLabel": "H₂S",
+     "marks": 3,
+     "stem": "A dissolved-gas sensing probe for **H₂S** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. Give (a) the inner filling solution, (b) the sensing electrode, (c) the sign of the slope of E against log[H₂S].",
+     "hint": "Write the equilibrium the gas sets up in water: H₂S ⇌ H⁺ + HS⁻ and HS⁻ ⇌ H⁺ + S²⁻. Hold one product fixed in the inner solution; the other is free to follow the gas, and the electrode reads it.",
+     "explanation": "H₂S: H₂S ⇌ H⁺ + HS⁻ and HS⁻ ⇌ H⁺ + S²⁻. Inner solution: a pH 5 buffer (holds H⁺ fixed). Sensing electrode: S²⁻ (Ag₂S) electrode. A buffer is used because the gas is itself an acid and would otherwise change the pH. With H⁺ fixed, [S²⁻] is proportional to [H₂S], and the Ag₂S electrode gives −29.6 mV per decade of S²⁻ (a doubly charged anion). Slope worked out from the ISE rule.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "inner",
+        "label": "Inner solution"
+       },
+       {
+        "key": "sensor",
+        "label": "Sensing electrode"
+       },
+       {
+        "key": "sign",
+        "label": "Slope of E against log[gas]"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "inner": {
+        "acceptedPatterns": [
+         "^.*(?:buffer|ph ?5|ph 5).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "a pH 5 buffer (holds H⁺ fixed)"
+       },
+       "sensor": {
+        "acceptedPatterns": [
+         "^.*(?:ag[2₂]s|s2-|s²⁻|sulfide|sulphide).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "S²⁻ (Ag₂S) electrode"
+       },
+       "sign": {
+        "acceptedPatterns": [
+         "^.*(?:neg|minus|−|-|fall|down|decreas).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "negative (about −30 mV per decade)"
+       }
+      }
+     }
+    },
+    {
+     "variantId": "p-gas-hcn",
+     "perspectiveLabel": "HCN",
+     "marks": 3,
+     "stem": "A dissolved-gas sensing probe for **HCN** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. Give (a) the inner filling solution, (b) the sensing electrode, (c) the sign of the slope of E against log[HCN].",
+     "hint": "Write the equilibrium the gas sets up in water: Ag(CN)₂⁻ ⇌ Ag⁺ + 2CN⁻. Hold one product fixed in the inner solution; the other is free to follow the gas, and the electrode reads it.",
+     "explanation": "HCN: Ag(CN)₂⁻ ⇌ Ag⁺ + 2CN⁻. Inner solution: KAg(CN)₂ (holds Ag(CN)₂⁻ fixed). Sensing electrode: Ag⁺ (silver) electrode. This one runs backwards: HCN supplies CN⁻, which pushes the complex equilibrium to the left, so Ag⁺ falls as 1/[CN⁻]². A cation electrode then gives a negative slope, about 2 × 59.2 mV per decade. The slope is worked out, not on the slide; the sign is what matters.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "inner",
+        "label": "Inner solution"
+       },
+       {
+        "key": "sensor",
+        "label": "Sensing electrode"
+       },
+       {
+        "key": "sign",
+        "label": "Slope of E against log[gas]"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "inner": {
+        "acceptedPatterns": [
+         "^.*(?:kag\\(cn\\)|ag\\(cn\\)|silver cyanide|dicyanoargentate|kag).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "KAg(CN)₂ (holds Ag(CN)₂⁻ fixed)"
+       },
+       "sensor": {
+        "acceptedPatterns": [
+         "^.*(?:ag\\+|ag⁺|silver|\\bag\\b).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "Ag⁺ (silver) electrode"
+       },
+       "sign": {
+        "acceptedPatterns": [
+         "^.*(?:neg|minus|−|-|fall|down|decreas).*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "negative (about −118 mV per decade, two CN⁻)"
        }
       }
      }

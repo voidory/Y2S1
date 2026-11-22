@@ -634,7 +634,7 @@
    "name": "Calibration line, dilution chain back to the sample, and weight % N",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.795,
+   "marks": 1.772,
    "basis": "notes",
    "ref": "Topic 3b · calibration with a dilution chain (finals style)",
    "tags": [
@@ -644,7 +644,7 @@
    "ids": [
     "bk-m11-p-chain"
    ],
-   "weight": 0.01795,
+   "weight": 0.01772,
    "nodes": [
     "bk-m11-p-chain"
    ],
@@ -891,7 +891,7 @@
    "name": "Slope of E vs log a (sign and charge dependence)",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.077,
+   "marks": 1.063,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -900,7 +900,7 @@
    "ids": [
     "bk-m11-p-slope"
    ],
-   "weight": 0.01077,
+   "weight": 0.01063,
    "nodes": [
     "bk-m11-p-slope"
    ],
@@ -912,7 +912,7 @@
    "name": "Unknown activity from a reading, and the Nernstian test",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.436,
+   "marks": 1.418,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -921,7 +921,7 @@
    "ids": [
     "bk-m11-p-cal"
    ],
-   "weight": 0.01436,
+   "weight": 0.01418,
    "nodes": [
     "bk-m11-p-cal"
    ],
@@ -933,7 +933,7 @@
    "name": "Selectivity coefficient from E₁ and E₂ with activities",
    "mode": "calc",
    "engine": "gen",
-   "marks": 2.872,
+   "marks": 2.835,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry · lecture Example 6",
    "tags": [
@@ -942,7 +942,7 @@
    "ids": [
     "bk-m11-p-sel"
    ],
-   "weight": 0.02872,
+   "weight": 0.02835,
    "nodes": [
     "bk-m11-p-sel"
    ],
@@ -954,7 +954,7 @@
    "name": "Interference error and what K^pot means",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.436,
+   "marks": 1.418,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -963,7 +963,7 @@
    "ids": [
     "bk-m11-p-intf"
    ],
-   "weight": 0.01436,
+   "weight": 0.01418,
    "nodes": [
     "bk-m11-p-intf"
    ],
@@ -975,7 +975,7 @@
    "name": "Slope for an ion sensed indirectly through Ksp",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.436,
+   "marks": 1.418,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry · lecture Ag₂S slides",
    "tags": [
@@ -984,7 +984,7 @@
    "ids": [
     "bk-m11-p-ag2s"
    ],
-   "weight": 0.01436,
+   "weight": 0.01418,
    "nodes": [
     "bk-m11-p-ag2s"
    ],
@@ -993,19 +993,19 @@
   {
    "id": "m11.p.gas",
    "ch": 4,
-   "name": "Gas probes: the ammonia probe (and CO₂ as the same idea)",
+   "name": "Gas probes: derive the inner solution, sensor and slope sign for any gas",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.359,
+   "marks": 0.532,
    "basis": "notes",
-   "ref": "Topic 3b · potentiometry · gas-probe lecture slides",
+   "ref": "Topic 3b · potentiometry · gas-probe lecture slides (slide 24 table)",
    "tags": [
     "gas-sensing-probe"
    ],
    "ids": [
     "bk-m11-p-gas"
    ],
-   "weight": 0.00359,
+   "weight": 0.00532,
    "nodes": [
     "bk-m11-p-gas"
    ],
@@ -1017,7 +1017,7 @@
    "name": "Glass electrode facts and TISAB",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.718,
+   "marks": 0.709,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -1026,7 +1026,7 @@
    "ids": [
     "bk-m11-p-facts"
    ],
-   "weight": 0.00718,
+   "weight": 0.00709,
    "nodes": [
     "bk-m11-p-facts"
    ],
@@ -1038,7 +1038,7 @@
    "name": "Cell notation, junction potentials and interference: concepts",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.359,
+   "marks": 0.354,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -1047,7 +1047,7 @@
    "ids": [
     "bk-m11-p-concepts"
    ],
-   "weight": 0.00359,
+   "weight": 0.00354,
    "nodes": [
     "bk-m11-p-concepts"
    ],
@@ -1059,7 +1059,7 @@
    "name": "Calibration and measurement procedure for an ISE",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.718,
+   "marks": 0.709,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -1068,7 +1068,7 @@
    "ids": [
     "bk-m11-p-calib-order"
    ],
-   "weight": 0.00718,
+   "weight": 0.00709,
    "nodes": [
     "bk-m11-p-calib-order"
    ],
@@ -1080,7 +1080,7 @@
    "name": "Explain glass, fluoride, ammonia electrodes and the liquid junction potential",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.795,
+   "marks": 1.772,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -1089,7 +1089,7 @@
    "ids": [
     "bk-m11-p-written"
    ],
-   "weight": 0.01795,
+   "weight": 0.01772,
    "nodes": [
     "bk-m11-p-written"
    ],

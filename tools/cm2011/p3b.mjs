@@ -135,23 +135,34 @@ const SLOPE = 59.16;
 }
 
 /* ---------- gas-sensing probes ----------
-   Only the ammonia probe has ever been examined (2011/12, 2017/18, 2025/26 finals); the lecture's wider gas table (H2S, HCN, SO2, HF)
-   never appears in 11 finals, so it was dropped. CO2 stays as the one other example of the same principle. */
+   The lecture table (Topic 3b slide 24) has six gases. Finals so far (2011/12, 2017/18, 2025/26) ask only the ammonia probe, but the whole
+   table is one idea: the film holds a fixed partner of the gas's own equilibrium, the other product is the free ion, and an ISE reads it.
+   Each card gives the equilibrium as a hint (hidden in exam mode) and asks for: inner solution (the fixed partner), sensor, sign of E against log[gas]. */
 {
+  const neg = '^.*(?:neg|minus|−|-|fall|down|decreas).*$', pos = '^.*(?:pos|plus|\\+|rise|up|increas).*$';
   const G = [
-    ['nh3', 'NH₃', '0.1 M NH₄Cl', has('nh[4₄]\\+? ?cl', 'nh[4₄]cl', 'ammonium chloride', 'ammonium'), 'pH glass electrode', has('ph', 'glass'),
-      'NH₃ crosses the membrane and raises the pH of the thin NH₄Cl layer (NH₃ + H₂O ⇌ NH₄⁺ + OH⁻); the glass electrode reads that pH change. More NH₃ means higher pH, so the potential falls as log[NH₃] rises: the slope is negative, about −59 mV per decade.'],
-    ['co2', 'CO₂', 'NaHCO₃', has('nahco[3₃]', 'sodium (?:hydrogen ?)?carbonate', 'sodium bicarbonate', 'hco[3₃]'), 'pH glass electrode', has('ph', 'glass'),
-      'CO₂ crosses the membrane and acidifies the thin NaHCO₃ layer (CO₂ + H₂O ⇌ H⁺ + HCO₃⁻); the glass electrode reads the pH fall. Same principle as the ammonia probe, opposite direction: more CO₂ gives a lower pH.'],
+    { id: 'nh3', gas: 'NH₃', eq: 'NH₃ + H₂O ⇌ NH₄⁺ + OH⁻', inner: '0.1 M NH₄Cl (holds NH₄⁺ fixed)', innerRe: has('nh[4₄]\\+? ?cl', 'nh[4₄]cl', 'ammonium chloride', 'ammonium', 'nh[4₄]\\+'), sensor: 'pH glass electrode', sensorRe: has('ph', 'glass'), sign: 'negative (about −59 mV per decade)', signRe: neg,
+      why: 'NH₄⁺ is held fixed, so OH⁻ (and so pH) rises in step with NH₃ and H⁺ falls as 1/[NH₃]. A cation electrode gives +59.2 log[H⁺], so E = const − 59.2 log[NH₃]. This is the one the finals ask: it is neutral, so concentration is enough; amines that cross the membrane interfere.' },
+    { id: 'co2', gas: 'CO₂', eq: 'CO₂ + H₂O ⇌ H⁺ + HCO₃⁻', inner: 'NaHCO₃ (holds HCO₃⁻ fixed)', innerRe: has('nahco[3₃]', 'sodium (?:hydrogen ?)?carbonate', 'sodium bicarbonate', 'hco[3₃]', 'bicarbonate', 'hydrogen ?carbonate'), sensor: 'pH glass electrode', sensorRe: has('ph', 'glass'), sign: 'positive (about +59 mV per decade)', signRe: pos,
+      why: 'HCO₃⁻ is held fixed, so H⁺ is proportional to [CO₂]: more CO₂ lowers the pH. The glass electrode is a cation sensor, so E = const + 59.2 log[CO₂]. (Na⁺ is only the spectator counter-ion.)' },
+    { id: 'so2', gas: 'SO₂', eq: 'SO₂ + H₂O ⇌ H⁺ + HSO₃⁻', inner: 'NaHSO₃ (holds HSO₃⁻ fixed)', innerRe: has('nahso[3₃]', 'hso[3₃]', 'bisulfite', 'bisulphite', 'hydrogen ?sulfite', 'hydrogen ?sulphite', 'sodium (?:hydrogen ?)?sulfite', 'sodium (?:hydrogen ?)?sulphite'), sensor: 'pH glass electrode', sensorRe: has('ph', 'glass'), sign: 'positive (about +59 mV per decade)', signRe: pos,
+      why: 'Same pattern as CO₂: HSO₃⁻ is held fixed, so H⁺ is proportional to [SO₂] and the pH glass electrode gives E = const + 59.2 log[SO₂].' },
+    { id: 'hf', gas: 'HF', eq: 'HF ⇌ H⁺ + F⁻', inner: 'an acid solution (holds H⁺ fixed)', innerRe: has('h\\+', 'h⁺', 'acid', 'hcl', 'proton', 'h\\^\\+'), sensor: 'F⁻ (LaF₃) electrode', sensorRe: has('laf', 'f-', 'f⁻', 'fluoride'), sign: 'negative (about −59 mV per decade)', signRe: neg,
+      why: 'Here the free ion is F⁻ itself: with H⁺ held fixed, [F⁻] = Ka[HF]/[H⁺] is proportional to [HF]. The fluoride electrode is an anion sensor, so E falls by 59.2 mV per decade. (Slope worked out from the ISE rule: the slide gives only the table.)' },
+    { id: 'h2s', gas: 'H₂S', eq: 'H₂S ⇌ H⁺ + HS⁻ and HS⁻ ⇌ H⁺ + S²⁻', inner: 'a pH 5 buffer (holds H⁺ fixed)', innerRe: has('buffer', 'ph ?5', 'ph 5'), sensor: 'S²⁻ (Ag₂S) electrode', sensorRe: has('ag[2₂]s', 's2-', 's²⁻', 'sulfide', 'sulphide'), sign: 'negative (about −30 mV per decade)', signRe: neg,
+      why: 'A buffer is used because the gas is itself an acid and would otherwise change the pH. With H⁺ fixed, [S²⁻] is proportional to [H₂S], and the Ag₂S electrode gives −29.6 mV per decade of S²⁻ (a doubly charged anion). Slope worked out from the ISE rule.' },
+    { id: 'hcn', gas: 'HCN', eq: 'Ag(CN)₂⁻ ⇌ Ag⁺ + 2CN⁻', inner: 'KAg(CN)₂ (holds Ag(CN)₂⁻ fixed)', innerRe: has('kag\\(cn\\)', 'ag\\(cn\\)', 'silver cyanide', 'dicyanoargentate', 'kag'), sensor: 'Ag⁺ (silver) electrode', sensorRe: has('ag\\+', 'ag⁺', 'silver', '\\bag\\b'), sign: 'negative (about −118 mV per decade, two CN⁻)', signRe: neg,
+      why: 'This one runs backwards: HCN supplies CN⁻, which pushes the complex equilibrium to the left, so Ag⁺ falls as 1/[CN⁻]². A cation electrode then gives a negative slope, about 2 × 59.2 mV per decade. The slope is worked out, not on the slide; the sign is what matters.' },
   ];
-  const variants = G.map(([id, gas, inner, innerRe, sensor, sensorRe, why]) => recall({
-    id: `p-gas-${id}`, label: gas, marks: 2,
-    stem: `A dissolved-gas sensing probe for **${gas}** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. What is the inner filling solution, and which electrode senses the change?`,
-    explanation: `${gas}: inner solution ${inner}; sensing electrode ${sensor}. ${why}`,
-    fields: [['inner', 'Inner solution', inner, [`^.*${innerRe}.*$`]], ['sensor', 'Sensing electrode', sensor, [`^.*${sensorRe}.*$`]]],
+  const variants = G.map((g) => recall({
+    id: `p-gas-${g.id}`, label: g.gas, marks: 3,
+    stem: `A dissolved-gas sensing probe for **${g.gas}** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. Give (a) the inner filling solution, (b) the sensing electrode, (c) the sign of the slope of E against log[${g.gas}].`,
+    hint: `Write the equilibrium the gas sets up in water: ${g.eq}. Hold one product fixed in the inner solution; the other is free to follow the gas, and the electrode reads it.`,
+    explanation: `${g.gas}: ${g.eq}. Inner solution: ${g.inner}. Sensing electrode: ${g.sensor}. ${g.why}`,
+    fields: [['inner', 'Inner solution', g.inner, [`^.*${g.innerRe}.*$`]], ['sensor', 'Sensing electrode', g.sensor, [`^.*${g.sensorRe}.*$`]], ['sign', 'Slope of E against log[gas]', g.sign, [g.signRe]]],
   }));
-  add(node({ id: 'bk-m11-p-gas', week: WEEK, title: 'Gas-sensing probes: how the ammonia probe works', theme: THEME, tags: ['gas-sensing-probe'], source: SRC + ' · gas-probe lecture slides', family: 'ise-recall', tier: 'atomic', exam: 'short_2to3', mins: 2, variants }),
-    { id: 'm11.p.gas', name: 'Gas probes: the ammonia probe (and CO₂ as the same idea)', chunk: 'p-types', marks: 1, tags: ['gas-sensing-probe'] });
+  add(node({ id: 'bk-m11-p-gas', week: WEEK, title: 'Gas-sensing probes: derive the inner solution and sensor', theme: THEME, tags: ['gas-sensing-probe'], source: SRC + ' · gas-probe lecture slides (slide 24 table)', family: 'ise-recall', tier: 'atomic', exam: 'short_2to3', mins: 3, variants }),
+    { id: 'm11.p.gas', name: 'Gas probes: derive the inner solution, sensor and slope sign for any gas', chunk: 'p-types', marks: 1.5, tags: ['gas-sensing-probe'] });
 }
 
 /* ---------- membranes and their facts ---------- */

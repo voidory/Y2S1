@@ -161,6 +161,85 @@ nuc('nuc-u', '²³⁸U captures a neutron, then undergoes two successive β⁻ d
 nuc('nuc-t', 'Natural tritium forms by neutron capture by nitrogen: ¹⁴N + n → T + X. What is X?', { A: 12, Z: 6, sym: 'C', name: 'carbon' }, 'A: 14 + 1 = 3 + 12. Z: 7 = 1 + 6, carbon-12.');
 nuc('nuc-be', '⁹Be + ⁴He → n + X. What is X?', { A: 12, Z: 6, sym: 'C', name: 'carbon' }, 'A: 9 + 4 = 1 + 12. Z: 4 + 2 = 0 + 6, carbon-12 (the discovery of the neutron).');
 
+
+/* ---------- added 22 Nov 2026 after checking the Kinjo decks (cm2021_part_2): reactions the slides print that the first list missed ---------- */
+add('h2-f2', 'h2', { ask: 'Write the formation of HF from H₂ and F₂ (at −196 °C).', eq: 'H2 + F2 -> 2HF', cond: 'works at −196 °C: F₂ is that reactive', hook: 'The most reactive halogen needs no heat to take H₂.' });
+add('h2-o2', 'h2', { ask: 'Write the burning of hydrogen in oxygen (a radical chain; mixtures explode).', eq: '2H2 + O2 -> 2H2O', hook: 'The strong O–H bond (464 kJ mol⁻¹) drives it.' });
+add('g1-h2o', 'g1more', { ask: 'Write sodium with water at room temperature.', eq: '2Na + 2H2O -> 2NaOH + H2', hook: 'Water is reduced to H₂ and OH⁻; vigour rises from Li to Cs.', x: 2 });
+add('g1-li2o', 'g1o2', { ask: 'Write lithium oxide with water.', eq: 'Li2O + H2O -> 2LiOH', hook: 'Oxide, peroxide and superoxide all give the hydroxide.' });
+add('g1-cl2', 'g1more', { ask: 'Write sodium with chlorine.', eq: '2Na + Cl2 -> 2NaCl', hook: 'Group 1 metals reduce every halogen.' });
+add('g1-roh', 'g1more', { ask: 'Write sodium with ethanol (an alkoxide forms).', eq: '2Na + 2C2H5OH -> 2NaOC2H5 + H2', hook: 'M + ROH → MOR + ½H₂: the same H⁺ reduction as with water.' });
+add('g2-mo-h2o', 'g2', { ask: 'Write CaO with water (Ca, Sr and Ba oxides; Be and Mg oxides are stable).', eq: 'CaO + H2O -> Ca(OH)2', hook: 'Basic oxide plus water gives the hydroxide, exothermically.' });
+add('g2-m-h2o', 'g2', { ask: 'Write magnesium with hot water.', eq: 'Mg + 2H2O -> Mg(OH)2 + H2', cond: 'heating required (Mg is passivated); Be does not react', hook: 'Ca, Sr and Ba react the same way, more readily.' });
+add('g2-mg-hcl', 'g2', { ask: 'Write magnesium dissolving in dilute HCl.', eq: 'Mg + 2HCl -> MgCl2 + H2', hook: 'Be and Mg dissolve readily in dilute acids with H₂.' });
+add('g2-mh2', 'g2', { ask: 'Write calcium with H₂ under high pressure.', eq: 'Ca + H2 -> CaH2', cond: 'high H₂ pressure', hook: 'Be is the exception: it does not react with H₂.' });
+add('g2-cah2-h2o', 'g2', { ask: 'Write the saline hydride CaH₂ with water in the general form MH₂ + 2H₂O (take M = Ca).', eq: 'CaH2 + 2H2O -> Ca(OH)2 + 2H2', hook: 'The same drying-agent reaction as in the hydrides chunk.' });
+add('g2-halide', 'g2', { ask: 'Write magnesium with chlorine.', eq: 'Mg + Cl2 -> MgCl2', hook: 'Direct combination with X₂ gives the ionic halides.' });
+add('g2-ca3n2', 'g2', { ask: 'Write Ca₃N₂ with H₂ (gives CaNH and CaH₂).', eq: 'Ca3N2 + 2H2 -> 2CaNH + CaH2', hook: 'The nitride is hydrogenated rather than hydrolysed.', note: 'The slide prints 2CaH₂, which leaves Ca unbalanced (4 against 3); one CaH₂ balances.' });
+add('g2-cac2', 'g2', { ask: 'Write the reaction of calcium carbonate with carbon (calcium carbide forms).', eq: 'CaCO3 + 4C -> CaC2 + 3CO', hook: 'Marked with an asterisk on the slide: a side note, low priority.' });
+add('g2-bef4', 'g2', { ask: 'Write BeF₂ with sodium fluoride (BeF₂ is a Lewis acid).', eq: 'BeF2 + 2NaF -> Na2[BeF4]', hook: 'Be²⁺ takes two F⁻ to reach four-coordinate [BeF₄]²⁻.' });
+add('g2-be-aq', 'g2', { ask: 'Write BeCl₂ dissolving in water (it forms the aqua ion).', eq: 'BeCl2 + 4H2O -> [Be(H2O)4]Cl2', hook: 'Small, highly charged Be²⁺ makes the acidic [Be(H₂O)₄]²⁺.', note: 'The slide prints the product as [Be(H₂O)₄]₂X, a typo for [Be(H₂O)₄]X₂.' });
+add('b-bcl3-zn', 'boron', { ask: 'Write the reduction of BCl₃ with zinc to give boron.', eq: '2BCl3 + 3Zn -> 3ZnCl2 + 2B', hook: 'Zn takes the chlorine; the other route uses Mg and B₂O₃.' });
+add('b-bcl3-syn', 'boron', { ask: 'Write the synthesis of BCl₃ from B₂O₃, carbon and chlorine.', eq: 'B2O3 + 3C + 3Cl2 -> 2BCl3 + 3CO', hook: 'Carbon strips the oxygen as CO while Cl₂ replaces it.' });
+add('b-bf3-meoh', 'boron', { ask: 'Write the Lewis adduct of BF₃ with methanol.', eq: 'BF3 + CH3OH -> BF3(CH3OH)', hook: 'BF₃ is a Lewis acid: the planar sp² boron becomes tetrahedral.' });
+add('b-al2o3', 'boron', { ask: 'Write Al₂O₃ with HF to make AlF₃ (970 K).', eq: 'Al2O3 + 6HF -> 2AlF3 + 3H2O', cond: '970 K', hook: 'HF swaps fluoride for oxide.' });
+add('b-mf3', 'boron', { ask: 'Write aluminium with fluorine (the general 2M + 3F₂ → 2MF₃).', eq: '2Al + 3F2 -> 2AlF3', hook: 'Direct combination gives the trifluoride.' });
+add('si-sih4-o2', 'silicon', { ask: 'Write silane burning in air.', eq: 'SiH4 + 2O2 -> SiO2 + 2H2O', hook: 'Silane is explosively inflammable, unlike methane.' });
+add('si-sih3cl', 'silicon', { ask: 'Write the formation of SiH₃Cl from silane and HCl.', eq: 'SiH4 + HCl -> SiH3Cl + H2', hook: 'One H swaps for Cl; the other route is Si + HCl.' });
+add('si-silica-c', 'silicon', { ask: 'Write the carbon reduction of silica to silicon.', eq: 'SiO2 + 2C -> Si + 2CO', cond: 'high temperature', hook: 'Carbon removes the oxygen as CO.', note: 'The slide prints CO₂ on the right, which does not balance; 2CO does.' });
+add('si-sicl4-syn', 'silicon', { ask: 'Write the formation of liquid SiCl₄ from silicon.', eq: 'Si + 2Cl2 -> SiCl4', hook: 'Direct reaction with Cl₂.' });
+add('si-sif4-h2o', 'silicon', { ask: 'Write the hydrolysis of SiF₄ (fluorosilicic acid forms).', eq: '3SiF4 + 6H2O -> SiO2 + 2[H3O]2[SiF6]', hook: 'Both SiF₄ and SiCl₄ hydrolyse; SiF₄ keeps some fluoride as [SiF₆]²⁻.' });
+add('si-sncl4', 'silicon', { ask: 'Write SnCl₄ with potassium chloride (tin(IV) halides are strong Lewis acids).', eq: 'SnCl4 + 2KCl -> K2[SnCl6]', hook: 'Tin(IV) halides resemble the Si and Ge ones and add halide.' });
+add('n-hno2', 'nox', { ask: 'Write the preparation of nitrous acid from barium nitrite and sulfuric acid.', eq: 'Ba(NO2)2 + H2SO4 -> 2HNO2 + BaSO4', hook: 'A mineral acid frees the weak acid; BaSO₄ precipitates.', note: 'The slide prints barium nitrite as Ba(NO)₂, a typo.' });
+add('n-n2h4-o2', 'nchain', { ask: 'Write hydrazine burning in oxygen (rocket fuel).', eq: 'N2H4 + O2 -> N2 + 2H2O', hook: 'Strongly exothermic: N₂ and water.' });
+add('nox-no-o2', 'nox', { ask: 'Write NO reacting with oxygen in air.', eq: '2NO + O2 -> 2NO2', hook: 'Immediate: this makes NO₂ in polluted air.' });
+add('nox-n2o3', 'nox', { ask: 'Write the formation of N₂O₃ from NO and NO₂ (below −101 °C).', eq: 'NO + NO2 -> N2O3', cond: 'below −101 °C (blue)', hook: 'It dissociates again as it warms.', note: 'The bank uses this step; the slide shows N₂O₃ ⇌ NO + NO₂.' });
+add('p-nh3-2', 'phos', { ask: 'Write phosphoric acid with two equivalents of NH₃.', eq: '2NH3 + H3PO4 -> (NH4)2HPO4', hook: 'Two acidic H atoms neutralised: the diammonium phosphate fertiliser.' });
+add('s-s8', 'osx', { ask: 'Write sulfur burning in oxygen.', eq: 'S8 + 8O2 -> 8SO2', hook: 'S₈ ring to eight SO₂.' });
+add('s-so3-h2o', 'osx', { ask: 'Write SO₃ with water (a strongly acidic oxide).', eq: 'SO3 + H2O -> H2SO4', hook: 'In the contact process this is avoided: water gives a mist, so SO₃ is absorbed in H₂SO₄ instead.' });
+add('hal-clo2-hcl', 'halogens', { ask: 'Write the other route to ClO₂: sodium chlorate reduced by hydrochloric acid.', eq: '2NaClO3 + 4HCl -> 2ClO2 + Cl2 + 2NaCl + 2H2O', hook: 'Cl(V) goes to Cl(IV); the HCl gives Cl₂ and NaCl.' });
+add('hal-clf', 'halogens', { ask: 'Write Cl₂ with F₂ at 225 °C (the lowest interhalogen).', eq: 'Cl2 + F2 -> 2ClF', cond: '225 °C', hook: 'Raise F₂ and T to go up: ClF₃, then ClF₅.' });
+add('hal-clf3', 'halogens', { ask: 'Write Cl₂ with excess F₂ at 300 °C.', eq: 'Cl2 + 3F2 -> 2ClF3', cond: '300 °C', hook: 'Odd numbers of F only: XX′ₙ with n odd.' });
+add('hal-clf5', 'halogens', { ask: 'Write Cl₂ with F₂ at 350 °C and 250 atm.', eq: 'Cl2 + 5F2 -> 2ClF5', cond: '350 °C, 250 atm F₂', hook: 'High F₂ pressure is what reaches the pentafluoride.' });
+
+/* ---------- corrections from the deck check ---------- */
+const PATCH = {
+  'hyd-lialh4': { flag: null }, 'hyd-nabh4': { flag: null }, 'hyd-tih': { flag: null },
+  'hyd-nad2o': { flag: 'unchecked', note: 'From the bank (the HD question); the slides print no D₂O equation.' },
+  'h2-reform': { note: 'The hydrogen slides before slide 25 are not in the uploaded decks, so this is bank-only.' },
+  'h2-wgs': { note: 'Bank-only (hydrogen slides before slide 25 are not in the uploaded decks).' },
+  'h2-coke': { note: 'Bank-only (hydrogen slides before slide 25 are not in the uploaded decks).' },
+  'h2-zn': { flag: 'unchecked', note: 'Bank-only: not in the uploaded decks.' },
+  'h2-al': { flag: 'unchecked', note: 'Bank-only: not in the uploaded decks.' },
+  'g1-ko2-co2': { note: 'The slides say KO₂ absorbs CO₂ and releases O₂ but print no equation; K₂CO₃ as the product comes from the bank.' },
+  'g1-rli': { flag: 'unchecked', note: 'The slides mention RLi reagents but print no preparation.' },
+  'na-downs': { note: 'The slides print 2NaCl → 2Na + Cl₂ (electrolysis of fused salts); "Downs cell" is the name from the bank.' },
+  'na-chlor': { note: 'The slides print the equation; "chlor-alkali" is the name from the bank.' },
+  'g2-caco3': { cond: 'decomposes at 813 K (Mg), 1173 K (Ca), 1563 K (Sr)' },
+  'g2-limewater': { note: 'The slides print only the first equation and say the solid "disappears on further reaction with CO₂" (soluble Ca(HCO₃)₂).' },
+  'si-sif4-f': { note: 'The slides call SiF₄ a mild Lewis acid and show [SiF₆]²⁻; the equation is written out here.' },
+  'n-haber': { cond: 'Fe₃O₄ catalyst, about 500 °C, 500 atm (the slides also quote 400 °C, 250 atm)' },
+  'n-ostwald': { note: 'The slides print only step 1 (Pt, 1300 K). Steps 2 and 3 come from the bank.' },
+  'n-olin': { note: 'The slides print the overall equation and mention chloramine; the two-step route is that path.' },
+  'n-chloramine': { note: 'The slides say chloramine forms but print no equation.' },
+  'n-nh4no3': { note: 'The slides show NH₃ + HX → NH₄X; the nitrate case is the end of the nitrogen chart.' },
+  'nox-hno3-i2': { note: 'The slides name the products (HIO₃, H₃PO₄, H₂SO₄) but print no equations.' },
+  'nox-hno3-p4': { note: 'The slides name the products (HIO₃, H₃PO₄, H₂SO₄) but print no equations.' },
+  'nox-hno3-s8': { note: 'The slides name the products (HIO₃, H₃PO₄, H₂SO₄) but print no equations.' },
+  'nox-aqua': { note: 'The slide prints H₂O (not 2H₂O) in the first step; 2H₂O is what balances.' },
+  'p-extract': { cond: 'about 1700 K, sand and coke; the P₄ vapour is condensed under water' },
+  'p-p4o10': { note: 'The slides describe it (terminal O added to each P) but print no equation.' },
+  'p-amide': { flag: null, note: 'The slide shows RCONH₂ → RCN with P₄O₁₀ and −H₂O; the balanced equation is worked out here.' },
+  's-contact': { note: 'The slides write SO₂ + ½O₂ → SO₃ (V₂O₅); the doubled form is the same reaction.' },
+  'hal-clbr': { note: 'The slides give the rule (a halogen higher up oxidises a halide below it) but no equation.' },
+  'hal-cli': { note: 'The slides give the rule but no equation.' },
+  'hal-if5': { note: 'Text only on the slides (IF₅ at room temperature).' },
+  'hal-if7': { note: 'Text only on the slides (IF₇ at 250–300 °C).' },
+  'o-h2o2': { note: 'The slides write H₂O₂ → H₂O + ½O₂ (ΔH° = −98 kJ mol⁻¹); doubled here.' },
+};
+for (const r of R) { const p = PATCH[r.id]; if (p) for (const [k, v] of Object.entries(p)) { if (v === null) delete r[k]; else r[k] = v; } }
+for (const id of Object.keys(PATCH)) if (!R.some((r) => r.id === id)) throw new Error('PATCH: unknown reaction ' + id);
+
 /* ------------------------------ chains ------------------------------ */
 export const CHAINS = [
   { id: 'chain-n', title: 'Nitrogen chart', rows: [

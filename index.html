@@ -11263,7 +11263,7 @@
         const b = [];
         if (r.fin && r.fin.length) b.push(`<span class="px-1.5 py-0.5 rounded bg-blue-50 border border-blue-200 text-blue-800 text-[10px] font-semibold" data-rx-badge="finals">Asked in finals ${esc(r.fin.join(', '))}</span>`);
         if (r.name) b.push(`<span class="px-1.5 py-0.5 rounded bg-slate-900 text-white text-[10px] font-semibold">${esc(r.name)}</span>`);
-        if (r.flag === 'unchecked') b.push(`<span class="px-1.5 py-0.5 rounded bg-amber-50 border border-amber-300 text-amber-900 text-[10px] font-medium" title="The notes say this one is in no uploaded slide deck">not in your slides</span>`);
+        if (r.flag === 'unchecked') b.push(`<span class="px-1.5 py-0.5 rounded bg-amber-50 border border-amber-300 text-amber-900 text-[10px] font-medium" title="Not found in the slide decks you uploaded (it comes from the question bank)">not in your slides</span>`);
         return b.join(' ');
       }
       function rxEqBlock(r, cover, revealed) {
@@ -11281,6 +11281,7 @@
             <div class="flex flex-wrap items-center gap-1.5 mb-0.5"><span class="text-[11px] text-slate-500">${esc(Reactions.label(r))}</span>${rxBadges(r)}</div>
             ${rxEqBlock(r, cover, revealed)}
             ${revealed && r.kind !== 'nuc' ? `<div class="mt-1 flex flex-wrap items-baseline gap-x-3 gap-y-0.5">${r.cond ? `<span class="text-[11px] font-medium text-amber-800 bg-amber-50 border border-amber-200 rounded px-1.5 py-0.5">${esc(r.cond)}</span>` : ''}<span class="text-xs text-slate-600 italic">${esc(r.hook)}</span></div>` : ''}
+            ${revealed && r.note ? `<p class="mt-1 text-[11px] text-slate-500" data-rx-note>${esc(r.note)}</p>` : ''}
           </div></li>`;
       }
 
@@ -11395,7 +11396,8 @@
             <div class="border rounded-xl p-3 ${tone}"><div class="font-display font-semibold text-sm" data-rx-verdict>${head}</div>${res.feedback ? `<p class="text-xs mt-0.5">${esc(res.feedback)}</p>` : ''}</div>
             <div class="bg-slate-50 border border-slate-200 rounded-xl p-3"><div class="text-[11px] uppercase tracking-wider text-slate-500 mb-1">Model answer</div>${model}${alt}
               ${r.cond ? `<div class="mt-1.5"><span class="text-[11px] font-medium text-amber-800 bg-amber-50 border border-amber-200 rounded px-1.5 py-0.5">${esc(r.cond)}</span></div>` : ''}
-              <p class="text-xs text-slate-700 italic mt-1.5">${esc(r.hook)}</p></div>
+              <p class="text-xs text-slate-700 italic mt-1.5">${esc(r.hook)}</p>
+              ${r.note ? `<p class="mt-1.5 text-[11px] text-slate-500" data-rx-note>${esc(r.note)}</p>` : ''}</div>
           </div>`;
         }
         const actions = res

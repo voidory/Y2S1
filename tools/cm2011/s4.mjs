@@ -103,24 +103,8 @@ const THEME_AT = 'Atomic Spectroscopy';
     { id: 'm11.s.aaslayout', name: 'Order the parts of an atomic absorption spectrometer', chunk: 's-atomic', marks: 2, tags: ['aas'] });
 }
 
-/* ---------- fluorescence and AAS: reasoning ---------- */
+/* ---------- fluorescence and AAS: reasoning (the pick-one concept cards were dropped: the written and table versions cover the same facts) ---------- */
 {
-  const flu = [
-    pick({ id: 's-f-wl', label: 'Emission wavelength', stem: 'A molecule is excited at 350 nm. Its fluorescence emission is most likely to be centred near:', explanation: 'Some energy is lost by vibrational relaxation before emission (the Stokes shift), so the fluorescence photon has less energy and a **longer** wavelength than the excitation photon.', options: [['a', '430 nm (longer than the excitation)'], ['b', '350 nm (identical)'], ['c', '280 nm (shorter than the excitation)'], ['d', 'it cannot be predicted']], correct: 'a' }),
-    pick({ id: 's-f-90', label: 'Why 90°', stem: 'Why is the fluorescence detector placed at 90° to the excitation beam?', explanation: 'In line with the beam the detector would be swamped by the (much brighter) transmitted source light. At 90° only emitted light and a little scatter reach it.', options: [['a', 'to avoid detecting the transmitted excitation light'], ['b', 'because fluorescence is emitted only at right angles'], ['c', 'to make the path length 1 cm'], ['d', 'to allow Beer’s law to be used']], correct: 'a' }),
-    pick({ id: 's-f-sens', label: 'Sensitivity', stem: 'Fluorescence methods usually have much lower detection limits than absorption methods because:', explanation: 'Fluorescence is measured against a near-dark background, so a tiny signal can be detected. Absorbance is the small difference between two large light intensities, which limits sensitivity.', options: [['a', 'a small emitted signal is measured against a dark background'], ['b', 'molar absorptivities are larger'], ['c', 'longer path lengths are used'], ['d', 'there is no scattered light']], correct: 'a' }),
-  ];
-  add(node({ id: 'bk-m11-s-fl-concepts', week: 6, title: 'Fluorescence: concepts', theme: THEME_F, tags: ['fluorescence', 'concepts'], source: SRC_Q, family: 'fluor', tier: 'atomic', exam: 'mcq_1mark', diff: 2, mins: 1, variants: flu }),
-    { id: 'm11.s.flconcepts', name: 'Fluorescence: Stokes shift, 90° geometry, sensitivity', chunk: 's-fluorescence', marks: 1, tags: ['fluorescence'] });
-
-  const aas = [
-    pick({ id: 's-a-hcl', label: 'Hollow-cathode lamp', stem: 'Why does atomic absorption spectrometry use a hollow-cathode lamp made of the element being determined?', explanation: 'Atomic absorption lines are very narrow (~0.01 nm). A lamp emitting the same element’s lines supplies exactly those wavelengths, with a bandwidth narrower than the absorption line, so Beer’s law holds without a very high-resolution monochromator.', options: [['a', 'it emits the narrow lines the atoms absorb'], ['b', 'it gives a continuous spectrum'], ['c', 'it atomises the sample'], ['d', 'it replaces the monochromator']], correct: 'a' }),
-    pick({ id: 's-a-gf', label: 'Flame vs furnace', stem: 'Compared with a flame, a graphite furnace atomiser usually gives:', explanation: 'The furnace holds the whole atomised sample in the light path for longer, so it detects much lower amounts (parts per billion) but is slower and less precise than flame AAS.', options: [['a', 'lower detection limits but slower analysis'], ['b', 'higher detection limits'], ['c', 'faster analysis of large samples'], ['d', 'no need for a lamp']], correct: 'a' }),
-    pick({ id: 's-a-what', label: 'What is absorbed', stem: 'In AAS the absorbing species are:', explanation: 'Free ground-state atoms in the flame or furnace. The sample is first desolvated, vaporised and atomised; the absorbance is proportional to the number of atoms in the light path.', options: [['a', 'free ground-state atoms'], ['b', 'excited atoms only'], ['c', 'intact molecules in the solvent'], ['d', 'ions formed by the lamp']], correct: 'a' }),
-  ];
-  add(node({ id: 'bk-m11-s-aas-concepts', week: 7, title: 'Atomic spectroscopy: concepts', theme: THEME_AT, tags: ['aas', 'concepts'], source: SRC_Q, family: 'aas', tier: 'atomic', exam: 'mcq_1mark', diff: 2, mins: 1, variants: aas }),
-    { id: 'm11.s.aasconcepts', name: 'AAS: lamp, atomisers and what absorbs', chunk: 's-atomic', marks: 1, tags: ['aas'] });
-
   add(node({ id: 'bk-m11-s-written', week: 6, title: 'Spectroscopy: explain', theme: THEME_F, tags: ['fluorescence', 'aas'], source: SRC_Q, family: 'fluor', mins: 6,
     variants: [
       written({ id: 's-w-fl-vs-abs', label: 'Fluorescence versus absorption', stem: 'Compare molecular fluorescence with molecular absorption spectrometry: how the signal is measured, instrument geometry, and sensitivity.', explanation: 'Absorption measures the light lost through the sample in line with the beam; fluorescence measures light emitted at a longer wavelength, viewed at 90° against a dark background, which makes it more sensitive and more selective (two wavelengths).',

@@ -161,25 +161,13 @@ const SLOPE = 59.16;
       stem: 'For the glass pH electrode: (a) in which solution is it conditioned, and for how long, (b) which surface group forms, and (c) which class of ions interferes?',
       explanation: 'Conditioning in 0.1 M HCl for about an hour forms silanol groups (–SiO⁻H⁺) in a thin surface layer. The response is to H⁺ activity; alkali-metal ions (Na⁺, Li⁺, K⁺) interfere, more so as the Al₂O₃ content rises.',
       fields: [['cond', 'Conditioning', '0.1 M HCl for 1 hour', [`^.*${has('0\\.1 ?m ?hcl', 'hcl', 'hydrochloric')}.*$`]], ['grp', 'Surface group', 'silanol, –SiO⁻H⁺', [`^.*${has('silanol', 'sio-? ?h', 'sio⁻ ?h')}.*$`]], ['intf', 'Interferents', 'alkali metal ions (Na⁺, Li⁺, K⁺)', [`^.*${has('alkali', 'na\\+', 'na⁺', 'sodium', 'li\\+', 'k\\+', 'group 1')}.*$`]]] }),
-    recall({ id: 'p-fact-laf3', label: 'Fluoride electrode', marks: 3,
-      stem: 'For the fluoride ISE: (a) what is the membrane, (b) what is it doped with to raise mobility, and (c) which ion is the main interferent?',
-      explanation: 'A single crystal of LaF₃ doped with EuF₂; F⁻ hops between vacancies (a defect mechanism). The main interferent is hydroxide, which is why TISAB buffers the pH to 5–6.',
-      fields: [['mem', 'Membrane', 'LaF₃ single crystal', [`^.*${has('laf', 'lanthanum')}.*$`]], ['dope', 'Dopant', 'EuF₂ (europium difluoride)', [`^.*${has('euf', 'europium', 'eu')}.*$`]], ['intf', 'Interferent', 'OH⁻ (hydroxide)', [`^.*${has('oh', 'hydroxide')}.*$`]]] }),
-    recall({ id: 'p-fact-pvc', label: 'PVC membrane', marks: 4,
-      stem: 'A PVC membrane sensor has four components. Name each in order of amount: ~30%, 65–70%, ~1%, and the ~1% that is sometimes added to raise conductivity.',
-      explanation: 'Polymer (PVC, ~30%); plasticiser (a solvent keeping the polymer liquid-like, 65–70%); ionophore (selective complexing agent, ~1%); salt (conductivity / counter-ion, ~1%).',
-      fields: [['p', '~30%', 'polymer (PVC)', [`^.*${has('polymer', 'pvc')}.*$`]], ['pl', '65–70%', 'plasticiser (solvent)', [`^.*${has('plasticis', 'plasticiz', 'solvent')}.*$`]], ['io', '~1% (selective)', 'ionophore', [`^.*${has('ionophore')}.*$`]], ['s', '~1% (conductivity)', 'salt (counter-ion)', [`^.*${has('salt', 'counter', 'lipophilic', 'electrolyte')}.*$`]]] }),
     recall({ id: 'p-fact-tisab', label: 'TISAB', marks: 3,
       stem: 'The fluoride ionic strength adjustment buffer (TISAB) has three components. State the job of (a) NaCl, (b) sodium acetate, (c) CDTA.',
       explanation: 'NaCl fixes the ionic strength so γ is constant and the electrode follows concentration. Acetate holds pH at 5–6 so OH⁻ does not interfere. CDTA complexes Al(III) and Fe(III), which would otherwise bind F⁻.',
       fields: [['nacl', 'NaCl', 'sets a constant ionic strength', [`^.*${has('ionic strength', 'constant', 'activity coeff', 'γ')}.*$`]], ['ac', 'Sodium acetate', 'buffers pH to 5–6 (avoids OH⁻)', [`^.*${has('ph', 'buffer', 'oh')}.*$`]], ['cdta', 'CDTA', 'complexes Al(III) and Fe(III)', [`^.*${has('complex', 'chelat', 'bind', 'mask', 'al', 'fe')}.*$`]]] }),
-    recall({ id: 'p-fact-k', label: 'Potassium electrode', marks: 3,
-      stem: 'For the PVC potassium electrode: (a) which ionophore is used, (b) why must the electrode be very selective for K⁺ over Na⁺ in serum, and (c) why is an NH₄NO₃ bridge used?',
-      explanation: 'Valinomycin; its cavity size gives high K⁺ selectivity. Serum K⁺ is 3.5–5.0 mM but Na⁺ is 135–145 mM, so Na⁺ is ~30× more abundant. The NH₄NO₃ bridge stops K⁺ leaking from the saturated KCl reference into the sample.',
-      fields: [['io', 'Ionophore', 'valinomycin', [`^.*${has('valinomycin')}.*$`]], ['why', 'Why very selective', 'Na⁺ is ~30× more concentrated than K⁺ in serum', [`^.*${has('na', 'sodium')}.*$`]], ['br', 'NH₄NO₃ bridge', 'prevents K⁺ contamination from the KCl reference', [`^.*${has('contamin', 'prevent', 'leak', 'k\\+', 'potassium', 'kcl')}.*$`]]] }),
   ];
-  add(node({ id: 'bk-m11-p-facts', week: WEEK, title: 'Membrane types: key facts', theme: THEME, tags: ['glass-electrode', 'laf3', 'pvc-membrane'], source: SRC, family: 'ise-recall', mins: 3, exam: 'short_2to3', tier: 'atomic', variants }),
-    { id: 'm11.p.facts', name: 'Glass, LaF₃, PVC and K⁺ electrode facts; TISAB', chunk: 'p-types', marks: 3, tags: ['membranes'] });
+  add(node({ id: 'bk-m11-p-facts', week: WEEK, title: 'Glass electrode and TISAB: key facts', theme: THEME, tags: ['glass-electrode', 'tisab'], source: SRC, family: 'ise-recall', mins: 3, exam: 'short_2to3', tier: 'atomic', variants }),
+    { id: 'm11.p.facts', name: 'Glass electrode facts and TISAB', chunk: 'p-types', marks: 2, tags: ['membranes'] });
 }
 
 /* ---------- concepts (pick one) ---------- */

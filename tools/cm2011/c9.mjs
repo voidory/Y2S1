@@ -279,14 +279,8 @@ add(node(mk({
 })), { id: 'm11.c.shape', name: 'Peak asymmetry: tailing and fronting', chunk: 'c-concepts', marks: 1, tags: ['peak-shape'] });
 
 add(node(mk({
-  id: 'bk-m11-c-types', title: 'Types of chromatography and general rules', tags: ['types'], family: 'chrom-types', exam: 'short_2to3', mins: 3, tier: 'atomic',
+  id: 'bk-m11-c-types', title: 'Retention basics: elution order and void time', tags: ['types'], family: 'chrom-types', exam: 'short_2to3', mins: 3, tier: 'atomic',
   variants: [
-    pick({
-      id: 'ty-sec', label: 'Size exclusion elution order', marks: 1,
-      stem: 'In **size-exclusion** chromatography, which molecules elute first?',
-      options: [['large', 'The largest: they cannot enter the pores and take the shortest path'], ['small', 'The smallest'], ['pol', 'The most polar'], ['hyd', 'The most hydrophobic']], correct: 'large',
-      explanation: 'Large molecules are excluded from the pores and pass straight through; small ones enter the pores and are delayed.',
-    }),
     pick({
       id: 'ty-first', label: 'Which solute leaves first', marks: 1,
       stem: 'In any chromatographic separation, which solute is detected **first**?',
@@ -299,25 +293,7 @@ add(node(mk({
       options: [['no', 'No: t_M is a property of the column and conditions, the same for every solute'], ['yes', 'Yes: t_M grows with retention'], ['half', 'Only for the first peak'], ['k', 'Yes, because k grows']], correct: 'no',
       explanation: 't_R = t_M + t_S. The retention of a solute lengthens t_S, not t_M, which is the time of an unretained compound.',
     }),
-    pick({
-      id: 'ty-mech', label: 'Match the mechanism: ion exchange', marks: 1,
-      stem: 'Which mechanism does **ion-exchange** chromatography use?',
-      options: [['ion', 'Fixed charged groups on the packing attract counter-ions from the sample'], ['sol', 'A liquid film on a solid support dissolves the solute'], ['size', 'Pores sort molecules by size'], ['aff', 'Specific binding to an attached antibody']], correct: 'ion',
-      explanation: 'Ion exchange: fixed charges on the stationary phase retain oppositely charged solute ions. Partition uses a liquid film, size exclusion uses pores, and affinity uses a specific binding partner.',
-    }),
-    pick({
-      id: 'ty-aff', label: 'Affinity chromatography', marks: 1,
-      stem: 'Which description fits **affinity** chromatography?',
-      options: [['spec', 'The stationary phase carries a group that binds the analyte specifically; it is released by changing pH or ionic strength'], ['size', 'It separates by molecular size'], ['gas', 'It needs a gaseous mobile phase'], ['hyd', 'It separates by hydrophobicity alone']], correct: 'spec',
-      explanation: 'Affinity is the most selective mode: a specific binder (for example an antibody) is bonded to the support, and the bound analyte is released by changing the pH or ionic strength.',
-    }),
-    pick({
-      id: 'ty-kk', label: 'The k/(1 + k) term', marks: 1,
-      stem: 'In the Purnell equation the retention term k_B/(1 + k_B) is about 0.5 at k_B = 1, 0.83 at 5 and 0.91 at 10. What does that tell you about increasing k?',
-      options: [['lev', 'Raising k beyond about 5 gains little resolution but lengthens the run'], ['lin', 'Resolution rises in proportion to k'], ['fall', 'Resolution falls as k rises'], ['none', 'k has no effect on resolution']], correct: 'lev',
-      explanation: 'The term levels off towards 1: beyond k of about 5 the extra retention buys almost no resolution and costs time and peak height.',
-    }),
   ],
-})), { id: 'm11.c.types', name: 'Types of chromatography and general rules', chunk: 'c-concepts', marks: 2, tags: ['types'] });
+})), { id: 'm11.c.types', name: 'Which solute leaves first; the void time', chunk: 'c-concepts', marks: 1, tags: ['types'] });
 
 export default out;

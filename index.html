@@ -979,6 +979,18 @@
 
       /* Pure. The one honest meter, weighted by the marks each topic carries (a topic's marks are shared by its questions):
          seen = marks on questions tried at least once, secure = last two attempts both passed, blind = never tried. */
+      /* Pure. How a set of questions stands: how many, tried, secure (last two attempts passed) and failed (latest attempt below the pass line). */
+      function focusStats(nodes, ids, logs) {
+        const hist = gradeHistory(logs), want = new Set(ids);
+        const r = { n: 0, seen: 0, secure: 0, failed: 0 };
+        for (const n of nodes) {
+          if (!want.has(n.id) || n.metadata?.composerOnly) continue;
+          const h = hist[n.id];
+          r.n += 1;
+          if (h) { r.seen += 1; if (nodeSecure(h)) r.secure += 1; if (h[0] < PASS_GRADE) r.failed += 1; }
+        }
+        return r;
+      }
       function coverage(nodes, map, logs, retired = noRetired) {
         const hist = gradeHistory(logs), { chunkOf, marks, names } = chunkTools(map);
         const rows = {};
@@ -1407,13 +1419,46 @@
          alternatives (one is picked), and every part gets its own random data. Marks come from the variants. */
       const FINAL_RECIPES = {
         CM2011: {
-          label: 'Final-style paper', durationMinutes: 120,
+          label: 'Final-style paper', durationMinutes: 120, approxMarks: 90,
           note: 'Built like the 2025-26 final: Q1 statistics, PSI, electrochemistry reasoning and propagation; Q2 the ISE calibration chain to weight % N (ammonia probe), a written ISE answer and spectrophotometry; Q3 the extraction chain with a pH; Q4 GC and HPLC, written. Part sizes and exact parts change from year to year, so treat the length as a guide.',
           sections: [
             { label: 'Question 1 · Statistics, air quality, electrochemistry, propagation', parts: [['bk-m11-t1-ttest-final'], ['bk-m11-a-sub'], ['bk-m11-a-written'], ['bk-m11-e-ksp'], ['bk-m11-e-ionic'], ['bk-m11-t1-errprop']] },
             { label: 'Question 2 · Ion-selective electrode, Kjeldahl and spectrophotometry', parts: [['bk-m11-p-chain/chain-nh3'], ['bk-m11-p-written'], ['bk-m11-s-beer'], ['bk-m11-s-beer']] },
             { label: 'Question 3 · Extraction', parts: [['bk-m11-x-acid/x-acid-chain']] },
             { label: 'Question 4 · GC and HPLC', parts: [['bk-m11-g-detectors/g-tcd'], ['bk-m11-g-detectors/g-fid'], ['bk-m11-g-columns/g-open-packed'], ['bk-m11-g-tprog/g-tprog'], ['bk-m11-h-gradient/h-grad-vs-iso'], ['bk-m11-h-order/h-ord-final'], ['bk-m11-g-ms/g-gcms-lcms']] },
+          ],
+        },
+        CM2021: {
+          label: 'Final-style paper', durationMinutes: 120, approxMarks: 100,
+          note: 'Four questions, 100 marks, 2 h, as in all three finals. Q3 and Q4 mix the templates; aim for 1.2 min a mark.',
+          sections: [
+            { label: 'Question 1 · Five short parts', parts: [
+              ['bk-c4-ox-numbers/c4-ox-numbers-v1', 'bk-c4-avg-on-past/c4-avg-on-past-v1', 'bk-c4-avg-on-n/c4-avg-on-n-v1'],
+              ['bk-c4-nuclear/c4-nuclear-v1', 'bk-c4-nuclear/c4-nuclear-v2'],
+              ['bk-c4-kie/c4-kie-v1', 'bk-c4-g1-o2/c4-g1-o2-v2', 'bk-c4-g1-o2/c4-g1-o2-v3'],
+              ['bk-c4-aqua-regia/c4-aqua-regia-v1', 'bk-c4-aqua-regia/c4-aqua-regia-v2'],
+              ['bk-c3-homo-past/c3-homo-past-v1'],
+            ] },
+            { label: 'Question 2 · Phosphorus, three-centre bonding and a short explanation', parts: [
+              ['bk-c4-p-scheme/c4-p-scheme-v1'],
+              ['bk-c3-three-centre-pi/c3-three-centre-pi-v3'],
+              ['bk-c4-hydrazine-gauche/c4-hydrazine-gauche-v2', 'bk-c4-wislicenus/c4-wislicenus-v2'],
+            ] },
+            { label: 'Question 3 · Coordination chemistry', parts: [
+              ['bk-c7-identify-p1/c7-identify-p1-v1', 'bk-c7-identify-p1/c7-identify-p1-v2', 'bk-c7-identify-p1/c7-identify-p1-v3', 'bk-c7-identify-p2/c7-identify-p2-v1', 'bk-c7-identify-p2/c7-identify-p2-v2', 'bk-c7-identify-p2/c7-identify-p2-v3'],
+              ['bk-c7-identify-p1/c7-identify-p1-v4', 'bk-c7-identify-p1/c7-identify-p1-v5', 'bk-c7-identify-p2/c7-identify-p2-v4', 'bk-c7-identify-p2/c7-identify-p2-v5', 'bk-c7-identify-p2/c7-identify-p2-v6'],
+              ['bk-c6-p3q3-cfse/c6-p3q3-cfse-v1'],
+              ['bk-c6-p3q3-cfse/c6-p3q3-cfse-v2', 'bk-c6-p3q3-cfse/c6-p3q3-cfse-v3'],
+              ['bk-c7-cft-limits/c7-cft-limits-v1', 'bk-c7-cft-principles/c7-cft-principles-v1', 'bk-c7-lft-principles/c7-lft-principles-v1'],
+              ['bk-c6-ox-dn-cn/c6-ox-dn-cn-v1', 'bk-c6-ox-dn-cn/c6-ox-dn-cn-v2', 'bk-c6-ox-dn-cn/c6-ox-dn-cn-v3'],
+            ] },
+            { label: 'Question 4 · Terms and Tanabe-Sugano', parts: [
+              ['bk-c8-ts-d7/c8-ts-d7-v2'],
+              ['bk-c8-terms-d8/c8-terms-d8-v2'],
+              ['bk-c8-microstates/c8-microstates-v3'],
+              ['bk-c8-oh-terms/c8-oh-terms-v3'],
+              ['bk-c8-ground-terms/c8-ground-terms-v1'],
+            ] },
           ],
         },
       };
@@ -1696,7 +1741,7 @@
         selectVariant,
         instantiateVariant,
         computeModuleReadiness,
-        PASS_GRADE, gradeHistory, nodeLevel, nodeSecure, coverage, cramNext, cramRecord, supersession, noRetired,
+        PASS_GRADE, gradeHistory, nodeLevel, nodeSecure, focusStats, coverage, cramNext, cramRecord, supersession, noRetired,
         inferNodeExamStyle,
         assembleMockPaper,
         assembleRecipePaper,
@@ -7315,6 +7360,23 @@
         }
         return out;
       }
+      /* Focus sets: hand-authored bundles of skills that cut across topics (content/<dir>/focus-sets.json). */
+      async function loadAllFocusSets(fetchFn) {
+        const out = {};
+        for (const mod of MODULES) {
+          try {
+            const doc = await fetchContent(`content/${mod.dir}/focus-sets.json`, fetchFn);
+            if (doc && Array.isArray(doc.sets)) out[mod.code] = doc;
+          } catch (err) { /* none for this module */ }
+        }
+        return out;
+      }
+      /* Pure: the question ids of every skill in a focus set (skills the map does not know are skipped). */
+      function focusNodeIds(map, set) {
+        const want = new Set(set?.skills || []), ids = new Set();
+        for (const sk of map?.skills || []) if (want.has(sk.id)) for (const id of sk.nodes || []) ids.add(id);
+        return [...ids];
+      }
       /* Pure: the page that serves a topic (chunk), or null. */
       function methodForChunk(doc, chunkId) {
         return (doc?.methods || []).find((m) => (m.chunks || []).includes(chunkId)) || null;
@@ -7424,7 +7486,7 @@
       return {
         MODULES, BANK_URL, SKILL_MAP_URL, RECORD_KEY, chunkNodeIds,
         fetchJson, fetchContent, bankKey, isReservedNodeId, planBankSync, syncBank, syncAllBanks, sweepOrphanedProgress,
-        validateSkillMap, loadSkillMap, loadAllSkillMaps, loadAllMethods, loadAllSupersedes, methodForChunk, methodsUrl, analyzeSkillMap, nodeProgress, skillRows,
+        validateSkillMap, loadSkillMap, loadAllSkillMaps, loadAllMethods, loadAllSupersedes, loadAllFocusSets, focusNodeIds, methodForChunk, methodsUrl, analyzeSkillMap, nodeProgress, skillRows,
       };
     })();
 
@@ -8686,6 +8748,7 @@
         reactions: null,          // CM2021 reaction list (content/cm2021/reactions.json)
         saved: [],                // question ids shortlisted "for later" (settings row savedLater), in the order to play them
         playlist: null,           // a running playlist: { on, ids, done, label, now } (session only)
+        focusSets: {},            // per module: bundles of skills to drill together (content/<dir>/focus-sets.json)
         supersedes: {},           // per module: pairs 'harder question covers an easier one' (content/<dir>/supersedes.json)
         retired: null,            // Scheduler.supersession result for the current history (questions skipped because a harder one was passed)
         rxStats: {},              // per-reaction spaced boxes (settings row 'reactionStats')
@@ -8859,6 +8922,24 @@
         appState.route = 'study';
         appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null, chunkId, chunkNodeIds: Content.chunkNodeIds(appState.skillMap, chunkId) };
         loadNextQuestion();
+      }
+
+      /* Drill a focus set: every question of the bundle's skills, across topics, in the usual order of need. */
+      function drillFocus(setId) {
+        const set = (appState.focusSets?.[appState.activeModule]?.sets || []).find((x) => x.id === setId);
+        if (!set) return;
+        const ids = Content.focusNodeIds(appState.skillMap, set);
+        if (!ids.length) { showToast('No questions in that set yet.', true); return; }
+        if (appState.cram) appState.cram.on = false;
+        appState.playlist = null;
+        appState.route = 'study';
+        appState.current = null;
+        appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null, chunkId: null, chunkNodeIds: ids, focusId: set.id, focusName: set.name };
+        loadNextQuestion();
+      }
+      function focusStripHtml() {
+        const f = appState.filters;
+        return `<div class="shrink-0 flex items-center justify-between gap-2 rounded-lg bg-indigo-600 text-white text-xs px-3 py-1.5" data-focus-strip><span class="min-w-0 truncate"><span class="font-semibold">Focus</span> · ${esc(f.focusName || '')} · ${(f.chunkNodeIds || []).length} questions</span><button type="button" id="btnFocusOff" class="shrink-0 underline decoration-dotted">End</button></div>`;
       }
 
       function redoNode(nodeId) {
@@ -9484,7 +9565,8 @@
             <label class="block">
               <span class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Topic</span>
               <select id="studyChunkFilter" aria-label="Filter by topic" class="w-full text-sm bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-slate-800">
-                <option value="ALL" ${!appState.filters.chunkId ? 'selected' : ''}>All topics</option>
+                <option value="ALL" ${!appState.filters.chunkId && !appState.filters.focusId ? 'selected' : ''}>All topics</option>
+                ${(appState.focusSets?.[appState.activeModule]?.sets || []).length ? `<optgroup label="Focus sets (across topics)">${appState.focusSets[appState.activeModule].sets.map((x) => `<option value="set:${esc(x.id)}" ${appState.filters.focusId === x.id ? 'selected' : ''}>${esc(x.name)}</option>`).join('')}</optgroup>` : ''}
                 ${[...new Set(appState.skillMap.chunks.map((c) => c.part))].map((part) => `
                   <optgroup label="${esc(part)}">
                     ${appState.skillMap.chunks.filter((c) => c.part === part).map((c) => `<option value="${esc(c.id)}" ${appState.filters.chunkId === c.id ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}
@@ -9965,6 +10047,7 @@
 
             ${appState.cram?.on ? cramStripHtml() : ''}
             ${appState.playlist?.on ? playlistStripHtml() : ''}
+            ${appState.filters.focusId ? focusStripHtml() : ''}
 
             <div class="seg lg:hidden shrink-0" role="tablist" aria-label="Question steps">
               ${stepBtn('question', '1 · Question')}${stepBtn('answer', '2 · Answer')}${stepBtn('result', '3 · Result', phase !== 'graded')}
@@ -10039,7 +10122,9 @@
           loadNextQuestion();
         });
         $('#studyChunkFilter', root)?.addEventListener('change', (e) => {
+          if (String(e.target.value).startsWith('set:')) { drillFocus(e.target.value.slice(4)); return; }
           const id = e.target.value === 'ALL' ? null : e.target.value;
+          appState.filters.focusId = null; appState.filters.focusName = null;
           appState.filters.chunkId = id;
           appState.filters.chunkNodeIds = id ? Content.chunkNodeIds(appState.skillMap, id) : null;
           loadNextQuestion();
@@ -10061,6 +10146,10 @@
         $('#btnCram', root)?.addEventListener('click', () => { if (appState.cram?.on) { appState.cram.on = false; render(); } else startCram('auto'); });
         $('#btnCramOff', root)?.addEventListener('click', () => { appState.cram.on = false; render(); });
         $('#btnPlaylistOff', root)?.addEventListener('click', () => { appState.playlist.on = false; render(); });
+        $('#btnFocusOff', root)?.addEventListener('click', () => {
+          appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null };
+          loadNextQuestion();
+        });
         $('#btnSaveLater', root)?.addEventListener('click', (e) => {
           const id = appState.current.node.id, on = !appState.saved.includes(id);
           setSaved([id], on);
@@ -10681,7 +10770,7 @@
               </div>` : ''}
               ${Scheduler.FINAL_RECIPES[mod.moduleCode] ? `
               <div class="shrink-0 flex items-center justify-between gap-3 bg-blue-50/60 border border-blue-200 rounded-lg px-3 py-2">
-                <div class="min-w-0 text-xs text-slate-700"><span class="font-semibold text-slate-900">${esc(Scheduler.FINAL_RECIPES[mod.moduleCode].label)}</span> · 4 questions, about 90 marks, ${Scheduler.FINAL_RECIPES[mod.moduleCode].durationMinutes} min<div class="text-[11px] text-slate-500 mt-0.5">${esc(Scheduler.FINAL_RECIPES[mod.moduleCode].note)}</div></div>
+                <div class="min-w-0 text-xs text-slate-700"><span class="font-semibold text-slate-900">${esc(Scheduler.FINAL_RECIPES[mod.moduleCode].label)}</span> · 4 questions, about ${Scheduler.FINAL_RECIPES[mod.moduleCode].approxMarks || 100} marks, ${Scheduler.FINAL_RECIPES[mod.moduleCode].durationMinutes} min<div class="text-[11px] text-slate-500 mt-0.5">${esc(Scheduler.FINAL_RECIPES[mod.moduleCode].note)}</div></div>
                 <button type="button" id="btnStartFinalPaper" class="shrink-0 px-3 py-1.5 text-xs font-medium bg-blue-700 text-white rounded-md hover:bg-blue-800">Start</button>
               </div>` : ''}
               <div class="shrink-0 flex items-center justify-between gap-2">
@@ -11480,6 +11569,22 @@
               ${(() => { const rn = nodesM.filter((n) => retiredNow().nodes.has(n.id)).length; return rn ? `<p class="text-[11px] text-slate-500" data-retired-note>${rn} easier question${rn === 1 ? ' is' : 's are'} skipped, because you passed a harder one that covers ${rn === 1 ? 'it' : 'them'}; ${rn === 1 ? 'it comes' : 'they come'} back if you miss that one.</p>` : ''; })()}
               <p class="text-[11px] text-slate-500">Unseen first: one question per topic, best marks per minute first, then a second per topic. Fix misses: the topic's method sheet once, then fresh-number cards until two pass in a row. "Secure" = the last two attempts both passed (85%).</p>`);
           }).join('');
+          const focusHtml = mods.map((m) => {
+            const sets = appState.focusSets?.[m.moduleCode]?.sets || [];
+            if (!sets.length) return '';
+            const nodesM = appState.allNodes.filter((n) => n.moduleCode === m.moduleCode);
+            const rows = sets.map((x) => {
+              const ids = Content.focusNodeIds(appState.skillMaps[m.moduleCode], x);
+              const st = Scheduler.focusStats(nodesM, ids, appState.masteryLogs);
+              if (!st.n) return '';
+              const pct = Math.round((100 * st.secure) / st.n);
+              return `<li class="border border-slate-200 rounded-lg p-2.5 flex items-start gap-3" data-focus-row="${esc(x.id)}">
+                <div class="min-w-0 flex-1"><div class="text-sm font-medium text-slate-900">${esc(x.name)}</div><div class="text-[11px] text-slate-500">${esc(x.why || '')}</div>
+                <div class="mt-1.5 flex items-center gap-2"><div class="flex-1 h-1.5 rounded-full bg-slate-100 overflow-hidden"><div class="h-full bg-emerald-500" style="width:${pct}%"></div></div><span class="font-mono text-[11px] text-slate-600 whitespace-nowrap">${st.n} q · ${st.n - st.seen} unseen · ${st.failed} to fix</span></div></div>
+                <button type="button" data-focus-start="${esc(m.moduleCode)}|${esc(x.id)}" class="shrink-0 px-3 py-1.5 text-xs font-medium bg-indigo-600 text-white rounded-md hover:bg-indigo-700">Drill</button></li>`;
+            }).join('');
+            return card(`<div><h2 class="font-display text-base font-semibold text-slate-900">Focus sets · <span class="font-mono text-blue-700">${esc(m.moduleCode)}</span></h2><p class="text-xs text-slate-500">One skill across every topic it appears in. The bar is how many are secure (last two attempts passed).</p></div><ul class="space-y-2">${rows}</ul>`);
+          }).join('');
           const blockHtml = card(`<div><h2 class="font-display text-base font-semibold text-slate-900">Today's blocks</h2><p class="text-xs text-slate-500">Each block is the best remaining topic for its module: most marks you can still win per hour of work.</p></div>
             ${blocks.length ? `<ol class="space-y-2">${blocks.map((b, i) => `
               <li class="flex items-center gap-3 border border-slate-200 rounded-lg p-2.5" data-plan-block>
@@ -11499,7 +11604,7 @@
                 </div>
                 ${r.tried === 0 ? `<label class="mt-1 flex items-center gap-1.5 text-[11px] text-slate-500">Where are you now? <select data-plan-rate="${esc(m.moduleCode)}:${esc(r.chunk)}" class="border border-slate-300 rounded-md px-1.5 py-0.5 text-[11px]">${['Never seen', 'Shaky', 'OK', 'Solid'].map((t, i) => `<option value="${i}" ${(pl.ratings[m.moduleCode + ':' + r.chunk] ?? 0) === i ? 'selected' : ''}>${t}</option>`).join('')}</select></label>` : ''}
               </div>`).join('')}</div>`)).join('');
-          return head + cramHtml + blockHtml + grid;
+          return head + cramHtml + focusHtml + blockHtml + grid;
         })();
 
         const body = { plan: planHtml, overview: overviewHtml, chapters: chaptersHtml, skills: `<section class="space-y-3">${skillParts.summary}${skillParts.list}</section>`, weak: weakHtml }[tab] || planHtml;
@@ -11563,6 +11668,11 @@
           const [code, pass] = btn.dataset.cramStart.split('|');
           if (code !== appState.activeModule) await setActiveModule(code);
           startCram(pass);
+        }));
+        $$('[data-focus-start]', root).forEach((btn) => btn.addEventListener('click', async () => {
+          const [code, id] = btn.dataset.focusStart.split('|');
+          if (code !== appState.activeModule) await setActiveModule(code);
+          drillFocus(id);
         }));
         $$('[data-plan-start]', root).forEach((btn) => btn.addEventListener('click', async () => {
           const [code, chunk] = btn.dataset.planStart.split('|');
@@ -12622,6 +12732,7 @@
           appState.skillMaps = loaded.maps;
           appState.methods = await Content.loadAllMethods();
           appState.supersedes = await Content.loadAllSupersedes();
+          appState.focusSets = await Content.loadAllFocusSets();
           try { appState.reactions = await Content.fetchContent('content/cm2021/reactions.json'); } catch (err) { appState.reactions = null; }
           try { appState.rxStats = (await db.settings.get('reactionStats'))?.stats || {}; } catch (err) { appState.rxStats = {}; }
           appState.content.skillMap = { map: loaded.maps[appState.activeModule] || null, error: loaded.error };

@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "date": "2026-11-21",
+ "date": "2026-11-22",
  "module": "CM2011",
  "chunks": [
   {
@@ -486,7 +486,7 @@
    "name": "Retention factor k and selectivity α",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.455,
+   "marks": 1.524,
    "basis": "notes",
    "ref": "Chromatography slides; booklet (efficiency and band spreading)",
    "tags": [
@@ -495,7 +495,7 @@
    "ids": [
     "bk-m11-c-retention"
    ],
-   "weight": 0.01455,
+   "weight": 0.01524,
    "nodes": [
     "bk-m11-c-retention"
    ],
@@ -507,7 +507,7 @@
    "name": "Resolution from times and widths; R_S and column length",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.818,
+   "marks": 1.905,
    "basis": "notes",
    "ref": "Chromatography slides; booklet (efficiency and band spreading)",
    "tags": [
@@ -516,7 +516,7 @@
    "ids": [
     "bk-m11-c-resolution"
    ],
-   "weight": 0.01818,
+   "weight": 0.01905,
    "nodes": [
     "bk-m11-c-resolution"
    ],
@@ -528,7 +528,7 @@
    "name": "Plate number, plate height and the plates needed for a target R_S",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.818,
+   "marks": 1.905,
    "basis": "notes",
    "ref": "Chromatography slides; booklet (efficiency and band spreading)",
    "tags": [
@@ -538,7 +538,7 @@
    "ids": [
     "bk-m11-c-plates"
    ],
-   "weight": 0.01818,
+   "weight": 0.01905,
    "nodes": [
     "bk-m11-c-plates"
    ],
@@ -550,7 +550,7 @@
    "name": "Linear velocity versus volume flow; scale-up",
    "mode": "calc",
    "engine": "gen",
-   "marks": 0.727,
+   "marks": 0.762,
    "basis": "notes",
    "ref": "Chromatography slides; booklet (efficiency and band spreading)",
    "tags": [
@@ -559,7 +559,7 @@
    "ids": [
     "bk-m11-c-flow"
    ],
-   "weight": 0.00727,
+   "weight": 0.00762,
    "nodes": [
     "bk-m11-c-flow"
    ],
@@ -571,7 +571,7 @@
    "name": "Band spreading: A, B/u and Cu terms and the optimum",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.091,
+   "marks": 1.143,
    "basis": "notes",
    "ref": "Chromatography slides; booklet (efficiency and band spreading)",
    "tags": [
@@ -580,7 +580,7 @@
    "ids": [
     "bk-m11-c-vd"
    ],
-   "weight": 0.01091,
+   "weight": 0.01143,
    "nodes": [
     "bk-m11-c-vd"
    ],
@@ -592,7 +592,7 @@
    "name": "Peak asymmetry: tailing and fronting",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.364,
+   "marks": 0.381,
    "basis": "notes",
    "ref": "Chromatography slides; booklet (efficiency and band spreading)",
    "tags": [
@@ -601,7 +601,7 @@
    "ids": [
     "bk-m11-c-shape"
    ],
-   "weight": 0.00364,
+   "weight": 0.00381,
    "nodes": [
     "bk-m11-c-shape"
    ],
@@ -610,10 +610,10 @@
   {
    "id": "m11.c.types",
    "ch": 9,
-   "name": "Types of chromatography and general rules",
+   "name": "Which solute leaves first; the void time",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.727,
+   "marks": 0.381,
    "basis": "notes",
    "ref": "Chromatography slides; booklet (efficiency and band spreading)",
    "tags": [
@@ -622,7 +622,7 @@
    "ids": [
     "bk-m11-c-types"
    ],
-   "weight": 0.00727,
+   "weight": 0.00381,
    "nodes": [
     "bk-m11-c-types"
    ],
@@ -634,7 +634,7 @@
    "name": "Calibration line, dilution chain back to the sample, and weight % N",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.75,
+   "marks": 1.772,
    "basis": "notes",
    "ref": "Topic 3b · calibration with a dilution chain (finals style)",
    "tags": [
@@ -644,7 +644,7 @@
    "ids": [
     "bk-m11-p-chain"
    ],
-   "weight": 0.0175,
+   "weight": 0.01772,
    "nodes": [
     "bk-m11-p-chain"
    ],
@@ -891,7 +891,7 @@
    "name": "Slope of E vs log a (sign and charge dependence)",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.05,
+   "marks": 1.063,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -900,7 +900,7 @@
    "ids": [
     "bk-m11-p-slope"
    ],
-   "weight": 0.0105,
+   "weight": 0.01063,
    "nodes": [
     "bk-m11-p-slope"
    ],
@@ -912,7 +912,7 @@
    "name": "Unknown activity from a reading, and the Nernstian test",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.4,
+   "marks": 1.418,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -921,7 +921,7 @@
    "ids": [
     "bk-m11-p-cal"
    ],
-   "weight": 0.014,
+   "weight": 0.01418,
    "nodes": [
     "bk-m11-p-cal"
    ],
@@ -933,7 +933,7 @@
    "name": "Selectivity coefficient from E₁ and E₂ with activities",
    "mode": "calc",
    "engine": "gen",
-   "marks": 2.8,
+   "marks": 2.835,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry · lecture Example 6",
    "tags": [
@@ -942,7 +942,7 @@
    "ids": [
     "bk-m11-p-sel"
    ],
-   "weight": 0.028,
+   "weight": 0.02835,
    "nodes": [
     "bk-m11-p-sel"
    ],
@@ -954,7 +954,7 @@
    "name": "Interference error and what K^pot means",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.4,
+   "marks": 1.418,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -963,7 +963,7 @@
    "ids": [
     "bk-m11-p-intf"
    ],
-   "weight": 0.014,
+   "weight": 0.01418,
    "nodes": [
     "bk-m11-p-intf"
    ],
@@ -975,7 +975,7 @@
    "name": "Slope for an ion sensed indirectly through Ksp",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.4,
+   "marks": 1.418,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry · lecture Ag₂S slides",
    "tags": [
@@ -984,7 +984,7 @@
    "ids": [
     "bk-m11-p-ag2s"
    ],
-   "weight": 0.014,
+   "weight": 0.01418,
    "nodes": [
     "bk-m11-p-ag2s"
    ],
@@ -993,19 +993,19 @@
   {
    "id": "m11.p.gas",
    "ch": 4,
-   "name": "Gas probes: the ammonia probe (and CO₂ as the same idea)",
+   "name": "Gas probes: derive the inner solution, sensor and slope sign for any gas",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.35,
+   "marks": 0.532,
    "basis": "notes",
-   "ref": "Topic 3b · potentiometry · gas-probe lecture slides",
+   "ref": "Topic 3b · potentiometry · gas-probe lecture slides (slide 24 table)",
    "tags": [
     "gas-sensing-probe"
    ],
    "ids": [
     "bk-m11-p-gas"
    ],
-   "weight": 0.0035,
+   "weight": 0.00532,
    "nodes": [
     "bk-m11-p-gas"
    ],
@@ -1014,10 +1014,10 @@
   {
    "id": "m11.p.facts",
    "ch": 4,
-   "name": "Glass, LaF₃, PVC and K⁺ electrode facts; TISAB",
+   "name": "Glass electrode facts and TISAB",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.05,
+   "marks": 0.709,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -1026,7 +1026,7 @@
    "ids": [
     "bk-m11-p-facts"
    ],
-   "weight": 0.0105,
+   "weight": 0.00709,
    "nodes": [
     "bk-m11-p-facts"
    ],
@@ -1038,7 +1038,7 @@
    "name": "Cell notation, junction potentials and interference: concepts",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.35,
+   "marks": 0.354,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -1047,7 +1047,7 @@
    "ids": [
     "bk-m11-p-concepts"
    ],
-   "weight": 0.0035,
+   "weight": 0.00354,
    "nodes": [
     "bk-m11-p-concepts"
    ],
@@ -1059,7 +1059,7 @@
    "name": "Calibration and measurement procedure for an ISE",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.7,
+   "marks": 0.709,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -1068,7 +1068,7 @@
    "ids": [
     "bk-m11-p-calib-order"
    ],
-   "weight": 0.007,
+   "weight": 0.00709,
    "nodes": [
     "bk-m11-p-calib-order"
    ],
@@ -1080,7 +1080,7 @@
    "name": "Explain glass, fluoride, ammonia electrodes and the liquid junction potential",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.75,
+   "marks": 1.772,
    "basis": "notes",
    "ref": "Topic 3b · potentiometry",
    "tags": [
@@ -1089,7 +1089,7 @@
    "ids": [
     "bk-m11-p-written"
    ],
-   "weight": 0.0175,
+   "weight": 0.01772,
    "nodes": [
     "bk-m11-p-written"
    ],
@@ -1101,7 +1101,7 @@
    "name": "Beer–Lambert: A, %T, c and dilutions",
    "mode": "calc",
    "engine": "gen",
-   "marks": 0.839,
+   "marks": 0.867,
    "basis": "notes",
    "ref": "Topic 4 · spectroscopy",
    "tags": [
@@ -1110,7 +1110,7 @@
    "ids": [
     "bk-m11-s-beer"
    ],
-   "weight": 0.00839,
+   "weight": 0.00867,
    "nodes": [
     "bk-m11-s-beer"
    ],
@@ -1122,7 +1122,7 @@
    "name": "Convert cm⁻¹, nm, Å, Hz and photon energy",
    "mode": "calc",
    "engine": "gen",
-   "marks": 0.839,
+   "marks": 0.867,
    "basis": "notes",
    "ref": "Topic 4 · spectroscopy",
    "tags": [
@@ -1131,7 +1131,7 @@
    "ids": [
     "bk-m11-s-wave"
    ],
-   "weight": 0.00839,
+   "weight": 0.00867,
    "nodes": [
     "bk-m11-s-wave"
    ],
@@ -1143,7 +1143,7 @@
    "name": "Order the parts of an absorption spectrometer",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.419,
+   "marks": 0.433,
    "basis": "notes",
    "ref": "Topic 4 · standard texts, check against your slides",
    "tags": [
@@ -1152,7 +1152,7 @@
    "ids": [
     "bk-m11-s-layout"
    ],
-   "weight": 0.00419,
+   "weight": 0.00433,
    "nodes": [
     "bk-m11-s-layout"
    ],
@@ -1164,7 +1164,7 @@
    "name": "Order the parts of a fluorimeter and explain the 90° geometry",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.419,
+   "marks": 0.433,
    "basis": "notes",
    "ref": "Topic 4 · standard texts, check against your slides",
    "tags": [
@@ -1173,7 +1173,7 @@
    "ids": [
     "bk-m11-s-fl-layout"
    ],
-   "weight": 0.00419,
+   "weight": 0.00433,
    "nodes": [
     "bk-m11-s-fl-layout"
    ],
@@ -1185,7 +1185,7 @@
    "name": "Order the parts of an atomic absorption spectrometer",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.419,
+   "marks": 0.433,
    "basis": "notes",
    "ref": "Topic 4 · standard texts, check against your slides",
    "tags": [
@@ -1194,51 +1194,9 @@
    "ids": [
     "bk-m11-s-aas-layout"
    ],
-   "weight": 0.00419,
+   "weight": 0.00433,
    "nodes": [
     "bk-m11-s-aas-layout"
-   ],
-   "chunk": "s-atomic"
-  },
-  {
-   "id": "m11.s.flconcepts",
-   "ch": 6,
-   "name": "Fluorescence: Stokes shift, 90° geometry, sensitivity",
-   "mode": "recall",
-   "engine": "gen",
-   "marks": 0.21,
-   "basis": "notes",
-   "ref": "Topic 4 · standard texts, check against your slides",
-   "tags": [
-    "fluorescence"
-   ],
-   "ids": [
-    "bk-m11-s-fl-concepts"
-   ],
-   "weight": 0.0021,
-   "nodes": [
-    "bk-m11-s-fl-concepts"
-   ],
-   "chunk": "s-fluorescence"
-  },
-  {
-   "id": "m11.s.aasconcepts",
-   "ch": 7,
-   "name": "AAS: lamp, atomisers and what absorbs",
-   "mode": "recall",
-   "engine": "gen",
-   "marks": 0.21,
-   "basis": "notes",
-   "ref": "Topic 4 · standard texts, check against your slides",
-   "tags": [
-    "aas"
-   ],
-   "ids": [
-    "bk-m11-s-aas-concepts"
-   ],
-   "weight": 0.0021,
-   "nodes": [
-    "bk-m11-s-aas-concepts"
    ],
    "chunk": "s-atomic"
   },
@@ -1248,7 +1206,7 @@
    "name": "Explain fluorescence vs absorption and AAS",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.839,
+   "marks": 0.867,
    "basis": "notes",
    "ref": "Topic 4 · standard texts, check against your slides",
    "tags": [
@@ -1257,7 +1215,7 @@
    "ids": [
     "bk-m11-s-written"
    ],
-   "weight": 0.00839,
+   "weight": 0.00867,
    "nodes": [
     "bk-m11-s-written"
    ],
@@ -1269,7 +1227,7 @@
    "name": "Jablonski diagram: label the arrows, trace the paths, fluorescence vs phosphorescence",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.048,
+   "marks": 1.083,
    "basis": "notes",
    "ref": "Topic 4b slides; past finals",
    "tags": [
@@ -1279,7 +1237,7 @@
    "ids": [
     "bk-m11-s-jablonski"
    ],
-   "weight": 0.01048,
+   "weight": 0.01083,
    "nodes": [
     "bk-m11-s-jablonski"
    ],
@@ -1291,7 +1249,7 @@
    "name": "Fluorescence: sensitivity, which molecules, broad bands, Stokes shift, quenching, instrument",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.839,
+   "marks": 0.867,
    "basis": "notes",
    "ref": "Topic 4b slides; past finals",
    "tags": [
@@ -1301,7 +1259,7 @@
    "ids": [
     "bk-m11-s-fl-explain"
    ],
-   "weight": 0.00839,
+   "weight": 0.00867,
    "nodes": [
     "bk-m11-s-fl-explain"
    ],
@@ -1313,7 +1271,7 @@
    "name": "Two-point linear calibration of a fluorescence signal",
    "mode": "calc",
    "engine": "gen",
-   "marks": 0.839,
+   "marks": 0.867,
    "basis": "notes",
    "ref": "Topic 4b slides; past finals",
    "tags": [
@@ -1323,7 +1281,7 @@
    "ids": [
     "bk-m11-s-fl-cal"
    ],
-   "weight": 0.00839,
+   "weight": 0.00867,
    "nodes": [
     "bk-m11-s-fl-cal"
    ],
@@ -1335,7 +1293,7 @@
    "name": "AAS: lamp, flame, monochromator, detector and the block diagram",
    "mode": "recall",
    "engine": "gen",
-   "marks": 2.097,
+   "marks": 2.167,
    "basis": "notes",
    "ref": "Topic 4c slides; past finals",
    "tags": [
@@ -1345,7 +1303,7 @@
    "ids": [
     "bk-m11-s-aas-table"
    ],
-   "weight": 0.02097,
+   "weight": 0.02167,
    "nodes": [
     "bk-m11-s-aas-table"
    ],
@@ -1357,7 +1315,7 @@
    "name": "Boltzmann: excited-state fraction and its change with temperature",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.048,
+   "marks": 1.083,
    "basis": "notes",
    "ref": "Topic 4c slides; past finals",
    "tags": [
@@ -1367,7 +1325,7 @@
    "ids": [
     "bk-m11-s-boltz"
    ],
-   "weight": 0.01048,
+   "weight": 0.01083,
    "nodes": [
     "bk-m11-s-boltz"
    ],
@@ -1379,7 +1337,7 @@
    "name": "AES vs AAS: temperature sensitivity, types of atomic spectroscopy, no Stokes shift",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.048,
+   "marks": 1.083,
    "basis": "notes",
    "ref": "Topic 4c slides; past finals",
    "tags": [
@@ -1389,7 +1347,7 @@
    "ids": [
     "bk-m11-s-aes-aas"
    ],
-   "weight": 0.01048,
+   "weight": 0.01083,
    "nodes": [
     "bk-m11-s-aes-aas"
    ],
@@ -1401,7 +1359,7 @@
    "name": "Atomic line broadening: natural, collisional, Doppler; why lamp lines are narrow",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.048,
+   "marks": 1.083,
    "basis": "notes",
    "ref": "Topic 4c slides; past finals",
    "tags": [
@@ -1411,7 +1369,7 @@
    "ids": [
     "bk-m11-s-broad"
    ],
-   "weight": 0.01048,
+   "weight": 0.01083,
    "nodes": [
     "bk-m11-s-broad"
    ],
@@ -1423,7 +1381,7 @@
    "name": "ICP-OES vs AAS, atomic vs molecular methods, sample preparation",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.839,
+   "marks": 0.867,
    "basis": "notes",
    "ref": "Topic 4c slides; past finals",
    "tags": [
@@ -1433,7 +1391,7 @@
    "ids": [
     "bk-m11-s-icp"
    ],
-   "weight": 0.00839,
+   "weight": 0.00867,
    "nodes": [
     "bk-m11-s-icp"
    ],
@@ -1445,7 +1403,7 @@
    "name": "GC detectors: TCD, FID, MS and choosing between them",
    "mode": "recall",
    "engine": "gen",
-   "marks": 2.429,
+   "marks": 2.55,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1455,7 +1413,7 @@
    "ids": [
     "bk-m11-g-detectors"
    ],
-   "weight": 0.02429,
+   "weight": 0.0255,
    "nodes": [
     "bk-m11-g-detectors"
    ],
@@ -1467,7 +1425,7 @@
    "name": "Open tubular vs packed GC columns",
    "mode": "recall",
    "engine": "gen",
-   "marks": 2.024,
+   "marks": 2.125,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1477,7 +1435,7 @@
    "ids": [
     "bk-m11-g-columns"
    ],
-   "weight": 0.02024,
+   "weight": 0.02125,
    "nodes": [
     "bk-m11-g-columns"
    ],
@@ -1489,7 +1447,7 @@
    "name": "Temperature programming and pressure programming",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.214,
+   "marks": 1.275,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1499,7 +1457,7 @@
    "ids": [
     "bk-m11-g-tprog"
    ],
-   "weight": 0.01214,
+   "weight": 0.01275,
    "nodes": [
     "bk-m11-g-tprog"
    ],
@@ -1511,7 +1469,7 @@
    "name": "Split, splitless and on-column injection; derivatisation",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.81,
+   "marks": 0.85,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1521,7 +1479,7 @@
    "ids": [
     "bk-m11-g-inject"
    ],
-   "weight": 0.0081,
+   "weight": 0.0085,
    "nodes": [
     "bk-m11-g-inject"
    ],
@@ -1533,7 +1491,7 @@
    "name": "GC carrier gases: speed, H₂ and the TCD",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.81,
+   "marks": 0.85,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1543,7 +1501,7 @@
    "ids": [
     "bk-m11-g-carrier"
    ],
-   "weight": 0.0081,
+   "weight": 0.0085,
    "nodes": [
     "bk-m11-g-carrier"
    ],
@@ -1555,7 +1513,7 @@
    "name": "HPLC column label, pore size, C8 vs C18, guard column",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.81,
+   "marks": 0.85,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1565,7 +1523,7 @@
    "ids": [
     "bk-m11-h-column"
    ],
-   "weight": 0.0081,
+   "weight": 0.0085,
    "nodes": [
     "bk-m11-h-column"
    ],
@@ -1577,7 +1535,7 @@
    "name": "Normal vs reversed phase and eluent strength",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.81,
+   "marks": 0.85,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1587,7 +1545,7 @@
    "ids": [
     "bk-m11-h-mode"
    ],
-   "weight": 0.0081,
+   "weight": 0.0085,
    "nodes": [
     "bk-m11-h-mode"
    ],
@@ -1599,7 +1557,7 @@
    "name": "Order of elution in reversed-phase and normal-phase HPLC",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.619,
+   "marks": 1.7,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1609,7 +1567,7 @@
    "ids": [
     "bk-m11-h-order"
    ],
-   "weight": 0.01619,
+   "weight": 0.017,
    "nodes": [
     "bk-m11-h-order"
    ],
@@ -1621,7 +1579,7 @@
    "name": "Isocratic vs gradient elution, and reading %B",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.619,
+   "marks": 1.7,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1631,7 +1589,7 @@
    "ids": [
     "bk-m11-h-gradient"
    ],
-   "weight": 0.01619,
+   "weight": 0.017,
    "nodes": [
     "bk-m11-h-gradient"
    ],
@@ -1643,7 +1601,7 @@
    "name": "HPLC detectors: UV, refractive index, electrochemical",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.81,
+   "marks": 0.85,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1653,7 +1611,7 @@
    "ids": [
     "bk-m11-h-detect"
    ],
-   "weight": 0.0081,
+   "weight": 0.0085,
    "nodes": [
     "bk-m11-h-detect"
    ],
@@ -1665,7 +1623,7 @@
    "name": "Why small particles improve efficiency and what they cost",
    "mode": "recall",
    "engine": "gen",
-   "marks": 1.214,
+   "marks": 0.425,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1675,7 +1633,7 @@
    "ids": [
     "bk-m11-h-particles"
    ],
-   "weight": 0.01214,
+   "weight": 0.00425,
    "nodes": [
     "bk-m11-h-particles"
    ],
@@ -1687,7 +1645,7 @@
    "name": "GC–MS vs LC–MS and what HPLC suits",
    "mode": "recall",
    "engine": "gen",
-   "marks": 2.024,
+   "marks": 2.125,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1698,7 +1656,7 @@
    "ids": [
     "bk-m11-g-ms"
    ],
-   "weight": 0.02024,
+   "weight": 0.02125,
    "nodes": [
     "bk-m11-g-ms"
    ],
@@ -1710,7 +1668,7 @@
    "name": "Choose GC or HPLC for an analyte",
    "mode": "recall",
    "engine": "gen",
-   "marks": 0.81,
+   "marks": 0.85,
    "basis": "notes",
    "ref": "GC and HPLC slides; final Q4 style",
    "tags": [
@@ -1721,7 +1679,7 @@
    "ids": [
     "bk-m11-g-choose"
    ],
-   "weight": 0.0081,
+   "weight": 0.0085,
    "nodes": [
     "bk-m11-g-choose"
    ],
@@ -1969,12 +1927,6 @@
   ],
   "bk-m11-s-aas-layout": [
    "m11.s.aaslayout"
-  ],
-  "bk-m11-s-fl-concepts": [
-   "m11.s.flconcepts"
-  ],
-  "bk-m11-s-aas-concepts": [
-   "m11.s.aasconcepts"
   ],
   "bk-m11-s-written": [
    "m11.s.written"

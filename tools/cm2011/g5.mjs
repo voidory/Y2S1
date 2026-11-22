@@ -334,7 +334,7 @@ add(node(mk({
       ],
     }),
   ],
-})), { id: 'm11.h.particles', name: 'Why small particles improve efficiency and what they cost', chunk: 'g-hplc', marks: 3, tags: ['hplc', 'van-deemter'] });
+})), { id: 'm11.h.particles', name: 'Why small particles improve efficiency and what they cost', chunk: 'g-hplc', marks: 1, tags: ['hplc', 'van-deemter'] });
 
 /* ---------- GC-MS vs LC-MS, choosing GC or HPLC ---------- */
 add(node(mk({

@@ -135,23 +135,34 @@ const SLOPE = 59.16;
 }
 
 /* ---------- gas-sensing probes ----------
-   Only the ammonia probe has ever been examined (2011/12, 2017/18, 2025/26 finals); the lecture's wider gas table (H2S, HCN, SO2, HF)
-   never appears in 11 finals, so it was dropped. CO2 stays as the one other example of the same principle. */
+   The lecture table (Topic 3b slide 24) has six gases. Finals so far (2011/12, 2017/18, 2025/26) ask only the ammonia probe, but the whole
+   table is one idea: the film holds a fixed partner of the gas's own equilibrium, the other product is the free ion, and an ISE reads it.
+   Each card gives the equilibrium as a hint (hidden in exam mode) and asks for: inner solution (the fixed partner), sensor, sign of E against log[gas]. */
 {
+  const neg = '^.*(?:neg|minus|−|-|fall|down|decreas).*$', pos = '^.*(?:pos|plus|\\+|rise|up|increas).*$';
   const G = [
-    ['nh3', 'NH₃', '0.1 M NH₄Cl', has('nh[4₄]\\+? ?cl', 'nh[4₄]cl', 'ammonium chloride', 'ammonium'), 'pH glass electrode', has('ph', 'glass'),
-      'NH₃ crosses the membrane and raises the pH of the thin NH₄Cl layer (NH₃ + H₂O ⇌ NH₄⁺ + OH⁻); the glass electrode reads that pH change. More NH₃ means higher pH, so the potential falls as log[NH₃] rises: the slope is negative, about −59 mV per decade.'],
-    ['co2', 'CO₂', 'NaHCO₃', has('nahco[3₃]', 'sodium (?:hydrogen ?)?carbonate', 'sodium bicarbonate', 'hco[3₃]'), 'pH glass electrode', has('ph', 'glass'),
-      'CO₂ crosses the membrane and acidifies the thin NaHCO₃ layer (CO₂ + H₂O ⇌ H⁺ + HCO₃⁻); the glass electrode reads the pH fall. Same principle as the ammonia probe, opposite direction: more CO₂ gives a lower pH.'],
+    { id: 'nh3', gas: 'NH₃', eq: 'NH₃ + H₂O ⇌ NH₄⁺ + OH⁻', inner: '0.1 M NH₄Cl (holds NH₄⁺ fixed)', innerRe: has('nh[4₄]\\+? ?cl', 'nh[4₄]cl', 'ammonium chloride', 'ammonium', 'nh[4₄]\\+'), sensor: 'pH glass electrode', sensorRe: has('ph', 'glass'), sign: 'negative (about −59 mV per decade)', signRe: neg,
+      why: 'NH₄⁺ is held fixed, so OH⁻ (and so pH) rises in step with NH₃ and H⁺ falls as 1/[NH₃]. A cation electrode gives +59.2 log[H⁺], so E = const − 59.2 log[NH₃]. This is the one the finals ask: it is neutral, so concentration is enough; amines that cross the membrane interfere.' },
+    { id: 'co2', gas: 'CO₂', eq: 'CO₂ + H₂O ⇌ H⁺ + HCO₃⁻', inner: 'NaHCO₃ (holds HCO₃⁻ fixed)', innerRe: has('nahco[3₃]', 'sodium (?:hydrogen ?)?carbonate', 'sodium bicarbonate', 'hco[3₃]', 'bicarbonate', 'hydrogen ?carbonate'), sensor: 'pH glass electrode', sensorRe: has('ph', 'glass'), sign: 'positive (about +59 mV per decade)', signRe: pos,
+      why: 'HCO₃⁻ is held fixed, so H⁺ is proportional to [CO₂]: more CO₂ lowers the pH. The glass electrode is a cation sensor, so E = const + 59.2 log[CO₂]. (Na⁺ is only the spectator counter-ion.)' },
+    { id: 'so2', gas: 'SO₂', eq: 'SO₂ + H₂O ⇌ H⁺ + HSO₃⁻', inner: 'NaHSO₃ (holds HSO₃⁻ fixed)', innerRe: has('nahso[3₃]', 'hso[3₃]', 'bisulfite', 'bisulphite', 'hydrogen ?sulfite', 'hydrogen ?sulphite', 'sodium (?:hydrogen ?)?sulfite', 'sodium (?:hydrogen ?)?sulphite'), sensor: 'pH glass electrode', sensorRe: has('ph', 'glass'), sign: 'positive (about +59 mV per decade)', signRe: pos,
+      why: 'Same pattern as CO₂: HSO₃⁻ is held fixed, so H⁺ is proportional to [SO₂] and the pH glass electrode gives E = const + 59.2 log[SO₂].' },
+    { id: 'hf', gas: 'HF', eq: 'HF ⇌ H⁺ + F⁻', inner: 'an acid solution (holds H⁺ fixed)', innerRe: has('h\\+', 'h⁺', 'acid', 'hcl', 'proton', 'h\\^\\+'), sensor: 'F⁻ (LaF₃) electrode', sensorRe: has('laf', 'f-', 'f⁻', 'fluoride'), sign: 'negative (about −59 mV per decade)', signRe: neg,
+      why: 'Here the free ion is F⁻ itself: with H⁺ held fixed, [F⁻] = Ka[HF]/[H⁺] is proportional to [HF]. The fluoride electrode is an anion sensor, so E falls by 59.2 mV per decade. (Slope worked out from the ISE rule: the slide gives only the table.)' },
+    { id: 'h2s', gas: 'H₂S', eq: 'H₂S ⇌ H⁺ + HS⁻ and HS⁻ ⇌ H⁺ + S²⁻', inner: 'a pH 5 buffer (holds H⁺ fixed)', innerRe: has('buffer', 'ph ?5', 'ph 5'), sensor: 'S²⁻ (Ag₂S) electrode', sensorRe: has('ag[2₂]s', 's2-', 's²⁻', 'sulfide', 'sulphide'), sign: 'negative (about −30 mV per decade)', signRe: neg,
+      why: 'A buffer is used because the gas is itself an acid and would otherwise change the pH. With H⁺ fixed, [S²⁻] is proportional to [H₂S], and the Ag₂S electrode gives −29.6 mV per decade of S²⁻ (a doubly charged anion). Slope worked out from the ISE rule.' },
+    { id: 'hcn', gas: 'HCN', eq: 'Ag(CN)₂⁻ ⇌ Ag⁺ + 2CN⁻', inner: 'KAg(CN)₂ (holds Ag(CN)₂⁻ fixed)', innerRe: has('kag\\(cn\\)', 'ag\\(cn\\)', 'silver cyanide', 'dicyanoargentate', 'kag'), sensor: 'Ag⁺ (silver) electrode', sensorRe: has('ag\\+', 'ag⁺', 'silver', '\\bag\\b'), sign: 'negative (about −118 mV per decade, two CN⁻)', signRe: neg,
+      why: 'This one runs backwards: HCN supplies CN⁻, which pushes the complex equilibrium to the left, so Ag⁺ falls as 1/[CN⁻]². A cation electrode then gives a negative slope, about 2 × 59.2 mV per decade. The slope is worked out, not on the slide; the sign is what matters.' },
   ];
-  const variants = G.map(([id, gas, inner, innerRe, sensor, sensorRe, why]) => recall({
-    id: `p-gas-${id}`, label: gas, marks: 2,
-    stem: `A dissolved-gas sensing probe for **${gas}** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. What is the inner filling solution, and which electrode senses the change?`,
-    explanation: `${gas}: inner solution ${inner}; sensing electrode ${sensor}. ${why}`,
-    fields: [['inner', 'Inner solution', inner, [`^.*${innerRe}.*$`]], ['sensor', 'Sensing electrode', sensor, [`^.*${sensorRe}.*$`]]],
+  const variants = G.map((g) => recall({
+    id: `p-gas-${g.id}`, label: g.gas, marks: 3,
+    stem: `A dissolved-gas sensing probe for **${g.gas}** has a gas-permeable membrane over a thin layer of inner solution, with an ion-selective electrode behind it. Give (a) the inner filling solution, (b) the sensing electrode, (c) the sign of the slope of E against log[${g.gas}].`,
+    hint: `Write the equilibrium the gas sets up in water: ${g.eq}. Hold one product fixed in the inner solution; the other is free to follow the gas, and the electrode reads it.`,
+    explanation: `${g.gas}: ${g.eq}. Inner solution: ${g.inner}. Sensing electrode: ${g.sensor}. ${g.why}`,
+    fields: [['inner', 'Inner solution', g.inner, [`^.*${g.innerRe}.*$`]], ['sensor', 'Sensing electrode', g.sensor, [`^.*${g.sensorRe}.*$`]], ['sign', 'Slope of E against log[gas]', g.sign, [g.signRe]]],
   }));
-  add(node({ id: 'bk-m11-p-gas', week: WEEK, title: 'Gas-sensing probes: how the ammonia probe works', theme: THEME, tags: ['gas-sensing-probe'], source: SRC + ' · gas-probe lecture slides', family: 'ise-recall', tier: 'atomic', exam: 'short_2to3', mins: 2, variants }),
-    { id: 'm11.p.gas', name: 'Gas probes: the ammonia probe (and CO₂ as the same idea)', chunk: 'p-types', marks: 1, tags: ['gas-sensing-probe'] });
+  add(node({ id: 'bk-m11-p-gas', week: WEEK, title: 'Gas-sensing probes: derive the inner solution and sensor', theme: THEME, tags: ['gas-sensing-probe'], source: SRC + ' · gas-probe lecture slides (slide 24 table)', family: 'ise-recall', tier: 'atomic', exam: 'short_2to3', mins: 3, variants }),
+    { id: 'm11.p.gas', name: 'Gas probes: derive the inner solution, sensor and slope sign for any gas', chunk: 'p-types', marks: 1.5, tags: ['gas-sensing-probe'] });
 }
 
 /* ---------- membranes and their facts ---------- */
@@ -161,25 +172,13 @@ const SLOPE = 59.16;
       stem: 'For the glass pH electrode: (a) in which solution is it conditioned, and for how long, (b) which surface group forms, and (c) which class of ions interferes?',
       explanation: 'Conditioning in 0.1 M HCl for about an hour forms silanol groups (–SiO⁻H⁺) in a thin surface layer. The response is to H⁺ activity; alkali-metal ions (Na⁺, Li⁺, K⁺) interfere, more so as the Al₂O₃ content rises.',
       fields: [['cond', 'Conditioning', '0.1 M HCl for 1 hour', [`^.*${has('0\\.1 ?m ?hcl', 'hcl', 'hydrochloric')}.*$`]], ['grp', 'Surface group', 'silanol, –SiO⁻H⁺', [`^.*${has('silanol', 'sio-? ?h', 'sio⁻ ?h')}.*$`]], ['intf', 'Interferents', 'alkali metal ions (Na⁺, Li⁺, K⁺)', [`^.*${has('alkali', 'na\\+', 'na⁺', 'sodium', 'li\\+', 'k\\+', 'group 1')}.*$`]]] }),
-    recall({ id: 'p-fact-laf3', label: 'Fluoride electrode', marks: 3,
-      stem: 'For the fluoride ISE: (a) what is the membrane, (b) what is it doped with to raise mobility, and (c) which ion is the main interferent?',
-      explanation: 'A single crystal of LaF₃ doped with EuF₂; F⁻ hops between vacancies (a defect mechanism). The main interferent is hydroxide, which is why TISAB buffers the pH to 5–6.',
-      fields: [['mem', 'Membrane', 'LaF₃ single crystal', [`^.*${has('laf', 'lanthanum')}.*$`]], ['dope', 'Dopant', 'EuF₂ (europium difluoride)', [`^.*${has('euf', 'europium', 'eu')}.*$`]], ['intf', 'Interferent', 'OH⁻ (hydroxide)', [`^.*${has('oh', 'hydroxide')}.*$`]]] }),
-    recall({ id: 'p-fact-pvc', label: 'PVC membrane', marks: 4,
-      stem: 'A PVC membrane sensor has four components. Name each in order of amount: ~30%, 65–70%, ~1%, and the ~1% that is sometimes added to raise conductivity.',
-      explanation: 'Polymer (PVC, ~30%); plasticiser (a solvent keeping the polymer liquid-like, 65–70%); ionophore (selective complexing agent, ~1%); salt (conductivity / counter-ion, ~1%).',
-      fields: [['p', '~30%', 'polymer (PVC)', [`^.*${has('polymer', 'pvc')}.*$`]], ['pl', '65–70%', 'plasticiser (solvent)', [`^.*${has('plasticis', 'plasticiz', 'solvent')}.*$`]], ['io', '~1% (selective)', 'ionophore', [`^.*${has('ionophore')}.*$`]], ['s', '~1% (conductivity)', 'salt (counter-ion)', [`^.*${has('salt', 'counter', 'lipophilic', 'electrolyte')}.*$`]]] }),
     recall({ id: 'p-fact-tisab', label: 'TISAB', marks: 3,
       stem: 'The fluoride ionic strength adjustment buffer (TISAB) has three components. State the job of (a) NaCl, (b) sodium acetate, (c) CDTA.',
       explanation: 'NaCl fixes the ionic strength so γ is constant and the electrode follows concentration. Acetate holds pH at 5–6 so OH⁻ does not interfere. CDTA complexes Al(III) and Fe(III), which would otherwise bind F⁻.',
       fields: [['nacl', 'NaCl', 'sets a constant ionic strength', [`^.*${has('ionic strength', 'constant', 'activity coeff', 'γ')}.*$`]], ['ac', 'Sodium acetate', 'buffers pH to 5–6 (avoids OH⁻)', [`^.*${has('ph', 'buffer', 'oh')}.*$`]], ['cdta', 'CDTA', 'complexes Al(III) and Fe(III)', [`^.*${has('complex', 'chelat', 'bind', 'mask', 'al', 'fe')}.*$`]]] }),
-    recall({ id: 'p-fact-k', label: 'Potassium electrode', marks: 3,
-      stem: 'For the PVC potassium electrode: (a) which ionophore is used, (b) why must the electrode be very selective for K⁺ over Na⁺ in serum, and (c) why is an NH₄NO₃ bridge used?',
-      explanation: 'Valinomycin; its cavity size gives high K⁺ selectivity. Serum K⁺ is 3.5–5.0 mM but Na⁺ is 135–145 mM, so Na⁺ is ~30× more abundant. The NH₄NO₃ bridge stops K⁺ leaking from the saturated KCl reference into the sample.',
-      fields: [['io', 'Ionophore', 'valinomycin', [`^.*${has('valinomycin')}.*$`]], ['why', 'Why very selective', 'Na⁺ is ~30× more concentrated than K⁺ in serum', [`^.*${has('na', 'sodium')}.*$`]], ['br', 'NH₄NO₃ bridge', 'prevents K⁺ contamination from the KCl reference', [`^.*${has('contamin', 'prevent', 'leak', 'k\\+', 'potassium', 'kcl')}.*$`]]] }),
   ];
-  add(node({ id: 'bk-m11-p-facts', week: WEEK, title: 'Membrane types: key facts', theme: THEME, tags: ['glass-electrode', 'laf3', 'pvc-membrane'], source: SRC, family: 'ise-recall', mins: 3, exam: 'short_2to3', tier: 'atomic', variants }),
-    { id: 'm11.p.facts', name: 'Glass, LaF₃, PVC and K⁺ electrode facts; TISAB', chunk: 'p-types', marks: 3, tags: ['membranes'] });
+  add(node({ id: 'bk-m11-p-facts', week: WEEK, title: 'Glass electrode and TISAB: key facts', theme: THEME, tags: ['glass-electrode', 'tisab'], source: SRC, family: 'ise-recall', mins: 3, exam: 'short_2to3', tier: 'atomic', variants }),
+    { id: 'm11.p.facts', name: 'Glass electrode facts and TISAB', chunk: 'p-types', marks: 2, tags: ['membranes'] });
 }
 
 /* ---------- concepts (pick one) ---------- */

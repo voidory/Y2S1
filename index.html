@@ -8684,6 +8684,8 @@
         plan: { hoursPerDay: 6, split: 50, ratings: {} },
         ui: { sheet: null, readinessTab: 'plan', settingsTab: 'module', bankLimit: 60 },
         reactions: null,          // CM2021 reaction list (content/cm2021/reactions.json)
+        saved: [],                // question ids shortlisted "for later" (settings row savedLater), in the order to play them
+        playlist: null,           // a running playlist: { on, ids, done, label, now } (session only)
         supersedes: {},           // per module: pairs 'harder question covers an easier one' (content/<dir>/supersedes.json)
         retired: null,            // Scheduler.supersession result for the current history (questions skipped because a harder one was passed)
         rxStats: {},              // per-reaction spaced boxes (settings row 'reactionStats')
@@ -8695,7 +8697,7 @@
         cram: null,      // cram mode (session only): { on, pass: 'auto'|'cover'|'fix', done, streak, last, passNow, chunkNow, left, shown }
         examMode: false, // study screen: no hints, no pick-one cards, pace shown (settings row 'examMode')
         filters: { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null },
-        bankFilters: { q: '', moduleCode: 'ALL', tier: 'ALL', includeGolden: true },
+        bankFilters: { q: '', moduleCode: 'ALL', tier: 'ALL', includeGolden: true, show: 'all' },
         current: null, // { node, inst, userInput, setTokens, paperScratchpad, phase: 'answering'|'rubric'|'graded', rubricChecks, evalResult, startedAtMs }
         mock: {
           phase: 'setup', // 'setup' | 'in_progress' | 'self_marking' | 'submitted'
@@ -8870,6 +8872,36 @@
         return Mastery.evaluate(appState.masteryLogs, appState.skillMap, appState.nodes, appState.settings, appState.masteryPrefs);
       }
 
+      /* "Save for later": an ordered shortlist of question ids (settings row savedLater), played like a playlist. */
+      async function saveSavedList() {
+        try {
+          const db = await DB.init();
+          await db.settings.put({ key: 'savedLater', ids: appState.saved });
+        } catch (err) {
+          console.warn('[Saved] could not save:', err.message);
+        }
+      }
+      function setSaved(ids, on) {
+        if (on) { const have = new Set(appState.saved); appState.saved = [...appState.saved, ...ids.filter((id, i) => !have.has(id) && ids.indexOf(id) === i)]; }
+        else { const drop = new Set(ids); appState.saved = appState.saved.filter((id) => !drop.has(id)); }
+        saveSavedList();
+      }
+      /* Play a list of questions in order (the Saved list, or the unseen ones in the Bank). Questions of the other module are left out. */
+      function startPlaylist(ids, label) {
+        const mine = ids.filter((id) => appState.nodes.some((n) => n.id === id));
+        if (!mine.length) { showToast('Nothing in this list belongs to the current module.'); return; }
+        appState.cram = null;
+        appState.playlist = { on: true, ids: mine, done: [], label, now: null };
+        appState.route = 'study';
+        appState.current = null;
+        appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null };
+        loadNextQuestion();
+      }
+      function playlistStripHtml() {
+        const pl = appState.playlist;
+        return `<div class="shrink-0 flex items-center justify-between gap-2 rounded-lg bg-amber-500 text-white text-xs px-3 py-1.5" data-playlist-strip><span class="min-w-0 truncate"><span class="font-semibold">${esc(pl.label)}</span> · ${Math.min(pl.done.length, pl.ids.length)} of ${pl.ids.length}</span><button type="button" id="btnPlaylistOff" class="shrink-0 underline decoration-dotted">End</button></div>`;
+      }
+
       async function saveMyHooks() {
         try {
           const db = await DB.init();
@@ -8936,7 +8968,8 @@
         refreshRetired();
         // the student's own choices live in settings rows; reload them here so an import cannot leave a stale copy that the next save overwrites
         try {
-          const [hooksRow, prefsRow, planRow] = await Promise.all([db.settings.get('myHooks'), db.settings.get('skillMastery'), db.settings.get('plan')]);
+          const [hooksRow, prefsRow, planRow, savedRow] = await Promise.all([db.settings.get('myHooks'), db.settings.get('skillMastery'), db.settings.get('plan'), db.settings.get('savedLater')]);
+          appState.saved = Array.isArray(savedRow?.ids) ? savedRow.ids.filter((x) => typeof x === 'string') : [];
           appState.plan = { hoursPerDay: Number(planRow?.hoursPerDay) > 0 ? Number(planRow.hoursPerDay) : 6, split: Number.isFinite(Number(planRow?.split)) && planRow?.split != null ? Number(planRow.split) : 50, ratings: planRow?.ratings || {} };
           appState.myHooks = hooksRow?.hooks || {};
           appState.masteryPrefs = { removed: prefsRow?.removed || {}, resetAt: prefsRow?.resetAt || {} };
@@ -8968,6 +9001,7 @@
         await db.settings.put({ key: 'activeModule', code });
         appState.activeModule = code;
         appState.cram = null;
+        appState.playlist = null;
         if (code !== 'CM2021' && appState.route === 'reactions') appState.route = 'study';
         appState.current = null;
         appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null };
@@ -9174,6 +9208,7 @@
 
       /* ---------- cram mode ---------- */
       function startCram(pass = 'auto') {
+        appState.playlist = null;
         appState.cram = { on: true, pass, done: [], streak: {}, last: null, passNow: null, chunkNow: null, left: null, shown: [] };
         appState.route = 'study';
         appState.current = null;
@@ -9209,6 +9244,12 @@
           appState.session.retry = appState.session.retry.filter((r) => !retiredNow().nodes.has(r.nodeId));
           const due = appState.session.retry.find((r) => r.after <= appState.session.cards && r.nodeId !== prevNode?.id);
           if (due) { appState.session.retry = appState.session.retry.filter((r) => r !== due); filters.forceNodeId = due.nodeId; }
+        }
+        if (appState.playlist?.on && !appState.filters.forceNodeId && !cramPick && !filters.forceNodeId) {
+          const pl = appState.playlist;
+          const nextId = pl.ids.find((id) => !pl.done.includes(id) && appState.nodes.some((n) => n.id === id));
+          if (nextId) { pl.done.push(nextId); pl.now = nextId; filters.forceNodeId = nextId; }
+          else { pl.on = false; showToast(`${pl.label}: that was the last one. Back to the normal queue.`); }
         }
         if (cramPick) { filters.forceNodeId = cramPick.node.id; Object.assign(appState.cram, { last: cramPick.node.id, passNow: cramPick.pass, chunkNow: cramPick.chunk, left: cramPick.left }); }
         if (appState.examMode) filters.typedOnly = true;
@@ -9367,6 +9408,7 @@
           const titles = [...new Set(fresh)].map((id) => appState.allNodes.find((n) => n.id === id)?.metadata?.title).filter(Boolean);
           if (titles.length) showToast(`Covers easier questions too: ${titles.slice(0, 2).join('; ')}${titles.length > 2 ? ` and ${titles.length - 2} more` : ''}. They will not come up unless you miss this one again.`);
         }
+        if (evalResult.passed && appState.saved.includes(cur.node.id)) { setSaved([cur.node.id], false); showToast('Passed: taken off your Saved list.'); }
         const masteryAfter = masteryNow();
         const lvAfter = topicScoreFor(cur.node.id);
         cur.levelMove = lvBefore && lvAfter ? { name: lvAfter.name, before: lvBefore.score, after: lvAfter.score } : null;
@@ -9922,6 +9964,7 @@
             </div>
 
             ${appState.cram?.on ? cramStripHtml() : ''}
+            ${appState.playlist?.on ? playlistStripHtml() : ''}
 
             <div class="seg lg:hidden shrink-0" role="tablist" aria-label="Question steps">
               ${stepBtn('question', '1 · Question')}${stepBtn('answer', '2 · Answer')}${stepBtn('result', '3 · Result', phase !== 'graded')}
@@ -9929,8 +9972,9 @@
 
             <div class="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] gap-3 lg:gap-4">
               <section class="pane pane-q bg-white border border-slate-200 rounded-xl p-4 sm:p-5">
-                <div class="text-xs font-mono text-slate-500 mb-2">
-                  ${variant.marks} mark${variant.marks === 1 ? '' : 's'} · ~${node.metadata.estimatedMinutes} min${node.metadata.family ? ` · ${esc(node.metadata.family)}` : ''}
+                <div class="text-xs font-mono text-slate-500 mb-2 flex items-center justify-between gap-2">
+                  <span class="min-w-0">${variant.marks} mark${variant.marks === 1 ? '' : 's'} · ~${node.metadata.estimatedMinutes} min${node.metadata.family ? ` · ${esc(node.metadata.family)}` : ''}</span>
+                  <button type="button" id="btnSaveLater" aria-pressed="${appState.saved.includes(node.id)}" title="Keep this on your Saved list to try later" class="shrink-0 px-2 py-0.5 font-sans text-[11px] font-medium border rounded-md ${appState.saved.includes(node.id) ? 'bg-amber-50 border-amber-400 text-amber-900' : 'bg-white border-slate-200 text-slate-600'}">${appState.saved.includes(node.id) ? '★ Saved' : '☆ Save for later'}</button>
                 </div>
                 <h1 class="font-display text-lg sm:text-xl font-semibold text-slate-900 leading-snug">${escSub(node.metadata.title)}</h1>
                 <div class="text-xs text-slate-500 mt-0.5 mb-3">${escSub(variant.perspectiveLabel)}${node.metadata.source ? ` · ${escSub(node.metadata.source)}` : ''}</div>
@@ -10016,6 +10060,15 @@
         $('#btnSkipNode', root)?.addEventListener('click', () => loadNextQuestion({ skipCurrent: true }));
         $('#btnCram', root)?.addEventListener('click', () => { if (appState.cram?.on) { appState.cram.on = false; render(); } else startCram('auto'); });
         $('#btnCramOff', root)?.addEventListener('click', () => { appState.cram.on = false; render(); });
+        $('#btnPlaylistOff', root)?.addEventListener('click', () => { appState.playlist.on = false; render(); });
+        $('#btnSaveLater', root)?.addEventListener('click', (e) => {
+          const id = appState.current.node.id, on = !appState.saved.includes(id);
+          setSaved([id], on);
+          const b = e.currentTarget;                       // update in place: re-rendering would drop what is typed
+          b.setAttribute('aria-pressed', String(on));
+          b.textContent = on ? '★ Saved' : '☆ Save for later';
+          b.className = `shrink-0 px-2 py-0.5 font-sans text-[11px] font-medium border rounded-md ${on ? 'bg-amber-50 border-amber-400 text-amber-900' : 'bg-white border-slate-200 text-slate-600'}`;
+        });
         $('#btnExamMode', root)?.addEventListener('click', async () => {
           appState.examMode = !appState.examMode;
           try { const db = await DB.init(); await db.settings.put({ key: 'examMode', on: appState.examMode }); } catch (err) { console.warn('[Exam mode] not saved:', err.message); }
@@ -11809,7 +11862,14 @@
       function renderBankView(root) {
         const f = appState.bankFilters;
         const q = f.q.trim().toLowerCase();
-        const filtered = appState.nodes.filter((n) => {
+        const tried = new Set((appState.masteryLogs || []).map((l) => l.nodeId));
+        const retiredB = retiredNow();
+        const counted = appState.nodes.filter((n) => f.includeGolden || !n.metadata?.isGoldenBank);   // the tab counts follow the Golden box, like the list
+        const unseenCount = counted.filter((n) => !tried.has(n.id)).length;
+        const savedCount = counted.filter((n) => appState.saved.includes(n.id)).length;
+        let filtered = appState.nodes.filter((n) => {
+          if (f.show === 'unseen' && tried.has(n.id)) return false;
+          if (f.show === 'saved' && !appState.saved.includes(n.id)) return false;
           if (!f.includeGolden && n.metadata?.isGoldenBank) return false;
           if (f.moduleCode !== 'ALL' && n.moduleCode !== f.moduleCode) return false;
           if (f.tier !== 'ALL' && n.tier !== f.tier) return false;
@@ -11819,6 +11879,9 @@
           }
           return true;
         });
+        if (f.show === 'saved') filtered = filtered.slice().sort((a, b) => appState.saved.indexOf(a.id) - appState.saved.indexOf(b.id));
+        const isList = f.show !== 'all' || Boolean(q);                       // a list worth playing or saving in one go
+        const unsavedShown = filtered.filter((n) => !appState.saved.includes(n.id)).length;
 
         const goldenCount = appState.nodes.filter((n) => n.metadata?.isGoldenBank).length;
 
@@ -11835,6 +11898,11 @@
             </div>
 
             <div class="shrink-0 space-y-2">
+              <div class="seg" role="tablist" aria-label="Which questions">
+                <button type="button" role="tab" data-bank-show="all" aria-selected="${f.show === 'all'}">All ${counted.length}</button>
+                <button type="button" role="tab" data-bank-show="unseen" aria-selected="${f.show === 'unseen'}">Unseen ${unseenCount}</button>
+                <button type="button" role="tab" data-bank-show="saved" aria-selected="${f.show === 'saved'}">★ Saved ${savedCount}</button>
+              </div>
               <input id="bankSearchInput" type="search" value="${esc(f.q)}" placeholder="Search title, theme, concept tag or formula…" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-white" />
               <div class="flex items-center gap-2">
                 <select id="bankTierSel" aria-label="Tier" class="flex-1 min-w-0 text-sm border border-slate-300 rounded-lg px-2.5 py-1.5 bg-white">
@@ -11847,7 +11915,14 @@
                   <span>Golden (${goldenCount})</span>
                 </label>
               </div>
-              <div class="text-[11px] font-mono text-slate-500">Showing ${shown.length} of ${filtered.length} matching questions</div>
+              <div class="flex items-center justify-between gap-2">
+                <div class="text-[11px] font-mono text-slate-500">Showing ${shown.length} of ${filtered.length} matching questions</div>
+                <div class="flex items-center gap-1.5 shrink-0">
+                  ${isList && unsavedShown ? `<button type="button" id="bankSaveAll" class="px-2.5 py-1 text-xs font-medium border border-amber-300 bg-amber-50 text-amber-900 rounded-md hover:bg-amber-100">☆ Save ${unsavedShown}</button>` : ''}
+                  ${f.show === 'saved' && savedCount ? `<button type="button" id="bankClearSaved" class="px-2.5 py-1 text-xs font-medium border border-slate-200 bg-white text-slate-700 rounded-md hover:bg-slate-50">Clear</button>` : ''}
+                  ${isList && filtered.length ? `<button type="button" id="bankPlayAll" class="px-3 py-1 text-xs font-medium bg-amber-500 text-white rounded-md hover:bg-amber-600">▶ Play ${filtered.length}</button>` : ''}
+                </div>
+              </div>
             </div>
 
             <div class="view-scroll bg-white border border-slate-200 rounded-xl divide-y divide-slate-100">
@@ -11856,11 +11931,13 @@
                   <div class="min-w-0">
                     <div class="text-sm font-medium text-slate-900 sm:truncate">${esc(n.metadata.title)}</div>
                     <div class="text-xs text-slate-500 mt-0.5">
-                      ${esc((appState.skillMap && appState.skillMap.chunks?.find((c) => c.id === Weakness.chunksOf(appState.skillMap, n.id)[0])?.name) || n.metadata.primaryTheme)} · ${n.tier === 'synthesis' ? 'Multi-step' : 'Quick drill'} · ${n.variants.length} version${n.variants.length === 1 ? '' : 's'}
+                      ${esc((appState.skillMap && appState.skillMap.chunks?.find((c) => c.id === Weakness.chunksOf(appState.skillMap, n.id)[0])?.name) || n.metadata.primaryTheme)} · ${n.tier === 'synthesis' ? 'Multi-step' : 'Quick drill'} · ${n.variants.length} version${n.variants.length === 1 ? '' : 's'}${tried.has(n.id) ? '' : ' · <span class="text-blue-700 font-medium">not tried yet</span>'}${retiredB.nodes.has(n.id) ? ' · <span class="text-slate-500" title="You passed a harder question that covers this one, so the queue skips it">skipped: covered by a harder one</span>' : ''}
                     </div>
                   </div>
                   <div class="flex items-center gap-2 shrink-0">
                     ${n.id.startsWith('gb-') ? `<button type="button" data-explore-case="${esc(n.id.slice(3))}" class="px-2.5 py-1 text-xs font-medium border border-slate-200 rounded-md hover:bg-slate-100 text-slate-700">3D</button>` : ''}
+                    ${f.show === 'saved' ? `<button type="button" data-save-move="up|${esc(n.id)}" aria-label="Move up" class="px-2 py-1 text-xs border border-slate-200 rounded-md hover:bg-slate-100 text-slate-600">▲</button><button type="button" data-save-move="down|${esc(n.id)}" aria-label="Move down" class="px-2 py-1 text-xs border border-slate-200 rounded-md hover:bg-slate-100 text-slate-600">▼</button>` : ''}
+                    <button type="button" data-save-node="${esc(n.id)}" aria-pressed="${appState.saved.includes(n.id)}" aria-label="${appState.saved.includes(n.id) ? 'Remove from Saved' : 'Save for later'}" class="px-2.5 py-1 text-xs font-medium border rounded-md ${appState.saved.includes(n.id) ? 'bg-amber-50 border-amber-400 text-amber-900' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-100'}">${appState.saved.includes(n.id) ? '★' : '☆'}</button>
                     <button type="button" data-inspect-node="${esc(n.id)}" class="px-2.5 py-1 text-xs font-medium border border-slate-200 rounded-md hover:bg-slate-100 text-slate-700">JSON</button>
                     <button type="button" data-launch-node="${esc(n.id)}" class="px-3 py-1 text-xs font-medium bg-slate-900 text-white rounded-md hover:bg-slate-800">Launch</button>
                   </div>
@@ -11876,6 +11953,26 @@
         `;
 
         $('#bankShowMore', root)?.addEventListener('click', () => { appState.ui.bankLimit += 60; renderBankView(root); });
+        const keepScroll = (fn) => { const sc = root.querySelector('.view-scroll'), y = sc ? sc.scrollTop : 0; fn(); const sc2 = root.querySelector('.view-scroll'); if (sc2) sc2.scrollTop = y; };
+        $$('[data-bank-show]', root).forEach((b) => b.addEventListener('click', () => { appState.bankFilters.show = b.dataset.bankShow; appState.ui.bankLimit = 60; renderBankView(root); }));
+        $$('[data-save-node]', root).forEach((b) => b.addEventListener('click', () => {
+          setSaved([b.dataset.saveNode], !appState.saved.includes(b.dataset.saveNode));
+          keepScroll(() => renderBankView(root));
+        }));
+        $$('[data-save-move]', root).forEach((b) => b.addEventListener('click', () => {
+          const [dir, id] = b.dataset.saveMove.split('|'), a = appState.saved.slice(), i = a.indexOf(id), j = dir === 'up' ? i - 1 : i + 1;
+          if (i < 0 || j < 0 || j >= a.length) return;
+          [a[i], a[j]] = [a[j], a[i]];
+          appState.saved = a; saveSavedList();
+          keepScroll(() => renderBankView(root));
+        }));
+        $('#bankSaveAll', root)?.addEventListener('click', () => { setSaved(filtered.map((n) => n.id), true); keepScroll(() => renderBankView(root)); });
+        $('#bankClearSaved', root)?.addEventListener('click', (e) => {
+          const b = e.currentTarget;
+          if (b.dataset.armed !== '1') { b.dataset.armed = '1'; b.textContent = 'Tap again to clear'; return; }
+          setSaved(appState.saved.slice(), false); renderBankView(root);
+        });
+        $('#bankPlayAll', root)?.addEventListener('click', () => startPlaylist(filtered.map((n) => n.id), f.show === 'saved' ? 'Saved' : f.show === 'unseen' ? 'Unseen' : 'Search results'));
 
         $('#bankSearchInput', root)?.addEventListener('input', (e) => {
           appState.bankFilters.q = e.target.value;

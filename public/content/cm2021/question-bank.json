@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-23T13:33:50.121Z",
+ "exportedAt": "2026-11-23T13:47:51.710Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -35403,6 +35403,2388 @@
         "isCritical": false
        }
       ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c2-trend-gen2",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Pick the highest or lowest: heavier Group 14, metals, hydrides",
+    "source": "Chapter 1 Part 2 slide 32, Part 3 slides 37 and 42, Part 4 slides 63-64; template of the Kinjo example mid-terms (boiling-point and trend picks)",
+    "week": 2,
+    "primaryTheme": "Periodic Trends",
+    "conceptTags": [
+     "periodic-trends",
+     "boiling-point",
+     "heavier-group-14"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 1,
+    "examStyle": "short_2to3",
+    "family": "trend-gen2"
+   },
+   "variants": [
+    {
+     "variantId": "c2-trend2-01",
+     "perspectiveLabel": "E≡E bond length in R–E≡E–R, lowest of Si, Ge, Pb",
+     "marks": 1,
+     "stem": "Among Si, Ge, Pb, which has the **lowest** E≡E bond length in R–E≡E–R?",
+     "explanation": "Si. The triple bond lengthens down Group 14 as the atoms get bigger and the np orbitals overlap less. (Slide values: Si 2.06 Å, Ge 2.29 Å, Pb 3.19 Å.)",
+     "sourceSlide": "ch1-p2 s32",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Si"
+       },
+       {
+        "id": "b",
+        "label": "Ge"
+       },
+       {
+        "id": "c",
+        "label": "Pb"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-02",
+     "perspectiveLabel": "E≡E bond length in R–E≡E–R, highest of C, Sn, Pb",
+     "marks": 1,
+     "stem": "Among C, Sn, Pb, which has the **highest** E≡E bond length in R–E≡E–R?",
+     "explanation": "Pb. The triple bond lengthens down Group 14 as the atoms get bigger and the np orbitals overlap less. (Slide values: C 1.2 Å, Sn 2.67 Å, Pb 3.19 Å.)",
+     "sourceSlide": "ch1-p2 s32",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "C"
+       },
+       {
+        "id": "b",
+        "label": "Sn"
+       },
+       {
+        "id": "c",
+        "label": "Pb"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-03",
+     "perspectiveLabel": "E–E–C bond angle in R–E≡E–R, lowest of Si, Ge, Sn",
+     "marks": 1,
+     "stem": "Among Si, Ge, Sn, which has the **lowest** E–E–C bond angle in R–E≡E–R?",
+     "explanation": "Sn. Only carbon is linear. The heavier analogues are trans-bent, and the bend grows down the group until Pb is close to 90°: the ns pair behaves like a core-like lone pair and the np orbitals bond at nearly right angles. (Slide values: Si 137.4 °, Ge 128.7 °, Sn 125.1 °.)",
+     "sourceSlide": "ch1-p2 s32",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Si"
+       },
+       {
+        "id": "b",
+        "label": "Ge"
+       },
+       {
+        "id": "c",
+        "label": "Sn"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-04",
+     "perspectiveLabel": "E–E–C bond angle in R–E≡E–R, highest of Si, Sn, Pb",
+     "marks": 1,
+     "stem": "Among Si, Sn, Pb, which has the **highest** E–E–C bond angle in R–E≡E–R?",
+     "explanation": "Si. Only carbon is linear. The heavier analogues are trans-bent, and the bend grows down the group until Pb is close to 90°: the ns pair behaves like a core-like lone pair and the np orbitals bond at nearly right angles. (Slide values: Si 137.4 °, Sn 125.1 °, Pb 94.3 °.)",
+     "sourceSlide": "ch1-p2 s32",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Si"
+       },
+       {
+        "id": "b",
+        "label": "Sn"
+       },
+       {
+        "id": "c",
+        "label": "Pb"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-05",
+     "perspectiveLabel": "E–E–C bond angle in R–E≡E–R, lowest of C, Ge, Pb",
+     "marks": 1,
+     "stem": "Among C, Ge, Pb, which has the **lowest** E–E–C bond angle in R–E≡E–R?",
+     "explanation": "Pb. Only carbon is linear. The heavier analogues are trans-bent, and the bend grows down the group until Pb is close to 90°: the ns pair behaves like a core-like lone pair and the np orbitals bond at nearly right angles. (Slide values: C 180 °, Ge 128.7 °, Pb 94.3 °.)",
+     "sourceSlide": "ch1-p2 s32",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "C"
+       },
+       {
+        "id": "b",
+        "label": "Ge"
+       },
+       {
+        "id": "c",
+        "label": "Pb"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-06",
+     "perspectiveLabel": "E–E single-bond length, highest of C, Si, Ge",
+     "marks": 1,
+     "stem": "Among C, Si, Ge, which has the **highest** E–E single-bond length?",
+     "explanation": "Ge. Single bonds lengthen down the group with atomic size. (Slide values: C 1.54 Å, Si 2.34 Å, Ge 2.44 Å.)",
+     "sourceSlide": "ch1-p2 s32",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "C"
+       },
+       {
+        "id": "b",
+        "label": "Si"
+       },
+       {
+        "id": "c",
+        "label": "Ge"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-07",
+     "perspectiveLabel": "melting point of the metal, highest of Na, Mg, Al",
+     "marks": 1,
+     "stem": "Among Na, Mg, Al, which has the **highest** melting point of the metal?",
+     "explanation": "Al. Metallic bonding is the pull of the electron cloud on the ion cores. Across a period each atom donates more electrons (Na 1, Mg 2, Al 3) so the cloud is denser and the ions are held harder; down a group the ions get bigger and the cloud holds them less effectively, so the melting point falls (Li 181, Na 98, K 63). (Slide values: Na 98 °C, Mg 650 °C, Al 659 °C.)",
+     "sourceSlide": "ch1-p4 s63-64",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Na"
+       },
+       {
+        "id": "b",
+        "label": "Mg"
+       },
+       {
+        "id": "c",
+        "label": "Al"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-08",
+     "perspectiveLabel": "melting point of the metal, lowest of Na, Mg, Al",
+     "marks": 1,
+     "stem": "Among Na, Mg, Al, which has the **lowest** melting point of the metal?",
+     "explanation": "Na. Metallic bonding is the pull of the electron cloud on the ion cores. Across a period each atom donates more electrons (Na 1, Mg 2, Al 3) so the cloud is denser and the ions are held harder; down a group the ions get bigger and the cloud holds them less effectively, so the melting point falls (Li 181, Na 98, K 63). (Slide values: Na 98 °C, Mg 650 °C, Al 659 °C.)",
+     "sourceSlide": "ch1-p4 s63-64",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Na"
+       },
+       {
+        "id": "b",
+        "label": "Mg"
+       },
+       {
+        "id": "c",
+        "label": "Al"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-09",
+     "perspectiveLabel": "melting point of the metal, highest of Li, Na, K",
+     "marks": 1,
+     "stem": "Among Li, Na, K, which has the **highest** melting point of the metal?",
+     "explanation": "Li. Metallic bonding is the pull of the electron cloud on the ion cores. Across a period each atom donates more electrons (Na 1, Mg 2, Al 3) so the cloud is denser and the ions are held harder; down a group the ions get bigger and the cloud holds them less effectively, so the melting point falls (Li 181, Na 98, K 63). (Slide values: Li 181 °C, Na 98 °C, K 63 °C.)",
+     "sourceSlide": "ch1-p4 s63-64",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Li"
+       },
+       {
+        "id": "b",
+        "label": "Na"
+       },
+       {
+        "id": "c",
+        "label": "K"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-10",
+     "perspectiveLabel": "melting point of the metal, lowest of Li, Na, K",
+     "marks": 1,
+     "stem": "Among Li, Na, K, which has the **lowest** melting point of the metal?",
+     "explanation": "K. Metallic bonding is the pull of the electron cloud on the ion cores. Across a period each atom donates more electrons (Na 1, Mg 2, Al 3) so the cloud is denser and the ions are held harder; down a group the ions get bigger and the cloud holds them less effectively, so the melting point falls (Li 181, Na 98, K 63). (Slide values: Li 181 °C, Na 98 °C, K 63 °C.)",
+     "sourceSlide": "ch1-p4 s63-64",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Li"
+       },
+       {
+        "id": "b",
+        "label": "Na"
+       },
+       {
+        "id": "c",
+        "label": "K"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-11",
+     "perspectiveLabel": "boiling point of the metal, highest of Na, Mg, Al",
+     "marks": 1,
+     "stem": "Among Na, Mg, Al, which has the **highest** boiling point of the metal?",
+     "explanation": "Al. Same reasoning as the melting point: more electrons donated per atom strengthens the metallic bond across a period (Na 890, Mg 1110, Al 2470), and bigger ions weaken it down a group (Li 1313, Na 890, K 774). (Slide values: Na 890 °C, Mg 1110 °C, Al 2470 °C.)",
+     "sourceSlide": "ch1-p4 s63-64",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Na"
+       },
+       {
+        "id": "b",
+        "label": "Mg"
+       },
+       {
+        "id": "c",
+        "label": "Al"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-12",
+     "perspectiveLabel": "boiling point of the metal, lowest of Li, Na, K",
+     "marks": 1,
+     "stem": "Among Li, Na, K, which has the **lowest** boiling point of the metal?",
+     "explanation": "K. Same reasoning as the melting point: more electrons donated per atom strengthens the metallic bond across a period (Na 890, Mg 1110, Al 2470), and bigger ions weaken it down a group (Li 1313, Na 890, K 774). (Slide values: Li 1313 °C, Na 890 °C, K 774 °C.)",
+     "sourceSlide": "ch1-p4 s63-64",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Li"
+       },
+       {
+        "id": "b",
+        "label": "Na"
+       },
+       {
+        "id": "c",
+        "label": "K"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-13",
+     "perspectiveLabel": "boiling point of the hydride, highest of NH₃, PH₃, AsH₃",
+     "marks": 1,
+     "stem": "Among NH₃, PH₃, AsH₃, which has the **highest** boiling point of the hydride?",
+     "explanation": "NH₃. Within a group the boiling point rises with the number of electrons (stronger dispersion forces), but the first member of Groups 15, 16 and 17 (NH₃, H₂O, HF) breaks the trend because of hydrogen bonding. (Slide values in °C.) (Slide values: NH₃ -33 °C, PH₃ -90 °C, AsH₃ -55 °C.)",
+     "sourceSlide": "ch1-p3 s42",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "NH₃"
+       },
+       {
+        "id": "b",
+        "label": "PH₃"
+       },
+       {
+        "id": "c",
+        "label": "AsH₃"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-14",
+     "perspectiveLabel": "boiling point of the hydride, lowest of NH₃, PH₃, AsH₃",
+     "marks": 1,
+     "stem": "Among NH₃, PH₃, AsH₃, which has the **lowest** boiling point of the hydride?",
+     "explanation": "PH₃. Within a group the boiling point rises with the number of electrons (stronger dispersion forces), but the first member of Groups 15, 16 and 17 (NH₃, H₂O, HF) breaks the trend because of hydrogen bonding. (Slide values in °C.) (Slide values: NH₃ -33 °C, PH₃ -90 °C, AsH₃ -55 °C.)",
+     "sourceSlide": "ch1-p3 s42",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "NH₃"
+       },
+       {
+        "id": "b",
+        "label": "PH₃"
+       },
+       {
+        "id": "c",
+        "label": "AsH₃"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "b"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-15",
+     "perspectiveLabel": "boiling point of the hydride, highest of PH₃, AsH₃, SbH₃",
+     "marks": 1,
+     "stem": "Among PH₃, AsH₃, SbH₃, which has the **highest** boiling point of the hydride?",
+     "explanation": "SbH₃. Within a group the boiling point rises with the number of electrons (stronger dispersion forces), but the first member of Groups 15, 16 and 17 (NH₃, H₂O, HF) breaks the trend because of hydrogen bonding. (Slide values in °C.) (Slide values: PH₃ -90 °C, AsH₃ -55 °C, SbH₃ -17 °C.)",
+     "sourceSlide": "ch1-p3 s42",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "PH₃"
+       },
+       {
+        "id": "b",
+        "label": "AsH₃"
+       },
+       {
+        "id": "c",
+        "label": "SbH₃"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-16",
+     "perspectiveLabel": "boiling point of the hydride, highest of H₂O, H₂S, H₂Se",
+     "marks": 1,
+     "stem": "Among H₂O, H₂S, H₂Se, which has the **highest** boiling point of the hydride?",
+     "explanation": "H₂O. Within a group the boiling point rises with the number of electrons (stronger dispersion forces), but the first member of Groups 15, 16 and 17 (NH₃, H₂O, HF) breaks the trend because of hydrogen bonding. (Slide values in °C.) (Slide values: H₂O 100 °C, H₂S -61 °C, H₂Se -40 °C.)",
+     "sourceSlide": "ch1-p3 s42",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "H₂O"
+       },
+       {
+        "id": "b",
+        "label": "H₂S"
+       },
+       {
+        "id": "c",
+        "label": "H₂Se"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-17",
+     "perspectiveLabel": "boiling point of the hydride, lowest of H₂O, H₂S, H₂Se",
+     "marks": 1,
+     "stem": "Among H₂O, H₂S, H₂Se, which has the **lowest** boiling point of the hydride?",
+     "explanation": "H₂S. Within a group the boiling point rises with the number of electrons (stronger dispersion forces), but the first member of Groups 15, 16 and 17 (NH₃, H₂O, HF) breaks the trend because of hydrogen bonding. (Slide values in °C.) (Slide values: H₂O 100 °C, H₂S -61 °C, H₂Se -40 °C.)",
+     "sourceSlide": "ch1-p3 s42",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "H₂O"
+       },
+       {
+        "id": "b",
+        "label": "H₂S"
+       },
+       {
+        "id": "c",
+        "label": "H₂Se"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "b"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-18",
+     "perspectiveLabel": "boiling point of the hydride, highest of H₂S, H₂Se, H₂Te",
+     "marks": 1,
+     "stem": "Among H₂S, H₂Se, H₂Te, which has the **highest** boiling point of the hydride?",
+     "explanation": "H₂Te. Within a group the boiling point rises with the number of electrons (stronger dispersion forces), but the first member of Groups 15, 16 and 17 (NH₃, H₂O, HF) breaks the trend because of hydrogen bonding. (Slide values in °C.) (Slide values: H₂S -61 °C, H₂Se -40 °C, H₂Te -2 °C.)",
+     "sourceSlide": "ch1-p3 s42",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "H₂S"
+       },
+       {
+        "id": "b",
+        "label": "H₂Se"
+       },
+       {
+        "id": "c",
+        "label": "H₂Te"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-19",
+     "perspectiveLabel": "boiling point of the hydride, highest of HF, HCl, HBr",
+     "marks": 1,
+     "stem": "Among HF, HCl, HBr, which has the **highest** boiling point of the hydride?",
+     "explanation": "HF. Within a group the boiling point rises with the number of electrons (stronger dispersion forces), but the first member of Groups 15, 16 and 17 (NH₃, H₂O, HF) breaks the trend because of hydrogen bonding. (Slide values in °C.) (Slide values: HF 20 °C, HCl -85 °C, HBr -69 °C.)",
+     "sourceSlide": "ch1-p3 s42",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "HF"
+       },
+       {
+        "id": "b",
+        "label": "HCl"
+       },
+       {
+        "id": "c",
+        "label": "HBr"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-20",
+     "perspectiveLabel": "boiling point of the hydride, lowest of HF, HCl, HBr",
+     "marks": 1,
+     "stem": "Among HF, HCl, HBr, which has the **lowest** boiling point of the hydride?",
+     "explanation": "HCl. Within a group the boiling point rises with the number of electrons (stronger dispersion forces), but the first member of Groups 15, 16 and 17 (NH₃, H₂O, HF) breaks the trend because of hydrogen bonding. (Slide values in °C.) (Slide values: HF 20 °C, HCl -85 °C, HBr -69 °C.)",
+     "sourceSlide": "ch1-p3 s42",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "HF"
+       },
+       {
+        "id": "b",
+        "label": "HCl"
+       },
+       {
+        "id": "c",
+        "label": "HBr"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "b"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-21",
+     "perspectiveLabel": "boiling point of the hydride, highest of HCl, HBr, HI",
+     "marks": 1,
+     "stem": "Among HCl, HBr, HI, which has the **highest** boiling point of the hydride?",
+     "explanation": "HI. Within a group the boiling point rises with the number of electrons (stronger dispersion forces), but the first member of Groups 15, 16 and 17 (NH₃, H₂O, HF) breaks the trend because of hydrogen bonding. (Slide values in °C.) (Slide values: HCl -85 °C, HBr -69 °C, HI -35 °C.)",
+     "sourceSlide": "ch1-p3 s42",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "HCl"
+       },
+       {
+        "id": "b",
+        "label": "HBr"
+       },
+       {
+        "id": "c",
+        "label": "HI"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-22",
+     "perspectiveLabel": "boiling point of the hydride, highest of CH₄, GeH₄, SnH₄",
+     "marks": 1,
+     "stem": "Among CH₄, GeH₄, SnH₄, which has the **highest** boiling point of the hydride?",
+     "explanation": "SnH₄. Within a group the boiling point rises with the number of electrons (stronger dispersion forces), but the first member of Groups 15, 16 and 17 (NH₃, H₂O, HF) breaks the trend because of hydrogen bonding. (Slide values in °C.) (Slide values: CH₄ -161 °C, GeH₄ -90 °C, SnH₄ -50 °C.)",
+     "sourceSlide": "ch1-p3 s42",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "CH₄"
+       },
+       {
+        "id": "b",
+        "label": "GeH₄"
+       },
+       {
+        "id": "c",
+        "label": "SnH₄"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-23",
+     "perspectiveLabel": "boiling point of the gas or alkane, highest of He, Ne, Kr",
+     "marks": 1,
+     "stem": "Among He, Ne, Kr, which has the **highest** boiling point of the gas or alkane?",
+     "explanation": "Kr. More electrons means a more polarisable electron cloud and stronger instantaneous-dipole attractions, so the boiling point rises along He < Ne < Ar < Kr and CH₄ < C₂H₆ < C₃H₈. (Slide values: He -269 °C, Ne -246 °C, Kr -152 °C.)",
+     "sourceSlide": "ch1-p3 s37",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "He"
+       },
+       {
+        "id": "b",
+        "label": "Ne"
+       },
+       {
+        "id": "c",
+        "label": "Kr"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-24",
+     "perspectiveLabel": "boiling point of the gas or alkane, lowest of Ne, Ar, Kr",
+     "marks": 1,
+     "stem": "Among Ne, Ar, Kr, which has the **lowest** boiling point of the gas or alkane?",
+     "explanation": "Ne. More electrons means a more polarisable electron cloud and stronger instantaneous-dipole attractions, so the boiling point rises along He < Ne < Ar < Kr and CH₄ < C₂H₆ < C₃H₈. (Slide values: Ne -246 °C, Ar -186 °C, Kr -152 °C.)",
+     "sourceSlide": "ch1-p3 s37",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Ne"
+       },
+       {
+        "id": "b",
+        "label": "Ar"
+       },
+       {
+        "id": "c",
+        "label": "Kr"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-25",
+     "perspectiveLabel": "boiling point of the gas or alkane, highest of CH₄, C₂H₆, C₃H₈",
+     "marks": 1,
+     "stem": "Among CH₄, C₂H₆, C₃H₈, which has the **highest** boiling point of the gas or alkane?",
+     "explanation": "C₃H₈. More electrons means a more polarisable electron cloud and stronger instantaneous-dipole attractions, so the boiling point rises along He < Ne < Ar < Kr and CH₄ < C₂H₆ < C₃H₈. (Slide values: CH₄ -161 °C, C₂H₆ -88 °C, C₃H₈ -42 °C.)",
+     "sourceSlide": "ch1-p3 s37",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "CH₄"
+       },
+       {
+        "id": "b",
+        "label": "C₂H₆"
+       },
+       {
+        "id": "c",
+        "label": "C₃H₈"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend2-26",
+     "perspectiveLabel": "boiling point of the gas or alkane, lowest of CH₄, C₂H₆, C₃H₈",
+     "marks": 1,
+     "stem": "Among CH₄, C₂H₆, C₃H₈, which has the **lowest** boiling point of the gas or alkane?",
+     "explanation": "CH₄. More electrons means a more polarisable electron cloud and stronger instantaneous-dipole attractions, so the boiling point rises along He < Ne < Ar < Kr and CH₄ < C₂H₆ < C₃H₈. (Slide values: CH₄ -161 °C, C₂H₆ -88 °C, C₃H₈ -42 °C.)",
+     "sourceSlide": "ch1-p3 s37",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "CH₄"
+       },
+       {
+        "id": "b",
+        "label": "C₂H₆"
+       },
+       {
+        "id": "c",
+        "label": "C₃H₈"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c1-partial-charge",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Dative bond: formal charge against partial charge",
+    "source": "Chapter 1 Part 4 slides 52-55 (NH₃→BF₃ with partial charges -0.8/+0.9 → -0.5/+0.7)",
+    "week": 1,
+    "primaryTheme": "Dative Bonding",
+    "conceptTags": [
+     "dative-bond",
+     "formal-charge",
+     "partial-charge"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "partial-charge"
+   },
+   "variants": [
+    {
+     "variantId": "c1-partial-charge-v1",
+     "perspectiveLabel": "NH₃→BF₃ (slide values)",
+     "marks": 5,
+     "stem": "In the free NH₃ the partial charge on the donor atom is **-0.8**, and in the free BF₃ the partial charge on the acceptor atom is **+0.9**. After the adduct forms they are **-0.5** and **+0.7**. (Partial charges come from a calculation.) Give: the formal charge on each of the two atoms in the adduct, and how much charge (electron density) the donor atom has given up and the acceptor atom has gained.",
+     "hint": "Charge given up = the change in the donor’s partial charge; charge gained = the change in the acceptor’s partial charge; the difference was spread over the other atoms.",
+     "explanation": "Formal charges treat the shared pair as split equally: the donor becomes +1 and the acceptor -1. The partial charges tell the real story: the donor goes from -0.8 to -0.5, so it gave up 0.3; the acceptor goes from +0.9 to +0.7, so it gained only 0.2; the remaining 0.1 was passed on to the other atoms of the acceptor.",
+     "sourceSlide": "ch1-p4 s53-54",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "fd",
+        "label": "Formal charge on the donor atom in the adduct"
+       },
+       {
+        "key": "fa",
+        "label": "Formal charge on the acceptor atom in the adduct"
+       },
+       {
+        "key": "don",
+        "label": "Charge donated by the donor atom"
+       },
+       {
+        "key": "acc",
+        "label": "Charge gained by the acceptor atom"
+       },
+       {
+        "key": "rest",
+        "label": "Charge that went onto the rest of the acceptor molecule"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "fd": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "fa": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       },
+       "don": {
+        "type": "numeric",
+        "targetExpr": "0.3",
+        "tolerance": 0.011
+       },
+       "acc": {
+        "type": "numeric",
+        "targetExpr": "0.2",
+        "tolerance": 0.011
+       },
+       "rest": {
+        "type": "numeric",
+        "targetExpr": "0.1",
+        "tolerance": 0.011
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-partial-charge-v2",
+     "perspectiveLabel": "H₃N→AlCl₃ (hypothetical values)",
+     "marks": 5,
+     "stem": "Take these as hypothetical values for the adduct H₃N–AlCl₃. In the free NH₃ the partial charge on the donor atom is **-0.8**, and in the free AlCl₃ the partial charge on the acceptor atom is **+1.1**. After the adduct forms they are **-0.55** and **+0.9**. (Partial charges come from a calculation.) Give: the formal charge on each of the two atoms in the adduct, and how much charge (electron density) the donor atom has given up and the acceptor atom has gained.",
+     "hint": "Charge given up = the change in the donor’s partial charge; charge gained = the change in the acceptor’s partial charge; the difference was spread over the other atoms.",
+     "explanation": "Formal charges treat the shared pair as split equally: the donor becomes +1 and the acceptor -1. The partial charges tell the real story: the donor goes from -0.8 to -0.55, so it gave up 0.25; the acceptor goes from +1.1 to +0.9, so it gained only 0.2; the remaining 0.05 was passed on to the other atoms of the acceptor.",
+     "sourceSlide": "ch1-p4 s53-54",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "fd",
+        "label": "Formal charge on the donor atom in the adduct"
+       },
+       {
+        "key": "fa",
+        "label": "Formal charge on the acceptor atom in the adduct"
+       },
+       {
+        "key": "don",
+        "label": "Charge donated by the donor atom"
+       },
+       {
+        "key": "acc",
+        "label": "Charge gained by the acceptor atom"
+       },
+       {
+        "key": "rest",
+        "label": "Charge that went onto the rest of the acceptor molecule"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "fd": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "fa": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       },
+       "don": {
+        "type": "numeric",
+        "targetExpr": "0.25",
+        "tolerance": 0.011
+       },
+       "acc": {
+        "type": "numeric",
+        "targetExpr": "0.2",
+        "tolerance": 0.011
+       },
+       "rest": {
+        "type": "numeric",
+        "targetExpr": "0.05",
+        "tolerance": 0.011
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-partial-charge-v3",
+     "perspectiveLabel": "Me₃N→BH₃ (hypothetical values)",
+     "marks": 5,
+     "stem": "Take these as hypothetical values for the adduct Me₃N–BH₃. In the free Me₃N the partial charge on the donor atom is **-0.6**, and in the free BH₃ the partial charge on the acceptor atom is **+0.3**. After the adduct forms they are **-0.4** and **+0.1**. (Partial charges come from a calculation.) Give: the formal charge on each of the two atoms in the adduct, and how much charge (electron density) the donor atom has given up and the acceptor atom has gained.",
+     "hint": "Charge given up = the change in the donor’s partial charge; charge gained = the change in the acceptor’s partial charge; the difference was spread over the other atoms.",
+     "explanation": "Formal charges treat the shared pair as split equally: the donor becomes +1 and the acceptor -1. The partial charges tell the real story: the donor goes from -0.6 to -0.4, so it gave up 0.2; the acceptor goes from +0.3 to +0.1, so it gained only 0.2; the remaining 0 was passed on to the other atoms of the acceptor.",
+     "sourceSlide": "ch1-p4 s53-54",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "fd",
+        "label": "Formal charge on the donor atom in the adduct"
+       },
+       {
+        "key": "fa",
+        "label": "Formal charge on the acceptor atom in the adduct"
+       },
+       {
+        "key": "don",
+        "label": "Charge donated by the donor atom"
+       },
+       {
+        "key": "acc",
+        "label": "Charge gained by the acceptor atom"
+       },
+       {
+        "key": "rest",
+        "label": "Charge that went onto the rest of the acceptor molecule"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "fd": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "fa": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       },
+       "don": {
+        "type": "numeric",
+        "targetExpr": "0.2",
+        "tolerance": 0.011
+       },
+       "acc": {
+        "type": "numeric",
+        "targetExpr": "0.2",
+        "tolerance": 0.011
+       },
+       "rest": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.011
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-partial-charge-v4",
+     "perspectiveLabel": "which statement is right",
+     "marks": 1,
+     "stem": "In H₃N→BF₃ the formal charges are +1 on N and −1 on B. Which statement is correct?",
+     "explanation": "Formal charge assumes the bond pair is shared exactly equally, so it only keeps count of electrons. Partial charges (from calculation) show that N is still negative (−0.5) and B still positive (+0.7). Formal charge is not a good indicator of electron flow.",
+     "sourceSlide": "ch1-p4 s53-55",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "The formal charges are misleading about electron flow: the partial charges show N is still electron-rich and B electron-poor, although N has donated about 0.3 of charge"
+       },
+       {
+        "id": "b",
+        "label": "N carries +1 so it ends up electron-poor and B ends up electron-rich"
+       },
+       {
+        "id": "c",
+        "label": "The formal charge on N and B is zero in the free molecules and still zero in the adduct"
+       },
+       {
+        "id": "d",
+        "label": "Formal charge measures how much electron density has really moved, so it is the best guide to a dative bond"
+       },
+       {
+        "id": "e",
+        "label": "The bond is purely ionic because N is +1 and B is −1"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c1-partial-charge-v5",
+     "perspectiveLabel": "why formal charge misleads",
+     "marks": 3,
+     "stem": "Explain why formal charges are not a good indicator of electron flow in the dative adduct H₃N→BF₃.",
+     "hint": "Think: what does the formal-charge rule assume about the bond pair, and what do the calculated charges say?",
+     "explanation": "Formal charge counts electrons by a fixed rule (equal sharing). Partial charges show the real distribution: N goes from −0.8 to −0.5 (gives up ~0.3) and B from +0.9 to +0.7 (gains ~0.2), with the rest on F.",
+     "sourceSlide": "ch1-p4 s53-55",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 8,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Formal charge assumes the shared pair is split equally between the two atoms (a purely covalent bond)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "In the adduct the formal charges are N +1 and B −1, but the calculated partial charges are N negative and B positive",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "So N is still electron-rich and B electron-poor: only a fraction of the charge (about 0.3 from N, 0.2 reaching B) has moved, and some is passed on to the F atoms",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c3-ahn-count",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "MO count for AHₙ hydrides: bonding, non-bonding, antibonding",
+    "source": "Chapter 1 Part 5 slides 51-62 (CH₄ and H₂O with ligand group orbitals; number of MOs = number of AOs)",
+    "week": 3,
+    "primaryTheme": "Molecular Orbital Theory",
+    "conceptTags": [
+     "mo-diagram",
+     "lgo",
+     "bond-order"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "ahn-count"
+   },
+   "variants": [
+    {
+     "variantId": "c3-ahn-count-1",
+     "perspectiveLabel": "CH₄",
+     "marks": 5,
+     "stem": "Build the MO diagram of CH₄ from the central-atom valence AOs and the H 1s ligand group orbitals (number of MOs = number of AOs). Give the number of MOs of each kind, the number of electrons in the non-bonding MOs, and the bond order of each A–H bond.",
+     "hint": "Total MOs = total AOs (central atom 4 valence AOs + one per H). Count the central-atom orbitals with no matching LGO as non-bonding.",
+     "explanation": "Eight AOs (C 2s, 2p ×3 and four H 1s as LGOs) give eight MOs. The a₁ and t₂ sets are bonding (4 MOs, 8 electrons) and the t₂* and a₁* sets are antibonding. There is no non-bonding MO. Bond order per A–H bond = (electrons in bonding MOs − electrons in antibonding MOs) / 2 / number of A–H bonds = 1.",
+     "sourceSlide": "ch1-p5 s51-62",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b",
+        "label": "Bonding MOs"
+       },
+       {
+        "key": "nb",
+        "label": "Non-bonding MOs"
+       },
+       {
+        "key": "ab",
+        "label": "Antibonding MOs"
+       },
+       {
+        "key": "enb",
+        "label": "Electrons in the non-bonding MOs"
+       },
+       {
+        "key": "bo",
+        "label": "Bond order of one A–H bond"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "ab": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       },
+       "enb": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "bo": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c3-ahn-count-2",
+     "perspectiveLabel": "NH₃",
+     "marks": 5,
+     "stem": "Build the MO diagram of NH₃ from the central-atom valence AOs and the H 1s ligand group orbitals (number of MOs = number of AOs). Give the number of MOs of each kind, the number of electrons in the non-bonding MOs, and the bond order of each A–H bond.",
+     "hint": "Total MOs = total AOs (central atom 4 valence AOs + one per H). Count the central-atom orbitals with no matching LGO as non-bonding.",
+     "explanation": "Seven AOs give seven MOs: three bonding (a₁ and the e pair), the N lone-pair a₁ orbital that is non-bonding (2 electrons), and three antibonding. Bond order per A–H bond = (electrons in bonding MOs − electrons in antibonding MOs) / 2 / number of A–H bonds = 1.",
+     "sourceSlide": "ch1-p5 s51-62",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b",
+        "label": "Bonding MOs"
+       },
+       {
+        "key": "nb",
+        "label": "Non-bonding MOs"
+       },
+       {
+        "key": "ab",
+        "label": "Antibonding MOs"
+       },
+       {
+        "key": "enb",
+        "label": "Electrons in the non-bonding MOs"
+       },
+       {
+        "key": "bo",
+        "label": "Bond order of one A–H bond"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "ab": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "enb": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "bo": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c3-ahn-count-3",
+     "perspectiveLabel": "H₂O",
+     "marks": 5,
+     "stem": "Build the MO diagram of H₂O from the central-atom valence AOs and the H 1s ligand group orbitals (number of MOs = number of AOs). Give the number of MOs of each kind, the number of electrons in the non-bonding MOs, and the bond order of each A–H bond.",
+     "hint": "Total MOs = total AOs (central atom 4 valence AOs + one per H). Count the central-atom orbitals with no matching LGO as non-bonding.",
+     "explanation": "Six AOs give six MOs: two bonding, two non-bonding (the O lone pairs, 4 electrons) and two antibonding. The 4 bonding electrons give 2 O–H bonds in total. Bond order per A–H bond = (electrons in bonding MOs − electrons in antibonding MOs) / 2 / number of A–H bonds = 1.",
+     "sourceSlide": "ch1-p5 s51-62",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b",
+        "label": "Bonding MOs"
+       },
+       {
+        "key": "nb",
+        "label": "Non-bonding MOs"
+       },
+       {
+        "key": "ab",
+        "label": "Antibonding MOs"
+       },
+       {
+        "key": "enb",
+        "label": "Electrons in the non-bonding MOs"
+       },
+       {
+        "key": "bo",
+        "label": "Bond order of one A–H bond"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "ab": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "enb": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       },
+       "bo": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c3-ahn-count-4",
+     "perspectiveLabel": "BH₃",
+     "marks": 5,
+     "stem": "Build the MO diagram of BH₃ from the central-atom valence AOs and the H 1s ligand group orbitals (number of MOs = number of AOs). Give the number of MOs of each kind, the number of electrons in the non-bonding MOs, and the bond order of each A–H bond.",
+     "hint": "Total MOs = total AOs (central atom 4 valence AOs + one per H). Count the central-atom orbitals with no matching LGO as non-bonding.",
+     "explanation": "Seven AOs give seven MOs: three bonding (6 electrons, three B–H bonds), the empty B 2p orbital perpendicular to the plane is non-bonding (0 electrons) and three antibonding. Bond order per A–H bond = (electrons in bonding MOs − electrons in antibonding MOs) / 2 / number of A–H bonds = 1.",
+     "sourceSlide": "ch1-p5 s51-62",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b",
+        "label": "Bonding MOs"
+       },
+       {
+        "key": "nb",
+        "label": "Non-bonding MOs"
+       },
+       {
+        "key": "ab",
+        "label": "Antibonding MOs"
+       },
+       {
+        "key": "enb",
+        "label": "Electrons in the non-bonding MOs"
+       },
+       {
+        "key": "bo",
+        "label": "Bond order of one A–H bond"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "ab": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "enb": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "bo": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c3-ahn-count-5",
+     "perspectiveLabel": "BeH₂",
+     "marks": 5,
+     "stem": "Build the MO diagram of BeH₂ from the central-atom valence AOs and the H 1s ligand group orbitals (number of MOs = number of AOs). Give the number of MOs of each kind, the number of electrons in the non-bonding MOs, and the bond order of each A–H bond.",
+     "hint": "Total MOs = total AOs (central atom 4 valence AOs + one per H). Count the central-atom orbitals with no matching LGO as non-bonding.",
+     "explanation": "Six AOs give six MOs: two bonding (4 electrons), two empty non-bonding Be 2p orbitals and two antibonding. Bond order per A–H bond = (electrons in bonding MOs − electrons in antibonding MOs) / 2 / number of A–H bonds = 1.",
+     "sourceSlide": "ch1-p5 s51-62",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "b",
+        "label": "Bonding MOs"
+       },
+       {
+        "key": "nb",
+        "label": "Non-bonding MOs"
+       },
+       {
+        "key": "ab",
+        "label": "Antibonding MOs"
+       },
+       {
+        "key": "enb",
+        "label": "Electrons in the non-bonding MOs"
+       },
+       {
+        "key": "bo",
+        "label": "Bond order of one A–H bond"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "b": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "nb": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "ab": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "enb": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "bo": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c3-diatomic-gen",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Bond order and unpaired electrons of diatomic species",
+    "source": "Chapter 1 Part 5 slides 25-33; template of the Kinjo example mid-terms (diatomic bond orders and magnetism)",
+    "week": 3,
+    "primaryTheme": "Molecular Orbital Theory",
+    "conceptTags": [
+     "mo-diagram",
+     "bond-order",
+     "magnetism"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "diatomic-gen"
+   },
+   "variants": [
+    {
+     "variantId": "c3-diatomic-gen-v1",
+     "perspectiveLabel": "B₂, C₂, N₂⁺",
+     "marks": 6,
+     "stem": "Using the MO diagram (s–p mixing for the early diatomics Li₂ to N₂ and their isoelectronic relatives, no mixing for O₂ and F₂), give the bond order and the number of unpaired electrons of each species.",
+     "hint": "Count valence electrons (2s and 2p), fill σ2s, σ*2s, then π2p/σ2p (π below σ if there is s–p mixing), then π*2p, σ*2p. Bond order = (bonding − antibonding)/2.",
+     "explanation": "B₂ (6 valence electrons): bond order 1, 2 unpaired — with s–p mixing the π2p pair lies below σ2p, so the last two electrons sit singly in the degenerate π pair (paramagnetic). C₂ (8 valence electrons): bond order 2, 0 unpaired — with s–p mixing the π2p set holds the last four electrons (diamagnetic, two π bonds). N₂⁺ (9 valence electrons): bond order 2.5, 1 unpaired.",
+     "sourceSlide": "ch1-p5 s25-33",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "bo0",
+        "label": "Bond order of B₂"
+       },
+       {
+        "key": "n0",
+        "label": "Unpaired electrons in B₂"
+       },
+       {
+        "key": "bo1",
+        "label": "Bond order of C₂"
+       },
+       {
+        "key": "n1",
+        "label": "Unpaired electrons in C₂"
+       },
+       {
+        "key": "bo2",
+        "label": "Bond order of N₂⁺"
+       },
+       {
+        "key": "n2",
+        "label": "Unpaired electrons in N₂⁺"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "bo0": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       },
+       "n0": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "bo1": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "n1": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "bo2": {
+        "type": "numeric",
+        "targetExpr": "2.5",
+        "tolerance": 0.01
+       },
+       "n2": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c3-diatomic-gen-v2",
+     "perspectiveLabel": "O₂⁺, O₂⁻, O₂²⁻",
+     "marks": 6,
+     "stem": "Using the MO diagram (s–p mixing for the early diatomics Li₂ to N₂ and their isoelectronic relatives, no mixing for O₂ and F₂), give the bond order and the number of unpaired electrons of each species.",
+     "hint": "Count valence electrons (2s and 2p), fill σ2s, σ*2s, then π2p/σ2p (π below σ if there is s–p mixing), then π*2p, σ*2p. Bond order = (bonding − antibonding)/2.",
+     "explanation": "O₂⁺ (11 valence electrons): bond order 2.5, 1 unpaired. O₂⁻ (13 valence electrons): bond order 1.5, 1 unpaired. O₂²⁻ (14 valence electrons): bond order 1, 0 unpaired.",
+     "sourceSlide": "ch1-p5 s25-33",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "bo0",
+        "label": "Bond order of O₂⁺"
+       },
+       {
+        "key": "n0",
+        "label": "Unpaired electrons in O₂⁺"
+       },
+       {
+        "key": "bo1",
+        "label": "Bond order of O₂⁻"
+       },
+       {
+        "key": "n1",
+        "label": "Unpaired electrons in O₂⁻"
+       },
+       {
+        "key": "bo2",
+        "label": "Bond order of O₂²⁻"
+       },
+       {
+        "key": "n2",
+        "label": "Unpaired electrons in O₂²⁻"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "bo0": {
+        "type": "numeric",
+        "targetExpr": "2.5",
+        "tolerance": 0.01
+       },
+       "n0": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "bo1": {
+        "type": "numeric",
+        "targetExpr": "1.5",
+        "tolerance": 0.01
+       },
+       "n1": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "bo2": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       },
+       "n2": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c3-diatomic-gen-v3",
+     "perspectiveLabel": "F₂, F₂⁺, Ne₂",
+     "marks": 6,
+     "stem": "Using the MO diagram (s–p mixing for the early diatomics Li₂ to N₂ and their isoelectronic relatives, no mixing for O₂ and F₂), give the bond order and the number of unpaired electrons of each species.",
+     "hint": "Count valence electrons (2s and 2p), fill σ2s, σ*2s, then π2p/σ2p (π below σ if there is s–p mixing), then π*2p, σ*2p. Bond order = (bonding − antibonding)/2.",
+     "explanation": "F₂ (14 valence electrons): bond order 1, 0 unpaired. F₂⁺ (13 valence electrons): bond order 1.5, 1 unpaired. Ne₂ (16 valence electrons): bond order 0, 0 unpaired — every bonding and antibonding MO is full, so there is no net bond.",
+     "sourceSlide": "ch1-p5 s25-33",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "bo0",
+        "label": "Bond order of F₂"
+       },
+       {
+        "key": "n0",
+        "label": "Unpaired electrons in F₂"
+       },
+       {
+        "key": "bo1",
+        "label": "Bond order of F₂⁺"
+       },
+       {
+        "key": "n1",
+        "label": "Unpaired electrons in F₂⁺"
+       },
+       {
+        "key": "bo2",
+        "label": "Bond order of Ne₂"
+       },
+       {
+        "key": "n2",
+        "label": "Unpaired electrons in Ne₂"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "bo0": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       },
+       "n0": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "bo1": {
+        "type": "numeric",
+        "targetExpr": "1.5",
+        "tolerance": 0.01
+       },
+       "n1": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "bo2": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       },
+       "n2": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c3-diatomic-gen-v4",
+     "perspectiveLabel": "Li₂, Be₂, C₂²⁻",
+     "marks": 6,
+     "stem": "Using the MO diagram (s–p mixing for the early diatomics Li₂ to N₂ and their isoelectronic relatives, no mixing for O₂ and F₂), give the bond order and the number of unpaired electrons of each species.",
+     "hint": "Count valence electrons (2s and 2p), fill σ2s, σ*2s, then π2p/σ2p (π below σ if there is s–p mixing), then π*2p, σ*2p. Bond order = (bonding − antibonding)/2.",
+     "explanation": "Li₂ (2 valence electrons): bond order 1, 0 unpaired. Be₂ (4 valence electrons): bond order 0, 0 unpaired — σ2s and σ*2s are both full, so there is no net bond. C₂²⁻ (10 valence electrons): bond order 3, 0 unpaired.",
+     "sourceSlide": "ch1-p5 s25-33",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "bo0",
+        "label": "Bond order of Li₂"
+       },
+       {
+        "key": "n0",
+        "label": "Unpaired electrons in Li₂"
+       },
+       {
+        "key": "bo1",
+        "label": "Bond order of Be₂"
+       },
+       {
+        "key": "n1",
+        "label": "Unpaired electrons in Be₂"
+       },
+       {
+        "key": "bo2",
+        "label": "Bond order of C₂²⁻"
+       },
+       {
+        "key": "n2",
+        "label": "Unpaired electrons in C₂²⁻"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "bo0": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       },
+       "n0": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "bo1": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       },
+       "n1": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "bo2": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "n2": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c3-diatomic-gen-v5",
+     "perspectiveLabel": "CN, CO⁺, NO⁻",
+     "marks": 6,
+     "stem": "Using the MO diagram (s–p mixing for the early diatomics Li₂ to N₂ and their isoelectronic relatives, no mixing for O₂ and F₂), give the bond order and the number of unpaired electrons of each species.",
+     "hint": "Count valence electrons (2s and 2p), fill σ2s, σ*2s, then π2p/σ2p (π below σ if there is s–p mixing), then π*2p, σ*2p. Bond order = (bonding − antibonding)/2.",
+     "explanation": "CN (9 valence electrons): bond order 2.5, 1 unpaired. CO⁺ (9 valence electrons): bond order 2.5, 1 unpaired. NO⁻ (12 valence electrons): bond order 2, 2 unpaired.",
+     "sourceSlide": "ch1-p5 s25-33",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "bo0",
+        "label": "Bond order of CN"
+       },
+       {
+        "key": "n0",
+        "label": "Unpaired electrons in CN"
+       },
+       {
+        "key": "bo1",
+        "label": "Bond order of CO⁺"
+       },
+       {
+        "key": "n1",
+        "label": "Unpaired electrons in CO⁺"
+       },
+       {
+        "key": "bo2",
+        "label": "Bond order of NO⁻"
+       },
+       {
+        "key": "n2",
+        "label": "Unpaired electrons in NO⁻"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "bo0": {
+        "type": "numeric",
+        "targetExpr": "2.5",
+        "tolerance": 0.01
+       },
+       "n0": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "bo1": {
+        "type": "numeric",
+        "targetExpr": "2.5",
+        "tolerance": 0.01
+       },
+       "n1": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "bo2": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "n2": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c3-diatomic-gen-v6",
+     "perspectiveLabel": "N₂⁻, NO, NO⁺",
+     "marks": 6,
+     "stem": "Using the MO diagram (s–p mixing for the early diatomics Li₂ to N₂ and their isoelectronic relatives, no mixing for O₂ and F₂), give the bond order and the number of unpaired electrons of each species.",
+     "hint": "Count valence electrons (2s and 2p), fill σ2s, σ*2s, then π2p/σ2p (π below σ if there is s–p mixing), then π*2p, σ*2p. Bond order = (bonding − antibonding)/2.",
+     "explanation": "N₂⁻ (11 valence electrons): bond order 2.5, 1 unpaired. NO (11 valence electrons): bond order 2.5, 1 unpaired. NO⁺ (10 valence electrons): bond order 3, 0 unpaired.",
+     "sourceSlide": "ch1-p5 s25-33",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "bo0",
+        "label": "Bond order of N₂⁻"
+       },
+       {
+        "key": "n0",
+        "label": "Unpaired electrons in N₂⁻"
+       },
+       {
+        "key": "bo1",
+        "label": "Bond order of NO"
+       },
+       {
+        "key": "n1",
+        "label": "Unpaired electrons in NO"
+       },
+       {
+        "key": "bo2",
+        "label": "Bond order of NO⁺"
+       },
+       {
+        "key": "n2",
+        "label": "Unpaired electrons in NO⁺"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "bo0": {
+        "type": "numeric",
+        "targetExpr": "2.5",
+        "tolerance": 0.01
+       },
+       "n0": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "bo1": {
+        "type": "numeric",
+        "targetExpr": "2.5",
+        "tolerance": 0.01
+       },
+       "n1": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "bo2": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "n2": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c2-solid-props",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Properties of ionic, metallic and covalent solids; hydrogen-bond count",
+    "source": "Chapter 1 Part 2 slides 9-11, Part 3 slides 44-45, Part 4 slides 58-65",
+    "week": 2,
+    "primaryTheme": "Solids and Intermolecular Forces",
+    "conceptTags": [
+     "ionic-solid",
+     "metallic-bonding",
+     "hydrogen-bond",
+     "covalent-network"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "solid-props"
+   },
+   "variants": [
+    {
+     "variantId": "c2-solid-props-1",
+     "perspectiveLabel": "ionic solids are brittle",
+     "marks": 1,
+     "stem": "Why is an ionic crystal such as NaCl brittle?",
+     "explanation": "In the lattice cations and anions alternate. Moving a layer by one ion puts like charges face to face; they repel and the crystal cleaves. (Metals do not do this: their electron cloud keeps binding the ions after the layers slide.)",
+     "sourceSlide": "ch1-p2 s10",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "A slip of one layer puts ions of the same charge next to each other, the repulsion splits the crystal"
+       },
+       {
+        "id": "b",
+        "label": "The ions are held by weak van der Waals forces that break easily"
+       },
+       {
+        "id": "c",
+        "label": "The electrons are free to move so the lattice collapses"
+       },
+       {
+        "id": "d",
+        "label": "The ionic bonds are directional covalent bonds that snap when bent"
+       },
+       {
+        "id": "e",
+        "label": "The crystal has no regular lattice"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-solid-props-2",
+     "perspectiveLabel": "NaCl conduction",
+     "marks": 2,
+     "stem": "Which forms of NaCl conduct electricity? Select all.",
+     "explanation": "Conduction needs mobile charge carriers. In the solid the ions are fixed in the lattice. When melted or dissolved in water they are free to move to the electrodes. Hexane is non-polar and does not dissolve NaCl, so there are no free ions.",
+     "sourceSlide": "ch1-p2 s9-11",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "multi",
+      "options": [
+       {
+        "id": "a",
+        "label": "Molten NaCl"
+       },
+       {
+        "id": "b",
+        "label": "Solid NaCl"
+       },
+       {
+        "id": "c",
+        "label": "NaCl dissolved in water"
+       },
+       {
+        "id": "d",
+        "label": "NaCl dissolved in hexane"
+       },
+       {
+        "id": "e",
+        "label": "A single crystal of NaCl at room temperature"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a",
+       "c"
+      ],
+      "gradingMode": "partial_with_penalty"
+     }
+    },
+    {
+     "variantId": "c2-solid-props-3",
+     "perspectiveLabel": "Mg against Na",
+     "marks": 1,
+     "stem": "Why does magnesium melt at a much higher temperature than sodium (650 °C against 98 °C)?",
+     "explanation": "The strength of metallic bonding depends on the number of electrons donated to the cloud and on the size of the ion. Mg gives two electrons per atom and its ion is small and doubly charged, so the cloud holds the ions together more strongly than for Na⁺.",
+     "sourceSlide": "ch1-p4 s59-63",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Each Mg atom donates two electrons to the cloud (denser cloud, smaller 2+ ion), so the ions are held more strongly"
+       },
+       {
+        "id": "b",
+        "label": "Mg atoms are larger so they overlap more"
+       },
+       {
+        "id": "c",
+        "label": "Mg has fewer valence electrons than Na"
+       },
+       {
+        "id": "d",
+        "label": "Mg forms covalent bonds and Na does not"
+       },
+       {
+        "id": "e",
+        "label": "Mg is a transition metal"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-solid-props-4",
+     "perspectiveLabel": "K against Na",
+     "marks": 1,
+     "stem": "Why does potassium melt at a lower temperature than sodium (63 °C against 98 °C)?",
+     "explanation": "Both donate one electron per atom. Going down the group the ionic radius increases, the electron cloud has a larger volume to cover and holds the ions less effectively, so the metal is easier to melt.",
+     "sourceSlide": "ch1-p4 s60-64",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "The K⁺ ion is larger, so the electron cloud is less effective at holding the ions together"
+       },
+       {
+        "id": "b",
+        "label": "K donates more electrons per atom than Na"
+       },
+       {
+        "id": "c",
+        "label": "K atoms are smaller than Na atoms"
+       },
+       {
+        "id": "d",
+        "label": "K has a stronger ionic bond"
+       },
+       {
+        "id": "e",
+        "label": "K is less reactive than Na"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-solid-props-5",
+     "perspectiveLabel": "graphite against diamond",
+     "marks": 1,
+     "stem": "Graphite conducts electricity although diamond does not. Why?",
+     "explanation": "Each carbon in graphite is sp² with one leftover p electron; these form a delocalised π system across the layer, so charge can flow. In diamond all four valence electrons are in localised σ bonds, so there are no mobile carriers. (Graphite is soft because the layers slip over each other.)",
+     "sourceSlide": "ch1-p4 s65",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Graphite has delocalised π electrons that can move along the layers"
+       },
+       {
+        "id": "b",
+        "label": "Graphite contains mobile ions"
+       },
+       {
+        "id": "c",
+        "label": "Diamond is a metal"
+       },
+       {
+        "id": "d",
+        "label": "Graphite has no covalent bonds"
+       },
+       {
+        "id": "e",
+        "label": "Graphite has a lower melting point than diamond"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-solid-props-6",
+     "perspectiveLabel": "malleable metals",
+     "marks": 3,
+     "stem": "Explain why a metal can be hammered into a sheet (malleable) or drawn into a wire (ductile), but an ionic crystal shatters.",
+     "hint": "Compare what keeps the particles together after a layer slides.",
+     "explanation": "Metal: sliding layers leaves the electron cloud binding the ion cores, so the metal deforms. Ionic solid: a one-ion slip brings ions of the same charge face to face and the crystal fractures.",
+     "sourceSlide": "ch1-p2 s10, ch1-p4 s58-61",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 8,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "In a metal the ions sit in a sea of delocalised electrons",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "When the layers of ions slide past each other the electron cloud still surrounds and binds the ions, so no bonds are broken and the shape changes",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "In an ionic crystal sliding a layer puts like charges next to each other, which repel and split the crystal (brittle)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c2-solid-props-7",
+     "perspectiveLabel": "hydrogen bonds per molecule",
+     "marks": 3,
+     "stem": "A molecule can form a hydrogen bond only through an H atom on N, O or F and a lone pair on N, O or F. HF has 1 such H and 3 lone pairs, H₂O has 2 H and 2 lone pairs, NH₃ has 3 H and 1 lone pair. How many hydrogen bonds can each molecule make per molecule in the liquid, taking the shorter supply (H atoms or lone pairs) as the limit?",
+     "hint": "Both quality (how polar) and quantity (how many H-bonds per molecule) matter.",
+     "explanation": "The limit is the smaller of the number of H atoms and the number of lone pairs: HF has 1 H (3 lone pairs spare), NH₃ has 1 lone pair (2 H atoms spare), whereas H₂O has 2 H and 2 lone pairs matched, so each molecule can form 2 hydrogen bonds. This is why H₂O (bp +100 °C) boils higher than HF (+20 °C) and NH₃ (−33 °C).",
+     "sourceSlide": "ch1-p3 s45",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "hf",
+        "label": "HF"
+       },
+       {
+        "key": "h2o",
+        "label": "H₂O"
+       },
+       {
+        "key": "nh3",
+        "label": "NH₃"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "hf": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "h2o": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "nh3": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c2-solid-props-8",
+     "perspectiveLabel": "highest boiling point of HF, H₂O, NH₃",
+     "marks": 1,
+     "stem": "HF (bp +20 °C), H₂O (+100 °C) and NH₃ (−33 °C): which statement explains why water has the highest boiling point?",
+     "explanation": "The number of H bonds per molecule is limited by the smaller of the H atoms and lone pairs available: 1 for HF, 2 for H₂O, 1 for NH₃. Molar mass cannot explain it (H₂O is the lightest of the three).",
+     "sourceSlide": "ch1-p3 s44-45",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Water has two H atoms and two lone pairs, so each molecule can make two hydrogen bonds, more than HF or NH₃"
+       },
+       {
+        "id": "b",
+        "label": "Water has the largest molar mass of the three"
+       },
+       {
+        "id": "c",
+        "label": "Water has no hydrogen bonds but strong dispersion forces"
+       },
+       {
+        "id": "d",
+        "label": "Water has the most electrons so van der Waals forces dominate"
+       },
+       {
+        "id": "e",
+        "label": "The O–H bond is the longest"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
      }
     }
    ]

@@ -168,7 +168,8 @@
     "bk-c1-formal-charge-bridge",
     "bk-c1-dative",
     "bk-c1-tut1-d",
-    "bk-c1-scn-formal-charge"
+    "bk-c1-scn-formal-charge",
+    "bk-c1-partial-charge"
    ],
    "chunk": "lewis-bonding"
   },
@@ -280,7 +281,8 @@
     "bk-c4-bx3-acidity",
     "bk-c4-sulfur-oxides",
     "bk-c4-interhalogens",
-    "bk-c4-si-halides"
+    "bk-c4-si-halides",
+    "bk-c1-partial-charge"
    ],
    "chunk": "lewis-bonding"
   },
@@ -322,7 +324,8 @@
     "bk-c2-bp-pairs",
     "bk-c2-bp-picks",
     "bk-c2-chalcogen-bp",
-    "bk-c2-ammonia-borane"
+    "bk-c2-ammonia-borane",
+    "bk-c2-trend-gen2"
    ],
    "chunk": "imf-solids"
   },
@@ -343,7 +346,8 @@
    "weight": 0.01167,
    "nodes": [
     "bk-c2-ammonia-borane",
-    "bk-c2-ice"
+    "bk-c2-ice",
+    "bk-c2-solid-props"
    ],
    "chunk": "imf-solids"
   },
@@ -382,7 +386,8 @@
    "ids": [],
    "weight": 0.00273,
    "nodes": [
-    "bk-c2-bond-classes"
+    "bk-c2-bond-classes",
+    "bk-c2-solid-props"
    ],
    "chunk": "imf-solids"
   },
@@ -424,7 +429,8 @@
    "weight": 0.014,
    "nodes": [
     "bk-c2-heavy-hybrid",
-    "bk-c4-sio2-co2"
+    "bk-c4-sio2-co2",
+    "bk-c2-trend-gen2"
    ],
    "chunk": "periodic-trends"
   },
@@ -447,7 +453,8 @@
     "bk-c4-g2-ie",
     "bk-c2-ionisation-energy",
     "bk-c4-g1-g2-compare",
-    "bk-c2-trend-gen"
+    "bk-c2-trend-gen",
+    "bk-c2-trend-gen2"
    ],
    "chunk": "periodic-trends"
   },
@@ -497,7 +504,8 @@
     "bk-c3-nf",
     "bk-c3-three-centre-pi",
     "bk-c3-h3plus",
-    "bk-c3-draw-mo"
+    "bk-c3-draw-mo",
+    "bk-c3-diatomic-gen"
    ],
    "chunk": "mo-diatomic"
   },
@@ -522,7 +530,8 @@
     "bk-c3-sp-mixing",
     "bk-c3-nf",
     "bk-c3-nitrene",
-    "bk-c4-n-oxides-props"
+    "bk-c4-n-oxides-props",
+    "bk-c3-diatomic-gen"
    ],
    "chunk": "mo-diatomic"
   },
@@ -634,7 +643,8 @@
     "bk-c3-3c4e",
     "bk-c3-water-ammonia-mo",
     "bk-c3-co2-salcs",
-    "bk-c3-draw-mo"
+    "bk-c3-draw-mo",
+    "bk-c3-ahn-count"
    ],
    "chunk": "mo-polyatomic"
   },
@@ -656,7 +666,8 @@
    "nodes": [
     "bk-c3-lgo-oh",
     "bk-c3-co2-salcs",
-    "bk-c3-draw-mo"
+    "bk-c3-draw-mo",
+    "bk-c3-ahn-count"
    ],
    "chunk": "mo-polyatomic"
   },
@@ -3148,6 +3159,27 @@
   ],
   "bk-c4-crown-draw": [
    "c4.crown"
+  ],
+  "bk-c2-trend-gen2": [
+   "c2.periodic-trends",
+   "c2.imf-bp",
+   "c2.double-bond-rule"
+  ],
+  "bk-c1-partial-charge": [
+   "c1.dative",
+   "c1.formal-charge"
+  ],
+  "bk-c3-ahn-count": [
+   "c3.polyatomic",
+   "c3.lgo"
+  ],
+  "bk-c3-diatomic-gen": [
+   "c3.diatomic",
+   "c3.diatomic-magnetism"
+  ],
+  "bk-c2-solid-props": [
+   "c2.solid-types",
+   "c2.hbond-anomaly"
   ]
  }
 }

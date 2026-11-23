@@ -31,7 +31,25 @@ Exceptions the slides stress and the picks now test: F has a lower electron affi
 
 Tests: `tests/kinjo-items.test.mjs` recomputes the key from an independent copy of the tables, the sum rule, A/Z conservation and a simple valence-MO filling.
 
-## 4. Open
+## 4. Chapter 1 slides, batch 2 (Parts 1-5; 168 pages, read as page images because the text layer is empty)
+
+| Deck | Content | Finals/example-paper weight | Bank state before | Done |
+|---|---|---|---|---|
+| Part 1 (52 s) | Lewis exceptions, formal charge, VSEPR for 5- and 6-coordinate, VB, hybridisation | 0 marks in 300 (Lewis, VSEPR) | 16 nodes already | not drilled further |
+| Part 2 (34 s) | ionic bonding, covalent bonding, **heavier Group 14 (ns/np size gap, promotion energy, double-bond rule, spin multiplicity, E≡E table, trans-bending)**, states of matter | recurring (hybridisation, disilene) | `bk-c2-heavy-hybrid` 3 variants | picks from the E≡E table; solid-property items |
+| Part 3 (16 s) | van der Waals, Pauling electronegativity, dipole-dipole, hydride boiling points, H-bond quality and quantity, ice | boiling-point picks every year | `bk-c2-bp-picks`, chalcogen, ice | hydride and gas/alkane tables; H-bond count |
+| Part 4 (14 s) | dative bonding (formal against partial charge in NH₃→BF₃), metallic bonding, melting-point trends, solids | BF₃/dative in two papers | `bk-c1-dative`, `bk-c1-formal-charge-bridge` | partial-charge node; metal melting/boiling picks; malleable and brittle |
+| Part 5 (52 s) | VB against MO, LCAO, three overlap conditions, bond order, s-p mixing, PES, CH₄ and H₂O with LGOs | MO and HOMO items every year | 26 `bk-c3-*` nodes | AHn MO count; diatomic bond order/unpaired generator |
+
+Built (`node tools/cm2021/kinjo2.mjs`, 50 variants): `bk-c2-trend-gen2` 26 (heavier-G14 length, bend angle and single-bond length; metal mp/bp across a period and down Group 1; 16 hydrides; noble gas and alkane boiling points), `bk-c1-partial-charge` 5, `bk-c3-ahn-count` 5 (CH₄, NH₃, H₂O, BH₃, BeH₂), `bk-c3-diatomic-gen` 6 (18 species), `bk-c2-solid-props` 8. Tests: `tests/kinjo2-items.test.mjs`.
+
+Things to know:
+- **Deck contradiction (rank-neutral).** Part 3 slide 39 (Pauling) prints Cl 3.2, Br 3.0, I 2.7; the Group 17 deck table (batch 1) prints Cl 3.0, Br 2.8, I 2.5. The order is the same, so picks are safe, but do not ask for a numeric value.
+- **Part 2 spin multiplicity** (2n+1 with n = unpaired/2, singlet/doublet/triplet) and the double-bond rule are in `bk-c2-heavy-hybrid`; no separate generator.
+- **Non-bonding MO counts** follow the lecture's H₂O diagram (2 bonding, 2 non-bonding, 2 antibonding); NH₃, BH₃ and BeH₂ extend the same rule (the empty p orbitals count as non-bonding).
+- The slide for Part 4 s63 prints three melting points without naming the metals; Na, Mg, Al is the reading used (98, 650, 659 °C).
+
+## 5. Open
 
 - Slide batches 2 onward (the user uploads five at a time).
 - Align explain rubrics to the keys' key-word style.

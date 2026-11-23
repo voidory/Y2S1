@@ -9650,8 +9650,14 @@
         const step = cur.step;
         const sheet = appState.ui.sheet;
 
+        const modeRow = (id, on, label, desc, onCls) => `<button type="button" id="${id}" aria-pressed="${on}" class="w-full text-left rounded-lg border px-3 py-2.5 flex items-start gap-3 ${on ? onCls : 'bg-white border-slate-200 text-slate-800'}"><span class="mt-0.5 shrink-0 w-9 h-5 rounded-full relative ${on ? 'bg-white/30' : 'bg-slate-200'}"><span class="absolute top-0.5 ${on ? 'right-0.5' : 'left-0.5'} w-4 h-4 rounded-full bg-white shadow"></span></span><span class="min-w-0"><span class="block text-sm font-semibold">${label}${on ? ' · on' : ''}</span><span class="block text-xs ${on ? 'text-white/80' : 'text-slate-500'}">${desc}</span></span></button>`;
         const filterControls = `
           <div class="space-y-3">
+            <div class="space-y-2" data-modes>
+              ${modeRow('btnCram', Boolean(appState.cram?.on), 'Cram', 'Unseen questions first, one per topic, then fix what you missed.', 'bg-rose-600 border-rose-600 text-white')}
+              ${modeRow('btnExamMode', Boolean(appState.examMode), 'Exam mode', 'No hints, no pick-one cards, and a pace line after each card.', 'bg-slate-900 border-slate-900 text-white')}
+            </div>
+            <div class="border-t border-slate-200 pt-3 text-xs font-semibold uppercase tracking-wider text-slate-500">Filters</div>
             <label class="block">
               <span class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">Question type</span>
               <select id="studyTierFilter" aria-label="Filter by question type" class="w-full text-sm bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-slate-800">
@@ -9773,7 +9779,7 @@
               <button type="button" id="btnPlanStart" ${on.length ? '' : 'disabled'} class="w-full px-5 py-3 text-sm font-medium bg-slate-900 text-white rounded-lg disabled:opacity-40">Start ${on.length} question${on.length === 1 ? '' : 's'}</button>
             </div>`;
         }
-        const sheetTitle = { queue: 'Your lists', plan: 'Plan a session' }[sheet] || 'Filters';
+        const sheetTitle = { queue: 'Your lists', plan: 'Plan a session' }[sheet] || 'Modes and filters';
         const sheetHtml = sheet ? `
           <div class="fixed inset-0 z-40 flex items-end md:items-center md:justify-center bg-slate-900/40" data-sheet-backdrop>
             <div class="bg-white w-full md:max-w-lg rounded-t-2xl md:rounded-2xl shadow-xl p-4 max-h-[85dvh] overflow-y-auto" data-bounded-scroll role="dialog" aria-modal="true" aria-label="${sheetTitle}">
@@ -10201,10 +10207,8 @@
               <div class="flex flex-wrap items-center justify-end gap-1.5">
                 <button type="button" data-open-sheet="plan" title="Choose what to study, tick the questions, then start" class="px-2.5 py-1.5 text-xs font-medium border border-slate-900 bg-slate-900 text-white rounded-lg" data-plan-btn>Plan session</button>
                 <button type="button" id="btnBack"${(appState.session.shown || []).length < 2 ? 'disabled' : ''} title="Back to the previous card" aria-label="Back to the previous card" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700 disabled:opacity-40">← Back</button>
-                <button type="button" id="btnCram" aria-pressed="${Boolean(appState.cram?.on)}" title="Cram mode: unseen questions first, then fix what you missed" class="px-2 py-1.5 text-xs font-medium border rounded-lg ${appState.cram?.on ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-700'}">Cram</button>
-                <button type="button" id="btnExamMode" aria-pressed="${Boolean(appState.examMode)}" title="Exam mode: no hints, no pick-one cards, pace shown after each card" class="px-2.5 py-1.5 text-xs font-medium border rounded-lg ${appState.examMode ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-200 text-slate-700'}">Exam mode</button>
                 <button type="button" data-open-sheet="queue" title="Up next, skipped, starred and done this session" class="px-2.5 py-1.5 text-xs font-medium border rounded-lg ${Object.values(appState.session.state || {}).includes('skipped') ? 'bg-amber-50 border-amber-400 text-amber-900' : 'bg-white border-slate-200 text-slate-700'}" data-lists-btn>Lists${(() => { const k = Object.values(appState.session.state || {}).filter((v) => v === 'skipped').length; return k ? ` · ${k} skipped` : ''; })()}</button>
-                <button type="button" data-open-sheet="filters" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700">Filters</button>
+                <button type="button" data-open-sheet="filters" data-modes-btn title="Cram, Exam mode, question type and topic" class="px-2.5 py-1.5 text-xs font-medium border rounded-lg ${(appState.cram?.on || appState.examMode || appState.filters.tier !== 'ALL' || appState.filters.chunkId || appState.filters.focusId) ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-200 text-slate-700'}">Modes${[appState.cram?.on ? 'Cram' : '', appState.examMode ? 'Exam' : '', (appState.filters.tier !== 'ALL' || appState.filters.chunkId || appState.filters.focusId) ? 'Filter' : ''].filter(Boolean).map((x) => ' · ' + x).join('')}</button>
                 <button type="button" id="btnSkipNode" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700 whitespace-nowrap">Skip →</button>
               </div>
             </div>
@@ -10332,7 +10336,7 @@
           const label = b.dataset.playList;
           startPlaylist(label === 'Skipped' ? Object.keys(appState.session.state).filter((id) => appState.session.state[id] === 'skipped').reverse() : appState.saved.slice(), label);
         }));
-        $('#btnCram', root)?.addEventListener('click', () => { if (appState.cram?.on) { appState.cram.on = false; render(); } else startCram('auto'); });
+        $('#btnCram', root)?.addEventListener('click', () => { if (appState.cram?.on) { appState.cram.on = false; appState.ui.sheet = null; render(); } else startCram('auto'); });
         $('#btnCramOff', root)?.addEventListener('click', () => { appState.cram.on = false; render(); });
         $('#btnPlaylistOff', root)?.addEventListener('click', () => { appState.playlist.on = false; render(); });
         $('#btnFocusOff', root)?.addEventListener('click', () => {
@@ -10348,7 +10352,7 @@
           b.className = `shrink-0 px-2 py-0.5 font-sans text-[11px] font-medium border rounded-md ${on ? 'bg-amber-50 border-amber-400 text-amber-900' : 'bg-white border-slate-200 text-slate-600'}`;
         });
         $('#btnExamMode', root)?.addEventListener('click', async () => {
-          appState.examMode = !appState.examMode;
+          appState.examMode = !appState.examMode; appState.ui.sheet = null;
           try { const db = await DB.init(); await db.settings.put({ key: 'examMode', on: appState.examMode }); } catch (err) { console.warn('[Exam mode] not saved:', err.message); }
           showToast(appState.examMode ? 'Exam mode on: no hints, no pick-one cards from the next card.' : 'Exam mode off.');
           render();

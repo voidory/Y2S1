@@ -61,7 +61,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(leftAfter < leftBefore, `the unseen count falls as cards are answered (${leftBefore} to ${leftAfter})`);
 
   // 3. the toolbar button turns it off
-  await p.click('#btnCram'); await p.waitForTimeout(250);
+  await p.evaluate(() => document.querySelector('[data-open-sheet="filters"]').click()); await p.waitForTimeout(200); await p.click('#btnCram'); await p.waitForTimeout(250);
   ok(await p.$('[data-cram-strip]') === null && await p.evaluate(() => !window.__MASTERY_ENGINE__.UI.appState.cram.on), 'the Cram button turns it off');
 
   // 4. fix pass: seed failures in extraction and passes elsewhere, reload, start "Fix misses"

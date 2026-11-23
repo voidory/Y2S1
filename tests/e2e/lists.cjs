@@ -33,7 +33,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     ok(m.sh <= m.ih + 1 && m.sw <= m.iw + 1, `${label}: the page does not scroll (${m.sw}x${m.sh} in ${m.iw}x${m.ih})`);
   };
   const toolbarFits = async (label) => {
-    const r = await A(() => [...document.querySelectorAll('#studyView button#btnBack, #studyView #btnSkipNode, #studyView [data-lists-btn], #studyView #btnCram, #studyView #btnExamMode')].map((x) => { const b = x.getBoundingClientRect(); return b.left >= -0.5 && b.right <= innerWidth + 0.5; }));
+    const r = await A(() => [...document.querySelectorAll('#studyView button#btnBack, #studyView #btnSkipNode, #studyView [data-lists-btn], #studyView [data-modes-btn], #studyView [data-plan-btn]')].map((x) => { const b = x.getBoundingClientRect(); return b.left >= -0.5 && b.right <= innerWidth + 0.5; }));
     ok(r.length === 5 && r.every(Boolean), `${label}: every toolbar button is inside the screen`);
   };
 

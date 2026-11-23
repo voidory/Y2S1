@@ -26,9 +26,11 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.selectOption('#moduleSwitch', 'CM2011'); await p.waitForTimeout(900);
   const A = () => p.evaluate(() => { const a = window.__MASTERY_ENGINE__.UI.appState; return { exam: a.examMode, type: a.current?.inst?.variant?.inputSlot?.type, hasHint: !!a.current?.inst?.resolvedHint, hintBtn: !!document.querySelector('#btnToggleHint') }; });
 
-  ok(await p.$('#btnExamMode') !== null, 'the study toolbar has an Exam mode button');
+  const openModes = async () => { await p.evaluate(() => document.querySelector('[data-open-sheet="filters"]').click()); await p.waitForTimeout(200); };
+  await openModes();
+  ok(await p.$('#btnExamMode') !== null, 'the Modes sheet has an Exam mode switch');
   await p.click('#btnExamMode'); await p.waitForTimeout(400);
-  ok((await A()).exam === true && await p.getAttribute('#btnExamMode', 'aria-pressed') === 'true', 'the button turns exam mode on');
+  ok((await A()).exam === true && await p.evaluate(() => /Exam/.test(document.querySelector('[data-modes-btn]').textContent)), 'the switch turns exam mode on and the Modes button says so');
 
   // 30 cards: never an options-only card, hint button never shown while answering
   let choice = 0, hintShown = 0;
@@ -50,7 +52,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   // persists over a reload, and turns off again
   await boot();
   ok((await A()).exam === true, 'exam mode survives a reload');
-  await p.click('#btnExamMode'); await p.waitForTimeout(300);
+  await openModes(); await p.click('#btnExamMode'); await p.waitForTimeout(300);
   ok((await A()).exam === false, 'the button turns it off again');
   ok(errs.length === 0, 'no page errors' + (errs.length ? ': ' + errs.join(' | ') : ''));
   await b.close(); srv.close();

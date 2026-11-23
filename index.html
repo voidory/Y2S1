@@ -207,6 +207,11 @@
   <!-- Toast notification -->
   <div id="toastBanner" class="fixed bottom-20 md:bottom-5 right-3 md:right-5 left-3 md:left-auto z-50 hidden max-w-sm bg-slate-900 text-white text-sm px-4 py-2.5 rounded-lg shadow-lg" role="status" aria-live="polite"></div>
   <script type="module">
+    /* A question the student draws on paper and then marks against a checklist (see isDrawThenCompareVariant in UI; this is the part the
+       scheduler and the focus sets need). */
+    function isDrawVariantPure(v) {
+      return Boolean(v && (v.drawOnPaperThenCompare || v.drawThenCompare || v.inputSlot?.drawOnPaperThenCompare || v.inputSlot?.drawThenCompare || /^draw/.test(v.inputSlot?.mode || '')));
+    }
     /* =====================================================================
        NAMESPACE 1: Expr — Sandboxed Recursive-Descent Expression Compiler
        Strictly NO eval() or new Function().
@@ -1196,6 +1201,7 @@
         const gone = opts.retiredVariants;
         if (gone && gone.size) { const rest = variants.filter((v) => !gone.has(v.variantId)); if (rest.length) variants = rest; }
         if (opts.typedOnly) { const typed = variants.filter((v) => v.inputSlot?.type !== 'choice'); if (typed.length) variants = typed; }
+        if (opts.drawOnly) { const drawn = variants.filter(isDrawVariantPure); if (drawn.length) variants = drawn; }
         if (variants.length <= 1) return variants[0] || null;
         const stats = reviewState?.variantStats || {};
         // Anti-rote: prefer least-recently-seen, fewest attempts, and lowest meanGrade
@@ -7374,9 +7380,10 @@
         return out;
       }
       /* Pure: the question ids of every skill in a focus set (skills the map does not know are skipped). */
-      function focusNodeIds(map, set) {
+      function focusNodeIds(map, set, nodes) {
         const want = new Set(set?.skills || []), ids = new Set();
         for (const sk of map?.skills || []) if (want.has(sk.id)) for (const id of sk.nodes || []) ids.add(id);
+        if (set?.drawOnly) for (const n of nodes || []) if ((n.variants || []).some(isDrawVariantPure)) ids.add(n.id);   // every question that has a draw-on-paper variant
         return [...ids];
       }
       /* Pure: the page that serves a topic (chunk), or null. */
@@ -8930,13 +8937,13 @@
       function drillFocus(setId) {
         const set = (appState.focusSets?.[appState.activeModule]?.sets || []).find((x) => x.id === setId);
         if (!set) return;
-        const ids = Content.focusNodeIds(appState.skillMap, set);
+        const ids = Content.focusNodeIds(appState.skillMap, set, appState.nodes);
         if (!ids.length) { showToast('No questions in that set yet.', true); return; }
         if (appState.cram) appState.cram.on = false;
         appState.playlist = null;
         appState.route = 'study';
         appState.current = null;
-        appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null, chunkId: null, chunkNodeIds: ids, focusId: set.id, focusName: set.name };
+        appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null, chunkId: null, chunkNodeIds: ids, focusId: set.id, focusName: set.name, drawOnly: Boolean(set.drawOnly) };
         loadNextQuestion();
       }
       function focusStripHtml() {
@@ -9362,7 +9369,7 @@
           return;
         }
         const rs = appState.reviewMap[pick.node.id];
-        const variant = Scheduler.selectVariant(pick.node, rs, { typedOnly: Boolean(appState.examMode), retiredVariants: retiredNow().variants.get(pick.node.id) });
+        const variant = Scheduler.selectVariant(pick.node, rs, { typedOnly: Boolean(appState.examMode), drawOnly: Boolean(appState.filters.drawOnly), retiredVariants: retiredNow().variants.get(pick.node.id) });
         const inst = Scheduler.instantiateVariant(variant);
         const slotType = variant.inputSlot.type;
         let initialInput = '';
@@ -11576,7 +11583,7 @@
             if (!sets.length) return '';
             const nodesM = appState.allNodes.filter((n) => n.moduleCode === m.moduleCode);
             const rows = sets.map((x) => {
-              const ids = Content.focusNodeIds(appState.skillMaps[m.moduleCode], x);
+              const ids = Content.focusNodeIds(appState.skillMaps[m.moduleCode], x, nodesM);
               const st = Scheduler.focusStats(nodesM, ids, appState.masteryLogs);
               if (!st.n) return '';
               const pct = Math.round((100 * st.secure) / st.n);

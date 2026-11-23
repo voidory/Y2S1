@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-23T12:26:43.142Z",
+ "exportedAt": "2026-11-23T12:41:18.034Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -30230,6 +30230,492 @@
         "tolerance": 0.01
        }
       }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c7-draw-split",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Draw it: d-orbital splitting with the electrons and the CFSE",
+    "source": "Template of 2025-26 Q3(a) (splitting diagram and CFSE of a given complex); draw on paper, then tick the marking points",
+    "week": 7,
+    "primaryTheme": "Crystal Field Theory",
+    "conceptTags": [
+     "cfse-calculation",
+     "d-orbital-splitting"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 4,
+    "examStyle": "construct_4to6",
+    "family": "draw-split"
+   },
+   "variants": [
+    {
+     "variantId": "c7-draw-split-mno4",
+     "perspectiveLabel": "KMnO₄ (d⁰, tetrahedral)",
+     "marks": 4.5,
+     "stem": "Draw the d-orbital splitting diagram for the metal in KMnO₄ (assume tetrahedral or octahedral, as appropriate). Label the orbital sets, show the electrons and give the CFSE.",
+     "explanation": "Mn(VII) is d⁰. Four donors give a tetrahedron: e below t₂ with gap Δt (about 4/9 Δo). With no d electrons there is nothing to stabilise, CFSE = 0. (The purple colour is a ligand-to-metal charge transfer, not a d–d band.)",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Oxidation state Mn(VII), so d⁰; four oxide donors, so tetrahedral",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Two sets drawn with the gap labelled Δt: e (d_z², d_x²−y²) lower and t₂ (d_xy, d_xz, d_yz) upper",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "e BELOW t₂ (the inverse of octahedral), centred on the free-ion level",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r4",
+        "criterion": "No d electrons shown; CFSE = 0",
+        "marks": 1,
+        "isCritical": true
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c7-draw-split-croxalate",
+     "perspectiveLabel": "K[Cr(H₂O)₂(ox)₂] (d³, octahedral)",
+     "marks": 5,
+     "stem": "Draw the d-orbital splitting diagram for K[Cr(H₂O)₂(C₂O₄)₂]·3H₂O. Label the orbital sets, show the electrons and give the CFSE.",
+     "explanation": "d³ in an octahedron: t₂g³ e_g⁰, three unpaired electrons, CFSE = −1.2 Δo. Weak or strong field makes no difference for d³.",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Cr(III), d³, six donors (two H₂O and two bidentate oxalates), so octahedral",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "t₂g (d_xy, d_xz, d_yz) LOWER by 0.4 Δo and e_g (d_z², d_x²−y²) UPPER by 0.6 Δo, gap Δo labelled",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Three electrons in three separate t₂g orbitals, parallel spins (Hund); e_g empty",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "CFSE = 3 × (−0.4 Δo) = −1.2 Δo (no pairing either way)",
+        "marks": 1,
+        "isCritical": true
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c7-draw-split-niamine",
+     "perspectiveLabel": "[Ni(NH₃)Cl(NH₂CH₃)₂]Cl (d⁸, four donors)",
+     "marks": 5,
+     "stem": "Draw the d-orbital splitting diagram for the metal in [Ni(NH₃)Cl(NH₂CH₃)₂]Cl (assume tetrahedral or octahedral, as appropriate). Label the orbital sets, show the electrons and give the CFSE.",
+     "explanation": "Four donors means a tetrahedron when the question says to choose between tetrahedral and octahedral. Fill e then t₂: e⁴ t₂⁴ puts two electrons singly in t₂ (paramagnetic). CFSE = −0.8 Δt.",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Ni(II), d⁸; four donors (NH₃, Cl⁻ and two NH₂CH₃), so tetrahedral",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "e (lower, −0.6 Δt) and t₂ (upper, +0.4 Δt) drawn and labelled with the gap Δt",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Eight electrons: e⁴ t₂⁴, with the last two electrons in separate t₂ orbitals (two unpaired)",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "CFSE = 4(−0.6) + 4(+0.4) = −0.8 Δt",
+        "marks": 1,
+        "isCritical": true
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c7-draw-split-fe-d6",
+     "perspectiveLabel": "d⁶: [Fe(H₂O)₆]²⁺ and [Fe(CN)₆]⁴⁻ side by side",
+     "marks": 6,
+     "stem": "Draw the splitting diagrams for [Fe(H₂O)₆]²⁺ and [Fe(CN)₆]⁴⁻ side by side. Show the electrons, say which is high spin and which low spin, and give each CFSE.",
+     "explanation": "Same metal ion and d count; only the ligands change Δo. Weak field: spread the electrons (Δo < P). Strong field: pair first (Δo > P). The low-spin d⁶ ion has two more pairs than the high-spin one, hence the 2P.",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Both Fe(II), d⁶, octahedral; the ligand sets the size of Δo (H₂O weak, CN⁻ strong)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "H₂O: Δo smaller than the pairing energy P, so t₂g⁴ e_g² (four unpaired, high spin); CFSE = 4(−0.4) + 2(+0.6) = −0.4 Δo",
+        "marks": 2,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "CN⁻: Δo larger than P, so t₂g⁶ (no unpaired, low spin, diamagnetic); CFSE = −2.4 Δo + 2P",
+        "marks": 2,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "States the rule: electrons pair before occupying e_g only when Δo > P",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c7-draw-split-sqplanar",
+     "perspectiveLabel": "Square planar d⁸: [Ni(CN)₄]²⁻",
+     "marks": 5,
+     "stem": "Draw the d-orbital splitting for square-planar [Ni(CN)₄]²⁻ and fill in the electrons. Why is it diamagnetic?",
+     "explanation": "The ligands lie on x and y, so d_x²−y² is far above the rest. Eight electrons pair in d_xz, d_yz, d_z² and d_xy, which is why d⁸ strong-field complexes are square planar and diamagnetic.",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Ni(II) d⁸ with four strong-field CN⁻ donors in the xy plane, so square planar (a tetragonal distortion of octahedral with the axial ligands removed)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Order from the top: d_x²−y² (points at the ligands) ≫ d_xy > d_z² > d_xz, d_yz (lowest, degenerate pair)",
+        "marks": 2,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Eight electrons fill the four lower orbitals in pairs; d_x²−y² empty",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "No unpaired electrons: diamagnetic, because the large gap above the fourth orbital outweighs the pairing energy",
+        "marks": 0.5,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c7-draw-split-jt",
+     "perspectiveLabel": "Jahn–Teller: [Cu(H₂O)₆]²⁺ (d⁹)",
+     "marks": 5,
+     "stem": "Draw the d-orbital splitting of [Cu(H₂O)₆]²⁺ including the tetragonal (Jahn–Teller) distortion. Show the electrons and say why the distortion lowers the energy.",
+     "explanation": "An uneven e_g occupation (d⁹, and high-spin d⁴) is removed by distorting the octahedron. The d_z² pair is lowered and the single d_x²−y² electron raised, so there is a net energy gain.",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Cu(II), d⁹: t₂g⁶ e_g³, an unevenly filled e_g set",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Elongation along z: d_z² drops and d_x²−y² rises (e_g splits); d_xz, d_yz drop and d_xy rises (t₂g splits)",
+        "marks": 2,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Electrons: (d_xz,d_yz)⁴ (d_xy)² (d_z²)² (d_x²−y²)¹, one unpaired",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "Net stabilisation comes from e_g (two electrons lowered by δ/2, one raised by δ/2); the filled t₂g set gives none",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c3-draw-mo",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Draw it: MO diagrams",
+    "source": "Template of 2023-24 Q2(d) and 2024-25 Q2(a); draw on paper, then tick the marking points",
+    "week": 3,
+    "primaryTheme": "Molecular Orbital Theory",
+    "conceptTags": [
+     "mo-diagram",
+     "bond-order"
+    ],
+    "difficultyEstimate": 6,
+    "estimatedMinutes": 5,
+    "examStyle": "construct_4to6",
+    "family": "draw-mo"
+   },
+   "variants": [
+    {
+     "variantId": "c3-draw-mo-n2o2",
+     "perspectiveLabel": "N₂ and O₂ (s–p mixing)",
+     "marks": 6,
+     "stem": "Draw the valence MO diagrams of N₂ and O₂ (include the effect of s–p mixing where it applies). Give each bond order and say whether it is paramagnetic.",
+     "explanation": "s–p mixing pushes σ2p up when the 2s–2p gap is small (up to N₂); from O₂ on, the gap is large and σ2p lies below π2p. Bond order = (bonding − antibonding)/2.",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Atomic 2s and 2p columns each side with the eight MOs between them: σ2s, σ*2s, π2p, σ2p, π*2p, σ*2p",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "N₂ (s–p mixing): π2p BELOW σ2p; 10 valence electrons give bond order 3, diamagnetic",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "O₂ (no mixing): σ2p BELOW π2p; 12 valence electrons fill up to π*2p",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "O₂: two unpaired electrons in the degenerate π*2p pair (parallel), bond order 2, paramagnetic",
+        "marks": 1.5,
+        "isCritical": true
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c3-draw-mo-co",
+     "perspectiveLabel": "CO",
+     "marks": 5,
+     "stem": "Draw the valence MO diagram of CO. Show which orbitals are the HOMO and LUMO and where they sit, and give the bond order.",
+     "explanation": "Because the HOMO is mostly a carbon lone pair, CO binds through C. The empty π* orbitals accept electron density back from the metal, which strengthens M–C and weakens C–O.",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Atomic orbitals offset: O lower than C (more electronegative)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Ten valence electrons fill σ(2s), σ*(2s), the two π bonds and the σ(2p); bond order 3",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "HOMO is the σ orbital, mainly on carbon (the carbon lone pair)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "LUMO is the degenerate π* pair, mainly on carbon",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r5",
+        "criterion": "Binding to a metal: σ donation from the C lone pair, π back-donation into π*",
+        "marks": 0.5,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c3-draw-mo-ml6",
+     "perspectiveLabel": "Octahedral ML₆ (σ only)",
+     "marks": 6,
+     "stem": "Draw the σ-only MO diagram of an octahedral complex ML₆. Label the metal and ligand-group orbitals by symmetry and show where Δo appears.",
+     "explanation": "Only e_g (d_z², d_x²−y²) points at the ligands, so only e_g can mix with the ligand a₁g/t₁u/e_g group orbitals; t₂g stays non-bonding. The t₂g–e_g* gap is Δo, which is why CFT and LFT give the same splitting pattern.",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "Metal orbitals: 4s (a₁g), 4p (t₁u), 3d split into e_g and t₂g",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Six ligand group orbitals (σ): a₁g + t₁u + e_g",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Bonding MOs a₁g, t₁u, e_g (mostly ligand, twelve ligand electrons); antibonding a₁g*, t₁u*, e_g*",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "t₂g non-bonding (metal d only), with the metal d electrons going into t₂g and e_g*",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r5",
+        "criterion": "Δo = the gap between t₂g and e_g*",
+        "marks": 1,
+        "isCritical": true
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c3-draw-mo-h2o",
+     "perspectiveLabel": "H₂O",
+     "marks": 5,
+     "stem": "Draw the valence MO diagram of H₂O (bent, C₂v) and show its electrons.",
+     "explanation": "The H 1s group orbitals have a₁ and b₂ symmetry; the O 2p_x (out of plane) has b₁ symmetry and no partner, so it stays non-bonding. That is the second lone pair seen in photoelectron spectra.",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "O 2s, 2p and the two H 1s group orbitals (a₁ and b₂) combine",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Bonding MOs: 1a₁ (mostly O 2s), 1b₂, 2a₁; antibonding 3a₁* and 2b₂*",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "1b₁ is a non-bonding pure O 2p orbital (out of the molecular plane): the HOMO",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "Eight valence electrons fill 1a₁, 1b₂, 2a₁, 1b₁",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
      }
     }
    ]

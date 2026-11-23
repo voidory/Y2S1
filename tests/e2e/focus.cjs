@@ -65,6 +65,19 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await p.$('[data-focus-strip]') === null, 'End closes the focus set');
   ok(await A(() => !window.__MASTERY_ENGINE__.UI.appState.filters.focusId), 'the filter is cleared');
 
+  // 4b. "Draw it on paper": only draw-then-compare variants, and they fit the screen
+  await p.click('.tabbar [data-nav="readiness"]'); await p.waitForTimeout(350);
+  await p.click('[data-focus-start="CM2021|draw"]'); await p.waitForTimeout(500);
+  let allDraw = true, kinds = new Set();
+  for (let i = 0; i < 6; i++) {
+    const r = await A(() => { const v = window.__MASTERY_ENGINE__.UI.appState.current.inst.variant; return { draw: Boolean(v.drawOnPaperThenCompare), id: v.variantId }; });
+    if (!r.draw) allDraw = false; kinds.add(r.id);
+    await noScroll(`draw card ${r.id}`);
+    await A(() => document.querySelector('#btnSkipNode').click()); await p.waitForTimeout(250);
+  }
+  ok(allDraw, `the Draw it on paper set serves only draw variants (${[...kinds].join(', ')})`);
+  await A(() => document.querySelector('#btnFocusOff').click()); await p.waitForTimeout(300);
+
   // 5. the CM2021 final-style paper
   await p.click('.tabbar [data-nav="mock"]').catch(() => {}); await p.waitForTimeout(350);
   const hasPaper = await p.$('#btnStartFinalPaper');

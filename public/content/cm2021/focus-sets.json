@@ -2,14 +2,121 @@
   "version": 1,
   "module": "CM2021",
   "sets": [
-    { "id": "ts", "name": "Tanabe–Sugano diagrams", "why": "Reading ground state, spin-allowed bands, crossover and Δo/B from a diagram: the Q4 template of two finals.", "skills": ["c8.tanabe-sugano", "c8.oh-terms", "c8.spin-only"] },
-    { "id": "terms", "name": "Microstates and term symbols", "why": "Count microstates, derive every term of d² and d⁸ (16 marks in 2025-26), find the ground term.", "skills": ["c8.microstates", "c8.terms"] },
-    { "id": "processes", "name": "Named processes and reaction schemes", "why": "Reactants, conditions, products and the A–E schemes (nitrogen chart, phosphorus scheme). The Reactions tab has the equations.", "skills": ["c4.named-process", "c4.reaction-scheme", "c4.balance", "c4.stoichiometry"] },
-    { "id": "recurring", "name": "Items that come back every year", "why": "Oxidation numbers, nuclear equations, Group 1 + O₂, isotope effect, HOMO counts.", "skills": ["c4.ox-number", "c4.nuclear", "c4.g1-oxides", "c4.isotope-zpe", "c4.kie", "c3.homo-count"] },
-    { "id": "why", "name": "Short 'explain why' answers", "why": "Zero-point energy, gauche hydrazine, BX₃ acidity, hyperconjugation, kinetic inertness: one clear paragraph each.", "skills": ["c4.gauche", "c4.bx3-acidity", "c4.kie", "c4.isotope-zpe", "c3.hyperconj", "c4.kinetic-stability", "c4.hydration"] },
-    { "id": "chain", "name": "Name → oxidation state → dⁿ → splitting → CFSE", "why": "The Q3 chain for given formulas, and identifying the metal.", "skills": ["c6.name", "c6.formula", "c6.ox-dn-cn", "c7.splitting", "c7.cfse", "c7.hs-ls", "c7.metal-id"] },
-    { "id": "essays", "name": "Coordination essays", "why": "Crystal field, ligand field and the limits of crystal field theory (15 marks in 2025-26).", "skills": ["c7.cft-essay", "c7.lft-essay", "c7.pi-bonding", "c7.vbt"] },
-    { "id": "mo", "name": "MO diagrams", "why": "Diatomics, HOMO counts, polyatomic and three-centre bonding with bond orders.", "skills": ["c3.diatomic", "c3.diatomic-magnetism", "c3.hetero-diatomic", "c3.homo-count", "c3.polyatomic", "c3.lgo", "c3.3c4e"] },
-    { "id": "pblock", "name": "p-block chemistry", "why": "Phosphorus (every final), nitrogen, oxygen and sulfur, halogens, boron and silicon.", "skills": ["c4.phosphorus", "c4.nitrogen", "c4.oxygen-sulfur", "c4.halogens", "c4.boron", "c4.silicon"] }
+    {
+      "id": "draw",
+      "name": "Draw it on paper",
+      "why": "Splitting diagrams with electrons and CFSE, MO diagrams, term tables, structures: draw on paper, then tick the marking points you drew. The finals ask for diagrams; typed fields never rehearse that.",
+      "skills": [],
+      "drawOnly": true
+    },
+    {
+      "id": "ts",
+      "name": "Tanabe–Sugano diagrams",
+      "why": "Reading ground state, spin-allowed bands, crossover and Δo/B from a diagram: the Q4 template of two finals.",
+      "skills": [
+        "c8.tanabe-sugano",
+        "c8.oh-terms",
+        "c8.spin-only"
+      ]
+    },
+    {
+      "id": "terms",
+      "name": "Microstates and term symbols",
+      "why": "Count microstates, derive every term of d² and d⁸ (16 marks in 2025-26), find the ground term.",
+      "skills": [
+        "c8.microstates",
+        "c8.terms"
+      ]
+    },
+    {
+      "id": "processes",
+      "name": "Named processes and reaction schemes",
+      "why": "Reactants, conditions, products and the A–E schemes (nitrogen chart, phosphorus scheme). The Reactions tab has the equations.",
+      "skills": [
+        "c4.named-process",
+        "c4.reaction-scheme",
+        "c4.balance",
+        "c4.stoichiometry"
+      ]
+    },
+    {
+      "id": "recurring",
+      "name": "Items that come back every year",
+      "why": "Oxidation numbers, nuclear equations, Group 1 + O₂, isotope effect, HOMO counts.",
+      "skills": [
+        "c4.ox-number",
+        "c4.nuclear",
+        "c4.g1-oxides",
+        "c4.isotope-zpe",
+        "c4.kie",
+        "c3.homo-count"
+      ]
+    },
+    {
+      "id": "why",
+      "name": "Short 'explain why' answers",
+      "why": "Zero-point energy, gauche hydrazine, BX₃ acidity, hyperconjugation, kinetic inertness: one clear paragraph each.",
+      "skills": [
+        "c4.gauche",
+        "c4.bx3-acidity",
+        "c4.kie",
+        "c4.isotope-zpe",
+        "c3.hyperconj",
+        "c4.kinetic-stability",
+        "c4.hydration"
+      ]
+    },
+    {
+      "id": "chain",
+      "name": "Name → oxidation state → dⁿ → splitting → CFSE",
+      "why": "The Q3 chain for given formulas, and identifying the metal.",
+      "skills": [
+        "c6.name",
+        "c6.formula",
+        "c6.ox-dn-cn",
+        "c7.splitting",
+        "c7.cfse",
+        "c7.hs-ls",
+        "c7.metal-id"
+      ]
+    },
+    {
+      "id": "essays",
+      "name": "Coordination essays",
+      "why": "Crystal field, ligand field and the limits of crystal field theory (15 marks in 2025-26).",
+      "skills": [
+        "c7.cft-essay",
+        "c7.lft-essay",
+        "c7.pi-bonding",
+        "c7.vbt"
+      ]
+    },
+    {
+      "id": "mo",
+      "name": "MO diagrams",
+      "why": "Diatomics, HOMO counts, polyatomic and three-centre bonding with bond orders.",
+      "skills": [
+        "c3.diatomic",
+        "c3.diatomic-magnetism",
+        "c3.hetero-diatomic",
+        "c3.homo-count",
+        "c3.polyatomic",
+        "c3.lgo",
+        "c3.3c4e"
+      ]
+    },
+    {
+      "id": "pblock",
+      "name": "p-block chemistry",
+      "why": "Phosphorus (every final), nitrogen, oxygen and sulfur, halogens, boron and silicon.",
+      "skills": [
+        "c4.phosphorus",
+        "c4.nitrogen",
+        "c4.oxygen-sulfur",
+        "c4.halogens",
+        "c4.boron",
+        "c4.silicon"
+      ]
+    }
   ]
 }

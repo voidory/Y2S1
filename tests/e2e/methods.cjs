@@ -37,7 +37,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   // CM2011: a missed extraction question
   await p.selectOption('#moduleSwitch', 'CM2011'); await p.waitForTimeout(900);
   await force('bk-m11-x-acid');
-  await p.evaluate(async () => { const { UI } = window.__MASTERY_ENGINE__; let g = 0; while (UI.appState.current.inst.variant.variantId !== 'x-acid-chain' && g++ < 30) { delete UI.appState.reviewMap['bk-m11-x-acid']; await UI.loadNextQuestion(); } });
+  await p.evaluate(async () => { const { UI } = window.__MASTERY_ENGINE__; let g = 0; while (UI.appState.current.inst.variant.variantId !== 'x-acid-chain' && g++ < 30) { delete UI.appState.reviewMap['bk-m11-x-acid']; UI.appState.session.state = {}; UI.appState.filters.forceNodeId = 'bk-m11-x-acid'; await UI.loadNextQuestion(); } });
   await submitWrong(true);
   ok(await p.evaluate(() => !!document.querySelector('#btnMethod')), 'a missed question offers "How to do this"');
   await p.evaluate(() => document.querySelector('#btnMethod').click()); await p.waitForTimeout(500);

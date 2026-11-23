@@ -1166,6 +1166,7 @@
           if (filters.masteryAdj?.exclude.has(n.id) && !filters.forceNodeId) return false;
           if (n.metadata?.composerOnly && !filters.forceNodeId) return false;
           if (filters.excludeNodeId && n.id === filters.excludeNodeId && nodes.length > 1) return false;
+          if (filters.excludeIds && filters.excludeIds.has(n.id) && !filters.forceNodeId) return false;   // skipped this session: not offered again by itself
           if (!includeGolden && !filters.forceNodeId && n.metadata?.isGoldenBank && !reviewMap[n.id]) return false;
           return true;
         });
@@ -8781,7 +8782,8 @@
         masteryLogs: [],
         composerNodes: [],
         myHooks: {},
-        session: { cards: 0, retry: [] },   // cards answered this session, and misses queued to come back
+        // cards answered this session, misses queued to come back, the cards shown in order (Back), and what happened to each (skipped, passed, missed)
+        session: { cards: 0, retry: [], shown: [], state: {} },
         retryAfterCards: 5,
         content: { bank: null, skillMap: null },
         plan: { hoursPerDay: 6, split: 50, ratings: {} },
@@ -9350,9 +9352,22 @@
         appState.ui.sheet = null;
         if (appState.cleanupWidget) { appState.cleanupWidget(); appState.cleanupWidget = null; }
         const prevNode = appState.current?.node || null;
+        const sess = appState.session;
+        sess.shown ||= []; sess.state ||= {};
+        if (opts.back) {
+          // Back: serve the card shown before this one (the stack holds this card on top)
+          const stack = sess.shown.slice(0, -1), before = stack[stack.length - 1];
+          if (!before) { showToast('Nothing earlier in this session.'); return; }
+          sess.shown = stack.slice(0, -1);
+          appState.filters.forceNodeId = before;
+        } else if (prevNode && appState.current.phase !== 'graded') {
+          // leaving a card without grading it = skipped; it stays on the Skipped list until you answer it
+          delete sess.state[prevNode.id]; sess.state[prevNode.id] = 'skipped';
+        }
         const filters = {
           ...appState.filters,
           excludeNodeId: (opts.skipCurrent || prevNode) ? prevNode?.id : null,
+          excludeIds: new Set(Object.keys(sess.state).filter((id) => sess.state[id] === 'skipped')),
           lastFamily: prevNode?.metadata?.family || null,
         };
         // cram mode picks the card itself (unseen first, then fixes); a pass that has nothing left switches cram off
@@ -9386,20 +9401,23 @@
         if (appState.settings?.allocByMarks !== false && appState.skillMap && !filters.forceNodeId && !filters.chunkNodeIds && !filters.skillTag) {
           filters.allocMult = Scheduler.allocationMultipliers(appState.nodes, appState.skillMap, appState.masteryLogs, { ratings: appState.plan?.ratings || {}, moduleCode: appState.activeModule });
         }
-        const pick = Scheduler.selectNextNode(
-          filters.forceNodeId ? [...appState.nodes, ...appState.composerNodes] : appState.nodes,
+        const poolFor = (f) => Scheduler.selectNextNode(
+          f.forceNodeId ? [...appState.nodes, ...appState.composerNodes] : appState.nodes,
           appState.reviewMap,
           moduleMap(),
           appState.attemptLogs,
           appState.settings,
-          filters
+          f
         );
+        let pick = poolFor(filters);
+        if (!pick.node && filters.excludeIds?.size) pick = poolFor({ ...filters, excludeIds: null });   // only skipped ones left: offer them
         appState.filters.forceNodeId = null;
         if (!pick.node) {
           appState.current = null;
           render();
           return;
         }
+        sess.shown.push(pick.node.id);
         const rs = appState.reviewMap[pick.node.id];
         const variant = Scheduler.selectVariant(pick.node, rs, { typedOnly: Boolean(appState.examMode), drawOnly: Boolean(appState.filters.drawOnly), retiredVariants: retiredNow().variants.get(pick.node.id) });
         const inst = Scheduler.instantiateVariant(variant);
@@ -9530,7 +9548,7 @@
           const titles = [...new Set(fresh)].map((id) => appState.allNodes.find((n) => n.id === id)?.metadata?.title).filter(Boolean);
           if (titles.length) showToast(`Covers easier questions too: ${titles.slice(0, 2).join('; ')}${titles.length > 2 ? ` and ${titles.length - 2} more` : ''}. They will not come up unless you miss this one again.`);
         }
-        if (evalResult.passed && appState.saved.includes(cur.node.id)) { setSaved([cur.node.id], false); showToast('Passed: taken off your Saved list.'); }
+        { const st = appState.session.state ||= {}; delete st[cur.node.id]; st[cur.node.id] = evalResult.passed ? 'passed' : 'missed'; }   // a star stays: it is yours to remove
         const masteryAfter = masteryNow();
         const lvAfter = topicScoreFor(cur.node.id);
         cur.levelMove = lvBefore && lvAfter ? { name: lvAfter.name, before: lvBefore.score, after: lvAfter.score } : null;
@@ -9653,14 +9671,45 @@
           </div>
         `;
 
+        // Lists: up next, skipped, starred, done this session. Every row opens that question.
+        const sessState = appState.session.state || {};
+        const inModule = (id) => appState.nodes.some((n) => n.id === id);
+        const skippedIds = Object.keys(sessState).filter((id) => sessState[id] === 'skipped' && inModule(id)).reverse();
+        const doneIds = Object.keys(sessState).filter((id) => (sessState[id] === 'passed' || sessState[id] === 'missed') && inModule(id)).reverse();
+        const starredIds = appState.saved.filter(inModule);
+        const listTab = appState.ui.listTab || 'next';
+        const nodeTitle = (id) => appState.nodes.find((n) => n.id === id)?.metadata?.title || id;
+        const nodeTopic = (id) => (appState.skillMap && appState.skillMap.chunks?.find((c) => c.id === Weakness.chunksOf(appState.skillMap, id)[0])?.name) || '';
+        const lastTry = (id) => {
+          if (sessState[id] === 'passed') return ['passed this session', 'bg-emerald-50 text-emerald-800 border-emerald-200'];
+          if (sessState[id] === 'missed') return ['missed this session', 'bg-rose-50 text-rose-800 border-rose-200'];
+          const log = appState.attemptLogs.find((l) => l.nodeId === id);
+          if (!log) return ['not tried', 'bg-blue-50 text-blue-800 border-blue-200'];
+          return log.normalizedGrade >= Scheduler.PASS_GRADE ? ['last try passed', 'bg-emerald-50 text-emerald-800 border-emerald-200'] : ['last try missed', 'bg-rose-50 text-rose-800 border-rose-200'];
+        };
+        const listRows = (ids, { unstar = false } = {}) => ids.length ? `<div class="divide-y divide-slate-100">${ids.map((id) => {
+          const [lab, cls] = lastTry(id);
+          return `<div class="flex items-center gap-2 py-2"><button type="button" data-jump-node="${esc(id)}" class="min-w-0 flex-1 text-left px-1.5 py-0.5 rounded hover:bg-slate-50"><div class="text-sm font-medium text-slate-900 truncate">${esc(nodeTitle(id))}</div><div class="text-xs text-slate-500 truncate">${esc(nodeTopic(id))}</div></button><span class="shrink-0 text-[11px] font-medium px-2 py-0.5 rounded-full border ${cls}">${lab}</span>${unstar ? `<button type="button" data-unstar="${esc(id)}" aria-label="Remove star" class="shrink-0 w-8 h-8 rounded-md border border-amber-300 bg-amber-50 text-amber-900">★</button>` : ''}</div>`;
+        }).join('')}</div>` : '';
+        const listEmpty = (t) => `<p class="text-sm text-slate-500 py-6 text-center">${t}</p>`;
+        const playBtn = (ids, label) => ids.length ? `<button type="button" data-play-list="${esc(label)}" class="shrink-0 whitespace-nowrap px-3 py-1.5 text-xs font-medium bg-amber-500 text-white rounded-md">▶ Play ${ids.length}</button>` : '';
+        let listBody = '';
+        if (listTab === 'skipped') listBody = `<div class="flex items-center justify-between gap-2 mb-2"><p class="text-xs text-slate-600">Cards you left without answering. They are not offered again by themselves.</p>${playBtn(skippedIds, 'Skipped')}</div>` + (listRows(skippedIds) || listEmpty('Nothing skipped yet this session.'));
+        else if (listTab === 'starred') listBody = `<div class="flex items-center justify-between gap-2 mb-2"><p class="text-xs text-slate-600">Your stars stay until you remove them. Browse and reorder them in the Bank.</p>${playBtn(starredIds, 'Starred')}</div>` + (listRows(starredIds, { unstar: true }) || listEmpty('No stars yet. Tap ☆ Star on a card.'));
+        else if (listTab === 'done') listBody = `<p class="text-xs text-slate-600 mb-2">Answered this session, newest first. Tap one to try it again.</p>` + (listRows(doneIds) || listEmpty('Nothing answered yet this session.'));
+        const listTabBtn = (k, label, n) => `<button type="button" role="tab" data-list-tab="${k}" aria-selected="${listTab === k}">${label}${n === null ? '' : ` ${n}`}</button>`;
+        const listsHtml = `
+          <div class="seg mb-3" role="tablist" aria-label="Lists">${listTabBtn('next', 'Up next', null)}${listTabBtn('skipped', 'Skipped', skippedIds.length)}${listTabBtn('starred', '★ Starred', starredIds.length)}${listTabBtn('done', 'Done', doneIds.length)}</div>
+          ${listTab === 'next' ? queueHtml : listBody}`;
+
         const sheetHtml = sheet ? `
           <div class="fixed inset-0 z-40 flex items-end md:items-center md:justify-center bg-slate-900/40" data-sheet-backdrop>
-            <div class="bg-white w-full md:max-w-lg rounded-t-2xl md:rounded-2xl shadow-xl p-4 max-h-[85dvh] overflow-y-auto" data-bounded-scroll role="dialog" aria-modal="true" aria-label="${sheet === 'queue' ? 'Adaptive queue' : 'Filters'}">
+            <div class="bg-white w-full md:max-w-lg rounded-t-2xl md:rounded-2xl shadow-xl p-4 max-h-[85dvh] overflow-y-auto" data-bounded-scroll role="dialog" aria-modal="true" aria-label="${sheet === 'queue' ? 'Your lists' : 'Filters'}">
               <div class="flex items-center justify-between mb-3">
-                <h2 class="font-display text-base font-semibold text-slate-900">${sheet === 'queue' ? 'Adaptive queue' : 'Filters'}</h2>
+                <h2 class="font-display text-base font-semibold text-slate-900">${sheet === 'queue' ? 'Your lists' : 'Filters'}</h2>
                 <button type="button" data-close-sheet aria-label="Close" class="w-9 h-9 -mr-1 rounded-lg text-slate-500 hover:bg-slate-100">✕</button>
               </div>
-              ${sheet === 'queue' ? queueHtml : filterControls}
+              ${sheet === 'queue' ? listsHtml : filterControls}
             </div>
           </div>
         ` : '';
@@ -10077,10 +10126,11 @@
                 <span class="font-semibold text-slate-700">${esc(crumbTopic)}</span>
                 · <span class="${node.tier === 'synthesis' ? 'text-blue-700 font-semibold' : 'hidden sm:inline'}">${tierLabel}</span>
               </div>
-              <div class="flex items-center gap-1.5 shrink-0">
+              <div class="flex flex-wrap items-center justify-end gap-1.5">
+                <button type="button" id="btnBack" ${(appState.session.shown || []).length < 2 ? 'disabled' : ''} title="Back to the previous card" aria-label="Back to the previous card" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700 disabled:opacity-40">← Back</button>
                 <button type="button" id="btnCram" aria-pressed="${Boolean(appState.cram?.on)}" title="Cram mode: unseen questions first, then fix what you missed" class="px-2 py-1.5 text-xs font-medium border rounded-lg ${appState.cram?.on ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-700'}">Cram</button>
                 <button type="button" id="btnExamMode" aria-pressed="${Boolean(appState.examMode)}" title="Exam mode: no hints, no pick-one cards, pace shown after each card" class="px-2.5 py-1.5 text-xs font-medium border rounded-lg ${appState.examMode ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-200 text-slate-700'}">Exam mode</button>
-                <button type="button" data-open-sheet="queue" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700">Queue</button>
+                <button type="button" data-open-sheet="queue" title="Up next, skipped, starred and done this session" class="px-2.5 py-1.5 text-xs font-medium border rounded-lg ${Object.values(appState.session.state || {}).includes('skipped') ? 'bg-amber-50 border-amber-400 text-amber-900' : 'bg-white border-slate-200 text-slate-700'}" data-lists-btn>Lists${(() => { const k = Object.values(appState.session.state || {}).filter((v) => v === 'skipped').length; return k ? ` · ${k} skipped` : ''; })()}</button>
                 <button type="button" data-open-sheet="filters" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700">Filters</button>
                 <button type="button" id="btnSkipNode" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700 whitespace-nowrap">Skip →</button>
               </div>
@@ -10098,7 +10148,7 @@
               <section class="pane pane-q bg-white border border-slate-200 rounded-xl p-4 sm:p-5">
                 <div class="text-xs font-mono text-slate-500 mb-2 flex items-center justify-between gap-2">
                   <span class="min-w-0">${variant.marks} mark${variant.marks === 1 ? '' : 's'} · ~${node.metadata.estimatedMinutes} min${node.metadata.family ? ` · ${esc(node.metadata.family)}` : ''}</span>
-                  <button type="button" id="btnSaveLater" aria-pressed="${appState.saved.includes(node.id)}" title="Keep this on your Saved list to try later" class="shrink-0 px-2 py-0.5 font-sans text-[11px] font-medium border rounded-md ${appState.saved.includes(node.id) ? 'bg-amber-50 border-amber-400 text-amber-900' : 'bg-white border-slate-200 text-slate-600'}">${appState.saved.includes(node.id) ? '★ Saved' : '☆ Save for later'}</button>
+                  <button type="button" id="btnSaveLater" aria-pressed="${appState.saved.includes(node.id)}" title="Star this question: it stays in Lists and the Bank until you remove the star" class="shrink-0 px-2 py-0.5 font-sans text-[11px] font-medium border rounded-md ${appState.saved.includes(node.id) ? 'bg-amber-50 border-amber-400 text-amber-900' : 'bg-white border-slate-200 text-slate-600'}">${appState.saved.includes(node.id) ? '★ Starred' : '☆ Star'}</button>
                 </div>
                 <h1 class="font-display text-lg sm:text-xl font-semibold text-slate-900 leading-snug">${escSub(node.metadata.title)}</h1>
                 <div class="text-xs text-slate-500 mt-0.5 mb-3">${escSub(variant.perspectiveLabel)}${node.metadata.source ? ` · ${escSub(node.metadata.source)}` : ''}</div>
@@ -10184,6 +10234,13 @@
           render();
         });
         $('#btnSkipNode', root)?.addEventListener('click', () => loadNextQuestion({ skipCurrent: true }));
+        $('#btnBack', root)?.addEventListener('click', () => loadNextQuestion({ back: true }));
+        $$('[data-list-tab]', root).forEach((b) => b.addEventListener('click', () => { appState.ui.listTab = b.dataset.listTab; renderStudyView(root); }));
+        $$('[data-unstar]', root).forEach((b) => b.addEventListener('click', () => { setSaved([b.dataset.unstar], false); renderStudyView(root); }));
+        $$('[data-play-list]', root).forEach((b) => b.addEventListener('click', () => {
+          const label = b.dataset.playList;
+          startPlaylist(label === 'Skipped' ? Object.keys(appState.session.state).filter((id) => appState.session.state[id] === 'skipped').reverse() : appState.saved.slice(), label);
+        }));
         $('#btnCram', root)?.addEventListener('click', () => { if (appState.cram?.on) { appState.cram.on = false; render(); } else startCram('auto'); });
         $('#btnCramOff', root)?.addEventListener('click', () => { appState.cram.on = false; render(); });
         $('#btnPlaylistOff', root)?.addEventListener('click', () => { appState.playlist.on = false; render(); });
@@ -10196,7 +10253,7 @@
           setSaved([id], on);
           const b = e.currentTarget;                       // update in place: re-rendering would drop what is typed
           b.setAttribute('aria-pressed', String(on));
-          b.textContent = on ? '★ Saved' : '☆ Save for later';
+          b.textContent = on ? '★ Starred' : '☆ Star';
           b.className = `shrink-0 px-2 py-0.5 font-sans text-[11px] font-medium border rounded-md ${on ? 'bg-amber-50 border-amber-400 text-amber-900' : 'bg-white border-slate-200 text-slate-600'}`;
         });
         $('#btnExamMode', root)?.addEventListener('click', async () => {
@@ -12076,7 +12133,7 @@
               <div class="seg" role="tablist" aria-label="Which questions">
                 <button type="button" role="tab" data-bank-show="all" aria-selected="${f.show === 'all'}">All ${counted.length}</button>
                 <button type="button" role="tab" data-bank-show="unseen" aria-selected="${f.show === 'unseen'}">Unseen ${unseenCount}</button>
-                <button type="button" role="tab" data-bank-show="saved" aria-selected="${f.show === 'saved'}">★ Saved ${savedCount}</button>
+                <button type="button" role="tab" data-bank-show="saved" aria-selected="${f.show === 'saved'}">★ Starred ${savedCount}</button>
               </div>
               <input id="bankSearchInput" type="search" value="${esc(f.q)}" placeholder="Search title, theme, concept tag or formula…" class="w-full text-sm px-3 py-2 border border-slate-300 rounded-lg bg-white" />
               <div class="flex items-center gap-2">
@@ -12093,7 +12150,7 @@
               <div class="flex items-center justify-between gap-2">
                 <div class="text-[11px] font-mono text-slate-500">Showing ${shown.length} of ${filtered.length} matching questions</div>
                 <div class="flex items-center gap-1.5 shrink-0">
-                  ${isList && unsavedShown ? `<button type="button" id="bankSaveAll" class="px-2.5 py-1 text-xs font-medium border border-amber-300 bg-amber-50 text-amber-900 rounded-md hover:bg-amber-100">☆ Save ${unsavedShown}</button>` : ''}
+                  ${isList && unsavedShown ? `<button type="button" id="bankSaveAll" class="px-2.5 py-1 text-xs font-medium border border-amber-300 bg-amber-50 text-amber-900 rounded-md hover:bg-amber-100">☆ Star ${unsavedShown}</button>` : ''}
                   ${f.show === 'saved' && savedCount ? `<button type="button" id="bankClearSaved" class="px-2.5 py-1 text-xs font-medium border border-slate-200 bg-white text-slate-700 rounded-md hover:bg-slate-50">Clear</button>` : ''}
                   ${isList && filtered.length ? `<button type="button" id="bankPlayAll" class="px-3 py-1 text-xs font-medium bg-amber-500 text-white rounded-md hover:bg-amber-600">▶ Play ${filtered.length}</button>` : ''}
                 </div>
@@ -12112,7 +12169,7 @@
                   <div class="flex items-center gap-2 shrink-0">
                     ${n.id.startsWith('gb-') ? `<button type="button" data-explore-case="${esc(n.id.slice(3))}" class="px-2.5 py-1 text-xs font-medium border border-slate-200 rounded-md hover:bg-slate-100 text-slate-700">3D</button>` : ''}
                     ${f.show === 'saved' ? `<button type="button" data-save-move="up|${esc(n.id)}" aria-label="Move up" class="px-2 py-1 text-xs border border-slate-200 rounded-md hover:bg-slate-100 text-slate-600">▲</button><button type="button" data-save-move="down|${esc(n.id)}" aria-label="Move down" class="px-2 py-1 text-xs border border-slate-200 rounded-md hover:bg-slate-100 text-slate-600">▼</button>` : ''}
-                    <button type="button" data-save-node="${esc(n.id)}" aria-pressed="${appState.saved.includes(n.id)}" aria-label="${appState.saved.includes(n.id) ? 'Remove from Saved' : 'Save for later'}" class="px-2.5 py-1 text-xs font-medium border rounded-md ${appState.saved.includes(n.id) ? 'bg-amber-50 border-amber-400 text-amber-900' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-100'}">${appState.saved.includes(n.id) ? '★' : '☆'}</button>
+                    <button type="button" data-save-node="${esc(n.id)}" aria-pressed="${appState.saved.includes(n.id)}" aria-label="${appState.saved.includes(n.id) ? 'Remove star' : 'Star this question'}" class="px-2.5 py-1 text-xs font-medium border rounded-md ${appState.saved.includes(n.id) ? 'bg-amber-50 border-amber-400 text-amber-900' : 'bg-white border-slate-200 text-slate-600 hover:bg-slate-100'}">${appState.saved.includes(n.id) ? '★' : '☆'}</button>
                     <button type="button" data-inspect-node="${esc(n.id)}" class="px-2.5 py-1 text-xs font-medium border border-slate-200 rounded-md hover:bg-slate-100 text-slate-700">JSON</button>
                     <button type="button" data-launch-node="${esc(n.id)}" class="px-3 py-1 text-xs font-medium bg-slate-900 text-white rounded-md hover:bg-slate-800">Launch</button>
                   </div>
@@ -12147,7 +12204,7 @@
           if (b.dataset.armed !== '1') { b.dataset.armed = '1'; b.textContent = 'Tap again to clear'; return; }
           setSaved(appState.saved.slice(), false); renderBankView(root);
         });
-        $('#bankPlayAll', root)?.addEventListener('click', () => startPlaylist(filtered.map((n) => n.id), f.show === 'saved' ? 'Saved' : f.show === 'unseen' ? 'Unseen' : 'Search results'));
+        $('#bankPlayAll', root)?.addEventListener('click', () => startPlaylist(filtered.map((n) => n.id), f.show === 'saved' ? 'Starred' : f.show === 'unseen' ? 'Unseen' : 'Search results'));
 
         $('#bankSearchInput', root)?.addEventListener('input', (e) => {
           appState.bankFilters.q = e.target.value;

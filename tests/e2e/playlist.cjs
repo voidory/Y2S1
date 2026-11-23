@@ -1,5 +1,5 @@
 /*
- * "Save for later" and the unseen list: the Bank has All / Unseen / Saved tabs, a star on every row and on the study screen,
+ * "Save for later" and the unseen list: the Bank has All / Unseen / Starred tabs, a star on every row and on the study screen,
  * Save all / Play on any list, and a played list serves its questions in order. A saved question drops off once it is passed.
  * node tests/e2e/playlist.cjs   (DEXIE_FILE as in the other suites)
  */
@@ -36,32 +36,32 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   // 1. the three tabs on a fresh install
   await bank();
   let c = await chips();
-  ok(c.length === 3 && c[0] === `All ${total}` && c[1] === `Unseen ${total}` && c[2] === '★ Saved 0', `the Bank has All / Unseen / Saved tabs (${c.join(' | ')})`);
+  ok(c.length === 3 && c[0] === `All ${total}` && c[1] === `Unseen ${total}` && c[2] === '★ Starred 0', `the Bank has All / Unseen / Starred tabs (${c.join(' | ')})`);
   await noScroll('bank with the new tabs');
 
   // 2. star a row; it persists across a reload
   const firstId = await A(() => document.querySelector('[data-save-node]').dataset.saveNode);
   await A(() => document.querySelector('[data-save-node]').click()); await p.waitForTimeout(150);
   c = await chips();
-  ok(c[2] === '★ Saved 1', 'the star on a row saves it');
+  ok(c[2] === '★ Starred 1', 'the star on a row saves it');
   await boot(); await bank();
   c = await chips();
-  ok(c[2] === '★ Saved 1', 'and it is still saved after a reload');
+  ok(c[2] === '★ Starred 1', 'and it is still saved after a reload');
   await A(() => document.querySelector('[data-bank-show="saved"]').click()); await p.waitForTimeout(150);
-  ok(await A(() => document.querySelectorAll('[data-launch-node]').length) === 1, 'the Saved tab lists just that question');
+  ok(await A(() => document.querySelectorAll('[data-launch-node]').length) === 1, 'the Starred tab lists just that question');
 
-  // 3. study screen: star toggles in place; passing the question takes it off the list
+  // 3. study screen: star toggles in place; passing the question keeps the star
   const open = async (id) => { await A(async () => { }); await p.evaluate(async (nodeId) => { const { UI } = window.__MASTERY_ENGINE__; const a = UI.appState; a.route = 'study'; a.current = null; a.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: nodeId }; UI.loadNextQuestion(); await new Promise((r) => setTimeout(r, 150)); }, id); };
   await open('bk-c1-vsepr-ex1');
-  ok(await A(() => document.querySelector('#btnSaveLater')?.getAttribute('aria-pressed')) === 'false', 'the study screen has a Save for later button');
+  ok(await A(() => document.querySelector('#btnSaveLater')?.getAttribute('aria-pressed')) === 'false', 'the study screen has a Star button');
   await noScroll('study with the save button');
   await A(() => document.querySelector('#btnSaveLater').click()); await p.waitForTimeout(150);
   ok(await A(() => document.querySelector('#btnSaveLater').getAttribute('aria-pressed')) === 'true' && await A(() => window.__MASTERY_ENGINE__.UI.appState.saved.includes('bk-c1-vsepr-ex1')), 'saving from the study screen works');
   await A(() => document.querySelector('.seg [data-step-go="answer"]')?.click());
   await p.fill('#mf_a', 'bent'); await p.fill('#mf_b', 'T-shaped'); await p.fill('#mf_c', 'square pyramidal');
   await A(() => document.querySelector('#btnSubmitAnswer')?.click()); await p.waitForTimeout(400);
-  ok(await A(() => !window.__MASTERY_ENGINE__.UI.appState.saved.includes('bk-c1-vsepr-ex1')), 'a pass takes the question off the Saved list');
-  ok(await A(() => window.__MASTERY_ENGINE__.UI.appState.saved.length) === 1, 'the other saved question stays (a miss would not remove it either)');
+  ok(await A(() => window.__MASTERY_ENGINE__.UI.appState.saved.includes('bk-c1-vsepr-ex1')), 'a pass does not take the star off: stars are yours to remove');
+  ok(await A(() => window.__MASTERY_ENGINE__.UI.appState.saved.length) === 2, 'both starred questions are still starred');
 
   // 4. Unseen: one fewer now, the tried one is gone from it
   await bank(); await A(() => document.querySelector('[data-bank-show="unseen"]').click()); await p.waitForTimeout(150);
@@ -74,7 +74,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   // 5. Save all and Play: served in the order listed, with a strip, and End closes it
   await A(() => document.querySelector('#bankSaveAll').click()); await p.waitForTimeout(250);
   c = await chips();
-  ok(c[2] === `★ Saved ${total - 1}` || c[2] === `★ Saved ${total - 1}`, `Save all puts the whole Unseen list on Saved (${c[2]})`);
+  ok(c[2] === `★ Starred ${total}`, `Star all puts the whole Unseen list on the stars, beside the one already passed (${c[2]})`);
   const order = await A(() => window.__MASTERY_ENGINE__.UI.appState.nodes.filter((n) => !window.__MASTERY_ENGINE__.UI.appState.masteryLogs.some((l) => l.nodeId === n.id)).map((n) => n.id));
   await A(() => document.querySelector('#bankPlayAll').click()); await p.waitForTimeout(500);
   ok(await p.$('[data-playlist-strip]') !== null, 'Play opens the study screen with a playlist strip');
@@ -99,7 +99,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await A(() => window.__MASTERY_ENGINE__.UI.appState.saved.length) > 0, 'Clear needs a second tap');
   await A(() => document.querySelector('#bankClearSaved').click()); await p.waitForTimeout(200);
   c = await chips();
-  ok(c[2] === '★ Saved 0', 'and the second tap empties the list');
+  ok(c[2] === '★ Starred 0', 'and the second tap empties the list');
 
   ok(errs.length === 0, 'no page errors' + (errs.length ? ': ' + errs.join(' | ') : ''));
   await b.close(); srv.close();

@@ -170,7 +170,8 @@
     "bk-c1-tut1-d",
     "bk-c1-scn-formal-charge",
     "bk-c1-partial-charge",
-    "bk-c1-fc-gen"
+    "bk-c1-fc-gen",
+    "bk-c1-fc-draw"
    ],
    "chunk": "lewis-bonding"
   },
@@ -283,7 +284,8 @@
     "bk-c4-sulfur-oxides",
     "bk-c4-interhalogens",
     "bk-c4-si-halides",
-    "bk-c1-partial-charge"
+    "bk-c1-partial-charge",
+    "bk-c1-fc-draw"
    ],
    "chunk": "lewis-bonding"
   },
@@ -3210,6 +3212,10 @@
   ],
   "bk-c1-fc-gen": [
    "c1.formal-charge"
+  ],
+  "bk-c1-fc-draw": [
+   "c1.formal-charge",
+   "c1.dative"
   ]
  }
 }

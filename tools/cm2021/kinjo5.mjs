@@ -61,8 +61,37 @@ variants[10].marks = 1;
 
 const fcNode = node('bk-c1-fc-gen', 'Formal charge from a described Lewis structure', 'Chapter 1 Part 1 slides (Formal Charge, Lewis exceptions, BF₃ π), Part 4 slides 52-55; Kinjo example mid-term (Al₂Cl₆ and I₂Cl₆)', 1, 'Formal Charge', ['formal-charge', 'lewis-structure'], 3, 'fc-gen', variants);
 
-const NODES = [fcNode];
-const LINKS = { 'bk-c1-fc-gen': ['c1.formal-charge'] };
+
+/* ---------- draw and label: draw the structure on paper, mark every formal charge, then tick the marking points ---------- */
+const drawV = (id, label, stem, points, explanation, slide) => ({
+  ...base(id, label, points.length, stem, explanation, slide, 'Draw all lone pairs, then count: formal charge = valence electrons − non-bonding electrons − bonds.'),
+  drawOnPaperThenCompare: true,
+  inputSlot: { type: 'typed_synthesis', placeholder: 'Draw on paper, then tick the marking points (or note the formal charges here)…', minWordsToUnlockRubric: 0, allowPaperScratchpad: true },
+  evaluator: { type: 'atomic_rubric', rubric: points.map((p, i) => ({ id: `r${i + 1}`, criterion: p, marks: 1, isCritical: i === 0 })) },
+});
+const drawNode = node('bk-c1-fc-draw', 'Draw the Lewis structure and label every formal charge', 'Kinjo example mid-term (Al₂Cl₆ and I₂Cl₆ with bridging Cl); Chapter 1 Part 1 and Part 4 slides', 1, 'Formal Charge', ['formal-charge', 'lewis-structure', 'draw'], 4, 'fc-draw', [
+  drawV('c1-fc-draw-1', 'Al₂Cl₆', 'Draw Al₂Cl₆ (two bridging Cl atoms), showing every lone pair, and label the formal charge on Al, on a bridging Cl and on a terminal Cl.',
+    ['Two Al atoms joined by two bridging Cl atoms, each Al also bonded to two terminal Cl (each Al has four single bonds in total)', 'Terminal Cl: one bond and three lone pairs, formal charge 0; bridging Cl: two single bonds and two lone pairs', 'Formal charge on each Al = −1 (3 − 0 − 4)', 'Formal charge on each bridging Cl = +1 (7 − 4 − 2); the charges add up to zero for the molecule'],
+    'Al: 3 − 0 − 4 = −1. Bridging Cl: 7 − 2(2) − 2 = +1. Terminal Cl: 7 − 2(3) − 1 = 0. Two Al (−2) and two bridging Cl (+2) cancel.', 's-fc'),
+  drawV('c1-fc-draw-2', 'I₂Cl₆', 'Draw I₂Cl₆ (two bridging Cl atoms), showing every lone pair, label the formal charges, and say why the molecule is planar.',
+    ['Two I atoms joined by two bridging Cl atoms, each I also bonded to two terminal Cl (four bonds per I)', 'Each I carries two lone pairs; each bridging Cl two bonds and two lone pairs; each terminal Cl one bond and three lone pairs', 'Formal charge on each I = −1 (7 − 4 − 4) and on each bridging Cl = +1', 'Planar because each I has six electron pairs (octahedral electron-pair geometry) with the two lone pairs trans to each other, so each ICl₄ unit is square planar'],
+    'I: 7 − 2(2) − 4 = −1; bridging Cl +1; terminal Cl 0. Six electron pairs around I (four bonds, two lone pairs) give an octahedral arrangement, and the lone pairs sit opposite each other, so each ICl₄ unit is square planar and the dimer is planar.', 's-fc'),
+  drawV('c1-fc-draw-3', 'H₃N→BF₃', 'Draw the adduct H₃N–BF₃ with every lone pair and label the formal charge on N and on B. Show which atom donates the electron pair.',
+    ['N bonded to three H and to B with no lone pair left; B bonded to N and three F; each F with three lone pairs', 'Donor/acceptor marked: the lone pair on N (a Lewis base) is donated to the empty orbital on B (a Lewis acid), shown with an arrow N→B', 'Formal charge on N = +1 (5 − 0 − 4)', 'Formal charge on B = −1 (3 − 0 − 4); the formal charges are not a guide to electron flow (the partial charge on N is still negative)'],
+    'N: 5 − 0 − 4 = +1; B: 3 − 0 − 4 = −1; F: 0. Formal charge counts the dative bond as shared equally, so it does not show that N is still electron-rich.', 's-dative'),
+  drawV('c1-fc-draw-4', 'NO₃⁻', 'Draw the Lewis structure of NO₃⁻, show all resonance forms and label every formal charge in one form.',
+    ['One N bonded to three O, with one N=O double bond and two N–O single bonds; N has no lone pair', 'Double-bonded O two lone pairs, single-bonded O three lone pairs each', 'Formal charges: N +1, double-bonded O 0, each single-bonded O −1 (total −1)', 'Three equivalent resonance forms (the double bond on each O in turn), so all three N–O bonds have bond order 4/3'],
+    'N: 5 − 0 − 4 = +1; =O: 6 − 4 − 2 = 0; −O⁻: 6 − 6 − 1 = −1; sum +1 + 0 − 2 = −1.', 's-fc'),
+  drawV('c1-fc-draw-5', 'SO₄²⁻', 'Draw the sulfate ion with S=O bonds so that the formal charges are as small as possible, and label every formal charge. Compare with the all-single-bond structure.',
+    ['S bonded to four O; two S=O double bonds and two S–O⁻ single bonds (six bonds at S, no lone pair)', 'Formal charge S = 0 (6 − 0 − 6); double-bonded O = 0; single-bonded O = −1 each (total −2)', 'All-single-bond structure: S = +2 and every O = −1, larger formal charges', 'The S=O form is preferred and is possible because S (period 3) can hold more than eight electrons (expanded octet)'],
+    'With two S=O: S 6 − 0 − 6 = 0; =O 6 − 4 − 2 = 0; −O 6 − 6 − 1 = −1. All single: S 6 − 0 − 4 = +2, O −1. Smaller formal charges mean the better contributor.', 's-expanded'),
+  drawV('c1-fc-draw-6', 'SCN⁻', 'Draw the three Lewis structures of SCN⁻ (S=C=N, S–C≡N, S≡C–N), show lone pairs, label every formal charge, and say which contributes most.',
+    ['S=C=N with two lone pairs on S and two on N: S 0, C 0, N −1', 'S–C≡N with three lone pairs on S and one on N: S −1, C 0, N 0', 'S≡C–N with one lone pair on S and three on N: S +1, C 0, N −2', 'The structure with the lowest formal charges and the negative charge on the more electronegative atom (S=C=N or S–C≡N) contributes most; S≡C–N (+1 and −2) contributes least'],
+    'Each structure sums to −1. S≡C–N has the largest formal charges (+1 on S and −2 on N), so it contributes least.', 's-fc'),
+]);
+
+const NODES = [fcNode, drawNode];
+const LINKS = { 'bk-c1-fc-gen': ['c1.formal-charge'], 'bk-c1-fc-draw': ['c1.formal-charge', 'c1.dative'] };
 export { NODES, STRUCTS };
 
 if (process.argv[1].endsWith('kinjo5.mjs')) {

@@ -69,6 +69,8 @@ With this batch every uploaded Kinjo lecture deck (Chapter 1 Parts 1-5, Chapter 
 
 The example mid-term item (Al₂Cl₆ and I₂Cl₆: Al −1, I −1, bridging Cl +1; I₂Cl₆ planar because each I has two lone pairs, octahedral electron-pair geometry, square-planar ICl₄ units) was already in `bk-c1-formal-charge-bridge`, but formal charge had only fixed variants (5 nodes). `node tools/cm2021/kinjo5.mjs` writes `bk-c1-fc-gen` (11): the two example-paper structures, H₃N→BF₃, H₃O⁺/NH₄⁺/BF₄⁻/BH₄⁻, SCN⁻ structures B and C, O₃ and NO₃⁻, CO and N₂O, BF₃ with a B=F π bond, SO₄²⁻ with all single bonds against two S=O (S +2 against 0), and a pick on which sulfate structure is preferred. Formal charge = V − non-bonding electrons − bonds. The test caught two data slips while building (N in SCN⁻ structure C is −2, not −1; a double-bonded F has two bonds). Tests: `tests/kinjo5-items.test.mjs`.
 
+The app has no general molecule editor (only the 3D coordination canvas for isomers), so `bk-c1-fc-draw` (6, same file) rehearses drawing on paper: Al₂Cl₆, I₂Cl₆ (with why it is planar), H₃N→BF₃ (donor arrow), NO₃⁻, SO₄²⁻ (S=O form against all single bonds) and SCN⁻, each as a draw-then-tick rubric. It is in the `draw` focus set automatically (13 nodes now have draw variants).
+
 ## 8. Open
 
 - Slide batches 3 onward (the user uploads five at a time).

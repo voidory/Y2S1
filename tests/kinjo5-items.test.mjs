@@ -35,3 +35,19 @@ test('formal charges equal hand-written textbook values (V − non-bonding elect
   // formal charges of a neutral molecule / ion add up: Al₂Cl₆ (2 Al, 2 bridging Cl, 4 terminal Cl) = 0
   assert.equal(2 * -1 + 2 * 1 + 4 * 0, 0);
 });
+
+test('draw-and-label formal charge variants: rubric marks add up, every quoted formal charge matches the rule', () => {
+  const d = bank.questionNodes.find((x) => x.id === 'bk-c1-fc-draw');
+  assert.equal(d.variants.length, 6);
+  for (const v of d.variants) {
+    assert.ok(v.drawOnPaperThenCompare);
+    assert.equal(v.evaluator.rubric.reduce((a, r) => a + r.marks, 0), v.marks);
+  }
+  const fcOf = (V, lp, b) => V - 2 * lp - b;
+  const text = d.variants.map((v) => v.explanation).join(' ');
+  // spot-check the arithmetic quoted in the explanations against the rule
+  assert.equal(fcOf(3, 0, 4), -1); assert.ok(text.includes('Al: 3 − 0 − 4 = −1'));
+  assert.equal(fcOf(7, 2, 2), 1); assert.equal(fcOf(7, 2, 4), -1);
+  assert.equal(fcOf(6, 0, 6), 0); assert.equal(fcOf(6, 0, 4), 2); assert.equal(fcOf(5, 0, 4), 1);
+  assert.equal(fcOf(6, 3, 1), -1); assert.equal(fcOf(6, 2, 2), 0);
+});

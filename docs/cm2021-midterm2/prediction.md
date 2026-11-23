@@ -106,3 +106,11 @@ Calibration: the nine skills I rated 85-95% were all hit (P1, P5, P7, P8, P9, P1
 Would the plan have secured 100%? Reliable from the plan: Q1, 2, 3, 6, 7, 10, 11, 15, 16, 17, 19, 20 (12), probable with care: Q4, 8, 13, 18 (4). Not covered by the plan, needing reasoning that memorised traps do not give: Q5 (count isomers when the geometry is square planar and one ligand is ambidentate), Q9 (chirality of a tetrahedral chelate complex), Q12 (definition), Q14 (which d orbital rises when a ligand is added). So the plan gives about 16-17 of 20 reliably; 20 needs three reasoning skills it did not name.
 
 Bank check (grep of the CM2021 bank): square-pyramidal or orbital-destabilisation questions 0; glycinato isomer questions 0; tetrahedral chirality 1; linkage-plus-geometric counting 1.
+
+---
+
+# Correction (appended after the owner's challenge, 2026-11-23)
+
+My first verdict on "did the deck predict the paper" credited a question to the deck only when a slide showed that exact scenario (55% stated, 35% derivable, 10% not in the deck). That test was too literal. At the level of **concepts taught**, the deck supports 19 of 20 questions: Q9 (slide 26's improper-axis rule applied to a tetrahedral chelate), Q14 (slides 36 and 46: orbitals pointing at ligands are raised, so an added axial ligand raises d_z²), Q12 (slide 32 strong binding = stable, slide 50 formation constants), Q18 (slides 39-40 tetrahedral splitting and slide 9 dⁿ counts, run backwards), Q13 (slide 43 halide π-donors, Zn²⁺ d¹⁰), Q2 (slides 5-6). Only Q5's "four-coordinate Pt(II) is square planar" is not tied to the deck.
+
+So the miss was in **my prediction's granularity** (I listed scenarios, not rules), not in the deck's coverage. The revised conclusion on "would the plan have secured 100%": the plan failed because it prescribed memorising slide-level traps; a student who knew each rule and had drilled it on unseen shapes (tetrahedral, square planar, ambidentate ligands in a count) would have answered all 20. Strategy for mid-terms and finals: master the rule, then practise transfer to a new geometry or ligand set.

@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "module": "CM2011",
+  "sets": [
+    { "id": "ttests", "name": "All the t-tests and confidence levels", "why": "Pooled, paired, 99% and 99.9% from the booklet, and the highest level at which a result still holds. In every final.", "skills": ["m11.t1.ttest2", "m11.t1.paired", "m11.t1.ttestfinal", "m11.t1.levels", "m11.t1.ci", "m11.t1.qtest"] },
+    { "id": "nernst", "name": "Activity, Nernst and cell potential", "why": "Ionic strength, γ, half-cell and full-cell E with activities, E° from Ksp, ΔG° and K, pH from activities.", "skills": ["m11.e.ionic", "m11.e.gamma", "m11.e.half", "m11.e.fe", "m11.e.cell", "m11.e.ksp", "m11.e.thermo", "m11.e.ph", "m11.e.ph2"] },
+    { "id": "ise", "name": "ISE calculations", "why": "Slope, reading to activity, calibration chain, selectivity coefficient, interference error.", "skills": ["m11.p.slope", "m11.p.cal", "m11.p.chain", "m11.p.sel", "m11.p.intf", "m11.p.ag2s", "m11.p.gas"] },
+    { "id": "extraction", "name": "Extraction (all of it)", "why": "D at a pH, fraction left, % extracted, how many portions, one big versus several small.", "skills": ["m11.x.acid", "m11.x.base", "m11.x.repeat", "m11.x.explain"] },
+    { "id": "chrom-calc", "name": "Chromatography calculations", "why": "k, α, R_S, N, H, flow and scale-up.", "skills": ["m11.c.retention", "m11.c.resolution", "m11.c.plates", "m11.c.flow"] },
+    { "id": "psi", "name": "Air quality (PSI)", "why": "Sub-index, overall PSI, 24-h versus 1-h, cigarette equivalents.", "skills": ["m11.a.sub", "m11.a.overall", "m11.a.cig", "m11.a.written"] }
+  ]
+}

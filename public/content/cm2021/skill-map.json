@@ -1596,7 +1596,8 @@
     "bk-c6-formula-rules",
     "bk-c7-identify-p1",
     "bk-c7-identify-p2",
-    "bk-c6-chain-gen"
+    "bk-c6-chain-gen",
+    "bk-c6-oxo-chain"
    ],
    "chunk": "naming"
   },
@@ -1642,7 +1643,9 @@
     "bk-c6-ox-state-practice",
     "bk-c6-dn-count",
     "bk-c6-cn-factors",
-    "bk-c6-chain-gen"
+    "bk-c6-chain-gen",
+    "bk-c6-ox-organo",
+    "bk-c6-oxo-chain"
    ],
    "chunk": "naming"
   },
@@ -1904,7 +1907,10 @@
     "bk-c7-td-oh",
     "bk-c7-sq-planar",
     "bk-c6-chain-gen",
-    "bk-c7-draw-split"
+    "bk-c7-draw-split",
+    "bk-c6-oxo-chain",
+    "bk-c7-oh-td-ratio",
+    "bk-c7-geom-orbitals"
    ],
    "chunk": "field-energetics"
   },
@@ -1931,7 +1937,9 @@
     "bk-c9-cr-labile",
     "bk-c7-cfse-d1-d2",
     "bk-c6-chain-gen",
-    "bk-c7-draw-split"
+    "bk-c7-draw-split",
+    "bk-c6-oxo-chain",
+    "bk-c7-oh-td-ratio"
    ],
    "chunk": "field-energetics"
   },
@@ -1957,7 +1965,8 @@
     "bk-c7-identify-p2",
     "bk-c8-moment-infer",
     "bk-c8-ts-d7",
-    "bk-c8-ts-d4"
+    "bk-c8-ts-d4",
+    "bk-c7-oh-td-ratio"
    ],
    "chunk": "field-energetics"
   },
@@ -1978,7 +1987,8 @@
    "weight": 0.00546,
    "nodes": [
     "bk-c7-spectrochemical",
-    "bk-c7-cr-delta"
+    "bk-c7-cr-delta",
+    "bk-c7-lig-bond"
    ],
    "chunk": "field-energetics"
   },
@@ -2002,7 +2012,8 @@
     "bk-c7-pi-classify",
     "bk-c7-pi-effects",
     "bk-c7-co-backbond",
-    "bk-c7-backbond-trend"
+    "bk-c7-backbond-trend",
+    "bk-c7-lig-bond"
    ],
    "chunk": "bonding-models"
   },
@@ -2041,7 +2052,9 @@
    "weight": 0.00546,
    "nodes": [
     "bk-c7-cu-kf5",
-    "bk-c7-jahn-teller"
+    "bk-c7-jahn-teller",
+    "bk-c7-jt-more",
+    "bk-c7-geom-orbitals"
    ],
    "chunk": "field-energetics"
   },
@@ -2085,7 +2098,8 @@
     "bk-c8-spin-only",
     "bk-c8-moment-infer",
     "bk-c8-ts-d7",
-    "bk-c8-ts-d4"
+    "bk-c8-ts-d4",
+    "bk-c8-magnetism-chain"
    ],
    "chunk": "magnetism-colour"
   },
@@ -2151,7 +2165,8 @@
     "bk-c8-ground-terms",
     "bk-c8-term-numbers",
     "bk-c8-hund",
-    "bk-c8-terms-gen"
+    "bk-c8-terms-gen",
+    "bk-c8-term-concepts"
    ],
    "chunk": "terms-ts"
   },
@@ -2202,7 +2217,8 @@
     "bk-c8-tsg-read",
     "bk-c8-tsg-reverse",
     "bk-c8-tsg-cross",
-    "bk-c8-tsg-explain"
+    "bk-c8-tsg-explain",
+    "bk-c8-term-concepts"
    ],
    "chunk": "terms-ts"
   },
@@ -2222,7 +2238,8 @@
    "ids": [],
    "weight": 0.00546,
    "nodes": [
-    "bk-c8-selection-rules"
+    "bk-c8-selection-rules",
+    "bk-c8-intensity"
    ],
    "chunk": "magnetism-colour"
   },
@@ -2241,7 +2258,8 @@
    "ids": [],
    "weight": 0.00273,
    "nodes": [
-    "bk-c8-charge-transfer"
+    "bk-c8-charge-transfer",
+    "bk-c8-intensity"
    ],
    "chunk": "magnetism-colour"
   },
@@ -3070,6 +3088,42 @@
    "c3.hetero-diatomic",
    "c3.polyatomic",
    "c3.lgo"
+  ],
+  "bk-c6-ox-organo": [
+   "c6.ox-dn-cn"
+  ],
+  "bk-c6-oxo-chain": [
+   "c6.name",
+   "c6.ox-dn-cn",
+   "c7.splitting",
+   "c7.cfse"
+  ],
+  "bk-c8-magnetism-chain": [
+   "c8.spin-only"
+  ],
+  "bk-c7-oh-td-ratio": [
+   "c7.cfse",
+   "c7.splitting",
+   "c7.hs-ls"
+  ],
+  "bk-c8-term-concepts": [
+   "c8.terms",
+   "c8.tanabe-sugano"
+  ],
+  "bk-c8-intensity": [
+   "c8.selection",
+   "c8.charge-transfer"
+  ],
+  "bk-c7-jt-more": [
+   "c7.jahn-teller"
+  ],
+  "bk-c7-geom-orbitals": [
+   "c7.splitting",
+   "c7.jahn-teller"
+  ],
+  "bk-c7-lig-bond": [
+   "c7.pi-bonding",
+   "c7.spectrochemical"
   ]
  }
 }

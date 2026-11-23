@@ -88,3 +88,7 @@ Tier 1 (stated in the deck and returning in the finals or mid-terms): COORD5 wit
 - Only the Hiang Kwee half has a deck here; Q1 + Q2 are not covered by this ledger.
 - Slide answers have not been independently recomputed yet; the Phase B items will be.
 - The mid-term papers are MCQ; none of their wording is used in content.
+
+## 8. Phase B result (2026-11-23)
+
+Built 50 variants in 9 nodes closing gaps 1-8 of section 5 (see CLAUDE.md, "Finals-deck items"): 8 drawn organometallic and bridged oxidation states, 5 oxo-anion chains, 5 χ→μ→n→spin items plus a Guoy rubric, 4 Oh/Td ratios plus 2 reasons, 6 term and Tanabe-Sugano concepts, 5 selection-rule and charge-transfer items, 4 Jahn-Teller items, 5 changed-geometry orbital items, 5 π-donor/acceptor and M-L bond items. All answers recomputed in `tests/deck-items.test.mjs`. Still open: a Kinjo-half deck (none supplied), and the lecturer's own key for any item where the slide is ambiguous (for example the σ/π character of the Zn-F bond in a d¹⁰ ion, which I did not write a question on).

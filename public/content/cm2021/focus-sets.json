@@ -117,6 +117,26 @@
         "c4.boron",
         "c4.silicon"
       ]
+    },
+    {
+      "id": "spectra",
+      "name": "Magnetism, selection rules and charge transfer",
+      "why": "Susceptibility to μ to unpaired electrons, Guoy balance, band intensity ranking, LMCT and MLCT: the Q4 material the finals deck adds after the terms.",
+      "skills": [
+        "c8.spin-only",
+        "c8.selection",
+        "c8.charge-transfer",
+        "c8.colour"
+      ]
+    },
+    {
+      "id": "jt",
+      "name": "Jahn-Teller and d-orbital energies when the geometry changes",
+      "why": "Strong, weak or none, two bands for d¹, elongation and compression, square pyramidal and tetrahedral orbital orders.",
+      "skills": [
+        "c7.jahn-teller",
+        "c7.splitting"
+      ]
     }
   ]
 }

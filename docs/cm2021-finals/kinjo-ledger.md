@@ -57,7 +57,15 @@ What was thin and is examined every year was the oxidation number (one fixed var
 
 Slide slips seen (do not memorise as printed): Part 5 slide 17 prints [(SiO₃)₈]¹⁸⁻ for an eight-membered ring, which is 16−; Part 6 `Ba(NO)₂` for barium nitrite and `Ca₃N₂`-type equations that do not balance were already logged on the Reactions screen.
 
-## 6. Open
+## 6. Chapter 2 slides, batch 4 (Parts 1-3: Hydrogen, Group 1, Group 2; text layer present) — the last Kinjo deck
+
+Audit as for batch 3: every printed equation was matched against `reactions.json` and ~60 facts against the bank. The generic forms (`M + O₂`, `MCO₃ → MO + CO₂`, `M + X₂`, `MH₂ + 2 H₂O`) are held as the specific cases (Ca, Mg, Ba), saline hydrides, LiAlH₄ and NaBH₄, Li₃N, Mg₃N₂, KO₂, the Be amphoteric pair, cryptand and alkalide, MeLi tetramer, Be(CH₃)₂ 3c-2e, the W(η²-H₂) Kubas complex and steam reforming are all present. Not present and low priority: H electron affinity (−17.4 kcal/mol) and ionisation enthalpy (313.6 against 122.7 for Li), BeBu₂ → BeH₂ + isobutene, CaCO₃ + 4 C → CaC₂ + 3 CO as a written equation.
+
+Thin and recurring: the **isotope effect** (zero-point energy; two of the three finals; the bank had 1 + 2 fixed variants) and the **H₂ + Cl₂ radical chain** (1 node). `node tools/cm2021/kinjo4.mjs` writes `bk-c4-isotope-gen` 7 (a numeric chain: ν(D₂) = 4401/√2, E₀ of each, and a bond-enthalpy difference of 1.84 kcal/mol that reproduces the slide's 106.0 − 104.2 = 1.8; rubrics for H₂/D₂ + Cl·, O–H against O–D, D₂O melting and boiling points, D₂O ice sinking, CH₄ against CD₄; one multi-select) and `bk-c4-radical-gen` 2 (classify the four steps; ΔH of each step from Cl–Cl 243, H–H 432, H–Cl 427, overall −179 kJ/mol). Tests: `tests/kinjo4-items.test.mjs`.
+
+With this batch every uploaded Kinjo lecture deck (Chapter 1 Parts 1-5, Chapter 2 Parts 1-8) has been read. Remaining Kinjo material not uploaded: Chapter 3 MO lectures beyond the Chapter 1 Part 5 summary, and Chapter 5 (symmetry and group theory).
+
+## 7. Open
 
 - Slide batches 3 onward (the user uploads five at a time).
 - Align explain rubrics to the keys' key-word style.

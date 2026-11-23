@@ -929,7 +929,8 @@
    "weight": 0.014,
    "nodes": [
     "bk-c4-isotope-zpe",
-    "bk-c4-kie"
+    "bk-c4-kie",
+    "bk-c4-isotope-gen"
    ],
    "chunk": "hydrogen"
   },
@@ -948,7 +949,8 @@
    "ids": [],
    "weight": 0.01167,
    "nodes": [
-    "bk-c4-kie"
+    "bk-c4-kie",
+    "bk-c4-isotope-gen"
    ],
    "chunk": "hydrogen"
   },
@@ -1035,7 +1037,8 @@
    "ids": [],
    "weight": 0.00273,
    "nodes": [
-    "bk-c4-hcl-chain"
+    "bk-c4-hcl-chain",
+    "bk-c4-radical-gen"
    ],
    "chunk": "hydrogen"
   },
@@ -3196,6 +3199,13 @@
    "c4.silicon",
    "c4.oxygen-sulfur",
    "c4.halogens"
+  ],
+  "bk-c4-isotope-gen": [
+   "c4.isotope-zpe",
+   "c4.kie"
+  ],
+  "bk-c4-radical-gen": [
+   "c4.radical-chain"
   ]
  }
 }

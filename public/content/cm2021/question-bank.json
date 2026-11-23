@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-23T13:56:36.175Z",
+ "exportedAt": "2026-11-23T14:01:39.890Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -38975,6 +38975,506 @@
        "a"
       ],
       "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-isotope-gen",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Isotope effect and zero-point energy: new pairs and a numeric chain",
+    "source": "Chapter 2 Part 1 slides 22-26 (H₂ and D₂ bond enthalpies, ω = (f/μ)½, E₀, D₂O properties); the isotope effect is in two of the three finals",
+    "week": 4,
+    "primaryTheme": "Hydrogen and Isotopes",
+    "conceptTags": [
+     "isotope-effect",
+     "zero-point-energy",
+     "kie"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 4,
+    "examStyle": "short_2to3",
+    "family": "isotope-gen"
+   },
+   "variants": [
+    {
+     "variantId": "c4-isotope-gen-01",
+     "perspectiveLabel": "zero-point energy chain for H₂ and D₂",
+     "marks": 4,
+     "stem": "The stretching wavenumber of H₂ is 4401 cm⁻¹. The force constant is the same for D₂ and the reduced mass of D₂ is twice that of H₂ (ω = (f/μ)½). Use 1 cm⁻¹ = 0.01196 kJ mol⁻¹ and E₀ = ½ hν. Give the D₂ wavenumber, E₀ for H₂ and for D₂ (kJ/mol), and by how many kcal/mol the D–D bond is stronger than H–H (1 kcal = 4.184 kJ).",
+     "hint": "ν ∝ 1/√μ, so ν(D₂) = ν(H₂)/√2; E₀ is half of hν; the bond enthalpy is −(E_electronic + E₀) so the molecule with the smaller E₀ has the larger bond enthalpy.",
+     "explanation": "ν(D₂) = 4401/√2 = 3112 cm⁻¹. E₀(H₂) = ½ × 4401 × 0.01196 = 26.3 kJ/mol; E₀(D₂) = ½ × 3112 × 0.01196 = 18.6 kJ/mol. The two molecules have the same electronic energy, so the bond enthalpy differs only by the zero-point energy: 7.7 kJ/mol = 1.84 kcal/mol, in line with the slide values (106.0 − 104.2 = 1.8 kcal/mol).",
+     "sourceSlide": "ch2-p1 s22-24",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "nud",
+        "label": "Wavenumber of D₂ (cm⁻¹)"
+       },
+       {
+        "key": "eh",
+        "label": "E₀ of H₂ (kJ/mol)"
+       },
+       {
+        "key": "ed",
+        "label": "E₀ of D₂ (kJ/mol)"
+       },
+       {
+        "key": "dk",
+        "label": "Extra bond enthalpy of D₂ over H₂ (kcal/mol)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "nud": {
+        "type": "numeric",
+        "targetExpr": "3112",
+        "tolerance": 5
+       },
+       "eh": {
+        "type": "numeric",
+        "targetExpr": "26.3",
+        "tolerance": 0.2
+       },
+       "ed": {
+        "type": "numeric",
+        "targetExpr": "18.6",
+        "tolerance": 0.2
+       },
+       "dk": {
+        "type": "numeric",
+        "targetExpr": "1.84",
+        "tolerance": 0.06
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-isotope-gen-02",
+     "perspectiveLabel": "rate of H₂ + Cl₂ against D₂ + Cl₂",
+     "marks": 3,
+     "stem": "The chain reaction of H₂ with Cl· (H₂ + Cl· → H· + HCl) is faster than that of D₂ with Cl·. Explain.",
+     "hint": "Same force constant, different reduced mass: follow ω to the zero-point energy to the activation energy.",
+     "explanation": "Isotopes share the same potential energy surface, so the force constant is the same. The heavier D gives a larger reduced mass and so a lower frequency and zero-point energy; the D–D bond starts lower in the well, is harder to break and the rate is lower (k_H/k_D > 1).",
+     "sourceSlide": "ch2-p1 s24",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 8,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "The H–H and D–D bonds have the same electronic potential energy curve and force constant",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "D is heavier, so the reduced mass is larger and the vibration frequency (ω = (f/μ)½) and zero-point energy are lower for D–D",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "The D–D bond therefore sits lower in the well and needs more energy to break (higher activation energy), so the D₂ reaction is slower",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c4-isotope-gen-03",
+     "perspectiveLabel": "O–H and O–D",
+     "marks": 3,
+     "stem": "A hydrolysis in which an O–H bond is broken in the slow step is slower in D₂O (O–D bond) than in H₂O. Explain using zero-point energy.",
+     "hint": "Think: which has the lower zero-point energy, and what does that do to the activation energy?",
+     "explanation": "The bond to the heavier isotope has the lower zero-point energy, so it is stronger in effect and needs a higher activation energy to break; the rate falls when D replaces H at the bond being broken.",
+     "sourceSlide": "ch2-p1 s24",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 8,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "The force constant of O–H and O–D is the same, but μ(O–D) is larger, so ω and the zero-point energy E₀ = ½hω are smaller for O–D",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "The O–D bond lies lower in the well, so more energy is needed to reach the transition state (larger activation energy)",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "So the rate constant is smaller: k_H/k_D > 1 (a primary kinetic isotope effect)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c4-isotope-gen-04",
+     "perspectiveLabel": "D₂O melting and boiling point",
+     "marks": 3,
+     "stem": "D₂O melts at 3.8 °C and boils at 101.4 °C, against 0.0 °C and 100.0 °C for H₂O. Suggest why D₂O is the more strongly bound liquid.",
+     "hint": "Remember the b.p. of D₂ (−249.7 °C) is also above that of H₂ (−252.8 °C).",
+     "explanation": "The same zero-point-energy argument applies to the O–D bonds and the hydrogen bonds: bonds involving D are slightly stronger, so the intermolecular attraction is greater and D₂O has higher melting and boiling points, density and viscosity than H₂O.",
+     "sourceSlide": "ch2-p1 s25-26",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 8,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "D is heavier, so the O–D bonds (and the hydrogen bonds involving D) have lower vibrational frequencies and a lower zero-point energy",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "The O–D···O hydrogen bonds are slightly stronger (the lower zero-point energy leaves a deeper effective well), so more energy is needed to separate the molecules",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "Hence higher melting and boiling points, higher density (1.106 against 0.998 g/mL) and higher viscosity (1.25 against 1.00 mPa·s)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c4-isotope-gen-05",
+     "perspectiveLabel": "ice of D₂O sinks in H₂O",
+     "marks": 2,
+     "stem": "A cube of D₂O ice dropped into ice-cold ordinary water sinks. Give the two reasons from the properties of heavy water.",
+     "explanation": "Ice made from heavy water is a solid at 0 °C because D₂O melts at 3.8 °C, and its higher density (the deuterium atoms add mass without changing the molecular size appreciably) makes it sink in H₂O.",
+     "sourceSlide": "ch2-p1 s26",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 8,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "D₂O is denser than H₂O (1.106 against 0.998 g/mL at 20 °C), so its solid is heavier too",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "D₂O melts at 3.8 °C, so D₂O ice stays solid in water at 0 °C and does not melt",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c4-isotope-gen-06",
+     "perspectiveLabel": "which statements about isotope effects",
+     "marks": 2,
+     "stem": "Which statements about the effect of replacing H by D in H₂ are correct? Select all.",
+     "explanation": "The potential energy curve (and so f and the electronic energy) is the same; the larger reduced mass of D₂ lowers ω and E₀ = ½hω, so the bond enthalpy −(E_el + E₀) is larger. The frequency of D₂ is lower by √2.",
+     "sourceSlide": "ch2-p1 s22-24",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "multi",
+      "options": [
+       {
+        "id": "a",
+        "label": "The force constant of the bond is unchanged"
+       },
+       {
+        "id": "b",
+        "label": "The zero-point energy of D₂ is lower than that of H₂"
+       },
+       {
+        "id": "c",
+        "label": "The bond enthalpy of D₂ (106.0 kcal/mol) is larger than that of H₂ (104.2 kcal/mol)"
+       },
+       {
+        "id": "d",
+        "label": "The electronic energy of D₂ is much more negative than that of H₂"
+       },
+       {
+        "id": "e",
+        "label": "The vibration frequency of D₂ is higher than that of H₂"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a",
+       "b",
+       "c"
+      ],
+      "gradingMode": "partial_with_penalty"
+     }
+    },
+    {
+     "variantId": "c4-isotope-gen-07",
+     "perspectiveLabel": "CH₄ against CD₄ in the radical chain",
+     "marks": 3,
+     "stem": "In the radical chlorination Cl· + CH₄ → HCl + ·CH₃ the C–H bond is broken in the rate-determining step. Explain why CD₄ reacts more slowly than CH₄.",
+     "hint": "Use the same three links: reduced mass → zero-point energy → activation energy.",
+     "explanation": "Primary kinetic isotope effect: the bond that is broken in the slow step is to H or D; the heavier D has a lower zero-point energy, so a larger activation energy and a slower reaction.",
+     "sourceSlide": "ch2-p1 s24",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 8,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "The C–H and C–D bonds have the same force constant, but the C–D bond has the larger reduced mass",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "It therefore has the lower vibrational frequency and the lower zero-point energy, so it sits lower in the potential well",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r3",
+        "criterion": "More energy is needed to break C–D (larger activation energy), so k_H/k_D > 1 and CD₄ reacts more slowly",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-radical-gen",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "H₂ + Cl₂ radical chain: classify the steps and compute ΔH",
+    "source": "Chapter 2 Part 1 slide 32 (initiation Cl–Cl 243, propagation H–H 432 and H–Cl 427)",
+    "week": 4,
+    "primaryTheme": "Radical Chain Reactions",
+    "conceptTags": [
+     "radical-chain",
+     "bond-enthalpy"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "radical-gen"
+   },
+   "variants": [
+    {
+     "variantId": "c4-radical-gen-1",
+     "perspectiveLabel": "classify the steps",
+     "marks": 4,
+     "stem": "The photochemical reaction H₂ + Cl₂ → 2 HCl is a radical chain. Classify each step as initiation, propagation or termination.",
+     "hint": "Count radicals: initiation creates them, propagation keeps the number, termination destroys them.",
+     "explanation": "Initiation makes radicals from a molecule (Cl₂ → 2 Cl·, by light). Propagation consumes one radical and makes another, so the chain carries on. Termination removes two radicals without making a new one.",
+     "sourceSlide": "ch2-p1 s32",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "s1",
+        "label": "Cl₂ → 2 Cl·",
+        "options": [
+         "initiation",
+         "propagation",
+         "termination"
+        ]
+       },
+       {
+        "key": "s2",
+        "label": "H₂ + Cl· → H· + HCl",
+        "options": [
+         "initiation",
+         "propagation",
+         "termination"
+        ]
+       },
+       {
+        "key": "s3",
+        "label": "H· + Cl₂ → HCl + Cl·",
+        "options": [
+         "initiation",
+         "propagation",
+         "termination"
+        ]
+       },
+       {
+        "key": "s4",
+        "label": "H· + Cl· → HCl",
+        "options": [
+         "initiation",
+         "propagation",
+         "termination"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "s1": {
+        "type": "keyword",
+        "expectedExpr": "'initiation'",
+        "synonyms": {
+         "initiation": [
+          "initiation"
+         ],
+         "propagation": [
+          "propagation"
+         ],
+         "termination": [
+          "termination"
+         ]
+        }
+       },
+       "s2": {
+        "type": "keyword",
+        "expectedExpr": "'propagation'",
+        "synonyms": {
+         "initiation": [
+          "initiation"
+         ],
+         "propagation": [
+          "propagation"
+         ],
+         "termination": [
+          "termination"
+         ]
+        }
+       },
+       "s3": {
+        "type": "keyword",
+        "expectedExpr": "'propagation'",
+        "synonyms": {
+         "initiation": [
+          "initiation"
+         ],
+         "propagation": [
+          "propagation"
+         ],
+         "termination": [
+          "termination"
+         ]
+        }
+       },
+       "s4": {
+        "type": "keyword",
+        "expectedExpr": "'termination'",
+        "synonyms": {
+         "initiation": [
+          "initiation"
+         ],
+         "propagation": [
+          "propagation"
+         ],
+         "termination": [
+          "termination"
+         ]
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-radical-gen-2",
+     "perspectiveLabel": "ΔH of each step",
+     "marks": 4,
+     "stem": "Use the bond enthalpies Cl–Cl 243, H–H 432 and H–Cl 427 kJ/mol to give the enthalpy change of each step (positive if endothermic): the initiation Cl₂ → 2 Cl·, the propagation H₂ + Cl· → H· + HCl, the propagation H· + Cl₂ → HCl + Cl·, and the overall reaction H₂ + Cl₂ → 2 HCl.",
+     "hint": "ΔH = sum of bonds broken minus sum of bonds formed for each step.",
+     "explanation": "ΔH = (bonds broken) − (bonds formed). Initiation: break Cl–Cl, +243. First propagation: break H–H (432), form H–Cl (427): +5. Second propagation: break Cl–Cl (243), form H–Cl (427): −184. Overall: 432 + 243 − 2(427) = −179 kJ/mol. The two propagation steps add to the overall value (5 − 184 = −179).",
+     "sourceSlide": "ch2-p1 s32",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "d1",
+        "label": "Cl₂ → 2 Cl· (kJ/mol)"
+       },
+       {
+        "key": "d2",
+        "label": "H₂ + Cl· → H· + HCl (kJ/mol)"
+       },
+       {
+        "key": "d3",
+        "label": "H· + Cl₂ → HCl + Cl· (kJ/mol)"
+       },
+       {
+        "key": "d4",
+        "label": "H₂ + Cl₂ → 2 HCl (kJ/mol)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "d1": {
+        "type": "numeric",
+        "targetExpr": "243",
+        "tolerance": 0
+       },
+       "d2": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       },
+       "d3": {
+        "type": "numeric",
+        "targetExpr": "-184",
+        "tolerance": 0
+       },
+       "d4": {
+        "type": "numeric",
+        "targetExpr": "-179",
+        "tolerance": 0
+       }
+      }
      }
     }
    ]

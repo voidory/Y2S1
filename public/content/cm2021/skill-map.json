@@ -446,7 +446,8 @@
    "nodes": [
     "bk-c4-g2-ie",
     "bk-c2-ionisation-energy",
-    "bk-c4-g1-g2-compare"
+    "bk-c4-g1-g2-compare",
+    "bk-c2-trend-gen"
    ],
    "chunk": "periodic-trends"
   },
@@ -560,7 +561,8 @@
    "weight": 0.02333,
    "nodes": [
     "bk-c3-homo-past",
-    "bk-c3-homo-drill"
+    "bk-c3-homo-drill",
+    "bk-c3-homo-gen"
    ],
    "chunk": "mo-diatomic"
   },
@@ -783,7 +785,8 @@
     "bk-c4-avg-on-n",
     "bk-c4-h3po3",
     "bk-c4-clo2",
-    "bk-c4-electride-alkalide"
+    "bk-c4-electride-alkalide",
+    "bk-c4-avgon-gen"
    ],
    "chunk": "reaction-toolkit"
   },
@@ -1125,7 +1128,8 @@
    "weight": 0.01167,
    "nodes": [
     "bk-c4-crown-cryptand",
-    "bk-c4-electride-alkalide"
+    "bk-c4-electride-alkalide",
+    "bk-c4-crown-draw"
    ],
    "chunk": "s-block"
   },
@@ -1490,7 +1494,8 @@
    "nodes": [
     "bk-c4-clo2",
     "bk-c4-interhalogens",
-    "bk-c4-halogen-redox"
+    "bk-c4-halogen-redox",
+    "bk-c2-trend-gen"
    ],
    "chunk": "group15-18"
   },
@@ -1509,7 +1514,8 @@
    "ids": [],
    "weight": 0.00273,
    "nodes": [
-    "bk-c4-xenon"
+    "bk-c4-xenon",
+    "bk-c2-trend-gen"
    ],
    "chunk": "group15-18"
   },
@@ -1528,7 +1534,8 @@
    "ids": [],
    "weight": 0.02333,
    "nodes": [
-    "bk-c4-nuclear"
+    "bk-c4-nuclear",
+    "bk-c4-nuclear-gen"
    ],
    "chunk": "reaction-toolkit"
   },
@@ -3124,6 +3131,23 @@
   "bk-c7-lig-bond": [
    "c7.pi-bonding",
    "c7.spectrochemical"
+  ],
+  "bk-c2-trend-gen": [
+   "c2.periodic-trends",
+   "c4.halogens",
+   "c4.noble"
+  ],
+  "bk-c4-avgon-gen": [
+   "c4.ox-number"
+  ],
+  "bk-c4-nuclear-gen": [
+   "c4.nuclear"
+  ],
+  "bk-c3-homo-gen": [
+   "c3.homo-count"
+  ],
+  "bk-c4-crown-draw": [
+   "c4.crown"
   ]
  }
 }

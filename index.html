@@ -9011,15 +9011,55 @@
         saveSavedList();
       }
       /* Play a list of questions in order (the Saved list, or the unseen ones in the Bank). Questions of the other module are left out. */
-      function startPlaylist(ids, label) {
+      function startPlaylist(ids, label, opts = {}) {
         const mine = ids.filter((id) => appState.nodes.some((n) => n.id === id));
         if (!mine.length) { showToast('Nothing in this list belongs to the current module.'); return; }
         appState.cram = null;
         appState.playlist = { on: true, ids: mine, done: [], label, now: null };
         appState.route = 'study';
         appState.current = null;
-        appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null };
+        appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null, drawOnly: Boolean(opts.drawOnly) };
         loadNextQuestion();
+      }
+
+      /* Plan a session: the questions a source would give you, in order, for you to tick before you start (session sheet). */
+      function planCandidates(plan) {
+        const nodes = appState.nodes, byId = new Map(nodes.map((n) => [n.id, n]));
+        const lastGrade = new Map();
+        for (const l of appState.attemptLogs) if (!lastGrade.has(l.nodeId)) lastGrade.set(l.nodeId, l.normalizedGrade);   // logs are newest first
+        const failed = (id) => lastGrade.has(id) && lastGrade.get(id) < Scheduler.PASS_GRADE;
+        const unseen = (id) => !lastGrade.has(id);
+        const sess = appState.session.state || {};
+        const retired = retiredNow().nodes;
+        // missed first, then never tried, then the rest; each keeps the list's own order
+        const rank = (ids) => ids.map((id, i) => [id, i]).sort((a, b) => ((failed(a[0]) ? 0 : unseen(a[0]) ? 1 : 2) - (failed(b[0]) ? 0 : unseen(b[0]) ? 1 : 2)) || a[1] - b[1]).map((x) => x[0]);
+        let ids = [], drawOnly = false, label = 'My session';
+        if (plan.src === 'queue') {
+          const base = { ...appState.filters, forceNodeId: null, excludeNodeId: null, lastFamily: null, retired: retiredNow() };
+          if (appState.examMode) base.typedOnly = true;
+          if (appState.skillMap) base.masteryAdj = Mastery.adjustments(masteryNow(), appState.skillMap, appState.masteryPrefs.removed, { ignoreRetired: Boolean(base.chunkNodeIds || base.skillTag) }, nodes.filter((n) => String(n.id).startsWith('lf-inv-')).map((n) => n.id));
+          if (appState.settings?.allocByMarks !== false && appState.skillMap && !base.chunkNodeIds && !base.skillTag) base.allocMult = Scheduler.allocationMultipliers(nodes, appState.skillMap, appState.masteryLogs, { ratings: appState.plan?.ratings || {}, moduleCode: appState.activeModule });
+          const ex = new Set();
+          for (let i = 0; i < plan.n; i++) {
+            const pk = Scheduler.selectNextNode(nodes, appState.reviewMap, moduleMap(), appState.attemptLogs, appState.settings, { ...base, excludeIds: ex });
+            if (!pk.node) break;
+            ids.push(pk.node.id); ex.add(pk.node.id);
+          }
+          label = 'My session · queue';
+        } else if (plan.src === 'unseen') { ids = nodes.filter((n) => unseen(n.id) && !retired.has(n.id)).map((n) => n.id); label = 'My session · unseen'; }
+        else if (plan.src === 'missed') { ids = nodes.filter((n) => failed(n.id) && !retired.has(n.id)).map((n) => n.id).sort((a, b) => lastGrade.get(a) - lastGrade.get(b)); label = 'My session · missed'; }
+        else if (plan.src === 'skipped') { ids = Object.keys(sess).filter((id) => sess[id] === 'skipped' && byId.has(id)).reverse(); label = 'My session · skipped'; }
+        else if (plan.src === 'starred') { ids = appState.saved.filter((id) => byId.has(id)); label = 'My session · starred'; }
+        else if (String(plan.src).startsWith('topic:')) {
+          const cid = plan.src.slice(6), name = appState.skillMap?.chunks?.find((c) => c.id === cid)?.name || 'topic';
+          ids = rank(Content.chunkNodeIds(appState.skillMap, cid).filter((id) => byId.has(id))); label = `My session · ${name}`;
+        } else if (String(plan.src).startsWith('set:')) {
+          const set = (appState.focusSets?.[appState.activeModule]?.sets || []).find((x) => x.id === plan.src.slice(4));
+          if (set) { ids = rank(Content.focusNodeIds(appState.skillMap, set, nodes).filter((id) => byId.has(id))); drawOnly = Boolean(set.drawOnly); label = `My session · ${set.name}`; }
+        }
+        ids = ids.slice(0, plan.n);
+        const items = ids.map((id) => { const n = byId.get(id); return { id, title: n.metadata.title, marks: n.variants?.[0]?.marks || 0, mins: n.metadata.estimatedMinutes || 0, status: failed(id) ? 'missed' : unseen(id) ? 'new' : 'seen' }; });
+        return { items, label, drawOnly };
       }
       function playlistStripHtml() {
         const pl = appState.playlist;
@@ -9702,14 +9742,46 @@
           <div class="seg mb-3" role="tablist" aria-label="Lists">${listTabBtn('next', 'Up next', null)}${listTabBtn('skipped', 'Skipped', skippedIds.length)}${listTabBtn('starred', '★ Starred', starredIds.length)}${listTabBtn('done', 'Done', doneIds.length)}</div>
           ${listTab === 'next' ? queueHtml : listBody}`;
 
+        // Plan a session: pick a source and a size, tick what you want, start it as a playlist
+        let planHtml = '';
+        if (sheet === 'plan') {
+          const pl = appState.ui.plan ||= { src: 'queue', n: 10, off: [] };
+          const cand = planCandidates(pl);
+          const on = cand.items.filter((x) => !pl.off.includes(x.id));
+          const marks = on.reduce((s, x) => s + x.marks, 0), mins = on.reduce((s, x) => s + x.mins, 0);
+          const nSkipped = Object.values(appState.session.state || {}).filter((v) => v === 'skipped').length;
+          const nMissed = (() => { const seen = new Set(); let k = 0; for (const l of appState.attemptLogs) { if (seen.has(l.nodeId)) continue; seen.add(l.nodeId); if (l.normalizedGrade < Scheduler.PASS_GRADE && appState.nodes.some((n) => n.id === l.nodeId)) k++; } return k; })();
+          const sets = appState.focusSets?.[appState.activeModule]?.sets || [];
+          const chip = { missed: 'bg-rose-50 text-rose-800 border-rose-200', new: 'bg-blue-50 text-blue-800 border-blue-200', seen: 'bg-slate-50 text-slate-600 border-slate-200' };
+          planHtml = `
+            <div class="space-y-3" data-plan>
+              <label class="block"><span class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1">What to draw from</span>
+                <select id="planSrc" class="w-full text-sm bg-white border border-slate-300 rounded-lg px-2.5 py-2 text-slate-800">
+                  <option value="queue" ${pl.src === 'queue' ? 'selected' : ''}>Next in my queue (what the app would pick)</option>
+                  <option value="unseen" ${pl.src === 'unseen' ? 'selected' : ''}>Never tried</option>
+                  <option value="missed" ${pl.src === 'missed' ? 'selected' : ''}>Missed last time (${nMissed})</option>
+                  <option value="skipped" ${pl.src === 'skipped' ? 'selected' : ''}>Skipped this session (${nSkipped})</option>
+                  <option value="starred" ${pl.src === 'starred' ? 'selected' : ''}>★ Starred (${appState.saved.filter((id) => appState.nodes.some((n) => n.id === id)).length})</option>
+                  ${sets.length ? `<optgroup label="Focus sets">${sets.map((x) => `<option value="set:${esc(x.id)}" ${pl.src === 'set:' + x.id ? 'selected' : ''}>${esc(x.name)}</option>`).join('')}</optgroup>` : ''}
+                  ${(appState.skillMap?.chunks || []).length ? `<optgroup label="One topic">${appState.skillMap.chunks.map((c) => `<option value="topic:${esc(c.id)}" ${pl.src === 'topic:' + c.id ? 'selected' : ''}>${esc(c.name)}</option>`).join('')}</optgroup>` : ''}
+                </select></label>
+              <div class="flex items-center gap-1.5" role="group" aria-label="How many questions"><span class="text-xs font-semibold uppercase tracking-wider text-slate-500 mr-1">How many</span>
+                ${[5, 10, 15, 20, 30].map((k) => `<button type="button" data-plan-n="${k}" aria-pressed="${pl.n === k}" class="px-2.5 py-1 text-xs font-medium rounded-full border ${pl.n === k ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-300 text-slate-700'}">${k}</button>`).join('')}</div>
+              <div class="flex items-center justify-between gap-2 text-xs text-slate-600"><span data-plan-total><b>${on.length}</b> question${on.length === 1 ? '' : 's'} · ${marks} marks · about ${mins} min</span>
+                <span class="flex gap-1.5"><button type="button" data-plan-all class="underline decoration-dotted">All</button><button type="button" data-plan-none class="underline decoration-dotted">None</button></span></div>
+              ${cand.items.length ? `<div class="divide-y divide-slate-100 border border-slate-200 rounded-lg">${cand.items.map((x) => `<label class="flex items-center gap-2.5 px-2.5 py-2 cursor-pointer"><input type="checkbox" data-plan-id="${esc(x.id)}" ${pl.off.includes(x.id) ? '' : 'checked'} class="w-4 h-4 shrink-0" /><span class="min-w-0 flex-1"><span class="block text-sm text-slate-900 truncate">${esc(x.title)}</span><span class="block text-[11px] text-slate-500">${x.marks} mark${x.marks === 1 ? '' : 's'} · ~${x.mins} min</span></span><span class="shrink-0 text-[11px] font-medium px-2 py-0.5 rounded-full border ${chip[x.status]}">${x.status === 'new' ? 'not tried' : x.status === 'missed' ? 'missed' : 'tried'}</span></label>`).join('')}</div>` : `<p class="text-sm text-slate-500 py-4 text-center">Nothing in that list right now.</p>`}
+              <button type="button" id="btnPlanStart" ${on.length ? '' : 'disabled'} class="w-full px-5 py-3 text-sm font-medium bg-slate-900 text-white rounded-lg disabled:opacity-40">Start ${on.length} question${on.length === 1 ? '' : 's'}</button>
+            </div>`;
+        }
+        const sheetTitle = { queue: 'Your lists', plan: 'Plan a session' }[sheet] || 'Filters';
         const sheetHtml = sheet ? `
           <div class="fixed inset-0 z-40 flex items-end md:items-center md:justify-center bg-slate-900/40" data-sheet-backdrop>
-            <div class="bg-white w-full md:max-w-lg rounded-t-2xl md:rounded-2xl shadow-xl p-4 max-h-[85dvh] overflow-y-auto" data-bounded-scroll role="dialog" aria-modal="true" aria-label="${sheet === 'queue' ? 'Your lists' : 'Filters'}">
+            <div class="bg-white w-full md:max-w-lg rounded-t-2xl md:rounded-2xl shadow-xl p-4 max-h-[85dvh] overflow-y-auto" data-bounded-scroll role="dialog" aria-modal="true" aria-label="${sheetTitle}">
               <div class="flex items-center justify-between mb-3">
-                <h2 class="font-display text-base font-semibold text-slate-900">${sheet === 'queue' ? 'Your lists' : 'Filters'}</h2>
+                <h2 class="font-display text-base font-semibold text-slate-900">${sheetTitle}</h2>
                 <button type="button" data-close-sheet aria-label="Close" class="w-9 h-9 -mr-1 rounded-lg text-slate-500 hover:bg-slate-100">✕</button>
               </div>
-              ${sheet === 'queue' ? listsHtml : filterControls}
+              ${sheet === 'queue' ? listsHtml : sheet === 'plan' ? planHtml : filterControls}
             </div>
           </div>
         ` : '';
@@ -10127,7 +10199,8 @@
                 · <span class="${node.tier === 'synthesis' ? 'text-blue-700 font-semibold' : 'hidden sm:inline'}">${tierLabel}</span>
               </div>
               <div class="flex flex-wrap items-center justify-end gap-1.5">
-                <button type="button" id="btnBack" ${(appState.session.shown || []).length < 2 ? 'disabled' : ''} title="Back to the previous card" aria-label="Back to the previous card" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700 disabled:opacity-40">← Back</button>
+                <button type="button" data-open-sheet="plan" title="Choose what to study, tick the questions, then start" class="px-2.5 py-1.5 text-xs font-medium border border-slate-900 bg-slate-900 text-white rounded-lg" data-plan-btn>Plan session</button>
+                <button type="button" id="btnBack"${(appState.session.shown || []).length < 2 ? 'disabled' : ''} title="Back to the previous card" aria-label="Back to the previous card" class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white rounded-lg text-slate-700 disabled:opacity-40">← Back</button>
                 <button type="button" id="btnCram" aria-pressed="${Boolean(appState.cram?.on)}" title="Cram mode: unseen questions first, then fix what you missed" class="px-2 py-1.5 text-xs font-medium border rounded-lg ${appState.cram?.on ? 'bg-rose-600 border-rose-600 text-white' : 'bg-white border-slate-200 text-slate-700'}">Cram</button>
                 <button type="button" id="btnExamMode" aria-pressed="${Boolean(appState.examMode)}" title="Exam mode: no hints, no pick-one cards, pace shown after each card" class="px-2.5 py-1.5 text-xs font-medium border rounded-lg ${appState.examMode ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-200 text-slate-700'}">Exam mode</button>
                 <button type="button" data-open-sheet="queue" title="Up next, skipped, starred and done this session" class="px-2.5 py-1.5 text-xs font-medium border rounded-lg ${Object.values(appState.session.state || {}).includes('skipped') ? 'bg-amber-50 border-amber-400 text-amber-900' : 'bg-white border-slate-200 text-slate-700'}" data-lists-btn>Lists${(() => { const k = Object.values(appState.session.state || {}).filter((v) => v === 'skipped').length; return k ? ` · ${k} skipped` : ''; })()}</button>
@@ -10235,6 +10308,24 @@
         });
         $('#btnSkipNode', root)?.addEventListener('click', () => loadNextQuestion({ skipCurrent: true }));
         $('#btnBack', root)?.addEventListener('click', () => loadNextQuestion({ back: true }));
+        {
+          const pl = appState.ui.plan ||= { src: 'queue', n: 10, off: [] };
+          $('#planSrc', root)?.addEventListener('change', (e) => { pl.src = e.target.value; pl.off = []; renderStudyView(root); });
+          $$('[data-plan-n]', root).forEach((b) => b.addEventListener('click', () => { pl.n = Number(b.dataset.planN); renderStudyView(root); }));
+          $$('[data-plan-id]', root).forEach((c) => c.addEventListener('change', () => {
+            pl.off = c.checked ? pl.off.filter((x) => x !== c.dataset.planId) : [...pl.off, c.dataset.planId];
+            const on = $$('[data-plan-id]', root).filter((x) => x.checked).length;     // update in place so the list does not jump
+            const btn = $('#btnPlanStart', root), tot = $('[data-plan-total] b', root);
+            if (btn) { btn.disabled = !on; btn.textContent = `Start ${on} question${on === 1 ? '' : 's'}`; }
+            if (tot) tot.textContent = String(on);
+          }));
+          $('[data-plan-all]', root)?.addEventListener('click', () => { pl.off = []; renderStudyView(root); });
+          $('[data-plan-none]', root)?.addEventListener('click', () => { pl.off = $$('[data-plan-id]', root).map((x) => x.dataset.planId); renderStudyView(root); });
+          $('#btnPlanStart', root)?.addEventListener('click', () => {
+            const cand = planCandidates(pl), ids = cand.items.map((x) => x.id).filter((id) => !pl.off.includes(id));
+            if (ids.length) startPlaylist(ids, cand.label, { drawOnly: cand.drawOnly });
+          });
+        }
         $$('[data-list-tab]', root).forEach((b) => b.addEventListener('click', () => { appState.ui.listTab = b.dataset.listTab; renderStudyView(root); }));
         $$('[data-unstar]', root).forEach((b) => b.addEventListener('click', () => { setSaved([b.dataset.unstar], false); renderStudyView(root); }));
         $$('[data-play-list]', root).forEach((b) => b.addEventListener('click', () => {

@@ -9010,6 +9010,14 @@
         else { const drop = new Set(ids); appState.saved = appState.saved.filter((id) => !drop.has(id)); }
         saveSavedList();
       }
+      /* Skipped questions are kept across sessions (settings row skippedLater); answering one takes it off. */
+      async function saveSkippedList() {
+        try {
+          const db = await DB.init();
+          const st = appState.session.state || {};
+          await db.settings.put({ key: 'skippedLater', ids: Object.keys(st).filter((id) => st[id] === 'skipped') });
+        } catch (err) { console.warn('[Skipped] could not save:', err.message); }
+      }
       /* Play a list of questions in order (the Saved list, or the unseen ones in the Bank). Questions of the other module are left out. */
       function startPlaylist(ids, label, opts = {}) {
         const mine = ids.filter((id) => appState.nodes.some((n) => n.id === id));
@@ -9132,7 +9140,8 @@
         refreshRetired();
         // the student's own choices live in settings rows; reload them here so an import cannot leave a stale copy that the next save overwrites
         try {
-          const [hooksRow, prefsRow, planRow, savedRow] = await Promise.all([db.settings.get('myHooks'), db.settings.get('skillMastery'), db.settings.get('plan'), db.settings.get('savedLater')]);
+          const [hooksRow, prefsRow, planRow, savedRow, skipRow] = await Promise.all([db.settings.get('myHooks'), db.settings.get('skillMastery'), db.settings.get('plan'), db.settings.get('savedLater'), db.settings.get('skippedLater')]);
+          { const st = appState.session.state ||= {}; for (const id of (Array.isArray(skipRow?.ids) ? skipRow.ids : [])) if (typeof id === 'string' && !(id in st)) st[id] = 'skipped'; }
           appState.saved = Array.isArray(savedRow?.ids) ? savedRow.ids.filter((x) => typeof x === 'string') : [];
           appState.plan = { hoursPerDay: Number(planRow?.hoursPerDay) > 0 ? Number(planRow.hoursPerDay) : 6, split: Number.isFinite(Number(planRow?.split)) && planRow?.split != null ? Number(planRow.split) : 50, ratings: planRow?.ratings || {} };
           appState.myHooks = hooksRow?.hooks || {};
@@ -9403,6 +9412,7 @@
         } else if (prevNode && appState.current.phase !== 'graded') {
           // leaving a card without grading it = skipped; it stays on the Skipped list until you answer it
           delete sess.state[prevNode.id]; sess.state[prevNode.id] = 'skipped';
+          saveSkippedList();
         }
         const filters = {
           ...appState.filters,
@@ -9588,7 +9598,7 @@
           const titles = [...new Set(fresh)].map((id) => appState.allNodes.find((n) => n.id === id)?.metadata?.title).filter(Boolean);
           if (titles.length) showToast(`Covers easier questions too: ${titles.slice(0, 2).join('; ')}${titles.length > 2 ? ` and ${titles.length - 2} more` : ''}. They will not come up unless you miss this one again.`);
         }
-        { const st = appState.session.state ||= {}; delete st[cur.node.id]; st[cur.node.id] = evalResult.passed ? 'passed' : 'missed'; }   // a star stays: it is yours to remove
+        { const st = appState.session.state ||= {}, was = st[cur.node.id] === 'skipped'; delete st[cur.node.id]; st[cur.node.id] = evalResult.passed ? 'passed' : 'missed'; if (was) saveSkippedList(); }   // a star stays: it is yours to remove
         const masteryAfter = masteryNow();
         const lvAfter = topicScoreFor(cur.node.id);
         cur.levelMove = lvBefore && lvAfter ? { name: lvAfter.name, before: lvBefore.score, after: lvAfter.score } : null;
@@ -9740,7 +9750,7 @@
         const listEmpty = (t) => `<p class="text-sm text-slate-500 py-6 text-center">${t}</p>`;
         const playBtn = (ids, label) => ids.length ? `<button type="button" data-play-list="${esc(label)}" class="shrink-0 whitespace-nowrap px-3 py-1.5 text-xs font-medium bg-amber-500 text-white rounded-md">▶ Play ${ids.length}</button>` : '';
         let listBody = '';
-        if (listTab === 'skipped') listBody = `<div class="flex items-center justify-between gap-2 mb-2"><p class="text-xs text-slate-600">Cards you left without answering. They are not offered again by themselves.</p>${playBtn(skippedIds, 'Skipped')}</div>` + (listRows(skippedIds) || listEmpty('Nothing skipped yet this session.'));
+        if (listTab === 'skipped') listBody = `<div class="flex items-center justify-between gap-2 mb-2"><p class="text-xs text-slate-600">Cards you left without answering. Kept between sessions; answering one takes it off. The queue does not offer them by itself.</p><span class="shrink-0 flex gap-1.5">${skippedIds.length ? '<button type="button" data-clear-skipped class="px-2.5 py-1.5 text-xs font-medium border border-slate-200 bg-white text-slate-700 rounded-md">Clear</button>' : ''}${playBtn(skippedIds, 'Skipped')}</span></div>` + (listRows(skippedIds) || listEmpty('Nothing skipped yet this session.'));
         else if (listTab === 'starred') listBody = `<div class="flex items-center justify-between gap-2 mb-2"><p class="text-xs text-slate-600">Your stars stay until you remove them. Browse and reorder them in the Bank.</p>${playBtn(starredIds, 'Starred')}</div>` + (listRows(starredIds, { unstar: true }) || listEmpty('No stars yet. Tap ☆ Star on a card.'));
         else if (listTab === 'done') listBody = `<p class="text-xs text-slate-600 mb-2">Answered this session, newest first. Tap one to try it again.</p>` + (listRows(doneIds) || listEmpty('Nothing answered yet this session.'));
         const listTabBtn = (k, label, n) => `<button type="button" role="tab" data-list-tab="${k}" aria-selected="${listTab === k}">${label}${n === null ? '' : ` ${n}`}</button>`;
@@ -10331,6 +10341,7 @@
           });
         }
         $$('[data-list-tab]', root).forEach((b) => b.addEventListener('click', () => { appState.ui.listTab = b.dataset.listTab; renderStudyView(root); }));
+        $('[data-clear-skipped]', root)?.addEventListener('click', () => { const st = appState.session.state; for (const id of Object.keys(st)) if (st[id] === 'skipped') delete st[id]; saveSkippedList(); renderStudyView(root); });
         $$('[data-unstar]', root).forEach((b) => b.addEventListener('click', () => { setSaved([b.dataset.unstar], false); renderStudyView(root); }));
         $$('[data-play-list]', root).forEach((b) => b.addEventListener('click', () => {
           const label = b.dataset.playList;
@@ -12190,6 +12201,14 @@
         const f = appState.bankFilters;
         const q = f.q.trim().toLowerCase();
         const tried = new Set((appState.masteryLogs || []).map((l) => l.nodeId));
+        // last result for a tried question, newest attempt first in attemptLogs
+        const lastGradeB = new Map();
+        for (const l of appState.attemptLogs || []) if (!lastGradeB.has(l.nodeId)) lastGradeB.set(l.nodeId, l.normalizedGrade);
+        const bankLast = (id) => {
+          const g = lastGradeB.get(id);
+          if (g === undefined) return '';
+          return g >= Scheduler.PASS_GRADE ? ' · <span class="text-emerald-700 font-medium">last try passed</span>' : ' · <span class="text-rose-700 font-medium">last try missed</span>';
+        };
         const retiredB = retiredNow();
         const counted = appState.nodes.filter((n) => f.includeGolden || !n.metadata?.isGoldenBank);   // the tab counts follow the Golden box, like the list
         const unseenCount = counted.filter((n) => !tried.has(n.id)).length;
@@ -12258,7 +12277,7 @@
                   <div class="min-w-0">
                     <div class="text-sm font-medium text-slate-900 sm:truncate">${esc(n.metadata.title)}</div>
                     <div class="text-xs text-slate-500 mt-0.5">
-                      ${esc((appState.skillMap && appState.skillMap.chunks?.find((c) => c.id === Weakness.chunksOf(appState.skillMap, n.id)[0])?.name) || n.metadata.primaryTheme)} · ${n.tier === 'synthesis' ? 'Multi-step' : 'Quick drill'} · ${n.variants.length} version${n.variants.length === 1 ? '' : 's'}${tried.has(n.id) ? '' : ' · <span class="text-blue-700 font-medium">not tried yet</span>'}${retiredB.nodes.has(n.id) ? ' · <span class="text-slate-500" title="You passed a harder question that covers this one, so the queue skips it">skipped: covered by a harder one</span>' : ''}
+                      ${esc((appState.skillMap && appState.skillMap.chunks?.find((c) => c.id === Weakness.chunksOf(appState.skillMap, n.id)[0])?.name) || n.metadata.primaryTheme)} · ${n.tier === 'synthesis' ? 'Multi-step' : 'Quick drill'} · ${n.variants.length} version${n.variants.length === 1 ? '' : 's'}${tried.has(n.id) ? bankLast(n.id) : ' · <span class="text-blue-700 font-medium">not tried yet</span>'}${(appState.session.state || {})[n.id] === 'skipped' ? ' · <span class="text-amber-700 font-medium">skipped</span>' : ''}${retiredB.nodes.has(n.id) ? ' · <span class="text-slate-500" title="You passed a harder question that covers this one, so the queue skips it">skipped: covered by a harder one</span>' : ''}
                     </div>
                   </div>
                   <div class="flex items-center gap-2 shrink-0">

@@ -92,7 +92,25 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await A(() => !!document.querySelector('[data-jump-node="bk-c1-vsepr-ex1"]')), 'the Done tab shows it, ready to retry');
   await click('[data-close-sheet]');
 
+  // 6b. skipped cards survive a reload; answering one takes it off; Bank rows show the last result
+  const skippedNow = await A(() => Object.keys(window.__MASTERY_ENGINE__.UI.appState.session.state).filter((k) => window.__MASTERY_ENGINE__.UI.appState.session.state[k] === 'skipped').sort());
+  await p.waitForTimeout(300);
+  await p.goto(url);
+  await p.waitForFunction(() => window.__MASTERY_ENGINE__ && window.__MASTERY_ENGINE__.UI.appState.nodes.length > 0);
+  await p.waitForTimeout(600);
+  const skippedAfter = await A(() => Object.keys(window.__MASTERY_ENGINE__.UI.appState.session.state).filter((k) => window.__MASTERY_ENGINE__.UI.appState.session.state[k] === 'skipped').sort());
+  ok(skippedNow.length > 0 && JSON.stringify(skippedAfter) === JSON.stringify(skippedNow), `the ${skippedNow.length} skipped cards are still skipped after a reload`);
+  await click('[data-open-sheet="queue"]'); await click('[data-list-tab="skipped"]');
+  const nSk = await A(() => document.querySelectorAll('[data-jump-node]').length);
+  ok(nSk === skippedNow.length, 'and the Skipped tab lists them');
+  await click('[data-clear-skipped]');
+  ok(await A(() => Object.values(window.__MASTERY_ENGINE__.UI.appState.session.state).filter((v) => v === 'skipped').length) === 0, 'Clear empties the skipped list');
+  await click('[data-close-sheet]');
+  await click('.nav-link[data-nav="bank"]'); await p.waitForTimeout(300);
+  ok(await A(() => /last try (passed|missed)/.test(document.querySelector('#appRoot').textContent)), 'Bank rows of tried questions say how the last try went');
+
   // 7. laptop width: toolbar and sheet fit
+  await click('.nav-link[data-nav="study"]'); await p.waitForTimeout(300);
   await p.setViewportSize({ width: 1280, height: 800 }); await p.waitForTimeout(300);
   await toolbarFits('laptop toolbar');
   await click('[data-open-sheet="queue"]'); await noScroll('laptop lists sheet');

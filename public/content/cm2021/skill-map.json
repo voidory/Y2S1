@@ -1591,7 +1591,8 @@
     "bk-c6-ate-names",
     "bk-c6-formula-rules",
     "bk-c7-identify-p1",
-    "bk-c7-identify-p2"
+    "bk-c7-identify-p2",
+    "bk-c6-chain-gen"
    ],
    "chunk": "naming"
   },
@@ -1636,7 +1637,8 @@
     "bk-c6-p3q3-cfse",
     "bk-c6-ox-state-practice",
     "bk-c6-dn-count",
-    "bk-c6-cn-factors"
+    "bk-c6-cn-factors",
+    "bk-c6-chain-gen"
    ],
    "chunk": "naming"
   },
@@ -1896,7 +1898,8 @@
     "bk-c7-cft-principles",
     "bk-c7-lft-principles",
     "bk-c7-td-oh",
-    "bk-c7-sq-planar"
+    "bk-c7-sq-planar",
+    "bk-c6-chain-gen"
    ],
    "chunk": "field-energetics"
   },
@@ -1921,7 +1924,8 @@
     "bk-c7-identify-p1",
     "bk-c7-identify-p2",
     "bk-c9-cr-labile",
-    "bk-c7-cfse-d1-d2"
+    "bk-c7-cfse-d1-d2",
+    "bk-c6-chain-gen"
    ],
    "chunk": "field-energetics"
   },
@@ -2116,7 +2120,8 @@
    "weight": 0.00933,
    "nodes": [
     "bk-c8-microstates",
-    "bk-c8-terms-d8"
+    "bk-c8-terms-d8",
+    "bk-c8-terms-gen"
    ],
    "chunk": "terms-ts"
   },
@@ -2139,7 +2144,8 @@
     "bk-c8-terms-d8",
     "bk-c8-ground-terms",
     "bk-c8-term-numbers",
-    "bk-c8-hund"
+    "bk-c8-hund",
+    "bk-c8-terms-gen"
    ],
    "chunk": "terms-ts"
   },
@@ -3038,6 +3044,16 @@
   ],
   "bk-c8-tsg-explain": [
    "c8.tanabe-sugano"
+  ],
+  "bk-c6-chain-gen": [
+   "c6.name",
+   "c6.ox-dn-cn",
+   "c7.splitting",
+   "c7.cfse"
+  ],
+  "bk-c8-terms-gen": [
+   "c8.terms",
+   "c8.microstates"
   ]
  }
 }

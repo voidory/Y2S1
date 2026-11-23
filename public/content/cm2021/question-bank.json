@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-21T07:19:00.973Z",
+ "exportedAt": "2026-11-23T12:26:43.142Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -25913,6 +25913,4323 @@
         "isCritical": false
        }
       ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c8-terms-gen",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Terms and ground term of any dⁿ",
+    "source": "Template of the 2025-26 Q4(a)-(c) (d², d⁸ microstates; all terms of d⁸); answers from the exact microstate enumeration (tools/cm2021/terms.mjs)",
+    "week": 8,
+    "primaryTheme": "Term Symbols",
+    "conceptTags": [
+     "term-symbols",
+     "microstates",
+     "ground-term"
+    ],
+    "difficultyEstimate": 6.5,
+    "estimatedMinutes": 10,
+    "examStyle": "construct_4to6",
+    "family": "terms-gen"
+   },
+   "variants": [
+    {
+     "variantId": "c8-terms-gen-all-d2",
+     "perspectiveLabel": "all terms of d²",
+     "marks": 16,
+     "stem": "Determine all possible atomic term symbols arising from a d² configuration. (Enter each distinct term once, e.g. 3F; J is not required. A term that occurs more than once is entered once.)",
+     "hint": "Build the microstate table by M_L and M_S, take the largest S then the largest L, remove that block (2L+1)(2S+1) of microstates, and repeat until the table is empty. Check: the (2L+1)(2S+1) of all the terms (repeats counted) add up to 45.",
+     "explanation": "d² has 45 microstates and these terms: ³F, ³P, ¹G, ¹D, ¹S. Check: 21 + 9 + 9 + 5 + 1 = 45. Ground term ³F (largest S, then largest L).",
+     "inputSlot": {
+      "type": "unordered_set",
+      "placeholder": "Type one item, press Enter"
+     },
+     "evaluator": {
+      "type": "set_match",
+      "targetSet": [
+       "3F",
+       "3P",
+       "1G",
+       "1D",
+       "1S"
+      ],
+      "caseSensitive": false,
+      "penaltyRatio": 0.5,
+      "synonyms": {
+       "³f": "3f",
+       "^3f": "3f",
+       "3 f": "3f",
+       "³p": "3p",
+       "^3p": "3p",
+       "3 p": "3p",
+       "¹g": "1g",
+       "^1g": "1g",
+       "1 g": "1g",
+       "¹d": "1d",
+       "^1d": "1d",
+       "1 d": "1d",
+       "¹s": "1s",
+       "^1s": "1s",
+       "1 s": "1s"
+      }
+     }
+    },
+    {
+     "variantId": "c8-terms-gen-all-d3",
+     "perspectiveLabel": "all terms of d³",
+     "marks": 16,
+     "stem": "Determine all possible atomic term symbols arising from a d³ configuration. (Enter each distinct term once, e.g. 3F; J is not required. A term that occurs more than once is entered once.)",
+     "hint": "Build the microstate table by M_L and M_S, take the largest S then the largest L, remove that block (2L+1)(2S+1) of microstates, and repeat until the table is empty. Check: the (2L+1)(2S+1) of all the terms (repeats counted) add up to 120.",
+     "explanation": "d³ has 120 microstates and these terms: ⁴F, ⁴P, ²H, ²G, ²F, ²D, ²D, ²P (²D (×2) occur more than once; each is entered once). Check: 28 + 12 + 22 + 18 + 14 + 10 + 10 + 6 = 120. Ground term ⁴F (largest S, then largest L).",
+     "inputSlot": {
+      "type": "unordered_set",
+      "placeholder": "Type one item, press Enter"
+     },
+     "evaluator": {
+      "type": "set_match",
+      "targetSet": [
+       "4F",
+       "4P",
+       "2H",
+       "2G",
+       "2F",
+       "2D",
+       "2P"
+      ],
+      "caseSensitive": false,
+      "penaltyRatio": 0.5,
+      "synonyms": {
+       "⁴f": "4f",
+       "^4f": "4f",
+       "4 f": "4f",
+       "⁴p": "4p",
+       "^4p": "4p",
+       "4 p": "4p",
+       "²h": "2h",
+       "^2h": "2h",
+       "2 h": "2h",
+       "²g": "2g",
+       "^2g": "2g",
+       "2 g": "2g",
+       "²f": "2f",
+       "^2f": "2f",
+       "2 f": "2f",
+       "²d": "2d",
+       "^2d": "2d",
+       "2 d": "2d",
+       "²p": "2p",
+       "^2p": "2p",
+       "2 p": "2p"
+      }
+     }
+    },
+    {
+     "variantId": "c8-terms-gen-all-d4",
+     "perspectiveLabel": "all terms of d⁴",
+     "marks": 16,
+     "stem": "Determine all possible atomic term symbols arising from a d⁴ configuration. (Enter each distinct term once, e.g. 3F; J is not required. A term that occurs more than once is entered once.)",
+     "hint": "Build the microstate table by M_L and M_S, take the largest S then the largest L, remove that block (2L+1)(2S+1) of microstates, and repeat until the table is empty. Check: the (2L+1)(2S+1) of all the terms (repeats counted) add up to 210.",
+     "explanation": "d⁴ has 210 microstates and these terms: ⁵D, ³H, ³G, ³F, ³F, ³D, ³P, ³P, ¹I, ¹G, ¹G, ¹F, ¹D, ¹D, ¹S, ¹S (³F (×2), ³P (×2), ¹G (×2), ¹D (×2), ¹S (×2) occur more than once; each is entered once). Check: 25 + 33 + 27 + 21 + 21 + 15 + 9 + 9 + 13 + 9 + 9 + 7 + 5 + 5 + 1 + 1 = 210. Ground term ⁵D (largest S, then largest L).",
+     "inputSlot": {
+      "type": "unordered_set",
+      "placeholder": "Type one item, press Enter"
+     },
+     "evaluator": {
+      "type": "set_match",
+      "targetSet": [
+       "5D",
+       "3H",
+       "3G",
+       "3F",
+       "3D",
+       "3P",
+       "1I",
+       "1G",
+       "1F",
+       "1D",
+       "1S"
+      ],
+      "caseSensitive": false,
+      "penaltyRatio": 0.5,
+      "synonyms": {
+       "⁵d": "5d",
+       "^5d": "5d",
+       "5 d": "5d",
+       "³h": "3h",
+       "^3h": "3h",
+       "3 h": "3h",
+       "³g": "3g",
+       "^3g": "3g",
+       "3 g": "3g",
+       "³f": "3f",
+       "^3f": "3f",
+       "3 f": "3f",
+       "³d": "3d",
+       "^3d": "3d",
+       "3 d": "3d",
+       "³p": "3p",
+       "^3p": "3p",
+       "3 p": "3p",
+       "¹i": "1i",
+       "^1i": "1i",
+       "1 i": "1i",
+       "¹g": "1g",
+       "^1g": "1g",
+       "1 g": "1g",
+       "¹f": "1f",
+       "^1f": "1f",
+       "1 f": "1f",
+       "¹d": "1d",
+       "^1d": "1d",
+       "1 d": "1d",
+       "¹s": "1s",
+       "^1s": "1s",
+       "1 s": "1s"
+      }
+     }
+    },
+    {
+     "variantId": "c8-terms-gen-all-d7",
+     "perspectiveLabel": "all terms of d⁷",
+     "marks": 16,
+     "stem": "Determine all possible atomic term symbols arising from a d⁷ configuration. (Enter each distinct term once, e.g. 3F; J is not required. A term that occurs more than once is entered once.)",
+     "hint": "Build the microstate table by M_L and M_S, take the largest S then the largest L, remove that block (2L+1)(2S+1) of microstates, and repeat until the table is empty. Check: the (2L+1)(2S+1) of all the terms (repeats counted) add up to 120.",
+     "explanation": "d⁷ has 120 microstates and these terms: ⁴F, ⁴P, ²H, ²G, ²F, ²D, ²D, ²P (²D (×2) occur more than once; each is entered once). Check: 28 + 12 + 22 + 18 + 14 + 10 + 10 + 6 = 120. Ground term ⁴F (largest S, then largest L). d⁷ has the same set of terms as d³ (seven electrons are three holes in a full d shell); the repulsion energies differ but the symbols and the ground term (⁴F) are the same.",
+     "inputSlot": {
+      "type": "unordered_set",
+      "placeholder": "Type one item, press Enter"
+     },
+     "evaluator": {
+      "type": "set_match",
+      "targetSet": [
+       "4F",
+       "4P",
+       "2H",
+       "2G",
+       "2F",
+       "2D",
+       "2P"
+      ],
+      "caseSensitive": false,
+      "penaltyRatio": 0.5,
+      "synonyms": {
+       "⁴f": "4f",
+       "^4f": "4f",
+       "4 f": "4f",
+       "⁴p": "4p",
+       "^4p": "4p",
+       "4 p": "4p",
+       "²h": "2h",
+       "^2h": "2h",
+       "2 h": "2h",
+       "²g": "2g",
+       "^2g": "2g",
+       "2 g": "2g",
+       "²f": "2f",
+       "^2f": "2f",
+       "2 f": "2f",
+       "²d": "2d",
+       "^2d": "2d",
+       "2 d": "2d",
+       "²p": "2p",
+       "^2p": "2p",
+       "2 p": "2p"
+      }
+     }
+    },
+    {
+     "variantId": "c8-terms-gen-gs-d1",
+     "perspectiveLabel": "d¹ microstates and ground term",
+     "marks": 4,
+     "stem": "For a d¹ configuration, give the total number of microstates, the ground term (Hund's rules; J not required) and the number of unpaired electrons the ground term corresponds to.",
+     "hint": "Microstates = 10!/(n!(10−n)!). Hund: the largest total spin S first, then the largest L. Unpaired electrons = 2S.",
+     "explanation": "d¹: 10!/(1!·9!) = 10 microstates. Fill m_l = +2, +1, 0, −1, −2 with parallel spins as far as possible: S = 0.5, M_L = 2, so the ground term is ²D with 1 unpaired electron.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "m",
+        "label": "Number of microstates"
+       },
+       {
+        "key": "g",
+        "label": "Ground term"
+       },
+       {
+        "key": "u",
+        "label": "Unpaired electrons in the ground term"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "m": {
+        "type": "numeric",
+        "targetExpr": "10",
+        "tolerance": 0
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[2²])\\s*D\\s*(?:_?\\s*\\d(?:\\/\\d)?)?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "²D"
+       },
+       "u": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-terms-gen-gs-d2",
+     "perspectiveLabel": "d² microstates and ground term",
+     "marks": 4,
+     "stem": "For a d² configuration, give the total number of microstates, the ground term (Hund's rules; J not required) and the number of unpaired electrons the ground term corresponds to.",
+     "hint": "Microstates = 10!/(n!(10−n)!). Hund: the largest total spin S first, then the largest L. Unpaired electrons = 2S.",
+     "explanation": "d²: 10!/(2!·8!) = 45 microstates. Fill m_l = +2, +1, 0, −1, −2 with parallel spins as far as possible: S = 1, M_L = 3, so the ground term is ³F with 2 unpaired electrons.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "m",
+        "label": "Number of microstates"
+       },
+       {
+        "key": "g",
+        "label": "Ground term"
+       },
+       {
+        "key": "u",
+        "label": "Unpaired electrons in the ground term"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "m": {
+        "type": "numeric",
+        "targetExpr": "45",
+        "tolerance": 0
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*F\\s*(?:_?\\s*\\d(?:\\/\\d)?)?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³F"
+       },
+       "u": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-terms-gen-gs-d3",
+     "perspectiveLabel": "d³ microstates and ground term",
+     "marks": 4,
+     "stem": "For a d³ configuration, give the total number of microstates, the ground term (Hund's rules; J not required) and the number of unpaired electrons the ground term corresponds to.",
+     "hint": "Microstates = 10!/(n!(10−n)!). Hund: the largest total spin S first, then the largest L. Unpaired electrons = 2S.",
+     "explanation": "d³: 10!/(3!·7!) = 120 microstates. Fill m_l = +2, +1, 0, −1, −2 with parallel spins as far as possible: S = 1.5, M_L = 3, so the ground term is ⁴F with 3 unpaired electrons.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "m",
+        "label": "Number of microstates"
+       },
+       {
+        "key": "g",
+        "label": "Ground term"
+       },
+       {
+        "key": "u",
+        "label": "Unpaired electrons in the ground term"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "m": {
+        "type": "numeric",
+        "targetExpr": "120",
+        "tolerance": 0
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*F\\s*(?:_?\\s*\\d(?:\\/\\d)?)?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴F"
+       },
+       "u": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-terms-gen-gs-d4",
+     "perspectiveLabel": "d⁴ microstates and ground term",
+     "marks": 4,
+     "stem": "For a d⁴ configuration, give the total number of microstates, the ground term (Hund's rules; J not required) and the number of unpaired electrons the ground term corresponds to.",
+     "hint": "Microstates = 10!/(n!(10−n)!). Hund: the largest total spin S first, then the largest L. Unpaired electrons = 2S.",
+     "explanation": "d⁴: 10!/(4!·6!) = 210 microstates. Fill m_l = +2, +1, 0, −1, −2 with parallel spins as far as possible: S = 2, M_L = 2, so the ground term is ⁵D with 4 unpaired electrons.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "m",
+        "label": "Number of microstates"
+       },
+       {
+        "key": "g",
+        "label": "Ground term"
+       },
+       {
+        "key": "u",
+        "label": "Unpaired electrons in the ground term"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "m": {
+        "type": "numeric",
+        "targetExpr": "210",
+        "tolerance": 0
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[5⁵])\\s*D\\s*(?:_?\\s*\\d(?:\\/\\d)?)?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁵D"
+       },
+       "u": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-terms-gen-gs-d5",
+     "perspectiveLabel": "d⁵ microstates and ground term",
+     "marks": 4,
+     "stem": "For a d⁵ configuration, give the total number of microstates, the ground term (Hund's rules; J not required) and the number of unpaired electrons the ground term corresponds to.",
+     "hint": "Microstates = 10!/(n!(10−n)!). Hund: the largest total spin S first, then the largest L. Unpaired electrons = 2S.",
+     "explanation": "d⁵: 10!/(5!·5!) = 252 microstates. Fill m_l = +2, +1, 0, −1, −2 with parallel spins as far as possible: S = 2.5, M_L = 0, so the ground term is ⁶S with 5 unpaired electrons.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "m",
+        "label": "Number of microstates"
+       },
+       {
+        "key": "g",
+        "label": "Ground term"
+       },
+       {
+        "key": "u",
+        "label": "Unpaired electrons in the ground term"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "m": {
+        "type": "numeric",
+        "targetExpr": "252",
+        "tolerance": 0
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[6⁶])\\s*S\\s*(?:_?\\s*\\d(?:\\/\\d)?)?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁶S"
+       },
+       "u": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-terms-gen-gs-d6",
+     "perspectiveLabel": "d⁶ microstates and ground term",
+     "marks": 4,
+     "stem": "For a d⁶ configuration, give the total number of microstates, the ground term (Hund's rules; J not required) and the number of unpaired electrons the ground term corresponds to.",
+     "hint": "Microstates = 10!/(n!(10−n)!). Hund: the largest total spin S first, then the largest L. Unpaired electrons = 2S.",
+     "explanation": "d⁶: 10!/(6!·4!) = 210 microstates. Fill m_l = +2, +1, 0, −1, −2 with parallel spins as far as possible: S = 2, M_L = 2, so the ground term is ⁵D with 4 unpaired electrons.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "m",
+        "label": "Number of microstates"
+       },
+       {
+        "key": "g",
+        "label": "Ground term"
+       },
+       {
+        "key": "u",
+        "label": "Unpaired electrons in the ground term"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "m": {
+        "type": "numeric",
+        "targetExpr": "210",
+        "tolerance": 0
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[5⁵])\\s*D\\s*(?:_?\\s*\\d(?:\\/\\d)?)?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁵D"
+       },
+       "u": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-terms-gen-gs-d7",
+     "perspectiveLabel": "d⁷ microstates and ground term",
+     "marks": 4,
+     "stem": "For a d⁷ configuration, give the total number of microstates, the ground term (Hund's rules; J not required) and the number of unpaired electrons the ground term corresponds to.",
+     "hint": "Microstates = 10!/(n!(10−n)!). Hund: the largest total spin S first, then the largest L. Unpaired electrons = 2S.",
+     "explanation": "d⁷: 10!/(7!·3!) = 120 microstates. Fill m_l = +2, +1, 0, −1, −2 with parallel spins as far as possible: S = 1.5, M_L = 3, so the ground term is ⁴F with 3 unpaired electrons.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "m",
+        "label": "Number of microstates"
+       },
+       {
+        "key": "g",
+        "label": "Ground term"
+       },
+       {
+        "key": "u",
+        "label": "Unpaired electrons in the ground term"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "m": {
+        "type": "numeric",
+        "targetExpr": "120",
+        "tolerance": 0
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[4⁴])\\s*F\\s*(?:_?\\s*\\d(?:\\/\\d)?)?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "⁴F"
+       },
+       "u": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-terms-gen-gs-d8",
+     "perspectiveLabel": "d⁸ microstates and ground term",
+     "marks": 4,
+     "stem": "For a d⁸ configuration, give the total number of microstates, the ground term (Hund's rules; J not required) and the number of unpaired electrons the ground term corresponds to.",
+     "hint": "Microstates = 10!/(n!(10−n)!). Hund: the largest total spin S first, then the largest L. Unpaired electrons = 2S.",
+     "explanation": "d⁸: 10!/(8!·2!) = 45 microstates. Fill m_l = +2, +1, 0, −1, −2 with parallel spins as far as possible: S = 1, M_L = 3, so the ground term is ³F with 2 unpaired electrons.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "m",
+        "label": "Number of microstates"
+       },
+       {
+        "key": "g",
+        "label": "Ground term"
+       },
+       {
+        "key": "u",
+        "label": "Unpaired electrons in the ground term"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "m": {
+        "type": "numeric",
+        "targetExpr": "45",
+        "tolerance": 0
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[3³])\\s*F\\s*(?:_?\\s*\\d(?:\\/\\d)?)?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "³F"
+       },
+       "u": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-terms-gen-gs-d9",
+     "perspectiveLabel": "d⁹ microstates and ground term",
+     "marks": 4,
+     "stem": "For a d⁹ configuration, give the total number of microstates, the ground term (Hund's rules; J not required) and the number of unpaired electrons the ground term corresponds to.",
+     "hint": "Microstates = 10!/(n!(10−n)!). Hund: the largest total spin S first, then the largest L. Unpaired electrons = 2S.",
+     "explanation": "d⁹: 10!/(9!·1!) = 10 microstates. Fill m_l = +2, +1, 0, −1, −2 with parallel spins as far as possible: S = 0.5, M_L = 2, so the ground term is ²D with 1 unpaired electron.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "m",
+        "label": "Number of microstates"
+       },
+       {
+        "key": "g",
+        "label": "Ground term"
+       },
+       {
+        "key": "u",
+        "label": "Unpaired electrons in the ground term"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "m": {
+        "type": "numeric",
+        "targetExpr": "10",
+        "tolerance": 0
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:\\^?\\s*[2²])\\s*D\\s*(?:_?\\s*\\d(?:\\/\\d)?)?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "²D"
+       },
+       "u": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-terms-gen-check-d3",
+     "perspectiveLabel": "d³ degeneracies and the repeated ²D",
+     "marks": 5,
+     "stem": "The d³ configuration (120 microstates) gives the terms 4F, 4P, 2H, 2G, 2F, 2D and 2P, with one of them occurring more than once. Give the number of microstates (2L+1)(2S+1) in each of ⁴F, ⁴P, ²H and ²G, and say how many times ²D occurs so that the microstates add up to 120.",
+     "hint": "(2L+1)(2S+1) for each term; the terms must add to 120. Whatever is missing after the other six terms is made up by the repeated term.",
+     "explanation": "⁴F = 7×4 = 28, ⁴P = 3×4 = 12, ²H = 11×2 = 22, ²G = 9×2 = 18, ²F = 7×2 = 14, ²P = 3×2 = 6, and each ²D = 5×2 = 10. 100 microstates are in the six non-²D terms, so 120 − 100 = 20 = 2 × 10: ²D occurs 2 times.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "f",
+        "label": "⁴F"
+       },
+       {
+        "key": "p",
+        "label": "⁴P"
+       },
+       {
+        "key": "h",
+        "label": "²H"
+       },
+       {
+        "key": "g",
+        "label": "²G"
+       },
+       {
+        "key": "d",
+        "label": "Times ²D occurs"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "f": {
+        "type": "numeric",
+        "targetExpr": "28",
+        "tolerance": 0
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "12",
+        "tolerance": 0
+       },
+       "h": {
+        "type": "numeric",
+        "targetExpr": "22",
+        "tolerance": 0
+       },
+       "g": {
+        "type": "numeric",
+        "targetExpr": "18",
+        "tolerance": 0
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c6-chain-gen",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Name → oxidation state → dⁿ → geometry → configuration → CFSE (fresh formulas)",
+    "source": "Template of the 2025-26 Q3(a); formulas generated by the in-app ligand-field engine (tools/cm2021/chain.mjs)",
+    "week": 7,
+    "primaryTheme": "Crystal Field Theory",
+    "conceptTags": [
+     "cfse-calculation",
+     "oxidation-state-complex",
+     "d-electron-count",
+     "iupac-nomenclature"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 5,
+    "examStyle": "construct_4to6",
+    "family": "chain-gen"
+   },
+   "variants": [
+    {
+     "variantId": "c6-chain-gen-v01",
+     "perspectiveLabel": "[ScCl2(NH3)2]Cl (d⁰, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`[ScCl2(NH3)2]Cl`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Sc, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[ScCl2(NH3)2]Cl** is **diamminedichloroscandium(III) chloride**. Charge balance gives Sc(III), so the metal is d⁰. 4 donors: tetrahedral. The d⁰ count fills the same way in either field, so the spin state does not change the answer. Configuration none (d⁰) (high-spin), CFSE = 0Δt: coefficient 0 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Sc"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*di[-\\s]*ammine[-\\s]*di[-\\s]*chloro[-\\s]*scandium\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$",
+         "^\\s*di[-\\s]*ammine[-\\s]*di[-\\s]*chlorido[-\\s]*scandium\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$"
+        ],
+        "expectedDisplay": "diamminedichloroscandium(III) chloride"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*(?:none|empty|no\\s+d[\\s-]*electrons?|d\\s*\\^?\\s*[0⁰]|0)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "none (d⁰)"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v02",
+     "perspectiveLabel": "[TiBr2(NH3)2]Cl (d¹, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`[TiBr2(NH3)2]Cl`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Ti, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[TiBr2(NH3)2]Cl** is **diamminedibromotitanium(III) chloride**. Charge balance gives Ti(III), so the metal is d¹. 4 donors: tetrahedral. The d¹ count fills the same way in either field, so the spin state does not change the answer. Configuration e¹ t₂⁰ (high-spin), CFSE = 0.6Δt: coefficient 0.6 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Ti"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*di[-\\s]*ammine[-\\s]*di[-\\s]*bromo[-\\s]*titanium\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$",
+         "^\\s*di[-\\s]*ammine[-\\s]*di[-\\s]*bromido[-\\s]*titanium\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$"
+        ],
+        "expectedDisplay": "diamminedibromotitanium(III) chloride"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[1¹](?:[\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e¹ t₂⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.6",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v03",
+     "perspectiveLabel": "K[TiCl2Br2] (d¹, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`K[TiCl2Br2]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Ti, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**K[TiCl2Br2]** is **potassium dibromodichlorotitanate(III)**. Charge balance gives Ti(III), so the metal is d¹. 4 donors: tetrahedral. The d¹ count fills the same way in either field, so the spin state does not change the answer. Configuration e¹ t₂⁰ (high-spin), CFSE = 0.6Δt: coefficient 0.6 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Ti"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*potassium\\s+di[-\\s]*bromo[-\\s]*di[-\\s]*chloro[-\\s]*titanate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*potassium\\s+di[-\\s]*bromo[-\\s]*di[-\\s]*chlorido[-\\s]*titanate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*potassium\\s+di[-\\s]*bromido[-\\s]*di[-\\s]*chloro[-\\s]*titanate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*potassium\\s+di[-\\s]*bromido[-\\s]*di[-\\s]*chlorido[-\\s]*titanate\\s*\\(\\s*III\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "potassium dibromodichlorotitanate(III)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[1¹](?:[\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e¹ t₂⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.6",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v04",
+     "perspectiveLabel": "[V(en)2(CN)2]NO3 (d², octahedral)",
+     "marks": 5,
+     "stem": "For **`[V(en)2(CN)2]NO3`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of V, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[V(en)2(CN)2]NO3** is **dicyanobis(ethylenediamine)vanadium(III) nitrate**. Charge balance gives V(III), so the metal is d². 6 donors: octahedral. The d² count fills the same way in either field, so the spin state does not change the answer. Configuration t₂g² e_g⁰ (low-spin), CFSE = 0.8Δo: coefficient 0.8 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of V"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*vanadium\\s*\\(\\s*III\\s*\\)\\s+nitrate\\s*$",
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*vanadium\\s*\\(\\s*III\\s*\\)\\s+nitrate\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*vanadium\\s*\\(\\s*III\\s*\\)\\s+nitrate\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*vanadium\\s*\\(\\s*III\\s*\\)\\s+nitrate\\s*$"
+        ],
+        "expectedDisplay": "dicyanobis(ethylenediamine)vanadium(III) nitrate"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g² e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.8",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v05",
+     "perspectiveLabel": "[VCl(NH3)3]SO4 (d², tetrahedral)",
+     "marks": 5,
+     "stem": "For **`[VCl(NH3)3]SO4`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of V, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[VCl(NH3)3]SO4** is **triamminechlorovanadium(III) sulfate**. Charge balance gives V(III), so the metal is d². 4 donors: tetrahedral. The d² count fills the same way in either field, so the spin state does not change the answer. Configuration e² t₂⁰ (high-spin), CFSE = 1.2Δt: coefficient 1.2 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of V"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*tri[-\\s]*ammine[-\\s]*chloro[-\\s]*vanadium\\s*\\(\\s*III\\s*\\)\\s+sulfate\\s*$",
+         "^\\s*tri[-\\s]*ammine[-\\s]*chloro[-\\s]*vanadium\\s*\\(\\s*III\\s*\\)\\s+sulphate\\s*$",
+         "^\\s*tri[-\\s]*ammine[-\\s]*chlorido[-\\s]*vanadium\\s*\\(\\s*III\\s*\\)\\s+sulfate\\s*$",
+         "^\\s*tri[-\\s]*ammine[-\\s]*chlorido[-\\s]*vanadium\\s*\\(\\s*III\\s*\\)\\s+sulphate\\s*$"
+        ],
+        "expectedDisplay": "triamminechlorovanadium(III) sulfate"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e² t₂⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v06",
+     "perspectiveLabel": "K[VCl3Br] (d², tetrahedral)",
+     "marks": 5,
+     "stem": "For **`K[VCl3Br]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of V, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**K[VCl3Br]** is **potassium bromotrichlorovanadate(III)**. Charge balance gives V(III), so the metal is d². 4 donors: tetrahedral. The d² count fills the same way in either field, so the spin state does not change the answer. Configuration e² t₂⁰ (high-spin), CFSE = 1.2Δt: coefficient 1.2 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of V"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*potassium\\s+bromo[-\\s]*tri[-\\s]*chloro[-\\s]*vanadate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*potassium\\s+bromo[-\\s]*tri[-\\s]*chlorido[-\\s]*vanadate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*potassium\\s+bromido[-\\s]*tri[-\\s]*chloro[-\\s]*vanadate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*potassium\\s+bromido[-\\s]*tri[-\\s]*chlorido[-\\s]*vanadate\\s*\\(\\s*III\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "potassium bromotrichlorovanadate(III)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e² t₂⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v07",
+     "perspectiveLabel": "[Cr(en)2(CN)2]Br (d³, octahedral)",
+     "marks": 5,
+     "stem": "For **`[Cr(en)2(CN)2]Br`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Cr, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[Cr(en)2(CN)2]Br** is **dicyanobis(ethylenediamine)chromium(III) bromide**. Charge balance gives Cr(III), so the metal is d³. 6 donors: octahedral. The d³ count fills the same way in either field, so the spin state does not change the answer. Configuration t₂g³ e_g⁰ (low-spin), CFSE = 1.2Δo: coefficient 1.2 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Cr"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*chromium\\s*\\(\\s*III\\s*\\)\\s+bromide\\s*$",
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*chromium\\s*\\(\\s*III\\s*\\)\\s+bromide\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*chromium\\s*\\(\\s*III\\s*\\)\\s+bromide\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*chromium\\s*\\(\\s*III\\s*\\)\\s+bromide\\s*$"
+        ],
+        "expectedDisplay": "dicyanobis(ethylenediamine)chromium(III) bromide"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[3³](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g³ e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v08",
+     "perspectiveLabel": "[Cr(en)2(NH3)2]Cl3 (d³, octahedral)",
+     "marks": 5,
+     "stem": "For **`[Cr(en)2(NH3)2]Cl3`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Cr, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[Cr(en)2(NH3)2]Cl3** is **diamminebis(ethylenediamine)chromium(III) chloride**. Charge balance gives Cr(III), so the metal is d³. 6 donors: octahedral. The d³ count fills the same way in either field, so the spin state does not change the answer. Configuration t₂g³ e_g⁰ (low-spin), CFSE = 1.2Δo: coefficient 1.2 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Cr"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*di[-\\s]*ammine[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*chromium\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$",
+         "^\\s*di[-\\s]*ammine[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*chromium\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$"
+        ],
+        "expectedDisplay": "diamminebis(ethylenediamine)chromium(III) chloride"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[3³](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g³ e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v09",
+     "perspectiveLabel": "[CrCl2(NH3)2]Br (d³, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`[CrCl2(NH3)2]Br`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Cr, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[CrCl2(NH3)2]Br** is **diamminedichlorochromium(III) bromide**. Charge balance gives Cr(III), so the metal is d³. 4 donors: tetrahedral. The d³ count fills the same way in either field, so the spin state does not change the answer. Configuration e² t₂¹ (high-spin), CFSE = 0.8Δt: coefficient 0.8 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Cr"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*di[-\\s]*ammine[-\\s]*di[-\\s]*chloro[-\\s]*chromium\\s*\\(\\s*III\\s*\\)\\s+bromide\\s*$",
+         "^\\s*di[-\\s]*ammine[-\\s]*di[-\\s]*chlorido[-\\s]*chromium\\s*\\(\\s*III\\s*\\)\\s+bromide\\s*$"
+        ],
+        "expectedDisplay": "diamminedichlorochromium(III) bromide"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[2²][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[1¹](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[1¹][\\s,·.]*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e² t₂¹"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.8",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v10",
+     "perspectiveLabel": "Na[CrClBr3] (d³, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`Na[CrClBr3]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Cr, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**Na[CrClBr3]** is **sodium tribromochlorochromate(III)**. Charge balance gives Cr(III), so the metal is d³. 4 donors: tetrahedral. The d³ count fills the same way in either field, so the spin state does not change the answer. Configuration e² t₂¹ (high-spin), CFSE = 0.8Δt: coefficient 0.8 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Cr"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*sodium\\s+tri[-\\s]*bromo[-\\s]*chloro[-\\s]*chromate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*sodium\\s+tri[-\\s]*bromo[-\\s]*chlorido[-\\s]*chromate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*sodium\\s+tri[-\\s]*bromido[-\\s]*chloro[-\\s]*chromate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*sodium\\s+tri[-\\s]*bromido[-\\s]*chlorido[-\\s]*chromate\\s*\\(\\s*III\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "sodium tribromochlorochromate(III)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[2²][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[1¹](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[1¹][\\s,·.]*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e² t₂¹"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.8",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v11",
+     "perspectiveLabel": "[Cr(en)2(CN)2] (d⁴, octahedral)",
+     "marks": 5,
+     "stem": "For **`[Cr(en)2(CN)2]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Cr, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[Cr(en)2(CN)2]** is **dicyanobis(ethylenediamine)chromium(II)**. Charge balance gives Cr(II), so the metal is d⁴. 6 donors: octahedral. en, CN- are all strong-field, so electrons pair up before filling e_g. Configuration t₂g⁴ e_g⁰ (low-spin), CFSE = 1.6Δo − 1P, with 1 extra pairing energy compared with high spin: coefficient 1.6 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Cr"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*chromium\\s*\\(\\s*II\\s*\\)(?:\\s+ion)?\\s*$",
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*chromium\\s*\\(\\s*II\\s*\\)(?:\\s+ion)?\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*chromium\\s*\\(\\s*II\\s*\\)(?:\\s+ion)?\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*chromium\\s*\\(\\s*II\\s*\\)(?:\\s+ion)?\\s*$"
+        ],
+        "expectedDisplay": "dicyanobis(ethylenediamine)chromium(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[4⁴](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁴ e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.6",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v12",
+     "perspectiveLabel": "[Mn(en)2(CN)2]Cl (d⁴, octahedral)",
+     "marks": 5,
+     "stem": "For **`[Mn(en)2(CN)2]Cl`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Mn, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[Mn(en)2(CN)2]Cl** is **dicyanobis(ethylenediamine)manganese(III) chloride**. Charge balance gives Mn(III), so the metal is d⁴. 6 donors: octahedral. en, CN- are all strong-field, so electrons pair up before filling e_g. Configuration t₂g⁴ e_g⁰ (low-spin), CFSE = 1.6Δo − 1P, with 1 extra pairing energy compared with high spin: coefficient 1.6 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Mn"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*manganese\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$",
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*manganese\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*manganese\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*manganese\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$"
+        ],
+        "expectedDisplay": "dicyanobis(ethylenediamine)manganese(III) chloride"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[4⁴](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁴ e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.6",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v13",
+     "perspectiveLabel": "[MnBr(NH3)3](NO3)2 (d⁴, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`[MnBr(NH3)3](NO3)2`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Mn, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[MnBr(NH3)3](NO3)2** is **triamminebromomanganese(III) nitrate**. Charge balance gives Mn(III), so the metal is d⁴. 4 donors: tetrahedral. The d⁴ count fills the same way in either field, so the spin state does not change the answer. Configuration e² t₂² (high-spin), CFSE = 0.4Δt: coefficient 0.4 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Mn"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*tri[-\\s]*ammine[-\\s]*bromo[-\\s]*manganese\\s*\\(\\s*III\\s*\\)\\s+nitrate\\s*$",
+         "^\\s*tri[-\\s]*ammine[-\\s]*bromido[-\\s]*manganese\\s*\\(\\s*III\\s*\\)\\s+nitrate\\s*$"
+        ],
+        "expectedDisplay": "triamminebromomanganese(III) nitrate"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[2²][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[2²][\\s,·.]*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e² t₂²"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.4",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v14",
+     "perspectiveLabel": "K3[Mn(CN)6] (d⁴, octahedral)",
+     "marks": 5,
+     "stem": "For **`K3[Mn(CN)6]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Mn, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**K3[Mn(CN)6]** is **potassium hexacyanomanganate(III)**. Charge balance gives Mn(III), so the metal is d⁴. 6 donors: octahedral. CN- are all strong-field, so electrons pair up before filling e_g. Configuration t₂g⁴ e_g⁰ (low-spin), CFSE = 1.6Δo − 1P, with 1 extra pairing energy compared with high spin: coefficient 1.6 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Mn"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*potassium\\s+hexa[-\\s]*cyano[-\\s]*manganate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*potassium\\s+hexa[-\\s]*cyanido[-\\s]*manganate\\s*\\(\\s*III\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "potassium hexacyanomanganate(III)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[4⁴](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁴ e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.6",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v15",
+     "perspectiveLabel": "Na[MnCl3Br] (d⁴, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`Na[MnCl3Br]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Mn, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**Na[MnCl3Br]** is **sodium bromotrichloromanganate(III)**. Charge balance gives Mn(III), so the metal is d⁴. 4 donors: tetrahedral. The d⁴ count fills the same way in either field, so the spin state does not change the answer. Configuration e² t₂² (high-spin), CFSE = 0.4Δt: coefficient 0.4 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Mn"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*sodium\\s+bromo[-\\s]*tri[-\\s]*chloro[-\\s]*manganate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*sodium\\s+bromo[-\\s]*tri[-\\s]*chlorido[-\\s]*manganate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*sodium\\s+bromido[-\\s]*tri[-\\s]*chloro[-\\s]*manganate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*sodium\\s+bromido[-\\s]*tri[-\\s]*chlorido[-\\s]*manganate\\s*\\(\\s*III\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "sodium bromotrichloromanganate(III)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[2²][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[2²][\\s,·.]*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e² t₂²"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.4",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v16",
+     "perspectiveLabel": "[Fe(en)2(CN)2]Br (d⁵, octahedral)",
+     "marks": 5,
+     "stem": "For **`[Fe(en)2(CN)2]Br`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Fe, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[Fe(en)2(CN)2]Br** is **dicyanobis(ethylenediamine)iron(III) bromide**. Charge balance gives Fe(III), so the metal is d⁵. 6 donors: octahedral. en, CN- are all strong-field, so electrons pair up before filling e_g. Configuration t₂g⁵ e_g⁰ (low-spin), CFSE = 2Δo − 2P, with 2 extra pairing energies compared with high spin: coefficient 2 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Fe"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*iron\\s*\\(\\s*III\\s*\\)\\s+bromide\\s*$",
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*iron\\s*\\(\\s*III\\s*\\)\\s+bromide\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*iron\\s*\\(\\s*III\\s*\\)\\s+bromide\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*iron\\s*\\(\\s*III\\s*\\)\\s+bromide\\s*$"
+        ],
+        "expectedDisplay": "dicyanobis(ethylenediamine)iron(III) bromide"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[5⁵](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁵ e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v17",
+     "perspectiveLabel": "[Fe(en)3]Cl3 (d⁵, octahedral)",
+     "marks": 5,
+     "stem": "For **`[Fe(en)3]Cl3`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Fe, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[Fe(en)3]Cl3** is **tris(ethylenediamine)iron(III) chloride**. Charge balance gives Fe(III), so the metal is d⁵. 6 donors: octahedral. en are all strong-field, so electrons pair up before filling e_g. Configuration t₂g⁵ e_g⁰ (low-spin), CFSE = 2Δo − 2P, with 2 extra pairing energies compared with high spin: coefficient 2 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Fe"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*tris\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*iron\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$",
+         "^\\s*tris\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*iron\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$"
+        ],
+        "expectedDisplay": "tris(ethylenediamine)iron(III) chloride"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[5⁵](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁵ e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v18",
+     "perspectiveLabel": "[Mn(en)2(CN)2] (d⁵, octahedral)",
+     "marks": 5,
+     "stem": "For **`[Mn(en)2(CN)2]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Mn, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[Mn(en)2(CN)2]** is **dicyanobis(ethylenediamine)manganese(II)**. Charge balance gives Mn(II), so the metal is d⁵. 6 donors: octahedral. en, CN- are all strong-field, so electrons pair up before filling e_g. Configuration t₂g⁵ e_g⁰ (low-spin), CFSE = 2Δo − 2P, with 2 extra pairing energies compared with high spin: coefficient 2 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Mn"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*manganese\\s*\\(\\s*II\\s*\\)(?:\\s+ion)?\\s*$",
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*manganese\\s*\\(\\s*II\\s*\\)(?:\\s+ion)?\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*manganese\\s*\\(\\s*II\\s*\\)(?:\\s+ion)?\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*manganese\\s*\\(\\s*II\\s*\\)(?:\\s+ion)?\\s*$"
+        ],
+        "expectedDisplay": "dicyanobis(ethylenediamine)manganese(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[5⁵](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁵ e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v19",
+     "perspectiveLabel": "K3[Fe(CN)6] (d⁵, octahedral)",
+     "marks": 5,
+     "stem": "For **`K3[Fe(CN)6]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Fe, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**K3[Fe(CN)6]** is **potassium hexacyanoferrate(III)**. Charge balance gives Fe(III), so the metal is d⁵. 6 donors: octahedral. CN- are all strong-field, so electrons pair up before filling e_g. Configuration t₂g⁵ e_g⁰ (low-spin), CFSE = 2Δo − 2P, with 2 extra pairing energies compared with high spin: coefficient 2 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Fe"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*potassium\\s+hexa[-\\s]*cyano[-\\s]*ferrate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*potassium\\s+hexa[-\\s]*cyanido[-\\s]*ferrate\\s*\\(\\s*III\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "potassium hexacyanoferrate(III)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[5⁵](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁵ e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v20",
+     "perspectiveLabel": "Na3[FeCl5F] (d⁵, octahedral)",
+     "marks": 5,
+     "stem": "For **`Na3[FeCl5F]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Fe, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**Na3[FeCl5F]** is **sodium pentachlorofluoroferrate(III)**. Charge balance gives Fe(III), so the metal is d⁵. 6 donors: octahedral. Cl-, F- are all weak-field, so electrons spread out (high spin). Configuration t₂g³ e_g² (high-spin), CFSE = 0Δo: coefficient 0 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Fe"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*sodium\\s+penta[-\\s]*chloro[-\\s]*fluoro[-\\s]*ferrate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*sodium\\s+penta[-\\s]*chloro[-\\s]*fluorido[-\\s]*ferrate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*sodium\\s+penta[-\\s]*chlorido[-\\s]*fluoro[-\\s]*ferrate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*sodium\\s+penta[-\\s]*chlorido[-\\s]*fluorido[-\\s]*ferrate\\s*\\(\\s*III\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "sodium pentachlorofluoroferrate(III)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[3³][\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[3³](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g³ e_g²"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v21",
+     "perspectiveLabel": "[Co(en)2(CN)2]Cl (d⁶, octahedral)",
+     "marks": 5,
+     "stem": "For **`[Co(en)2(CN)2]Cl`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Co, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[Co(en)2(CN)2]Cl** is **dicyanobis(ethylenediamine)cobalt(III) chloride**. Charge balance gives Co(III), so the metal is d⁶. 6 donors: octahedral. en, CN- are all strong-field, so electrons pair up before filling e_g. Configuration t₂g⁶ e_g⁰ (low-spin), CFSE = 2.4Δo − 2P, with 2 extra pairing energies compared with high spin: coefficient 2.4 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Co"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*cobalt\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$",
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*cobalt\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*cobalt\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*cobalt\\s*\\(\\s*III\\s*\\)\\s+chloride\\s*$"
+        ],
+        "expectedDisplay": "dicyanobis(ethylenediamine)cobalt(III) chloride"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁶ e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "2.4",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v22",
+     "perspectiveLabel": "[Co(en)3]Br3 (d⁶, octahedral)",
+     "marks": 5,
+     "stem": "For **`[Co(en)3]Br3`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Co, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[Co(en)3]Br3** is **tris(ethylenediamine)cobalt(III) bromide**. Charge balance gives Co(III), so the metal is d⁶. 6 donors: octahedral. en are all strong-field, so electrons pair up before filling e_g. Configuration t₂g⁶ e_g⁰ (low-spin), CFSE = 2.4Δo − 2P, with 2 extra pairing energies compared with high spin: coefficient 2.4 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Co"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*tris\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*cobalt\\s*\\(\\s*III\\s*\\)\\s+bromide\\s*$",
+         "^\\s*tris\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*cobalt\\s*\\(\\s*III\\s*\\)\\s+bromide\\s*$"
+        ],
+        "expectedDisplay": "tris(ethylenediamine)cobalt(III) bromide"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁶ e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "2.4",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v23",
+     "perspectiveLabel": "[CoBr2(NH3)2]NO3 (d⁶, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`[CoBr2(NH3)2]NO3`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Co, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[CoBr2(NH3)2]NO3** is **diamminedibromocobalt(III) nitrate**. Charge balance gives Co(III), so the metal is d⁶. 4 donors: tetrahedral. The d⁶ count fills the same way in either field, so the spin state does not change the answer. Configuration e³ t₂³ (high-spin), CFSE = 0.6Δt: coefficient 0.6 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Co"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*di[-\\s]*ammine[-\\s]*di[-\\s]*bromo[-\\s]*cobalt\\s*\\(\\s*III\\s*\\)\\s+nitrate\\s*$",
+         "^\\s*di[-\\s]*ammine[-\\s]*di[-\\s]*bromido[-\\s]*cobalt\\s*\\(\\s*III\\s*\\)\\s+nitrate\\s*$"
+        ],
+        "expectedDisplay": "diamminedibromocobalt(III) nitrate"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[3³][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[3³](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[3³][\\s,·.]*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[3³](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e³ t₂³"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.6",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v24",
+     "perspectiveLabel": "[CoCl(NH3)3]SO4 (d⁶, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`[CoCl(NH3)3]SO4`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Co, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[CoCl(NH3)3]SO4** is **triamminechlorocobalt(III) sulfate**. Charge balance gives Co(III), so the metal is d⁶. 4 donors: tetrahedral. The d⁶ count fills the same way in either field, so the spin state does not change the answer. Configuration e³ t₂³ (high-spin), CFSE = 0.6Δt: coefficient 0.6 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Co"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*tri[-\\s]*ammine[-\\s]*chloro[-\\s]*cobalt\\s*\\(\\s*III\\s*\\)\\s+sulfate\\s*$",
+         "^\\s*tri[-\\s]*ammine[-\\s]*chloro[-\\s]*cobalt\\s*\\(\\s*III\\s*\\)\\s+sulphate\\s*$",
+         "^\\s*tri[-\\s]*ammine[-\\s]*chlorido[-\\s]*cobalt\\s*\\(\\s*III\\s*\\)\\s+sulfate\\s*$",
+         "^\\s*tri[-\\s]*ammine[-\\s]*chlorido[-\\s]*cobalt\\s*\\(\\s*III\\s*\\)\\s+sulphate\\s*$"
+        ],
+        "expectedDisplay": "triamminechlorocobalt(III) sulfate"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[3³][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[3³](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[3³][\\s,·.]*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[3³](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e³ t₂³"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.6",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v25",
+     "perspectiveLabel": "[Fe(en)2(CN)2] (d⁶, octahedral)",
+     "marks": 5,
+     "stem": "For **`[Fe(en)2(CN)2]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Fe, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[Fe(en)2(CN)2]** is **dicyanobis(ethylenediamine)iron(II)**. Charge balance gives Fe(II), so the metal is d⁶. 6 donors: octahedral. en, CN- are all strong-field, so electrons pair up before filling e_g. Configuration t₂g⁶ e_g⁰ (low-spin), CFSE = 2.4Δo − 2P, with 2 extra pairing energies compared with high spin: coefficient 2.4 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Fe"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*iron\\s*\\(\\s*II\\s*\\)(?:\\s+ion)?\\s*$",
+         "^\\s*di[-\\s]*cyano[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*iron\\s*\\(\\s*II\\s*\\)(?:\\s+ion)?\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethylenediamine\\s*\\)[-\\s]*iron\\s*\\(\\s*II\\s*\\)(?:\\s+ion)?\\s*$",
+         "^\\s*di[-\\s]*cyanido[-\\s]*bis\\s*\\(\\s*ethane-1,2-diamine\\s*\\)[-\\s]*iron\\s*\\(\\s*II\\s*\\)(?:\\s+ion)?\\s*$"
+        ],
+        "expectedDisplay": "dicyanobis(ethylenediamine)iron(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁶ e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "2.4",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v26",
+     "perspectiveLabel": "K3[Co(CN)6] (d⁶, octahedral)",
+     "marks": 5,
+     "stem": "For **`K3[Co(CN)6]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Co, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**K3[Co(CN)6]** is **potassium hexacyanocobaltate(III)**. Charge balance gives Co(III), so the metal is d⁶. 6 donors: octahedral. CN- are all strong-field, so electrons pair up before filling e_g. Configuration t₂g⁶ e_g⁰ (low-spin), CFSE = 2.4Δo − 2P, with 2 extra pairing energies compared with high spin: coefficient 2.4 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Co"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*potassium\\s+hexa[-\\s]*cyano[-\\s]*cobaltate\\s*\\(\\s*III\\s*\\)\\s*$",
+         "^\\s*potassium\\s+hexa[-\\s]*cyanido[-\\s]*cobaltate\\s*\\(\\s*III\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "potassium hexacyanocobaltate(III)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶](?:[\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁶ e_g⁰"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "2.4",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v27",
+     "perspectiveLabel": "[CoCl(NH3)3]Br (d⁷, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`[CoCl(NH3)3]Br`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Co, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[CoCl(NH3)3]Br** is **triamminechlorocobalt(II) bromide**. Charge balance gives Co(II), so the metal is d⁷. 4 donors: tetrahedral. The d⁷ count fills the same way in either field, so the spin state does not change the answer. Configuration e⁴ t₂³ (high-spin), CFSE = 1.2Δt: coefficient 1.2 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Co"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*tri[-\\s]*ammine[-\\s]*chloro[-\\s]*cobalt\\s*\\(\\s*II\\s*\\)\\s+bromide\\s*$",
+         "^\\s*tri[-\\s]*ammine[-\\s]*chlorido[-\\s]*cobalt\\s*\\(\\s*II\\s*\\)\\s+bromide\\s*$"
+        ],
+        "expectedDisplay": "triamminechlorocobalt(II) bromide"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "7",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[4⁴][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[3³](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[3³][\\s,·.]*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[4⁴](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e⁴ t₂³"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v28",
+     "perspectiveLabel": "K2[CoCl2Br2] (d⁷, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`K2[CoCl2Br2]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Co, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**K2[CoCl2Br2]** is **potassium dibromodichlorocobaltate(II)**. Charge balance gives Co(II), so the metal is d⁷. 4 donors: tetrahedral. The d⁷ count fills the same way in either field, so the spin state does not change the answer. Configuration e⁴ t₂³ (high-spin), CFSE = 1.2Δt: coefficient 1.2 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Co"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*potassium\\s+di[-\\s]*bromo[-\\s]*di[-\\s]*chloro[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*potassium\\s+di[-\\s]*bromo[-\\s]*di[-\\s]*chlorido[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*potassium\\s+di[-\\s]*bromido[-\\s]*di[-\\s]*chloro[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*potassium\\s+di[-\\s]*bromido[-\\s]*di[-\\s]*chlorido[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "potassium dibromodichlorocobaltate(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "7",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[4⁴][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[3³](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[3³][\\s,·.]*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[4⁴](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e⁴ t₂³"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v29",
+     "perspectiveLabel": "K3[CoF5(H2O)] (d⁷, octahedral)",
+     "marks": 5,
+     "stem": "For **`K3[CoF5(H2O)]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Co, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**K3[CoF5(H2O)]** is **potassium aquapentafluorocobaltate(II)**. Charge balance gives Co(II), so the metal is d⁷. 6 donors: octahedral. F-, H2O are all weak-field, so electrons spread out (high spin). Configuration t₂g⁵ e_g² (high-spin), CFSE = 0.8Δo: coefficient 0.8 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Co"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*potassium\\s+aqua[-\\s]*penta[-\\s]*fluoro[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*potassium\\s+aqua[-\\s]*penta[-\\s]*fluorido[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*potassium\\s+aquo[-\\s]*penta[-\\s]*fluoro[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*potassium\\s+aquo[-\\s]*penta[-\\s]*fluorido[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "potassium aquapentafluorocobaltate(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "7",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[5⁵][\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[5⁵](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁵ e_g²"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.8",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v30",
+     "perspectiveLabel": "Na[CoBr3(NH3)] (d⁷, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`Na[CoBr3(NH3)]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Co, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**Na[CoBr3(NH3)]** is **sodium amminetribromocobaltate(II)**. Charge balance gives Co(II), so the metal is d⁷. 4 donors: tetrahedral. The d⁷ count fills the same way in either field, so the spin state does not change the answer. Configuration e⁴ t₂³ (high-spin), CFSE = 1.2Δt: coefficient 1.2 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Co"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*sodium\\s+ammine[-\\s]*tri[-\\s]*bromo[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*sodium\\s+ammine[-\\s]*tri[-\\s]*bromido[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "sodium amminetribromocobaltate(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "7",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[4⁴][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[3³](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[3³][\\s,·.]*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[4⁴](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e⁴ t₂³"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v31",
+     "perspectiveLabel": "Na[CoCl3(H2O)3] (d⁷, octahedral)",
+     "marks": 5,
+     "stem": "For **`Na[CoCl3(H2O)3]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Co, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**Na[CoCl3(H2O)3]** is **sodium triaquatrichlorocobaltate(II)**. Charge balance gives Co(II), so the metal is d⁷. 6 donors: octahedral. Cl-, H2O are all weak-field, so electrons spread out (high spin). Configuration t₂g⁵ e_g² (high-spin), CFSE = 0.8Δo: coefficient 0.8 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Co"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*sodium\\s+tri[-\\s]*aqua[-\\s]*tri[-\\s]*chloro[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*sodium\\s+tri[-\\s]*aqua[-\\s]*tri[-\\s]*chlorido[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*sodium\\s+tri[-\\s]*aquo[-\\s]*tri[-\\s]*chloro[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*sodium\\s+tri[-\\s]*aquo[-\\s]*tri[-\\s]*chlorido[-\\s]*cobaltate\\s*\\(\\s*II\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "sodium triaquatrichlorocobaltate(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "7",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[5⁵][\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[5⁵](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁵ e_g²"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.8",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v32",
+     "perspectiveLabel": "[Ni(H2O)6]Br2 (d⁸, octahedral)",
+     "marks": 5,
+     "stem": "For **`[Ni(H2O)6]Br2`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Ni, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**[Ni(H2O)6]Br2** is **hexaaquanickel(II) bromide**. Charge balance gives Ni(II), so the metal is d⁸. 6 donors: octahedral. The d⁸ count fills the same way in either field, so the spin state does not change the answer. Configuration t₂g⁶ e_g² (high-spin), CFSE = 1.2Δo: coefficient 1.2 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Ni"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*hexa[-\\s]*aqua[-\\s]*nickel\\s*\\(\\s*II\\s*\\)\\s+bromide\\s*$",
+         "^\\s*hexa[-\\s]*aquo[-\\s]*nickel\\s*\\(\\s*II\\s*\\)\\s+bromide\\s*$"
+        ],
+        "expectedDisplay": "hexaaquanickel(II) bromide"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "8",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶][\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁶ e_g²"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v33",
+     "perspectiveLabel": "K3[Ni(CN)5(NH3)] (d⁸, octahedral)",
+     "marks": 5,
+     "stem": "For **`K3[Ni(CN)5(NH3)]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Ni, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**K3[Ni(CN)5(NH3)]** is **potassium amminepentacyanonickelate(II)**. Charge balance gives Ni(II), so the metal is d⁸. 6 donors: octahedral. The d⁸ count fills the same way in either field, so the spin state does not change the answer. Configuration t₂g⁶ e_g² (high-spin), CFSE = 1.2Δo: coefficient 1.2 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Ni"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*potassium\\s+ammine[-\\s]*penta[-\\s]*cyano[-\\s]*nickelate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*potassium\\s+ammine[-\\s]*penta[-\\s]*cyanido[-\\s]*nickelate\\s*\\(\\s*II\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "potassium amminepentacyanonickelate(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "8",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶][\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁶ e_g²"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v34",
+     "perspectiveLabel": "Na[NiCl3(NH3)3] (d⁸, octahedral)",
+     "marks": 5,
+     "stem": "For **`Na[NiCl3(NH3)3]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Ni, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**Na[NiCl3(NH3)3]** is **sodium triamminetrichloronickelate(II)**. Charge balance gives Ni(II), so the metal is d⁸. 6 donors: octahedral. The d⁸ count fills the same way in either field, so the spin state does not change the answer. Configuration t₂g⁶ e_g² (high-spin), CFSE = 1.2Δo: coefficient 1.2 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Ni"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*sodium\\s+tri[-\\s]*ammine[-\\s]*tri[-\\s]*chloro[-\\s]*nickelate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*sodium\\s+tri[-\\s]*ammine[-\\s]*tri[-\\s]*chlorido[-\\s]*nickelate\\s*\\(\\s*II\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "sodium triamminetrichloronickelate(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "8",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶][\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁶ e_g²"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v35",
+     "perspectiveLabel": "Na3[NiF5(NH3)] (d⁸, octahedral)",
+     "marks": 5,
+     "stem": "For **`Na3[NiF5(NH3)]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Ni, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**Na3[NiF5(NH3)]** is **sodium amminepentafluoronickelate(II)**. Charge balance gives Ni(II), so the metal is d⁸. 6 donors: octahedral. The d⁸ count fills the same way in either field, so the spin state does not change the answer. Configuration t₂g⁶ e_g² (high-spin), CFSE = 1.2Δo: coefficient 1.2 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Ni"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*sodium\\s+ammine[-\\s]*penta[-\\s]*fluoro[-\\s]*nickelate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*sodium\\s+ammine[-\\s]*penta[-\\s]*fluorido[-\\s]*nickelate\\s*\\(\\s*II\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "sodium amminepentafluoronickelate(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "8",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶][\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[2²][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁶ e_g²"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v36",
+     "perspectiveLabel": "K[CuBr3(NH3)] (d⁹, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`K[CuBr3(NH3)]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Cu, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**K[CuBr3(NH3)]** is **potassium amminetribromocuprate(II)**. Charge balance gives Cu(II), so the metal is d⁹. 4 donors: tetrahedral. The d⁹ count fills the same way in either field, so the spin state does not change the answer. Configuration e⁴ t₂⁵ (high-spin), CFSE = 0.4Δt: coefficient 0.4 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Cu"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*potassium\\s+ammine[-\\s]*tri[-\\s]*bromo[-\\s]*cuprate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*potassium\\s+ammine[-\\s]*tri[-\\s]*bromido[-\\s]*cuprate\\s*\\(\\s*II\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "potassium amminetribromocuprate(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "9",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[4⁴][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[5⁵](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[5⁵][\\s,·.]*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[4⁴](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e⁴ t₂⁵"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.4",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v37",
+     "perspectiveLabel": "K2[Cu(CN)4(H2O)2] (d⁹, octahedral)",
+     "marks": 5,
+     "stem": "For **`K2[Cu(CN)4(H2O)2]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Cu, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**K2[Cu(CN)4(H2O)2]** is **potassium diaquatetracyanocuprate(II)**. Charge balance gives Cu(II), so the metal is d⁹. 6 donors: octahedral. The d⁹ count fills the same way in either field, so the spin state does not change the answer. Configuration t₂g⁶ e_g³ (high-spin), CFSE = 0.6Δo: coefficient 0.6 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Cu"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*potassium\\s+di[-\\s]*aqua[-\\s]*tetra[-\\s]*cyano[-\\s]*cuprate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*potassium\\s+di[-\\s]*aqua[-\\s]*tetra[-\\s]*cyanido[-\\s]*cuprate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*potassium\\s+di[-\\s]*aquo[-\\s]*tetra[-\\s]*cyano[-\\s]*cuprate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*potassium\\s+di[-\\s]*aquo[-\\s]*tetra[-\\s]*cyanido[-\\s]*cuprate\\s*\\(\\s*II\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "potassium diaquatetracyanocuprate(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "9",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶][\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[3³](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[3³][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁶ e_g³"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.6",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v38",
+     "perspectiveLabel": "K3[CuCl5(NH3)] (d⁹, octahedral)",
+     "marks": 5,
+     "stem": "For **`K3[CuCl5(NH3)]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Cu, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δo, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**K3[CuCl5(NH3)]** is **potassium amminepentachlorocuprate(II)**. Charge balance gives Cu(II), so the metal is d⁹. 6 donors: octahedral. The d⁹ count fills the same way in either field, so the spin state does not change the answer. Configuration t₂g⁶ e_g³ (high-spin), CFSE = 0.6Δo: coefficient 0.6 Δo.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Cu"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δo)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*potassium\\s+ammine[-\\s]*penta[-\\s]*chloro[-\\s]*cuprate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*potassium\\s+ammine[-\\s]*penta[-\\s]*chlorido[-\\s]*cuprate\\s*\\(\\s*II\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "potassium amminepentachlorocuprate(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "9",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:octahedral|octahedron|Oh|O_h)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "octahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶][\\s,·.]*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[3³](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*e\\s*_?\\s*g\\s*\\)?\\s*\\^?\\s*[3³][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*g\\s*\\)?\\s*\\^?\\s*[6⁶](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "t₂g⁶ e_g³"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.6",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-chain-gen-v39",
+     "perspectiveLabel": "Na2[ZnCl2Br2] (d¹⁰, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`Na2[ZnCl2Br2]`** (assume tetrahedral or octahedral, as appropriate): give its name, the oxidation state of Zn, its dⁿ count, the geometry, the d-electron configuration in that geometry, the CFSE as a multiple of Δt, and how many extra pairing energies (P) it has compared with the high-spin arrangement (0 if none).",
+     "hint": "Charge balance first (counter-ions and ligand charges), then dⁿ = group number − oxidation state, then count the donors to choose the geometry, then fill the orbitals (all weak-field ligands: high spin; all strong-field: low spin). Octahedral CFSE: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron.",
+     "explanation": "**Na2[ZnCl2Br2]** is **sodium dibromodichlorozincate(II)**. Charge balance gives Zn(II), so the metal is d¹⁰. 4 donors: tetrahedral. The d¹⁰ count fills the same way in either field, so the spin state does not change the answer. Configuration e⁴ t₂⁶ (high-spin), CFSE = 0Δt: coefficient 0 Δt.",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Zn"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "g",
+        "label": "Geometry"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       },
+       {
+        "key": "p",
+        "label": "Extra pairing energies (P)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*sodium\\s+di[-\\s]*bromo[-\\s]*di[-\\s]*chloro[-\\s]*zincate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*sodium\\s+di[-\\s]*bromo[-\\s]*di[-\\s]*chlorido[-\\s]*zincate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*sodium\\s+di[-\\s]*bromido[-\\s]*di[-\\s]*chloro[-\\s]*zincate\\s*\\(\\s*II\\s*\\)\\s*$",
+         "^\\s*sodium\\s+di[-\\s]*bromido[-\\s]*di[-\\s]*chlorido[-\\s]*zincate\\s*\\(\\s*II\\s*\\)\\s*$"
+        ],
+        "expectedDisplay": "sodium dibromodichlorozincate(II)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "10",
+        "tolerance": 0.01
+       },
+       "g": {
+        "acceptedPatterns": [
+         "^\\s*(?:tetrahedral|tetrahedron|Td|T_d)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "tetrahedral"
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[4⁴][\\s,·.]*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[6⁶](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$",
+         "^\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[6⁶][\\s,·.]*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[4⁴](?:[\\s,·.]*(?!))?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e⁴ t₂⁶"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       },
+       "p": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       }
+      }
      }
     }
    ]

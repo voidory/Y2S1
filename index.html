@@ -921,6 +921,38 @@
          (one lucky pass does not hide the easier steps, where slips cascade). A variant-level ref needs that variant's latest attempt to pass and the
          node's latest two attempts to pass. Missing the harder one again brings the easier one back. Returns { nodes: Set of node ids with every variant retired, variants: Map nodeId -> Set of retired
          variantIds (partial), why: Map ref -> [the harder refs that passed] }. */
+      /* Paper diagnosis: where the marks of a finished mock paper went, by skill, and a repair list. entries = [{nodeId, label, marks, earned, errorTags}].
+         A lost mark is shared equally between the skills its question is linked to; skills are ranked by marks lost. The repair list is the questions
+         you lost marks on (served again with a fresh instance) plus up to two other questions of the same skill, for the four worst skills. A ranking, not a forecast. */
+      function paperDiagnosis(entries, map, nodes = []) {
+        const skillById = new Map((map?.skills || []).map((s) => [s.id, s]));
+        const rows = new Map();
+        let totalLost = 0, totalMarks = 0;
+        for (const e of entries || []) {
+          const marks = Number(e.marks) || 0, lost = Math.max(0, marks - (Number(e.earned) || 0));
+          totalMarks += marks; totalLost += lost;
+          if (lost < 0.05) continue;
+          const ids = (map?.nodeSkills?.[e.nodeId] || []).filter((id) => skillById.has(id));
+          const targets = ids.length ? ids : ['_other'];
+          for (const sid of targets) {
+            const r = rows.get(sid) || { skillId: sid, name: skillById.get(sid)?.name || 'Other', lost: 0, parts: [], slips: new Set(), nodeIds: [] };
+            r.lost += lost / targets.length; r.parts.push(e.label || e.nodeId);
+            for (const t of e.errorTags || []) r.slips.add(String(t));
+            if (!r.nodeIds.includes(e.nodeId)) r.nodeIds.push(e.nodeId);
+            rows.set(sid, r);
+          }
+        }
+        const ranked = [...rows.values()].map((r) => ({ ...r, lost: Number(r.lost.toFixed(2)), parts: [...new Set(r.parts)], slips: [...r.slips] })).sort((a, b) => b.lost - a.lost);
+        const paperNodes = new Set((entries || []).map((e) => e.nodeId)), known = new Set(nodes.map((n) => n.id)), repair = [];
+        const add = (id) => { if (id && known.has(id) && !repair.includes(id)) { repair.push(id); return true; } return false; };
+        for (const r of ranked.filter((x) => x.skillId !== '_other' && x.lost >= 0.5).slice(0, 4)) {
+          r.nodeIds.forEach(add);
+          let extra = 0;
+          for (const id of skillById.get(r.skillId)?.nodes || []) { if (extra >= 2) break; if (!paperNodes.has(id) && add(id)) extra++; }
+        }
+        return { rows: ranked, totalLost: Number(totalLost.toFixed(2)), totalMarks: Number(totalMarks.toFixed(2)), repairIds: repair.slice(0, 14) };
+      }
+
       function supersession(pairs, nodes, logs) {
         const out = { nodes: new Set(), variants: new Map(), why: new Map() };
         if (!pairs || !pairs.length) return out;
@@ -1749,7 +1781,7 @@
         selectVariant,
         instantiateVariant,
         computeModuleReadiness,
-        PASS_GRADE, gradeHistory, nodeLevel, nodeSecure, focusStats, coverage, cramNext, cramRecord, supersession, noRetired,
+        PASS_GRADE, gradeHistory, nodeLevel, nodeSecure, focusStats, coverage, cramNext, cramRecord, supersession, noRetired, paperDiagnosis,
         inferNodeExamStyle,
         assembleMockPaper,
         assembleRecipePaper,
@@ -10604,7 +10636,7 @@
           ...appState.mock,
           phase: 'in_progress',
           reviewFilter: 'all',
-          resultTab: 'chapters',
+          resultTab: 'diagnosis',
           durationMinutes,
           questionCount: totalQuestions,
           selectedChapters: chapters.slice(),
@@ -10727,6 +10759,7 @@
             missedSkillTags: evalRes.missedSkillTags || [],
             errorTags: safeErrorTags(variant, q.userInput, evalRes, q.rubricChecks),
           };
+          q.errorTags = logEntry.errorTags;
           newLogs.push(logEntry);
         }
 
@@ -11208,7 +11241,7 @@
 
         // Submitted phase: show marks per chapter + question breakdown
         const pct = m.totalMarks > 0 ? Math.round((m.totalEarned / m.totalMarks) * 100) : 0;
-        const resTab = m.resultTab || 'chapters';
+        const resTab = m.resultTab || 'diagnosis';
         const secChapters = `
             <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-3">
               <h2 class="font-display text-base font-semibold text-slate-900">Marks per Chapter Breakdown</h2>
@@ -11231,6 +11264,27 @@
               </div>
             </section>
         `;
+        const diag = Scheduler.paperDiagnosis(m.questions.map((q) => ({
+          nodeId: q.node.id, marks: Number(q.inst.variant.marks ?? 1), earned: q.earnedMarks, errorTags: q.errorTags || [],
+          label: `${(q.section || '').match(/Question \d/)?.[0].replace('Question ', 'Q') || `Q${q.index + 1}`}: ${q.node.metadata.title}`,
+        })), appState.skillMap, appState.nodes);
+        m.diagnosis = diag;
+        const slipText = (t) => String(t).replace(/^calc:/, '').replace(/-/g, ' ');
+        const secDiagnosis = `
+            <section class="bg-white border border-slate-200 rounded-xl p-5 space-y-3" data-paper-diagnosis>
+              <h2 class="font-display text-base font-semibold text-slate-900">Where the marks went</h2>
+              ${diag.totalLost < 0.05 ? '<p class="text-sm text-emerald-700">No marks lost on this paper.</p>' : `
+              <p class="text-xs text-slate-600">${diag.totalLost} of ${diag.totalMarks} marks lost, grouped by skill and ranked by marks lost. The repair set is the questions you lost marks on (fresh instance each time) plus up to two others from the same skill, for the four worst skills. It is a ranking of what to do next, not a prediction.</p>
+              <div class="divide-y divide-slate-100">
+                ${diag.rows.slice(0, 8).map((r) => `
+                  <div class="py-2.5 text-xs sm:text-sm" data-diagnosis-row="${esc(r.skillId)}">
+                    <div class="flex items-start justify-between gap-3"><span class="font-medium text-slate-900">${esc(r.name)}</span><span class="font-mono font-semibold text-rose-700 shrink-0">−${r.lost}</span></div>
+                    <div class="text-[11px] text-slate-500 mt-0.5">${esc(r.parts.join(' · '))}</div>
+                    ${r.slips.length ? `<div class="text-[11px] text-amber-800 mt-0.5">Slips: ${esc(r.slips.slice(0, 3).map(slipText).join('; '))}</div>` : ''}
+                  </div>`).join('')}
+              </div>
+              ${diag.repairIds.length ? `<button type="button" id="btnRepairFromPaper" class="w-full sm:w-auto px-4 py-2 text-sm font-medium bg-blue-700 text-white rounded-lg hover:bg-blue-800">Repair: ${diag.repairIds.length} question${diag.repairIds.length === 1 ? '' : 's'} from these skills</button>` : ''}`}
+            </section>`;
         const styleName = { mcq_1mark: 'MCQ', short_2to3: 'Short', construct_4to6: 'Construct' };
         const missedQs = m.questions.filter((q) => !q.evalResult?.passed);
         const onlyMissed = m.reviewFilter === 'missed';
@@ -11266,10 +11320,11 @@
               </button>
             </div>
             <div class="seg shrink-0" role="tablist" aria-label="Results sections">
+              <button type="button" role="tab" data-seg-mock="diagnosis" aria-selected="${resTab === 'diagnosis'}">Diagnosis</button>
               <button type="button" role="tab" data-seg-mock="chapters" aria-selected="${resTab === 'chapters'}">By chapter</button>
               <button type="button" role="tab" data-seg-mock="questions" aria-selected="${resTab === 'questions'}">Question review</button>
             </div>
-            <div class="view-scroll space-y-3">${resTab === 'questions' ? secQuestions : secChapters}</div>
+            <div class="view-scroll space-y-3">${resTab === 'questions' ? secQuestions : resTab === 'chapters' ? secChapters : secDiagnosis}</div>
           </div>
         `;
         $$('[data-seg-mock]', root).forEach((btn) => {
@@ -11279,6 +11334,7 @@
           btn.addEventListener('click', () => { m.reviewFilter = btn.dataset.reviewFilter; renderMockView(root); });
         });
 
+        $('#btnRepairFromPaper', root)?.addEventListener('click', () => startPlaylist(m.diagnosis.repairIds, 'Repair from the paper'));
         $('#btnNewMockPaper', root)?.addEventListener('click', () => {
           m.phase = 'setup';
           render();

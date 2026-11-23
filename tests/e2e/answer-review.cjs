@@ -95,7 +95,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.evaluate(() => document.querySelector('#btnStartMockPaper').click()); await p.waitForTimeout(500);
   await p.evaluate(() => document.querySelector('#btnSubmitMockPaper')?.click()); await p.waitForTimeout(600);
   if (await p.$('#btnFinalizeMockPaper')) { await p.evaluate(() => document.querySelector('#btnFinalizeMockPaper').click()); await p.waitForTimeout(700); }
-  await p.evaluate(() => document.querySelectorAll('#appRoot .seg > button')[1]?.click()); await p.waitForTimeout(300);
+  await p.evaluate(() => document.querySelector('[data-seg-mock="questions"]')?.click()); await p.waitForTimeout(300);
   ok(await p.evaluate(() => !!document.querySelector('[data-review-filter="missed"]')) && !(await p.textContent('#appRoot')).includes('mock-1'), 'mock review: filter chips present and no raw mock id');
   ok(await p.evaluate(() => document.querySelectorAll('[data-mock-review-q] [data-answer-review]').length > 0), 'mock review: questions show the same answer-review card');
   const before = await p.evaluate(() => document.querySelectorAll('[data-mock-review-q]').length);

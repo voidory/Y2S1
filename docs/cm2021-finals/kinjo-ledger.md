@@ -51,6 +51,6 @@ Things to know:
 
 ## 5. Open
 
-- Slide batches 2 onward (the user uploads five at a time).
+- Slide batches 3 onward (the user uploads five at a time).
 - Align explain rubrics to the keys' key-word style.
 - Confirm the lecturer's own wording for any slide table that disagrees with a textbook value (none seen in batch 1).

@@ -49,7 +49,15 @@ Things to know:
 - **Non-bonding MO counts** follow the lecture's H₂O diagram (2 bonding, 2 non-bonding, 2 antibonding); NH₃, BH₃ and BeH₂ extend the same rule (the empty p orbitals count as non-bonding).
 - The slide for Part 4 s63 prints three melting points without naming the metals; Na, Mg, Al is the reading used (98, 650, 659 °C).
 
-## 5. Open
+## 5. Chapter 2 slides, batch 3 (Parts 4-8: Groups 13 to 18; text layer present)
+
+Part 8 (Groups 17 and 18) is the same file as batch 1. For the other four decks I matched every printed equation against `reactions.json` and about 50 slide facts and numbers against the bank and the method pages: nearly all were already there from the Chapter 4 deck ingest (diborane 3c-2e, inert pair, BX3 acidity, silanes, N(SiH3)3, Haber/Raschig/Wislicenus, nitrogen oxides, phosphorus, contact process, SF6, interhalogens, xenon). Genuinely absent: B₂O₃ + 3 C + 3 Cl₂ → 2 BCl₃ + 3 CO, hydrosilylation (not quizzable), the match-head reaction, borax, cryolite, SO₃ polymorph melting points, H₂SO₄ hydration enthalpy, SO₂ → SO₃ ΔG° −71 kJ/mol, talc and asbestos (unlikely to be examined).
+
+What was thin and is examined every year was the oxidation number (one fixed variant plus the average-oxidation-number set), so `node tools/cm2021/kinjo3.mjs` writes 22 variants: `bk-c4-ox-gen` 10 sets of 4 (N oxides and oxoacids, P, S and Cl species, **hydridic H**: Si in SiH₄ and SiHCl₃ is +4 and B in B₂H₆ is +3, against C in CH₄ at −4, because Part 5 stresses that H is more electronegative than Si), `bk-c4-silicate-gen` 4 (charge = 4 per Si − 2 per O, terminal against bridging O), `bk-c4-facts-gen` 8 (E–H bond energy and length, SO₃ polymorphs, interhalogen XX′ₙ rule and conditions). Tests: `tests/kinjo3-items.test.mjs`.
+
+Slide slips seen (do not memorise as printed): Part 5 slide 17 prints [(SiO₃)₈]¹⁸⁻ for an eight-membered ring, which is 16−; Part 6 `Ba(NO)₂` for barium nitrite and `Ca₃N₂`-type equations that do not balance were already logged on the Reactions screen.
+
+## 6. Open
 
 - Slide batches 3 onward (the user uploads five at a time).
 - Align explain rubrics to the keys' key-word style.

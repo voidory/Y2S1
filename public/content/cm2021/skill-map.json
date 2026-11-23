@@ -797,7 +797,8 @@
     "bk-c4-h3po3",
     "bk-c4-clo2",
     "bk-c4-electride-alkalide",
-    "bk-c4-avgon-gen"
+    "bk-c4-avgon-gen",
+    "bk-c4-ox-gen"
    ],
    "chunk": "reaction-toolkit"
   },
@@ -1284,7 +1285,8 @@
    "nodes": [
     "bk-c4-silanes",
     "bk-c4-chlorosilanes",
-    "bk-c4-si-halides"
+    "bk-c4-si-halides",
+    "bk-c4-facts-gen"
    ],
    "chunk": "group13-14"
   },
@@ -1342,7 +1344,8 @@
    "ids": [],
    "weight": 0.00273,
    "nodes": [
-    "bk-c4-silicates"
+    "bk-c4-silicates",
+    "bk-c4-silicate-gen"
    ],
    "chunk": "group13-14"
   },
@@ -1461,7 +1464,8 @@
     "bk-c4-h2o2",
     "bk-c4-contact",
     "bk-c4-sulfur-oxides",
-    "bk-c4-sf6-inert"
+    "bk-c4-sf6-inert",
+    "bk-c4-facts-gen"
    ],
    "chunk": "group15-18"
   },
@@ -1506,7 +1510,8 @@
     "bk-c4-clo2",
     "bk-c4-interhalogens",
     "bk-c4-halogen-redox",
-    "bk-c2-trend-gen"
+    "bk-c2-trend-gen",
+    "bk-c4-facts-gen"
    ],
    "chunk": "group15-18"
   },
@@ -3180,6 +3185,17 @@
   "bk-c2-solid-props": [
    "c2.solid-types",
    "c2.hbond-anomaly"
+  ],
+  "bk-c4-ox-gen": [
+   "c4.ox-number"
+  ],
+  "bk-c4-silicate-gen": [
+   "c4.silicates"
+  ],
+  "bk-c4-facts-gen": [
+   "c4.silicon",
+   "c4.oxygen-sulfur",
+   "c4.halogens"
   ]
  }
 }

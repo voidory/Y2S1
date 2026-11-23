@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-23T13:47:51.710Z",
+ "exportedAt": "2026-11-23T13:56:36.175Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -37775,6 +37775,1196 @@
        {
         "id": "e",
         "label": "The O–H bond is the longest"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-ox-gen",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Oxidation numbers: nitrogen, phosphorus, sulfur, chlorine species and hydridic H",
+    "source": "Chapter 2 Parts 4-8 (nitrogen oxides and oxoacids, phosphorus, sulfur, chlorine oxides, silanes and boranes as hydrides, aqua regia, cryolite); an oxidation-number question is in every final",
+    "week": 4,
+    "primaryTheme": "Oxidation Numbers",
+    "conceptTags": [
+     "oxidation-number",
+     "hydride"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "ox-gen"
+   },
+   "variants": [
+    {
+     "variantId": "c4-ox-gen-01",
+     "perspectiveLabel": "N₂O, NO, N₂O₃, NO₂",
+     "marks": 4,
+     "stem": "Give the oxidation number of the element named in each case. Treat H as −1 when it is bonded to a less electronegative element (a hydride), otherwise +1; O is −2 and F and Cl are −1 unless stated.",
+     "hint": "Sum of oxidation numbers = overall charge. Hydrogen is −1 in silanes, boranes and metal hydrides (bonded to something less electronegative than H) and +1 in CH₄, NH₃, H₂O.",
+     "explanation": "N₂O: O is −2; the atoms of N must make up the rest of the charge (0): +1 each. NO: O is −2; the atoms of N must make up the rest of the charge (0): +2. N₂O₃: O is −2; the atoms of N must make up the rest of the charge (0): +3 each. NO₂: O is −2; the atoms of N must make up the rest of the charge (0): +4.",
+     "sourceSlide": "ch2-p4-8",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "x0",
+        "label": "N in N₂O"
+       },
+       {
+        "key": "x1",
+        "label": "N in NO"
+       },
+       {
+        "key": "x2",
+        "label": "N in N₂O₃"
+       },
+       {
+        "key": "x3",
+        "label": "N in NO₂"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "x0": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "x1": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "x2": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "x3": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-ox-gen-02",
+     "perspectiveLabel": "N₂O₅, NO₂⁺, NO₃⁻, NO₂⁻",
+     "marks": 4,
+     "stem": "Give the oxidation number of the element named in each case. Treat H as −1 when it is bonded to a less electronegative element (a hydride), otherwise +1; O is −2 and F and Cl are −1 unless stated.",
+     "hint": "Sum of oxidation numbers = overall charge. Hydrogen is −1 in silanes, boranes and metal hydrides (bonded to something less electronegative than H) and +1 in CH₄, NH₃, H₂O.",
+     "explanation": "N₂O₅: O is −2; the atoms of N must make up the rest of the charge (0): +5 each. NO₂⁺: O is −2, the ion is 1+ (the nitronium ion in N₂O₅); the atoms of N must make up the rest of the charge (1): +5. NO₃⁻: O is −2; the atoms of N must make up the rest of the charge (-1): +5. NO₂⁻: O is −2; the atoms of N must make up the rest of the charge (-1): +3.",
+     "sourceSlide": "ch2-p4-8",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "x0",
+        "label": "N in N₂O₅"
+       },
+       {
+        "key": "x1",
+        "label": "N in NO₂⁺"
+       },
+       {
+        "key": "x2",
+        "label": "N in NO₃⁻"
+       },
+       {
+        "key": "x3",
+        "label": "N in NO₂⁻"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "x0": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       },
+       "x1": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       },
+       "x2": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       },
+       "x3": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-ox-gen-03",
+     "perspectiveLabel": "HNO₂, HNO₃, H₂N₂O₂ (hyponitrous acid), NH₂OH",
+     "marks": 4,
+     "stem": "Give the oxidation number of the element named in each case. Treat H as −1 when it is bonded to a less electronegative element (a hydride), otherwise +1; O is −2 and F and Cl are −1 unless stated.",
+     "hint": "Sum of oxidation numbers = overall charge. Hydrogen is −1 in silanes, boranes and metal hydrides (bonded to something less electronegative than H) and +1 in CH₄, NH₃, H₂O.",
+     "explanation": "HNO₂: H is +1 (bonded to O), O is −2; the atoms of N must make up the rest of the charge (0): +3. HNO₃: H is +1, O is −2; the atoms of N must make up the rest of the charge (0): +5. H₂N₂O₂ (hyponitrous acid): H is +1, O is −2; the atoms of N must make up the rest of the charge (0): +1 each. NH₂OH: H is +1 (N and O are both more electronegative), O is −2, so N is −1.; the atoms of N must make up the rest of the charge (0): -1.",
+     "sourceSlide": "ch2-p4-8",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "x0",
+        "label": "N in HNO₂"
+       },
+       {
+        "key": "x1",
+        "label": "N in HNO₃"
+       },
+       {
+        "key": "x2",
+        "label": "N in H₂N₂O₂ (hyponitrous acid)"
+       },
+       {
+        "key": "x3",
+        "label": "N in NH₂OH"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "x0": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "x1": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       },
+       "x2": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "x3": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-ox-gen-04",
+     "perspectiveLabel": "NOCl, NO⁺, NH₄⁺, N₂H₄",
+     "marks": 4,
+     "stem": "Give the oxidation number of the element named in each case. Treat H as −1 when it is bonded to a less electronegative element (a hydride), otherwise +1; O is −2 and F and Cl are −1 unless stated.",
+     "hint": "Sum of oxidation numbers = overall charge. Hydrogen is −1 in silanes, boranes and metal hydrides (bonded to something less electronegative than H) and +1 in CH₄, NH₃, H₂O.",
+     "explanation": "NOCl: O is −2, Cl is −1; the atoms of N must make up the rest of the charge (0): +3. NO⁺: O is −2, the ion is 1+; the atoms of N must make up the rest of the charge (1): +3. NH₄⁺: H is +1; the atoms of N must make up the rest of the charge (1): -3. N₂H₄: H is +1; the atoms of N must make up the rest of the charge (0): -2 each.",
+     "sourceSlide": "ch2-p4-8",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "x0",
+        "label": "N in NOCl"
+       },
+       {
+        "key": "x1",
+        "label": "N in NO⁺"
+       },
+       {
+        "key": "x2",
+        "label": "N in NH₄⁺"
+       },
+       {
+        "key": "x3",
+        "label": "N in N₂H₄"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "x0": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "x1": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "x2": {
+        "type": "numeric",
+        "targetExpr": "-3",
+        "tolerance": 0
+       },
+       "x3": {
+        "type": "numeric",
+        "targetExpr": "-2",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-ox-gen-05",
+     "perspectiveLabel": "H₃PO₄, H₃PO₃, P₄O₆, P₄O₁₀",
+     "marks": 4,
+     "stem": "Give the oxidation number of the element named in each case. Treat H as −1 when it is bonded to a less electronegative element (a hydride), otherwise +1; O is −2 and F and Cl are −1 unless stated.",
+     "hint": "Sum of oxidation numbers = overall charge. Hydrogen is −1 in silanes, boranes and metal hydrides (bonded to something less electronegative than H) and +1 in CH₄, NH₃, H₂O.",
+     "explanation": "H₃PO₄: H is +1, O is −2; the atoms of P must make up the rest of the charge (0): +5. H₃PO₃: H is +1, O is −2; the atoms of P must make up the rest of the charge (0): +3. P₄O₆: O is −2; the atoms of P must make up the rest of the charge (0): +3 each. P₄O₁₀: O is −2; the atoms of P must make up the rest of the charge (0): +5 each.",
+     "sourceSlide": "ch2-p4-8",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "x0",
+        "label": "P in H₃PO₄"
+       },
+       {
+        "key": "x1",
+        "label": "P in H₃PO₃"
+       },
+       {
+        "key": "x2",
+        "label": "P in P₄O₆"
+       },
+       {
+        "key": "x3",
+        "label": "P in P₄O₁₀"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "x0": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       },
+       "x1": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "x2": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "x3": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-ox-gen-06",
+     "perspectiveLabel": "PCl₃, PCl₅, PCl₄⁺, PCl₆⁻",
+     "marks": 4,
+     "stem": "Give the oxidation number of the element named in each case. Treat H as −1 when it is bonded to a less electronegative element (a hydride), otherwise +1; O is −2 and F and Cl are −1 unless stated.",
+     "hint": "Sum of oxidation numbers = overall charge. Hydrogen is −1 in silanes, boranes and metal hydrides (bonded to something less electronegative than H) and +1 in CH₄, NH₃, H₂O.",
+     "explanation": "PCl₃: Cl is −1; the atoms of P must make up the rest of the charge (0): +3. PCl₅: Cl is −1; the atoms of P must make up the rest of the charge (0): +5. PCl₄⁺: Cl is −1, the ion is 1+; the atoms of P must make up the rest of the charge (1): +5. PCl₆⁻: Cl is −1, the ion is 1−; the atoms of P must make up the rest of the charge (-1): +5.",
+     "sourceSlide": "ch2-p4-8",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "x0",
+        "label": "P in PCl₃"
+       },
+       {
+        "key": "x1",
+        "label": "P in PCl₅"
+       },
+       {
+        "key": "x2",
+        "label": "P in PCl₄⁺"
+       },
+       {
+        "key": "x3",
+        "label": "P in PCl₆⁻"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "x0": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "x1": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       },
+       "x2": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       },
+       "x3": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-ox-gen-07",
+     "perspectiveLabel": "SO₂, SO₃, H₂S₂O₇, SF₆",
+     "marks": 4,
+     "stem": "Give the oxidation number of the element named in each case. Treat H as −1 when it is bonded to a less electronegative element (a hydride), otherwise +1; O is −2 and F and Cl are −1 unless stated.",
+     "hint": "Sum of oxidation numbers = overall charge. Hydrogen is −1 in silanes, boranes and metal hydrides (bonded to something less electronegative than H) and +1 in CH₄, NH₃, H₂O.",
+     "explanation": "SO₂: O is −2; the atoms of S must make up the rest of the charge (0): +4. SO₃: O is −2; the atoms of S must make up the rest of the charge (0): +6. H₂S₂O₇: H is +1, O is −2; the atoms of S must make up the rest of the charge (0): +6 each. SF₆: F is −1; the atoms of S must make up the rest of the charge (0): +6.",
+     "sourceSlide": "ch2-p4-8",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "x0",
+        "label": "S in SO₂"
+       },
+       {
+        "key": "x1",
+        "label": "S in SO₃"
+       },
+       {
+        "key": "x2",
+        "label": "S in H₂S₂O₇"
+       },
+       {
+        "key": "x3",
+        "label": "S in SF₆"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "x0": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       },
+       "x1": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0
+       },
+       "x2": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0
+       },
+       "x3": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-ox-gen-08",
+     "perspectiveLabel": "ClO₂, ClO₂⁻, ClO₃⁻, ClO₄⁻",
+     "marks": 4,
+     "stem": "Give the oxidation number of the element named in each case. Treat H as −1 when it is bonded to a less electronegative element (a hydride), otherwise +1; O is −2 and F and Cl are −1 unless stated.",
+     "hint": "Sum of oxidation numbers = overall charge. Hydrogen is −1 in silanes, boranes and metal hydrides (bonded to something less electronegative than H) and +1 in CH₄, NH₃, H₂O.",
+     "explanation": "ClO₂: O is −2; the atoms of Cl must make up the rest of the charge (0): +4. ClO₂⁻: O is −2; the atoms of Cl must make up the rest of the charge (-1): +3. ClO₃⁻: O is −2; the atoms of Cl must make up the rest of the charge (-1): +5. ClO₄⁻: O is −2; the atoms of Cl must make up the rest of the charge (-1): +7.",
+     "sourceSlide": "ch2-p4-8",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "x0",
+        "label": "Cl in ClO₂"
+       },
+       {
+        "key": "x1",
+        "label": "Cl in ClO₂⁻"
+       },
+       {
+        "key": "x2",
+        "label": "Cl in ClO₃⁻"
+       },
+       {
+        "key": "x3",
+        "label": "Cl in ClO₄⁻"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "x0": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       },
+       "x1": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "x2": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       },
+       "x3": {
+        "type": "numeric",
+        "targetExpr": "7",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-ox-gen-09",
+     "perspectiveLabel": "CH₄, SiH₄, SiHCl₃, B₂H₆",
+     "marks": 4,
+     "stem": "Give the oxidation number of the element named in each case. Treat H as −1 when it is bonded to a less electronegative element (a hydride), otherwise +1; O is −2 and F and Cl are −1 unless stated.",
+     "hint": "Sum of oxidation numbers = overall charge. Hydrogen is −1 in silanes, boranes and metal hydrides (bonded to something less electronegative than H) and +1 in CH₄, NH₃, H₂O.",
+     "explanation": "CH₄: H is +1: carbon (2.5) is more electronegative than hydrogen (2.2); the atoms of C must make up the rest of the charge (0): -4. SiH₄: H is −1: hydrogen (2.2) is more electronegative than silicon (1.9), so silanes are hydridic; the atoms of Si must make up the rest of the charge (0): +4. SiHCl₃: H is −1 and Cl is −1; the atoms of Si must make up the rest of the charge (0): +4. B₂H₆: H is −1: boron (2.0) is less electronegative than hydrogen (2.2); the atoms of B must make up the rest of the charge (0): +3 each.",
+     "sourceSlide": "ch2-p4-8",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "x0",
+        "label": "C in CH₄"
+       },
+       {
+        "key": "x1",
+        "label": "Si in SiH₄"
+       },
+       {
+        "key": "x2",
+        "label": "Si in SiHCl₃"
+       },
+       {
+        "key": "x3",
+        "label": "B in B₂H₆"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "x0": {
+        "type": "numeric",
+        "targetExpr": "-4",
+        "tolerance": 0
+       },
+       "x1": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       },
+       "x2": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       },
+       "x3": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-ox-gen-10",
+     "perspectiveLabel": "HAuCl₄, K₂SiO₃, Na₃[AlF₆] (cryolite), AlH₄⁻",
+     "marks": 4,
+     "stem": "Give the oxidation number of the element named in each case. Treat H as −1 when it is bonded to a less electronegative element (a hydride), otherwise +1; O is −2 and F and Cl are −1 unless stated.",
+     "hint": "Sum of oxidation numbers = overall charge. Hydrogen is −1 in silanes, boranes and metal hydrides (bonded to something less electronegative than H) and +1 in CH₄, NH₃, H₂O.",
+     "explanation": "HAuCl₄: H is +1, Cl is −1; the atoms of Au must make up the rest of the charge (0): +3. K₂SiO₃: K is +1, O is −2; the atoms of Si must make up the rest of the charge (0): +4. Na₃[AlF₆] (cryolite): Na is +1, F is −1; the atoms of Al must make up the rest of the charge (0): +3. AlH₄⁻: H is −1 (a hydride); the atoms of Al must make up the rest of the charge (-1): +3.",
+     "sourceSlide": "ch2-p4-8",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "x0",
+        "label": "Au in HAuCl₄"
+       },
+       {
+        "key": "x1",
+        "label": "Si in K₂SiO₃"
+       },
+       {
+        "key": "x2",
+        "label": "Al in Na₃[AlF₆] (cryolite)"
+       },
+       {
+        "key": "x3",
+        "label": "Al in AlH₄⁻"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "x0": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "x1": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       },
+       "x2": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "x3": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-silicate-gen",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Silicate anions: charge and bridging oxygen",
+    "source": "Chapter 2 Part 5 slides 16-18 (SiO₃²⁻ chain, tremolite Si₄O₁₁ double chain, talc sheet)",
+    "week": 4,
+    "primaryTheme": "Silicates",
+    "conceptTags": [
+     "silicates"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "silicate-gen"
+   },
+   "variants": [
+    {
+     "variantId": "c4-silicate-gen-1",
+     "perspectiveLabel": "orthosilicate, pyrosilicate and rings",
+     "marks": 4,
+     "stem": "Silicates are built from SiO₄ tetrahedra that share O atoms; each terminal O contributes −1. Using Si 4+ and O 2−, give the charge of each unit as a signed whole number (e.g. −4).",
+     "hint": "Charge = 4 × (number of Si) − 2 × (number of O). Terminal O = −charge; bridging O = total O − terminal O.",
+     "explanation": "SiO₄ (orthosilicate): isolated tetrahedron; charge 4(1) − 2(4) = -4, so 4 terminal O and 0 bridging O. Si₂O₇ (pyrosilicate): two tetrahedra sharing one O; charge 4(2) − 2(7) = -6, so 6 terminal O and 1 bridging O. Si₃O₉ (three-membered ring): ring of three tetrahedra; charge 4(3) − 2(9) = -6, so 6 terminal O and 3 bridging O. Si₆O₁₈ (six-membered ring): ring of six tetrahedra; charge 4(6) − 2(18) = -12, so 12 terminal O and 6 bridging O.",
+     "sourceSlide": "ch2-p5 s16-17",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "q0",
+        "label": "Charge of SiO₄ (orthosilicate)"
+       },
+       {
+        "key": "q1",
+        "label": "Charge of Si₂O₇ (pyrosilicate)"
+       },
+       {
+        "key": "q2",
+        "label": "Charge of Si₃O₉ (three-membered ring)"
+       },
+       {
+        "key": "q3",
+        "label": "Charge of Si₆O₁₈ (six-membered ring)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "q0": {
+        "type": "numeric",
+        "targetExpr": "-4",
+        "tolerance": 0
+       },
+       "q1": {
+        "type": "numeric",
+        "targetExpr": "-6",
+        "tolerance": 0
+       },
+       "q2": {
+        "type": "numeric",
+        "targetExpr": "-6",
+        "tolerance": 0
+       },
+       "q3": {
+        "type": "numeric",
+        "targetExpr": "-12",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-silicate-gen-2",
+     "perspectiveLabel": "chains, double chain, sheet, framework",
+     "marks": 4,
+     "stem": "Silicates are built from SiO₄ tetrahedra that share O atoms; each terminal O contributes −1. Using Si 4+ and O 2−, give the charge of each unit as a signed whole number (e.g. −4).",
+     "hint": "Charge = 4 × (number of Si) − 2 × (number of O). Terminal O = −charge; bridging O = total O − terminal O.",
+     "explanation": "(SiO₃) repeat unit of a single chain: single chain, two bridging O per Si; charge 4(1) − 2(3) = -2, so 2 terminal O and 1 bridging O. (Si₄O₁₁) repeat unit of a double chain (tremolite): double chain; charge 4(4) − 2(11) = -6, so 6 terminal O and 5 bridging O. (Si₂O₅) repeat unit of a sheet (talc, micas): sheet, three bridging O per Si; charge 4(2) − 2(5) = -2, so 2 terminal O and 3 bridging O. SiO₂ (silica): three-dimensional framework; charge 4(1) − 2(2) = 0, so 0 terminal O and 2 bridging O.",
+     "sourceSlide": "ch2-p5 s16-17",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "q0",
+        "label": "Charge of (SiO₃) repeat unit of a single chain"
+       },
+       {
+        "key": "q1",
+        "label": "Charge of (Si₄O₁₁) repeat unit of a double chain (tremolite)"
+       },
+       {
+        "key": "q2",
+        "label": "Charge of (Si₂O₅) repeat unit of a sheet (talc, micas)"
+       },
+       {
+        "key": "q3",
+        "label": "Charge of SiO₂ (silica)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "q0": {
+        "type": "numeric",
+        "targetExpr": "-2",
+        "tolerance": 0
+       },
+       "q1": {
+        "type": "numeric",
+        "targetExpr": "-6",
+        "tolerance": 0
+       },
+       "q2": {
+        "type": "numeric",
+        "targetExpr": "-2",
+        "tolerance": 0
+       },
+       "q3": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-silicate-gen-3",
+     "perspectiveLabel": "terminal and bridging O: pyro, ring, chain",
+     "marks": 6,
+     "stem": "In a silicate every Si is bonded to four O, and each **terminal** O carries a −1 charge while a **bridging** O (shared by two Si) is neutral overall. Using the formula (Si 4+, O 2−), give the number of terminal and bridging O atoms in each unit.",
+     "hint": "Charge = 4 × (number of Si) − 2 × (number of O). Terminal O = −charge; bridging O = total O − terminal O.",
+     "explanation": "Si₂O₇ (pyrosilicate): two tetrahedra sharing one O; charge 4(2) − 2(7) = -6, so 6 terminal O and 1 bridging O. Si₃O₉ (three-membered ring): ring of three tetrahedra; charge 4(3) − 2(9) = -6, so 6 terminal O and 3 bridging O. (SiO₃) repeat unit of a single chain: single chain, two bridging O per Si; charge 4(1) − 2(3) = -2, so 2 terminal O and 1 bridging O.",
+     "sourceSlide": "ch2-p5 s16-17",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "t0",
+        "label": "Terminal O in Si₂O₇ (pyrosilicate)"
+       },
+       {
+        "key": "b0",
+        "label": "Bridging O in Si₂O₇ (pyrosilicate)"
+       },
+       {
+        "key": "t1",
+        "label": "Terminal O in Si₃O₉ (three-membered ring)"
+       },
+       {
+        "key": "b1",
+        "label": "Bridging O in Si₃O₉ (three-membered ring)"
+       },
+       {
+        "key": "t2",
+        "label": "Terminal O in (SiO₃) repeat unit of a single chain"
+       },
+       {
+        "key": "b2",
+        "label": "Bridging O in (SiO₃) repeat unit of a single chain"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "t0": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0
+       },
+       "b0": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "t1": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0
+       },
+       "b1": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "t2": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "b2": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-silicate-gen-4",
+     "perspectiveLabel": "terminal and bridging O: double chain, sheet",
+     "marks": 6,
+     "stem": "In a silicate every Si is bonded to four O, and each **terminal** O carries a −1 charge while a **bridging** O (shared by two Si) is neutral overall. Using the formula (Si 4+, O 2−), give the number of terminal and bridging O atoms in each unit.",
+     "hint": "Charge = 4 × (number of Si) − 2 × (number of O). Terminal O = −charge; bridging O = total O − terminal O.",
+     "explanation": "(Si₄O₁₁) repeat unit of a double chain (tremolite): double chain; charge 4(4) − 2(11) = -6, so 6 terminal O and 5 bridging O. (Si₂O₅) repeat unit of a sheet (talc, micas): sheet, three bridging O per Si; charge 4(2) − 2(5) = -2, so 2 terminal O and 3 bridging O. SiO₂ (silica): three-dimensional framework; charge 4(1) − 2(2) = 0, so 0 terminal O and 2 bridging O.",
+     "sourceSlide": "ch2-p5 s16-17",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "t0",
+        "label": "Terminal O in (Si₄O₁₁) repeat unit of a double chain (tremolite)"
+       },
+       {
+        "key": "b0",
+        "label": "Bridging O in (Si₄O₁₁) repeat unit of a double chain (tremolite)"
+       },
+       {
+        "key": "t1",
+        "label": "Terminal O in (Si₂O₅) repeat unit of a sheet (talc, micas)"
+       },
+       {
+        "key": "b1",
+        "label": "Bridging O in (Si₂O₅) repeat unit of a sheet (talc, micas)"
+       },
+       {
+        "key": "t2",
+        "label": "Terminal O in SiO₂ (silica)"
+       },
+       {
+        "key": "b2",
+        "label": "Bridging O in SiO₂ (silica)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "t0": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0
+       },
+       "b0": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       },
+       "t1": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "b1": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "t2": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "b2": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-facts-gen",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Group 14, 16 and 17 facts: E–H bonds, SO₃ forms, interhalogens",
+    "source": "Chapter 2 Part 5 slide 4, Part 7 slide 9, Part 8 slides 22-25",
+    "week": 4,
+    "primaryTheme": "Main Group Chemistry",
+    "conceptTags": [
+     "group-14",
+     "sulfur-trioxide",
+     "interhalogens"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "facts-gen"
+   },
+   "variants": [
+    {
+     "variantId": "c4-facts-gen-01",
+     "perspectiveLabel": "E–H bond energy, lowest of C–H, Si–H, Ge–H",
+     "marks": 1,
+     "stem": "Among C–H, Si–H, Ge–H, which has the **lowest** E–H bond energy?",
+     "explanation": "Ge–H. The E–H bond weakens down Group 14 (about 95 > 75 > 70 kcal/mol) because the larger atoms overlap less well with H 1s. (Slide values: C–H 95 kcal/mol, Si–H 75 kcal/mol, Ge–H 70 kcal/mol.)",
+     "sourceSlide": "ch2-p5 s4",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "C–H"
+       },
+       {
+        "id": "b",
+        "label": "Si–H"
+       },
+       {
+        "id": "c",
+        "label": "Ge–H"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c4-facts-gen-02",
+     "perspectiveLabel": "E–H bond energy, highest of C–H, Si–H, Ge–H",
+     "marks": 1,
+     "stem": "Among C–H, Si–H, Ge–H, which has the **highest** E–H bond energy?",
+     "explanation": "C–H. The E–H bond weakens down Group 14 (about 95 > 75 > 70 kcal/mol) because the larger atoms overlap less well with H 1s. (Slide values: C–H 95 kcal/mol, Si–H 75 kcal/mol, Ge–H 70 kcal/mol.)",
+     "sourceSlide": "ch2-p5 s4",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "C–H"
+       },
+       {
+        "id": "b",
+        "label": "Si–H"
+       },
+       {
+        "id": "c",
+        "label": "Ge–H"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c4-facts-gen-03",
+     "perspectiveLabel": "E–H bond length, highest of C–H, Si–H, Ge–H",
+     "marks": 1,
+     "stem": "Among C–H, Si–H, Ge–H, which has the **highest** E–H bond length?",
+     "explanation": "Ge–H. The E–H bond lengthens down Group 14 (1.09, 1.48, 1.53 Å) as the element gets larger. (Slide values: C–H 1.09 Å, Si–H 1.48 Å, Ge–H 1.53 Å.)",
+     "sourceSlide": "ch2-p5 s4",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "C–H"
+       },
+       {
+        "id": "b",
+        "label": "Si–H"
+       },
+       {
+        "id": "c",
+        "label": "Ge–H"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c4-facts-gen-04",
+     "perspectiveLabel": "E–H bond length, lowest of C–H, Si–H, Ge–H",
+     "marks": 1,
+     "stem": "Among C–H, Si–H, Ge–H, which has the **lowest** E–H bond length?",
+     "explanation": "C–H. The E–H bond lengthens down Group 14 (1.09, 1.48, 1.53 Å) as the element gets larger. (Slide values: C–H 1.09 Å, Si–H 1.48 Å, Ge–H 1.53 Å.)",
+     "sourceSlide": "ch2-p5 s4",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "C–H"
+       },
+       {
+        "id": "b",
+        "label": "Si–H"
+       },
+       {
+        "id": "c",
+        "label": "Ge–H"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c4-facts-gen-05",
+     "perspectiveLabel": "SO₃ forms, lowest melting point",
+     "marks": 1,
+     "stem": "Solid SO₃ exists as α-SO₃ (polymeric, m.p. 62.3 °C), β-SO₃ (polymeric, m.p. 32.5 °C) and γ-SO₃ (trimeric, m.p. 16.8 °C). Which has the lowest melting point and why?",
+     "explanation": "The polymeric forms are held together by S–O–S links through the whole chain, so they melt higher. γ-SO₃ is a discrete trimer (S₃O₉ rings), so only weak forces between small molecules have to be overcome: 16.8 °C.",
+     "sourceSlide": "ch2-p7 s9",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "γ-SO₃: it consists of small trimer molecules, so there is less to break apart than in a polymer chain"
+       },
+       {
+        "id": "b",
+        "label": "α-SO₃: polymeric solids always melt lowest"
+       },
+       {
+        "id": "c",
+        "label": "β-SO₃: it has the most S–O double bonds"
+       },
+       {
+        "id": "d",
+        "label": "All three melt at the same temperature because the unit is SO₃"
+       },
+       {
+        "id": "e",
+        "label": "γ-SO₃: it is the only one with S–S bonds"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c4-facts-gen-06",
+     "perspectiveLabel": "interhalogen formula rule",
+     "marks": 1,
+     "stem": "Neutral interhalogens have the formula XX′ₙ with n odd, and X′ is the lighter halogen when n > 1. Which is a neutral interhalogen compound?",
+     "explanation": "ClF₃ has n = 3 (odd) and F is the lighter halogen. ClF₂, IF₆ and BrCl₄ have an even n, and in FCl₃ the heavier halogen is the outer atom. An odd n gives an even total of valence electrons (7(n + 1)), which is why neutral interhalogens are diamagnetic.",
+     "sourceSlide": "ch2-p8 s25",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "ClF₃"
+       },
+       {
+        "id": "b",
+        "label": "ClF₂"
+       },
+       {
+        "id": "c",
+        "label": "FCl₃"
+       },
+       {
+        "id": "d",
+        "label": "IF₆"
+       },
+       {
+        "id": "e",
+        "label": "BrCl₄"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c4-facts-gen-07",
+     "perspectiveLabel": "interhalogen conditions",
+     "marks": 1,
+     "stem": "Iodine reacts with excess fluorine. Which product forms at room temperature, and which at 250–300 °C?",
+     "explanation": "Higher fluorination needs a higher temperature (and pressure): I₂ + F₂ gives IF₅ at room temperature and IF₇ at 250–300 °C. Likewise Cl₂ + F₂ gives ClF at 225 °C, ClF₃ at 300 °C, and ClF₅ needs 350 °C and 250 atm.",
+     "sourceSlide": "ch2-p8 s25",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "IF₅ at room temperature and IF₇ at 250–300 °C"
+       },
+       {
+        "id": "b",
+        "label": "IF₇ at room temperature and IF₅ at 250–300 °C"
+       },
+       {
+        "id": "c",
+        "label": "IF₃ at room temperature and IF₅ at 250–300 °C"
+       },
+       {
+        "id": "d",
+        "label": "IF at both temperatures"
+       },
+       {
+        "id": "e",
+        "label": "IF₅ at both temperatures"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c4-facts-gen-08",
+     "perspectiveLabel": "chlorine fluorides and conditions",
+     "marks": 1,
+     "stem": "Chlorine reacts with fluorine. Which product needs the most forcing conditions?",
+     "explanation": "The more F atoms added, the harsher the conditions: ClF at 225 °C, ClF₃ at 300 °C, ClF₅ at 350 °C and 250 atm. ClF₇ is not known (Cl is too small for seven F).",
+     "sourceSlide": "ch2-p8 s25",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "ClF₅ (350 °C and 250 atm of F₂)"
+       },
+       {
+        "id": "b",
+        "label": "ClF (225 °C)"
+       },
+       {
+        "id": "c",
+        "label": "ClF₃ (300 °C)"
+       },
+       {
+        "id": "d",
+        "label": "All form at room temperature"
+       },
+       {
+        "id": "e",
+        "label": "ClF₇ (400 °C)"
        }
       ],
       "shuffleOptions": true

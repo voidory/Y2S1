@@ -66,14 +66,18 @@ const fcNode = node('bk-c1-fc-gen', 'Formal charge from a described Lewis struct
 const DIRS = [0, 45, 90, 135, 180, 225, 270, 315];
 const angDist = (a, b) => { const d = Math.abs(a - b) % 360; return d > 180 ? 360 - d : d; };
 export function lewisSvg(structs, caption) {
-  const xs = structs.flatMap((st) => st.atoms.map((a) => a.x)), x0 = Math.min(...xs) - 30, W = Math.max(...xs) + 36 - x0, rowH = structs.length > 1 ? 112 : 190, H = structs.length * rowH + 8;
+  const xs = structs.flatMap((st) => st.atoms.map((a) => a.x)), cxm = (Math.min(...xs) + Math.max(...xs)) / 2;
+  const x0 = Math.min(Math.min(...xs) - 30, cxm - 150), W = Math.max(Math.max(...xs) + 36, cxm + 150) - x0;
+  let cur = 4; const offs = [], titleY = [];
+  structs.forEach((st) => { const ys = st.atoms.map((a) => a.y), tsp = st.title ? 22 : 0; titleY.push(cur + 12); offs.push(cur + tsp + 22 - Math.min(...ys)); cur += tsp + 22 + (Math.max(...ys) - Math.min(...ys)) + 26; });
+  const H = cur + 4;
   let out = '';
   structs.forEach((st, si) => {
-    const oy = si * rowH + 4, at = Object.fromEntries(st.atoms.map((a) => [a.id, a]));
+    const oy = offs[si], at = Object.fromEntries(st.atoms.map((a) => [a.id, a]));
     const ang = (a, b) => (Math.atan2(-(b.y - a.y), b.x - a.x) * 180 / Math.PI + 360) % 360;
     const bondDirs = Object.fromEntries(st.atoms.map((a) => [a.id, []]));
     for (const [i, j] of st.bonds) { bondDirs[i].push(ang(at[i], at[j])); bondDirs[j].push(ang(at[j], at[i])); }
-    if (st.title) out += `<text x="${x0 + 4}" y="${oy + 12}" font-size="11" fill="#475569" font-weight="600">${st.title}</text>`;
+    if (st.title) out += `<text x="${x0 + 4}" y="${titleY[si]}" font-size="11" fill="#475569" font-weight="600">${st.title}</text>`;
     for (const [i, j, order = 1, arrow] of st.bonds) {
       const a = at[i], b = at[j], dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy), nx = -dy / len, ny = dx / len;
       const offs = order === 1 ? [0] : order === 2 ? [-2.5, 2.5] : [-4, 0, 4];

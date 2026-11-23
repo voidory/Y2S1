@@ -1,4 +1,4 @@
-/* Draw-and-label formal charge items show the reference structure (an SVG) once you commit your drawing, at phone and laptop size, without page scroll. */
+/* Draw-on-paper items (formal charge, d-orbital splitting, MO diagrams, crown ethers) show the reference structure (an SVG) once you commit your drawing, at phone and laptop size, without page scroll. */
 const http = require('http'), fs = require('fs'), path = require('path');
 const { chromium } = require('playwright');
 const ROOT = path.resolve(__dirname, '../..');
@@ -14,9 +14,10 @@ const srv = http.createServer((q, r) => { const f = path.join(ROOT, decodeURICom
     await p.goto(`http://127.0.0.1:${srv.address().port}/index.html`);
     await p.waitForFunction(() => window.__MASTERY_ENGINE__ && window.__MASTERY_ENGINE__.UI.appState.nodes.length > 0); await p.waitForTimeout(500);
     await p.selectOption('#moduleSwitch', 'CM2021'); await p.waitForTimeout(800);
+    for (const NODE of ['bk-c1-fc-draw', 'bk-c7-draw-split', 'bk-c3-draw-mo', 'bk-c4-crown-draw']) {
     const seen = new Set();
-    for (let k = 0; k < 14 && seen.size < 6; k++) {
-      await p.evaluate(async () => { const { UI } = window.__MASTERY_ENGINE__; const a = UI.appState; a.route = 'study'; a.current = null; a.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: 'bk-c1-fc-draw' }; UI.loadNextQuestion(); await new Promise((r) => setTimeout(r, 150)); });
+    for (let k = 0; k < 16 && seen.size < 4; k++) {
+      await p.evaluate(async (NODE_ID) => { const { UI } = window.__MASTERY_ENGINE__; const a = UI.appState; a.route = 'study'; a.current = null; a.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: NODE_ID }; UI.loadNextQuestion(); await new Promise((r) => setTimeout(r, 150)); }, NODE);
       const id = await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.current.inst.variant.variantId);
       if (seen.has(id)) continue; seen.add(id);
       const before = await p.locator('[data-reference-compare]').count();
@@ -29,7 +30,7 @@ const srv = http.createServer((q, r) => { const f = path.join(ROOT, decodeURICom
       if (shots && id.endsWith('-2')) await p.screenshot({ path: `${shots}/fc-draw-${name}.png` });
     }
     if (errs.length) { fails++; console.log('page errors', errs.slice(0, 2)); }
-    console.log(name, 'variants checked', seen.size);
+    console.log(name, NODE, 'variants checked', seen.size); }
     await p.context().close();
   }
   await b.close(); srv.close(); console.log(fails ? 'fc-draw FAILED' : 'fc-draw ok'); process.exit(fails ? 1 : 0);

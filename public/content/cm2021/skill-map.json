@@ -456,8 +456,8 @@
     "bk-c4-g2-ie",
     "bk-c2-ionisation-energy",
     "bk-c4-g1-g2-compare",
-    "bk-c2-trend-gen",
-    "bk-c2-trend-gen2"
+    "bk-c2-trend-gen2",
+    "bk-c2-trend-gen"
    ],
    "chunk": "periodic-trends"
   },
@@ -507,8 +507,8 @@
     "bk-c3-nf",
     "bk-c3-three-centre-pi",
     "bk-c3-h3plus",
-    "bk-c3-draw-mo",
-    "bk-c3-diatomic-gen"
+    "bk-c3-diatomic-gen",
+    "bk-c3-draw-mo"
    ],
    "chunk": "mo-diatomic"
   },
@@ -646,8 +646,8 @@
     "bk-c3-3c4e",
     "bk-c3-water-ammonia-mo",
     "bk-c3-co2-salcs",
-    "bk-c3-draw-mo",
-    "bk-c3-ahn-count"
+    "bk-c3-ahn-count",
+    "bk-c3-draw-mo"
    ],
    "chunk": "mo-polyatomic"
   },
@@ -669,8 +669,8 @@
    "nodes": [
     "bk-c3-lgo-oh",
     "bk-c3-co2-salcs",
-    "bk-c3-draw-mo",
-    "bk-c3-ahn-count"
+    "bk-c3-ahn-count",
+    "bk-c3-draw-mo"
    ],
    "chunk": "mo-polyatomic"
   },
@@ -1936,10 +1936,10 @@
     "bk-c7-td-oh",
     "bk-c7-sq-planar",
     "bk-c6-chain-gen",
-    "bk-c7-draw-split",
     "bk-c6-oxo-chain",
     "bk-c7-oh-td-ratio",
-    "bk-c7-geom-orbitals"
+    "bk-c7-geom-orbitals",
+    "bk-c7-draw-split"
    ],
    "chunk": "field-energetics"
   },
@@ -1966,9 +1966,9 @@
     "bk-c9-cr-labile",
     "bk-c7-cfse-d1-d2",
     "bk-c6-chain-gen",
-    "bk-c7-draw-split",
     "bk-c6-oxo-chain",
-    "bk-c7-oh-td-ratio"
+    "bk-c7-oh-td-ratio",
+    "bk-c7-draw-split"
    ],
    "chunk": "field-energetics"
   },

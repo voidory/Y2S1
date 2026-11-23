@@ -71,7 +71,13 @@ The example mid-term item (Al₂Cl₆ and I₂Cl₆: Al −1, I −1, bridging C
 
 The app has no general molecule editor (only the 3D coordination canvas for isomers), so `bk-c1-fc-draw` (6, same file) rehearses drawing on paper: Al₂Cl₆, I₂Cl₆ (with why it is planar), H₃N→BF₃ (donor arrow), NO₃⁻, SO₄²⁻ (S=O form against all single bonds) and SCN⁻, each as a draw-then-tick rubric. Each variant has a `comparisonVisualAsset` (an SVG built by `lewisSvg` in `tools/cm2021/kinjo5.mjs`: bond lines, lone-pair dots, formal-charge labels) that the app shows next to the marking points once you press Compare; no change to `index.html` was needed. `tests/e2e/fc-draw.cjs` checks it appears at phone and laptop size. It is in the `draw` focus set automatically (13 nodes now have draw variants).
 
-## 8. Open
+## 8. Reference pictures for the draw items, and fresh instances in the mock (final request)
+
+`tools/cm2021/figs.mjs` holds two small SVG handlers: `levels()` (orbital lines with up/down electron arrows, dashed links, labelled gaps) and `crownSvg()` (crown-ether rings), and re-uses `lewisSvg` from `kinjo5.mjs` (now laid out per structure so titles do not collide). It defines 19 pictures keyed by variantId: the 6 d-orbital splitting diagrams (Td d⁰ and d⁸, Oh d³, d⁶ high and low spin side by side, square planar d⁸, Jahn–Teller d⁹), 4 MO diagrams (N₂ and O₂, CO with HOMO/LUMO marked, octahedral ML₆ σ-only, H₂O), NF, nitrene NH, the ozone π system with lobe signs, the 3 crown ethers plus the 18-crown-6 cryptand item, O₃/ClO₄⁻/NO₃⁻ resonance forms and phosphonic/phosphinic acid. `draw.mjs` and `kinjo.mjs` attach their own; `node tools/cm2021/attachfigs.mjs` (run last) attaches the rest to hand-written nodes. They show beside the marking points (`comparisonVisualAsset`). **Still text-only:** the six σ ligand group orbitals of ML₆ (`c3-lgo-oh-v2`), CO₂ SALCs (`c3-co2-salcs-v1`), the 2.2.1-cryptand Lewis structure (`c4-crown-cryptand-v4`) and the [MA₂BCDE] isomers (`c6-draw-v3`). Check: `tests/e2e/fc-draw.cjs` (phone and laptop, four draw nodes) and a unit test that lists the four exceptions.
+
+Mock paper (`Scheduler.FINAL_RECIPES.CM2021`, Q1): part 1 (oxidation number) now also draws from the 10 generated `bk-c4-ox-gen` sets (made five species each so they are five marks, like the real parts), part 5 (HOMO count) from `bk-c3-homo-gen` v1 and v2. Parts need equal marks across options, so the 2-mark average-oxidation-number and nuclear generators and the 3-mark isotope rubrics were not added. `tests/cm2021-recipe.test.mjs` still checks 25/25/30/20.
+
+## 9. Open
 
 - Slide batches 3 onward (the user uploads five at a time).
 - Align explain rubrics to the keys' key-word style.

@@ -7,6 +7,7 @@
    Add further tables (Group 1, 2, 13-16) here as the other lecture decks arrive.
    Run: node tools/cm2021/kinjo.mjs   — rewrites bk-c2-trend-gen, bk-c4-avgon-gen, bk-c4-nuclear-gen, bk-c3-homo-gen and their skill links. */
 import fs from 'node:fs';
+import { FIGS_BY_VARIANT } from './figs.mjs';
 
 const DIR = 'public/content';
 const SUP = '⁰¹²³⁴⁵⁶⁷⁸⁹', SUB = '₀₁₂₃₄₅₆₇₈₉';
@@ -144,6 +145,7 @@ const crown = node('bk-c4-crown-draw', 'Draw a crown ether and name its best ion
   crownV('c4-crown-draw-18c6', '18-crown-6', 18, 6, 'K⁺', '2.6–3.2 Å against K⁺ 2.66 Å'),
 ]);
 
+for (const v of crown.variants) if (FIGS_BY_VARIANT[v.variantId]) v.comparisonVisualAsset = FIGS_BY_VARIANT[v.variantId];
 const NODES = [trend, avg, nuc, homo, crown];
 const LINKS = {
   'bk-c2-trend-gen': ['c2.periodic-trends', 'c4.halogens', 'c4.noble'],

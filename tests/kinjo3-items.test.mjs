@@ -35,7 +35,7 @@ test('oxidation numbers equal an independent hand-written table (including hydri
   const E = { 'N in N₂O': 1, 'N in NO': 2, 'N in N₂O₃': 3, 'N in NO₂': 4, 'N in N₂O₅': 5, 'N in NO₂⁺': 5, 'N in NO₃⁻': 5, 'N in NO₂⁻': 3, 'N in HNO₂': 3, 'N in HNO₃': 5, 'N in H₂N₂O₂ (hyponitrous acid)': 1, 'N in NH₂OH': -1,
     'N in NOCl': 3, 'N in NO⁺': 3, 'N in NH₄⁺': -3, 'N in N₂H₄': -2, 'P in H₃PO₄': 5, 'P in H₃PO₃': 3, 'P in P₄O₆': 3, 'P in P₄O₁₀': 5, 'P in PCl₃': 3, 'P in PCl₅': 5, 'P in PCl₄⁺': 5, 'P in PCl₆⁻': 5,
     'S in SO₂': 4, 'S in SO₃': 6, 'S in H₂S₂O₇': 6, 'S in SF₆': 6, 'Cl in ClO₂': 4, 'Cl in ClO₂⁻': 3, 'Cl in ClO₃⁻': 5, 'Cl in ClO₄⁻': 7,
-    'C in CH₄': -4, 'Si in SiH₄': 4, 'Si in SiHCl₃': 4, 'B in B₂H₆': 3, 'Au in HAuCl₄': 3, 'Si in K₂SiO₃': 4, 'Al in Na₃[AlF₆] (cryolite)': 3, 'Al in AlH₄⁻': 3 };
+    'C in CH₄': -4, 'Si in SiH₄': 4, 'Si in SiHCl₃': 4, 'B in B₂H₆': 3, 'Au in HAuCl₄': 3, 'Si in K₂SiO₃': 4, 'Al in Na₃[AlF₆] (cryolite)': 3, 'Al in AlH₄⁻': 3, 'Ge in GeH₄': 4, 'Au in AuCl₄⁻': 3, 'S in H₂SO₃': 4, 'Cl in HClO': 1 };
   let seen = 0;
   for (const v of N('bk-c4-ox-gen').variants) {
     for (const f of v.inputSlot.fields) {
@@ -44,7 +44,7 @@ test('oxidation numbers equal an independent hand-written table (including hydri
       seen++;
     }
   }
-  assert.equal(seen, 40);
+  assert.equal(seen, 50);
 });
 
 test('silicate charges: 4 per Si minus 2 per O; terminal plus bridging equals the O count', () => {

@@ -1441,11 +1441,11 @@
           note: 'Four questions, 100 marks, 2 h, as in all three finals. Q3 and Q4 mix the templates; aim for 1.2 min a mark.',
           sections: [
             { label: 'Question 1 · Five short parts', parts: [
-              ['bk-c4-ox-numbers/c4-ox-numbers-v1', 'bk-c4-avg-on-past/c4-avg-on-past-v1', 'bk-c4-avg-on-n/c4-avg-on-n-v1'],
+              ['bk-c4-ox-numbers/c4-ox-numbers-v1', 'bk-c4-avg-on-past/c4-avg-on-past-v1', 'bk-c4-avg-on-n/c4-avg-on-n-v1', ...Array.from({ length: 10 }, (_, i) => `bk-c4-ox-gen/c4-ox-gen-${String(i + 1).padStart(2, '0')}`)],
               ['bk-c4-nuclear/c4-nuclear-v1', 'bk-c4-nuclear/c4-nuclear-v2'],
               ['bk-c4-kie/c4-kie-v1', 'bk-c4-g1-o2/c4-g1-o2-v2', 'bk-c4-g1-o2/c4-g1-o2-v3'],
               ['bk-c4-aqua-regia/c4-aqua-regia-v1', 'bk-c4-aqua-regia/c4-aqua-regia-v2'],
-              ['bk-c3-homo-past/c3-homo-past-v1'],
+              ['bk-c3-homo-past/c3-homo-past-v1', 'bk-c3-homo-gen/c3-homo-gen-v1', 'bk-c3-homo-gen/c3-homo-gen-v2'],
             ] },
             { label: 'Question 2 · Phosphorus, three-centre bonding and a short explanation', parts: [
               ['bk-c4-p-scheme/c4-p-scheme-v1'],

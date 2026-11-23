@@ -1,7 +1,7 @@
 /* Kinjo half, batch 3: Chapter 2 Parts 4-8 (Groups 13 to 18). These five decks repeat material already ingested from the Chapter 4 deck
    (about 50 slide facts and equations were checked against the bank and the Reactions list: nearly all were present). What was thin and is
    examined every year is the oxidation number, so this adds:
-   - bk-c4-ox-gen       oxidation numbers of the element in 10 sets of species taken from the slides (N oxides and oxoacids, P, S, Cl species,
+   - bk-c4-ox-gen       oxidation numbers of the element in 10 sets of five species taken from the slides (N oxides and oxoacids, P, S, Cl species,
                         hydridic H in silanes and boranes against CH₄, Au/Al/B/Si in aqua regia, cryolite, borax, silicate)
    - bk-c4-silicate-gen charge of silicate anions from the formula, and terminal against bridging O (slide 'each terminal O contributes −1')
    - bk-c4-facts-gen    E–H bond energy and length (Group 14 slide), SO₃ polymorph melting points, interhalogen formula rules and conditions
@@ -49,9 +49,9 @@ const WHYS = { 'PH₃': 'P is −3 and H is +1: with phosphorus (2.2) and hydrog
 // the two awkward explanations above replace the hand notes in OX for PH₃ and NH₂OH
 const ruleOf = (r) => WHYS[r[0]] || r[5];
 const SETS = [
-  ['N₂O', 'NO', 'N₂O₃', 'NO₂'], ['N₂O₅', 'NO₂⁺', 'NO₃⁻', 'NO₂⁻'], ['HNO₂', 'HNO₃', 'H₂N₂O₂ (hyponitrous acid)', 'NH₂OH'], ['NOCl', 'NO⁺', 'NH₄⁺', 'N₂H₄'],
-  ['H₃PO₄', 'H₃PO₃', 'P₄O₆', 'P₄O₁₀'], ['PCl₃', 'PCl₅', 'PCl₄⁺', 'PCl₆⁻'], ['SO₂', 'SO₃', 'H₂S₂O₇', 'SF₆'], ['ClO₂', 'ClO₂⁻', 'ClO₃⁻', 'ClO₄⁻'],
-  ['CH₄', 'SiH₄', 'SiHCl₃', 'B₂H₆'], ['HAuCl₄', 'K₂SiO₃', 'Na₃[AlF₆] (cryolite)', 'AlH₄⁻'],
+  ['N₂O', 'NO', 'N₂O₃', 'NO₂', 'N₂H₄'], ['N₂O₅', 'NO₂⁺', 'NO₃⁻', 'NO₂⁻', 'HNO₃'], ['HNO₂', 'HNO₃', 'H₂N₂O₂ (hyponitrous acid)', 'NH₂OH', 'NH₄⁺'], ['NOCl', 'NO⁺', 'NH₄⁺', 'N₂H₄', 'N₂O'],
+  ['H₃PO₄', 'H₃PO₃', 'P₄O₆', 'P₄O₁₀', 'PCl₃'], ['PCl₃', 'PCl₅', 'PCl₄⁺', 'PCl₆⁻', 'H₃PO₄'], ['SO₂', 'SO₃', 'H₂S₂O₇', 'SF₆', 'H₂SO₃'], ['ClO₂', 'ClO₂⁻', 'ClO₃⁻', 'ClO₄⁻', 'HClO'],
+  ['CH₄', 'SiH₄', 'SiHCl₃', 'B₂H₆', 'GeH₄'], ['HAuCl₄', 'K₂SiO₃', 'Na₃[AlF₆] (cryolite)', 'AlH₄⁻', 'AuCl₄⁻'],
 ];
 const oxV = (set, i) => {
   const rows = set.map((n) => OX.find((r) => r[0] === n));

@@ -64,3 +64,18 @@ test('every draw-and-label variant carries a reference structure (SVG) that show
   const scn = d.variants[5].comparisonVisualAsset.payload;
   assert.ok(scn.includes('−2') && scn.includes('+1'), 'SCN⁻ structure C shows +1 on S and −2 on N');
 });
+
+test('draw-on-paper items carry a reference picture, except the four listed as still text-only', () => {
+  const textOnly = new Set(['c3-lgo-oh-v2', 'c3-co2-salcs-v1', 'c4-crown-cryptand-v4', 'c6-draw-v3']);
+  let withPic = 0, total = 0;
+  for (const nd of bank.questionNodes) for (const v of nd.variants) {
+    if (!(v.drawOnPaperThenCompare || v.inputSlot?.drawOnPaperThenCompare)) continue;
+    total++;
+    const a = v.comparisonVisualAsset;
+    if (textOnly.has(v.variantId)) { assert.ok(!a, v.variantId); continue; }
+    assert.equal(a?.type, 'svg', `${v.variantId} has a reference picture`);
+    assert.ok(/<svg[^>]*viewBox/.test(a.payload) && a.payload.length > 400, v.variantId);
+    withPic++;
+  }
+  assert.equal(total - withPic, textOnly.size);
+});

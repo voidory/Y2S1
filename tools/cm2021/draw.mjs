@@ -5,6 +5,7 @@
      bk-c3-draw-mo     (skills c3.diatomic, c3.hetero-diatomic, c3.polyatomic, c3.lgo)   MO diagrams
    Run: node tools/cm2021/draw.mjs   — rewrites the two nodes in question-bank.json and their skill links in skill-map.json. */
 import fs from 'node:fs';
+import { FIGS_BY_VARIANT } from './figs.mjs';
 
 const DIR = 'public/content';
 const crit = (list) => list.map(([criterion, marks, isCritical], i) => ({ id: `r${i + 1}`, criterion, marks, isCritical: Boolean(isCritical) }));
@@ -79,6 +80,7 @@ const NODES = [
     variants: mo,
   },
 ];
+for (const n of NODES) for (const v of n.variants) if (FIGS_BY_VARIANT[v.variantId]) v.comparisonVisualAsset = FIGS_BY_VARIANT[v.variantId];   // reference picture shown beside the marking points
 const LINKS = { 'bk-c7-draw-split': ['c7.splitting', 'c7.cfse'], 'bk-c3-draw-mo': ['c3.diatomic', 'c3.hetero-diatomic', 'c3.polyatomic', 'c3.lgo'] };
 
 if (process.argv[1].endsWith('draw.mjs')) {

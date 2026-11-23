@@ -62,6 +62,58 @@ variants[10].marks = 1;
 const fcNode = node('bk-c1-fc-gen', 'Formal charge from a described Lewis structure', 'Chapter 1 Part 1 slides (Formal Charge, Lewis exceptions, BF₃ π), Part 4 slides 52-55; Kinjo example mid-term (Al₂Cl₆ and I₂Cl₆)', 1, 'Formal Charge', ['formal-charge', 'lewis-structure'], 3, 'fc-gen', variants);
 
 
+/* ---------- a small Lewis-structure SVG handler: atoms at fixed positions, bond lines, lone-pair dots, formal-charge labels ---------- */
+const DIRS = [0, 45, 90, 135, 180, 225, 270, 315];
+const angDist = (a, b) => { const d = Math.abs(a - b) % 360; return d > 180 ? 360 - d : d; };
+export function lewisSvg(structs, caption) {
+  const xs = structs.flatMap((st) => st.atoms.map((a) => a.x)), x0 = Math.min(...xs) - 30, W = Math.max(...xs) + 36 - x0, rowH = structs.length > 1 ? 112 : 190, H = structs.length * rowH + 8;
+  let out = '';
+  structs.forEach((st, si) => {
+    const oy = si * rowH + 4, at = Object.fromEntries(st.atoms.map((a) => [a.id, a]));
+    const ang = (a, b) => (Math.atan2(-(b.y - a.y), b.x - a.x) * 180 / Math.PI + 360) % 360;
+    const bondDirs = Object.fromEntries(st.atoms.map((a) => [a.id, []]));
+    for (const [i, j] of st.bonds) { bondDirs[i].push(ang(at[i], at[j])); bondDirs[j].push(ang(at[j], at[i])); }
+    if (st.title) out += `<text x="${x0 + 4}" y="${oy + 12}" font-size="11" fill="#475569" font-weight="600">${st.title}</text>`;
+    for (const [i, j, order = 1, arrow] of st.bonds) {
+      const a = at[i], b = at[j], dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy), nx = -dy / len, ny = dx / len;
+      const offs = order === 1 ? [0] : order === 2 ? [-2.5, 2.5] : [-4, 0, 4];
+      for (const o of offs) out += `<line x1="${a.x + nx * o}" y1="${oy + a.y + ny * o}" x2="${b.x + nx * o}" y2="${oy + b.y + ny * o}" stroke="#0f172a" stroke-width="1.6"/>`;
+      if (arrow) { const mx = a.x + dx * 0.55, my = a.y + dy * 0.55, ux = dx / len, uy = dy / len; out += `<polygon points="${mx + ux * 7},${oy + my + uy * 7} ${mx - ux * 3 + nx * 5},${oy + my - uy * 3 + ny * 5} ${mx - ux * 3 - nx * 5},${oy + my - uy * 3 - ny * 5}" fill="#0f172a"/>`; }
+    }
+    for (const a of st.atoms) {
+      const chosen = [];
+      for (let k = 0; k < (a.lp || 0); k++) {
+        let best = null, bd = -1;
+        for (const d of DIRS) { if (chosen.includes(d)) continue; const m = Math.min(...[...bondDirs[a.id], ...chosen].map((x) => angDist(d, x)), 360); if (m > bd) { bd = m; best = d; } }
+        chosen.push(best);
+      }
+      for (const d of chosen) {
+        const r = d % 90 === 0 ? 17 : 19, cx = a.x + r * Math.cos(d * Math.PI / 180), cy = oy + a.y - r * Math.sin(d * Math.PI / 180), px = -Math.sin(d * Math.PI / 180) * 3.2, py = -Math.cos(d * Math.PI / 180) * 3.2;
+        out += `<circle cx="${cx + px}" cy="${cy + py}" r="1.7" fill="#0f172a"/><circle cx="${cx - px}" cy="${cy - py}" r="1.7" fill="#0f172a"/>`;
+      }
+      out += `<circle cx="${a.x}" cy="${oy + a.y}" r="9" fill="#fff"/><text x="${a.x}" y="${oy + a.y + 4.5}" text-anchor="middle" font-size="14" font-weight="700" fill="#0f172a">${a.el}</text>`;
+      if (a.fc !== undefined && a.fc !== 0) out += `<text x="${a.x + 12}" y="${oy + a.y - 9}" font-size="13" font-weight="800" fill="${a.fc > 0 ? '#1d4ed8' : '#be123c'}">${a.fc > 0 ? '+' : '−'}${Math.abs(a.fc)}</text>`;
+    }
+  });
+  return { type: 'svg', payload: `<svg viewBox="${x0} 0 ${W} ${H}" role="img" aria-label="${caption}" style="width:100%;max-width:${W}px;height:auto;display:block;margin:0 auto">${out}</svg>`, caption };
+}
+const A = (id, el, x, y, lp, fcv) => ({ id, el, x, y, lp, fc: fcv });
+const dimer = (m, fcM, lpM) => ({ atoms: [A('m1', m, 120, 94, lpM, fcM), A('m2', m, 220, 94, lpM, fcM), A('b1', 'Cl', 170, 44, 2, 1), A('b2', 'Cl', 170, 144, 2, 1),
+  A('t1', 'Cl', 70, 44, 3, 0), A('t2', 'Cl', 70, 144, 3, 0), A('t3', 'Cl', 270, 44, 3, 0), A('t4', 'Cl', 270, 144, 3, 0)],
+  bonds: [['m1', 'b1'], ['m1', 'b2'], ['m2', 'b1'], ['m2', 'b2'], ['m1', 't1'], ['m1', 't2'], ['m2', 't3'], ['m2', 't4']] });
+export const FIGS = {
+  al2cl6: lewisSvg([dimer('Al', -1, 0)], 'Al₂Cl₆: Al −1, bridging Cl +1, terminal Cl 0'),
+  i2cl6: lewisSvg([dimer('I', -1, 2)], 'I₂Cl₆: I −1 with two lone pairs (above and below the plane), bridging Cl +1'),
+  adduct: lewisSvg([{ atoms: [A('n', 'N', 110, 95, 0, 1), A('b', 'B', 210, 95, 0, -1), A('h1', 'H', 110, 40, 0), A('h2', 'H', 60, 130, 0), A('h3', 'H', 110, 150, 0), A('f1', 'F', 210, 40, 3), A('f2', 'F', 260, 130, 3), A('f3', 'F', 210, 150, 3)],
+    bonds: [['n', 'b', 1, true], ['n', 'h1'], ['n', 'h2'], ['n', 'h3'], ['b', 'f1'], ['b', 'f2'], ['b', 'f3']] }], 'H₃N→BF₃: N +1, B −1, the pair donated N→B'),
+  no3: lewisSvg([{ atoms: [A('n', 'N', 170, 90, 0, 1), A('o1', 'O', 170, 34, 2, 0), A('o2', 'O', 120, 135, 3, -1), A('o3', 'O', 220, 135, 3, -1)], bonds: [['n', 'o1', 2], ['n', 'o2'], ['n', 'o3']] }], 'NO₃⁻: N +1, double-bonded O 0, single-bonded O −1 (one of three resonance forms)'),
+  so4: lewisSvg([{ atoms: [A('s', 'S', 170, 95, 0, 0), A('o1', 'O', 170, 38, 2, 0), A('o2', 'O', 170, 152, 2, 0), A('o3', 'O', 112, 95, 3, -1), A('o4', 'O', 228, 95, 3, -1)], bonds: [['s', 'o1', 2], ['s', 'o2', 2], ['s', 'o3'], ['s', 'o4']] }], 'SO₄²⁻ with two S=O: S 0, double-bonded O 0, single-bonded O −1'),
+  scn: lewisSvg([
+    { title: 'A: S=C=N', atoms: [A('s', 'S', 80, 62, 2, 0), A('c', 'C', 170, 62, 0, 0), A('n', 'N', 260, 62, 2, -1)], bonds: [['s', 'c', 2], ['c', 'n', 2]] },
+    { title: 'B: S–C≡N', atoms: [A('s', 'S', 80, 62, 3, -1), A('c', 'C', 170, 62, 0, 0), A('n', 'N', 260, 62, 1, 0)], bonds: [['s', 'c'], ['c', 'n', 3]] },
+    { title: 'C: S≡C–N', atoms: [A('s', 'S', 80, 62, 1, 1), A('c', 'C', 170, 62, 0, 0), A('n', 'N', 260, 62, 3, -2)], bonds: [['s', 'c', 3], ['c', 'n']] }], 'SCN⁻ structures A, B and C with formal charges'),
+};
+
 /* ---------- draw and label: draw the structure on paper, mark every formal charge, then tick the marking points ---------- */
 const drawV = (id, label, stem, points, explanation, slide) => ({
   ...base(id, label, points.length, stem, explanation, slide, 'Draw all lone pairs, then count: formal charge = valence electrons − non-bonding electrons − bonds.'),
@@ -69,6 +121,7 @@ const drawV = (id, label, stem, points, explanation, slide) => ({
   inputSlot: { type: 'typed_synthesis', placeholder: 'Draw on paper, then tick the marking points (or note the formal charges here)…', minWordsToUnlockRubric: 0, allowPaperScratchpad: true },
   evaluator: { type: 'atomic_rubric', rubric: points.map((p, i) => ({ id: `r${i + 1}`, criterion: p, marks: 1, isCritical: i === 0 })) },
 });
+const FIGBY = { 'c1-fc-draw-1': 'al2cl6', 'c1-fc-draw-2': 'i2cl6', 'c1-fc-draw-3': 'adduct', 'c1-fc-draw-4': 'no3', 'c1-fc-draw-5': 'so4', 'c1-fc-draw-6': 'scn' };
 const drawNode = node('bk-c1-fc-draw', 'Draw the Lewis structure and label every formal charge', 'Kinjo example mid-term (Al₂Cl₆ and I₂Cl₆ with bridging Cl); Chapter 1 Part 1 and Part 4 slides', 1, 'Formal Charge', ['formal-charge', 'lewis-structure', 'draw'], 4, 'fc-draw', [
   drawV('c1-fc-draw-1', 'Al₂Cl₆', 'Draw Al₂Cl₆ (two bridging Cl atoms), showing every lone pair, and label the formal charge on Al, on a bridging Cl and on a terminal Cl.',
     ['Two Al atoms joined by two bridging Cl atoms, each Al also bonded to two terminal Cl (each Al has four single bonds in total)', 'Terminal Cl: one bond and three lone pairs, formal charge 0; bridging Cl: two single bonds and two lone pairs', 'Formal charge on each Al = −1 (3 − 0 − 4)', 'Formal charge on each bridging Cl = +1 (7 − 4 − 2); the charges add up to zero for the molecule'],
@@ -90,11 +143,12 @@ const drawNode = node('bk-c1-fc-draw', 'Draw the Lewis structure and label every
     'Each structure sums to −1. S≡C–N has the largest formal charges (+1 on S and −2 on N), so it contributes least.', 's-fc'),
 ]);
 
+for (const v of drawNode.variants) v.comparisonVisualAsset = FIGS[FIGBY[v.variantId]];
 const NODES = [fcNode, drawNode];
 const LINKS = { 'bk-c1-fc-gen': ['c1.formal-charge'], 'bk-c1-fc-draw': ['c1.formal-charge', 'c1.dative'] };
 export { NODES, STRUCTS };
 
-if (process.argv[1].endsWith('kinjo5.mjs')) {
+if (process.argv[1]?.endsWith('kinjo5.mjs')) {
   const bankPath = `${DIR}/cm2021/question-bank.json`, mapPath = `${DIR}/cm2021/skill-map.json`;
   const bank = JSON.parse(fs.readFileSync(bankPath, 'utf8'));
   bank.questionNodes = bank.questionNodes.filter((n) => !LINKS[n.id]).concat(NODES);

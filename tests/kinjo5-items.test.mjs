@@ -51,3 +51,16 @@ test('draw-and-label formal charge variants: rubric marks add up, every quoted f
   assert.equal(fcOf(6, 0, 6), 0); assert.equal(fcOf(6, 0, 4), 2); assert.equal(fcOf(5, 0, 4), 1);
   assert.equal(fcOf(6, 3, 1), -1); assert.equal(fcOf(6, 2, 2), 0);
 });
+
+test('every draw-and-label variant carries a reference structure (SVG) that shows its formal charges', () => {
+  const d = bank.questionNodes.find((x) => x.id === 'bk-c1-fc-draw');
+  for (const v of d.variants) {
+    const a = v.comparisonVisualAsset;
+    assert.equal(a?.type, 'svg', v.variantId);
+    assert.ok(a.payload.startsWith('<svg') && a.payload.includes('viewBox') && /<line /.test(a.payload) && /<circle /.test(a.payload), `${v.variantId} has bonds and lone-pair dots`);
+    assert.ok(/[+−]1/.test(a.payload), `${v.variantId} labels formal charges`);
+    assert.ok(!v.visualAsset, 'the structure stays hidden until the rubric phase');
+  }
+  const scn = d.variants[5].comparisonVisualAsset.payload;
+  assert.ok(scn.includes('−2') && scn.includes('+1'), 'SCN⁻ structure C shows +1 on S and −2 on N');
+});

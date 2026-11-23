@@ -119,7 +119,7 @@ const BANNED = [
   await p.evaluate(() => document.querySelector('#btnStartMockPaper').click()); await p.waitForTimeout(500);
   await p.evaluate(() => document.querySelector('#btnSubmitMockPaper')?.click()); await p.waitForTimeout(600);
   if (await p.$('#btnFinalizeMockPaper')) { await p.evaluate(() => document.querySelector('#btnFinalizeMockPaper').click()); await p.waitForTimeout(700); }
-  await guard('mock results'); await p.evaluate(() => document.querySelectorAll('#appRoot .seg > button')[1]?.click()); await p.waitForTimeout(300); await guard('mock question review');
+  await guard('mock results'); await p.evaluate(() => document.querySelector('[data-seg-mock="questions"]')?.click()); await p.waitForTimeout(300); await guard('mock question review');
   await nav('settings'); await p.evaluate(() => document.querySelector('[data-seg-settings="data"]')?.click()); await p.waitForTimeout(250);
   const data = await p.evaluate(() => document.querySelector('#appRoot').innerText);
   ok(/Content check/.test(data) && /Questions present/.test(data), 'the content check now lives in Settings, under Data');

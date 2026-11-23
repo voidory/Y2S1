@@ -169,7 +169,8 @@
     "bk-c1-dative",
     "bk-c1-tut1-d",
     "bk-c1-scn-formal-charge",
-    "bk-c1-partial-charge"
+    "bk-c1-partial-charge",
+    "bk-c1-fc-gen"
    ],
    "chunk": "lewis-bonding"
   },
@@ -3206,6 +3207,9 @@
   ],
   "bk-c4-radical-gen": [
    "c4.radical-chain"
+  ],
+  "bk-c1-fc-gen": [
+   "c1.formal-charge"
   ]
  }
 }

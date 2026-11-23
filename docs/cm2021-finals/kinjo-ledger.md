@@ -65,7 +65,11 @@ Thin and recurring: the **isotope effect** (zero-point energy; two of the three 
 
 With this batch every uploaded Kinjo lecture deck (Chapter 1 Parts 1-5, Chapter 2 Parts 1-8) has been read. Remaining Kinjo material not uploaded: Chapter 3 MO lectures beyond the Chapter 1 Part 5 summary, and Chapter 5 (symmetry and group theory).
 
-## 7. Open
+## 7. Formal charge generator (batch 5, added after the owner flagged formal charge as important)
+
+The example mid-term item (Al₂Cl₆ and I₂Cl₆: Al −1, I −1, bridging Cl +1; I₂Cl₆ planar because each I has two lone pairs, octahedral electron-pair geometry, square-planar ICl₄ units) was already in `bk-c1-formal-charge-bridge`, but formal charge had only fixed variants (5 nodes). `node tools/cm2021/kinjo5.mjs` writes `bk-c1-fc-gen` (11): the two example-paper structures, H₃N→BF₃, H₃O⁺/NH₄⁺/BF₄⁻/BH₄⁻, SCN⁻ structures B and C, O₃ and NO₃⁻, CO and N₂O, BF₃ with a B=F π bond, SO₄²⁻ with all single bonds against two S=O (S +2 against 0), and a pick on which sulfate structure is preferred. Formal charge = V − non-bonding electrons − bonds. The test caught two data slips while building (N in SCN⁻ structure C is −2, not −1; a double-bonded F has two bonds). Tests: `tests/kinjo5-items.test.mjs`.
+
+## 8. Open
 
 - Slide batches 3 onward (the user uploads five at a time).
 - Align explain rubrics to the keys' key-word style.

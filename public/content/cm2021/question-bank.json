@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-23T14:01:39.890Z",
+ "exportedAt": "2026-11-23T14:12:34.686Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -39475,6 +39475,567 @@
         "tolerance": 0
        }
       }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c1-fc-gen",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Formal charge from a described Lewis structure",
+    "source": "Chapter 1 Part 1 slides (Formal Charge, Lewis exceptions, BF₃ π), Part 4 slides 52-55; Kinjo example mid-term (Al₂Cl₆ and I₂Cl₆)",
+    "week": 1,
+    "primaryTheme": "Formal Charge",
+    "conceptTags": [
+     "formal-charge",
+     "lewis-structure"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "fc-gen"
+   },
+   "variants": [
+    {
+     "variantId": "c1-fc-gen-01",
+     "perspectiveLabel": "Al₂Cl₆",
+     "marks": 3,
+     "stem": "Al₂Cl₆ has two bridging Cl atoms. Each Al has four single bonds (two to terminal Cl, two to bridging Cl) and no lone pair; a bridging Cl has two single bonds and two lone pairs; a terminal Cl has one bond and three lone pairs. Give the formal charge of each atom listed.",
+     "hint": "Formal charge = V − (non-bonding electrons) − (bonds); count each non-bonding electron individually (a lone pair = 2), a double bond = 2 bonds.",
+     "explanation": "Formal charge = valence electrons − non-bonding electrons − number of bonds. Al: 3 − 2(0) − 4 = -1; bridging Cl: 7 − 2(2) − 2 = +1; terminal Cl: 7 − 2(3) − 1 = 0. The bridging Cl is +1 in both because it forms two bonds; Al and I are both −1 because each makes four bonds.",
+     "sourceSlide": "s-fc",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a0",
+        "label": "Formal charge of Al"
+       },
+       {
+        "key": "a1",
+        "label": "Formal charge of bridging Cl"
+       },
+       {
+        "key": "a2",
+        "label": "Formal charge of terminal Cl"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a0": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       },
+       "a1": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "a2": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-fc-gen-02",
+     "perspectiveLabel": "I₂Cl₆",
+     "marks": 3,
+     "stem": "I₂Cl₆ has two bridging Cl atoms. Each I has four single bonds (two to terminal Cl, two to bridging Cl) and two lone pairs; a bridging Cl has two single bonds and two lone pairs; a terminal Cl has one bond and three lone pairs. Give the formal charge of each atom listed.",
+     "hint": "Formal charge = V − (non-bonding electrons) − (bonds); count each non-bonding electron individually (a lone pair = 2), a double bond = 2 bonds.",
+     "explanation": "Formal charge = valence electrons − non-bonding electrons − number of bonds. I: 7 − 2(2) − 4 = -1; bridging Cl: 7 − 2(2) − 2 = +1; terminal Cl: 7 − 2(3) − 1 = 0. The bridging Cl is +1 in both because it forms two bonds; Al and I are both −1 because each makes four bonds.",
+     "sourceSlide": "s-fc",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a0",
+        "label": "Formal charge of I"
+       },
+       {
+        "key": "a1",
+        "label": "Formal charge of bridging Cl"
+       },
+       {
+        "key": "a2",
+        "label": "Formal charge of terminal Cl"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a0": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       },
+       "a1": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "a2": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-fc-gen-03",
+     "perspectiveLabel": "H₃N→BF₃",
+     "marks": 3,
+     "stem": "In the adduct H₃N–BF₃ the N has four single bonds (three to H, one to B) and no lone pair; B has four single bonds (three to F, one to N) and no lone pair; each F has one bond and three lone pairs. Give the formal charge of each atom listed.",
+     "hint": "Formal charge = V − (non-bonding electrons) − (bonds); count each non-bonding electron individually (a lone pair = 2), a double bond = 2 bonds.",
+     "explanation": "Formal charge = valence electrons − non-bonding electrons − number of bonds. N: 5 − 2(0) − 4 = +1; B: 3 − 2(0) − 4 = -1; F: 7 − 2(3) − 1 = 0.",
+     "sourceSlide": "s-dative",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a0",
+        "label": "Formal charge of N"
+       },
+       {
+        "key": "a1",
+        "label": "Formal charge of B"
+       },
+       {
+        "key": "a2",
+        "label": "Formal charge of F"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a0": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "a1": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       },
+       "a2": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-fc-gen-04",
+     "perspectiveLabel": "H₃O⁺, NH₄⁺, BF₄⁻, BH₄⁻",
+     "marks": 4,
+     "stem": "H₃O⁺: O has three single bonds and one lone pair. NH₄⁺: N has four single bonds and no lone pair. BF₄⁻ and BH₄⁻: B has four single bonds and no lone pair. Give the formal charge of each atom listed.",
+     "hint": "Formal charge = V − (non-bonding electrons) − (bonds); count each non-bonding electron individually (a lone pair = 2), a double bond = 2 bonds.",
+     "explanation": "Formal charge = valence electrons − non-bonding electrons − number of bonds. O in H₃O⁺: 6 − 2(1) − 3 = +1; N in NH₄⁺: 5 − 2(0) − 4 = +1; B in BF₄⁻: 3 − 2(0) − 4 = -1; B in BH₄⁻: 3 − 2(0) − 4 = -1.",
+     "sourceSlide": "s-fc",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a0",
+        "label": "Formal charge of O in H₃O⁺"
+       },
+       {
+        "key": "a1",
+        "label": "Formal charge of N in NH₄⁺"
+       },
+       {
+        "key": "a2",
+        "label": "Formal charge of B in BF₄⁻"
+       },
+       {
+        "key": "a3",
+        "label": "Formal charge of B in BH₄⁻"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a0": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "a1": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "a2": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       },
+       "a3": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-fc-gen-05",
+     "perspectiveLabel": "SCN⁻ (structures B and C)",
+     "marks": 4,
+     "stem": "Structure B of SCN⁻ is S–C≡N with three lone pairs on S and one on N. Structure C is S≡C–N with one lone pair on S and three on N. Give the formal charge of each atom listed.",
+     "hint": "Formal charge = V − (non-bonding electrons) − (bonds); count each non-bonding electron individually (a lone pair = 2), a double bond = 2 bonds.",
+     "explanation": "Formal charge = valence electrons − non-bonding electrons − number of bonds. S in B: 6 − 2(3) − 1 = -1; N in B: 5 − 2(1) − 3 = 0; S in C: 6 − 2(1) − 3 = +1; N in C: 5 − 2(3) − 1 = -2.",
+     "sourceSlide": "s-fc",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a0",
+        "label": "Formal charge of S in B"
+       },
+       {
+        "key": "a1",
+        "label": "Formal charge of N in B"
+       },
+       {
+        "key": "a2",
+        "label": "Formal charge of S in C"
+       },
+       {
+        "key": "a3",
+        "label": "Formal charge of N in C"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a0": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       },
+       "a1": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "a2": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "a3": {
+        "type": "numeric",
+        "targetExpr": "-2",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-fc-gen-06",
+     "perspectiveLabel": "O₃ and NO₃⁻",
+     "marks": 4,
+     "stem": "In O₃ drawn O=O⁺–O⁻, the central O has one double and one single bond and one lone pair, the double-bonded end O has two lone pairs, and the single-bonded end O has three lone pairs. In NO₃⁻ the N has one double and two single bonds and no lone pair, the double-bonded O has two lone pairs and each single-bonded O has three. Give the formal charge of each atom listed.",
+     "hint": "Formal charge = V − (non-bonding electrons) − (bonds); count each non-bonding electron individually (a lone pair = 2), a double bond = 2 bonds.",
+     "explanation": "Formal charge = valence electrons − non-bonding electrons − number of bonds. central O in O₃: 6 − 2(1) − 3 = +1; single-bonded end O in O₃: 6 − 2(3) − 1 = -1; N in NO₃⁻: 5 − 2(0) − 4 = +1; single-bonded O in NO₃⁻: 6 − 2(3) − 1 = -1.",
+     "sourceSlide": "s-fc",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a0",
+        "label": "Formal charge of central O in O₃"
+       },
+       {
+        "key": "a1",
+        "label": "Formal charge of single-bonded end O in O₃"
+       },
+       {
+        "key": "a2",
+        "label": "Formal charge of N in NO₃⁻"
+       },
+       {
+        "key": "a3",
+        "label": "Formal charge of single-bonded O in NO₃⁻"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a0": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "a1": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       },
+       "a2": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "a3": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-fc-gen-07",
+     "perspectiveLabel": "CO and N₂O",
+     "marks": 4,
+     "stem": "CO has a triple bond; C has one lone pair and O has one lone pair. In N₂O drawn N≡N⁺–O⁻ the terminal N has a triple bond and one lone pair, the central N has a triple and a single bond and no lone pair, and O has one bond and three lone pairs. Give the formal charge of each atom listed.",
+     "hint": "Formal charge = V − (non-bonding electrons) − (bonds); count each non-bonding electron individually (a lone pair = 2), a double bond = 2 bonds.",
+     "explanation": "Formal charge = valence electrons − non-bonding electrons − number of bonds. C in CO: 4 − 2(1) − 3 = -1; O in CO: 6 − 2(1) − 3 = +1; central N in N₂O: 5 − 2(0) − 4 = +1; O in N₂O: 6 − 2(3) − 1 = -1.",
+     "sourceSlide": "s-fc",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a0",
+        "label": "Formal charge of C in CO"
+       },
+       {
+        "key": "a1",
+        "label": "Formal charge of O in CO"
+       },
+       {
+        "key": "a2",
+        "label": "Formal charge of central N in N₂O"
+       },
+       {
+        "key": "a3",
+        "label": "Formal charge of O in N₂O"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a0": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       },
+       "a1": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "a2": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "a3": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-fc-gen-08",
+     "perspectiveLabel": "BF₃ with a B=F π bond",
+     "marks": 3,
+     "stem": "In one resonance form of BF₃ a B=F double bond is drawn: that B has one double and two single bonds and no lone pair, the double-bonded F has two lone pairs and the other two F each have three. Give the formal charge of each atom listed.",
+     "hint": "Formal charge = V − (non-bonding electrons) − (bonds); count each non-bonding electron individually (a lone pair = 2), a double bond = 2 bonds.",
+     "explanation": "Formal charge = valence electrons − non-bonding electrons − number of bonds. B: 3 − 2(0) − 4 = -1; double-bonded F: 7 − 2(2) − 2 = +1; single-bonded F: 7 − 2(3) − 1 = 0.",
+     "sourceSlide": "s-bf3",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a0",
+        "label": "Formal charge of B"
+       },
+       {
+        "key": "a1",
+        "label": "Formal charge of double-bonded F"
+       },
+       {
+        "key": "a2",
+        "label": "Formal charge of single-bonded F"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a0": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       },
+       "a1": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "a2": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-fc-gen-09",
+     "perspectiveLabel": "SO₄²⁻ with all single bonds",
+     "marks": 2,
+     "stem": "In the Lewis structure of SO₄²⁻ with four S–O single bonds, S has four bonds and no lone pair and each O has one bond and three lone pairs. Give the formal charge of each atom listed.",
+     "hint": "Formal charge = V − (non-bonding electrons) − (bonds); count each non-bonding electron individually (a lone pair = 2), a double bond = 2 bonds.",
+     "explanation": "Formal charge = valence electrons − non-bonding electrons − number of bonds. S: 6 − 2(0) − 4 = +2; O: 6 − 2(3) − 1 = -1. The formal charges on S (+2) are larger than in the structure with S=O bonds (0), which is why the expanded-octet form is drawn.",
+     "sourceSlide": "s-expanded",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a0",
+        "label": "Formal charge of S"
+       },
+       {
+        "key": "a1",
+        "label": "Formal charge of O"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a0": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "a1": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-fc-gen-10",
+     "perspectiveLabel": "SO₄²⁻ with two S=O bonds",
+     "marks": 3,
+     "stem": "In the Lewis structure of SO₄²⁻ with two S=O and two S–O⁻ bonds, S has six bonds (two double, two single) and no lone pair; a double-bonded O has two lone pairs; a single-bonded O has three. Give the formal charge of each atom listed.",
+     "hint": "Formal charge = V − (non-bonding electrons) − (bonds); count each non-bonding electron individually (a lone pair = 2), a double bond = 2 bonds.",
+     "explanation": "Formal charge = valence electrons − non-bonding electrons − number of bonds. S: 6 − 2(0) − 6 = 0; double-bonded O: 6 − 2(2) − 2 = 0; single-bonded O: 6 − 2(3) − 1 = -1.",
+     "sourceSlide": "s-expanded",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a0",
+        "label": "Formal charge of S"
+       },
+       {
+        "key": "a1",
+        "label": "Formal charge of double-bonded O"
+       },
+       {
+        "key": "a2",
+        "label": "Formal charge of single-bonded O"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a0": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "a1": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0
+       },
+       "a2": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c1-fc-gen-11",
+     "perspectiveLabel": "which sulfate structure",
+     "marks": 1,
+     "stem": "Two Lewis structures of SO₄²⁻ are drawn: one with four S–O single bonds, one with two S=O and two S–O⁻ bonds. Which statement is correct?",
+     "explanation": "All-single bonds: S +2 and each O −1. With two S=O bonds: S 0, double-bonded O 0, single-bonded O −1. Smaller formal charges mean a better contributor, and from the third period down the valence shell can hold more than 8 electrons (the slides’ “expanded shells” exception).",
+     "sourceSlide": "s-expanded",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "The structure with two S=O bonds has the smaller formal charges (S 0 and O 0 or −1), so it is preferred, and S can expand its octet because 3d/higher orbitals are close in energy"
+       },
+       {
+        "id": "b",
+        "label": "The all-single-bond structure is preferred because S obeys the octet and has a formal charge of +2"
+       },
+       {
+        "id": "c",
+        "label": "The two structures have identical formal charges"
+       },
+       {
+        "id": "d",
+        "label": "Sulfur cannot form S=O bonds because it is in the third period"
+       },
+       {
+        "id": "e",
+        "label": "Formal charges are irrelevant to choosing between Lewis structures"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
      }
     }
    ]

@@ -168,7 +168,10 @@
     "bk-c1-formal-charge-bridge",
     "bk-c1-dative",
     "bk-c1-tut1-d",
-    "bk-c1-scn-formal-charge"
+    "bk-c1-scn-formal-charge",
+    "bk-c1-partial-charge",
+    "bk-c1-fc-gen",
+    "bk-c1-fc-draw"
    ],
    "chunk": "lewis-bonding"
   },
@@ -280,7 +283,9 @@
     "bk-c4-bx3-acidity",
     "bk-c4-sulfur-oxides",
     "bk-c4-interhalogens",
-    "bk-c4-si-halides"
+    "bk-c4-si-halides",
+    "bk-c1-partial-charge",
+    "bk-c1-fc-draw"
    ],
    "chunk": "lewis-bonding"
   },
@@ -322,7 +327,8 @@
     "bk-c2-bp-pairs",
     "bk-c2-bp-picks",
     "bk-c2-chalcogen-bp",
-    "bk-c2-ammonia-borane"
+    "bk-c2-ammonia-borane",
+    "bk-c2-trend-gen2"
    ],
    "chunk": "imf-solids"
   },
@@ -343,7 +349,8 @@
    "weight": 0.01167,
    "nodes": [
     "bk-c2-ammonia-borane",
-    "bk-c2-ice"
+    "bk-c2-ice",
+    "bk-c2-solid-props"
    ],
    "chunk": "imf-solids"
   },
@@ -382,7 +389,8 @@
    "ids": [],
    "weight": 0.00273,
    "nodes": [
-    "bk-c2-bond-classes"
+    "bk-c2-bond-classes",
+    "bk-c2-solid-props"
    ],
    "chunk": "imf-solids"
   },
@@ -424,7 +432,8 @@
    "weight": 0.014,
    "nodes": [
     "bk-c2-heavy-hybrid",
-    "bk-c4-sio2-co2"
+    "bk-c4-sio2-co2",
+    "bk-c2-trend-gen2"
    ],
    "chunk": "periodic-trends"
   },
@@ -446,7 +455,9 @@
    "nodes": [
     "bk-c4-g2-ie",
     "bk-c2-ionisation-energy",
-    "bk-c4-g1-g2-compare"
+    "bk-c4-g1-g2-compare",
+    "bk-c2-trend-gen2",
+    "bk-c2-trend-gen"
    ],
    "chunk": "periodic-trends"
   },
@@ -495,7 +506,9 @@
     "bk-c3-homo-drill",
     "bk-c3-nf",
     "bk-c3-three-centre-pi",
-    "bk-c3-h3plus"
+    "bk-c3-h3plus",
+    "bk-c3-diatomic-gen",
+    "bk-c3-draw-mo"
    ],
    "chunk": "mo-diatomic"
   },
@@ -520,7 +533,8 @@
     "bk-c3-sp-mixing",
     "bk-c3-nf",
     "bk-c3-nitrene",
-    "bk-c4-n-oxides-props"
+    "bk-c4-n-oxides-props",
+    "bk-c3-diatomic-gen"
    ],
    "chunk": "mo-diatomic"
   },
@@ -559,7 +573,8 @@
    "weight": 0.02333,
    "nodes": [
     "bk-c3-homo-past",
-    "bk-c3-homo-drill"
+    "bk-c3-homo-drill",
+    "bk-c3-homo-gen"
    ],
    "chunk": "mo-diatomic"
   },
@@ -580,7 +595,8 @@
    "nodes": [
     "bk-c3-nf",
     "bk-c3-nitrene",
-    "bk-c3-co-binding"
+    "bk-c3-co-binding",
+    "bk-c3-draw-mo"
    ],
    "chunk": "mo-diatomic"
   },
@@ -629,7 +645,9 @@
     "bk-c3-lgo-oh",
     "bk-c3-3c4e",
     "bk-c3-water-ammonia-mo",
-    "bk-c3-co2-salcs"
+    "bk-c3-co2-salcs",
+    "bk-c3-ahn-count",
+    "bk-c3-draw-mo"
    ],
    "chunk": "mo-polyatomic"
   },
@@ -650,7 +668,9 @@
    "weight": 0.00546,
    "nodes": [
     "bk-c3-lgo-oh",
-    "bk-c3-co2-salcs"
+    "bk-c3-co2-salcs",
+    "bk-c3-ahn-count",
+    "bk-c3-draw-mo"
    ],
    "chunk": "mo-polyatomic"
   },
@@ -779,7 +799,9 @@
     "bk-c4-avg-on-n",
     "bk-c4-h3po3",
     "bk-c4-clo2",
-    "bk-c4-electride-alkalide"
+    "bk-c4-electride-alkalide",
+    "bk-c4-avgon-gen",
+    "bk-c4-ox-gen"
    ],
    "chunk": "reaction-toolkit"
   },
@@ -910,7 +932,8 @@
    "weight": 0.014,
    "nodes": [
     "bk-c4-isotope-zpe",
-    "bk-c4-kie"
+    "bk-c4-kie",
+    "bk-c4-isotope-gen"
    ],
    "chunk": "hydrogen"
   },
@@ -929,7 +952,8 @@
    "ids": [],
    "weight": 0.01167,
    "nodes": [
-    "bk-c4-kie"
+    "bk-c4-kie",
+    "bk-c4-isotope-gen"
    ],
    "chunk": "hydrogen"
   },
@@ -1016,7 +1040,8 @@
    "ids": [],
    "weight": 0.00273,
    "nodes": [
-    "bk-c4-hcl-chain"
+    "bk-c4-hcl-chain",
+    "bk-c4-radical-gen"
    ],
    "chunk": "hydrogen"
   },
@@ -1121,7 +1146,8 @@
    "weight": 0.01167,
    "nodes": [
     "bk-c4-crown-cryptand",
-    "bk-c4-electride-alkalide"
+    "bk-c4-electride-alkalide",
+    "bk-c4-crown-draw"
    ],
    "chunk": "s-block"
   },
@@ -1265,7 +1291,8 @@
    "nodes": [
     "bk-c4-silanes",
     "bk-c4-chlorosilanes",
-    "bk-c4-si-halides"
+    "bk-c4-si-halides",
+    "bk-c4-facts-gen"
    ],
    "chunk": "group13-14"
   },
@@ -1323,7 +1350,8 @@
    "ids": [],
    "weight": 0.00273,
    "nodes": [
-    "bk-c4-silicates"
+    "bk-c4-silicates",
+    "bk-c4-silicate-gen"
    ],
    "chunk": "group13-14"
   },
@@ -1442,7 +1470,8 @@
     "bk-c4-h2o2",
     "bk-c4-contact",
     "bk-c4-sulfur-oxides",
-    "bk-c4-sf6-inert"
+    "bk-c4-sf6-inert",
+    "bk-c4-facts-gen"
    ],
    "chunk": "group15-18"
   },
@@ -1486,7 +1515,9 @@
    "nodes": [
     "bk-c4-clo2",
     "bk-c4-interhalogens",
-    "bk-c4-halogen-redox"
+    "bk-c4-halogen-redox",
+    "bk-c2-trend-gen",
+    "bk-c4-facts-gen"
    ],
    "chunk": "group15-18"
   },
@@ -1505,7 +1536,8 @@
    "ids": [],
    "weight": 0.00273,
    "nodes": [
-    "bk-c4-xenon"
+    "bk-c4-xenon",
+    "bk-c2-trend-gen"
    ],
    "chunk": "group15-18"
   },
@@ -1524,7 +1556,8 @@
    "ids": [],
    "weight": 0.02333,
    "nodes": [
-    "bk-c4-nuclear"
+    "bk-c4-nuclear",
+    "bk-c4-nuclear-gen"
    ],
    "chunk": "reaction-toolkit"
   },
@@ -1592,7 +1625,8 @@
     "bk-c6-formula-rules",
     "bk-c7-identify-p1",
     "bk-c7-identify-p2",
-    "bk-c6-chain-gen"
+    "bk-c6-chain-gen",
+    "bk-c6-oxo-chain"
    ],
    "chunk": "naming"
   },
@@ -1638,7 +1672,9 @@
     "bk-c6-ox-state-practice",
     "bk-c6-dn-count",
     "bk-c6-cn-factors",
-    "bk-c6-chain-gen"
+    "bk-c6-chain-gen",
+    "bk-c6-ox-organo",
+    "bk-c6-oxo-chain"
    ],
    "chunk": "naming"
   },
@@ -1899,7 +1935,11 @@
     "bk-c7-lft-principles",
     "bk-c7-td-oh",
     "bk-c7-sq-planar",
-    "bk-c6-chain-gen"
+    "bk-c6-chain-gen",
+    "bk-c6-oxo-chain",
+    "bk-c7-oh-td-ratio",
+    "bk-c7-geom-orbitals",
+    "bk-c7-draw-split"
    ],
    "chunk": "field-energetics"
   },
@@ -1925,7 +1965,10 @@
     "bk-c7-identify-p2",
     "bk-c9-cr-labile",
     "bk-c7-cfse-d1-d2",
-    "bk-c6-chain-gen"
+    "bk-c6-chain-gen",
+    "bk-c6-oxo-chain",
+    "bk-c7-oh-td-ratio",
+    "bk-c7-draw-split"
    ],
    "chunk": "field-energetics"
   },
@@ -1951,7 +1994,8 @@
     "bk-c7-identify-p2",
     "bk-c8-moment-infer",
     "bk-c8-ts-d7",
-    "bk-c8-ts-d4"
+    "bk-c8-ts-d4",
+    "bk-c7-oh-td-ratio"
    ],
    "chunk": "field-energetics"
   },
@@ -1972,7 +2016,8 @@
    "weight": 0.00546,
    "nodes": [
     "bk-c7-spectrochemical",
-    "bk-c7-cr-delta"
+    "bk-c7-cr-delta",
+    "bk-c7-lig-bond"
    ],
    "chunk": "field-energetics"
   },
@@ -1996,7 +2041,8 @@
     "bk-c7-pi-classify",
     "bk-c7-pi-effects",
     "bk-c7-co-backbond",
-    "bk-c7-backbond-trend"
+    "bk-c7-backbond-trend",
+    "bk-c7-lig-bond"
    ],
    "chunk": "bonding-models"
   },
@@ -2035,7 +2081,9 @@
    "weight": 0.00546,
    "nodes": [
     "bk-c7-cu-kf5",
-    "bk-c7-jahn-teller"
+    "bk-c7-jahn-teller",
+    "bk-c7-jt-more",
+    "bk-c7-geom-orbitals"
    ],
    "chunk": "field-energetics"
   },
@@ -2079,7 +2127,8 @@
     "bk-c8-spin-only",
     "bk-c8-moment-infer",
     "bk-c8-ts-d7",
-    "bk-c8-ts-d4"
+    "bk-c8-ts-d4",
+    "bk-c8-magnetism-chain"
    ],
    "chunk": "magnetism-colour"
   },
@@ -2145,7 +2194,8 @@
     "bk-c8-ground-terms",
     "bk-c8-term-numbers",
     "bk-c8-hund",
-    "bk-c8-terms-gen"
+    "bk-c8-terms-gen",
+    "bk-c8-term-concepts"
    ],
    "chunk": "terms-ts"
   },
@@ -2196,7 +2246,8 @@
     "bk-c8-tsg-read",
     "bk-c8-tsg-reverse",
     "bk-c8-tsg-cross",
-    "bk-c8-tsg-explain"
+    "bk-c8-tsg-explain",
+    "bk-c8-term-concepts"
    ],
    "chunk": "terms-ts"
   },
@@ -2216,7 +2267,8 @@
    "ids": [],
    "weight": 0.00546,
    "nodes": [
-    "bk-c8-selection-rules"
+    "bk-c8-selection-rules",
+    "bk-c8-intensity"
    ],
    "chunk": "magnetism-colour"
   },
@@ -2235,7 +2287,8 @@
    "ids": [],
    "weight": 0.00273,
    "nodes": [
-    "bk-c8-charge-transfer"
+    "bk-c8-charge-transfer",
+    "bk-c8-intensity"
    ],
    "chunk": "magnetism-colour"
   },
@@ -3054,6 +3107,115 @@
   "bk-c8-terms-gen": [
    "c8.terms",
    "c8.microstates"
+  ],
+  "bk-c7-draw-split": [
+   "c7.splitting",
+   "c7.cfse"
+  ],
+  "bk-c3-draw-mo": [
+   "c3.diatomic",
+   "c3.hetero-diatomic",
+   "c3.polyatomic",
+   "c3.lgo"
+  ],
+  "bk-c6-ox-organo": [
+   "c6.ox-dn-cn"
+  ],
+  "bk-c6-oxo-chain": [
+   "c6.name",
+   "c6.ox-dn-cn",
+   "c7.splitting",
+   "c7.cfse"
+  ],
+  "bk-c8-magnetism-chain": [
+   "c8.spin-only"
+  ],
+  "bk-c7-oh-td-ratio": [
+   "c7.cfse",
+   "c7.splitting",
+   "c7.hs-ls"
+  ],
+  "bk-c8-term-concepts": [
+   "c8.terms",
+   "c8.tanabe-sugano"
+  ],
+  "bk-c8-intensity": [
+   "c8.selection",
+   "c8.charge-transfer"
+  ],
+  "bk-c7-jt-more": [
+   "c7.jahn-teller"
+  ],
+  "bk-c7-geom-orbitals": [
+   "c7.splitting",
+   "c7.jahn-teller"
+  ],
+  "bk-c7-lig-bond": [
+   "c7.pi-bonding",
+   "c7.spectrochemical"
+  ],
+  "bk-c2-trend-gen": [
+   "c2.periodic-trends",
+   "c4.halogens",
+   "c4.noble"
+  ],
+  "bk-c4-avgon-gen": [
+   "c4.ox-number"
+  ],
+  "bk-c4-nuclear-gen": [
+   "c4.nuclear"
+  ],
+  "bk-c3-homo-gen": [
+   "c3.homo-count"
+  ],
+  "bk-c4-crown-draw": [
+   "c4.crown"
+  ],
+  "bk-c2-trend-gen2": [
+   "c2.periodic-trends",
+   "c2.imf-bp",
+   "c2.double-bond-rule"
+  ],
+  "bk-c1-partial-charge": [
+   "c1.dative",
+   "c1.formal-charge"
+  ],
+  "bk-c3-ahn-count": [
+   "c3.polyatomic",
+   "c3.lgo"
+  ],
+  "bk-c3-diatomic-gen": [
+   "c3.diatomic",
+   "c3.diatomic-magnetism"
+  ],
+  "bk-c2-solid-props": [
+   "c2.solid-types",
+   "c2.hbond-anomaly"
+  ],
+  "bk-c4-ox-gen": [
+   "c4.ox-number"
+  ],
+  "bk-c4-silicate-gen": [
+   "c4.silicates"
+  ],
+  "bk-c4-facts-gen": [
+   "c4.silicon",
+   "c4.oxygen-sulfur",
+   "c4.halogens"
+  ],
+  "bk-c4-isotope-gen": [
+   "c4.isotope-zpe",
+   "c4.kie"
+  ],
+  "bk-c4-radical-gen": [
+   "c4.radical-chain"
+  ],
+  "bk-c1-fc-gen": [
+   "c1.formal-charge"
+  ],
+  "bk-c1-fc-draw": [
+   "c1.formal-charge",
+   "c1.dative"
   ]
  }
 }

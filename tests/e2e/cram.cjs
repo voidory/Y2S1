@@ -87,14 +87,14 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.click('#btnSkipNode'); await p.waitForTimeout(300);
   ok(await p.$('#methodOverlay') === null, 'the method sheet does not open again for the same topic');
 
-  // 5. "done a harder one, skip the easier one": seed a pass on the overall-PSI question, nothing else
+  // 5. "done a harder one, skip the easier one": seed two passes on the overall-PSI question, nothing else
   await p.evaluate(async () => {
     const E = window.__MASTERY_ENGINE__, db = await E.DB.init();
     await db.attemptLogs.clear();
-    await db.attemptLogs.put({ id: 'seed-sup', nodeId: 'bk-m11-a-overall', variantId: 'psi-overall', timestamp: Date.now() - 5000, durationMs: 1000, normalizedGrade: 1, userInput: {}, errorTags: [], missedSkillTags: [] });
+    for (const [i, k] of [[0, 'seed-sup-1'], [1, 'seed-sup-2']]) await db.attemptLogs.put({ id: k, nodeId: 'bk-m11-a-overall', variantId: 'psi-overall', timestamp: Date.now() - 6000 + i * 1000, durationMs: 1000, normalizedGrade: 1, userInput: {}, errorTags: [], missedSkillTags: [] });
   });
   await boot(); await p.selectOption('#moduleSwitch', 'CM2011'); await p.waitForTimeout(800);
-  ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.retired.nodes.has('bk-m11-a-sub')), 'passing the overall PSI question retires the single sub-index question');
+  ok(await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.retired.nodes.has('bk-m11-a-sub')), 'two passes on the overall PSI question retire the single sub-index question');
   await openPlan();
   const note = await p.evaluate(() => document.querySelector('[data-retired-note]')?.textContent.replace(/\s+/g, ' '));
   ok(note && /1 easier question is skipped/.test(note), `the Plan tab says so (${note})`);

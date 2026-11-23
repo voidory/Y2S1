@@ -41,48 +41,55 @@ test('the relation has no loops (an easier question can never be made harder tha
 const nodes11 = banks.cm2011.questionNodes;
 const sup = (logs) => Scheduler.supersession(docs.cm2011.pairs, nodes11, logs);
 
-test('passing the harder question retires the easier one; a miss, or no attempt, does not', () => {
+const twice = (id, g, v) => [log(id, g, 1, v), log(id, g, 2, v)];
+
+test('two passes in a row on the harder question retire the easier one; one pass, a miss, or no attempt, do not', () => {
   assert.equal(sup([]).nodes.size, 0);
-  assert.ok(!sup([log('bk-m11-a-overall', 0.6, 1)]).nodes.has('bk-m11-a-sub'), 'a miss on the harder one retires nothing');
-  assert.ok(!sup([log('bk-m11-a-sub', 1, 1)]).nodes.has('bk-m11-a-sub'), 'passing the easier one does not retire itself');
-  assert.ok(sup([log('bk-m11-a-overall', 0.9, 1)]).nodes.has('bk-m11-a-sub'));
-  assert.ok(!sup([log('bk-m11-a-overall', 0.84, 1)]).nodes.has('bk-m11-a-sub'), 'just under the pass line is not a pass');
+  assert.ok(!sup(twice('bk-m11-a-overall', 0.6)).nodes.has('bk-m11-a-sub'), 'misses on the harder one retire nothing');
+  assert.ok(!sup(twice('bk-m11-a-sub', 1)).nodes.has('bk-m11-a-sub'), 'passing the easier one does not retire itself');
+  assert.ok(!sup([log('bk-m11-a-overall', 1, 1)]).nodes.has('bk-m11-a-sub'), 'one lucky pass is not enough');
+  assert.ok(!sup([log('bk-m11-a-overall', 0.3, 1), log('bk-m11-a-overall', 0.95, 2)]).nodes.has('bk-m11-a-sub'), 'a miss then a pass is not enough');
+  assert.ok(sup(twice('bk-m11-a-overall', 0.9)).nodes.has('bk-m11-a-sub'));
+  assert.ok(!sup(twice('bk-m11-a-overall', 0.84)).nodes.has('bk-m11-a-sub'), 'just under the pass line is not a pass');
+  assert.ok(sup([log('bk-m11-a-overall', 0.2, 1), log('bk-m11-a-overall', 0.9, 2), log('bk-m11-a-overall', 0.9, 3)]).nodes.has('bk-m11-a-sub'), 'only the last two attempts count');
 });
 
 test('only the latest attempt counts: failing the harder one again brings the easier one back', () => {
-  const s = sup([log('bk-m11-a-overall', 0.95, 1), log('bk-m11-a-overall', 0.3, 2)]);
+  const s = sup([log('bk-m11-a-overall', 0.95, 1), log('bk-m11-a-overall', 0.95, 2), log('bk-m11-a-overall', 0.3, 3)]);
   assert.ok(!s.nodes.has('bk-m11-a-sub'));
-  const t = sup([log('bk-m11-a-overall', 0.3, 1), log('bk-m11-a-overall', 0.95, 2)]);
+  const t = sup([log('bk-m11-a-overall', 0.3, 1), log('bk-m11-a-overall', 0.95, 2), log('bk-m11-a-overall', 0.95, 3)]);
   assert.ok(t.nodes.has('bk-m11-a-sub'));
 });
 
 test('a variant-level harder ref needs that variant, not just any attempt on the node', () => {
-  assert.ok(!sup([log('bk-m11-q-dilution', 1, 1, 'q-dil-one')]).variants.size, 'the easier variant itself retires nothing');
-  const s = sup([log('bk-m11-q-dilution', 1, 1, 'q-dil-two')]);
+  assert.ok(!sup(twice('bk-m11-q-dilution', 1, 'q-dil-one')).variants.size, 'the easier variant itself retires nothing');
+  assert.ok(!sup([log('bk-m11-q-dilution', 1, 1, 'q-dil-two')]).variants.size, 'one pass on the harder variant is not enough');
+  assert.ok(sup([log('bk-m11-q-dilution', 1, 1, 'q-dil-one'), log('bk-m11-q-dilution', 1, 2, 'q-dil-two')]).variants.get('bk-m11-q-dilution')?.has('q-dil-one'), 'the variant needs one pass of its own plus two passes on the node, not two on the same variant');
+  const s = sup(twice('bk-m11-q-dilution', 1, 'q-dil-two'));
   assert.ok(s.nodes.size === 0 || !s.nodes.has('bk-m11-q-dilution'), 'one variant of the node is retired, not the node');
   assert.ok(s.variants.get('bk-m11-q-dilution')?.has('q-dil-one'));
-  assert.ok(!sup([log('bk-m11-q-dilution', 1, 1, 'q-dil-one')]).variants.get('bk-m11-q-dilution'));
+  assert.ok(!sup(twice('bk-m11-q-dilution', 1, 'q-dil-one')).variants.get('bk-m11-q-dilution'));
 });
 
 test('it follows the chain: the hardest question retires everything below it', () => {
-  const s = sup([log('bk-m11-e-cell', 1, 1, 'e-cell-znfe')]);
+  const s = sup(twice('bk-m11-e-cell', 1, 'e-cell-znfe'));
   for (const id of ['bk-m11-e-fe', 'bk-m11-e-half', 'bk-m11-e-gamma']) assert.ok(s.nodes.has(id), `${id} is covered by the full cell`);
   assert.ok(s.variants.get('bk-m11-e-cell')?.has('e-cell-cuag'), 'and the simpler cell variants');
   assert.ok(s.nodes.has('bk-m11-e-ionic'), 'and the ionic-strength question at the bottom of the chain (single salts via gamma, mixtures via the Fe cell)');
 });
 
 test('a node whose every variant is retired counts as retired', () => {
-  const s = sup([log('bk-m11-e-gamma', 1, 1, 'e-gamma-NaCl')]);
+  const s = sup(twice('bk-m11-e-gamma', 1, 'e-gamma-NaCl'));
   const ionic = nodes11.find((n) => n.id === 'bk-m11-e-ionic');
   const singles = ionic.variants.filter((v) => !/mix/.test(v.variantId)).length;
   assert.equal(s.variants.get('bk-m11-e-ionic').size, singles, 'six single-salt variants go, the two mixtures stay');
   assert.ok(!s.nodes.has('bk-m11-e-ionic'));
-  const t = sup([log('bk-m11-e-gamma', 1, 1, 'e-gamma-NaCl'), log('bk-m11-e-ph', 1, 2, 'e-ph-na2so4')]);
+  const t = sup([...twice('bk-m11-e-gamma', 1, 'e-gamma-NaCl'), log('bk-m11-e-ph', 1, 3, 'e-ph-na2so4'), log('bk-m11-e-ph', 1, 4, 'e-ph-na2so4')]);
   assert.ok(t.nodes.has('bk-m11-e-ionic'), 'with the pH question passed too, the mixtures go and the whole node is retired');
 });
 
 test('the queue never serves a retired node, and falls back if that would leave nothing', () => {
-  const retired = sup([log('bk-m11-a-overall', 1, 1)]);
+  const retired = sup(twice('bk-m11-a-overall', 1));
   const all = nodes11.map((n) => ({ ...n, moduleCode: 'CM2011' }));
   for (let i = 0; i < 40; i++) {
     const pick = Scheduler.selectNextNode(all, {}, {}, [], Scheduler.DEFAULT_SETTINGS, { retired });
@@ -102,7 +109,7 @@ test('selectVariant skips retired variants of a node that is otherwise still ser
 test('coverage, plan and cram ignore retired questions instead of counting them as unseen work', () => {
   const map = readContent('skill-map.json', 'cm2011');
   const all = nodes11.map((n) => ({ ...n, moduleCode: 'CM2011' }));
-  const retired = sup([log('bk-m11-a-overall', 1, 1)]);
+  const retired = sup(twice('bk-m11-a-overall', 1));
   const a = Scheduler.coverage(all, map, []), b = Scheduler.coverage(all, map, [], retired);
   assert.equal(b.unseenN, a.unseenN - retired.nodes.size);
   assert.ok(b.unseenMin < a.unseenMin);
@@ -123,7 +130,7 @@ test('coverage, plan and cram ignore retired questions instead of counting them 
 test('a retired question that was failed is not listed as a miss to fix', () => {
   const { Weakness } = loadEngine();
   const map = readContent('skill-map.json', 'cm2011');
-  const logs = [log('bk-m11-a-sub', 0.2, 1), log('bk-m11-a-overall', 1, 2)];
+  const logs = [log('bk-m11-a-sub', 0.2, 1), log('bk-m11-a-overall', 1, 2), log('bk-m11-a-overall', 1, 3)];
   const retired = sup(logs);
   assert.equal(Weakness.unresolvedMisses(logs, (id) => id, map, 9).length, 1);
   assert.equal(Weakness.unresolvedMisses(logs, (id) => id, map, 9, retired).length, 0);

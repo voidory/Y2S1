@@ -911,20 +911,22 @@
       /* One pass line everywhere (verdict, Weak spots, Plan, readiness, cram): a card is passed at 85% or more. */
       const PASS_GRADE = 0.85;
       /* Pure. "Done a harder one, skip the easier one." `pairs` come from content/<dir>/supersedes.json (hand-authored):
-         { easier: [ref], harder: [ref] }, a ref being a node id or node#variantId. An easier ref is retired once the LATEST attempt on any
-         harder ref (or any ref harder still: the relation is followed transitively) scored at least the pass line. Missing the harder one
-         again brings the easier one back. Returns { nodes: Set of node ids with every variant retired, variants: Map nodeId -> Set of retired
+         { easier: [ref], harder: [ref] }, a ref being a node id or node#variantId. An easier ref is retired once the LATEST TWO attempts on any
+         harder ref (or any ref harder still: the relation is followed transitively) both scored at least the pass line, the same test as "secure"
+         (one lucky pass does not hide the easier steps, where slips cascade). A variant-level ref needs that variant's latest attempt to pass and the
+         node's latest two attempts to pass. Missing the harder one again brings the easier one back. Returns { nodes: Set of node ids with every variant retired, variants: Map nodeId -> Set of retired
          variantIds (partial), why: Map ref -> [the harder refs that passed] }. */
       function supersession(pairs, nodes, logs) {
         const out = { nodes: new Set(), variants: new Map(), why: new Map() };
         if (!pairs || !pairs.length) return out;
-        const lastNode = new Map(), lastVar = new Map();
+        const lastNode = new Map(), lastVar = new Map();           // node -> its last two grades (newest first); node#variant -> latest grade
         for (const l of [...(logs || [])].sort((a, b) => (a.timestamp || 0) - (b.timestamp || 0))) {
           const g = Number(l.normalizedGrade) || 0;
-          lastNode.set(l.nodeId, g);
+          lastNode.set(l.nodeId, [g, ...(lastNode.get(l.nodeId) || [])].slice(0, 2));
           if (l.variantId) lastVar.set(l.nodeId + '#' + l.variantId, g);
         }
-        const passed = (ref) => (ref.includes('#') ? lastVar : lastNode).get(ref) >= PASS_GRADE;
+        const twoPasses = (id) => { const h = lastNode.get(id); return Boolean(h && h.length >= 2 && h[0] >= PASS_GRADE && h[1] >= PASS_GRADE); };
+        const passed = (ref) => (ref.includes('#') ? lastVar.get(ref) >= PASS_GRADE && twoPasses(ref.split('#')[0]) : twoPasses(ref));
         const harderOf = new Map();
         for (const pr of pairs) for (const e of pr.easier || []) for (const h of pr.harder || []) { if (!harderOf.has(e)) harderOf.set(e, new Set()); harderOf.get(e).add(h); }
         const reach = (ref) => {                                   // every ref harder than `ref`, followed through the chain
@@ -11566,7 +11568,7 @@
               <div data-cram-meter="${esc(m.moduleCode)}"><div class="flex h-3 rounded-full overflow-hidden bg-slate-100">${seg(secure, 'bg-emerald-500')}${seg(seenOnly, 'bg-amber-400')}${seg(blind, 'bg-slate-300')}</div>
                 <div class="mt-1.5 grid grid-cols-3 gap-2 text-[11px]"><span><span class="inline-block w-2 h-2 rounded-full bg-emerald-500 mr-1"></span><b class="font-mono">${Math.round(cov.securePct)}%</b> of marks secure</span><span><span class="inline-block w-2 h-2 rounded-full bg-amber-400 mr-1"></span><b class="font-mono">${Math.round(seenOnly)}%</b> seen, not secure</span><span><span class="inline-block w-2 h-2 rounded-full bg-slate-300 mr-1"></span><b class="font-mono">${Math.round(blind)}%</b> still blind</span></div></div>
               <p class="text-xs text-slate-600">${cov.unseenN} unseen question${cov.unseenN === 1 ? '' : 's'} (~${fmt(coverMin)}), ${cov.failedN} to fix (~${fmt(fixMin)}), plus a timed paper (~${fmt(mockMin)}): <b>${fmt(need)}</b>${budgetMin == null ? ' · set the exam date for a time budget' : ` against about <b>${fmt(budgetMin)}</b> you can give it${need > budgetMin ? `, so you are over by ${fmt(need - budgetMin)}: the order is marks per minute, so just stop when the time is gone` : ''}`}.</p>
-              ${(() => { const rn = nodesM.filter((n) => retiredNow().nodes.has(n.id)).length; return rn ? `<p class="text-[11px] text-slate-500" data-retired-note>${rn} easier question${rn === 1 ? ' is' : 's are'} skipped, because you passed a harder one that covers ${rn === 1 ? 'it' : 'them'}; ${rn === 1 ? 'it comes' : 'they come'} back if you miss that one.</p>` : ''; })()}
+              ${(() => { const rn = nodesM.filter((n) => retiredNow().nodes.has(n.id)).length; return rn ? `<p class="text-[11px] text-slate-500" data-retired-note>${rn} easier question${rn === 1 ? ' is' : 's are'} skipped, because you passed a harder one that covers ${rn === 1 ? 'it' : 'them'} twice in a row; ${rn === 1 ? 'it comes' : 'they come'} back if you miss that one.</p>` : ''; })()}
               <p class="text-[11px] text-slate-500">Unseen first: one question per topic, best marks per minute first, then a second per topic. Fix misses: the topic's method sheet once, then fresh-number cards until two pass in a row. "Secure" = the last two attempts both passed (85%).</p>`);
           }).join('');
           const focusHtml = mods.map((m) => {

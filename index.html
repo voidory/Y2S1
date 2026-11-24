@@ -8700,13 +8700,21 @@
 
       /* Predict the exception: one card per EXCEPTIONS entry; the options are shuffled, `answer` is the reaction that breaks the rule. */
       function buildExceptionCard(exc, rnd = Math.random) {
-        const opts = exc.options.slice();
-        for (let i = opts.length - 1; i > 0; i--) { const j = Math.min(i, Math.floor(rnd() * (i + 1))); [opts[i], opts[j]] = [opts[j], opts[i]]; }
-        return { rid: exc.answer, kind: 'exc', eid: exc.id, ask: exc.ask, why: exc.why, options: opts, answer: exc.answer };
+        const shuf = (a) => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.min(i, Math.floor(rnd() * (i + 1))); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+        /* the answer plus up to four of the other options and decoys (decoys look like the answer but follow the rule), so surface cues do not give it away */
+        const others = shuf([...new Set([...exc.options, ...(exc.decoys || [])])].filter((x) => x !== exc.answer)).slice(0, 4);
+        const opts = shuf([exc.answer, ...others]);
+        const then = exc.then ? { q: exc.then.q, right: exc.then.right, options: shuf([{ t: exc.then.right, ok: true }, ...exc.then.wrong.map((t) => ({ t, ok: false }))]) } : null;
+        return { rid: exc.answer, kind: 'exc', eid: exc.id, ask: exc.ask, why: exc.why, options: opts, answer: exc.answer, then };
       }
       function gradeException(card, chosenRid) {
         const ok = chosenRid === card.answer;
         return { grade: ok ? 1 : 0, feedback: ok ? 'Yes, that is the one that breaks the rule.' : 'Not that one: that reaction follows the rule.' };
+      }
+      /* second step: what the exception actually gives (so picking the odd one out by its look is not enough) */
+      function gradeExceptionOutcome(card, idx) {
+        const o = card.then && card.then.options[idx], ok = !!(o && o.ok);
+        return { grade: ok ? 1 : 0, feedback: ok ? 'Yes, and that is what it gives.' : 'That is the odd one, but it does not give that: ' + card.then.right + '.' };
       }
 
       /* say what is wrong when the species line up but the answer was still not accepted (side, number of equations) */
@@ -8812,7 +8820,7 @@
         return q.toLowerCase().split(/\s+/).filter(Boolean).every((w) => hay.includes(w));
       };
 
-      return { INTERVALS_MS, fmtFormula, fmtEq, fmtReactants, label, routesOf, norm, formulaKey, parseIsotope, chooseKind, buildCard, buildExceptionCard, gradeException, gradeCard, applyResult, isKnown, eligible, pickQueue, summary, dotLevel, matches };
+      return { INTERVALS_MS, fmtFormula, fmtEq, fmtReactants, label, routesOf, norm, formulaKey, parseIsotope, chooseKind, buildCard, buildExceptionCard, gradeException, gradeExceptionOutcome, gradeCard, applyResult, isKnown, eligible, pickQueue, summary, dotLevel, matches };
     })();
 
     /* =====================================================================
@@ -12148,7 +12156,7 @@
         const pos = `Card ${Math.min(s.i + 1, s.queue.length)} of ${s.queue.length}`;
         const grp = rxGroups()[r.g]?.title || '';
         if (c.kind === 'exc') {
-          const byId = rxById();
+          const byId = rxById(), step2 = !res && s.pick1 && c.then;
           const optRow = (id) => {
             const o = byId[id], picked = res && res.chosen === id, right = id === c.answer;
             const tone = !res ? 'border-slate-300 bg-white hover:bg-slate-50' : right ? 'border-emerald-300 bg-emerald-50' : picked ? 'border-rose-300 bg-rose-50' : 'border-slate-200 bg-white';
@@ -12156,14 +12164,21 @@
               <div class="text-[15px] leading-relaxed">${res ? Reactions.fmtEq(o.eq) : Reactions.fmtReactants(o.eq)}</div>
               ${res ? `<div class="text-[11px] font-semibold mt-0.5 ${right ? 'text-emerald-800' : picked ? 'text-rose-800' : 'text-slate-500'}">${right ? 'breaks the rule' : picked ? 'you picked this: it follows the rule' : 'follows the rule'}</div>` : ''}</button>`;
           };
-          const verdict = res ? `<div class="mt-3 border rounded-xl p-3 ${res.grade >= 1 ? 'border-emerald-300 bg-emerald-50 text-emerald-900' : 'border-rose-300 bg-rose-50 text-rose-900'}" data-rx-result><div class="font-display font-semibold text-sm" data-rx-verdict>${res.grade >= 1 ? 'Correct' : 'Not quite'}</div><p class="text-xs mt-0.5">${esc(c.why)}</p></div>
+          const thenRows = (c.then ? c.then.options : []).map((o, i) => {
+            const picked = res && res.thenPick === i, tone = !res ? 'border-slate-300 bg-white hover:bg-slate-50' : o.ok ? 'border-emerald-300 bg-emerald-50' : picked ? 'border-rose-300 bg-rose-50' : 'border-slate-200 bg-white';
+            return `<button type="button" data-rx-then="${i}" ${res ? 'disabled' : ''} class="w-full text-left rounded-xl border px-3 py-2.5 text-[15px] ${tone}">${esc(o.t)}</button>`;
+          }).join('');
+          const verdict = res ? `<div class="mt-3 border rounded-xl p-3 ${res.grade >= 1 ? 'border-emerald-300 bg-emerald-50 text-emerald-900' : 'border-rose-300 bg-rose-50 text-rose-900'}" data-rx-result><div class="font-display font-semibold text-sm" data-rx-verdict>${res.grade >= 1 ? 'Correct' : 'Not quite'}</div><p class="text-xs mt-0.5">${esc(res.feedback || '')}</p><p class="text-xs mt-1">${esc(c.why)}</p></div>
             <div class="flex items-center gap-2 mt-3"><button type="button" id="rxNext" class="ml-auto px-5 py-2.5 text-sm font-semibold bg-slate-900 text-white rounded-lg">${s.i + 1 >= s.queue.length ? 'Finish' : 'Next →'}</button></div>` : '';
+          const body = step2
+            ? `<div class="text-[11px] font-semibold text-slate-500 mb-1">Step 2 of 2</div><div class="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-[15px] mb-2">${Reactions.fmtReactants(byId[c.answer].eq)}</div><div class="text-[15px] text-slate-900 mb-2" data-rx-then-q>${esc(c.then.q)}</div><div class="space-y-2">${thenRows}</div>`
+            : `${c.then && !res ? '<div class="text-[11px] font-semibold text-slate-500 mb-1">Step 1 of 2</div>' : ''}<div class="space-y-2">${c.options.map(optRow).join('')}</div>${res && c.then && res.thenPick != null ? `<div class="text-[11px] font-semibold text-slate-500 mt-3 mb-1">${esc(c.then.q)}</div><div class="space-y-2">${thenRows}</div>` : ''}`;
           return `<div class="view-scroll" data-rx-card="exc">
             <div class="flex items-center justify-between gap-2 text-xs text-slate-500 mb-2"><span class="font-mono">${pos} · Predict the exception</span><button type="button" id="rxStop" class="underline decoration-dotted">End session</button></div>
             <div class="bg-white border border-slate-200 rounded-xl p-4">
               <div class="text-[10px] uppercase tracking-wider font-semibold text-slate-500 mb-1.5">Predict the exception</div>
-              <div class="text-[15px] text-slate-900 leading-relaxed mb-3">${esc(c.ask)}</div>
-              <div class="space-y-2">${c.options.map(optRow).join('')}</div>
+              ${step2 ? '' : `<div class="text-[15px] text-slate-900 leading-relaxed mb-3">${esc(c.ask)}</div>`}
+              ${body}
               ${verdict}
             </div></div>`;
         }
@@ -12237,7 +12252,7 @@
         if (s.forceKind === 'exc') {
           const exc = (appState.reactions.exceptions || []).find((e) => e.answer === r.id);
           s.card = Reactions.buildExceptionCard(exc, Math.random);
-          s.result = null; s.revealed = false;
+          s.result = null; s.revealed = false; s.pick1 = null;
           render();
           return;
         }
@@ -12282,8 +12297,15 @@
         $$('[data-rx-choose]', root).forEach((b) => b.addEventListener('click', async () => {
           const s = rx.session; if (!s || s.result || s.card?.kind !== 'exc') return;
           const res = Reactions.gradeException(s.card, b.dataset.rxChoose);
+          if (res.grade >= 1 && s.card.then) { s.pick1 = b.dataset.rxChoose; render(); return; }
           await rxRecord(res.grade, { feedback: res.feedback, chosen: b.dataset.rxChoose });
           render(); $('#rxNext')?.focus();
+        }));
+        $$('[data-rx-then]', root).forEach((b) => b.addEventListener('click', async () => {
+          const s = rx.session; if (!s || s.result || s.card?.kind !== 'exc' || !s.pick1) return;
+          const i = +b.dataset.rxThen, res = Reactions.gradeExceptionOutcome(s.card, i);
+          await rxRecord(res.grade, { feedback: res.feedback, chosen: s.pick1, thenPick: i });
+          s.pick1 = null; render(); $('#rxNext')?.focus();
         }));
         $$('[data-rx-exc]', root).forEach((b) => b.addEventListener('click', () => {
           const all = appState.reactions.exceptions || [], pid = b.dataset.rxExc;

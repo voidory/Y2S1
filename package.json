@@ -17,7 +17,7 @@
     "test:copy": "node tests/e2e/copy-cleanup.cjs",
     "test:plan": "node tests/e2e/plan.cjs",
     "test:data": "node tests/e2e/data-safety.cjs && node tests/e2e/plan.cjs",
-    "test:e2e": "node tests/e2e/layout-check.cjs && node tests/e2e/study-flows.cjs && node tests/e2e/answer-review.cjs && node tests/e2e/weak-spots.cjs && node tests/e2e/copy-cleanup.cjs && node tests/e2e/data-safety.cjs && node tests/e2e/plan.cjs && node tests/e2e/methods.cjs && node tests/e2e/interactions.cjs && node tests/e2e/reactions.cjs && node tests/e2e/exam-mode.cjs && node tests/e2e/cram.cjs && node tests/e2e/playlist.cjs && node tests/e2e/lists.cjs && node tests/e2e/session-plan.cjs && node tests/e2e/focus.cjs",
+    "test:e2e": "node tests/e2e/layout-check.cjs && node tests/e2e/study-flows.cjs && node tests/e2e/answer-review.cjs && node tests/e2e/weak-spots.cjs && node tests/e2e/copy-cleanup.cjs && node tests/e2e/data-safety.cjs && node tests/e2e/plan.cjs && node tests/e2e/methods.cjs && node tests/e2e/interactions.cjs && node tests/e2e/reactions.cjs && node tests/e2e/patterns.cjs && node tests/e2e/exam-mode.cjs && node tests/e2e/cram.cjs && node tests/e2e/playlist.cjs && node tests/e2e/lists.cjs && node tests/e2e/session-plan.cjs && node tests/e2e/focus.cjs",
     "test:methods": "node tests/e2e/methods.cjs",
     "test:interactions": "node tests/e2e/interactions.cjs",
     "test:cm2011": "node tests/e2e/cm2011-flows.cjs"

@@ -61,7 +61,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(rub && /critical step/.test(rub.text) && /capped at 45%/.test(rub.text) && /do not take part in bonding/.test(rub.text), 'written answer: critical steps flagged, the cap explained in plain words, and your own text echoed');
 
   // 3. multiple choice: option states
-  ok(await open('bk-c6-isomer-type', 'Nitro complex'), 'opened the select-all question');
+  ok(await open('bk-c3-mo-principles', 'Conditions'), 'opened the select-all question');
   await answerStep();
   await p.evaluate(() => {
     const c = window.__MASTERY_ENGINE__.UI.appState.current; const v = c.inst.variant;

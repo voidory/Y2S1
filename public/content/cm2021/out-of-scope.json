@@ -1,0 +1,25 @@
+{
+  "module": "CM2021",
+  "decided": "2026-11-24",
+  "why": "Left out because the course will not test them (owner, 24 Nov 2026): Chapter 9 (inorganic reaction mechanisms, the Hiang Kwee half) and isomerism (confirmed again in the latest lecture). They are hidden from the queue, the Plan, the meters and the mock. The questions stay in the bank file (and your attempts stay stored); delete this file to bring them back.",
+  "weeks": [9, 5],
+  "chunks": ["kinetics", "isomerism"],
+  "nodes": [
+    "bk-c9-labile-inert",
+    "bk-c9-cr-labile",
+    "bk-c9-mechanisms",
+    "bk-c9-evidence",
+    "bk-c9-stereo",
+    "bk-c9-trans-series",
+    "bk-c9-trans-products",
+    "bk-c5-symmetry-rules",
+    "bk-c6-isomer-type",
+    "bk-c6-agno3-test",
+    "bk-c6-isomer-counts",
+    "bk-c6-geometric-misc",
+    "bk-c6-tut4-stereo",
+    "bk-c6-drawing",
+    "bk-c6-chirality",
+    "bk-c6-delta-lambda"
+  ]
+}

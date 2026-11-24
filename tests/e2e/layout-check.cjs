@@ -21,7 +21,7 @@ const SIZES = [
   ['tablet 768x1024', { width: 768, height: 1024 }],
   ['laptop 1280x720', { width: 1280, height: 720 }],
 ];
-const STUDY_NODES = ['bk-c4-haber', 'bk-c6-isomer-type', 'bk-c1-vsepr-tut1', 'bk-c1-resonance-count', 'bk-c4-clo2', 'bk-c7-identify-p1', 'bk-c6-name-tut4', 'bk-c8-terms-d8', 'bk-c4-aqua-regia', 'bk-c3-lgo-oh'];
+const STUDY_NODES = ['bk-c4-haber', 'bk-c3-mo-principles', 'bk-c1-vsepr-tut1', 'bk-c1-resonance-count', 'bk-c4-clo2', 'bk-c7-identify-p1', 'bk-c6-name-tut4', 'bk-c8-terms-d8', 'bk-c4-aqua-regia', 'bk-c3-lgo-oh'];
 const MIME = { '.html': 'text/html', '.json': 'application/json', '.mjs': 'text/javascript', '.js': 'text/javascript', '.css': 'text/css' };
 
 function serve() {

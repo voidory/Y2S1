@@ -7402,6 +7402,34 @@
         return out;
       }
       /* Pairs "harder question covers an easier one" (content/<dir>/supersedes.json, hand-authored). Never throws. */
+      /* Out of scope (public/content/<dir>/out-of-scope.json): chapters/chunks/questions the course will not test. They are hidden everywhere
+         (queue, Plan, meters, mock, Bank) without touching the bank file or stored progress; delete the file to bring them back. */
+      async function loadAllScopes(fetchFn) {
+        const out = {};
+        for (const mod of MODULES) {
+          try {
+            const doc = await fetchContent(`content/${mod.dir}/out-of-scope.json`, fetchFn);
+            if (doc && (Array.isArray(doc.nodes) || Array.isArray(doc.chunks) || Array.isArray(doc.weeks))) out[mod.code] = doc;
+          } catch (err) { /* nothing left out for this module */ }
+        }
+        return out;
+      }
+      const scopeNodeSet = (scope) => new Set(scope?.nodes || []);
+      /* a copy of the skill map without the left-out chunks, their skills and the left-out questions */
+      function scopeSkillMap(map, scope) {
+        if (!map || !scope) return map;
+        const dropChunks = new Set(scope.chunks || []), dropNodes = scopeNodeSet(scope);
+        const skills = (map.skills || []).filter((k) => !dropChunks.has(k.chunk)).map((k) => ({ ...k, nodes: (k.nodes || []).filter((id) => !dropNodes.has(id)) }));
+        const keep = new Set(skills.map((k) => k.id));
+        const nodeSkills = {};
+        for (const [id, list] of Object.entries(map.nodeSkills || {})) if (!dropNodes.has(id)) nodeSkills[id] = list.filter((sid) => keep.has(sid));
+        return { ...map, chunks: (map.chunks || []).filter((c) => !dropChunks.has(c.id)), skills, nodeSkills };
+      }
+      function scopeModules(modules, scope) {
+        if (!scope || !(scope.weeks || []).length) return modules;
+        return modules.map((m) => (m.moduleCode === scope.module ? { ...m, weeks: (m.weeks || []).filter((w) => !scope.weeks.includes(w.weekNum)) } : m));
+      }
+
       async function loadAllSupersedes(fetchFn) {
         const out = {};
         for (const mod of MODULES) {
@@ -7539,7 +7567,7 @@
       return {
         MODULES, BANK_URL, SKILL_MAP_URL, RECORD_KEY, chunkNodeIds,
         fetchJson, fetchContent, bankKey, isReservedNodeId, planBankSync, syncBank, syncAllBanks, sweepOrphanedProgress,
-        validateSkillMap, loadSkillMap, loadAllSkillMaps, loadAllMethods, loadAllSupersedes, loadAllFocusSets, focusNodeIds, methodForChunk, methodsUrl, analyzeSkillMap, nodeProgress, skillRows,
+        validateSkillMap, loadSkillMap, loadAllSkillMaps, loadAllScopes, scopeNodeSet, scopeSkillMap, scopeModules, loadAllMethods, loadAllSupersedes, loadAllFocusSets, focusNodeIds, methodForChunk, methodsUrl, analyzeSkillMap, nodeProgress, skillRows,
       };
     })();
 
@@ -8813,6 +8841,7 @@
         reactions: null,          // CM2021 reaction list (content/cm2021/reactions.json)
         saved: [],                // question ids shortlisted "for later" (settings row savedLater), in the order to play them
         playlist: null,           // a running playlist: { on, ids, done, label, now } (session only)
+        scopes: {},               // per module: chapters, chunks and questions the course will not test (content/<dir>/out-of-scope.json), hidden everywhere
         focusSets: {},            // per module: bundles of skills to drill together (content/<dir>/focus-sets.json)
         supersedes: {},           // per module: pairs 'harder question covers an easier one' (content/<dir>/supersedes.json)
         retired: null,            // Scheduler.supersession result for the current history (questions skipped because a harder one was passed)
@@ -9142,14 +9171,15 @@
           db.attemptLogs.orderBy('timestamp').reverse().limit(500).toArray(),
           db.settings.get('global'),
         ]);
-        appState.modules = modules;
+        appState.modules = Object.keys(appState.scopes || {}).reduce((acc, code) => Content.scopeModules(acc, appState.scopes[code]), modules);
         try {
           const row = await db.settings.get('activeModule');
           if (row?.code && modules.some((m) => m.moduleCode === row.code)) appState.activeModule = row.code;
         } catch (err) { /* keep the current module */ }
         try { appState.examMode = Boolean((await db.settings.get('examMode'))?.on); } catch (err) { appState.examMode = false; }
         if (!modules.some((m) => m.moduleCode === appState.activeModule) && modules.length) appState.activeModule = modules[0].moduleCode;
-        appState.allNodes = nodes.filter((n) => !n.metadata?.composerOnly);
+        const leftOut = new Set(Object.values(appState.scopes || {}).flatMap((sc) => [...Content.scopeNodeSet(sc)]));
+        appState.allNodes = nodes.filter((n) => !n.metadata?.composerOnly && !leftOut.has(n.id));
         appState.allComposerNodes = nodes.filter((n) => n.metadata?.composerOnly);
         appState.nodes = appState.allNodes.filter((n) => n.moduleCode === appState.activeModule);
         appState.composerNodes = appState.allComposerNodes.filter((n) => n.moduleCode === appState.activeModule);
@@ -13073,8 +13103,9 @@
           appState.content.bank = await Content.syncAllBanks(db);
           appState.content.swept = await Content.sweepOrphanedProgress(db);
           if (appState.content.swept.reviewStates || appState.content.swept.attemptLogs) console.info('[Content] removed orphaned progress', appState.content.swept);
+          appState.scopes = await Content.loadAllScopes();
           const loaded = await Content.loadAllSkillMaps();
-          appState.skillMaps = loaded.maps;
+          appState.skillMaps = Object.fromEntries(Object.entries(loaded.maps).map(([code, m]) => [code, Content.scopeSkillMap(m, appState.scopes[code])]));
           appState.methods = await Content.loadAllMethods();
           appState.supersedes = await Content.loadAllSupersedes();
           appState.focusSets = await Content.loadAllFocusSets();

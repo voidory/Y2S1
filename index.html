@@ -87,6 +87,17 @@
     @media (min-width: 1024px) {
       #studyView .pane-q, #studyView .pane-a, #studyView .blk-answer, #studyView .blk-result { display: block !important; }
     }
+    /* Laptop, after grading: the question stays top left, the long review sits under it, the answers get the right column
+       (the review used to overflow a half-empty column). pane-a dissolves so its two blocks become grid items. */
+    @media (min-width: 1024px) {
+      #studyView[data-phase="graded"] .study-grid { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); grid-template-rows: minmax(0, auto) minmax(0, 1fr); }
+      #studyView[data-phase="graded"] .pane-a { display: contents !important; }
+      #studyView[data-phase="graded"] .pane-q { grid-column: 1; grid-row: 1; max-height: 42dvh; }
+      #studyView[data-phase="graded"] .blk-result, #studyView[data-phase="graded"] .blk-answer { background: #fff; border: 1px solid #E2E8F0; border-radius: 0.75rem; padding: 1rem 1.25rem; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+      #studyView[data-phase="graded"] .blk-answer { grid-column: 1; grid-row: 2; }
+      #studyView[data-phase="graded"] .blk-result { grid-column: 2; grid-row: 1 / span 2; }
+      #studyView[data-phase="graded"] .blk-result > :first-child { margin-top: 0; }
+    }
     .seg { display: flex; gap: 0.25rem; padding: 0.25rem; background: #F1F5F9; border-radius: 0.75rem; }
     .seg > button { flex: 1 1 0%; padding: 0.4rem 0.5rem; font-size: 0.75rem; font-weight: 600; color: #475569; border-radius: 0.5rem; white-space: nowrap; }
     .seg > button[aria-selected="true"] { background: #FFFFFF; color: #0F172A; box-shadow: 0 1px 2px rgba(15,23,42,.12); }
@@ -10208,11 +10219,12 @@
         const crumbTopic = (crumbTopicId && appState.skillMap.chunks?.find((c) => c.id === crumbTopicId)?.name) || node.metadata.primaryTheme;
         const stepBtn = (key, label, disabled) => `<button type="button" role="tab" data-step-go="${key}" aria-selected="${step === key}" ${disabled ? 'disabled' : ''}>${label}</button>`;
         root.innerHTML = `
-          <div class="view" id="studyView" data-step="${step}">
+          <div class="view" id="studyView" data-step="${step}" data-phase="${phase}">
             <div class="shrink-0 flex items-center justify-between gap-2">
               <div class="min-w-0 text-[11px] sm:text-xs text-slate-500 truncate">
                 <span class="font-semibold text-slate-700">${esc(crumbTopic)}</span>
                 · <span class="${node.tier === 'synthesis' ? 'text-blue-700 font-semibold' : 'hidden sm:inline'}">${tierLabel}</span>
+                <span class="hidden xl:inline ml-3 text-slate-400" data-key-legend>Keys: <kbd>N</kbd> next · <kbd>S</kbd> skip · <kbd>B</kbd> back · <kbd>L</kbd> lists · <kbd>P</kbd> plan · <kbd>M</kbd> modes · <kbd>H</kbd> hint · <kbd>*</kbd> star</span>
               </div>
               <div class="flex flex-wrap items-center justify-end gap-1.5">
                 <button type="button" data-open-sheet="plan" title="Choose what to study, tick the questions, then start" class="px-2.5 py-1.5 text-xs font-medium border border-slate-900 bg-slate-900 text-white rounded-lg" data-plan-btn>Plan session</button>
@@ -10231,7 +10243,7 @@
               ${stepBtn('question', '1 · Question')}${stepBtn('answer', '2 · Answer')}${stepBtn('result', '3 · Result', phase !== 'graded')}
             </div>
 
-            <div class="flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] gap-3 lg:gap-4">
+            <div class="study-grid flex-1 min-h-0 grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] gap-3 lg:gap-4">
               <section class="pane pane-q bg-white border border-slate-200 rounded-xl p-4 sm:p-5">
                 <div class="text-xs font-mono text-slate-500 mb-2 flex items-center justify-between gap-2">
                   <span class="min-w-0">${variant.marks} mark${variant.marks === 1 ? '' : 's'} · ~${node.metadata.estimatedMinutes} min${node.metadata.family ? ` · ${esc(node.metadata.family)}` : ''}</span>
@@ -10263,7 +10275,7 @@
               </section>
 
               <section class="pane pane-a bg-white border border-slate-200 rounded-xl p-4 sm:p-5">
-                <div class="blk-answer">
+                <div class="blk-answer" data-bounded-scroll>
                   ${inputHtml}
                   ${phase === 'answering' && slot.type !== 'typed_synthesis' ? `
                     <div class="sticky bottom-0 bg-white mt-4 max-lg:mt-auto py-3 border-t border-slate-200 flex flex-wrap items-center justify-end gap-2">
@@ -10285,7 +10297,7 @@
                   ` : ''}
                   ${rubricPanelHtml}
                 </div>
-                <div class="blk-result">
+                <div class="blk-result" data-bounded-scroll>
                   ${feedbackHtml}
                 </div>
               </section>
@@ -12002,7 +12014,7 @@
               <div class="px-3 pb-2.5"><button type="button" data-rx-drill="${esc(g.id)}" class="px-3 py-1.5 text-xs font-medium border border-slate-300 rounded-lg bg-white hover:bg-slate-50">Drill this chunk</button></div>
             </details>`;
           }).join('');
-          if (!shown) body = '<p class="py-10 text-center text-sm text-slate-500">No reactions match those filters.</p>';
+          if (!shown) body = '<p class="py-10 text-center text-sm text-slate-500 lg:col-span-2">No reactions match those filters.</p>';
         }
         return `<div class="shrink-0 space-y-2">
             <div class="flex items-center gap-2">
@@ -12013,7 +12025,7 @@
               <button type="button" id="rxCover" aria-pressed="${rx.cover}" class="ml-auto px-2.5 py-1 text-[11px] font-medium rounded-full border ${rx.cover ? 'bg-blue-700 border-blue-700 text-white' : 'bg-white border-blue-300 text-blue-800'}">${rx.cover ? 'Covered: tap a row to check' : 'Cover answers'}</button></div>
             <div class="flex items-center gap-3 text-[11px] text-slate-500">${RX_DOT.map((c, i) => `<span class="inline-flex items-center gap-1"><span class="w-2 h-2 rounded-full ${c}"></span>${RX_DOT_TEXT[i]}</span>`).join('')}</div>
           </div>
-          <div class="view-scroll space-y-2.5 pb-3" id="rxMapBody">${body}</div>`;
+          <div class="view-scroll space-y-2.5 pb-3 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-2.5 lg:content-start lg:items-start" id="rxMapBody">${body}</div>`;
       }
 
       /* Patterns: the reactions cut by reagent and by the family that shares a behaviour (content/cm2021/reactions.json "patterns"). */
@@ -12050,7 +12062,7 @@
             <div class="flex flex-wrap items-center gap-1.5">${chip('ALL', 'All')}${reagents.map((x) => chip(x, esc(x))).join('')}
               <button type="button" id="rxCover" aria-pressed="${rx.cover}" class="ml-auto px-2.5 py-1 text-[11px] font-medium rounded-full border ${rx.cover ? 'bg-blue-700 border-blue-700 text-white' : 'bg-white border-blue-300 text-blue-800'}">${rx.cover ? 'Covered: tap to check' : 'Cover answers'}</button></div>
           </div>
-          <div class="view-scroll space-y-2.5 pb-3" id="rxPatternsBody">${body || '<p class="py-10 text-center text-sm text-slate-500">No patterns for that reagent.</p>'}</div>`;
+          <div class="view-scroll space-y-2.5 pb-3 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-2.5 lg:content-start lg:items-start" id="rxPatternsBody">${body || '<p class="py-10 text-center text-sm text-slate-500 lg:col-span-2">No patterns for that reagent.</p>'}</div>`;
       }
 
       function rxTrainHtml() {
@@ -13045,6 +13057,25 @@
             appState.route = 'study';
             appState.filters = { moduleCode: 'ALL', tier: 'ALL', skillTag: null, forceNodeId: null };
             loadNextQuestion();
+          });
+          // Laptop keyboard: drive the study screen without the mouse. Ignored while typing, with a modifier, or over an overlay.
+          document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey || e.altKey || appState.route !== 'study' || !document.querySelector('#studyView')) return;
+            const t = e.target, tag = t?.tagName;
+            if (e.key === 'Escape') { document.querySelector('[data-close-sheet]')?.click(); return; }
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || t?.isContentEditable) return;
+            if (document.querySelector('[data-sheet-backdrop], #methodOverlay')) return;
+            const click = (sel) => { const b = document.querySelector(sel); if (b && !b.disabled) { e.preventDefault(); b.click(); return true; } return false; };
+            const k = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+            if (k === 'Enter') { if (tag !== 'BUTTON' && tag !== 'A') click('#btnNextQuestion'); return; }
+            if (k === 'n') click('#btnNextQuestion') || click('#btnSkipNode');
+            else if (k === 's') click('#btnSkipNode');
+            else if (k === 'b') click('#btnBack');
+            else if (k === 'l') click('[data-lists-btn]');
+            else if (k === 'p') click('[data-plan-btn]');
+            else if (k === 'm') click('[data-modes-btn]');
+            else if (k === 'h') click('#btnToggleHint');
+            else if (k === '*') click('#btnSaveLater');
           });
           $('#closeExplorerModal')?.addEventListener('click', closeExplorerModal);
           $('#explorerModal')?.addEventListener('click', (e) => { if (e.target.id === 'explorerModal') closeExplorerModal(); });

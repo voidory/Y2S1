@@ -191,3 +191,15 @@ test('exceptions: neutral stems, decoys, a second "what does it give" step, and 
     }
   }
 });
+
+test('lower case is accepted: species are matched ignoring case, in write and gap cards, and a whole equation typed into a gap card is graded as an equation', () => {
+  const w = (id, txt, kind = 'write', answer) => Reactions.gradeCard({ kind, answer }, byId[id], txt, fns).grade;
+  assert.equal(w('g1-na', '2na + o2 -> na2o2'), 1);
+  assert.equal(w('g1-ko2', '2ko2 + 2h2o -> 2koh + h2o2 + o2'), 1);
+  assert.equal(w('g1-ko2', '2ko2 + 2h2o -> 2koh + h2o2 + o2', 'gap', 'O2'), 1);
+  assert.equal(w('g1-ko2', 'o2', 'gap', 'O2'), 1);
+  assert.equal(w('g1-ko2', '2ko2 + 2h2o -> 2koh + h2o2', 'gap', 'O2'), 0, 'the wrong equation is still wrong');
+  assert.equal(w('g1-na', 'na + o2 -> na2o2'), 0.5, 'lower case does not make an unbalanced equation right');
+  assert.equal(w('g1-na', '4na + o2 -> 2na2o'), 0);
+  assert.equal(w('hal-clbr', 'br-', 'gap', 'Br^-'), 1);
+});

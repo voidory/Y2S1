@@ -8670,6 +8670,17 @@
         return card;
       }
 
+      /* Predict the exception: one card per EXCEPTIONS entry; the options are shuffled, `answer` is the reaction that breaks the rule. */
+      function buildExceptionCard(exc, rnd = Math.random) {
+        const opts = exc.options.slice();
+        for (let i = opts.length - 1; i > 0; i--) { const j = Math.min(i, Math.floor(rnd() * (i + 1))); [opts[i], opts[j]] = [opts[j], opts[i]]; }
+        return { rid: exc.answer, kind: 'exc', eid: exc.id, ask: exc.ask, why: exc.why, options: opts, answer: exc.answer };
+      }
+      function gradeException(card, chosenRid) {
+        const ok = chosenRid === card.answer;
+        return { grade: ok ? 1 : 0, feedback: ok ? 'Yes, that is the one that breaks the rule.' : 'Not that one: that reaction follows the rule.' };
+      }
+
       /* say what is wrong when the species line up but the answer was still not accepted (side, number of equations) */
       function diagnose(routes, text, fns) {
         const lines = String(text).split(/\r?\n|;/).map((l) => l.trim()).filter(Boolean).map((l) => fns.parseEquationLine(l));
@@ -8773,7 +8784,7 @@
         return q.toLowerCase().split(/\s+/).filter(Boolean).every((w) => hay.includes(w));
       };
 
-      return { INTERVALS_MS, fmtFormula, fmtEq, fmtReactants, label, routesOf, norm, formulaKey, parseIsotope, chooseKind, buildCard, gradeCard, applyResult, isKnown, eligible, pickQueue, summary, dotLevel, matches };
+      return { INTERVALS_MS, fmtFormula, fmtEq, fmtReactants, label, routesOf, norm, formulaKey, parseIsotope, chooseKind, buildCard, buildExceptionCard, gradeException, gradeCard, applyResult, isKnown, eligible, pickQueue, summary, dotLevel, matches };
     })();
 
     /* =====================================================================
@@ -12054,13 +12065,14 @@
                 <div class="min-w-0 flex-1"><div class="flex flex-wrap items-center gap-1.5"><span class="text-[11px] font-semibold text-slate-600">${esc(row.label)}</span>${row.odd ? '<span class="px-1.5 py-0.5 rounded bg-amber-50 border border-amber-300 text-amber-900 text-[10px] font-medium">exception</span>' : ''}</div>
                 ${(r.steps || [r.eq]).map((e) => `<div class="text-[14px] leading-relaxed">${revealed ? Reactions.fmtEq(e) : Reactions.fmtReactants(e)}</div>`).join('')}</div></li>`;
             }).join('')}</ul>
-            <div class="mt-1.5"><button type="button" data-rx-pat-test="${esc(p.id)}" class="px-3 py-1.5 text-xs font-medium border border-slate-300 rounded-lg bg-white hover:bg-slate-50">Test this pattern (${p.rows.length})</button></div>
+            <div class="mt-1.5 flex flex-wrap gap-1.5"><button type="button" data-rx-pat-test="${esc(p.id)}" class="px-3 py-1.5 text-xs font-medium border border-slate-300 rounded-lg bg-white hover:bg-slate-50">Test this pattern (${p.rows.length})</button>${(appState.reactions.exceptions || []).some((e) => e.pattern === p.id) ? `<button type="button" data-rx-exc="${esc(p.id)}" class="px-3 py-1.5 text-xs font-medium border border-amber-400 rounded-lg bg-amber-50 text-amber-900">Predict the exception</button>` : ''}</div>
           </section>`;
         }).join('');
         return `<div class="shrink-0 space-y-2">
             <p class="text-xs text-slate-600">The same reactions grouped by what they react with, so you can see the trend and the exception. Cover answers hides the rule and the products; Test writes each row as a card.</p>
             <div class="flex flex-wrap items-center gap-1.5">${chip('ALL', 'All')}${reagents.map((x) => chip(x, esc(x))).join('')}
-              <button type="button" id="rxCover" aria-pressed="${rx.cover}" class="ml-auto px-2.5 py-1 text-[11px] font-medium rounded-full border ${rx.cover ? 'bg-blue-700 border-blue-700 text-white' : 'bg-white border-blue-300 text-blue-800'}">${rx.cover ? 'Covered: tap to check' : 'Cover answers'}</button></div>
+              <button type="button" data-rx-exc="ALL" class="ml-auto px-2.5 py-1 text-[11px] font-medium rounded-full border bg-amber-500 border-amber-500 text-white">Predict the exception (${(appState.reactions.exceptions || []).length})</button>
+              <button type="button" id="rxCover" aria-pressed="${rx.cover}" class="px-2.5 py-1 text-[11px] font-medium rounded-full border ${rx.cover ? 'bg-blue-700 border-blue-700 text-white' : 'bg-white border-blue-300 text-blue-800'}">${rx.cover ? 'Covered: tap to check' : 'Cover answers'}</button></div>
           </div>
           <div class="view-scroll space-y-2.5 pb-3 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-2.5 lg:content-start lg:items-start" id="rxPatternsBody">${body || '<p class="py-10 text-center text-sm text-slate-500 lg:col-span-2">No patterns for that reagent.</p>'}</div>`;
       }
@@ -12105,6 +12117,26 @@
         const s = appState.rx.session, c = s.card, r = rxById()[c.rid], res = s.result;
         const pos = `Card ${Math.min(s.i + 1, s.queue.length)} of ${s.queue.length}`;
         const grp = rxGroups()[r.g]?.title || '';
+        if (c.kind === 'exc') {
+          const byId = rxById();
+          const optRow = (id) => {
+            const o = byId[id], picked = res && res.chosen === id, right = id === c.answer;
+            const tone = !res ? 'border-slate-300 bg-white hover:bg-slate-50' : right ? 'border-emerald-300 bg-emerald-50' : picked ? 'border-rose-300 bg-rose-50' : 'border-slate-200 bg-white';
+            return `<button type="button" data-rx-choose="${esc(id)}" ${res ? 'disabled' : ''} class="w-full text-left rounded-xl border px-3 py-2.5 ${tone}">
+              <div class="text-[15px] leading-relaxed">${res ? Reactions.fmtEq(o.eq) : Reactions.fmtReactants(o.eq)}</div>
+              ${res ? `<div class="text-[11px] font-semibold mt-0.5 ${right ? 'text-emerald-800' : picked ? 'text-rose-800' : 'text-slate-500'}">${right ? 'breaks the rule' : picked ? 'you picked this: it follows the rule' : 'follows the rule'}</div>` : ''}</button>`;
+          };
+          const verdict = res ? `<div class="mt-3 border rounded-xl p-3 ${res.grade >= 1 ? 'border-emerald-300 bg-emerald-50 text-emerald-900' : 'border-rose-300 bg-rose-50 text-rose-900'}" data-rx-result><div class="font-display font-semibold text-sm" data-rx-verdict>${res.grade >= 1 ? 'Correct' : 'Not quite'}</div><p class="text-xs mt-0.5">${esc(c.why)}</p></div>
+            <div class="flex items-center gap-2 mt-3"><button type="button" id="rxNext" class="ml-auto px-5 py-2.5 text-sm font-semibold bg-slate-900 text-white rounded-lg">${s.i + 1 >= s.queue.length ? 'Finish' : 'Next →'}</button></div>` : '';
+          return `<div class="view-scroll" data-rx-card="exc">
+            <div class="flex items-center justify-between gap-2 text-xs text-slate-500 mb-2"><span class="font-mono">${pos} · Predict the exception</span><button type="button" id="rxStop" class="underline decoration-dotted">End session</button></div>
+            <div class="bg-white border border-slate-200 rounded-xl p-4">
+              <div class="text-[10px] uppercase tracking-wider font-semibold text-slate-500 mb-1.5">Predict the exception</div>
+              <div class="text-[15px] text-slate-900 leading-relaxed mb-3">${esc(c.ask)}</div>
+              <div class="space-y-2">${c.options.map(optRow).join('')}</div>
+              ${verdict}
+            </div></div>`;
+        }
         const lines = r.kind === 'nuc' ? '' : (r.steps || [r.eq]).map((e) => `<div class="text-[16px] leading-relaxed">${Reactions.fmtEq(e)}</div>`).join('');
         const alt = (r.alt || []).length && r.kind !== 'nuc' ? `<p class="text-[11px] text-slate-500 mt-1">Also accepted: ${r.alt.map((a) => (Array.isArray(a) ? a : [a]).map((e) => Reactions.fmtEq(e)).join('; ')).join(' | ')}</p>` : '';
         let prompt = '', input = '';
@@ -12138,7 +12170,7 @@
         return `<div class="view-scroll" data-rx-card="${esc(c.kind)}">
           <div class="flex items-center justify-between gap-2 text-xs text-slate-500 mb-2"><span class="font-mono">${pos} · ${esc(grp)}</span><button type="button" id="rxStop" class="underline decoration-dotted">End session</button></div>
           <div class="bg-white border border-slate-200 rounded-xl p-4">
-            <div class="flex flex-wrap items-center gap-1.5 mb-1.5"><span class="text-[10px] uppercase tracking-wider font-semibold text-slate-500">${({ write: 'Write the equation', gap: 'Missing species', name: 'Name it', cond: 'Conditions', nuc: 'Nuclear equation' })[c.kind]}</span>${rxBadges(r)}</div>
+            <div class="flex flex-wrap items-center gap-1.5 mb-1.5"><span class="text-[10px] uppercase tracking-wider font-semibold text-slate-500">${({ write: 'Write the equation', gap: 'Missing species', name: 'Name it', cond: 'Conditions', nuc: 'Nuclear equation', exc: 'Predict the exception' })[c.kind]}</span>${rxBadges(r)}</div>
             <div class="text-[15px] text-slate-900 leading-relaxed">${prompt}</div>
             ${input ? `<div class="mt-3">${input}</div>` : ''}
             ${actions}${result}
@@ -12172,6 +12204,13 @@
         if (!s) return;
         if (s.i >= s.queue.length) { s.done = true; s.card = null; render(); return; }
         const r = rxById()[s.queue[s.i]];
+        if (s.forceKind === 'exc') {
+          const exc = (appState.reactions.exceptions || []).find((e) => e.answer === r.id);
+          s.card = Reactions.buildExceptionCard(exc, Math.random);
+          s.result = null; s.revealed = false;
+          render();
+          return;
+        }
         const kind = s.forceKind && r.kind !== 'nuc' ? s.forceKind : Reactions.chooseKind(r, appState.rxStats[r.id], Math.random());
         s.card = Reactions.buildCard(r, kind, Math.random());
         s.result = null; s.revealed = false;
@@ -12210,6 +12249,20 @@
         $$('details[data-rx-group]', root).forEach((d) => d.addEventListener('toggle', () => { if (d.open) rx.collapsed.delete(d.dataset.rxGroup); else rx.collapsed.add(d.dataset.rxGroup); }));
         $$('[data-rx-drill]', root).forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); rxStartSession({ group: b.dataset.rxDrill, n: 12, examOnly: false, namedOnly: false }); }));
         $$('[data-rx-drill-one]', root).forEach((b) => b.addEventListener('click', () => { const id = b.dataset.rxDrillOne; appState.rx.tab = 'train'; appState.rx.session = { queue: [id], i: 0, results: [], retried: new Set(), card: null, result: null, revealed: false, opts: {} }; rxNextCard(); }));
+        $$('[data-rx-choose]', root).forEach((b) => b.addEventListener('click', async () => {
+          const s = rx.session; if (!s || s.result || s.card?.kind !== 'exc') return;
+          const res = Reactions.gradeException(s.card, b.dataset.rxChoose);
+          await rxRecord(res.grade, { feedback: res.feedback, chosen: b.dataset.rxChoose });
+          render(); $('#rxNext')?.focus();
+        }));
+        $$('[data-rx-exc]', root).forEach((b) => b.addEventListener('click', () => {
+          const all = appState.reactions.exceptions || [], pid = b.dataset.rxExc;
+          const list = pid === 'ALL' ? all : all.filter((e) => e.pattern === pid);
+          if (!list.length) return;
+          rx.tab = 'train';
+          rx.session = { queue: list.map((e) => e.answer).sort(() => Math.random() - 0.5), i: 0, results: [], retried: new Set(), card: null, result: null, revealed: false, opts: {}, forceKind: 'exc' };
+          rxNextCard();
+        }));
         $$('[data-rx-reagent]', root).forEach((b) => b.addEventListener('click', () => { rx.reagent = b.dataset.rxReagent; render(); }));
         $$('[data-rx-pat-rule]', root).forEach((d) => d.addEventListener('click', () => { if (!rx.cover) return; const k = d.dataset.rxPatRule; if (rx.revealed.has(k)) rx.revealed.delete(k); else rx.revealed.add(k); render(); }));
         $$('[data-rx-pat-test]', root).forEach((b) => b.addEventListener('click', () => {

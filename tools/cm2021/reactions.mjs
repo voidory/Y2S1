@@ -321,6 +321,30 @@ export const PATTERNS = [
     rows: [{ label: 'CaO + water', rid: 'g2-mo-h2o' }, { label: 'Be(OH)₂ + acid', rid: 'g2-beoh-acid', odd: true }, { label: 'Be(OH)₂ + NaOH', rid: 'g2-beoh-naoh', odd: true }] },
 ];
 
+/* Predict the exception: three or four reactions that share a rule, one of which breaks it. The options are existing reactions (shown as
+   reactants only), `answer` is the one that breaks the rule, `why` is one sentence of our own wording. `pattern` links the card to a
+   Patterns-tab entry when there is one. */
+export const EXCEPTIONS = [
+  { id: 'exc-o2-ba', pattern: 'pat-o2', ask: 'Burnt in O₂, which of these does NOT give the ordinary oxide?',
+    options: ['g1-li', 'g2-mg', 'g2-ba'], answer: 'g2-ba',
+    why: 'Mg (like Be to Sr) burns to the oxide; Ba, the big cation, takes the peroxide ion and gives BaO₂.' },
+  { id: 'exc-g1-li', pattern: null, ask: 'Three of these work for every alkali metal. Which one is Li only?',
+    options: ['g1-li-n2', 'hyd-gH2', 'g1-c2h2', 'g1-h2o'], answer: 'g1-li-n2',
+    why: 'Only Li takes N₂ directly (Li₃N). Every alkali metal gives MH with H₂, loses H⁺ from acetylene and reacts with water.' },
+  { id: 'exc-sf6', pattern: 'pat-halide-h2o', ask: 'Which of these covalent halides does NOT hydrolyse, although the reaction is favourable?',
+    options: ['b-bcl3-h2o', 'si-sicl4', 'p-pcl3-h2o', 's-sf6'], answer: 's-sf6',
+    why: 'BCl₃, SiCl₄ and PCl₃ are hydrolysed at once. SF₆ has ΔG° = −221 kJ mol⁻¹ but is kinetically inert, so nothing happens.' },
+  { id: 'exc-sif4', pattern: 'pat-halide-h2o', ask: 'Which hydrolysis keeps its fluoride as a complex ion instead of releasing the halide as HX?',
+    options: ['b-bcl3-h2o', 'p-pcl3-h2o', 'si-sif4-h2o'], answer: 'si-sif4-h2o',
+    why: 'BCl₃ and PCl₃ give the oxo-acid and HCl. SiF₄ gives SiO₂ and the fluoride is taken up as [SiF₆]²⁻.' },
+  { id: 'exc-ko2', pattern: 'pat-anion-h2o', ask: 'Each of these anions takes H⁺ from water. Which one also releases O₂?',
+    options: ['hyd-cah2', 'g1-li2o', 'g1-na2o2', 'g1-ko2'], answer: 'g1-ko2',
+    why: 'H⁻ gives H₂, O²⁻ gives OH⁻ and O₂²⁻ gives H₂O₂. The superoxide gives H₂O₂ and also O₂.' },
+  { id: 'exc-bf4', pattern: 'pat-lewis-f', ask: 'These halides all add halide ion. Which one stops at four-coordinate?',
+    options: ['b-bf3-hf', 'si-sif4-f', 'si-sncl4'], answer: 'b-bf3-hf',
+    why: 'B has no room to expand and stops at [BF₄]⁻; Si and Sn go to six-coordinate ([SiF₆]²⁻, [SnCl₆]²⁻).' },
+];
+
 export function build() {
   const ids = new Set();
   for (const r of R) { if (ids.has(r.id)) throw new Error('duplicate ' + r.id); ids.add(r.id); }
@@ -328,7 +352,13 @@ export function build() {
   for (const r of R) if (!groupIds.has(r.g)) throw new Error(`${r.id}: unknown group ${r.g}`);
   for (const c of CHAINS) for (const row of c.rows) if (!ids.has(row.rid)) throw new Error(`${c.id}: unknown reaction ${row.rid}`);
   for (const p of PATTERNS) for (const row of p.rows) if (!ids.has(row.rid)) throw new Error(`${p.id}: unknown reaction ${row.rid}`);
-  return { version: 1, module: 'CM2021', exportedAt: '2026-11-24', groups: GROUPS, chains: CHAINS, patterns: PATTERNS, reactions: R };
+  const pids = new Set(PATTERNS.map((x) => x.id));
+  for (const e of EXCEPTIONS) {
+    if (e.pattern && !pids.has(e.pattern)) throw new Error(`${e.id}: unknown pattern ${e.pattern}`);
+    if (e.options.length < 3 || !e.options.includes(e.answer)) throw new Error(`${e.id}: options`);
+    for (const o of e.options) if (!ids.has(o)) throw new Error(`${e.id}: unknown reaction ${o}`);
+  }
+  return { version: 1, module: 'CM2021', exportedAt: '2026-11-24', groups: GROUPS, chains: CHAINS, patterns: PATTERNS, exceptions: EXCEPTIONS, reactions: R };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname)) {

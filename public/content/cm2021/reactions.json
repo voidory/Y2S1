@@ -643,6 +643,83 @@
    ]
   }
  ],
+ "exceptions": [
+  {
+   "id": "exc-o2-ba",
+   "pattern": "pat-o2",
+   "ask": "Burnt in O₂, which of these does NOT give the ordinary oxide?",
+   "options": [
+    "g1-li",
+    "g2-mg",
+    "g2-ba"
+   ],
+   "answer": "g2-ba",
+   "why": "Mg (like Be to Sr) burns to the oxide; Ba, the big cation, takes the peroxide ion and gives BaO₂."
+  },
+  {
+   "id": "exc-g1-li",
+   "pattern": null,
+   "ask": "Three of these work for every alkali metal. Which one is Li only?",
+   "options": [
+    "g1-li-n2",
+    "hyd-gH2",
+    "g1-c2h2",
+    "g1-h2o"
+   ],
+   "answer": "g1-li-n2",
+   "why": "Only Li takes N₂ directly (Li₃N). Every alkali metal gives MH with H₂, loses H⁺ from acetylene and reacts with water."
+  },
+  {
+   "id": "exc-sf6",
+   "pattern": "pat-halide-h2o",
+   "ask": "Which of these covalent halides does NOT hydrolyse, although the reaction is favourable?",
+   "options": [
+    "b-bcl3-h2o",
+    "si-sicl4",
+    "p-pcl3-h2o",
+    "s-sf6"
+   ],
+   "answer": "s-sf6",
+   "why": "BCl₃, SiCl₄ and PCl₃ are hydrolysed at once. SF₆ has ΔG° = −221 kJ mol⁻¹ but is kinetically inert, so nothing happens."
+  },
+  {
+   "id": "exc-sif4",
+   "pattern": "pat-halide-h2o",
+   "ask": "Which hydrolysis keeps its fluoride as a complex ion instead of releasing the halide as HX?",
+   "options": [
+    "b-bcl3-h2o",
+    "p-pcl3-h2o",
+    "si-sif4-h2o"
+   ],
+   "answer": "si-sif4-h2o",
+   "why": "BCl₃ and PCl₃ give the oxo-acid and HCl. SiF₄ gives SiO₂ and the fluoride is taken up as [SiF₆]²⁻."
+  },
+  {
+   "id": "exc-ko2",
+   "pattern": "pat-anion-h2o",
+   "ask": "Each of these anions takes H⁺ from water. Which one also releases O₂?",
+   "options": [
+    "hyd-cah2",
+    "g1-li2o",
+    "g1-na2o2",
+    "g1-ko2"
+   ],
+   "answer": "g1-ko2",
+   "why": "H⁻ gives H₂, O²⁻ gives OH⁻ and O₂²⁻ gives H₂O₂. The superoxide gives H₂O₂ and also O₂."
+  },
+  {
+   "id": "exc-bf4",
+   "pattern": "pat-lewis-f",
+   "ask": "These halides all add halide ion. Which one stops at four-coordinate?",
+   "options": [
+    "b-bf3-hf",
+    "si-sif4-f",
+    "si-sncl4"
+   ],
+   "answer": "b-bf3-hf",
+   "why": "B has no room to expand and stops at [BF₄]⁻; Si and Sn go to six-coordinate ([SiF₆]²⁻, [SnCl₆]²⁻)."
+  }
+ ],
  "reactions": [
   {
    "id": "h2-reform",

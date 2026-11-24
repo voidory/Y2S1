@@ -1936,10 +1936,10 @@
     "bk-c7-td-oh",
     "bk-c7-sq-planar",
     "bk-c6-chain-gen",
+    "bk-c7-draw-split",
     "bk-c6-oxo-chain",
     "bk-c7-oh-td-ratio",
-    "bk-c7-geom-orbitals",
-    "bk-c7-draw-split"
+    "bk-c7-geom-orbitals"
    ],
    "chunk": "field-energetics"
   },
@@ -1966,9 +1966,9 @@
     "bk-c9-cr-labile",
     "bk-c7-cfse-d1-d2",
     "bk-c6-chain-gen",
+    "bk-c7-draw-split",
     "bk-c6-oxo-chain",
-    "bk-c7-oh-td-ratio",
-    "bk-c7-draw-split"
+    "bk-c7-oh-td-ratio"
    ],
    "chunk": "field-energetics"
   },

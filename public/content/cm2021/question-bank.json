@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-23T14:32:46.362Z",
+ "exportedAt": "2026-11-24T01:40:20.733Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -30266,2738 +30266,6 @@
   },
   {
    "schemaVersion": "3.0",
-   "id": "bk-c6-ox-organo",
-   "moduleCode": "CM2021",
-   "tier": "synthesis",
-   "metadata": {
-    "title": "Oxidation state of drawn organometallic and bridged complexes",
-    "source": "Finals revision deck slides 5-6 (Ni dimer, Co alkyl, bridged Co dimer) and transfer cases",
-    "week": 7,
-    "primaryTheme": "Coordination Chemistry",
-    "conceptTags": [
-     "oxidation-state-complex",
-     "d-electron-count"
-    ],
-    "difficultyEstimate": 5,
-    "estimatedMinutes": 3,
-    "examStyle": "construct_4to6",
-    "family": "ox-organo"
-   },
-   "variants": [
-    {
-     "variantId": "c6-ox-organo-ni2",
-     "perspectiveLabel": "Ni₂Cl₂(PPh₃)₂ (bridging chlorides, Ni–Ni bond)",
-     "marks": 3,
-     "stem": "Two nickel atoms are joined by a Ni–Ni bond. Each carries one PPh₃ (a neutral donor, drawn as an arrow) and the two chlorides each bridge both nickels. The molecule is neutral: Ni₂(μ-Cl)₂(PPh₃)₂. Give the oxidation state of each nickel and its dⁿ.",
-     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
-     "explanation": "Two bridging Cl⁻ give −2 in total, PPh₃ is neutral and the Ni–Ni bond adds nothing, so the two Ni share +2: each is Ni(I), d⁹ (3d¹⁰ minus one electron).",
-     "sourceSlide": "s6",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "ox",
-        "label": "Oxidation state of each metal"
-       },
-       {
-        "key": "d",
-        "label": "n in dⁿ for that metal"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "ox": {
-        "type": "numeric",
-        "targetExpr": "1",
-        "tolerance": 0.01
-       },
-       "d": {
-        "type": "numeric",
-        "targetExpr": "9",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c6-ox-organo-conorb",
-     "perspectiveLabel": "Co(1-norbornyl)₄",
-     "marks": 3,
-     "stem": "Cobalt carries four 1-norbornyl groups (bicyclic alkyl groups bound through carbon, each counted as R⁻) in a neutral molecule, Co(C₇H₁₁)₄. Give the oxidation state of cobalt and its dⁿ.",
-     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
-     "explanation": "Each alkyl group is R⁻ (−1), four of them give −4, the molecule is neutral, so cobalt is +4: Co(IV), d⁵.",
-     "sourceSlide": "s6",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "ox",
-        "label": "Oxidation state of each metal"
-       },
-       {
-        "key": "d",
-        "label": "n in dⁿ for that metal"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "ox": {
-        "type": "numeric",
-        "targetExpr": "4",
-        "tolerance": 0.01
-       },
-       "d": {
-        "type": "numeric",
-        "targetExpr": "5",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c6-ox-organo-codimer",
-     "perspectiveLabel": "[(NH₃)₄Co(μ-OH)(μ-NH₂)Co(NH₃)₄]⁴⁺",
-     "marks": 3,
-     "stem": "Two cobalt centres are bridged by one hydroxide and one amide (NH₂⁻) and each carries four NH₃: [(NH₃)₄Co(μ-OH)(μ-NH₂)Co(NH₃)₄]⁴⁺. Give the oxidation state of each cobalt and its dⁿ.",
-     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
-     "explanation": "NH₃ is neutral, the bridging OH⁻ and NH₂⁻ give −2 in total, the complex is 4+, so the two Co share +6: each is Co(III), d⁶.",
-     "sourceSlide": "s6",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "ox",
-        "label": "Oxidation state of each metal"
-       },
-       {
-        "key": "d",
-        "label": "n in dⁿ for that metal"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "ox": {
-        "type": "numeric",
-        "targetExpr": "3",
-        "tolerance": 0.01
-       },
-       "d": {
-        "type": "numeric",
-        "targetExpr": "6",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c6-ox-organo-mn2co10",
-     "perspectiveLabel": "Mn₂(CO)₁₀ (Mn–Mn bond)",
-     "marks": 3,
-     "stem": "Mn₂(CO)₁₀ is a neutral molecule with a Mn–Mn bond and ten terminal CO ligands. Give the oxidation state of each manganese and its dⁿ.",
-     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
-     "explanation": "CO is neutral and the Mn–Mn bond adds nothing, so each Mn is 0: Mn(0), d⁷ (the neutral atom is 3d⁵4s²).",
-     "sourceSlide": "s6",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "ox",
-        "label": "Oxidation state of each metal"
-       },
-       {
-        "key": "d",
-        "label": "n in dⁿ for that metal"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "ox": {
-        "type": "numeric",
-        "targetExpr": "0",
-        "tolerance": 0.01
-       },
-       "d": {
-        "type": "numeric",
-        "targetExpr": "7",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c6-ox-organo-ptpcy3",
-     "perspectiveLabel": "Pt(PCy₃)₃",
-     "marks": 3,
-     "stem": "The neutral complex Pt(PCy₃)₃ has three tricyclohexylphosphine ligands (neutral donors). Give the oxidation state of platinum and its dⁿ.",
-     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
-     "explanation": "Phosphines are neutral, the complex is neutral, so Pt(0): d¹⁰ (5d⁹6s¹ for the atom, 6s electron moved into d).",
-     "sourceSlide": "s4",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "ox",
-        "label": "Oxidation state of each metal"
-       },
-       {
-        "key": "d",
-        "label": "n in dⁿ for that metal"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "ox": {
-        "type": "numeric",
-        "targetExpr": "0",
-        "tolerance": 0.01
-       },
-       "d": {
-        "type": "numeric",
-        "targetExpr": "10",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c6-ox-organo-zeise",
-     "perspectiveLabel": "K[PtCl₃(C₂H₄)] (Zeise's salt)",
-     "marks": 3,
-     "stem": "K[PtCl₃(C₂H₄)] contains the anion [PtCl₃(C₂H₄)]⁻ with three chloride ligands and one neutral ethene. Give the oxidation state of platinum and its dⁿ.",
-     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
-     "explanation": "Three Cl⁻ give −3, ethene is neutral and the anion is 1−, so Pt is +2: Pt(II), d⁸.",
-     "sourceSlide": "s5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "ox",
-        "label": "Oxidation state of each metal"
-       },
-       {
-        "key": "d",
-        "label": "n in dⁿ for that metal"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "ox": {
-        "type": "numeric",
-        "targetExpr": "2",
-        "tolerance": 0.01
-       },
-       "d": {
-        "type": "numeric",
-        "targetExpr": "8",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c6-ox-organo-cr2oh",
-     "perspectiveLabel": "[(NH₃)₅Cr–(μ-OH)–Cr(NH₃)₅]⁵⁺",
-     "marks": 3,
-     "stem": "Two chromium centres are bridged by a single hydroxide and each carries five NH₃: [(NH₃)₅Cr(μ-OH)Cr(NH₃)₅]⁵⁺. Give the oxidation state of each chromium and its dⁿ.",
-     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
-     "explanation": "Ten NH₃ are neutral, the bridging OH⁻ is −1, the ion is 5+, so the two Cr share +6: each is Cr(III), d³.",
-     "sourceSlide": "s6",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "ox",
-        "label": "Oxidation state of each metal"
-       },
-       {
-        "key": "d",
-        "label": "n in dⁿ for that metal"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "ox": {
-        "type": "numeric",
-        "targetExpr": "3",
-        "tolerance": 0.01
-       },
-       "d": {
-        "type": "numeric",
-        "targetExpr": "3",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c6-ox-organo-fecoh5",
-     "perspectiveLabel": "Fe(CO)₅",
-     "marks": 3,
-     "stem": "Fe(CO)₅ is a neutral molecule with five carbonyl ligands. Give the oxidation state of iron and its dⁿ.",
-     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
-     "explanation": "CO is neutral, so Fe(0): d⁸ (3d⁶4s² for the atom, the 4s electrons promoted into d in the complex).",
-     "sourceSlide": "s6",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "ox",
-        "label": "Oxidation state of each metal"
-       },
-       {
-        "key": "d",
-        "label": "n in dⁿ for that metal"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "ox": {
-        "type": "numeric",
-        "targetExpr": "0",
-        "tolerance": 0.01
-       },
-       "d": {
-        "type": "numeric",
-        "targetExpr": "8",
-        "tolerance": 0.01
-       }
-      }
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c6-oxo-chain",
-   "moduleCode": "CM2021",
-   "tier": "synthesis",
-   "metadata": {
-    "title": "Name → oxidation state → dⁿ → tetrahedral configuration → CFSE for oxo-anions",
-    "source": "Finals revision deck slides 4, 10, 15, 22, 43 (KMnO₄ and oxo ligand) and the 2025-26 final Q3(a) template",
-    "week": 7,
-    "primaryTheme": "Crystal Field Theory",
-    "conceptTags": [
-     "cfse-calculation",
-     "oxidation-state-complex",
-     "iupac-nomenclature"
-    ],
-    "difficultyEstimate": 5,
-    "estimatedMinutes": 4,
-    "examStyle": "construct_4to6",
-    "family": "oxo-chain"
-   },
-   "variants": [
-    {
-     "variantId": "c6-oxo-chain-mno4",
-     "perspectiveLabel": "KMnO₄ (d⁰, tetrahedral)",
-     "marks": 5,
-     "stem": "For **`KMnO₄`**: give its name, the oxidation state of Mn, its dⁿ count, the d-electron configuration in the tetrahedral field of the four oxide donors, and the CFSE as a multiple of Δt.",
-     "hint": "Name oxide ligands as oxo (slide 10), the metal ends in -ate in an anion (slide 15) and the cation is named first. Tetrahedral: e lies below t₂ (slide 22); each electron in e is worth −0.6 Δt, in t₂ +0.4 Δt.",
-     "explanation": "Charge balance: K⁺ plus MnO₄⁻, four O²⁻ give −8 so Mn is +7, d⁰. Tetrahedral, nothing to place in e or t₂, CFSE 0. The purple colour is ligand-to-metal charge transfer (slide 43), not a d–d band.",
-     "sourceSlide": "s4, s10, s22",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "name",
-        "label": "Name"
-       },
-       {
-        "key": "ox",
-        "label": "Oxidation state of Mn"
-       },
-       {
-        "key": "d",
-        "label": "n in dⁿ"
-       },
-       {
-        "key": "conf",
-        "label": "Configuration"
-       },
-       {
-        "key": "c",
-        "label": "CFSE (coefficient of Δt)"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "name": {
-        "type": "pattern",
-        "caseSensitive": false,
-        "acceptedPatterns": [
-         "^\\s*(?:potassium\\s+tetra(?:oxo|oxido)manganate\\s*\\(\\s*(?:VII|7)\\s*\\)|potassium\\s+permanganate)\\s*$"
-        ],
-        "expectedDisplay": "potassium tetraoxomanganate(VII)"
-       },
-       "ox": {
-        "type": "numeric",
-        "targetExpr": "7",
-        "tolerance": 0.01
-       },
-       "d": {
-        "type": "numeric",
-        "targetExpr": "0",
-        "tolerance": 0.01
-       },
-       "conf": {
-        "acceptedPatterns": [
-         "^\\s*(?:none|empty|no\\s+d[\\s-]*electrons?|d\\s*\\^?\\s*[0⁰]|0)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "none (d⁰)"
-       },
-       "c": {
-        "type": "numeric",
-        "targetExpr": "0.0",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c6-oxo-chain-cro4",
-     "perspectiveLabel": "K₂CrO₄ (d⁰, tetrahedral)",
-     "marks": 5,
-     "stem": "For **`K₂CrO₄`**: give its name, the oxidation state of Cr, its dⁿ count, the d-electron configuration in the tetrahedral field of the four oxide donors, and the CFSE as a multiple of Δt.",
-     "hint": "Name oxide ligands as oxo (slide 10), the metal ends in -ate in an anion (slide 15) and the cation is named first. Tetrahedral: e lies below t₂ (slide 22); each electron in e is worth −0.6 Δt, in t₂ +0.4 Δt.",
-     "explanation": "Four O²⁻ give −8 and the anion is 2−, so Cr is +6, d⁰: tetrahedral, CFSE 0. The yellow colour is charge transfer.",
-     "sourceSlide": "s4, s10, s22",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "name",
-        "label": "Name"
-       },
-       {
-        "key": "ox",
-        "label": "Oxidation state of Cr"
-       },
-       {
-        "key": "d",
-        "label": "n in dⁿ"
-       },
-       {
-        "key": "conf",
-        "label": "Configuration"
-       },
-       {
-        "key": "c",
-        "label": "CFSE (coefficient of Δt)"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "name": {
-        "type": "pattern",
-        "caseSensitive": false,
-        "acceptedPatterns": [
-         "^\\s*(?:potassium\\s+tetra(?:oxo|oxido)chromate\\s*\\(\\s*(?:VI|6)\\s*\\)|potassium\\s+chromate(?:\\s*\\(\\s*VI\\s*\\))?)\\s*$"
-        ],
-        "expectedDisplay": "potassium tetraoxochromate(VI)"
-       },
-       "ox": {
-        "type": "numeric",
-        "targetExpr": "6",
-        "tolerance": 0.01
-       },
-       "d": {
-        "type": "numeric",
-        "targetExpr": "0",
-        "tolerance": 0.01
-       },
-       "conf": {
-        "acceptedPatterns": [
-         "^\\s*(?:none|empty|no\\s+d[\\s-]*electrons?|d\\s*\\^?\\s*[0⁰]|0)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "none (d⁰)"
-       },
-       "c": {
-        "type": "numeric",
-        "targetExpr": "0.0",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c6-oxo-chain-mno4-2",
-     "perspectiveLabel": "K₂MnO₄ (d¹, tetrahedral)",
-     "marks": 5,
-     "stem": "For **`K₂MnO₄`**: give its name, the oxidation state of Mn, its dⁿ count, the d-electron configuration in the tetrahedral field of the four oxide donors, and the CFSE as a multiple of Δt.",
-     "hint": "Name oxide ligands as oxo (slide 10), the metal ends in -ate in an anion (slide 15) and the cation is named first. Tetrahedral: e lies below t₂ (slide 22); each electron in e is worth −0.6 Δt, in t₂ +0.4 Δt.",
-     "explanation": "Four O²⁻ give −8 and the anion is 2−, so Mn is +6, d¹. In the tetrahedral field the electron goes into e (below t₂): e¹, CFSE = 0.6 Δt.",
-     "sourceSlide": "s4, s10, s22",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "name",
-        "label": "Name"
-       },
-       {
-        "key": "ox",
-        "label": "Oxidation state of Mn"
-       },
-       {
-        "key": "d",
-        "label": "n in dⁿ"
-       },
-       {
-        "key": "conf",
-        "label": "Configuration"
-       },
-       {
-        "key": "c",
-        "label": "CFSE (coefficient of Δt)"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "name": {
-        "type": "pattern",
-        "caseSensitive": false,
-        "acceptedPatterns": [
-         "^\\s*(?:potassium\\s+tetra(?:oxo|oxido)manganate\\s*\\(\\s*(?:VI|6)\\s*\\)|potassium\\s+manganate(?:\\s*\\(\\s*VI\\s*\\))?)\\s*$"
-        ],
-        "expectedDisplay": "potassium tetraoxomanganate(VI)"
-       },
-       "ox": {
-        "type": "numeric",
-        "targetExpr": "6",
-        "tolerance": 0.01
-       },
-       "d": {
-        "type": "numeric",
-        "targetExpr": "1",
-        "tolerance": 0.01
-       },
-       "conf": {
-        "acceptedPatterns": [
-         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[1¹](?:\\s*[,·]?\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "e¹"
-       },
-       "c": {
-        "type": "numeric",
-        "targetExpr": "0.6",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c6-oxo-chain-vo4",
-     "perspectiveLabel": "Na₃VO₄ (d⁰, tetrahedral)",
-     "marks": 5,
-     "stem": "For **`Na₃VO₄`**: give its name, the oxidation state of V, its dⁿ count, the d-electron configuration in the tetrahedral field of the four oxide donors, and the CFSE as a multiple of Δt.",
-     "hint": "Name oxide ligands as oxo (slide 10), the metal ends in -ate in an anion (slide 15) and the cation is named first. Tetrahedral: e lies below t₂ (slide 22); each electron in e is worth −0.6 Δt, in t₂ +0.4 Δt.",
-     "explanation": "Four O²⁻ give −8 and the anion is 3−, so V is +5, d⁰: tetrahedral, CFSE 0.",
-     "sourceSlide": "s4, s10, s22",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "name",
-        "label": "Name"
-       },
-       {
-        "key": "ox",
-        "label": "Oxidation state of V"
-       },
-       {
-        "key": "d",
-        "label": "n in dⁿ"
-       },
-       {
-        "key": "conf",
-        "label": "Configuration"
-       },
-       {
-        "key": "c",
-        "label": "CFSE (coefficient of Δt)"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "name": {
-        "type": "pattern",
-        "caseSensitive": false,
-        "acceptedPatterns": [
-         "^\\s*(?:sodium\\s+tetra(?:oxo|oxido)vanadate\\s*\\(\\s*(?:V|5)\\s*\\)|sodium\\s+(?:ortho)?vanadate(?:\\s*\\(\\s*V\\s*\\))?)\\s*$"
-        ],
-        "expectedDisplay": "sodium tetraoxovanadate(V)"
-       },
-       "ox": {
-        "type": "numeric",
-        "targetExpr": "5",
-        "tolerance": 0.01
-       },
-       "d": {
-        "type": "numeric",
-        "targetExpr": "0",
-        "tolerance": 0.01
-       },
-       "conf": {
-        "acceptedPatterns": [
-         "^\\s*(?:none|empty|no\\s+d[\\s-]*electrons?|d\\s*\\^?\\s*[0⁰]|0)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "none (d⁰)"
-       },
-       "c": {
-        "type": "numeric",
-        "targetExpr": "0.0",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c6-oxo-chain-feo4",
-     "perspectiveLabel": "K₂FeO₄ (d², tetrahedral)",
-     "marks": 5,
-     "stem": "For **`K₂FeO₄`**: give its name, the oxidation state of Fe, its dⁿ count, the d-electron configuration in the tetrahedral field of the four oxide donors, and the CFSE as a multiple of Δt.",
-     "hint": "Name oxide ligands as oxo (slide 10), the metal ends in -ate in an anion (slide 15) and the cation is named first. Tetrahedral: e lies below t₂ (slide 22); each electron in e is worth −0.6 Δt, in t₂ +0.4 Δt.",
-     "explanation": "Four O²⁻ give −8 and the anion is 2−, so Fe is +6, d². Both electrons go into e (parallel spins): e², CFSE = 2 × 0.6 = 1.2 Δt.",
-     "sourceSlide": "s4, s10, s22",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "name",
-        "label": "Name"
-       },
-       {
-        "key": "ox",
-        "label": "Oxidation state of Fe"
-       },
-       {
-        "key": "d",
-        "label": "n in dⁿ"
-       },
-       {
-        "key": "conf",
-        "label": "Configuration"
-       },
-       {
-        "key": "c",
-        "label": "CFSE (coefficient of Δt)"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "name": {
-        "type": "pattern",
-        "caseSensitive": false,
-        "acceptedPatterns": [
-         "^\\s*(?:potassium\\s+tetra(?:oxo|oxido)ferrate\\s*\\(\\s*(?:VI|6)\\s*\\)|potassium\\s+ferrate(?:\\s*\\(\\s*VI\\s*\\))?)\\s*$"
-        ],
-        "expectedDisplay": "potassium tetraoxoferrate(VI)"
-       },
-       "ox": {
-        "type": "numeric",
-        "targetExpr": "6",
-        "tolerance": 0.01
-       },
-       "d": {
-        "type": "numeric",
-        "targetExpr": "2",
-        "tolerance": 0.01
-       },
-       "conf": {
-        "acceptedPatterns": [
-         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[2²](?:\\s*[,·]?\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-        ],
-        "caseSensitive": false,
-        "expectedDisplay": "e²"
-       },
-       "c": {
-        "type": "numeric",
-        "targetExpr": "1.2",
-        "tolerance": 0.01
-       }
-      }
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c8-magnetism-chain",
-   "moduleCode": "CM2021",
-   "tier": "synthesis",
-   "metadata": {
-    "title": "Magnetism: susceptibility to μ to unpaired electrons to high or low spin",
-    "source": "Finals revision deck slide 33 (Guoy balance; 2023-24 spin-only and 2024-25 instrument parts)",
-    "week": 8,
-    "primaryTheme": "Magnetic Properties",
-    "conceptTags": [
-     "spin-only-magnetism",
-     "high-low-spin"
-    ],
-    "difficultyEstimate": 5,
-    "estimatedMinutes": 4,
-    "examStyle": "construct_4to6",
-    "family": "magnetism"
-   },
-   "variants": [
-    {
-     "variantId": "c8-mag-fe2",
-     "perspectiveLabel": "Fe(II) complex (d⁶)",
-     "marks": 4,
-     "stem": "The molar magnetic susceptibility of an octahedral Fe(II) complex is χ_M = 1.01×10⁻² cm³ mol⁻¹ at 298 K (diamagnetic correction already made). Use μ = 2.828 √(χ_M T) to find the magnetic moment in Bohr magnetons, then the number of unpaired electrons (μ_s = √(n(n+2))), and say whether the complex is high spin or low spin (or neither).",
-     "hint": "Work out χ_M T first. Compare μ with the spin-only values for n = 1 to 5 (1.73, 2.83, 3.87, 4.90, 5.92 BM); orbital contribution is largely quenched for first-row metals.",
-     "explanation": "χ_M T = 1.01×10⁻² × 298 = 3.01, μ = 2.828 √3.01 = 4.9 BM. √(n(n+2)) = 4.90 gives n = 4: that is the high-spin d⁶ arrangement (low-spin d⁶ would be diamagnetic, n = 0).",
-     "sourceSlide": "s33",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "mu",
-        "label": "μ (BM)"
-       },
-       {
-        "key": "n",
-        "label": "Unpaired electrons"
-       },
-       {
-        "key": "spin",
-        "label": "Spin state",
-        "options": [
-         "high",
-         "low",
-         "neither"
-        ]
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "mu": {
-        "type": "numeric",
-        "targetExpr": "4.9",
-        "tolerance": 0.08
-       },
-       "n": {
-        "type": "numeric",
-        "targetExpr": "4",
-        "tolerance": 0
-       },
-       "spin": {
-        "type": "keyword",
-        "expectedExpr": "'high'",
-        "synonyms": {
-         "high": [
-          "high",
-          "high spin",
-          "hs"
-         ],
-         "low": [
-          "low",
-          "low spin",
-          "ls"
-         ],
-         "neither": [
-          "neither",
-          "not applicable",
-          "n/a",
-          "na",
-          "none"
-         ]
-        }
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c8-mag-co2",
-     "perspectiveLabel": "Co(II) complex (d⁷)",
-     "marks": 4,
-     "stem": "The molar magnetic susceptibility of an octahedral Co(II) complex is χ_M = 6.30×10⁻³ cm³ mol⁻¹ at 298 K (diamagnetic correction already made). Use μ = 2.828 √(χ_M T) to find the magnetic moment in Bohr magnetons, then the number of unpaired electrons (μ_s = √(n(n+2))), and say whether the complex is high spin or low spin (or neither).",
-     "hint": "Work out χ_M T first. Compare μ with the spin-only values for n = 1 to 5 (1.73, 2.83, 3.87, 4.90, 5.92 BM); orbital contribution is largely quenched for first-row metals.",
-     "explanation": "χ_M T = 6.30×10⁻³ × 298 = 1.88, μ = 2.828 √1.88 = 3.87 BM, so n = 3: high-spin d⁷ (low-spin d⁷ has n = 1, μ_s = 1.73).",
-     "sourceSlide": "s33",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "mu",
-        "label": "μ (BM)"
-       },
-       {
-        "key": "n",
-        "label": "Unpaired electrons"
-       },
-       {
-        "key": "spin",
-        "label": "Spin state",
-        "options": [
-         "high",
-         "low",
-         "neither"
-        ]
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "mu": {
-        "type": "numeric",
-        "targetExpr": "3.87",
-        "tolerance": 0.08
-       },
-       "n": {
-        "type": "numeric",
-        "targetExpr": "3",
-        "tolerance": 0
-       },
-       "spin": {
-        "type": "keyword",
-        "expectedExpr": "'high'",
-        "synonyms": {
-         "high": [
-          "high",
-          "high spin",
-          "hs"
-         ],
-         "low": [
-          "low",
-          "low spin",
-          "ls"
-         ],
-         "neither": [
-          "neither",
-          "not applicable",
-          "n/a",
-          "na",
-          "none"
-         ]
-        }
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c8-mag-mn2",
-     "perspectiveLabel": "Mn(II) complex (d⁵)",
-     "marks": 4,
-     "stem": "The molar magnetic susceptibility of an octahedral Mn(II) complex is χ_M = 1.47×10⁻² cm³ mol⁻¹ at 298 K (diamagnetic correction already made). Use μ = 2.828 √(χ_M T) to find the magnetic moment in Bohr magnetons, then the number of unpaired electrons (μ_s = √(n(n+2))), and say whether the complex is high spin or low spin (or neither).",
-     "hint": "Work out χ_M T first. Compare μ with the spin-only values for n = 1 to 5 (1.73, 2.83, 3.87, 4.90, 5.92 BM); orbital contribution is largely quenched for first-row metals.",
-     "explanation": "χ_M T = 1.47×10⁻² × 298 = 4.38, μ = 2.828 √4.38 = 5.92 BM, so n = 5: high-spin d⁵ (low-spin d⁵ has n = 1).",
-     "sourceSlide": "s33",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "mu",
-        "label": "μ (BM)"
-       },
-       {
-        "key": "n",
-        "label": "Unpaired electrons"
-       },
-       {
-        "key": "spin",
-        "label": "Spin state",
-        "options": [
-         "high",
-         "low",
-         "neither"
-        ]
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "mu": {
-        "type": "numeric",
-        "targetExpr": "5.92",
-        "tolerance": 0.08
-       },
-       "n": {
-        "type": "numeric",
-        "targetExpr": "5",
-        "tolerance": 0
-       },
-       "spin": {
-        "type": "keyword",
-        "expectedExpr": "'high'",
-        "synonyms": {
-         "high": [
-          "high",
-          "high spin",
-          "hs"
-         ],
-         "low": [
-          "low",
-          "low spin",
-          "ls"
-         ],
-         "neither": [
-          "neither",
-          "not applicable",
-          "n/a",
-          "na",
-          "none"
-         ]
-        }
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c8-mag-fe3",
-     "perspectiveLabel": "Fe(III) complex (d⁵)",
-     "marks": 4,
-     "stem": "The molar magnetic susceptibility of an octahedral Fe(III) complex is χ_M = 1.26×10⁻³ cm³ mol⁻¹ at 298 K (diamagnetic correction already made). Use μ = 2.828 √(χ_M T) to find the magnetic moment in Bohr magnetons, then the number of unpaired electrons (μ_s = √(n(n+2))), and say whether the complex is high spin or low spin (or neither).",
-     "hint": "Work out χ_M T first. Compare μ with the spin-only values for n = 1 to 5 (1.73, 2.83, 3.87, 4.90, 5.92 BM); orbital contribution is largely quenched for first-row metals.",
-     "explanation": "χ_M T = 1.26×10⁻³ × 298 = 0.375, μ = 2.828 √0.375 = 1.73 BM, so n = 1: low-spin d⁵ (high-spin would have n = 5, μ = 5.92).",
-     "sourceSlide": "s33",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "mu",
-        "label": "μ (BM)"
-       },
-       {
-        "key": "n",
-        "label": "Unpaired electrons"
-       },
-       {
-        "key": "spin",
-        "label": "Spin state",
-        "options": [
-         "high",
-         "low",
-         "neither"
-        ]
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "mu": {
-        "type": "numeric",
-        "targetExpr": "1.73",
-        "tolerance": 0.08
-       },
-       "n": {
-        "type": "numeric",
-        "targetExpr": "1",
-        "tolerance": 0
-       },
-       "spin": {
-        "type": "keyword",
-        "expectedExpr": "'low'",
-        "synonyms": {
-         "high": [
-          "high",
-          "high spin",
-          "hs"
-         ],
-         "low": [
-          "low",
-          "low spin",
-          "ls"
-         ],
-         "neither": [
-          "neither",
-          "not applicable",
-          "n/a",
-          "na",
-          "none"
-         ]
-        }
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c8-mag-ni2",
-     "perspectiveLabel": "Ni(II) complex (d⁸)",
-     "marks": 4,
-     "stem": "The molar magnetic susceptibility of an octahedral Ni(II) complex is χ_M = 3.36×10⁻³ cm³ mol⁻¹ at 298 K (diamagnetic correction already made). Use μ = 2.828 √(χ_M T) to find the magnetic moment in Bohr magnetons, then the number of unpaired electrons (μ_s = √(n(n+2))), and say whether the complex is high spin or low spin (or neither).",
-     "hint": "Work out χ_M T first. Compare μ with the spin-only values for n = 1 to 5 (1.73, 2.83, 3.87, 4.90, 5.92 BM); orbital contribution is largely quenched for first-row metals.",
-     "explanation": "χ_M T = 3.36×10⁻³ × 298 = 1.00, μ = 2.828 BM, so n = 2. d⁸ has the same t₂g⁶e_g² arrangement whatever the field, so high or low spin does not apply.",
-     "sourceSlide": "s33",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "mu",
-        "label": "μ (BM)"
-       },
-       {
-        "key": "n",
-        "label": "Unpaired electrons"
-       },
-       {
-        "key": "spin",
-        "label": "Spin state",
-        "options": [
-         "high",
-         "low",
-         "neither"
-        ]
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "mu": {
-        "type": "numeric",
-        "targetExpr": "2.83",
-        "tolerance": 0.08
-       },
-       "n": {
-        "type": "numeric",
-        "targetExpr": "2",
-        "tolerance": 0
-       },
-       "spin": {
-        "type": "keyword",
-        "expectedExpr": "'neither'",
-        "synonyms": {
-         "high": [
-          "high",
-          "high spin",
-          "hs"
-         ],
-         "low": [
-          "low",
-          "low spin",
-          "ls"
-         ],
-         "neither": [
-          "neither",
-          "not applicable",
-          "n/a",
-          "na",
-          "none"
-         ]
-        }
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c8-mag-guoy",
-     "perspectiveLabel": "Guoy balance and spin state",
-     "marks": 5,
-     "stem": "Describe how a Guoy balance is used to tell a paramagnetic from a diamagnetic sample and, from the measurement, to decide whether an octahedral d⁶ complex is high spin or low spin.",
-     "explanation": "Paramagnetic: weight up with the magnet on. Diamagnetic: weight down. χ → μ = 2.828 √(χT) → n from √(n(n+2)) → high spin (n = 4) or low spin (n = 0) for d⁶.",
-     "sourceSlide": "s33",
-     "inputSlot": {
-      "type": "typed_synthesis",
-      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
-      "minWordsToUnlockRubric": 12,
-      "allowPaperScratchpad": true
-     },
-     "evaluator": {
-      "type": "atomic_rubric",
-      "rubric": [
-       {
-        "id": "r1",
-        "criterion": "The sample tube hangs between magnet poles and is weighed with the magnet off and on",
-        "marks": 1,
-        "isCritical": false
-       },
-       {
-        "id": "r2",
-        "criterion": "A paramagnetic sample is drawn into the field, so its apparent weight increases; a diamagnetic sample is pushed out, so it decreases",
-        "marks": 1.5,
-        "isCritical": true
-       },
-       {
-        "id": "r3",
-        "criterion": "The change in weight gives the molar susceptibility χ, and μ = 2.828 √(χT)",
-        "marks": 1,
-        "isCritical": true
-       },
-       {
-        "id": "r4",
-        "criterion": "Set μ = √(n(n+2)) to find the number of unpaired electrons n",
-        "marks": 1,
-        "isCritical": true
-       },
-       {
-        "id": "r5",
-        "criterion": "Compare n with the dⁿ arrangements: d⁶ high spin n = 4, low spin n = 0 (diamagnetic); orbital contribution is quenched for first-row metals so the spin-only value is adequate",
-        "marks": 0.5,
-        "isCritical": false
-       }
-      ]
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c7-oh-td-ratio",
-   "moduleCode": "CM2021",
-   "tier": "synthesis",
-   "metadata": {
-    "title": "Octahedral against tetrahedral CFSE and why tetrahedral complexes are high spin",
-    "source": "Finals revision deck slides 19-22; the 27/8 ratio type recurs in the mid-terms",
-    "week": 7,
-    "primaryTheme": "Crystal Field Theory",
-    "conceptTags": [
-     "cfse-calculation",
-     "tetrahedral"
-    ],
-    "difficultyEstimate": 5,
-    "estimatedMinutes": 3,
-    "examStyle": "construct_4to6",
-    "family": "oh-td"
-   },
-   "variants": [
-    {
-     "variantId": "c7-ohtd-ni2",
-     "perspectiveLabel": "Ni(II) d⁸",
-     "marks": 4,
-     "stem": "Compare the CFSE of Ni(II) (d⁸) in an octahedral and in a tetrahedral complex of the same weak-field ligand (both high spin), taking Δt = 4/9 Δo. Give the CFSE of each as a coefficient of its own Δ, the tetrahedral value in units of Δo, and the ratio CFSE(octahedral) : CFSE(tetrahedral) (pairing energy ignored).",
-     "hint": "Octahedral: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron. Tetrahedral: −0.6 Δt per e electron, +0.4 Δt per t₂ electron. Stabilisation is reported as a positive number.",
-     "explanation": "Octahedral d⁸ is t₂g⁶e_g²: 6(0.4) − 2(0.6) = 1.2 Δo. Tetrahedral d⁸ is e⁴t₂⁴: 4(0.6) − 4(0.4) = 0.8 Δt = 0.8 × 4/9 Δo = 0.356 Δo. Ratio 1.2 / 0.356 = 3.375 = 27/8.",
-     "sourceSlide": "s19-22",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "oh",
-        "label": "Octahedral CFSE (× Δo)"
-       },
-       {
-        "key": "td",
-        "label": "Tetrahedral CFSE (× Δt)"
-       },
-       {
-        "key": "tdo",
-        "label": "Tetrahedral CFSE in units of Δo"
-       },
-       {
-        "key": "r",
-        "label": "Ratio Oh : Td"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "oh": {
-        "type": "numeric",
-        "targetExpr": "1.2",
-        "tolerance": 0.01
-       },
-       "td": {
-        "type": "numeric",
-        "targetExpr": "0.8",
-        "tolerance": 0.01
-       },
-       "tdo": {
-        "type": "numeric",
-        "targetExpr": "0.356",
-        "tolerance": 0.01
-       },
-       "r": {
-        "type": "numeric",
-        "targetExpr": "3.375",
-        "tolerance": 0.05
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c7-ohtd-co2",
-     "perspectiveLabel": "Co(II) d⁷",
-     "marks": 4,
-     "stem": "Compare the CFSE of Co(II) (d⁷) in an octahedral and in a tetrahedral complex of the same weak-field ligand (both high spin), taking Δt = 4/9 Δo. Give the CFSE of each as a coefficient of its own Δ, the tetrahedral value in units of Δo, and the ratio CFSE(octahedral) : CFSE(tetrahedral) (pairing energy ignored).",
-     "hint": "Octahedral: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron. Tetrahedral: −0.6 Δt per e electron, +0.4 Δt per t₂ electron. Stabilisation is reported as a positive number.",
-     "explanation": "Octahedral high-spin d⁷ is t₂g⁵e_g²: 5(0.4) − 2(0.6) = 0.8 Δo. Tetrahedral d⁷ is e⁴t₂³: 4(0.6) − 3(0.4) = 1.2 Δt = 0.533 Δo. Ratio 0.8 / 0.533 = 1.5 (this is why Co(II) forms tetrahedral halide complexes so readily).",
-     "sourceSlide": "s19-22",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "oh",
-        "label": "Octahedral CFSE (× Δo)"
-       },
-       {
-        "key": "td",
-        "label": "Tetrahedral CFSE (× Δt)"
-       },
-       {
-        "key": "tdo",
-        "label": "Tetrahedral CFSE in units of Δo"
-       },
-       {
-        "key": "r",
-        "label": "Ratio Oh : Td"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "oh": {
-        "type": "numeric",
-        "targetExpr": "0.8",
-        "tolerance": 0.01
-       },
-       "td": {
-        "type": "numeric",
-        "targetExpr": "1.2",
-        "tolerance": 0.01
-       },
-       "tdo": {
-        "type": "numeric",
-        "targetExpr": "0.533",
-        "tolerance": 0.01
-       },
-       "r": {
-        "type": "numeric",
-        "targetExpr": "1.5",
-        "tolerance": 0.05
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c7-ohtd-cu2",
-     "perspectiveLabel": "Cu(II) d⁹",
-     "marks": 4,
-     "stem": "Compare the CFSE of Cu(II) (d⁹) in an octahedral and in a tetrahedral complex of the same weak-field ligand (both high spin), taking Δt = 4/9 Δo. Give the CFSE of each as a coefficient of its own Δ, the tetrahedral value in units of Δo, and the ratio CFSE(octahedral) : CFSE(tetrahedral) (pairing energy ignored).",
-     "hint": "Octahedral: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron. Tetrahedral: −0.6 Δt per e electron, +0.4 Δt per t₂ electron. Stabilisation is reported as a positive number.",
-     "explanation": "Octahedral d⁹ is t₂g⁶e_g³: 6(0.4) − 3(0.6) = 0.6 Δo. Tetrahedral d⁹ is e⁴t₂⁵: 4(0.6) − 5(0.4) = 0.4 Δt = 0.178 Δo. Ratio 0.6 / 0.178 = 3.375.",
-     "sourceSlide": "s19-22",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "oh",
-        "label": "Octahedral CFSE (× Δo)"
-       },
-       {
-        "key": "td",
-        "label": "Tetrahedral CFSE (× Δt)"
-       },
-       {
-        "key": "tdo",
-        "label": "Tetrahedral CFSE in units of Δo"
-       },
-       {
-        "key": "r",
-        "label": "Ratio Oh : Td"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "oh": {
-        "type": "numeric",
-        "targetExpr": "0.6",
-        "tolerance": 0.01
-       },
-       "td": {
-        "type": "numeric",
-        "targetExpr": "0.4",
-        "tolerance": 0.01
-       },
-       "tdo": {
-        "type": "numeric",
-        "targetExpr": "0.178",
-        "tolerance": 0.01
-       },
-       "r": {
-        "type": "numeric",
-        "targetExpr": "3.375",
-        "tolerance": 0.05
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c7-ohtd-fe2",
-     "perspectiveLabel": "Fe(II) d⁶",
-     "marks": 4,
-     "stem": "Compare the CFSE of Fe(II) (d⁶) in an octahedral and in a tetrahedral complex of the same weak-field ligand (both high spin), taking Δt = 4/9 Δo. Give the CFSE of each as a coefficient of its own Δ, the tetrahedral value in units of Δo, and the ratio CFSE(octahedral) : CFSE(tetrahedral) (pairing energy ignored).",
-     "hint": "Octahedral: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron. Tetrahedral: −0.6 Δt per e electron, +0.4 Δt per t₂ electron. Stabilisation is reported as a positive number.",
-     "explanation": "Octahedral high-spin d⁶ is t₂g⁴e_g²: 4(0.4) − 2(0.6) = 0.4 Δo. Tetrahedral d⁶ is e³t₂³: 3(0.6) − 3(0.4) = 0.6 Δt = 0.267 Δo. Ratio 0.4 / 0.267 = 1.5.",
-     "sourceSlide": "s19-22",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "oh",
-        "label": "Octahedral CFSE (× Δo)"
-       },
-       {
-        "key": "td",
-        "label": "Tetrahedral CFSE (× Δt)"
-       },
-       {
-        "key": "tdo",
-        "label": "Tetrahedral CFSE in units of Δo"
-       },
-       {
-        "key": "r",
-        "label": "Ratio Oh : Td"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "oh": {
-        "type": "numeric",
-        "targetExpr": "0.4",
-        "tolerance": 0.01
-       },
-       "td": {
-        "type": "numeric",
-        "targetExpr": "0.6",
-        "tolerance": 0.01
-       },
-       "tdo": {
-        "type": "numeric",
-        "targetExpr": "0.267",
-        "tolerance": 0.01
-       },
-       "r": {
-        "type": "numeric",
-        "targetExpr": "1.5",
-        "tolerance": 0.05
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c7-ohtd-why-hs",
-     "perspectiveLabel": "Why tetrahedral complexes are high spin",
-     "marks": 1,
-     "stem": "Why do tetrahedral complexes almost always adopt high-spin configurations?",
-     "explanation": "No orbital points straight at a ligand in a tetrahedron, so the splitting is small (Δt = 4/9 Δo) and rarely beats the pairing energy: electrons occupy both sets singly first, high spin. The e set is the lower one, and strong-field ligands in a tetrahedron are possible but still do not give low spin because Δt stays small.",
-     "sourceSlide": "s22",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Δt is only about 4/9 of Δo, so it rarely exceeds the pairing energy"
-       },
-       {
-        "id": "b",
-        "label": "Δt is larger than Δo, so electrons avoid the upper set"
-       },
-       {
-        "id": "c",
-        "label": "the e orbitals lie above the t₂ orbitals, which forces parallel spins"
-       },
-       {
-        "id": "d",
-        "label": "tetrahedral ligands are always weak-field ligands"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c7-ohtd-order",
-     "perspectiveLabel": "Which set is lower in a tetrahedron",
-     "marks": 1,
-     "stem": "In a tetrahedral crystal field, which statement about the d orbitals is correct?",
-     "explanation": "The ligands sit at alternate corners of a cube. The t₂ orbitals point toward the cube edges (nearer the ligands, more repulsion, higher); e points to the faces (lower). There is no inversion centre, so no g or u labels.",
-     "sourceSlide": "s21",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "d_z² and d_x²−y² (e) are lower, d_xy, d_xz and d_yz (t₂) are higher"
-       },
-       {
-        "id": "b",
-        "label": "d_xy, d_xz and d_yz (t₂) are lower, d_z² and d_x²−y² (e) are higher"
-       },
-       {
-        "id": "c",
-        "label": "all five stay degenerate in a tetrahedron"
-       },
-       {
-        "id": "d",
-        "label": "the sets are labelled e_g and t₂g"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c8-term-concepts",
-   "moduleCode": "CM2021",
-   "tier": "synthesis",
-   "metadata": {
-    "title": "Term, Tanabe-Sugano and molecular-term concepts",
-    "source": "Finals revision deck slides 34-41",
-    "week": 8,
-    "primaryTheme": "Term Symbols",
-    "conceptTags": [
-     "term-symbols",
-     "tanabe-sugano"
-    ],
-    "difficultyEstimate": 5,
-    "estimatedMinutes": 3,
-    "examStyle": "construct_4to6",
-    "family": "term-concepts"
-   },
-   "variants": [
-    {
-     "variantId": "c8-tc-order-d2",
-     "perspectiveLabel": "Observed order of the d² terms",
-     "marks": 1,
-     "stem": "For a free ion with a d² configuration, which energy order of the five terms (lowest first) is observed, the one that differs from the naive order of Hund-type rules?",
-     "explanation": "The rules (largest multiplicity, then largest L) predict ³F < ³P < ¹G < ¹D < ¹S, but the observed order is ³F < ¹D < ³P < ¹G < ¹S. Only the ground term (³F) is reliably predicted.",
-     "sourceSlide": "s38",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "³F < ¹D < ³P < ¹G < ¹S"
-       },
-       {
-        "id": "b",
-        "label": "³F < ³P < ¹G < ¹D < ¹S"
-       },
-       {
-        "id": "c",
-        "label": "³F < ³P < ¹D < ¹G < ¹S"
-       },
-       {
-        "id": "d",
-        "label": "¹D < ³F < ³P < ¹G < ¹S"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c8-tc-rules",
-     "perspectiveLabel": "What the rules predict reliably",
-     "marks": 1,
-     "stem": "Which statement about predicting the energies of spectroscopic terms is correct?",
-     "explanation": "The spin-multiplicity rule is fairly reliable for ordering, but the greatest-L rule and the two rules together reliably predict only the ground term; the d² example shows the excited terms come in a different order.",
-     "sourceSlide": "s38",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "The highest-multiplicity and greatest-L rules reliably give only the ground term"
-       },
-       {
-        "id": "b",
-        "label": "They give the correct energy order of all terms of the configuration"
-       },
-       {
-        "id": "c",
-        "label": "The greatest-L rule orders every term of the same multiplicity correctly"
-       },
-       {
-        "id": "d",
-        "label": "They apply only to d¹ and d⁹ ions"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c8-tc-aet",
-     "perspectiveLabel": "A, E or T for the ground configuration",
-     "marks": 3,
-     "stem": "In an octahedral complex, the letter of a molecular term shows how the d electrons occupy the degenerate sets: T for a triply degenerate set that is asymmetrically occupied, E for a doubly degenerate set that is asymmetrically occupied, A (or B) when every set is symmetrically occupied (empty, half-filled or full). Give the letter for each configuration.",
-     "explanation": "T: t₂g¹ and t₂g⁴ (three orbitals, uneven filling). A: t₂g³, t₂g³e_g² and t₂g⁶e_g² (every set empty, half-filled or full). E: e_g¹ and e_g³ with a symmetric t₂g (high-spin d⁴ and d⁹). The full labels are ²T₂g, ⁴A₂g, ⁵E_g, ⁶A₁g, ⁵T₂g, ³A₂g and ²E_g.",
-     "sourceSlide": "s40",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "c0",
-        "label": "t₂g¹"
-       },
-       {
-        "key": "c1",
-        "label": "t₂g³"
-       },
-       {
-        "key": "c2",
-        "label": "t₂g³e_g¹"
-       },
-       {
-        "key": "c3",
-        "label": "t₂g³e_g²"
-       },
-       {
-        "key": "c4",
-        "label": "t₂g⁴e_g²"
-       },
-       {
-        "key": "c5",
-        "label": "t₂g⁶e_g²"
-       },
-       {
-        "key": "c6",
-        "label": "t₂g⁶e_g³"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "c0": {
-        "type": "pattern",
-        "caseSensitive": false,
-        "acceptedPatterns": [
-         "^\\s*T\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
-        ],
-        "expectedDisplay": "T"
-       },
-       "c1": {
-        "type": "pattern",
-        "caseSensitive": false,
-        "acceptedPatterns": [
-         "^\\s*A\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
-        ],
-        "expectedDisplay": "A"
-       },
-       "c2": {
-        "type": "pattern",
-        "caseSensitive": false,
-        "acceptedPatterns": [
-         "^\\s*E\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
-        ],
-        "expectedDisplay": "E"
-       },
-       "c3": {
-        "type": "pattern",
-        "caseSensitive": false,
-        "acceptedPatterns": [
-         "^\\s*A\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
-        ],
-        "expectedDisplay": "A"
-       },
-       "c4": {
-        "type": "pattern",
-        "caseSensitive": false,
-        "acceptedPatterns": [
-         "^\\s*T\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
-        ],
-        "expectedDisplay": "T"
-       },
-       "c5": {
-        "type": "pattern",
-        "caseSensitive": false,
-        "acceptedPatterns": [
-         "^\\s*A\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
-        ],
-        "expectedDisplay": "A"
-       },
-       "c6": {
-        "type": "pattern",
-        "caseSensitive": false,
-        "acceptedPatterns": [
-         "^\\s*E\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
-        ],
-        "expectedDisplay": "E"
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c8-tc-noncross",
-     "perspectiveLabel": "Non-crossing rule",
-     "marks": 1,
-     "stem": "On a Tanabe-Sugano diagram, what happens when two terms of the same symmetry approach each other as the field strength increases?",
-     "explanation": "Terms of the same symmetry obey the non-crossing rule: as the ligand field brings them close they bend away from each other. Terms of different symmetry can cross.",
-     "sourceSlide": "s41",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "They do not cross: they bend apart"
-       },
-       {
-        "id": "b",
-        "label": "They cross at the point where they meet"
-       },
-       {
-        "id": "c",
-        "label": "They merge into a single level"
-       },
-       {
-        "id": "d",
-        "label": "The upper one is lost from the diagram"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c8-tc-racah",
-     "perspectiveLabel": "What B is",
-     "marks": 1,
-     "stem": "On a Tanabe-Sugano diagram the axes are E/B and Δo/B. What is the Racah parameter B?",
-     "explanation": "B measures electron-electron repulsion between terms of the same multiplicity; E is the energy above the ground state and Δ the ligand-field splitting, so dividing by B makes one diagram serve every complex of that dⁿ.",
-     "sourceSlide": "s41",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "A measure of the repulsion between terms of the same multiplicity"
-       },
-       {
-        "id": "b",
-        "label": "The ligand-field splitting Δo"
-       },
-       {
-        "id": "c",
-        "label": "The energy of the excited state above the ground state"
-       },
-       {
-        "id": "d",
-        "label": "The spin-orbit coupling constant"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c8-tc-hole",
-     "perspectiveLabel": "dⁿ and d¹⁰⁻ⁿ share terms",
-     "marks": 1,
-     "stem": "Which configuration has the same set of spectroscopic terms (the same atomic term symbols) as d³?",
-     "explanation": "dⁿ and d¹⁰⁻ⁿ have the same terms (n electrons behave like n holes in a full shell): d³ = d⁷ (⁴F, ⁴P, ²H, ²G, ²F, ²D twice, ²P), d² = d⁸ and d¹ = d⁹ (²D).",
-     "sourceSlide": "s36",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "d⁷"
-       },
-       {
-        "id": "b",
-        "label": "d⁴"
-       },
-       {
-        "id": "c",
-        "label": "d⁶"
-       },
-       {
-        "id": "d",
-        "label": "d⁵"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c8-intensity",
-   "moduleCode": "CM2021",
-   "tier": "synthesis",
-   "metadata": {
-    "title": "Selection rules, band intensity and charge-transfer bands",
-    "source": "Finals revision deck slides 42-43",
-    "week": 8,
-    "primaryTheme": "UV-Vis Spectroscopy",
-    "conceptTags": [
-     "selection-rules",
-     "charge-transfer"
-    ],
-    "difficultyEstimate": 5,
-    "estimatedMinutes": 3,
-    "examStyle": "construct_4to6",
-    "family": "intensity"
-   },
-   "variants": [
-    {
-     "variantId": "c8-int-rank",
-     "perspectiveLabel": "Rank four bands by ε",
-     "marks": 3,
-     "stem": "Order these absorption bands from the weakest to the strongest (smallest to largest molar absorptivity ε): the d–d band of [Mn(H₂O)₆]²⁺ (high-spin d⁵), the d–d band of [Ti(H₂O)₆]³⁺, the d–d band of tetrahedral [NiCl₄]²⁻, and the intense purple band of [MnO₄]⁻.",
-     "explanation": "Weakest to strongest: [Mn(H₂O)₆]²⁺ (spin-forbidden, ε < 1), [Ti(H₂O)₆]³⁺ (spin-allowed but Laporte-forbidden in a centrosymmetric complex, ε about 1-10), [NiCl₄]²⁻ (spin- and Laporte-allowed because a tetrahedron has no inversion centre, ε about 10-1000), [MnO₄]⁻ (charge transfer, fully allowed, ε about 1000-50000).",
-     "sourceSlide": "s42",
-     "inputSlot": {
-      "type": "ordered_list",
-      "directionLabel": "Weakest → strongest band (smallest to largest ε)",
-      "items": [
-       {
-        "id": "ti",
-        "label": "[Ti(H₂O)₆]³⁺ d–d"
-       },
-       {
-        "id": "mno4",
-        "label": "[MnO₄]⁻ band"
-       },
-       {
-        "id": "mn",
-        "label": "[Mn(H₂O)₆]²⁺ d–d"
-       },
-       {
-        "id": "ni",
-        "label": "[NiCl₄]²⁻ d–d"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "order_match",
-      "targetOrder": [
-       "mn",
-       "ti",
-       "ni",
-       "mno4"
-      ]
-     }
-    },
-    {
-     "variantId": "c8-int-tetra",
-     "perspectiveLabel": "Why tetrahedral d–d bands are stronger",
-     "marks": 1,
-     "stem": "The d–d bands of tetrahedral [NiCl₄]²⁻ are much more intense than those of octahedral [Ni(H₂O)₆]²⁺. What is the reason?",
-     "explanation": "The Laporte rule (g ↔ u only) forbids d–d bands in a centrosymmetric octahedron (ε about 1-10); without an inversion centre the rule relaxes (d–p mixing) and the band is much stronger (ε about 10-1000). Both complexes are spin-allowed.",
-     "sourceSlide": "s42",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "A tetrahedron has no centre of inversion, so d–d transitions are not Laporte-forbidden"
-       },
-       {
-        "id": "b",
-        "label": "The tetrahedral complex has more d electrons"
-       },
-       {
-        "id": "c",
-        "label": "The d–d transitions in the tetrahedral complex are spin-allowed but those in the octahedral complex are not"
-       },
-       {
-        "id": "d",
-        "label": "Chloride is a stronger-field ligand than water"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c8-int-lmct",
-     "perspectiveLabel": "Type of band in [MnO₄]⁻",
-     "marks": 1,
-     "stem": "The intense purple colour of [MnO₄]⁻ (ε of the order of 10³) comes from which kind of transition?",
-     "explanation": "Mn(VII) is d⁰, so there are no d electrons to excite in a d–d band. The colour is charge transfer from ligand-based orbitals (O²⁻) to empty metal d orbitals: LMCT, fully allowed and very intense.",
-     "sourceSlide": "s43",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Ligand-to-metal charge transfer from O²⁻-based orbitals into empty metal d orbitals (Mn is d⁰)"
-       },
-       {
-        "id": "b",
-        "label": "A spin-forbidden d–d transition"
-       },
-       {
-        "id": "c",
-        "label": "A Laporte-forbidden d–d transition within the e and t₂ sets"
-       },
-       {
-        "id": "d",
-        "label": "Metal-to-ligand charge transfer from filled Mn d orbitals"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c8-int-which",
-     "perspectiveLabel": "LMCT or MLCT from the ions",
-     "marks": 1,
-     "stem": "Which combination of metal and ligand favours a low-energy metal-to-ligand charge-transfer (MLCT) band?",
-     "explanation": "MLCT moves an electron from a metal-based filled orbital to an empty ligand orbital, so it needs a metal that is easy to oxidise (low oxidation state) and a ligand with low-lying acceptor orbitals. The reverse pairing (high-valent metal, π-donor ligand) gives LMCT.",
-     "sourceSlide": "s43",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "A metal in a low oxidation state with filled d orbitals and a π-acceptor ligand with low-lying empty orbitals (such as CO, CN⁻ or bpy)"
-       },
-       {
-        "id": "b",
-        "label": "A metal in a high oxidation state with empty d orbitals and a π-donor ligand such as O²⁻ or Cl⁻"
-       },
-       {
-        "id": "c",
-        "label": "A d⁰ metal with a σ-only ligand such as NH₃"
-       },
-       {
-        "id": "d",
-        "label": "Any complex with a spin-forbidden d–d band"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c8-int-ct-strong",
-     "perspectiveLabel": "Why charge-transfer bands are intense",
-     "marks": 1,
-     "stem": "Why are charge-transfer bands (ε about 10³-10⁵) usually far more intense than d–d bands?",
-     "explanation": "Charge-transfer transitions move an electron between metal-based and ligand-based orbitals of different parity without a spin flip, so both the spin and Laporte rules are satisfied (slide 43: fully allowed, generally much more intense than d–d).",
-     "sourceSlide": "s43",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "They are allowed by both the spin and Laporte selection rules"
-       },
-       {
-        "id": "b",
-        "label": "They involve a change of spin multiplicity"
-       },
-       {
-        "id": "c",
-        "label": "They occur only in centrosymmetric complexes"
-       },
-       {
-        "id": "d",
-        "label": "They involve only the t₂g orbitals"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c7-jt-more",
-   "moduleCode": "CM2021",
-   "tier": "synthesis",
-   "metadata": {
-    "title": "Jahn-Teller strength, spectra and reactivity",
-    "source": "Finals revision deck slides 28-32",
-    "week": 9,
-    "primaryTheme": "Jahn-Teller Effect",
-    "conceptTags": [
-     "jahn-teller"
-    ],
-    "difficultyEstimate": 5,
-    "estimatedMinutes": 3,
-    "examStyle": "construct_4to6",
-    "family": "jt-more"
-   },
-   "variants": [
-    {
-     "variantId": "c7-jt-table",
-     "perspectiveLabel": "Strong, weak or none",
-     "marks": 3,
-     "stem": "Using the Jahn-Teller table for octahedral complexes (an asymmetrically occupied e_g set gives a strong distortion, an asymmetrically occupied t₂g set a weak one, symmetric occupation none), classify the expected Jahn-Teller effect of each ion.",
-     "explanation": "Strong: e_g asymmetrically filled, that is high-spin d⁴ (t₂g³e_g¹), low-spin d⁷ (t₂g⁶e_g¹) and d⁹ (t₂g⁶e_g³). Weak: asymmetric t₂g, high-spin d⁶ (t₂g⁴e_g²). None: symmetric occupation, d⁸ (t₂g⁶e_g²) and high-spin d⁵ (t₂g³e_g²).",
-     "sourceSlide": "s29",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "j0",
-        "label": "[Cr(H₂O)₆]²⁺ (high-spin d⁴)",
-        "options": [
-         "strong",
-         "weak",
-         "none"
-        ]
-       },
-       {
-        "key": "j1",
-        "label": "[Fe(H₂O)₆]²⁺ (high-spin d⁶)",
-        "options": [
-         "strong",
-         "weak",
-         "none"
-        ]
-       },
-       {
-        "key": "j2",
-        "label": "[Ni(H₂O)₆]²⁺ (d⁸)",
-        "options": [
-         "strong",
-         "weak",
-         "none"
-        ]
-       },
-       {
-        "key": "j3",
-        "label": "[Co(CN)₆]⁴⁻ (low-spin d⁷)",
-        "options": [
-         "strong",
-         "weak",
-         "none"
-        ]
-       },
-       {
-        "key": "j4",
-        "label": "[Mn(H₂O)₆]²⁺ (high-spin d⁵)",
-        "options": [
-         "strong",
-         "weak",
-         "none"
-        ]
-       },
-       {
-        "key": "j5",
-        "label": "[Cu(H₂O)₆]²⁺ (d⁹)",
-        "options": [
-         "strong",
-         "weak",
-         "none"
-        ]
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "j0": {
-        "type": "keyword",
-        "expectedExpr": "'strong'",
-        "synonyms": {
-         "strong": [
-          "strong",
-          "s"
-         ],
-         "weak": [
-          "weak",
-          "w"
-         ],
-         "none": [
-          "none",
-          "no",
-          "no effect",
-          "nil"
-         ]
-        }
-       },
-       "j1": {
-        "type": "keyword",
-        "expectedExpr": "'weak'",
-        "synonyms": {
-         "strong": [
-          "strong",
-          "s"
-         ],
-         "weak": [
-          "weak",
-          "w"
-         ],
-         "none": [
-          "none",
-          "no",
-          "no effect",
-          "nil"
-         ]
-        }
-       },
-       "j2": {
-        "type": "keyword",
-        "expectedExpr": "'none'",
-        "synonyms": {
-         "strong": [
-          "strong",
-          "s"
-         ],
-         "weak": [
-          "weak",
-          "w"
-         ],
-         "none": [
-          "none",
-          "no",
-          "no effect",
-          "nil"
-         ]
-        }
-       },
-       "j3": {
-        "type": "keyword",
-        "expectedExpr": "'strong'",
-        "synonyms": {
-         "strong": [
-          "strong",
-          "s"
-         ],
-         "weak": [
-          "weak",
-          "w"
-         ],
-         "none": [
-          "none",
-          "no",
-          "no effect",
-          "nil"
-         ]
-        }
-       },
-       "j4": {
-        "type": "keyword",
-        "expectedExpr": "'none'",
-        "synonyms": {
-         "strong": [
-          "strong",
-          "s"
-         ],
-         "weak": [
-          "weak",
-          "w"
-         ],
-         "none": [
-          "none",
-          "no",
-          "no effect",
-          "nil"
-         ]
-        }
-       },
-       "j5": {
-        "type": "keyword",
-        "expectedExpr": "'strong'",
-        "synonyms": {
-         "strong": [
-          "strong",
-          "s"
-         ],
-         "weak": [
-          "weak",
-          "w"
-         ],
-         "none": [
-          "none",
-          "no",
-          "no effect",
-          "nil"
-         ]
-        }
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c7-jt-twobands",
-     "perspectiveLabel": "Two bands for Ti³⁺ (d¹)",
-     "marks": 4,
-     "stem": "Octahedral [Ti(H₂O)₆]³⁺ (d¹) should give a single d–d band, yet its spectrum shows two close bands. Explain.",
-     "explanation": "One electron in t₂g is a degenerate asymmetric occupation, so the ion distorts. The split e_g sublevels allow two transitions, and because the distortion is small the two bands overlap as a shoulder peak.",
-     "sourceSlide": "s31",
-     "inputSlot": {
-      "type": "typed_synthesis",
-      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
-      "minWordsToUnlockRubric": 12,
-      "allowPaperScratchpad": true
-     },
-     "evaluator": {
-      "type": "atomic_rubric",
-      "rubric": [
-       {
-        "id": "r1",
-        "criterion": "d¹ is t₂g¹: the single electron sits in a degenerate set that is asymmetrically occupied",
-        "marks": 1,
-        "isCritical": true
-       },
-       {
-        "id": "r2",
-        "criterion": "The complex distorts (Jahn-Teller) to remove the degeneracy, splitting e_g (and t₂g) into sublevels",
-        "marks": 1,
-        "isCritical": true
-       },
-       {
-        "id": "r3",
-        "criterion": "So the electron can be excited into two different upper levels, giving two possible transitions",
-        "marks": 1,
-        "isCritical": true
-       },
-       {
-        "id": "r4",
-        "criterion": "The splittings are small, so the two bands lie close together and appear as a shoulder",
-        "marks": 1,
-        "isCritical": false
-       }
-      ]
-     }
-    },
-    {
-     "variantId": "c7-jt-cu",
-     "perspectiveLabel": "Cu(II) elongation and formation constants",
-     "marks": 4,
-     "stem": "In [Cu(H₂O)₆]²⁺ the two axial Cu–O distances (2.38 Å) are longer than the four equatorial ones (about 1.95 Å). Explain why, and what it does to the stepwise formation constants when NH₃ replaces water (K₁ to K₄ large, K₅ about 3×10⁻¹, K₆ very small).",
-     "explanation": "The e_g³ configuration distorts the octahedron; the stabilisation comes from lowering the doubly occupied d_z². The weak axial sites explain why the fifth and sixth ammonia ligands are hard to add.",
-     "sourceSlide": "s30, s32",
-     "inputSlot": {
-      "type": "typed_synthesis",
-      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
-      "minWordsToUnlockRubric": 12,
-      "allowPaperScratchpad": true
-     },
-     "evaluator": {
-      "type": "atomic_rubric",
-      "rubric": [
-       {
-        "id": "r1",
-        "criterion": "d⁹ is t₂g⁶e_g³: the e_g set is asymmetrically occupied, which gives a strong Jahn-Teller distortion",
-        "marks": 1,
-        "isCritical": true
-       },
-       {
-        "id": "r2",
-        "criterion": "Axial elongation lowers d_z² (two electrons) and raises d_x²−y² (one electron), a net energy gain",
-        "marks": 1,
-        "isCritical": true
-       },
-       {
-        "id": "r3",
-        "criterion": "Four short equatorial bonds and two long, weak axial bonds",
-        "marks": 1,
-        "isCritical": false
-       },
-       {
-        "id": "r4",
-        "criterion": "The two axial positions bind a fifth and sixth NH₃ only weakly, so K₅ is small and K₆ very small, while K₁ to K₄ (equatorial) are large",
-        "marks": 1,
-        "isCritical": true
-       }
-      ]
-     }
-    },
-    {
-     "variantId": "c7-jt-eg-strong",
-     "perspectiveLabel": "Why e_g asymmetry distorts more",
-     "marks": 1,
-     "stem": "Why is the Jahn-Teller distortion much stronger for asymmetric occupation of e_g than of t₂g?",
-     "explanation": "e_g* levels are involved in the σ bond (they point toward the ligands), so uneven occupation distorts the bond lengths strongly; t₂g orbitals point between the ligands and the distortion is weak (slide 29).",
-     "sourceSlide": "s29",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "The e_g orbitals point at the ligands and are σ-antibonding, so their occupation changes the metal-ligand bond lengths directly"
-       },
-       {
-        "id": "b",
-        "label": "The e_g orbitals are lower in energy than t₂g"
-       },
-       {
-        "id": "c",
-        "label": "The t₂g orbitals are involved in σ bonding"
-       },
-       {
-        "id": "d",
-        "label": "The e_g set holds more electrons than t₂g"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c7-geom-orbitals",
-   "moduleCode": "CM2021",
-   "tier": "synthesis",
-   "metadata": {
-    "title": "d-orbital energies when ligands are added, removed or distorted",
-    "source": "Finals revision deck slides 18, 21-22, 28 (orbital directions, tetragonal distortion); recurs in all four mid-terms",
-    "week": 9,
-    "primaryTheme": "Crystal Field Theory",
-    "conceptTags": [
-     "d-orbital-splitting",
-     "jahn-teller"
-    ],
-    "difficultyEstimate": 5,
-    "estimatedMinutes": 2,
-    "examStyle": "construct_4to6",
-    "family": "geom-orbitals"
-   },
-   "variants": [
-    {
-     "variantId": "c7-geo-sqpyr",
-     "perspectiveLabel": "Square planar to square pyramidal",
-     "marks": 1,
-     "stem": "Which d orbital is most destabilised when a square-planar complex gains one extra ligand along the z axis to become square pyramidal?",
-     "explanation": "The new ligand approaches along z, directly toward the lobes of d_z², so that orbital feels the most extra repulsion; d_xz and d_yz are raised only a little and d_xy not at all.",
-     "sourceSlide": "s18",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "d_z²"
-       },
-       {
-        "id": "b",
-        "label": "d_xy"
-       },
-       {
-        "id": "c",
-        "label": "d_xz"
-       },
-       {
-        "id": "d",
-        "label": "d_yz"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c7-geo-remove",
-     "perspectiveLabel": "Remove the two axial ligands",
-     "marks": 1,
-     "stem": "Which d orbital is stabilised most when the two ligands on the z axis are removed from an octahedral complex?",
-     "explanation": "d_z² points along the removed ligands, so losing them removes most of its repulsion and it drops the most (d_xz and d_yz drop a little).",
-     "sourceSlide": "s28",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "d_z²"
-       },
-       {
-        "id": "b",
-        "label": "d_xy"
-       },
-       {
-        "id": "c",
-        "label": "d_x²−y²"
-       },
-       {
-        "id": "d",
-        "label": "none: removing ligands does not change orbital energies"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c7-geo-elong",
-     "perspectiveLabel": "Axial elongation",
-     "marks": 1,
-     "stem": "Which statement is true when an octahedral complex undergoes axial elongation (Jahn-Teller, z-axis ligands move away)?",
-     "explanation": "Elongation reduces repulsion along z: d_z² (and, among t₂g, d_xz and d_yz) are lowered, d_x²−y² (and d_xy) are raised, so d_x²−y² is the highest; d_xz and d_yz, not d_xy, are the lowest (slide 28).",
-     "sourceSlide": "s28",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "d_x²−y² is the highest orbital and d_z² drops below it"
-       },
-       {
-        "id": "b",
-        "label": "d_xy is the lowest orbital"
-       },
-       {
-        "id": "c",
-        "label": "The d orbitals with lobes along z are raised in energy"
-       },
-       {
-        "id": "d",
-        "label": "All five d orbitals stay degenerate"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c7-geo-compress",
-     "perspectiveLabel": "Axial compression",
-     "marks": 1,
-     "stem": "Which statement is true when an octahedral complex undergoes axial compression (z-axis ligands move closer)?",
-     "explanation": "Compression increases repulsion along z: d_z² (e_g) and d_xz, d_yz are raised, d_x²−y² and d_xy are lowered. d_z² ends up highest and d_xy lowest, the reverse of elongation.",
-     "sourceSlide": "s28",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "d_xy is the lowest-energy orbital and d_z² the highest"
-       },
-       {
-        "id": "b",
-        "label": "d_x²−y² is the highest-energy orbital"
-       },
-       {
-        "id": "c",
-        "label": "The orbitals with lobes along z are lowered"
-       },
-       {
-        "id": "d",
-        "label": "d_z² and d_xy are degenerate"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c7-geo-order",
-     "perspectiveLabel": "Where d_xy lies above d_z²",
-     "marks": 1,
-     "stem": "In which geometries is the d_xy orbital higher in energy than d_z²?",
-     "explanation": "Octahedral: t₂g (d_xy) below e_g (d_z²). Tetrahedral: t₂ (d_xy) above e (d_z²). Square planar: order d_x²−y² > d_xy > d_z² > d_xz, d_yz, so d_xy is above d_z² there too.",
-     "sourceSlide": "s18, s21",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Tetrahedral and square planar, but not octahedral"
-       },
-       {
-        "id": "b",
-        "label": "Octahedral only"
-       },
-       {
-        "id": "c",
-        "label": "Octahedral and square planar"
-       },
-       {
-        "id": "d",
-        "label": "All three"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c7-lig-bond",
-   "moduleCode": "CM2021",
-   "tier": "synthesis",
-   "metadata": {
-    "title": "π-donor, π-acceptor and the σ/π character of an M–L bond",
-    "source": "Finals revision deck slides 24-27",
-    "week": 9,
-    "primaryTheme": "Ligand Field Theory",
-    "conceptTags": [
-     "pi-bonding",
-     "back-bonding"
-    ],
-    "difficultyEstimate": 5,
-    "estimatedMinutes": 2,
-    "examStyle": "construct_4to6",
-    "family": "lig-bond"
-   },
-   "variants": [
-    {
-     "variantId": "c7-lb-cn",
-     "perspectiveLabel": "Which ligand is a π-acceptor",
-     "marks": 1,
-     "stem": "Which of these ligands is a π-acceptor?",
-     "explanation": "CN⁻ (and CO, PR₃) have low-lying empty π* orbitals that accept electron density from filled metal t₂g orbitals (M→L back-bonding), which raises Δo. F⁻ and H₂O are π-donors, NH₃ has no π effect.",
-     "sourceSlide": "s25",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "CN⁻"
-       },
-       {
-        "id": "b",
-        "label": "F⁻"
-       },
-       {
-        "id": "c",
-        "label": "NH₃"
-       },
-       {
-        "id": "d",
-        "label": "H₂O"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c7-lb-f",
-     "perspectiveLabel": "Fluoride as a ligand",
-     "marks": 1,
-     "stem": "Which description of the fluoride ligand is correct?",
-     "explanation": "F⁻ donates a σ pair and has filled p orbitals of π symmetry that can donate to empty metal t₂g orbitals (L→M π donation), which lowers Δo (halides sit at the weak-field end of the series).",
-     "sourceSlide": "s25",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "σ-donor and π-donor"
-       },
-       {
-        "id": "b",
-        "label": "σ-donor and π-acceptor"
-       },
-       {
-        "id": "c",
-        "label": "σ-acceptor and π-acceptor"
-       },
-       {
-        "id": "d",
-        "label": "π-donor only, with no σ donation"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c7-lb-nh3",
-     "perspectiveLabel": "The ligand with no π effect",
-     "marks": 1,
-     "stem": "In the π-bonding classification, which of these ligands has essentially no π interaction (σ-donor only)?",
-     "explanation": "NH₃ has a lone pair for σ donation but no filled p orbitals or low-lying empty orbitals of suitable symmetry. Halides are π-donors; CO and PR₃ are π-acceptors.",
-     "sourceSlide": "s25",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "NH₃"
-       },
-       {
-        "id": "b",
-        "label": "Cl⁻"
-       },
-       {
-        "id": "c",
-        "label": "CO"
-       },
-       {
-        "id": "d",
-        "label": "PR₃"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c7-lb-d0",
-     "perspectiveLabel": "Bond character with and without d electrons",
-     "marks": 1,
-     "stem": "In [Ti(CO)₆]⁴⁺ (Ti is d⁰) and in Cr(CO)₆ (Cr is d⁶), which statement about the metal-carbon bond is correct?",
-     "explanation": "CO is always a σ donor through carbon. π back-donation needs filled metal d orbitals of t₂g symmetry: Ti⁴⁺ is d⁰, so none; Cr(0) is d⁶, so back-donation into π* (which also weakens C–O) gives π character.",
-     "sourceSlide": "s26",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Ti–C is σ only (no d electrons to back-donate); Cr–C is both σ and π"
-       },
-       {
-        "id": "b",
-        "label": "Both have σ and π character"
-       },
-       {
-        "id": "c",
-        "label": "Ti–C has π character only, Cr–C σ only"
-       },
-       {
-        "id": "d",
-        "label": "Both are purely ionic"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c7-lb-co-length",
-     "perspectiveLabel": "C–O length with more d electrons",
-     "marks": 1,
-     "stem": "A CO ligand is bound to metal ions of the same size and charge, one d⁰ and one d⁶. In which does the C–O bond come out longer, and why?",
-     "explanation": "Back-donation needs d electrons. Filling CO π* weakens and lengthens C–O and strengthens M–C (slide 26), so the d⁶ ion has the longer C–O.",
-     "sourceSlide": "s26",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "In the d⁶ ion: metal-to-ligand π back-donation puts electron density into CO π*, weakening C–O"
-       },
-       {
-        "id": "b",
-        "label": "In the d⁰ ion: ligand-to-metal π donation weakens C–O"
-       },
-       {
-        "id": "c",
-        "label": "They are the same: only σ donation matters"
-       },
-       {
-        "id": "d",
-        "label": "In the d⁰ ion, because the metal is more electropositive"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
    "id": "bk-c2-trend-gen2",
    "moduleCode": "CM2021",
    "tier": "atomic",
@@ -40534,6 +37802,2738 @@
        {
         "id": "e",
         "label": "ClF₇ (400 °C)"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c6-ox-organo",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Oxidation state of drawn organometallic and bridged complexes",
+    "source": "Finals revision deck slides 5-6 (Ni dimer, Co alkyl, bridged Co dimer) and transfer cases",
+    "week": 7,
+    "primaryTheme": "Coordination Chemistry",
+    "conceptTags": [
+     "oxidation-state-complex",
+     "d-electron-count"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 3,
+    "examStyle": "construct_4to6",
+    "family": "ox-organo"
+   },
+   "variants": [
+    {
+     "variantId": "c6-ox-organo-ni2",
+     "perspectiveLabel": "Ni₂Cl₂(PPh₃)₂ (bridging chlorides, Ni–Ni bond)",
+     "marks": 3,
+     "stem": "Two nickel atoms are joined by a Ni–Ni bond. Each carries one PPh₃ (a neutral donor, drawn as an arrow) and the two chlorides each bridge both nickels. The molecule is neutral: Ni₂(μ-Cl)₂(PPh₃)₂. Give the oxidation state of each nickel and its dⁿ.",
+     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
+     "explanation": "Two bridging Cl⁻ give −2 in total, PPh₃ is neutral and the Ni–Ni bond adds nothing, so the two Ni share +2: each is Ni(I), d⁹ (3d¹⁰ minus one electron).",
+     "sourceSlide": "s6",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "ox",
+        "label": "Oxidation state of each metal"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ for that metal"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "9",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-ox-organo-conorb",
+     "perspectiveLabel": "Co(1-norbornyl)₄",
+     "marks": 3,
+     "stem": "Cobalt carries four 1-norbornyl groups (bicyclic alkyl groups bound through carbon, each counted as R⁻) in a neutral molecule, Co(C₇H₁₁)₄. Give the oxidation state of cobalt and its dⁿ.",
+     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
+     "explanation": "Each alkyl group is R⁻ (−1), four of them give −4, the molecule is neutral, so cobalt is +4: Co(IV), d⁵.",
+     "sourceSlide": "s6",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "ox",
+        "label": "Oxidation state of each metal"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ for that metal"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-ox-organo-codimer",
+     "perspectiveLabel": "[(NH₃)₄Co(μ-OH)(μ-NH₂)Co(NH₃)₄]⁴⁺",
+     "marks": 3,
+     "stem": "Two cobalt centres are bridged by one hydroxide and one amide (NH₂⁻) and each carries four NH₃: [(NH₃)₄Co(μ-OH)(μ-NH₂)Co(NH₃)₄]⁴⁺. Give the oxidation state of each cobalt and its dⁿ.",
+     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
+     "explanation": "NH₃ is neutral, the bridging OH⁻ and NH₂⁻ give −2 in total, the complex is 4+, so the two Co share +6: each is Co(III), d⁶.",
+     "sourceSlide": "s6",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "ox",
+        "label": "Oxidation state of each metal"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ for that metal"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-ox-organo-mn2co10",
+     "perspectiveLabel": "Mn₂(CO)₁₀ (Mn–Mn bond)",
+     "marks": 3,
+     "stem": "Mn₂(CO)₁₀ is a neutral molecule with a Mn–Mn bond and ten terminal CO ligands. Give the oxidation state of each manganese and its dⁿ.",
+     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
+     "explanation": "CO is neutral and the Mn–Mn bond adds nothing, so each Mn is 0: Mn(0), d⁷ (the neutral atom is 3d⁵4s²).",
+     "sourceSlide": "s6",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "ox",
+        "label": "Oxidation state of each metal"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ for that metal"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "7",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-ox-organo-ptpcy3",
+     "perspectiveLabel": "Pt(PCy₃)₃",
+     "marks": 3,
+     "stem": "The neutral complex Pt(PCy₃)₃ has three tricyclohexylphosphine ligands (neutral donors). Give the oxidation state of platinum and its dⁿ.",
+     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
+     "explanation": "Phosphines are neutral, the complex is neutral, so Pt(0): d¹⁰ (5d⁹6s¹ for the atom, 6s electron moved into d).",
+     "sourceSlide": "s4",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "ox",
+        "label": "Oxidation state of each metal"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ for that metal"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "10",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-ox-organo-zeise",
+     "perspectiveLabel": "K[PtCl₃(C₂H₄)] (Zeise's salt)",
+     "marks": 3,
+     "stem": "K[PtCl₃(C₂H₄)] contains the anion [PtCl₃(C₂H₄)]⁻ with three chloride ligands and one neutral ethene. Give the oxidation state of platinum and its dⁿ.",
+     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
+     "explanation": "Three Cl⁻ give −3, ethene is neutral and the anion is 1−, so Pt is +2: Pt(II), d⁸.",
+     "sourceSlide": "s5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "ox",
+        "label": "Oxidation state of each metal"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ for that metal"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "8",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-ox-organo-cr2oh",
+     "perspectiveLabel": "[(NH₃)₅Cr–(μ-OH)–Cr(NH₃)₅]⁵⁺",
+     "marks": 3,
+     "stem": "Two chromium centres are bridged by a single hydroxide and each carries five NH₃: [(NH₃)₅Cr(μ-OH)Cr(NH₃)₅]⁵⁺. Give the oxidation state of each chromium and its dⁿ.",
+     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
+     "explanation": "Ten NH₃ are neutral, the bridging OH⁻ is −1, the ion is 5+, so the two Cr share +6: each is Cr(III), d³.",
+     "sourceSlide": "s6",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "ox",
+        "label": "Oxidation state of each metal"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ for that metal"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-ox-organo-fecoh5",
+     "perspectiveLabel": "Fe(CO)₅",
+     "marks": 3,
+     "stem": "Fe(CO)₅ is a neutral molecule with five carbonyl ligands. Give the oxidation state of iron and its dⁿ.",
+     "hint": "Add up the ligand charges (neutral ligands 0, alkyl −1, bridging hydroxide or amide −1 each, chloride −1), then make the total equal the charge on the complex. A metal–metal bond contributes nothing.",
+     "explanation": "CO is neutral, so Fe(0): d⁸ (3d⁶4s² for the atom, the 4s electrons promoted into d in the complex).",
+     "sourceSlide": "s6",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "ox",
+        "label": "Oxidation state of each metal"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ for that metal"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "8",
+        "tolerance": 0.01
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c6-oxo-chain",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Name → oxidation state → dⁿ → tetrahedral configuration → CFSE for oxo-anions",
+    "source": "Finals revision deck slides 4, 10, 15, 22, 43 (KMnO₄ and oxo ligand) and the 2025-26 final Q3(a) template",
+    "week": 7,
+    "primaryTheme": "Crystal Field Theory",
+    "conceptTags": [
+     "cfse-calculation",
+     "oxidation-state-complex",
+     "iupac-nomenclature"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 4,
+    "examStyle": "construct_4to6",
+    "family": "oxo-chain"
+   },
+   "variants": [
+    {
+     "variantId": "c6-oxo-chain-mno4",
+     "perspectiveLabel": "KMnO₄ (d⁰, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`KMnO₄`**: give its name, the oxidation state of Mn, its dⁿ count, the d-electron configuration in the tetrahedral field of the four oxide donors, and the CFSE as a multiple of Δt.",
+     "hint": "Name oxide ligands as oxo (slide 10), the metal ends in -ate in an anion (slide 15) and the cation is named first. Tetrahedral: e lies below t₂ (slide 22); each electron in e is worth −0.6 Δt, in t₂ +0.4 Δt.",
+     "explanation": "Charge balance: K⁺ plus MnO₄⁻, four O²⁻ give −8 so Mn is +7, d⁰. Tetrahedral, nothing to place in e or t₂, CFSE 0. The purple colour is ligand-to-metal charge transfer (slide 43), not a d–d band.",
+     "sourceSlide": "s4, s10, s22",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Mn"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*(?:potassium\\s+tetra(?:oxo|oxido)manganate\\s*\\(\\s*(?:VII|7)\\s*\\)|potassium\\s+permanganate)\\s*$"
+        ],
+        "expectedDisplay": "potassium tetraoxomanganate(VII)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "7",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*(?:none|empty|no\\s+d[\\s-]*electrons?|d\\s*\\^?\\s*[0⁰]|0)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "none (d⁰)"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-oxo-chain-cro4",
+     "perspectiveLabel": "K₂CrO₄ (d⁰, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`K₂CrO₄`**: give its name, the oxidation state of Cr, its dⁿ count, the d-electron configuration in the tetrahedral field of the four oxide donors, and the CFSE as a multiple of Δt.",
+     "hint": "Name oxide ligands as oxo (slide 10), the metal ends in -ate in an anion (slide 15) and the cation is named first. Tetrahedral: e lies below t₂ (slide 22); each electron in e is worth −0.6 Δt, in t₂ +0.4 Δt.",
+     "explanation": "Four O²⁻ give −8 and the anion is 2−, so Cr is +6, d⁰: tetrahedral, CFSE 0. The yellow colour is charge transfer.",
+     "sourceSlide": "s4, s10, s22",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Cr"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*(?:potassium\\s+tetra(?:oxo|oxido)chromate\\s*\\(\\s*(?:VI|6)\\s*\\)|potassium\\s+chromate(?:\\s*\\(\\s*VI\\s*\\))?)\\s*$"
+        ],
+        "expectedDisplay": "potassium tetraoxochromate(VI)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*(?:none|empty|no\\s+d[\\s-]*electrons?|d\\s*\\^?\\s*[0⁰]|0)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "none (d⁰)"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-oxo-chain-mno4-2",
+     "perspectiveLabel": "K₂MnO₄ (d¹, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`K₂MnO₄`**: give its name, the oxidation state of Mn, its dⁿ count, the d-electron configuration in the tetrahedral field of the four oxide donors, and the CFSE as a multiple of Δt.",
+     "hint": "Name oxide ligands as oxo (slide 10), the metal ends in -ate in an anion (slide 15) and the cation is named first. Tetrahedral: e lies below t₂ (slide 22); each electron in e is worth −0.6 Δt, in t₂ +0.4 Δt.",
+     "explanation": "Four O²⁻ give −8 and the anion is 2−, so Mn is +6, d¹. In the tetrahedral field the electron goes into e (below t₂): e¹, CFSE = 0.6 Δt.",
+     "sourceSlide": "s4, s10, s22",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Mn"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*(?:potassium\\s+tetra(?:oxo|oxido)manganate\\s*\\(\\s*(?:VI|6)\\s*\\)|potassium\\s+manganate(?:\\s*\\(\\s*VI\\s*\\))?)\\s*$"
+        ],
+        "expectedDisplay": "potassium tetraoxomanganate(VI)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[1¹](?:\\s*[,·]?\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e¹"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.6",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-oxo-chain-vo4",
+     "perspectiveLabel": "Na₃VO₄ (d⁰, tetrahedral)",
+     "marks": 5,
+     "stem": "For **`Na₃VO₄`**: give its name, the oxidation state of V, its dⁿ count, the d-electron configuration in the tetrahedral field of the four oxide donors, and the CFSE as a multiple of Δt.",
+     "hint": "Name oxide ligands as oxo (slide 10), the metal ends in -ate in an anion (slide 15) and the cation is named first. Tetrahedral: e lies below t₂ (slide 22); each electron in e is worth −0.6 Δt, in t₂ +0.4 Δt.",
+     "explanation": "Four O²⁻ give −8 and the anion is 3−, so V is +5, d⁰: tetrahedral, CFSE 0.",
+     "sourceSlide": "s4, s10, s22",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of V"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*(?:sodium\\s+tetra(?:oxo|oxido)vanadate\\s*\\(\\s*(?:V|5)\\s*\\)|sodium\\s+(?:ortho)?vanadate(?:\\s*\\(\\s*V\\s*\\))?)\\s*$"
+        ],
+        "expectedDisplay": "sodium tetraoxovanadate(V)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "0",
+        "tolerance": 0.01
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*(?:none|empty|no\\s+d[\\s-]*electrons?|d\\s*\\^?\\s*[0⁰]|0)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "none (d⁰)"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "0.0",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c6-oxo-chain-feo4",
+     "perspectiveLabel": "K₂FeO₄ (d², tetrahedral)",
+     "marks": 5,
+     "stem": "For **`K₂FeO₄`**: give its name, the oxidation state of Fe, its dⁿ count, the d-electron configuration in the tetrahedral field of the four oxide donors, and the CFSE as a multiple of Δt.",
+     "hint": "Name oxide ligands as oxo (slide 10), the metal ends in -ate in an anion (slide 15) and the cation is named first. Tetrahedral: e lies below t₂ (slide 22); each electron in e is worth −0.6 Δt, in t₂ +0.4 Δt.",
+     "explanation": "Four O²⁻ give −8 and the anion is 2−, so Fe is +6, d². Both electrons go into e (parallel spins): e², CFSE = 2 × 0.6 = 1.2 Δt.",
+     "sourceSlide": "s4, s10, s22",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "name",
+        "label": "Name"
+       },
+       {
+        "key": "ox",
+        "label": "Oxidation state of Fe"
+       },
+       {
+        "key": "d",
+        "label": "n in dⁿ"
+       },
+       {
+        "key": "conf",
+        "label": "Configuration"
+       },
+       {
+        "key": "c",
+        "label": "CFSE (coefficient of Δt)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "name": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*(?:potassium\\s+tetra(?:oxo|oxido)ferrate\\s*\\(\\s*(?:VI|6)\\s*\\)|potassium\\s+ferrate(?:\\s*\\(\\s*VI\\s*\\))?)\\s*$"
+        ],
+        "expectedDisplay": "potassium tetraoxoferrate(VI)"
+       },
+       "ox": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0.01
+       },
+       "d": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       },
+       "conf": {
+        "acceptedPatterns": [
+         "^\\s*\\(?\\s*e\\s*\\)?\\s*\\^?\\s*[2²](?:\\s*[,·]?\\s*\\(?\\s*t\\s*_?\\s*[2₂]\\s*\\)?\\s*\\^?\\s*[0⁰])?\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+        ],
+        "caseSensitive": false,
+        "expectedDisplay": "e²"
+       },
+       "c": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c8-magnetism-chain",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Magnetism: susceptibility to μ to unpaired electrons to high or low spin",
+    "source": "Finals revision deck slide 33 (Guoy balance; 2023-24 spin-only and 2024-25 instrument parts)",
+    "week": 8,
+    "primaryTheme": "Magnetic Properties",
+    "conceptTags": [
+     "spin-only-magnetism",
+     "high-low-spin"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 4,
+    "examStyle": "construct_4to6",
+    "family": "magnetism"
+   },
+   "variants": [
+    {
+     "variantId": "c8-mag-fe2",
+     "perspectiveLabel": "Fe(II) complex (d⁶)",
+     "marks": 4,
+     "stem": "The molar magnetic susceptibility of an octahedral Fe(II) complex is χ_M = 1.01×10⁻² cm³ mol⁻¹ at 298 K (diamagnetic correction already made). Use μ = 2.828 √(χ_M T) to find the magnetic moment in Bohr magnetons, then the number of unpaired electrons (μ_s = √(n(n+2))), and say whether the complex is high spin or low spin (or neither).",
+     "hint": "Work out χ_M T first. Compare μ with the spin-only values for n = 1 to 5 (1.73, 2.83, 3.87, 4.90, 5.92 BM); orbital contribution is largely quenched for first-row metals.",
+     "explanation": "χ_M T = 1.01×10⁻² × 298 = 3.01, μ = 2.828 √3.01 = 4.9 BM. √(n(n+2)) = 4.90 gives n = 4: that is the high-spin d⁶ arrangement (low-spin d⁶ would be diamagnetic, n = 0).",
+     "sourceSlide": "s33",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "mu",
+        "label": "μ (BM)"
+       },
+       {
+        "key": "n",
+        "label": "Unpaired electrons"
+       },
+       {
+        "key": "spin",
+        "label": "Spin state",
+        "options": [
+         "high",
+         "low",
+         "neither"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "mu": {
+        "type": "numeric",
+        "targetExpr": "4.9",
+        "tolerance": 0.08
+       },
+       "n": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       },
+       "spin": {
+        "type": "keyword",
+        "expectedExpr": "'high'",
+        "synonyms": {
+         "high": [
+          "high",
+          "high spin",
+          "hs"
+         ],
+         "low": [
+          "low",
+          "low spin",
+          "ls"
+         ],
+         "neither": [
+          "neither",
+          "not applicable",
+          "n/a",
+          "na",
+          "none"
+         ]
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-mag-co2",
+     "perspectiveLabel": "Co(II) complex (d⁷)",
+     "marks": 4,
+     "stem": "The molar magnetic susceptibility of an octahedral Co(II) complex is χ_M = 6.30×10⁻³ cm³ mol⁻¹ at 298 K (diamagnetic correction already made). Use μ = 2.828 √(χ_M T) to find the magnetic moment in Bohr magnetons, then the number of unpaired electrons (μ_s = √(n(n+2))), and say whether the complex is high spin or low spin (or neither).",
+     "hint": "Work out χ_M T first. Compare μ with the spin-only values for n = 1 to 5 (1.73, 2.83, 3.87, 4.90, 5.92 BM); orbital contribution is largely quenched for first-row metals.",
+     "explanation": "χ_M T = 6.30×10⁻³ × 298 = 1.88, μ = 2.828 √1.88 = 3.87 BM, so n = 3: high-spin d⁷ (low-spin d⁷ has n = 1, μ_s = 1.73).",
+     "sourceSlide": "s33",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "mu",
+        "label": "μ (BM)"
+       },
+       {
+        "key": "n",
+        "label": "Unpaired electrons"
+       },
+       {
+        "key": "spin",
+        "label": "Spin state",
+        "options": [
+         "high",
+         "low",
+         "neither"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "mu": {
+        "type": "numeric",
+        "targetExpr": "3.87",
+        "tolerance": 0.08
+       },
+       "n": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "spin": {
+        "type": "keyword",
+        "expectedExpr": "'high'",
+        "synonyms": {
+         "high": [
+          "high",
+          "high spin",
+          "hs"
+         ],
+         "low": [
+          "low",
+          "low spin",
+          "ls"
+         ],
+         "neither": [
+          "neither",
+          "not applicable",
+          "n/a",
+          "na",
+          "none"
+         ]
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-mag-mn2",
+     "perspectiveLabel": "Mn(II) complex (d⁵)",
+     "marks": 4,
+     "stem": "The molar magnetic susceptibility of an octahedral Mn(II) complex is χ_M = 1.47×10⁻² cm³ mol⁻¹ at 298 K (diamagnetic correction already made). Use μ = 2.828 √(χ_M T) to find the magnetic moment in Bohr magnetons, then the number of unpaired electrons (μ_s = √(n(n+2))), and say whether the complex is high spin or low spin (or neither).",
+     "hint": "Work out χ_M T first. Compare μ with the spin-only values for n = 1 to 5 (1.73, 2.83, 3.87, 4.90, 5.92 BM); orbital contribution is largely quenched for first-row metals.",
+     "explanation": "χ_M T = 1.47×10⁻² × 298 = 4.38, μ = 2.828 √4.38 = 5.92 BM, so n = 5: high-spin d⁵ (low-spin d⁵ has n = 1).",
+     "sourceSlide": "s33",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "mu",
+        "label": "μ (BM)"
+       },
+       {
+        "key": "n",
+        "label": "Unpaired electrons"
+       },
+       {
+        "key": "spin",
+        "label": "Spin state",
+        "options": [
+         "high",
+         "low",
+         "neither"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "mu": {
+        "type": "numeric",
+        "targetExpr": "5.92",
+        "tolerance": 0.08
+       },
+       "n": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0
+       },
+       "spin": {
+        "type": "keyword",
+        "expectedExpr": "'high'",
+        "synonyms": {
+         "high": [
+          "high",
+          "high spin",
+          "hs"
+         ],
+         "low": [
+          "low",
+          "low spin",
+          "ls"
+         ],
+         "neither": [
+          "neither",
+          "not applicable",
+          "n/a",
+          "na",
+          "none"
+         ]
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-mag-fe3",
+     "perspectiveLabel": "Fe(III) complex (d⁵)",
+     "marks": 4,
+     "stem": "The molar magnetic susceptibility of an octahedral Fe(III) complex is χ_M = 1.26×10⁻³ cm³ mol⁻¹ at 298 K (diamagnetic correction already made). Use μ = 2.828 √(χ_M T) to find the magnetic moment in Bohr magnetons, then the number of unpaired electrons (μ_s = √(n(n+2))), and say whether the complex is high spin or low spin (or neither).",
+     "hint": "Work out χ_M T first. Compare μ with the spin-only values for n = 1 to 5 (1.73, 2.83, 3.87, 4.90, 5.92 BM); orbital contribution is largely quenched for first-row metals.",
+     "explanation": "χ_M T = 1.26×10⁻³ × 298 = 0.375, μ = 2.828 √0.375 = 1.73 BM, so n = 1: low-spin d⁵ (high-spin would have n = 5, μ = 5.92).",
+     "sourceSlide": "s33",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "mu",
+        "label": "μ (BM)"
+       },
+       {
+        "key": "n",
+        "label": "Unpaired electrons"
+       },
+       {
+        "key": "spin",
+        "label": "Spin state",
+        "options": [
+         "high",
+         "low",
+         "neither"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "mu": {
+        "type": "numeric",
+        "targetExpr": "1.73",
+        "tolerance": 0.08
+       },
+       "n": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       },
+       "spin": {
+        "type": "keyword",
+        "expectedExpr": "'low'",
+        "synonyms": {
+         "high": [
+          "high",
+          "high spin",
+          "hs"
+         ],
+         "low": [
+          "low",
+          "low spin",
+          "ls"
+         ],
+         "neither": [
+          "neither",
+          "not applicable",
+          "n/a",
+          "na",
+          "none"
+         ]
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-mag-ni2",
+     "perspectiveLabel": "Ni(II) complex (d⁸)",
+     "marks": 4,
+     "stem": "The molar magnetic susceptibility of an octahedral Ni(II) complex is χ_M = 3.36×10⁻³ cm³ mol⁻¹ at 298 K (diamagnetic correction already made). Use μ = 2.828 √(χ_M T) to find the magnetic moment in Bohr magnetons, then the number of unpaired electrons (μ_s = √(n(n+2))), and say whether the complex is high spin or low spin (or neither).",
+     "hint": "Work out χ_M T first. Compare μ with the spin-only values for n = 1 to 5 (1.73, 2.83, 3.87, 4.90, 5.92 BM); orbital contribution is largely quenched for first-row metals.",
+     "explanation": "χ_M T = 3.36×10⁻³ × 298 = 1.00, μ = 2.828 BM, so n = 2. d⁸ has the same t₂g⁶e_g² arrangement whatever the field, so high or low spin does not apply.",
+     "sourceSlide": "s33",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "mu",
+        "label": "μ (BM)"
+       },
+       {
+        "key": "n",
+        "label": "Unpaired electrons"
+       },
+       {
+        "key": "spin",
+        "label": "Spin state",
+        "options": [
+         "high",
+         "low",
+         "neither"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "mu": {
+        "type": "numeric",
+        "targetExpr": "2.83",
+        "tolerance": 0.08
+       },
+       "n": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "spin": {
+        "type": "keyword",
+        "expectedExpr": "'neither'",
+        "synonyms": {
+         "high": [
+          "high",
+          "high spin",
+          "hs"
+         ],
+         "low": [
+          "low",
+          "low spin",
+          "ls"
+         ],
+         "neither": [
+          "neither",
+          "not applicable",
+          "n/a",
+          "na",
+          "none"
+         ]
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-mag-guoy",
+     "perspectiveLabel": "Guoy balance and spin state",
+     "marks": 5,
+     "stem": "Describe how a Guoy balance is used to tell a paramagnetic from a diamagnetic sample and, from the measurement, to decide whether an octahedral d⁶ complex is high spin or low spin.",
+     "explanation": "Paramagnetic: weight up with the magnet on. Diamagnetic: weight down. χ → μ = 2.828 √(χT) → n from √(n(n+2)) → high spin (n = 4) or low spin (n = 0) for d⁶.",
+     "sourceSlide": "s33",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 12,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "The sample tube hangs between magnet poles and is weighed with the magnet off and on",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r2",
+        "criterion": "A paramagnetic sample is drawn into the field, so its apparent weight increases; a diamagnetic sample is pushed out, so it decreases",
+        "marks": 1.5,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "The change in weight gives the molar susceptibility χ, and μ = 2.828 √(χT)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "Set μ = √(n(n+2)) to find the number of unpaired electrons n",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r5",
+        "criterion": "Compare n with the dⁿ arrangements: d⁶ high spin n = 4, low spin n = 0 (diamagnetic); orbital contribution is quenched for first-row metals so the spin-only value is adequate",
+        "marks": 0.5,
+        "isCritical": false
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c7-oh-td-ratio",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Octahedral against tetrahedral CFSE and why tetrahedral complexes are high spin",
+    "source": "Finals revision deck slides 19-22; the 27/8 ratio type recurs in the mid-terms",
+    "week": 7,
+    "primaryTheme": "Crystal Field Theory",
+    "conceptTags": [
+     "cfse-calculation",
+     "tetrahedral"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 3,
+    "examStyle": "construct_4to6",
+    "family": "oh-td"
+   },
+   "variants": [
+    {
+     "variantId": "c7-ohtd-ni2",
+     "perspectiveLabel": "Ni(II) d⁸",
+     "marks": 4,
+     "stem": "Compare the CFSE of Ni(II) (d⁸) in an octahedral and in a tetrahedral complex of the same weak-field ligand (both high spin), taking Δt = 4/9 Δo. Give the CFSE of each as a coefficient of its own Δ, the tetrahedral value in units of Δo, and the ratio CFSE(octahedral) : CFSE(tetrahedral) (pairing energy ignored).",
+     "hint": "Octahedral: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron. Tetrahedral: −0.6 Δt per e electron, +0.4 Δt per t₂ electron. Stabilisation is reported as a positive number.",
+     "explanation": "Octahedral d⁸ is t₂g⁶e_g²: 6(0.4) − 2(0.6) = 1.2 Δo. Tetrahedral d⁸ is e⁴t₂⁴: 4(0.6) − 4(0.4) = 0.8 Δt = 0.8 × 4/9 Δo = 0.356 Δo. Ratio 1.2 / 0.356 = 3.375 = 27/8.",
+     "sourceSlide": "s19-22",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "oh",
+        "label": "Octahedral CFSE (× Δo)"
+       },
+       {
+        "key": "td",
+        "label": "Tetrahedral CFSE (× Δt)"
+       },
+       {
+        "key": "tdo",
+        "label": "Tetrahedral CFSE in units of Δo"
+       },
+       {
+        "key": "r",
+        "label": "Ratio Oh : Td"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "oh": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       },
+       "td": {
+        "type": "numeric",
+        "targetExpr": "0.8",
+        "tolerance": 0.01
+       },
+       "tdo": {
+        "type": "numeric",
+        "targetExpr": "0.356",
+        "tolerance": 0.01
+       },
+       "r": {
+        "type": "numeric",
+        "targetExpr": "3.375",
+        "tolerance": 0.05
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c7-ohtd-co2",
+     "perspectiveLabel": "Co(II) d⁷",
+     "marks": 4,
+     "stem": "Compare the CFSE of Co(II) (d⁷) in an octahedral and in a tetrahedral complex of the same weak-field ligand (both high spin), taking Δt = 4/9 Δo. Give the CFSE of each as a coefficient of its own Δ, the tetrahedral value in units of Δo, and the ratio CFSE(octahedral) : CFSE(tetrahedral) (pairing energy ignored).",
+     "hint": "Octahedral: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron. Tetrahedral: −0.6 Δt per e electron, +0.4 Δt per t₂ electron. Stabilisation is reported as a positive number.",
+     "explanation": "Octahedral high-spin d⁷ is t₂g⁵e_g²: 5(0.4) − 2(0.6) = 0.8 Δo. Tetrahedral d⁷ is e⁴t₂³: 4(0.6) − 3(0.4) = 1.2 Δt = 0.533 Δo. Ratio 0.8 / 0.533 = 1.5 (this is why Co(II) forms tetrahedral halide complexes so readily).",
+     "sourceSlide": "s19-22",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "oh",
+        "label": "Octahedral CFSE (× Δo)"
+       },
+       {
+        "key": "td",
+        "label": "Tetrahedral CFSE (× Δt)"
+       },
+       {
+        "key": "tdo",
+        "label": "Tetrahedral CFSE in units of Δo"
+       },
+       {
+        "key": "r",
+        "label": "Ratio Oh : Td"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "oh": {
+        "type": "numeric",
+        "targetExpr": "0.8",
+        "tolerance": 0.01
+       },
+       "td": {
+        "type": "numeric",
+        "targetExpr": "1.2",
+        "tolerance": 0.01
+       },
+       "tdo": {
+        "type": "numeric",
+        "targetExpr": "0.533",
+        "tolerance": 0.01
+       },
+       "r": {
+        "type": "numeric",
+        "targetExpr": "1.5",
+        "tolerance": 0.05
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c7-ohtd-cu2",
+     "perspectiveLabel": "Cu(II) d⁹",
+     "marks": 4,
+     "stem": "Compare the CFSE of Cu(II) (d⁹) in an octahedral and in a tetrahedral complex of the same weak-field ligand (both high spin), taking Δt = 4/9 Δo. Give the CFSE of each as a coefficient of its own Δ, the tetrahedral value in units of Δo, and the ratio CFSE(octahedral) : CFSE(tetrahedral) (pairing energy ignored).",
+     "hint": "Octahedral: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron. Tetrahedral: −0.6 Δt per e electron, +0.4 Δt per t₂ electron. Stabilisation is reported as a positive number.",
+     "explanation": "Octahedral d⁹ is t₂g⁶e_g³: 6(0.4) − 3(0.6) = 0.6 Δo. Tetrahedral d⁹ is e⁴t₂⁵: 4(0.6) − 5(0.4) = 0.4 Δt = 0.178 Δo. Ratio 0.6 / 0.178 = 3.375.",
+     "sourceSlide": "s19-22",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "oh",
+        "label": "Octahedral CFSE (× Δo)"
+       },
+       {
+        "key": "td",
+        "label": "Tetrahedral CFSE (× Δt)"
+       },
+       {
+        "key": "tdo",
+        "label": "Tetrahedral CFSE in units of Δo"
+       },
+       {
+        "key": "r",
+        "label": "Ratio Oh : Td"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "oh": {
+        "type": "numeric",
+        "targetExpr": "0.6",
+        "tolerance": 0.01
+       },
+       "td": {
+        "type": "numeric",
+        "targetExpr": "0.4",
+        "tolerance": 0.01
+       },
+       "tdo": {
+        "type": "numeric",
+        "targetExpr": "0.178",
+        "tolerance": 0.01
+       },
+       "r": {
+        "type": "numeric",
+        "targetExpr": "3.375",
+        "tolerance": 0.05
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c7-ohtd-fe2",
+     "perspectiveLabel": "Fe(II) d⁶",
+     "marks": 4,
+     "stem": "Compare the CFSE of Fe(II) (d⁶) in an octahedral and in a tetrahedral complex of the same weak-field ligand (both high spin), taking Δt = 4/9 Δo. Give the CFSE of each as a coefficient of its own Δ, the tetrahedral value in units of Δo, and the ratio CFSE(octahedral) : CFSE(tetrahedral) (pairing energy ignored).",
+     "hint": "Octahedral: −0.4 Δo per t₂g electron, +0.6 Δo per e_g electron. Tetrahedral: −0.6 Δt per e electron, +0.4 Δt per t₂ electron. Stabilisation is reported as a positive number.",
+     "explanation": "Octahedral high-spin d⁶ is t₂g⁴e_g²: 4(0.4) − 2(0.6) = 0.4 Δo. Tetrahedral d⁶ is e³t₂³: 3(0.6) − 3(0.4) = 0.6 Δt = 0.267 Δo. Ratio 0.4 / 0.267 = 1.5.",
+     "sourceSlide": "s19-22",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "oh",
+        "label": "Octahedral CFSE (× Δo)"
+       },
+       {
+        "key": "td",
+        "label": "Tetrahedral CFSE (× Δt)"
+       },
+       {
+        "key": "tdo",
+        "label": "Tetrahedral CFSE in units of Δo"
+       },
+       {
+        "key": "r",
+        "label": "Ratio Oh : Td"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "oh": {
+        "type": "numeric",
+        "targetExpr": "0.4",
+        "tolerance": 0.01
+       },
+       "td": {
+        "type": "numeric",
+        "targetExpr": "0.6",
+        "tolerance": 0.01
+       },
+       "tdo": {
+        "type": "numeric",
+        "targetExpr": "0.267",
+        "tolerance": 0.01
+       },
+       "r": {
+        "type": "numeric",
+        "targetExpr": "1.5",
+        "tolerance": 0.05
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c7-ohtd-why-hs",
+     "perspectiveLabel": "Why tetrahedral complexes are high spin",
+     "marks": 1,
+     "stem": "Why do tetrahedral complexes almost always adopt high-spin configurations?",
+     "explanation": "No orbital points straight at a ligand in a tetrahedron, so the splitting is small (Δt = 4/9 Δo) and rarely beats the pairing energy: electrons occupy both sets singly first, high spin. The e set is the lower one, and strong-field ligands in a tetrahedron are possible but still do not give low spin because Δt stays small.",
+     "sourceSlide": "s22",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Δt is only about 4/9 of Δo, so it rarely exceeds the pairing energy"
+       },
+       {
+        "id": "b",
+        "label": "Δt is larger than Δo, so electrons avoid the upper set"
+       },
+       {
+        "id": "c",
+        "label": "the e orbitals lie above the t₂ orbitals, which forces parallel spins"
+       },
+       {
+        "id": "d",
+        "label": "tetrahedral ligands are always weak-field ligands"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c7-ohtd-order",
+     "perspectiveLabel": "Which set is lower in a tetrahedron",
+     "marks": 1,
+     "stem": "In a tetrahedral crystal field, which statement about the d orbitals is correct?",
+     "explanation": "The ligands sit at alternate corners of a cube. The t₂ orbitals point toward the cube edges (nearer the ligands, more repulsion, higher); e points to the faces (lower). There is no inversion centre, so no g or u labels.",
+     "sourceSlide": "s21",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "d_z² and d_x²−y² (e) are lower, d_xy, d_xz and d_yz (t₂) are higher"
+       },
+       {
+        "id": "b",
+        "label": "d_xy, d_xz and d_yz (t₂) are lower, d_z² and d_x²−y² (e) are higher"
+       },
+       {
+        "id": "c",
+        "label": "all five stay degenerate in a tetrahedron"
+       },
+       {
+        "id": "d",
+        "label": "the sets are labelled e_g and t₂g"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c8-term-concepts",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Term, Tanabe-Sugano and molecular-term concepts",
+    "source": "Finals revision deck slides 34-41",
+    "week": 8,
+    "primaryTheme": "Term Symbols",
+    "conceptTags": [
+     "term-symbols",
+     "tanabe-sugano"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 3,
+    "examStyle": "construct_4to6",
+    "family": "term-concepts"
+   },
+   "variants": [
+    {
+     "variantId": "c8-tc-order-d2",
+     "perspectiveLabel": "Observed order of the d² terms",
+     "marks": 1,
+     "stem": "For a free ion with a d² configuration, which energy order of the five terms (lowest first) is observed, the one that differs from the naive order of Hund-type rules?",
+     "explanation": "The rules (largest multiplicity, then largest L) predict ³F < ³P < ¹G < ¹D < ¹S, but the observed order is ³F < ¹D < ³P < ¹G < ¹S. Only the ground term (³F) is reliably predicted.",
+     "sourceSlide": "s38",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "³F < ¹D < ³P < ¹G < ¹S"
+       },
+       {
+        "id": "b",
+        "label": "³F < ³P < ¹G < ¹D < ¹S"
+       },
+       {
+        "id": "c",
+        "label": "³F < ³P < ¹D < ¹G < ¹S"
+       },
+       {
+        "id": "d",
+        "label": "¹D < ³F < ³P < ¹G < ¹S"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c8-tc-rules",
+     "perspectiveLabel": "What the rules predict reliably",
+     "marks": 1,
+     "stem": "Which statement about predicting the energies of spectroscopic terms is correct?",
+     "explanation": "The spin-multiplicity rule is fairly reliable for ordering, but the greatest-L rule and the two rules together reliably predict only the ground term; the d² example shows the excited terms come in a different order.",
+     "sourceSlide": "s38",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "The highest-multiplicity and greatest-L rules reliably give only the ground term"
+       },
+       {
+        "id": "b",
+        "label": "They give the correct energy order of all terms of the configuration"
+       },
+       {
+        "id": "c",
+        "label": "The greatest-L rule orders every term of the same multiplicity correctly"
+       },
+       {
+        "id": "d",
+        "label": "They apply only to d¹ and d⁹ ions"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c8-tc-aet",
+     "perspectiveLabel": "A, E or T for the ground configuration",
+     "marks": 3,
+     "stem": "In an octahedral complex, the letter of a molecular term shows how the d electrons occupy the degenerate sets: T for a triply degenerate set that is asymmetrically occupied, E for a doubly degenerate set that is asymmetrically occupied, A (or B) when every set is symmetrically occupied (empty, half-filled or full). Give the letter for each configuration.",
+     "explanation": "T: t₂g¹ and t₂g⁴ (three orbitals, uneven filling). A: t₂g³, t₂g³e_g² and t₂g⁶e_g² (every set empty, half-filled or full). E: e_g¹ and e_g³ with a symmetric t₂g (high-spin d⁴ and d⁹). The full labels are ²T₂g, ⁴A₂g, ⁵E_g, ⁶A₁g, ⁵T₂g, ³A₂g and ²E_g.",
+     "sourceSlide": "s40",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "c0",
+        "label": "t₂g¹"
+       },
+       {
+        "key": "c1",
+        "label": "t₂g³"
+       },
+       {
+        "key": "c2",
+        "label": "t₂g³e_g¹"
+       },
+       {
+        "key": "c3",
+        "label": "t₂g³e_g²"
+       },
+       {
+        "key": "c4",
+        "label": "t₂g⁴e_g²"
+       },
+       {
+        "key": "c5",
+        "label": "t₂g⁶e_g²"
+       },
+       {
+        "key": "c6",
+        "label": "t₂g⁶e_g³"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "c0": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*T\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
+        ],
+        "expectedDisplay": "T"
+       },
+       "c1": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*A\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
+        ],
+        "expectedDisplay": "A"
+       },
+       "c2": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*E\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
+        ],
+        "expectedDisplay": "E"
+       },
+       "c3": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*A\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
+        ],
+        "expectedDisplay": "A"
+       },
+       "c4": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*T\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
+        ],
+        "expectedDisplay": "T"
+       },
+       "c5": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*A\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
+        ],
+        "expectedDisplay": "A"
+       },
+       "c6": {
+        "type": "pattern",
+        "caseSensitive": false,
+        "acceptedPatterns": [
+         "^\\s*E\\s*(?:\\(?\\s*[12]?\\s*\\)?)?\\s*(?:g|\\s*\\(?\\s*[12]?g?\\s*\\)?)?\\s*$"
+        ],
+        "expectedDisplay": "E"
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c8-tc-noncross",
+     "perspectiveLabel": "Non-crossing rule",
+     "marks": 1,
+     "stem": "On a Tanabe-Sugano diagram, what happens when two terms of the same symmetry approach each other as the field strength increases?",
+     "explanation": "Terms of the same symmetry obey the non-crossing rule: as the ligand field brings them close they bend away from each other. Terms of different symmetry can cross.",
+     "sourceSlide": "s41",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "They do not cross: they bend apart"
+       },
+       {
+        "id": "b",
+        "label": "They cross at the point where they meet"
+       },
+       {
+        "id": "c",
+        "label": "They merge into a single level"
+       },
+       {
+        "id": "d",
+        "label": "The upper one is lost from the diagram"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c8-tc-racah",
+     "perspectiveLabel": "What B is",
+     "marks": 1,
+     "stem": "On a Tanabe-Sugano diagram the axes are E/B and Δo/B. What is the Racah parameter B?",
+     "explanation": "B measures electron-electron repulsion between terms of the same multiplicity; E is the energy above the ground state and Δ the ligand-field splitting, so dividing by B makes one diagram serve every complex of that dⁿ.",
+     "sourceSlide": "s41",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "A measure of the repulsion between terms of the same multiplicity"
+       },
+       {
+        "id": "b",
+        "label": "The ligand-field splitting Δo"
+       },
+       {
+        "id": "c",
+        "label": "The energy of the excited state above the ground state"
+       },
+       {
+        "id": "d",
+        "label": "The spin-orbit coupling constant"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c8-tc-hole",
+     "perspectiveLabel": "dⁿ and d¹⁰⁻ⁿ share terms",
+     "marks": 1,
+     "stem": "Which configuration has the same set of spectroscopic terms (the same atomic term symbols) as d³?",
+     "explanation": "dⁿ and d¹⁰⁻ⁿ have the same terms (n electrons behave like n holes in a full shell): d³ = d⁷ (⁴F, ⁴P, ²H, ²G, ²F, ²D twice, ²P), d² = d⁸ and d¹ = d⁹ (²D).",
+     "sourceSlide": "s36",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "d⁷"
+       },
+       {
+        "id": "b",
+        "label": "d⁴"
+       },
+       {
+        "id": "c",
+        "label": "d⁶"
+       },
+       {
+        "id": "d",
+        "label": "d⁵"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c8-intensity",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Selection rules, band intensity and charge-transfer bands",
+    "source": "Finals revision deck slides 42-43",
+    "week": 8,
+    "primaryTheme": "UV-Vis Spectroscopy",
+    "conceptTags": [
+     "selection-rules",
+     "charge-transfer"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 3,
+    "examStyle": "construct_4to6",
+    "family": "intensity"
+   },
+   "variants": [
+    {
+     "variantId": "c8-int-rank",
+     "perspectiveLabel": "Rank four bands by ε",
+     "marks": 3,
+     "stem": "Order these absorption bands from the weakest to the strongest (smallest to largest molar absorptivity ε): the d–d band of [Mn(H₂O)₆]²⁺ (high-spin d⁵), the d–d band of [Ti(H₂O)₆]³⁺, the d–d band of tetrahedral [NiCl₄]²⁻, and the intense purple band of [MnO₄]⁻.",
+     "explanation": "Weakest to strongest: [Mn(H₂O)₆]²⁺ (spin-forbidden, ε < 1), [Ti(H₂O)₆]³⁺ (spin-allowed but Laporte-forbidden in a centrosymmetric complex, ε about 1-10), [NiCl₄]²⁻ (spin- and Laporte-allowed because a tetrahedron has no inversion centre, ε about 10-1000), [MnO₄]⁻ (charge transfer, fully allowed, ε about 1000-50000).",
+     "sourceSlide": "s42",
+     "inputSlot": {
+      "type": "ordered_list",
+      "directionLabel": "Weakest → strongest band (smallest to largest ε)",
+      "items": [
+       {
+        "id": "ti",
+        "label": "[Ti(H₂O)₆]³⁺ d–d"
+       },
+       {
+        "id": "mno4",
+        "label": "[MnO₄]⁻ band"
+       },
+       {
+        "id": "mn",
+        "label": "[Mn(H₂O)₆]²⁺ d–d"
+       },
+       {
+        "id": "ni",
+        "label": "[NiCl₄]²⁻ d–d"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "order_match",
+      "targetOrder": [
+       "mn",
+       "ti",
+       "ni",
+       "mno4"
+      ]
+     }
+    },
+    {
+     "variantId": "c8-int-tetra",
+     "perspectiveLabel": "Why tetrahedral d–d bands are stronger",
+     "marks": 1,
+     "stem": "The d–d bands of tetrahedral [NiCl₄]²⁻ are much more intense than those of octahedral [Ni(H₂O)₆]²⁺. What is the reason?",
+     "explanation": "The Laporte rule (g ↔ u only) forbids d–d bands in a centrosymmetric octahedron (ε about 1-10); without an inversion centre the rule relaxes (d–p mixing) and the band is much stronger (ε about 10-1000). Both complexes are spin-allowed.",
+     "sourceSlide": "s42",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "A tetrahedron has no centre of inversion, so d–d transitions are not Laporte-forbidden"
+       },
+       {
+        "id": "b",
+        "label": "The tetrahedral complex has more d electrons"
+       },
+       {
+        "id": "c",
+        "label": "The d–d transitions in the tetrahedral complex are spin-allowed but those in the octahedral complex are not"
+       },
+       {
+        "id": "d",
+        "label": "Chloride is a stronger-field ligand than water"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c8-int-lmct",
+     "perspectiveLabel": "Type of band in [MnO₄]⁻",
+     "marks": 1,
+     "stem": "The intense purple colour of [MnO₄]⁻ (ε of the order of 10³) comes from which kind of transition?",
+     "explanation": "Mn(VII) is d⁰, so there are no d electrons to excite in a d–d band. The colour is charge transfer from ligand-based orbitals (O²⁻) to empty metal d orbitals: LMCT, fully allowed and very intense.",
+     "sourceSlide": "s43",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Ligand-to-metal charge transfer from O²⁻-based orbitals into empty metal d orbitals (Mn is d⁰)"
+       },
+       {
+        "id": "b",
+        "label": "A spin-forbidden d–d transition"
+       },
+       {
+        "id": "c",
+        "label": "A Laporte-forbidden d–d transition within the e and t₂ sets"
+       },
+       {
+        "id": "d",
+        "label": "Metal-to-ligand charge transfer from filled Mn d orbitals"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c8-int-which",
+     "perspectiveLabel": "LMCT or MLCT from the ions",
+     "marks": 1,
+     "stem": "Which combination of metal and ligand favours a low-energy metal-to-ligand charge-transfer (MLCT) band?",
+     "explanation": "MLCT moves an electron from a metal-based filled orbital to an empty ligand orbital, so it needs a metal that is easy to oxidise (low oxidation state) and a ligand with low-lying acceptor orbitals. The reverse pairing (high-valent metal, π-donor ligand) gives LMCT.",
+     "sourceSlide": "s43",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "A metal in a low oxidation state with filled d orbitals and a π-acceptor ligand with low-lying empty orbitals (such as CO, CN⁻ or bpy)"
+       },
+       {
+        "id": "b",
+        "label": "A metal in a high oxidation state with empty d orbitals and a π-donor ligand such as O²⁻ or Cl⁻"
+       },
+       {
+        "id": "c",
+        "label": "A d⁰ metal with a σ-only ligand such as NH₃"
+       },
+       {
+        "id": "d",
+        "label": "Any complex with a spin-forbidden d–d band"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c8-int-ct-strong",
+     "perspectiveLabel": "Why charge-transfer bands are intense",
+     "marks": 1,
+     "stem": "Why are charge-transfer bands (ε about 10³-10⁵) usually far more intense than d–d bands?",
+     "explanation": "Charge-transfer transitions move an electron between metal-based and ligand-based orbitals of different parity without a spin flip, so both the spin and Laporte rules are satisfied (slide 43: fully allowed, generally much more intense than d–d).",
+     "sourceSlide": "s43",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "They are allowed by both the spin and Laporte selection rules"
+       },
+       {
+        "id": "b",
+        "label": "They involve a change of spin multiplicity"
+       },
+       {
+        "id": "c",
+        "label": "They occur only in centrosymmetric complexes"
+       },
+       {
+        "id": "d",
+        "label": "They involve only the t₂g orbitals"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c7-jt-more",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "Jahn-Teller strength, spectra and reactivity",
+    "source": "Finals revision deck slides 28-32",
+    "week": 7,
+    "primaryTheme": "Jahn-Teller Effect",
+    "conceptTags": [
+     "jahn-teller"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 3,
+    "examStyle": "construct_4to6",
+    "family": "jt-more"
+   },
+   "variants": [
+    {
+     "variantId": "c7-jt-table",
+     "perspectiveLabel": "Strong, weak or none",
+     "marks": 3,
+     "stem": "Using the Jahn-Teller table for octahedral complexes (an asymmetrically occupied e_g set gives a strong distortion, an asymmetrically occupied t₂g set a weak one, symmetric occupation none), classify the expected Jahn-Teller effect of each ion.",
+     "explanation": "Strong: e_g asymmetrically filled, that is high-spin d⁴ (t₂g³e_g¹), low-spin d⁷ (t₂g⁶e_g¹) and d⁹ (t₂g⁶e_g³). Weak: asymmetric t₂g, high-spin d⁶ (t₂g⁴e_g²). None: symmetric occupation, d⁸ (t₂g⁶e_g²) and high-spin d⁵ (t₂g³e_g²).",
+     "sourceSlide": "s29",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "j0",
+        "label": "[Cr(H₂O)₆]²⁺ (high-spin d⁴)",
+        "options": [
+         "strong",
+         "weak",
+         "none"
+        ]
+       },
+       {
+        "key": "j1",
+        "label": "[Fe(H₂O)₆]²⁺ (high-spin d⁶)",
+        "options": [
+         "strong",
+         "weak",
+         "none"
+        ]
+       },
+       {
+        "key": "j2",
+        "label": "[Ni(H₂O)₆]²⁺ (d⁸)",
+        "options": [
+         "strong",
+         "weak",
+         "none"
+        ]
+       },
+       {
+        "key": "j3",
+        "label": "[Co(CN)₆]⁴⁻ (low-spin d⁷)",
+        "options": [
+         "strong",
+         "weak",
+         "none"
+        ]
+       },
+       {
+        "key": "j4",
+        "label": "[Mn(H₂O)₆]²⁺ (high-spin d⁵)",
+        "options": [
+         "strong",
+         "weak",
+         "none"
+        ]
+       },
+       {
+        "key": "j5",
+        "label": "[Cu(H₂O)₆]²⁺ (d⁹)",
+        "options": [
+         "strong",
+         "weak",
+         "none"
+        ]
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "j0": {
+        "type": "keyword",
+        "expectedExpr": "'strong'",
+        "synonyms": {
+         "strong": [
+          "strong",
+          "s"
+         ],
+         "weak": [
+          "weak",
+          "w"
+         ],
+         "none": [
+          "none",
+          "no",
+          "no effect",
+          "nil"
+         ]
+        }
+       },
+       "j1": {
+        "type": "keyword",
+        "expectedExpr": "'weak'",
+        "synonyms": {
+         "strong": [
+          "strong",
+          "s"
+         ],
+         "weak": [
+          "weak",
+          "w"
+         ],
+         "none": [
+          "none",
+          "no",
+          "no effect",
+          "nil"
+         ]
+        }
+       },
+       "j2": {
+        "type": "keyword",
+        "expectedExpr": "'none'",
+        "synonyms": {
+         "strong": [
+          "strong",
+          "s"
+         ],
+         "weak": [
+          "weak",
+          "w"
+         ],
+         "none": [
+          "none",
+          "no",
+          "no effect",
+          "nil"
+         ]
+        }
+       },
+       "j3": {
+        "type": "keyword",
+        "expectedExpr": "'strong'",
+        "synonyms": {
+         "strong": [
+          "strong",
+          "s"
+         ],
+         "weak": [
+          "weak",
+          "w"
+         ],
+         "none": [
+          "none",
+          "no",
+          "no effect",
+          "nil"
+         ]
+        }
+       },
+       "j4": {
+        "type": "keyword",
+        "expectedExpr": "'none'",
+        "synonyms": {
+         "strong": [
+          "strong",
+          "s"
+         ],
+         "weak": [
+          "weak",
+          "w"
+         ],
+         "none": [
+          "none",
+          "no",
+          "no effect",
+          "nil"
+         ]
+        }
+       },
+       "j5": {
+        "type": "keyword",
+        "expectedExpr": "'strong'",
+        "synonyms": {
+         "strong": [
+          "strong",
+          "s"
+         ],
+         "weak": [
+          "weak",
+          "w"
+         ],
+         "none": [
+          "none",
+          "no",
+          "no effect",
+          "nil"
+         ]
+        }
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c7-jt-twobands",
+     "perspectiveLabel": "Two bands for Ti³⁺ (d¹)",
+     "marks": 4,
+     "stem": "Octahedral [Ti(H₂O)₆]³⁺ (d¹) should give a single d–d band, yet its spectrum shows two close bands. Explain.",
+     "explanation": "One electron in t₂g is a degenerate asymmetric occupation, so the ion distorts. The split e_g sublevels allow two transitions, and because the distortion is small the two bands overlap as a shoulder peak.",
+     "sourceSlide": "s31",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 12,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "d¹ is t₂g¹: the single electron sits in a degenerate set that is asymmetrically occupied",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "The complex distorts (Jahn-Teller) to remove the degeneracy, splitting e_g (and t₂g) into sublevels",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "So the electron can be excited into two different upper levels, giving two possible transitions",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r4",
+        "criterion": "The splittings are small, so the two bands lie close together and appear as a shoulder",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c7-jt-cu",
+     "perspectiveLabel": "Cu(II) elongation and formation constants",
+     "marks": 4,
+     "stem": "In [Cu(H₂O)₆]²⁺ the two axial Cu–O distances (2.38 Å) are longer than the four equatorial ones (about 1.95 Å). Explain why, and what it does to the stepwise formation constants when NH₃ replaces water (K₁ to K₄ large, K₅ about 3×10⁻¹, K₆ very small).",
+     "explanation": "The e_g³ configuration distorts the octahedron; the stabilisation comes from lowering the doubly occupied d_z². The weak axial sites explain why the fifth and sixth ammonia ligands are hard to add.",
+     "sourceSlide": "s30, s32",
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 12,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "d⁹ is t₂g⁶e_g³: the e_g set is asymmetrically occupied, which gives a strong Jahn-Teller distortion",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "Axial elongation lowers d_z² (two electrons) and raises d_x²−y² (one electron), a net energy gain",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Four short equatorial bonds and two long, weak axial bonds",
+        "marks": 1,
+        "isCritical": false
+       },
+       {
+        "id": "r4",
+        "criterion": "The two axial positions bind a fifth and sixth NH₃ only weakly, so K₅ is small and K₆ very small, while K₁ to K₄ (equatorial) are large",
+        "marks": 1,
+        "isCritical": true
+       }
+      ]
+     }
+    },
+    {
+     "variantId": "c7-jt-eg-strong",
+     "perspectiveLabel": "Why e_g asymmetry distorts more",
+     "marks": 1,
+     "stem": "Why is the Jahn-Teller distortion much stronger for asymmetric occupation of e_g than of t₂g?",
+     "explanation": "e_g* levels are involved in the σ bond (they point toward the ligands), so uneven occupation distorts the bond lengths strongly; t₂g orbitals point between the ligands and the distortion is weak (slide 29).",
+     "sourceSlide": "s29",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "The e_g orbitals point at the ligands and are σ-antibonding, so their occupation changes the metal-ligand bond lengths directly"
+       },
+       {
+        "id": "b",
+        "label": "The e_g orbitals are lower in energy than t₂g"
+       },
+       {
+        "id": "c",
+        "label": "The t₂g orbitals are involved in σ bonding"
+       },
+       {
+        "id": "d",
+        "label": "The e_g set holds more electrons than t₂g"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c7-geom-orbitals",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "d-orbital energies when ligands are added, removed or distorted",
+    "source": "Finals revision deck slides 18, 21-22, 28 (orbital directions, tetragonal distortion); recurs in all four mid-terms",
+    "week": 7,
+    "primaryTheme": "Crystal Field Theory",
+    "conceptTags": [
+     "d-orbital-splitting",
+     "jahn-teller"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 2,
+    "examStyle": "construct_4to6",
+    "family": "geom-orbitals"
+   },
+   "variants": [
+    {
+     "variantId": "c7-geo-sqpyr",
+     "perspectiveLabel": "Square planar to square pyramidal",
+     "marks": 1,
+     "stem": "Which d orbital is most destabilised when a square-planar complex gains one extra ligand along the z axis to become square pyramidal?",
+     "explanation": "The new ligand approaches along z, directly toward the lobes of d_z², so that orbital feels the most extra repulsion; d_xz and d_yz are raised only a little and d_xy not at all.",
+     "sourceSlide": "s18",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "d_z²"
+       },
+       {
+        "id": "b",
+        "label": "d_xy"
+       },
+       {
+        "id": "c",
+        "label": "d_xz"
+       },
+       {
+        "id": "d",
+        "label": "d_yz"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c7-geo-remove",
+     "perspectiveLabel": "Remove the two axial ligands",
+     "marks": 1,
+     "stem": "Which d orbital is stabilised most when the two ligands on the z axis are removed from an octahedral complex?",
+     "explanation": "d_z² points along the removed ligands, so losing them removes most of its repulsion and it drops the most (d_xz and d_yz drop a little).",
+     "sourceSlide": "s28",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "d_z²"
+       },
+       {
+        "id": "b",
+        "label": "d_xy"
+       },
+       {
+        "id": "c",
+        "label": "d_x²−y²"
+       },
+       {
+        "id": "d",
+        "label": "none: removing ligands does not change orbital energies"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c7-geo-elong",
+     "perspectiveLabel": "Axial elongation",
+     "marks": 1,
+     "stem": "Which statement is true when an octahedral complex undergoes axial elongation (Jahn-Teller, z-axis ligands move away)?",
+     "explanation": "Elongation reduces repulsion along z: d_z² (and, among t₂g, d_xz and d_yz) are lowered, d_x²−y² (and d_xy) are raised, so d_x²−y² is the highest; d_xz and d_yz, not d_xy, are the lowest (slide 28).",
+     "sourceSlide": "s28",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "d_x²−y² is the highest orbital and d_z² drops below it"
+       },
+       {
+        "id": "b",
+        "label": "d_xy is the lowest orbital"
+       },
+       {
+        "id": "c",
+        "label": "The d orbitals with lobes along z are raised in energy"
+       },
+       {
+        "id": "d",
+        "label": "All five d orbitals stay degenerate"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c7-geo-compress",
+     "perspectiveLabel": "Axial compression",
+     "marks": 1,
+     "stem": "Which statement is true when an octahedral complex undergoes axial compression (z-axis ligands move closer)?",
+     "explanation": "Compression increases repulsion along z: d_z² (e_g) and d_xz, d_yz are raised, d_x²−y² and d_xy are lowered. d_z² ends up highest and d_xy lowest, the reverse of elongation.",
+     "sourceSlide": "s28",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "d_xy is the lowest-energy orbital and d_z² the highest"
+       },
+       {
+        "id": "b",
+        "label": "d_x²−y² is the highest-energy orbital"
+       },
+       {
+        "id": "c",
+        "label": "The orbitals with lobes along z are lowered"
+       },
+       {
+        "id": "d",
+        "label": "d_z² and d_xy are degenerate"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c7-geo-order",
+     "perspectiveLabel": "Where d_xy lies above d_z²",
+     "marks": 1,
+     "stem": "In which geometries is the d_xy orbital higher in energy than d_z²?",
+     "explanation": "Octahedral: t₂g (d_xy) below e_g (d_z²). Tetrahedral: t₂ (d_xy) above e (d_z²). Square planar: order d_x²−y² > d_xy > d_z² > d_xz, d_yz, so d_xy is above d_z² there too.",
+     "sourceSlide": "s18, s21",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Tetrahedral and square planar, but not octahedral"
+       },
+       {
+        "id": "b",
+        "label": "Octahedral only"
+       },
+       {
+        "id": "c",
+        "label": "Octahedral and square planar"
+       },
+       {
+        "id": "d",
+        "label": "All three"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c7-lig-bond",
+   "moduleCode": "CM2021",
+   "tier": "synthesis",
+   "metadata": {
+    "title": "π-donor, π-acceptor and the σ/π character of an M–L bond",
+    "source": "Finals revision deck slides 24-27",
+    "week": 7,
+    "primaryTheme": "Ligand Field Theory",
+    "conceptTags": [
+     "pi-bonding",
+     "back-bonding"
+    ],
+    "difficultyEstimate": 5,
+    "estimatedMinutes": 2,
+    "examStyle": "construct_4to6",
+    "family": "lig-bond"
+   },
+   "variants": [
+    {
+     "variantId": "c7-lb-cn",
+     "perspectiveLabel": "Which ligand is a π-acceptor",
+     "marks": 1,
+     "stem": "Which of these ligands is a π-acceptor?",
+     "explanation": "CN⁻ (and CO, PR₃) have low-lying empty π* orbitals that accept electron density from filled metal t₂g orbitals (M→L back-bonding), which raises Δo. F⁻ and H₂O are π-donors, NH₃ has no π effect.",
+     "sourceSlide": "s25",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "CN⁻"
+       },
+       {
+        "id": "b",
+        "label": "F⁻"
+       },
+       {
+        "id": "c",
+        "label": "NH₃"
+       },
+       {
+        "id": "d",
+        "label": "H₂O"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c7-lb-f",
+     "perspectiveLabel": "Fluoride as a ligand",
+     "marks": 1,
+     "stem": "Which description of the fluoride ligand is correct?",
+     "explanation": "F⁻ donates a σ pair and has filled p orbitals of π symmetry that can donate to empty metal t₂g orbitals (L→M π donation), which lowers Δo (halides sit at the weak-field end of the series).",
+     "sourceSlide": "s25",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "σ-donor and π-donor"
+       },
+       {
+        "id": "b",
+        "label": "σ-donor and π-acceptor"
+       },
+       {
+        "id": "c",
+        "label": "σ-acceptor and π-acceptor"
+       },
+       {
+        "id": "d",
+        "label": "π-donor only, with no σ donation"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c7-lb-nh3",
+     "perspectiveLabel": "The ligand with no π effect",
+     "marks": 1,
+     "stem": "In the π-bonding classification, which of these ligands has essentially no π interaction (σ-donor only)?",
+     "explanation": "NH₃ has a lone pair for σ donation but no filled p orbitals or low-lying empty orbitals of suitable symmetry. Halides are π-donors; CO and PR₃ are π-acceptors.",
+     "sourceSlide": "s25",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "NH₃"
+       },
+       {
+        "id": "b",
+        "label": "Cl⁻"
+       },
+       {
+        "id": "c",
+        "label": "CO"
+       },
+       {
+        "id": "d",
+        "label": "PR₃"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c7-lb-d0",
+     "perspectiveLabel": "Bond character with and without d electrons",
+     "marks": 1,
+     "stem": "In [Ti(CO)₆]⁴⁺ (Ti is d⁰) and in Cr(CO)₆ (Cr is d⁶), which statement about the metal-carbon bond is correct?",
+     "explanation": "CO is always a σ donor through carbon. π back-donation needs filled metal d orbitals of t₂g symmetry: Ti⁴⁺ is d⁰, so none; Cr(0) is d⁶, so back-donation into π* (which also weakens C–O) gives π character.",
+     "sourceSlide": "s26",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Ti–C is σ only (no d electrons to back-donate); Cr–C is both σ and π"
+       },
+       {
+        "id": "b",
+        "label": "Both have σ and π character"
+       },
+       {
+        "id": "c",
+        "label": "Ti–C has π character only, Cr–C σ only"
+       },
+       {
+        "id": "d",
+        "label": "Both are purely ionic"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c7-lb-co-length",
+     "perspectiveLabel": "C–O length with more d electrons",
+     "marks": 1,
+     "stem": "A CO ligand is bound to metal ions of the same size and charge, one d⁰ and one d⁶. In which does the C–O bond come out longer, and why?",
+     "explanation": "Back-donation needs d electrons. Filling CO π* weakens and lengthens C–O and strengthens M–C (slide 26), so the d⁶ ion has the longer C–O.",
+     "sourceSlide": "s26",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "In the d⁶ ion: metal-to-ligand π back-donation puts electron density into CO π*, weakening C–O"
+       },
+       {
+        "id": "b",
+        "label": "In the d⁰ ion: ligand-to-metal π donation weakens C–O"
+       },
+       {
+        "id": "c",
+        "label": "They are the same: only σ donation matters"
+       },
+       {
+        "id": "d",
+        "label": "In the d⁰ ion, because the metal is more electropositive"
        }
       ],
       "shuffleOptions": true

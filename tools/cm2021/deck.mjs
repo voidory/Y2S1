@@ -194,7 +194,7 @@ const inten = node('bk-c8-intensity', 'Selection rules, band intensity and charg
 
 /* ---------- 7. Jahn-Teller written and table items (slides 28-32) ---------- */
 const JT = [['[Cr(H₂O)₆]²⁺ (high-spin d⁴)', 'strong'], ['[Fe(H₂O)₆]²⁺ (high-spin d⁶)', 'weak'], ['[Ni(H₂O)₆]²⁺ (d⁸)', 'none'], ['[Co(CN)₆]⁴⁻ (low-spin d⁷)', 'strong'], ['[Mn(H₂O)₆]²⁺ (high-spin d⁵)', 'none'], ['[Cu(H₂O)₆]²⁺ (d⁹)', 'strong']];
-const jtm = node('bk-c7-jt-more', 'Jahn-Teller strength, spectra and reactivity', 'Finals revision deck slides 28-32', 9, 'Jahn-Teller Effect', ['jahn-teller'], 3, 'jt-more', [
+const jtm = node('bk-c7-jt-more', 'Jahn-Teller strength, spectra and reactivity', 'Finals revision deck slides 28-32', 7, 'Jahn-Teller Effect', ['jahn-teller'], 3, 'jt-more', [
   mapped(base('c7-jt-table', 'Strong, weak or none', 3,
     'Using the Jahn-Teller table for octahedral complexes (an asymmetrically occupied e_g set gives a strong distortion, an asymmetrically occupied t₂g set a weak one, symmetric occupation none), classify the expected Jahn-Teller effect of each ion.',
     'Strong: e_g asymmetrically filled, that is high-spin d⁴ (t₂g³e_g¹), low-spin d⁷ (t₂g⁶e_g¹) and d⁹ (t₂g⁶e_g³). Weak: asymmetric t₂g, high-spin d⁶ (t₂g⁴e_g²). None: symmetric occupation, d⁸ (t₂g⁶e_g²) and high-spin d⁵ (t₂g³e_g²).', 's29'),
@@ -214,7 +214,7 @@ const jtm = node('bk-c7-jt-more', 'Jahn-Teller strength, spectra and reactivity'
 ]);
 
 /* ---------- 8. d-orbital energies when the geometry changes (the mid-terms asked this in 4 of 4 years) ---------- */
-const geo = node('bk-c7-geom-orbitals', 'd-orbital energies when ligands are added, removed or distorted', 'Finals revision deck slides 18, 21-22, 28 (orbital directions, tetragonal distortion); recurs in all four mid-terms', 9, 'Crystal Field Theory', ['d-orbital-splitting', 'jahn-teller'], 2, 'geom-orbitals', [
+const geo = node('bk-c7-geom-orbitals', 'd-orbital energies when ligands are added, removed or distorted', 'Finals revision deck slides 18, 21-22, 28 (orbital directions, tetragonal distortion); recurs in all four mid-terms', 7, 'Crystal Field Theory', ['d-orbital-splitting', 'jahn-teller'], 2, 'geom-orbitals', [
   mc('c7-geo-sqpyr', 'Square planar to square pyramidal', 'Which d orbital is most destabilised when a square-planar complex gains one extra ligand along the z axis to become square pyramidal?',
     ['d_z²', 'd_xy', 'd_xz', 'd_yz'], 0,
     'The new ligand approaches along z, directly toward the lobes of d_z², so that orbital feels the most extra repulsion; d_xz and d_yz are raised only a little and d_xy not at all.', 's18'),
@@ -233,7 +233,7 @@ const geo = node('bk-c7-geom-orbitals', 'd-orbital energies when ligands are add
 ]);
 
 /* ---------- 9. ligand type and M-L bond character (slides 24-27; a template in all four mid-terms) ---------- */
-const lig = node('bk-c7-lig-bond', 'π-donor, π-acceptor and the σ/π character of an M–L bond', 'Finals revision deck slides 24-27', 9, 'Ligand Field Theory', ['pi-bonding', 'back-bonding'], 2, 'lig-bond', [
+const lig = node('bk-c7-lig-bond', 'π-donor, π-acceptor and the σ/π character of an M–L bond', 'Finals revision deck slides 24-27', 7, 'Ligand Field Theory', ['pi-bonding', 'back-bonding'], 2, 'lig-bond', [
   mc('c7-lb-cn', 'Which ligand is a π-acceptor', 'Which of these ligands is a π-acceptor?',
     ['CN⁻', 'F⁻', 'NH₃', 'H₂O'], 0,
     'CN⁻ (and CO, PR₃) have low-lying empty π* orbitals that accept electron density from filled metal t₂g orbitals (M→L back-bonding), which raises Δo. F⁻ and H₂O are π-donors, NH₃ has no π effect.', 's25'),

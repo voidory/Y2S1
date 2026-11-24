@@ -9277,12 +9277,43 @@
         );
       }
 
+      const ZOOM_BTN = '<button type="button" data-fig-zoom aria-label="Enlarge this figure" class="absolute top-1.5 right-1.5 z-10 px-2 py-1 text-[11px] font-semibold rounded-full border border-slate-300 bg-white/95 text-slate-700 hover:bg-slate-100 shadow-sm">⤢ Enlarge</button>';
+      /* Enlarge: a full-screen copy of any figure (static copy of the drawing; the ruler works on it too) */
+      function openFigZoom(fig) {
+        const src = fig && fig.querySelector('svg, img'); if (!src) return;
+        document.getElementById('figZoom')?.remove();
+        const ov = document.createElement('div');
+        ov.id = 'figZoom'; ov.setAttribute('role', 'dialog'); ov.setAttribute('aria-label', 'Enlarged figure');
+        ov.className = 'fixed inset-0 z-[300] bg-white flex flex-col';
+        const cap = fig.querySelector('figcaption')?.textContent || '';
+        ov.innerHTML = `<div class="shrink-0 flex items-center justify-between gap-3 px-4 py-2.5 border-b border-slate-200"><div class="text-sm text-slate-600 min-w-0 truncate">${esc(cap)}</div><button type="button" id="figZoomClose" class="shrink-0 px-4 py-1.5 text-sm font-semibold bg-slate-900 text-white rounded-lg">Close</button></div><div class="flex-1 min-h-0 overflow-auto p-3 sm:p-5" data-bounded-scroll id="figZoomBody"></div>`;
+        document.body.appendChild(ov);
+        const body = ov.querySelector('#figZoomBody');
+        const c = src.cloneNode(true);
+        c.removeAttribute('data-ruler-ready'); delete c.dataset.rulerReady;
+        c.removeAttribute('class'); c.style.cssText = 'display:block;margin:0 auto;height:auto;width:100%;max-width:1500px;min-width:' + (c.dataset.ruler ? '900px' : '0') + ';';
+        if (c.tagName === 'IMG') c.style.maxHeight = 'none';
+        if (c.dataset.ruler && innerWidth >= 768) { c.style.width = 'min(100%, calc((100dvh - 210px) * 1.598))'; c.style.minWidth = '0'; }
+        const wrap = document.createElement('div'); wrap.setAttribute('data-ts-scroll', ''); wrap.style.overflowX = 'auto'; wrap.appendChild(c); body.appendChild(wrap);
+        if (c.dataset.ruler && Figures.attachRuler) Figures.attachRuler(c);
+        const close = () => { ov.remove(); document.removeEventListener('keydown', onKey, true); };
+        const onKey = (e) => { if (e.key === 'Escape') { e.stopPropagation(); close(); } };
+        document.addEventListener('keydown', onKey, true);
+        ov.querySelector('#figZoomClose').addEventListener('click', close);
+        ov.querySelector('#figZoomClose').focus();
+      }
+      if (typeof document !== 'undefined') document.addEventListener('click', (e) => {
+        const b = e.target.closest && e.target.closest('[data-fig-zoom]');
+        if (b) { e.preventDefault(); openFigZoom(b.closest('figure')); return; }
+        const f = e.target.closest && e.target.closest('figure[data-visual-asset]');
+        if (f && !f.closest('#figZoom') && f.dataset.assetType !== 'ts-diagram' && !e.target.closest('button,a,input,select,textarea')) openFigZoom(f);
+      });
       function renderVisualAssetHtml(asset, extraClass = 'mb-5', testAttr = 'stem-visual-asset') {
         if (!asset || typeof asset !== 'object') return '';
         if (asset.type === 'svg') {
           return `
-            <figure class="${extraClass} p-3 bg-slate-50 border border-slate-200 rounded-xl" data-visual-asset="${esc(testAttr)}" data-asset-type="svg">
-              ${asset.payload || ''}
+            <figure class="${extraClass} relative p-3 bg-slate-50 border border-slate-200 rounded-xl cursor-zoom-in" data-visual-asset="${esc(testAttr)}" data-asset-type="svg">
+              ${ZOOM_BTN}${asset.payload || ''}
               ${asset.caption ? `<figcaption class="text-xs text-center text-slate-500 mt-2">${esc(asset.caption)}</figcaption>` : ''}
             </figure>
           `;
@@ -9291,8 +9322,8 @@
           const ion = Figures.tsStore.data?.ions?.[asset.ion];
           if (!ion) { Figures.tsLoad().then(() => { if (appState.current) render(); }); return `<figure class="${extraClass} p-3 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-500" data-visual-asset="${esc(testAttr)}" data-asset-type="ts-diagram">Loading the diagram…</figure>`; }
           return `
-            <figure class="${extraClass} p-3 bg-white border border-slate-200 rounded-xl" data-visual-asset="${esc(testAttr)}" data-asset-type="ts-diagram">
-              <div class="overflow-x-auto" data-ts-scroll>${Figures.tsSvg(ion, asset)}</div>
+            <figure class="${extraClass} relative p-3 pt-9 bg-white border border-slate-200 rounded-xl" data-visual-asset="${esc(testAttr)}" data-asset-type="ts-diagram">
+              ${ZOOM_BTN}<div class="overflow-x-auto" data-ts-scroll>${Figures.tsSvg(ion, asset)}</div>
               ${asset.caption ? `<figcaption class="text-xs text-center text-slate-500 mt-2">${esc(asset.caption)}</figcaption>` : ''}
             </figure>`;
         }
@@ -9300,8 +9331,8 @@
           const src = asset.dataUrl || asset.src || asset.url || asset.payload || '';
           if (!src) return '';
           return `
-            <figure class="${extraClass} p-3 bg-slate-50 border border-slate-200 rounded-xl" data-visual-asset="${esc(testAttr)}" data-asset-type="image">
-              <img src="${esc(src)}" alt="${esc(asset.alt || asset.caption || 'Diagram')}" class="max-h-80 w-auto mx-auto rounded" />
+            <figure class="${extraClass} relative p-3 bg-slate-50 border border-slate-200 rounded-xl cursor-zoom-in" data-visual-asset="${esc(testAttr)}" data-asset-type="image">
+              ${ZOOM_BTN}<img src="${esc(src)}" alt="${esc(asset.alt || asset.caption || 'Diagram')}" class="max-h-80 w-auto mx-auto rounded" />
               ${asset.caption ? `<figcaption class="text-xs text-center text-slate-500 mt-2">${esc(asset.caption)}</figcaption>` : ''}
             </figure>
           `;

@@ -9302,7 +9302,7 @@
         ov.querySelector('#figZoomClose').addEventListener('click', close);
         ov.querySelector('#figZoomClose').focus();
       }
-      document.addEventListener('click', (e) => {
+      if (typeof document !== 'undefined') document.addEventListener('click', (e) => {
         const b = e.target.closest && e.target.closest('[data-fig-zoom]');
         if (b) { e.preventDefault(); openFigZoom(b.closest('figure')); return; }
         const f = e.target.closest && e.target.closest('figure[data-visual-asset]');

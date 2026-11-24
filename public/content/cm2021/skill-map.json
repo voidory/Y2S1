@@ -800,8 +800,8 @@
     "bk-c4-h3po3",
     "bk-c4-clo2",
     "bk-c4-electride-alkalide",
-    "bk-c4-avgon-gen",
-    "bk-c4-ox-gen"
+    "bk-c4-ox-gen",
+    "bk-c4-avgon-gen"
    ],
    "chunk": "reaction-toolkit"
   },
@@ -1516,8 +1516,8 @@
     "bk-c4-clo2",
     "bk-c4-interhalogens",
     "bk-c4-halogen-redox",
-    "bk-c2-trend-gen",
-    "bk-c4-facts-gen"
+    "bk-c4-facts-gen",
+    "bk-c2-trend-gen"
    ],
    "chunk": "group15-18"
   },

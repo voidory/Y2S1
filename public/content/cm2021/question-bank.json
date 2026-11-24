@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-24T01:40:20.733Z",
+ "exportedAt": "2026-11-24T03:47:17.652Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -6447,7 +6447,7 @@
      },
      "comparisonVisualAsset": {
       "type": "svg",
-      "payload": "<svg viewBox=\"0 0 340 200\" role=\"img\" aria-label=\"18-crown-6\" style=\"width:100%;max-width:340px;height:auto;display:block;margin:0 auto\"><polygon points=\"110,34 132.57332945949415,37.98028702813005 152.4239822393116,49.44106675414745 167.15767664977295,67 174.99731169880573,88.5392202739826 174.99731169880573,111.4607797260174 167.15767664977295,133 152.4239822393116,150.55893324585253 132.57332945949415,162.01971297186995 110,166 87.42667054050587,162.01971297186995 67.57601776068842,150.5589332458526 52.84232335022706,133.00000000000003 45.00268830119427,111.46077972601739 45.00268830119427,88.53922027398262 52.842323350227026,67.00000000000004 67.57601776068839,49.44106675414746 87.42667054050588,37.98028702813004\" fill=\"none\" stroke=\"#0f172a\" stroke-width=\"1.6\"/><circle cx=\"110\" cy=\"34\" r=\"9\" fill=\"#fff\"/><text x=\"110\" y=\"38.5\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"132.57332945949415\" cy=\"37.98028702813005\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"152.4239822393116\" cy=\"49.44106675414745\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"167.15767664977295\" cy=\"67\" r=\"9\" fill=\"#fff\"/><text x=\"167.15767664977295\" y=\"71.5\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"174.99731169880573\" cy=\"88.5392202739826\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"174.99731169880573\" cy=\"111.4607797260174\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"167.15767664977295\" cy=\"133\" r=\"9\" fill=\"#fff\"/><text x=\"167.15767664977295\" y=\"137.5\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"152.4239822393116\" cy=\"150.55893324585253\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"132.57332945949415\" cy=\"162.01971297186995\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"110\" cy=\"166\" r=\"9\" fill=\"#fff\"/><text x=\"110\" y=\"170.5\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"87.42667054050587\" cy=\"162.01971297186995\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"67.57601776068842\" cy=\"150.5589332458526\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"52.84232335022706\" cy=\"133.00000000000003\" r=\"9\" fill=\"#fff\"/><text x=\"52.84232335022706\" y=\"137.50000000000003\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"45.00268830119427\" cy=\"111.46077972601739\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"45.00268830119427\" cy=\"88.53922027398262\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"52.842323350227026\" cy=\"67.00000000000004\" r=\"9\" fill=\"#fff\"/><text x=\"52.842323350227026\" y=\"71.50000000000004\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"67.57601776068839\" cy=\"49.44106675414746\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"87.42667054050588\" cy=\"37.98028702813004\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"110\" cy=\"100\" r=\"19\" fill=\"#dbeafe\" stroke=\"#1d4ed8\"/><text x=\"110\" y=\"104\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" fill=\"#1d4ed8\">K⁺</text><text x=\"215\" y=\"86\" font-size=\"11\" fill=\"#334155\">18-crown-6</text><text x=\"215\" y=\"102\" font-size=\"10\" fill=\"#475569\">18 ring atoms</text><text x=\"215\" y=\"116\" font-size=\"10\" fill=\"#475569\">6 O, each pair of O</text><text x=\"215\" y=\"129\" font-size=\"10\" fill=\"#475569\">joined by –CH₂CH₂–</text><text x=\"215\" y=\"148\" font-size=\"10\" fill=\"#1d4ed8\">binds K⁺ best</text></svg>",
+      "payload": "<svg viewBox=\"0 0 320 322\" role=\"img\" aria-label=\"18-crown-6\" style=\"width:100%;max-width:460px;height:auto;display:block;margin:0 auto\"><polygon points=\"160.0,69.0 200.0,50.1 218.5,90.3 261.3,101.5 249.6,144.2 275.2,180.3 238.8,205.5 235.2,249.6 191.1,245.5 160.0,277.0 128.9,245.5 84.8,249.6 81.2,205.5 44.8,180.3 70.4,144.2 58.7,101.5 101.5,90.3 120.0,50.1\" fill=\"none\" stroke=\"#0f172a\" stroke-width=\"2.6\" stroke-linejoin=\"round\"/><circle cx=\"160.0\" cy=\"69.0\" r=\"12\" fill=\"#fff\"/><text x=\"160.0\" y=\"74.5\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"261.3\" cy=\"101.5\" r=\"12\" fill=\"#fff\"/><text x=\"261.3\" y=\"107.0\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"238.8\" cy=\"205.5\" r=\"12\" fill=\"#fff\"/><text x=\"238.8\" y=\"211.0\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"160.0\" cy=\"277.0\" r=\"12\" fill=\"#fff\"/><text x=\"160.0\" y=\"282.5\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"81.2\" cy=\"205.5\" r=\"12\" fill=\"#fff\"/><text x=\"81.2\" y=\"211.0\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"58.7\" cy=\"101.5\" r=\"12\" fill=\"#fff\"/><text x=\"58.7\" y=\"107.0\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"160\" cy=\"160\" r=\"26\" fill=\"#dbeafe\" stroke=\"#1d4ed8\" stroke-width=\"1.5\"/><text x=\"160\" y=\"165\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#1d4ed8\">K⁺</text><text x=\"160\" y=\"22\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#334155\">18-crown-6</text><text x=\"160\" y=\"312\" text-anchor=\"middle\" font-size=\"12\" fill=\"#475569\">18 ring atoms · 6 O, each pair joined by –CH₂CH₂–</text></svg>",
       "caption": "18-crown-6: 6 O donors separated by two CH₂ groups; cavity matches K⁺"
      }
     },
@@ -33684,1976 +33684,6 @@
   },
   {
    "schemaVersion": "3.0",
-   "id": "bk-c2-trend-gen",
-   "moduleCode": "CM2021",
-   "tier": "atomic",
-   "metadata": {
-    "title": "Pick the highest or lowest: halogens, noble gases and xenon fluorides",
-    "source": "Chapter 2 Part 8 slides 21-23, 30, 33; template of the Kinjo example mid-terms (boiling point, ionisation energy, electron affinity picks)",
-    "week": 2,
-    "primaryTheme": "Periodic Trends",
-    "conceptTags": [
-     "periodic-trends",
-     "halogens",
-     "noble-gases"
-    ],
-    "difficultyEstimate": 3,
-    "estimatedMinutes": 1,
-    "examStyle": "short_2to3",
-    "family": "trend-gen"
-   },
-   "variants": [
-    {
-     "variantId": "c2-trend-01",
-     "perspectiveLabel": "first ionisation energy, highest of F, Cl, Br",
-     "marks": 1,
-     "stem": "Among F, Cl, Br, which has the **highest** first ionisation energy?",
-     "explanation": "F. Ionisation energy falls down the group: the outer electron is farther from the nucleus and better shielded. (Slide values: F 1681 kJ/mol, Cl 1256 kJ/mol, Br 1143 kJ/mol.)",
-     "sourceSlide": "s21",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "F"
-       },
-       {
-        "id": "b",
-        "label": "Cl"
-       },
-       {
-        "id": "c",
-        "label": "Br"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-02",
-     "perspectiveLabel": "first ionisation energy, lowest of Cl, Br, I",
-     "marks": 1,
-     "stem": "Among Cl, Br, I, which has the **lowest** first ionisation energy?",
-     "explanation": "I. Ionisation energy falls down the group: the outer electron is farther from the nucleus and better shielded. (Slide values: Cl 1256 kJ/mol, Br 1143 kJ/mol, I 1009 kJ/mol.)",
-     "sourceSlide": "s21",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Cl"
-       },
-       {
-        "id": "b",
-        "label": "Br"
-       },
-       {
-        "id": "c",
-        "label": "I"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-03",
-     "perspectiveLabel": "electronegativity, highest of Cl, Br, I",
-     "marks": 1,
-     "stem": "Among Cl, Br, I, which has the **highest** electronegativity?",
-     "explanation": "Cl. Electronegativity falls down the group as the atoms get larger. (Slide values: Cl 3, Br 2.8, I 2.5.)",
-     "sourceSlide": "s21",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Cl"
-       },
-       {
-        "id": "b",
-        "label": "Br"
-       },
-       {
-        "id": "c",
-        "label": "I"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-04",
-     "perspectiveLabel": "electronegativity, lowest of F, Br, I",
-     "marks": 1,
-     "stem": "Among F, Br, I, which has the **lowest** electronegativity?",
-     "explanation": "I. Electronegativity falls down the group as the atoms get larger. (Slide values: F 4, Br 2.8, I 2.5.)",
-     "sourceSlide": "s21",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "F"
-       },
-       {
-        "id": "b",
-        "label": "Br"
-       },
-       {
-        "id": "c",
-        "label": "I"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-05",
-     "perspectiveLabel": "atomic radius, highest of F, Cl, I",
-     "marks": 1,
-     "stem": "Among F, Cl, I, which has the **highest** atomic radius?",
-     "explanation": "I. Atomic radius grows down the group as extra shells are added. (Slide values: F 72 pm, Cl 100 pm, I 133 pm.)",
-     "sourceSlide": "s21",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "F"
-       },
-       {
-        "id": "b",
-        "label": "Cl"
-       },
-       {
-        "id": "c",
-        "label": "I"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-06",
-     "perspectiveLabel": "ionic radius of the halide ion, lowest of F⁻, Cl⁻, Br⁻",
-     "marks": 1,
-     "stem": "Among F⁻, Cl⁻, Br⁻, which has the **lowest** ionic radius of the halide ion?",
-     "explanation": "F⁻. Halide ions get larger down the group. (Slide values: F⁻ 133 pm, Cl⁻ 181 pm, Br⁻ 196 pm.)",
-     "sourceSlide": "s21",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "F⁻"
-       },
-       {
-        "id": "b",
-        "label": "Cl⁻"
-       },
-       {
-        "id": "c",
-        "label": "Br⁻"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-07",
-     "perspectiveLabel": "ionic radius of the halide ion, highest of Cl⁻, Br⁻, I⁻",
-     "marks": 1,
-     "stem": "Among Cl⁻, Br⁻, I⁻, which has the **highest** ionic radius of the halide ion?",
-     "explanation": "I⁻. Halide ions get larger down the group. (Slide values: Cl⁻ 181 pm, Br⁻ 196 pm, I⁻ 220 pm.)",
-     "sourceSlide": "s21",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Cl⁻"
-       },
-       {
-        "id": "b",
-        "label": "Br⁻"
-       },
-       {
-        "id": "c",
-        "label": "I⁻"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-08",
-     "perspectiveLabel": "boiling point of the element, highest of F₂, Cl₂, Br₂",
-     "marks": 1,
-     "stem": "Among F₂, Cl₂, Br₂, which has the **highest** boiling point of the element?",
-     "explanation": "Br₂. Boiling and melting points rise down the group: more electrons, stronger dispersion forces between the X₂ molecules. (Slide values: F₂ -188 °C, Cl₂ -34 °C, Br₂ 59.5 °C.)",
-     "sourceSlide": "s21",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "F₂"
-       },
-       {
-        "id": "b",
-        "label": "Cl₂"
-       },
-       {
-        "id": "c",
-        "label": "Br₂"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-09",
-     "perspectiveLabel": "boiling point of the element, lowest of Cl₂, Br₂, I₂",
-     "marks": 1,
-     "stem": "Among Cl₂, Br₂, I₂, which has the **lowest** boiling point of the element?",
-     "explanation": "Cl₂. Boiling and melting points rise down the group: more electrons, stronger dispersion forces between the X₂ molecules. (Slide values: Cl₂ -34 °C, Br₂ 59.5 °C, I₂ 185 °C.)",
-     "sourceSlide": "s21",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Cl₂"
-       },
-       {
-        "id": "b",
-        "label": "Br₂"
-       },
-       {
-        "id": "c",
-        "label": "I₂"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-10",
-     "perspectiveLabel": "melting point of the element, highest of F₂, Br₂, I₂",
-     "marks": 1,
-     "stem": "Among F₂, Br₂, I₂, which has the **highest** melting point of the element?",
-     "explanation": "I₂. Melting points rise down the group because dispersion forces grow with the number of electrons. (Slide values: F₂ -219 °C, Br₂ -7.2 °C, I₂ 114 °C.)",
-     "sourceSlide": "s21",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "F₂"
-       },
-       {
-        "id": "b",
-        "label": "Br₂"
-       },
-       {
-        "id": "c",
-        "label": "I₂"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-11",
-     "perspectiveLabel": "melting point of the element, lowest of F₂, Cl₂, Br₂",
-     "marks": 1,
-     "stem": "Among F₂, Cl₂, Br₂, which has the **lowest** melting point of the element?",
-     "explanation": "F₂. Melting points rise down the group because dispersion forces grow with the number of electrons. (Slide values: F₂ -219 °C, Cl₂ -101 °C, Br₂ -7.2 °C.)",
-     "sourceSlide": "s21",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "F₂"
-       },
-       {
-        "id": "b",
-        "label": "Cl₂"
-       },
-       {
-        "id": "c",
-        "label": "Br₂"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-12",
-     "perspectiveLabel": "X–X bond energy, highest of F–F, Cl–Cl, Br–Br",
-     "marks": 1,
-     "stem": "Among F–F, Cl–Cl, Br–Br, which has the **highest** X–X bond energy?",
-     "explanation": "Cl–Cl. The bond energy is not simply decreasing: Cl–Cl is the strongest, and F–F is weak despite being short (lone-pair repulsion across the short bond); then Br–Br > I–I. (Slide values: F–F 159 kJ/mol, Cl–Cl 243 kJ/mol, Br–Br 193 kJ/mol.)",
-     "sourceSlide": "s22",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "F–F"
-       },
-       {
-        "id": "b",
-        "label": "Cl–Cl"
-       },
-       {
-        "id": "c",
-        "label": "Br–Br"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "b"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-13",
-     "perspectiveLabel": "X–X bond energy, lowest of F–F, Br–Br, I–I",
-     "marks": 1,
-     "stem": "Among F–F, Br–Br, I–I, which has the **lowest** X–X bond energy?",
-     "explanation": "I–I. The bond energy is not simply decreasing: Cl–Cl is the strongest, and F–F is weak despite being short (lone-pair repulsion across the short bond); then Br–Br > I–I. (Slide values: F–F 159 kJ/mol, Br–Br 193 kJ/mol, I–I 151 kJ/mol.)",
-     "sourceSlide": "s22",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "F–F"
-       },
-       {
-        "id": "b",
-        "label": "Br–Br"
-       },
-       {
-        "id": "c",
-        "label": "I–I"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-14",
-     "perspectiveLabel": "X–X bond energy, highest of Cl–Cl, Br–Br, I–I",
-     "marks": 1,
-     "stem": "Among Cl–Cl, Br–Br, I–I, which has the **highest** X–X bond energy?",
-     "explanation": "Cl–Cl. The bond energy is not simply decreasing: Cl–Cl is the strongest, and F–F is weak despite being short (lone-pair repulsion across the short bond); then Br–Br > I–I. (Slide values: Cl–Cl 243 kJ/mol, Br–Br 193 kJ/mol, I–I 151 kJ/mol.)",
-     "sourceSlide": "s22",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Cl–Cl"
-       },
-       {
-        "id": "b",
-        "label": "Br–Br"
-       },
-       {
-        "id": "c",
-        "label": "I–I"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-15",
-     "perspectiveLabel": "X–X bond length, highest of F–F, Cl–Cl, I–I",
-     "marks": 1,
-     "stem": "Among F–F, Cl–Cl, I–I, which has the **highest** X–X bond length?",
-     "explanation": "I–I. Bond length grows down the group with atomic size. (Slide values: F–F 143 pm, Cl–Cl 200 pm, I–I 266 pm.)",
-     "sourceSlide": "s22",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "F–F"
-       },
-       {
-        "id": "b",
-        "label": "Cl–Cl"
-       },
-       {
-        "id": "c",
-        "label": "I–I"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-16",
-     "perspectiveLabel": "electron affinity (energy released on E + e⁻ → E⁻), highest of F, Cl, Br",
-     "marks": 1,
-     "stem": "Among F, Cl, Br, which has the **highest** electron affinity (energy released on E + e⁻ → E⁻)?",
-     "explanation": "Cl. Chlorine has the largest electron affinity, not fluorine: the small 2p shell of F makes the added electron repel the ones already there; after Cl the values fall down the group. (F is still the most electronegative.) (Slide values: F 334 kJ/mol, Cl 355 kJ/mol, Br 325 kJ/mol.)",
-     "sourceSlide": "s23",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "F"
-       },
-       {
-        "id": "b",
-        "label": "Cl"
-       },
-       {
-        "id": "c",
-        "label": "Br"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "b"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-17",
-     "perspectiveLabel": "electron affinity (energy released on E + e⁻ → E⁻), highest of F, Br, I",
-     "marks": 1,
-     "stem": "Among F, Br, I, which has the **highest** electron affinity (energy released on E + e⁻ → E⁻)?",
-     "explanation": "F. Chlorine has the largest electron affinity, not fluorine: the small 2p shell of F makes the added electron repel the ones already there; after Cl the values fall down the group. (F is still the most electronegative.) (Slide values: F 334 kJ/mol, Br 325 kJ/mol, I 295 kJ/mol.)",
-     "sourceSlide": "s23",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "F"
-       },
-       {
-        "id": "b",
-        "label": "Br"
-       },
-       {
-        "id": "c",
-        "label": "I"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-18",
-     "perspectiveLabel": "electron affinity (energy released on E + e⁻ → E⁻), lowest of Cl, Br, I",
-     "marks": 1,
-     "stem": "Among Cl, Br, I, which has the **lowest** electron affinity (energy released on E + e⁻ → E⁻)?",
-     "explanation": "I. Chlorine has the largest electron affinity, not fluorine: the small 2p shell of F makes the added electron repel the ones already there; after Cl the values fall down the group. (F is still the most electronegative.) (Slide values: Cl 355 kJ/mol, Br 325 kJ/mol, I 295 kJ/mol.)",
-     "sourceSlide": "s23",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Cl"
-       },
-       {
-        "id": "b",
-        "label": "Br"
-       },
-       {
-        "id": "c",
-        "label": "I"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-19",
-     "perspectiveLabel": "electron affinity (energy released on E + e⁻ → E⁻), lowest of F, Cl, I",
-     "marks": 1,
-     "stem": "Among F, Cl, I, which has the **lowest** electron affinity (energy released on E + e⁻ → E⁻)?",
-     "explanation": "I. Chlorine has the largest electron affinity, not fluorine: the small 2p shell of F makes the added electron repel the ones already there; after Cl the values fall down the group. (F is still the most electronegative.) (Slide values: F 334 kJ/mol, Cl 355 kJ/mol, I 295 kJ/mol.)",
-     "sourceSlide": "s23",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "F"
-       },
-       {
-        "id": "b",
-        "label": "Cl"
-       },
-       {
-        "id": "c",
-        "label": "I"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-20",
-     "perspectiveLabel": "first ionisation energy, highest of He, Ne, Ar",
-     "marks": 1,
-     "stem": "Among He, Ne, Ar, which has the **highest** first ionisation energy?",
-     "explanation": "He. Noble gases have the highest ionisation energy in each period and it falls down the group. (Slide values: He 2372 kJ/mol, Ne 2080 kJ/mol, Ar 1520 kJ/mol.)",
-     "sourceSlide": "s30",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "He"
-       },
-       {
-        "id": "b",
-        "label": "Ne"
-       },
-       {
-        "id": "c",
-        "label": "Ar"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-21",
-     "perspectiveLabel": "first ionisation energy, lowest of Ar, Kr, Xe",
-     "marks": 1,
-     "stem": "Among Ar, Kr, Xe, which has the **lowest** first ionisation energy?",
-     "explanation": "Xe. Noble gases have the highest ionisation energy in each period and it falls down the group. (Slide values: Ar 1520 kJ/mol, Kr 1351 kJ/mol, Xe 1170 kJ/mol.)",
-     "sourceSlide": "s30",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Ar"
-       },
-       {
-        "id": "b",
-        "label": "Kr"
-       },
-       {
-        "id": "c",
-        "label": "Xe"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-22",
-     "perspectiveLabel": "first ionisation energy, highest of Ne, Kr, Rn",
-     "marks": 1,
-     "stem": "Among Ne, Kr, Rn, which has the **highest** first ionisation energy?",
-     "explanation": "Ne. Noble gases have the highest ionisation energy in each period and it falls down the group. (Slide values: Ne 2080 kJ/mol, Kr 1351 kJ/mol, Rn 1037 kJ/mol.)",
-     "sourceSlide": "s30",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Ne"
-       },
-       {
-        "id": "b",
-        "label": "Kr"
-       },
-       {
-        "id": "c",
-        "label": "Rn"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-23",
-     "perspectiveLabel": "boiling point, lowest of He, Ne, Ar",
-     "marks": 1,
-     "stem": "Among He, Ne, Ar, which has the **lowest** boiling point?",
-     "explanation": "He. Boiling points rise down the group: larger atoms are more polarisable, so dispersion forces grow. (Slide values: He -269 °C, Ne -246 °C, Ar -186 °C.)",
-     "sourceSlide": "s30",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "He"
-       },
-       {
-        "id": "b",
-        "label": "Ne"
-       },
-       {
-        "id": "c",
-        "label": "Ar"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-24",
-     "perspectiveLabel": "boiling point, highest of Kr, Xe, Rn",
-     "marks": 1,
-     "stem": "Among Kr, Xe, Rn, which has the **highest** boiling point?",
-     "explanation": "Rn. Boiling points rise down the group: larger atoms are more polarisable, so dispersion forces grow. (Slide values: Kr -153 °C, Xe -108 °C, Rn -62 °C.)",
-     "sourceSlide": "s30",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Kr"
-       },
-       {
-        "id": "b",
-        "label": "Xe"
-       },
-       {
-        "id": "c",
-        "label": "Rn"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-25",
-     "perspectiveLabel": "boiling point, highest of Ne, Ar, Xe",
-     "marks": 1,
-     "stem": "Among Ne, Ar, Xe, which has the **highest** boiling point?",
-     "explanation": "Xe. Boiling points rise down the group: larger atoms are more polarisable, so dispersion forces grow. (Slide values: Ne -246 °C, Ar -186 °C, Xe -108 °C.)",
-     "sourceSlide": "s30",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Ne"
-       },
-       {
-        "id": "b",
-        "label": "Ar"
-       },
-       {
-        "id": "c",
-        "label": "Xe"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-26",
-     "perspectiveLabel": "density at STP, highest of Ne, Kr, Rn",
-     "marks": 1,
-     "stem": "Among Ne, Kr, Rn, which has the **highest** density at STP?",
-     "explanation": "Rn. Density at STP rises down the group with the atomic mass (the molar volume of an ideal-like gas is the same). (Slide values: Ne 0.9 g/L, Kr 3.75 g/L, Rn 9.73 g/L.)",
-     "sourceSlide": "s30",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "Ne"
-       },
-       {
-        "id": "b",
-        "label": "Kr"
-       },
-       {
-        "id": "c",
-        "label": "Rn"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-27",
-     "perspectiveLabel": "density at STP, lowest of He, Ar, Xe",
-     "marks": 1,
-     "stem": "Among He, Ar, Xe, which has the **lowest** density at STP?",
-     "explanation": "He. Density at STP rises down the group with the atomic mass (the molar volume of an ideal-like gas is the same). (Slide values: He 0.178 g/L, Ar 1.78 g/L, Xe 5.9 g/L.)",
-     "sourceSlide": "s30",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "He"
-       },
-       {
-        "id": "b",
-        "label": "Ar"
-       },
-       {
-        "id": "c",
-        "label": "Xe"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-28",
-     "perspectiveLabel": "atomic radius, highest of He, Ar, Xe",
-     "marks": 1,
-     "stem": "Among He, Ar, Xe, which has the **highest** atomic radius?",
-     "explanation": "Xe. Atomic radius grows down the group. (Slide values: He 31 pm, Ar 98 pm, Xe 131 pm.)",
-     "sourceSlide": "s30",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "He"
-       },
-       {
-        "id": "b",
-        "label": "Ar"
-       },
-       {
-        "id": "c",
-        "label": "Xe"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-29",
-     "perspectiveLabel": "melting point of the xenon fluoride, lowest of XeF₂, XeF₄, XeF₆",
-     "marks": 1,
-     "stem": "Among XeF₂, XeF₄, XeF₆, which has the **lowest** melting point of the xenon fluoride?",
-     "explanation": "XeF₆. The melting points fall as more fluorine is added (XeF₂ 140 °C, XeF₄ 117 °C, XeF₆ 49 °C). (Slide values: XeF₂ 140 °C, XeF₄ 117 °C, XeF₆ 49 °C.)",
-     "sourceSlide": "s33",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "XeF₂"
-       },
-       {
-        "id": "b",
-        "label": "XeF₄"
-       },
-       {
-        "id": "c",
-        "label": "XeF₆"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-30",
-     "perspectiveLabel": "melting point of the xenon fluoride, highest of XeF₂, XeF₄, XeF₆",
-     "marks": 1,
-     "stem": "Among XeF₂, XeF₄, XeF₆, which has the **highest** melting point of the xenon fluoride?",
-     "explanation": "XeF₂. The melting points fall as more fluorine is added (XeF₂ 140 °C, XeF₄ 117 °C, XeF₆ 49 °C). (Slide values: XeF₂ 140 °C, XeF₄ 117 °C, XeF₆ 49 °C.)",
-     "sourceSlide": "s33",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "XeF₂"
-       },
-       {
-        "id": "b",
-        "label": "XeF₄"
-       },
-       {
-        "id": "c",
-        "label": "XeF₆"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "a"
-      ],
-      "gradingMode": "exact"
-     }
-    },
-    {
-     "variantId": "c2-trend-31",
-     "perspectiveLabel": "Xe–F bond length, lowest of XeF₂, XeF₄, XeF₆",
-     "marks": 1,
-     "stem": "Among XeF₂, XeF₄, XeF₆, which has the **lowest** Xe–F bond length?",
-     "explanation": "XeF₆. The Xe–F bond shortens as more F is bonded (2.00, 1.95, 1.89 Å). (Slide values: XeF₂ 2 Å, XeF₄ 1.95 Å, XeF₆ 1.89 Å.)",
-     "sourceSlide": "s33",
-     "inputSlot": {
-      "type": "choice",
-      "selectionMode": "single",
-      "options": [
-       {
-        "id": "a",
-        "label": "XeF₂"
-       },
-       {
-        "id": "b",
-        "label": "XeF₄"
-       },
-       {
-        "id": "c",
-        "label": "XeF₆"
-       }
-      ],
-      "shuffleOptions": true
-     },
-     "evaluator": {
-      "type": "choice_match",
-      "targetIds": [
-       "c"
-      ],
-      "gradingMode": "exact"
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c4-avgon-gen",
-   "moduleCode": "CM2021",
-   "tier": "atomic",
-   "metadata": {
-    "title": "Average oxidation number of an element in a formula",
-    "source": "Template of the Kinjo example mid-terms (N₂O₃ in two papers) and the finals (average oxidation numbers of Mn₃O₄ and Mg₅Ga₂)",
-    "week": 4,
-    "primaryTheme": "Oxidation Numbers",
-    "conceptTags": [
-     "average-oxidation-number"
-    ],
-    "difficultyEstimate": 3,
-    "estimatedMinutes": 2,
-    "examStyle": "short_2to3",
-    "family": "avgon-gen"
-   },
-   "variants": [
-    {
-     "variantId": "c4-avgon-gen-01",
-     "perspectiveLabel": "N₂O",
-     "marks": 2,
-     "stem": "Give the average oxidation number of **N** in **N₂O**. (Give a fraction as a decimal to two places.)",
-     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
-     "explanation": "O is −2, the molecule is neutral, so the two N share +2: +1 each.",
-     "sourceSlide": "s4-5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "Average oxidation number of N"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "type": "numeric",
-        "targetExpr": "1",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c4-avgon-gen-02",
-     "perspectiveLabel": "N₂O₃",
-     "marks": 2,
-     "stem": "Give the average oxidation number of **N** in **N₂O₃**. (Give a fraction as a decimal to two places.)",
-     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
-     "explanation": "Three O give −6, so the two N share +6: average +3 (one N is +2 and the other +4 in the real structure, which is why it is an average).",
-     "sourceSlide": "s4-5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "Average oxidation number of N"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "type": "numeric",
-        "targetExpr": "3",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c4-avgon-gen-03",
-     "perspectiveLabel": "N₂O₄",
-     "marks": 2,
-     "stem": "Give the average oxidation number of **N** in **N₂O₄**. (Give a fraction as a decimal to two places.)",
-     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
-     "explanation": "Four O give −8: the two N share +8, average +4.",
-     "sourceSlide": "s4-5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "Average oxidation number of N"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "type": "numeric",
-        "targetExpr": "4",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c4-avgon-gen-04",
-     "perspectiveLabel": "N₂O₅",
-     "marks": 2,
-     "stem": "Give the average oxidation number of **N** in **N₂O₅**. (Give a fraction as a decimal to two places.)",
-     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
-     "explanation": "Five O give −10: the two N share +10, average +5.",
-     "sourceSlide": "s4-5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "Average oxidation number of N"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "type": "numeric",
-        "targetExpr": "5",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c4-avgon-gen-05",
-     "perspectiveLabel": "N₂H₄",
-     "marks": 2,
-     "stem": "Give the average oxidation number of **N** in **N₂H₄**. (Give a fraction as a decimal to two places.)",
-     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
-     "explanation": "Four H give +4, so the two N share −4: −2 each.",
-     "sourceSlide": "s4-5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "Average oxidation number of N"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "type": "numeric",
-        "targetExpr": "-2",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c4-avgon-gen-06",
-     "perspectiveLabel": "NH₂OH",
-     "marks": 2,
-     "stem": "Give the average oxidation number of **N** in **NH₂OH**. (Give a fraction as a decimal to two places.)",
-     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
-     "explanation": "H₃ gives +3 and O is −2, together +1, so N is −1.",
-     "sourceSlide": "s4-5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "Average oxidation number of N"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "type": "numeric",
-        "targetExpr": "-1",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c4-avgon-gen-07",
-     "perspectiveLabel": "NH₄NO₃ (average over both N atoms)",
-     "marks": 2,
-     "stem": "Give the average oxidation number of **N** in **NH₄NO₃ (average over both N atoms)**. (Give a fraction as a decimal to two places.)",
-     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
-     "explanation": "NH₄⁺ has N(−3) and NO₃⁻ has N(+5), average (−3 + 5)/2 = +1.",
-     "sourceSlide": "s4-5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "Average oxidation number of N"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "type": "numeric",
-        "targetExpr": "1",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c4-avgon-gen-08",
-     "perspectiveLabel": "Fe₃O₄",
-     "marks": 2,
-     "stem": "Give the average oxidation number of **Fe** in **Fe₃O₄**. (Give a fraction as a decimal to two places.)",
-     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
-     "explanation": "Four O give −8, so the three Fe share +8: +8/3 = +2.67 on average (the real compound has one Fe²⁺ and two Fe³⁺).",
-     "sourceSlide": "s4-5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "Average oxidation number of Fe"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "type": "numeric",
-        "targetExpr": "2.6667",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c4-avgon-gen-09",
-     "perspectiveLabel": "Pb₃O₄",
-     "marks": 2,
-     "stem": "Give the average oxidation number of **Pb** in **Pb₃O₄**. (Give a fraction as a decimal to two places.)",
-     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
-     "explanation": "Four O give −8, three Pb share +8: +8/3 (two Pb(II) and one Pb(IV) in the real compound).",
-     "sourceSlide": "s4-5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "Average oxidation number of Pb"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "type": "numeric",
-        "targetExpr": "2.6667",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c4-avgon-gen-10",
-     "perspectiveLabel": "S₄O₆²⁻",
-     "marks": 2,
-     "stem": "Give the average oxidation number of **S** in **S₄O₆²⁻**. (Give a fraction as a decimal to two places.)",
-     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
-     "explanation": "Six O give −12 and the ion is 2−, so the four S share +10: +2.5 on average.",
-     "sourceSlide": "s4-5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "Average oxidation number of S"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "type": "numeric",
-        "targetExpr": "2.5",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c4-avgon-gen-11",
-     "perspectiveLabel": "S₂O₃²⁻",
-     "marks": 2,
-     "stem": "Give the average oxidation number of **S** in **S₂O₃²⁻**. (Give a fraction as a decimal to two places.)",
-     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
-     "explanation": "Three O give −6 and the ion is 2−, so the two S share +4: +2 on average.",
-     "sourceSlide": "s4-5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "Average oxidation number of S"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "type": "numeric",
-        "targetExpr": "2",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c4-avgon-gen-12",
-     "perspectiveLabel": "I₃⁻",
-     "marks": 2,
-     "stem": "Give the average oxidation number of **I** in **I₃⁻**. (Give a fraction as a decimal to two places.)",
-     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
-     "explanation": "The ion carries 1−, shared over three I: −1/3 each on average.",
-     "sourceSlide": "s4-5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "Average oxidation number of I"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "type": "numeric",
-        "targetExpr": "-0.3333",
-        "tolerance": 0.01
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c4-avgon-gen-13",
-     "perspectiveLabel": "NaN₃",
-     "marks": 2,
-     "stem": "Give the average oxidation number of **N** in **NaN₃**. (Give a fraction as a decimal to two places.)",
-     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
-     "explanation": "Na is +1, so the three N share −1: −1/3 on average.",
-     "sourceSlide": "s4-5",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "a",
-        "label": "Average oxidation number of N"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "a": {
-        "type": "numeric",
-        "targetExpr": "-0.3333",
-        "tolerance": 0.01
-       }
-      }
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c4-nuclear-gen",
-   "moduleCode": "CM2021",
-   "tier": "atomic",
-   "metadata": {
-    "title": "Nuclear equations: find the unknown nucleus",
-    "source": "Template of the Kinjo example mid-term (¹⁴N + n → T + X) and finals 2024-25 and 2025-26 (α capture, neutron capture then two β⁻)",
-    "week": 4,
-    "primaryTheme": "Nuclear Chemistry",
-    "conceptTags": [
-     "nuclear-equation"
-    ],
-    "difficultyEstimate": 3,
-    "estimatedMinutes": 2,
-    "examStyle": "short_2to3",
-    "family": "nuclear-gen"
-   },
-   "variants": [
-    {
-     "variantId": "c4-nuclear-gen-01",
-     "perspectiveLabel": "³⁰P",
-     "marks": 2,
-     "stem": "²⁷Al captures an α particle (⁴He) and then emits a neutron. Which isotope forms?",
-     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
-     "explanation": "²⁷Al + ⁴He → X + ¹n: A = 27 + 4 − 1 = 30, Z = 13 + 2 − 0 = 15, so ³⁰P.",
-     "sourceSlide": "s4",
-     "inputSlot": {
-      "type": "typed_short",
-      "formatHint": "e.g. 25Mg or Mg-25"
-     },
-     "evaluator": {
-      "type": "pattern_match",
-      "acceptedPatterns": [
-       "^\\s*(?:\\^?\\s*30\\s*-?\\s*P|P\\s*-?\\s*30|³⁰\\s*P|(?:phosphorus)\\s*-?\\s*30)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-      ],
-      "caseSensitive": false,
-      "expectedDisplay": "³⁰P"
-     }
-    },
-    {
-     "variantId": "c4-nuclear-gen-02",
-     "perspectiveLabel": "¹⁷O",
-     "marks": 2,
-     "stem": "¹⁴N is hit by an α particle (⁴He) and a proton (¹H) is released. Which isotope forms?",
-     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
-     "explanation": "¹⁴N + ⁴He → X + ¹H: A = 14 + 4 − 1 = 17, Z = 7 + 2 − 1 = 8, so ¹⁷O (the first artificial transmutation).",
-     "sourceSlide": "s4",
-     "inputSlot": {
-      "type": "typed_short",
-      "formatHint": "e.g. 25Mg or Mg-25"
-     },
-     "evaluator": {
-      "type": "pattern_match",
-      "acceptedPatterns": [
-       "^\\s*(?:\\^?\\s*17\\s*-?\\s*O|O\\s*-?\\s*17|¹⁷\\s*O|(?:oxygen)\\s*-?\\s*17)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-      ],
-      "caseSensitive": false,
-      "expectedDisplay": "¹⁷O"
-     }
-    },
-    {
-     "variantId": "c4-nuclear-gen-03",
-     "perspectiveLabel": "⁷Li",
-     "marks": 2,
-     "stem": "¹⁰B absorbs a neutron and splits into ⁴He and one other nucleus X. Identify X.",
-     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
-     "explanation": "¹⁰B + ¹n → ⁴He + X: A = 10 + 1 − 4 = 7, Z = 5 + 0 − 2 = 3, so ⁷Li.",
-     "sourceSlide": "s4",
-     "inputSlot": {
-      "type": "typed_short",
-      "formatHint": "e.g. 25Mg or Mg-25"
-     },
-     "evaluator": {
-      "type": "pattern_match",
-      "acceptedPatterns": [
-       "^\\s*(?:\\^?\\s*7\\s*-?\\s*Li|Li\\s*-?\\s*7|⁷\\s*Li|(?:lithium)\\s*-?\\s*7)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-      ],
-      "caseSensitive": false,
-      "expectedDisplay": "⁷Li"
-     }
-    },
-    {
-     "variantId": "c4-nuclear-gen-04",
-     "perspectiveLabel": "⁹²Kr",
-     "marks": 2,
-     "stem": "²³⁵U absorbs a neutron and splits into ¹⁴¹Ba, three neutrons and a second nucleus X. Identify X.",
-     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
-     "explanation": "²³⁵U + ¹n → ¹⁴¹Ba + 3 ¹n + X: A = 235 + 1 − 141 − 3 = 92, Z = 92 − 56 = 36, so ⁹²Kr.",
-     "sourceSlide": "s4",
-     "inputSlot": {
-      "type": "typed_short",
-      "formatHint": "e.g. 25Mg or Mg-25"
-     },
-     "evaluator": {
-      "type": "pattern_match",
-      "acceptedPatterns": [
-       "^\\s*(?:\\^?\\s*92\\s*-?\\s*Kr|Kr\\s*-?\\s*92|⁹²\\s*Kr|(?:krypton)\\s*-?\\s*92)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-      ],
-      "caseSensitive": false,
-      "expectedDisplay": "⁹²Kr"
-     }
-    },
-    {
-     "variantId": "c4-nuclear-gen-05",
-     "perspectiveLabel": "⁴He",
-     "marks": 2,
-     "stem": "⁷Li captures a proton (¹H) and splits into two identical nuclei X. Identify X.",
-     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
-     "explanation": "⁷Li + ¹H → 2 X: A = (7 + 1)/2 = 4, Z = (3 + 1)/2 = 2, so ⁴He (an α particle each).",
-     "sourceSlide": "s4",
-     "inputSlot": {
-      "type": "typed_short",
-      "formatHint": "e.g. 25Mg or Mg-25"
-     },
-     "evaluator": {
-      "type": "pattern_match",
-      "acceptedPatterns": [
-       "^\\s*(?:\\^?\\s*4\\s*-?\\s*He|He\\s*-?\\s*4|⁴\\s*He|(?:helium)\\s*-?\\s*4)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-      ],
-      "caseSensitive": false,
-      "expectedDisplay": "⁴He"
-     }
-    },
-    {
-     "variantId": "c4-nuclear-gen-06",
-     "perspectiveLabel": "²⁸Al",
-     "marks": 2,
-     "stem": "²⁸Si captures a neutron and then emits a proton (¹H). Which isotope forms?",
-     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
-     "explanation": "²⁸Si + ¹n → X + ¹H: A = 28 + 1 − 1 = 28, Z = 14 + 0 − 1 = 13, so ²⁸Al.",
-     "sourceSlide": "s4",
-     "inputSlot": {
-      "type": "typed_short",
-      "formatHint": "e.g. 25Mg or Mg-25"
-     },
-     "evaluator": {
-      "type": "pattern_match",
-      "acceptedPatterns": [
-       "^\\s*(?:\\^?\\s*28\\s*-?\\s*Al|Al\\s*-?\\s*28|²⁸\\s*Al|(?:aluminium|aluminum)\\s*-?\\s*28)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-      ],
-      "caseSensitive": false,
-      "expectedDisplay": "²⁸Al"
-     }
-    },
-    {
-     "variantId": "c4-nuclear-gen-07",
-     "perspectiveLabel": "³⁸Ar",
-     "marks": 2,
-     "stem": "³⁷Cl captures a neutron and the product then undergoes one β⁻ decay. Which isotope results?",
-     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
-     "explanation": "³⁷Cl + ¹n → ³⁸Cl; β⁻ decay raises Z by 1 and leaves A unchanged: ³⁸Ar.",
-     "sourceSlide": "s4",
-     "inputSlot": {
-      "type": "typed_short",
-      "formatHint": "e.g. 25Mg or Mg-25"
-     },
-     "evaluator": {
-      "type": "pattern_match",
-      "acceptedPatterns": [
-       "^\\s*(?:\\^?\\s*38\\s*-?\\s*Ar|Ar\\s*-?\\s*38|³⁸\\s*Ar|(?:argon)\\s*-?\\s*38)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-      ],
-      "caseSensitive": false,
-      "expectedDisplay": "³⁸Ar"
-     }
-    },
-    {
-     "variantId": "c4-nuclear-gen-08",
-     "perspectiveLabel": "²⁹Si",
-     "marks": 2,
-     "stem": "²⁶Mg captures an α particle (⁴He) and then emits a neutron. Which isotope forms?",
-     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
-     "explanation": "²⁶Mg + ⁴He → X + ¹n: A = 26 + 4 − 1 = 29, Z = 12 + 2 = 14, so ²⁹Si.",
-     "sourceSlide": "s4",
-     "inputSlot": {
-      "type": "typed_short",
-      "formatHint": "e.g. 25Mg or Mg-25"
-     },
-     "evaluator": {
-      "type": "pattern_match",
-      "acceptedPatterns": [
-       "^\\s*(?:\\^?\\s*29\\s*-?\\s*Si|Si\\s*-?\\s*29|²⁹\\s*Si|(?:silicon)\\s*-?\\s*29)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
-      ],
-      "caseSensitive": false,
-      "expectedDisplay": "²⁹Si"
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c3-homo-gen",
-   "moduleCode": "CM2021",
-   "tier": "atomic",
-   "metadata": {
-    "title": "HOMO electron counts for hydrides and small ions",
-    "source": "Template of the Kinjo example mid-terms (CH₄ and OH⁻, C₂) and finals (SF₆, CH₄)",
-    "week": 3,
-    "primaryTheme": "Molecular Orbital Theory",
-    "conceptTags": [
-     "homo",
-     "mo-diagram"
-    ],
-    "difficultyEstimate": 3,
-    "estimatedMinutes": 3,
-    "examStyle": "short_2to3",
-    "family": "homo-gen"
-   },
-   "variants": [
-    {
-     "variantId": "c3-homo-gen-v1",
-     "perspectiveLabel": "NH₃, H₂O, HF, BH₃, NO",
-     "marks": 5,
-     "stem": "Based on MO theory, give the total number of electrons in the HOMO (count every electron in a degenerate HOMO set) of each species.",
-     "hint": "Fill the valence MOs in energy order, then count the electrons in the highest occupied level (both orbitals if it is a degenerate pair or triple).",
-     "explanation": "NH₃: the HOMO is the non-bonding lone-pair a₁ orbital, 2 electrons. H₂O: the HOMO is the non-bonding out-of-plane O 2p lone pair (b₁), 2 electrons. HF: the HOMO is the degenerate non-bonding F 2p π pair, 4 electrons. BH₃ (6 valence electrons): a₁′ and e′ are filled, so the HOMO e′ pair holds 4 electrons. NO: the single unpaired electron sits in a degenerate π* orbital, 1 electron.",
-     "sourceSlide": "s3",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "h0",
-        "label": "NH₃"
-       },
-       {
-        "key": "h1",
-        "label": "H₂O"
-       },
-       {
-        "key": "h2",
-        "label": "HF"
-       },
-       {
-        "key": "h3",
-        "label": "BH₃"
-       },
-       {
-        "key": "h4",
-        "label": "NO"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "h0": {
-        "type": "numeric",
-        "targetExpr": "2",
-        "tolerance": 0
-       },
-       "h1": {
-        "type": "numeric",
-        "targetExpr": "2",
-        "tolerance": 0
-       },
-       "h2": {
-        "type": "numeric",
-        "targetExpr": "4",
-        "tolerance": 0
-       },
-       "h3": {
-        "type": "numeric",
-        "targetExpr": "4",
-        "tolerance": 0
-       },
-       "h4": {
-        "type": "numeric",
-        "targetExpr": "1",
-        "tolerance": 0
-       }
-      }
-     }
-    },
-    {
-     "variantId": "c3-homo-gen-v2",
-     "perspectiveLabel": "SiH₄, CN⁻, O₂⁻, NO⁺, F₂",
-     "marks": 5,
-     "stem": "Based on MO theory, give the total number of electrons in the HOMO (count every electron in a degenerate HOMO set) of each species.",
-     "hint": "Fill the valence MOs in energy order, then count the electrons in the highest occupied level (both orbitals if it is a degenerate pair or triple).",
-     "explanation": "SiH₄ is like CH₄: a₁ then the t₂ set holds the last 6 electrons. CN⁻ and NO⁺ are isoelectronic with N₂ (10 valence electrons): the HOMO is the σ orbital with 2 electrons. O₂⁻ (13 valence electrons) puts 3 electrons in the π* pair. F₂ has all of π* filled: 4 electrons.",
-     "sourceSlide": "s3",
-     "inputSlot": {
-      "type": "mapped_fields",
-      "layout": "table",
-      "fields": [
-       {
-        "key": "h0",
-        "label": "SiH₄"
-       },
-       {
-        "key": "h1",
-        "label": "CN⁻"
-       },
-       {
-        "key": "h2",
-        "label": "O₂⁻"
-       },
-       {
-        "key": "h3",
-        "label": "NO⁺"
-       },
-       {
-        "key": "h4",
-        "label": "F₂"
-       }
-      ]
-     },
-     "evaluator": {
-      "type": "mapped_fields_match",
-      "targets": {
-       "h0": {
-        "type": "numeric",
-        "targetExpr": "6",
-        "tolerance": 0
-       },
-       "h1": {
-        "type": "numeric",
-        "targetExpr": "2",
-        "tolerance": 0
-       },
-       "h2": {
-        "type": "numeric",
-        "targetExpr": "3",
-        "tolerance": 0
-       },
-       "h3": {
-        "type": "numeric",
-        "targetExpr": "2",
-        "tolerance": 0
-       },
-       "h4": {
-        "type": "numeric",
-        "targetExpr": "4",
-        "tolerance": 0
-       }
-      }
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
-   "id": "bk-c4-crown-draw",
-   "moduleCode": "CM2021",
-   "tier": "atomic",
-   "metadata": {
-    "title": "Draw a crown ether and name its best ion",
-    "source": "Kinjo example mid-terms (18-crown-6 in two papers, 15-crown-5 in one); cavity sizes from the bank",
-    "week": 4,
-    "primaryTheme": "Crown Ethers",
-    "conceptTags": [
-     "crown-ether",
-     "draw"
-    ],
-    "difficultyEstimate": 3,
-    "estimatedMinutes": 3,
-    "examStyle": "short_2to3",
-    "family": "crown-draw"
-   },
-   "variants": [
-    {
-     "variantId": "c4-crown-draw-12c4",
-     "perspectiveLabel": "12-crown-4",
-     "marks": 3,
-     "stem": "Draw the structure of 12-crown-4 and say which alkali-metal ion it binds best.",
-     "hint": "Repeat –O–CH₂–CH₂– around the ring, count the ring atoms, then match the cavity size to the ion size.",
-     "explanation": "12-crown-4: a ring of 12 atoms (4 oxygen donors, each pair of neighbouring O atoms joined by –CH₂CH₂–). The cavity (1.2–1.5 Å against Li⁺ 1.36 Å) matches Li⁺, so Li⁺ is bound best; ions that are too small rattle in the cavity and ions that are too large do not fit.",
-     "sourceSlide": "s4-5",
-     "drawOnPaperThenCompare": true,
-     "inputSlot": {
-      "type": "typed_synthesis",
-      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
-      "minWordsToUnlockRubric": 0,
-      "allowPaperScratchpad": true
-     },
-     "evaluator": {
-      "type": "atomic_rubric",
-      "rubric": [
-       {
-        "id": "r1",
-        "criterion": "A single ring of 12 atoms in total",
-        "marks": 1,
-        "isCritical": true
-       },
-       {
-        "id": "r2",
-        "criterion": "4 oxygen atoms, each separated from the next by two CH₂ groups (–O–CH₂CH₂–O–)",
-        "marks": 1,
-        "isCritical": true
-       },
-       {
-        "id": "r3",
-        "criterion": "Best-binding ion Li⁺, because the ion size matches the cavity size (1.2–1.5 Å against Li⁺ 1.36 Å)",
-        "marks": 1,
-        "isCritical": false
-       }
-      ]
-     },
-     "comparisonVisualAsset": {
-      "type": "svg",
-      "payload": "<svg viewBox=\"0 0 340 200\" role=\"img\" aria-label=\"12-crown-4\" style=\"width:100%;max-width:340px;height:auto;display:block;margin:0 auto\"><polygon points=\"110,34 143,42.84232335022705 167.15767664977295,67 176,100 167.15767664977295,133 143,157.15767664977295 110,166 77.00000000000001,157.15767664977295 52.84232335022706,133.00000000000003 44,100.00000000000001 52.842323350227055,67 76.99999999999997,42.84232335022706\" fill=\"none\" stroke=\"#0f172a\" stroke-width=\"1.6\"/><circle cx=\"110\" cy=\"34\" r=\"9\" fill=\"#fff\"/><text x=\"110\" y=\"38.5\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"143\" cy=\"42.84232335022705\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"167.15767664977295\" cy=\"67\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"176\" cy=\"100\" r=\"9\" fill=\"#fff\"/><text x=\"176\" y=\"104.5\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"167.15767664977295\" cy=\"133\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"143\" cy=\"157.15767664977295\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"110\" cy=\"166\" r=\"9\" fill=\"#fff\"/><text x=\"110\" y=\"170.5\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"77.00000000000001\" cy=\"157.15767664977295\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"52.84232335022706\" cy=\"133.00000000000003\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"44\" cy=\"100.00000000000001\" r=\"9\" fill=\"#fff\"/><text x=\"44\" y=\"104.50000000000001\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"52.842323350227055\" cy=\"67\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"76.99999999999997\" cy=\"42.84232335022706\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"110\" cy=\"100\" r=\"12\" fill=\"#dbeafe\" stroke=\"#1d4ed8\"/><text x=\"110\" y=\"104\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" fill=\"#1d4ed8\">Li⁺</text><text x=\"215\" y=\"86\" font-size=\"11\" fill=\"#334155\">12-crown-4</text><text x=\"215\" y=\"102\" font-size=\"10\" fill=\"#475569\">12 ring atoms</text><text x=\"215\" y=\"116\" font-size=\"10\" fill=\"#475569\">4 O, each pair of O</text><text x=\"215\" y=\"129\" font-size=\"10\" fill=\"#475569\">joined by –CH₂CH₂–</text><text x=\"215\" y=\"148\" font-size=\"10\" fill=\"#1d4ed8\">binds Li⁺ best</text></svg>",
-      "caption": "12-crown-4: 4 O donors separated by two CH₂ groups; cavity matches Li⁺"
-     }
-    },
-    {
-     "variantId": "c4-crown-draw-15c5",
-     "perspectiveLabel": "15-crown-5",
-     "marks": 3,
-     "stem": "Draw the structure of 15-crown-5 and say which alkali-metal ion it binds best.",
-     "hint": "Repeat –O–CH₂–CH₂– around the ring, count the ring atoms, then match the cavity size to the ion size.",
-     "explanation": "15-crown-5: a ring of 15 atoms (5 oxygen donors, each pair of neighbouring O atoms joined by –CH₂CH₂–). The cavity (1.7–2.2 Å against Na⁺ 1.9 Å) matches Na⁺, so Na⁺ is bound best; ions that are too small rattle in the cavity and ions that are too large do not fit.",
-     "sourceSlide": "s4-5",
-     "drawOnPaperThenCompare": true,
-     "inputSlot": {
-      "type": "typed_synthesis",
-      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
-      "minWordsToUnlockRubric": 0,
-      "allowPaperScratchpad": true
-     },
-     "evaluator": {
-      "type": "atomic_rubric",
-      "rubric": [
-       {
-        "id": "r1",
-        "criterion": "A single ring of 15 atoms in total",
-        "marks": 1,
-        "isCritical": true
-       },
-       {
-        "id": "r2",
-        "criterion": "5 oxygen atoms, each separated from the next by two CH₂ groups (–O–CH₂CH₂–O–)",
-        "marks": 1,
-        "isCritical": true
-       },
-       {
-        "id": "r3",
-        "criterion": "Best-binding ion Na⁺, because the ion size matches the cavity size (1.7–2.2 Å against Na⁺ 1.9 Å)",
-        "marks": 1,
-        "isCritical": false
-       }
-      ]
-     },
-     "comparisonVisualAsset": {
-      "type": "svg",
-      "payload": "<svg viewBox=\"0 0 340 200\" role=\"img\" aria-label=\"15-crown-5\" style=\"width:100%;max-width:340px;height:auto;display:block;margin:0 auto\"><polygon points=\"110,34 136.84461844300282,39.70599979558834 159.04755848150802,55.837379980315355 172.76973007548014,79.60487837125348 175.63844509430604,106.89887857566512 167.15767664977295,133 148.79382665130322,153.39512162874652 123.7221715939721,164.55774164843118 96.2778284060279,164.55774164843118 71.20617334869678,153.39512162874652 52.84232335022706,133.00000000000003 44.361554905693964,106.89887857566518 47.23026992451986,79.60487837125348 60.952441518492,55.83737998031533 83.1553815569972,39.70599979558833\" fill=\"none\" stroke=\"#0f172a\" stroke-width=\"1.6\"/><circle cx=\"110\" cy=\"34\" r=\"9\" fill=\"#fff\"/><text x=\"110\" y=\"38.5\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"136.84461844300282\" cy=\"39.70599979558834\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"159.04755848150802\" cy=\"55.837379980315355\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"172.76973007548014\" cy=\"79.60487837125348\" r=\"9\" fill=\"#fff\"/><text x=\"172.76973007548014\" y=\"84.10487837125348\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"175.63844509430604\" cy=\"106.89887857566512\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"167.15767664977295\" cy=\"133\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"148.79382665130322\" cy=\"153.39512162874652\" r=\"9\" fill=\"#fff\"/><text x=\"148.79382665130322\" y=\"157.89512162874652\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"123.7221715939721\" cy=\"164.55774164843118\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"96.2778284060279\" cy=\"164.55774164843118\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"71.20617334869678\" cy=\"153.39512162874652\" r=\"9\" fill=\"#fff\"/><text x=\"71.20617334869678\" y=\"157.89512162874652\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"52.84232335022706\" cy=\"133.00000000000003\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"44.361554905693964\" cy=\"106.89887857566518\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"47.23026992451986\" cy=\"79.60487837125348\" r=\"9\" fill=\"#fff\"/><text x=\"47.23026992451986\" y=\"84.10487837125348\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"60.952441518492\" cy=\"55.83737998031533\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"83.1553815569972\" cy=\"39.70599979558833\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"110\" cy=\"100\" r=\"15\" fill=\"#dbeafe\" stroke=\"#1d4ed8\"/><text x=\"110\" y=\"104\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" fill=\"#1d4ed8\">Na⁺</text><text x=\"215\" y=\"86\" font-size=\"11\" fill=\"#334155\">15-crown-5</text><text x=\"215\" y=\"102\" font-size=\"10\" fill=\"#475569\">15 ring atoms</text><text x=\"215\" y=\"116\" font-size=\"10\" fill=\"#475569\">5 O, each pair of O</text><text x=\"215\" y=\"129\" font-size=\"10\" fill=\"#475569\">joined by –CH₂CH₂–</text><text x=\"215\" y=\"148\" font-size=\"10\" fill=\"#1d4ed8\">binds Na⁺ best</text></svg>",
-      "caption": "15-crown-5: 5 O donors separated by two CH₂ groups; cavity matches Na⁺"
-     }
-    },
-    {
-     "variantId": "c4-crown-draw-18c6",
-     "perspectiveLabel": "18-crown-6",
-     "marks": 3,
-     "stem": "Draw the structure of 18-crown-6 and say which alkali-metal ion it binds best.",
-     "hint": "Repeat –O–CH₂–CH₂– around the ring, count the ring atoms, then match the cavity size to the ion size.",
-     "explanation": "18-crown-6: a ring of 18 atoms (6 oxygen donors, each pair of neighbouring O atoms joined by –CH₂CH₂–). The cavity (2.6–3.2 Å against K⁺ 2.66 Å) matches K⁺, so K⁺ is bound best; ions that are too small rattle in the cavity and ions that are too large do not fit.",
-     "sourceSlide": "s4-5",
-     "drawOnPaperThenCompare": true,
-     "inputSlot": {
-      "type": "typed_synthesis",
-      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
-      "minWordsToUnlockRubric": 0,
-      "allowPaperScratchpad": true
-     },
-     "evaluator": {
-      "type": "atomic_rubric",
-      "rubric": [
-       {
-        "id": "r1",
-        "criterion": "A single ring of 18 atoms in total",
-        "marks": 1,
-        "isCritical": true
-       },
-       {
-        "id": "r2",
-        "criterion": "6 oxygen atoms, each separated from the next by two CH₂ groups (–O–CH₂CH₂–O–)",
-        "marks": 1,
-        "isCritical": true
-       },
-       {
-        "id": "r3",
-        "criterion": "Best-binding ion K⁺, because the ion size matches the cavity size (2.6–3.2 Å against K⁺ 2.66 Å)",
-        "marks": 1,
-        "isCritical": false
-       }
-      ]
-     },
-     "comparisonVisualAsset": {
-      "type": "svg",
-      "payload": "<svg viewBox=\"0 0 340 200\" role=\"img\" aria-label=\"18-crown-6\" style=\"width:100%;max-width:340px;height:auto;display:block;margin:0 auto\"><polygon points=\"110,34 132.57332945949415,37.98028702813005 152.4239822393116,49.44106675414745 167.15767664977295,67 174.99731169880573,88.5392202739826 174.99731169880573,111.4607797260174 167.15767664977295,133 152.4239822393116,150.55893324585253 132.57332945949415,162.01971297186995 110,166 87.42667054050587,162.01971297186995 67.57601776068842,150.5589332458526 52.84232335022706,133.00000000000003 45.00268830119427,111.46077972601739 45.00268830119427,88.53922027398262 52.842323350227026,67.00000000000004 67.57601776068839,49.44106675414746 87.42667054050588,37.98028702813004\" fill=\"none\" stroke=\"#0f172a\" stroke-width=\"1.6\"/><circle cx=\"110\" cy=\"34\" r=\"9\" fill=\"#fff\"/><text x=\"110\" y=\"38.5\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"132.57332945949415\" cy=\"37.98028702813005\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"152.4239822393116\" cy=\"49.44106675414745\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"167.15767664977295\" cy=\"67\" r=\"9\" fill=\"#fff\"/><text x=\"167.15767664977295\" y=\"71.5\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"174.99731169880573\" cy=\"88.5392202739826\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"174.99731169880573\" cy=\"111.4607797260174\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"167.15767664977295\" cy=\"133\" r=\"9\" fill=\"#fff\"/><text x=\"167.15767664977295\" y=\"137.5\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"152.4239822393116\" cy=\"150.55893324585253\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"132.57332945949415\" cy=\"162.01971297186995\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"110\" cy=\"166\" r=\"9\" fill=\"#fff\"/><text x=\"110\" y=\"170.5\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"87.42667054050587\" cy=\"162.01971297186995\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"67.57601776068842\" cy=\"150.5589332458526\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"52.84232335022706\" cy=\"133.00000000000003\" r=\"9\" fill=\"#fff\"/><text x=\"52.84232335022706\" y=\"137.50000000000003\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"45.00268830119427\" cy=\"111.46077972601739\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"45.00268830119427\" cy=\"88.53922027398262\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"52.842323350227026\" cy=\"67.00000000000004\" r=\"9\" fill=\"#fff\"/><text x=\"52.842323350227026\" y=\"71.50000000000004\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"67.57601776068839\" cy=\"49.44106675414746\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"87.42667054050588\" cy=\"37.98028702813004\" r=\"2.6\" fill=\"#0f172a\"/><circle cx=\"110\" cy=\"100\" r=\"19\" fill=\"#dbeafe\" stroke=\"#1d4ed8\"/><text x=\"110\" y=\"104\" text-anchor=\"middle\" font-size=\"11\" font-weight=\"700\" fill=\"#1d4ed8\">K⁺</text><text x=\"215\" y=\"86\" font-size=\"11\" fill=\"#334155\">18-crown-6</text><text x=\"215\" y=\"102\" font-size=\"10\" fill=\"#475569\">18 ring atoms</text><text x=\"215\" y=\"116\" font-size=\"10\" fill=\"#475569\">6 O, each pair of O</text><text x=\"215\" y=\"129\" font-size=\"10\" fill=\"#475569\">joined by –CH₂CH₂–</text><text x=\"215\" y=\"148\" font-size=\"10\" fill=\"#1d4ed8\">binds K⁺ best</text></svg>",
-      "caption": "18-crown-6: 6 O donors separated by two CH₂ groups; cavity matches K⁺"
-     }
-    }
-   ]
-  },
-  {
-   "schemaVersion": "3.0",
    "id": "bk-c1-fc-gen",
    "moduleCode": "CM2021",
    "tier": "atomic",
@@ -40544,6 +38574,1976 @@
        "a"
       ],
       "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c2-trend-gen",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Pick the highest or lowest: halogens, noble gases and xenon fluorides",
+    "source": "Chapter 2 Part 8 slides 21-23, 30, 33; template of the Kinjo example mid-terms (boiling point, ionisation energy, electron affinity picks)",
+    "week": 2,
+    "primaryTheme": "Periodic Trends",
+    "conceptTags": [
+     "periodic-trends",
+     "halogens",
+     "noble-gases"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 1,
+    "examStyle": "short_2to3",
+    "family": "trend-gen"
+   },
+   "variants": [
+    {
+     "variantId": "c2-trend-01",
+     "perspectiveLabel": "first ionisation energy, highest of F, Cl, Br",
+     "marks": 1,
+     "stem": "Among F, Cl, Br, which has the **highest** first ionisation energy?",
+     "explanation": "F. Ionisation energy falls down the group: the outer electron is farther from the nucleus and better shielded. (Slide values: F 1681 kJ/mol, Cl 1256 kJ/mol, Br 1143 kJ/mol.)",
+     "sourceSlide": "s21",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "F"
+       },
+       {
+        "id": "b",
+        "label": "Cl"
+       },
+       {
+        "id": "c",
+        "label": "Br"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-02",
+     "perspectiveLabel": "first ionisation energy, lowest of Cl, Br, I",
+     "marks": 1,
+     "stem": "Among Cl, Br, I, which has the **lowest** first ionisation energy?",
+     "explanation": "I. Ionisation energy falls down the group: the outer electron is farther from the nucleus and better shielded. (Slide values: Cl 1256 kJ/mol, Br 1143 kJ/mol, I 1009 kJ/mol.)",
+     "sourceSlide": "s21",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Cl"
+       },
+       {
+        "id": "b",
+        "label": "Br"
+       },
+       {
+        "id": "c",
+        "label": "I"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-03",
+     "perspectiveLabel": "electronegativity, highest of Cl, Br, I",
+     "marks": 1,
+     "stem": "Among Cl, Br, I, which has the **highest** electronegativity?",
+     "explanation": "Cl. Electronegativity falls down the group as the atoms get larger. (Slide values: Cl 3, Br 2.8, I 2.5.)",
+     "sourceSlide": "s21",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Cl"
+       },
+       {
+        "id": "b",
+        "label": "Br"
+       },
+       {
+        "id": "c",
+        "label": "I"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-04",
+     "perspectiveLabel": "electronegativity, lowest of F, Br, I",
+     "marks": 1,
+     "stem": "Among F, Br, I, which has the **lowest** electronegativity?",
+     "explanation": "I. Electronegativity falls down the group as the atoms get larger. (Slide values: F 4, Br 2.8, I 2.5.)",
+     "sourceSlide": "s21",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "F"
+       },
+       {
+        "id": "b",
+        "label": "Br"
+       },
+       {
+        "id": "c",
+        "label": "I"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-05",
+     "perspectiveLabel": "atomic radius, highest of F, Cl, I",
+     "marks": 1,
+     "stem": "Among F, Cl, I, which has the **highest** atomic radius?",
+     "explanation": "I. Atomic radius grows down the group as extra shells are added. (Slide values: F 72 pm, Cl 100 pm, I 133 pm.)",
+     "sourceSlide": "s21",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "F"
+       },
+       {
+        "id": "b",
+        "label": "Cl"
+       },
+       {
+        "id": "c",
+        "label": "I"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-06",
+     "perspectiveLabel": "ionic radius of the halide ion, lowest of F⁻, Cl⁻, Br⁻",
+     "marks": 1,
+     "stem": "Among F⁻, Cl⁻, Br⁻, which has the **lowest** ionic radius of the halide ion?",
+     "explanation": "F⁻. Halide ions get larger down the group. (Slide values: F⁻ 133 pm, Cl⁻ 181 pm, Br⁻ 196 pm.)",
+     "sourceSlide": "s21",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "F⁻"
+       },
+       {
+        "id": "b",
+        "label": "Cl⁻"
+       },
+       {
+        "id": "c",
+        "label": "Br⁻"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-07",
+     "perspectiveLabel": "ionic radius of the halide ion, highest of Cl⁻, Br⁻, I⁻",
+     "marks": 1,
+     "stem": "Among Cl⁻, Br⁻, I⁻, which has the **highest** ionic radius of the halide ion?",
+     "explanation": "I⁻. Halide ions get larger down the group. (Slide values: Cl⁻ 181 pm, Br⁻ 196 pm, I⁻ 220 pm.)",
+     "sourceSlide": "s21",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Cl⁻"
+       },
+       {
+        "id": "b",
+        "label": "Br⁻"
+       },
+       {
+        "id": "c",
+        "label": "I⁻"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-08",
+     "perspectiveLabel": "boiling point of the element, highest of F₂, Cl₂, Br₂",
+     "marks": 1,
+     "stem": "Among F₂, Cl₂, Br₂, which has the **highest** boiling point of the element?",
+     "explanation": "Br₂. Boiling and melting points rise down the group: more electrons, stronger dispersion forces between the X₂ molecules. (Slide values: F₂ -188 °C, Cl₂ -34 °C, Br₂ 59.5 °C.)",
+     "sourceSlide": "s21",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "F₂"
+       },
+       {
+        "id": "b",
+        "label": "Cl₂"
+       },
+       {
+        "id": "c",
+        "label": "Br₂"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-09",
+     "perspectiveLabel": "boiling point of the element, lowest of Cl₂, Br₂, I₂",
+     "marks": 1,
+     "stem": "Among Cl₂, Br₂, I₂, which has the **lowest** boiling point of the element?",
+     "explanation": "Cl₂. Boiling and melting points rise down the group: more electrons, stronger dispersion forces between the X₂ molecules. (Slide values: Cl₂ -34 °C, Br₂ 59.5 °C, I₂ 185 °C.)",
+     "sourceSlide": "s21",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Cl₂"
+       },
+       {
+        "id": "b",
+        "label": "Br₂"
+       },
+       {
+        "id": "c",
+        "label": "I₂"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-10",
+     "perspectiveLabel": "melting point of the element, highest of F₂, Br₂, I₂",
+     "marks": 1,
+     "stem": "Among F₂, Br₂, I₂, which has the **highest** melting point of the element?",
+     "explanation": "I₂. Melting points rise down the group because dispersion forces grow with the number of electrons. (Slide values: F₂ -219 °C, Br₂ -7.2 °C, I₂ 114 °C.)",
+     "sourceSlide": "s21",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "F₂"
+       },
+       {
+        "id": "b",
+        "label": "Br₂"
+       },
+       {
+        "id": "c",
+        "label": "I₂"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-11",
+     "perspectiveLabel": "melting point of the element, lowest of F₂, Cl₂, Br₂",
+     "marks": 1,
+     "stem": "Among F₂, Cl₂, Br₂, which has the **lowest** melting point of the element?",
+     "explanation": "F₂. Melting points rise down the group because dispersion forces grow with the number of electrons. (Slide values: F₂ -219 °C, Cl₂ -101 °C, Br₂ -7.2 °C.)",
+     "sourceSlide": "s21",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "F₂"
+       },
+       {
+        "id": "b",
+        "label": "Cl₂"
+       },
+       {
+        "id": "c",
+        "label": "Br₂"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-12",
+     "perspectiveLabel": "X–X bond energy, highest of F–F, Cl–Cl, Br–Br",
+     "marks": 1,
+     "stem": "Among F–F, Cl–Cl, Br–Br, which has the **highest** X–X bond energy?",
+     "explanation": "Cl–Cl. The bond energy is not simply decreasing: Cl–Cl is the strongest, and F–F is weak despite being short (lone-pair repulsion across the short bond); then Br–Br > I–I. (Slide values: F–F 159 kJ/mol, Cl–Cl 243 kJ/mol, Br–Br 193 kJ/mol.)",
+     "sourceSlide": "s22",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "F–F"
+       },
+       {
+        "id": "b",
+        "label": "Cl–Cl"
+       },
+       {
+        "id": "c",
+        "label": "Br–Br"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "b"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-13",
+     "perspectiveLabel": "X–X bond energy, lowest of F–F, Br–Br, I–I",
+     "marks": 1,
+     "stem": "Among F–F, Br–Br, I–I, which has the **lowest** X–X bond energy?",
+     "explanation": "I–I. The bond energy is not simply decreasing: Cl–Cl is the strongest, and F–F is weak despite being short (lone-pair repulsion across the short bond); then Br–Br > I–I. (Slide values: F–F 159 kJ/mol, Br–Br 193 kJ/mol, I–I 151 kJ/mol.)",
+     "sourceSlide": "s22",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "F–F"
+       },
+       {
+        "id": "b",
+        "label": "Br–Br"
+       },
+       {
+        "id": "c",
+        "label": "I–I"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-14",
+     "perspectiveLabel": "X–X bond energy, highest of Cl–Cl, Br–Br, I–I",
+     "marks": 1,
+     "stem": "Among Cl–Cl, Br–Br, I–I, which has the **highest** X–X bond energy?",
+     "explanation": "Cl–Cl. The bond energy is not simply decreasing: Cl–Cl is the strongest, and F–F is weak despite being short (lone-pair repulsion across the short bond); then Br–Br > I–I. (Slide values: Cl–Cl 243 kJ/mol, Br–Br 193 kJ/mol, I–I 151 kJ/mol.)",
+     "sourceSlide": "s22",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Cl–Cl"
+       },
+       {
+        "id": "b",
+        "label": "Br–Br"
+       },
+       {
+        "id": "c",
+        "label": "I–I"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-15",
+     "perspectiveLabel": "X–X bond length, highest of F–F, Cl–Cl, I–I",
+     "marks": 1,
+     "stem": "Among F–F, Cl–Cl, I–I, which has the **highest** X–X bond length?",
+     "explanation": "I–I. Bond length grows down the group with atomic size. (Slide values: F–F 143 pm, Cl–Cl 200 pm, I–I 266 pm.)",
+     "sourceSlide": "s22",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "F–F"
+       },
+       {
+        "id": "b",
+        "label": "Cl–Cl"
+       },
+       {
+        "id": "c",
+        "label": "I–I"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-16",
+     "perspectiveLabel": "electron affinity (energy released on E + e⁻ → E⁻), highest of F, Cl, Br",
+     "marks": 1,
+     "stem": "Among F, Cl, Br, which has the **highest** electron affinity (energy released on E + e⁻ → E⁻)?",
+     "explanation": "Cl. Chlorine has the largest electron affinity, not fluorine: the small 2p shell of F makes the added electron repel the ones already there; after Cl the values fall down the group. (F is still the most electronegative.) (Slide values: F 334 kJ/mol, Cl 355 kJ/mol, Br 325 kJ/mol.)",
+     "sourceSlide": "s23",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "F"
+       },
+       {
+        "id": "b",
+        "label": "Cl"
+       },
+       {
+        "id": "c",
+        "label": "Br"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "b"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-17",
+     "perspectiveLabel": "electron affinity (energy released on E + e⁻ → E⁻), highest of F, Br, I",
+     "marks": 1,
+     "stem": "Among F, Br, I, which has the **highest** electron affinity (energy released on E + e⁻ → E⁻)?",
+     "explanation": "F. Chlorine has the largest electron affinity, not fluorine: the small 2p shell of F makes the added electron repel the ones already there; after Cl the values fall down the group. (F is still the most electronegative.) (Slide values: F 334 kJ/mol, Br 325 kJ/mol, I 295 kJ/mol.)",
+     "sourceSlide": "s23",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "F"
+       },
+       {
+        "id": "b",
+        "label": "Br"
+       },
+       {
+        "id": "c",
+        "label": "I"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-18",
+     "perspectiveLabel": "electron affinity (energy released on E + e⁻ → E⁻), lowest of Cl, Br, I",
+     "marks": 1,
+     "stem": "Among Cl, Br, I, which has the **lowest** electron affinity (energy released on E + e⁻ → E⁻)?",
+     "explanation": "I. Chlorine has the largest electron affinity, not fluorine: the small 2p shell of F makes the added electron repel the ones already there; after Cl the values fall down the group. (F is still the most electronegative.) (Slide values: Cl 355 kJ/mol, Br 325 kJ/mol, I 295 kJ/mol.)",
+     "sourceSlide": "s23",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Cl"
+       },
+       {
+        "id": "b",
+        "label": "Br"
+       },
+       {
+        "id": "c",
+        "label": "I"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-19",
+     "perspectiveLabel": "electron affinity (energy released on E + e⁻ → E⁻), lowest of F, Cl, I",
+     "marks": 1,
+     "stem": "Among F, Cl, I, which has the **lowest** electron affinity (energy released on E + e⁻ → E⁻)?",
+     "explanation": "I. Chlorine has the largest electron affinity, not fluorine: the small 2p shell of F makes the added electron repel the ones already there; after Cl the values fall down the group. (F is still the most electronegative.) (Slide values: F 334 kJ/mol, Cl 355 kJ/mol, I 295 kJ/mol.)",
+     "sourceSlide": "s23",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "F"
+       },
+       {
+        "id": "b",
+        "label": "Cl"
+       },
+       {
+        "id": "c",
+        "label": "I"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-20",
+     "perspectiveLabel": "first ionisation energy, highest of He, Ne, Ar",
+     "marks": 1,
+     "stem": "Among He, Ne, Ar, which has the **highest** first ionisation energy?",
+     "explanation": "He. Noble gases have the highest ionisation energy in each period and it falls down the group. (Slide values: He 2372 kJ/mol, Ne 2080 kJ/mol, Ar 1520 kJ/mol.)",
+     "sourceSlide": "s30",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "He"
+       },
+       {
+        "id": "b",
+        "label": "Ne"
+       },
+       {
+        "id": "c",
+        "label": "Ar"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-21",
+     "perspectiveLabel": "first ionisation energy, lowest of Ar, Kr, Xe",
+     "marks": 1,
+     "stem": "Among Ar, Kr, Xe, which has the **lowest** first ionisation energy?",
+     "explanation": "Xe. Noble gases have the highest ionisation energy in each period and it falls down the group. (Slide values: Ar 1520 kJ/mol, Kr 1351 kJ/mol, Xe 1170 kJ/mol.)",
+     "sourceSlide": "s30",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Ar"
+       },
+       {
+        "id": "b",
+        "label": "Kr"
+       },
+       {
+        "id": "c",
+        "label": "Xe"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-22",
+     "perspectiveLabel": "first ionisation energy, highest of Ne, Kr, Rn",
+     "marks": 1,
+     "stem": "Among Ne, Kr, Rn, which has the **highest** first ionisation energy?",
+     "explanation": "Ne. Noble gases have the highest ionisation energy in each period and it falls down the group. (Slide values: Ne 2080 kJ/mol, Kr 1351 kJ/mol, Rn 1037 kJ/mol.)",
+     "sourceSlide": "s30",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Ne"
+       },
+       {
+        "id": "b",
+        "label": "Kr"
+       },
+       {
+        "id": "c",
+        "label": "Rn"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-23",
+     "perspectiveLabel": "boiling point, lowest of He, Ne, Ar",
+     "marks": 1,
+     "stem": "Among He, Ne, Ar, which has the **lowest** boiling point?",
+     "explanation": "He. Boiling points rise down the group: larger atoms are more polarisable, so dispersion forces grow. (Slide values: He -269 °C, Ne -246 °C, Ar -186 °C.)",
+     "sourceSlide": "s30",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "He"
+       },
+       {
+        "id": "b",
+        "label": "Ne"
+       },
+       {
+        "id": "c",
+        "label": "Ar"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-24",
+     "perspectiveLabel": "boiling point, highest of Kr, Xe, Rn",
+     "marks": 1,
+     "stem": "Among Kr, Xe, Rn, which has the **highest** boiling point?",
+     "explanation": "Rn. Boiling points rise down the group: larger atoms are more polarisable, so dispersion forces grow. (Slide values: Kr -153 °C, Xe -108 °C, Rn -62 °C.)",
+     "sourceSlide": "s30",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Kr"
+       },
+       {
+        "id": "b",
+        "label": "Xe"
+       },
+       {
+        "id": "c",
+        "label": "Rn"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-25",
+     "perspectiveLabel": "boiling point, highest of Ne, Ar, Xe",
+     "marks": 1,
+     "stem": "Among Ne, Ar, Xe, which has the **highest** boiling point?",
+     "explanation": "Xe. Boiling points rise down the group: larger atoms are more polarisable, so dispersion forces grow. (Slide values: Ne -246 °C, Ar -186 °C, Xe -108 °C.)",
+     "sourceSlide": "s30",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Ne"
+       },
+       {
+        "id": "b",
+        "label": "Ar"
+       },
+       {
+        "id": "c",
+        "label": "Xe"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-26",
+     "perspectiveLabel": "density at STP, highest of Ne, Kr, Rn",
+     "marks": 1,
+     "stem": "Among Ne, Kr, Rn, which has the **highest** density at STP?",
+     "explanation": "Rn. Density at STP rises down the group with the atomic mass (the molar volume of an ideal-like gas is the same). (Slide values: Ne 0.9 g/L, Kr 3.75 g/L, Rn 9.73 g/L.)",
+     "sourceSlide": "s30",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "Ne"
+       },
+       {
+        "id": "b",
+        "label": "Kr"
+       },
+       {
+        "id": "c",
+        "label": "Rn"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-27",
+     "perspectiveLabel": "density at STP, lowest of He, Ar, Xe",
+     "marks": 1,
+     "stem": "Among He, Ar, Xe, which has the **lowest** density at STP?",
+     "explanation": "He. Density at STP rises down the group with the atomic mass (the molar volume of an ideal-like gas is the same). (Slide values: He 0.178 g/L, Ar 1.78 g/L, Xe 5.9 g/L.)",
+     "sourceSlide": "s30",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "He"
+       },
+       {
+        "id": "b",
+        "label": "Ar"
+       },
+       {
+        "id": "c",
+        "label": "Xe"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-28",
+     "perspectiveLabel": "atomic radius, highest of He, Ar, Xe",
+     "marks": 1,
+     "stem": "Among He, Ar, Xe, which has the **highest** atomic radius?",
+     "explanation": "Xe. Atomic radius grows down the group. (Slide values: He 31 pm, Ar 98 pm, Xe 131 pm.)",
+     "sourceSlide": "s30",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "He"
+       },
+       {
+        "id": "b",
+        "label": "Ar"
+       },
+       {
+        "id": "c",
+        "label": "Xe"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-29",
+     "perspectiveLabel": "melting point of the xenon fluoride, lowest of XeF₂, XeF₄, XeF₆",
+     "marks": 1,
+     "stem": "Among XeF₂, XeF₄, XeF₆, which has the **lowest** melting point of the xenon fluoride?",
+     "explanation": "XeF₆. The melting points fall as more fluorine is added (XeF₂ 140 °C, XeF₄ 117 °C, XeF₆ 49 °C). (Slide values: XeF₂ 140 °C, XeF₄ 117 °C, XeF₆ 49 °C.)",
+     "sourceSlide": "s33",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "XeF₂"
+       },
+       {
+        "id": "b",
+        "label": "XeF₄"
+       },
+       {
+        "id": "c",
+        "label": "XeF₆"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-30",
+     "perspectiveLabel": "melting point of the xenon fluoride, highest of XeF₂, XeF₄, XeF₆",
+     "marks": 1,
+     "stem": "Among XeF₂, XeF₄, XeF₆, which has the **highest** melting point of the xenon fluoride?",
+     "explanation": "XeF₂. The melting points fall as more fluorine is added (XeF₂ 140 °C, XeF₄ 117 °C, XeF₆ 49 °C). (Slide values: XeF₂ 140 °C, XeF₄ 117 °C, XeF₆ 49 °C.)",
+     "sourceSlide": "s33",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "XeF₂"
+       },
+       {
+        "id": "b",
+        "label": "XeF₄"
+       },
+       {
+        "id": "c",
+        "label": "XeF₆"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "c2-trend-31",
+     "perspectiveLabel": "Xe–F bond length, lowest of XeF₂, XeF₄, XeF₆",
+     "marks": 1,
+     "stem": "Among XeF₂, XeF₄, XeF₆, which has the **lowest** Xe–F bond length?",
+     "explanation": "XeF₆. The Xe–F bond shortens as more F is bonded (2.00, 1.95, 1.89 Å). (Slide values: XeF₂ 2 Å, XeF₄ 1.95 Å, XeF₆ 1.89 Å.)",
+     "sourceSlide": "s33",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "options": [
+       {
+        "id": "a",
+        "label": "XeF₂"
+       },
+       {
+        "id": "b",
+        "label": "XeF₄"
+       },
+       {
+        "id": "c",
+        "label": "XeF₆"
+       }
+      ],
+      "shuffleOptions": true
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "c"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-avgon-gen",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Average oxidation number of an element in a formula",
+    "source": "Template of the Kinjo example mid-terms (N₂O₃ in two papers) and the finals (average oxidation numbers of Mn₃O₄ and Mg₅Ga₂)",
+    "week": 4,
+    "primaryTheme": "Oxidation Numbers",
+    "conceptTags": [
+     "average-oxidation-number"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "avgon-gen"
+   },
+   "variants": [
+    {
+     "variantId": "c4-avgon-gen-01",
+     "perspectiveLabel": "N₂O",
+     "marks": 2,
+     "stem": "Give the average oxidation number of **N** in **N₂O**. (Give a fraction as a decimal to two places.)",
+     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
+     "explanation": "O is −2, the molecule is neutral, so the two N share +2: +1 each.",
+     "sourceSlide": "s4-5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "Average oxidation number of N"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-avgon-gen-02",
+     "perspectiveLabel": "N₂O₃",
+     "marks": 2,
+     "stem": "Give the average oxidation number of **N** in **N₂O₃**. (Give a fraction as a decimal to two places.)",
+     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
+     "explanation": "Three O give −6, so the two N share +6: average +3 (one N is +2 and the other +4 in the real structure, which is why it is an average).",
+     "sourceSlide": "s4-5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "Average oxidation number of N"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-avgon-gen-03",
+     "perspectiveLabel": "N₂O₄",
+     "marks": 2,
+     "stem": "Give the average oxidation number of **N** in **N₂O₄**. (Give a fraction as a decimal to two places.)",
+     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
+     "explanation": "Four O give −8: the two N share +8, average +4.",
+     "sourceSlide": "s4-5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "Average oxidation number of N"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-avgon-gen-04",
+     "perspectiveLabel": "N₂O₅",
+     "marks": 2,
+     "stem": "Give the average oxidation number of **N** in **N₂O₅**. (Give a fraction as a decimal to two places.)",
+     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
+     "explanation": "Five O give −10: the two N share +10, average +5.",
+     "sourceSlide": "s4-5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "Average oxidation number of N"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "5",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-avgon-gen-05",
+     "perspectiveLabel": "N₂H₄",
+     "marks": 2,
+     "stem": "Give the average oxidation number of **N** in **N₂H₄**. (Give a fraction as a decimal to two places.)",
+     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
+     "explanation": "Four H give +4, so the two N share −4: −2 each.",
+     "sourceSlide": "s4-5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "Average oxidation number of N"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "-2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-avgon-gen-06",
+     "perspectiveLabel": "NH₂OH",
+     "marks": 2,
+     "stem": "Give the average oxidation number of **N** in **NH₂OH**. (Give a fraction as a decimal to two places.)",
+     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
+     "explanation": "H₃ gives +3 and O is −2, together +1, so N is −1.",
+     "sourceSlide": "s4-5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "Average oxidation number of N"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "-1",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-avgon-gen-07",
+     "perspectiveLabel": "NH₄NO₃ (average over both N atoms)",
+     "marks": 2,
+     "stem": "Give the average oxidation number of **N** in **NH₄NO₃ (average over both N atoms)**. (Give a fraction as a decimal to two places.)",
+     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
+     "explanation": "NH₄⁺ has N(−3) and NO₃⁻ has N(+5), average (−3 + 5)/2 = +1.",
+     "sourceSlide": "s4-5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "Average oxidation number of N"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-avgon-gen-08",
+     "perspectiveLabel": "Fe₃O₄",
+     "marks": 2,
+     "stem": "Give the average oxidation number of **Fe** in **Fe₃O₄**. (Give a fraction as a decimal to two places.)",
+     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
+     "explanation": "Four O give −8, so the three Fe share +8: +8/3 = +2.67 on average (the real compound has one Fe²⁺ and two Fe³⁺).",
+     "sourceSlide": "s4-5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "Average oxidation number of Fe"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "2.6667",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-avgon-gen-09",
+     "perspectiveLabel": "Pb₃O₄",
+     "marks": 2,
+     "stem": "Give the average oxidation number of **Pb** in **Pb₃O₄**. (Give a fraction as a decimal to two places.)",
+     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
+     "explanation": "Four O give −8, three Pb share +8: +8/3 (two Pb(II) and one Pb(IV) in the real compound).",
+     "sourceSlide": "s4-5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "Average oxidation number of Pb"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "2.6667",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-avgon-gen-10",
+     "perspectiveLabel": "S₄O₆²⁻",
+     "marks": 2,
+     "stem": "Give the average oxidation number of **S** in **S₄O₆²⁻**. (Give a fraction as a decimal to two places.)",
+     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
+     "explanation": "Six O give −12 and the ion is 2−, so the four S share +10: +2.5 on average.",
+     "sourceSlide": "s4-5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "Average oxidation number of S"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "2.5",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-avgon-gen-11",
+     "perspectiveLabel": "S₂O₃²⁻",
+     "marks": 2,
+     "stem": "Give the average oxidation number of **S** in **S₂O₃²⁻**. (Give a fraction as a decimal to two places.)",
+     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
+     "explanation": "Three O give −6 and the ion is 2−, so the two S share +4: +2 on average.",
+     "sourceSlide": "s4-5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "Average oxidation number of S"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-avgon-gen-12",
+     "perspectiveLabel": "I₃⁻",
+     "marks": 2,
+     "stem": "Give the average oxidation number of **I** in **I₃⁻**. (Give a fraction as a decimal to two places.)",
+     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
+     "explanation": "The ion carries 1−, shared over three I: −1/3 each on average.",
+     "sourceSlide": "s4-5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "Average oxidation number of I"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "-0.3333",
+        "tolerance": 0.01
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c4-avgon-gen-13",
+     "perspectiveLabel": "NaN₃",
+     "marks": 2,
+     "stem": "Give the average oxidation number of **N** in **NaN₃**. (Give a fraction as a decimal to two places.)",
+     "hint": "Oxygen −2, hydrogen +1 (with a non-metal), sodium +1; the total must equal the charge on the species; divide what is left by the number of atoms of the element.",
+     "explanation": "Na is +1, so the three N share −1: −1/3 on average.",
+     "sourceSlide": "s4-5",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "a",
+        "label": "Average oxidation number of N"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "a": {
+        "type": "numeric",
+        "targetExpr": "-0.3333",
+        "tolerance": 0.01
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-nuclear-gen",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Nuclear equations: find the unknown nucleus",
+    "source": "Template of the Kinjo example mid-term (¹⁴N + n → T + X) and finals 2024-25 and 2025-26 (α capture, neutron capture then two β⁻)",
+    "week": 4,
+    "primaryTheme": "Nuclear Chemistry",
+    "conceptTags": [
+     "nuclear-equation"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 2,
+    "examStyle": "short_2to3",
+    "family": "nuclear-gen"
+   },
+   "variants": [
+    {
+     "variantId": "c4-nuclear-gen-01",
+     "perspectiveLabel": "³⁰P",
+     "marks": 2,
+     "stem": "²⁷Al captures an α particle (⁴He) and then emits a neutron. Which isotope forms?",
+     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
+     "explanation": "²⁷Al + ⁴He → X + ¹n: A = 27 + 4 − 1 = 30, Z = 13 + 2 − 0 = 15, so ³⁰P.",
+     "sourceSlide": "s4",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "e.g. 25Mg or Mg-25"
+     },
+     "evaluator": {
+      "type": "pattern_match",
+      "acceptedPatterns": [
+       "^\\s*(?:\\^?\\s*30\\s*-?\\s*P|P\\s*-?\\s*30|³⁰\\s*P|(?:phosphorus)\\s*-?\\s*30)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+      ],
+      "caseSensitive": false,
+      "expectedDisplay": "³⁰P"
+     }
+    },
+    {
+     "variantId": "c4-nuclear-gen-02",
+     "perspectiveLabel": "¹⁷O",
+     "marks": 2,
+     "stem": "¹⁴N is hit by an α particle (⁴He) and a proton (¹H) is released. Which isotope forms?",
+     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
+     "explanation": "¹⁴N + ⁴He → X + ¹H: A = 14 + 4 − 1 = 17, Z = 7 + 2 − 1 = 8, so ¹⁷O (the first artificial transmutation).",
+     "sourceSlide": "s4",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "e.g. 25Mg or Mg-25"
+     },
+     "evaluator": {
+      "type": "pattern_match",
+      "acceptedPatterns": [
+       "^\\s*(?:\\^?\\s*17\\s*-?\\s*O|O\\s*-?\\s*17|¹⁷\\s*O|(?:oxygen)\\s*-?\\s*17)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+      ],
+      "caseSensitive": false,
+      "expectedDisplay": "¹⁷O"
+     }
+    },
+    {
+     "variantId": "c4-nuclear-gen-03",
+     "perspectiveLabel": "⁷Li",
+     "marks": 2,
+     "stem": "¹⁰B absorbs a neutron and splits into ⁴He and one other nucleus X. Identify X.",
+     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
+     "explanation": "¹⁰B + ¹n → ⁴He + X: A = 10 + 1 − 4 = 7, Z = 5 + 0 − 2 = 3, so ⁷Li.",
+     "sourceSlide": "s4",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "e.g. 25Mg or Mg-25"
+     },
+     "evaluator": {
+      "type": "pattern_match",
+      "acceptedPatterns": [
+       "^\\s*(?:\\^?\\s*7\\s*-?\\s*Li|Li\\s*-?\\s*7|⁷\\s*Li|(?:lithium)\\s*-?\\s*7)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+      ],
+      "caseSensitive": false,
+      "expectedDisplay": "⁷Li"
+     }
+    },
+    {
+     "variantId": "c4-nuclear-gen-04",
+     "perspectiveLabel": "⁹²Kr",
+     "marks": 2,
+     "stem": "²³⁵U absorbs a neutron and splits into ¹⁴¹Ba, three neutrons and a second nucleus X. Identify X.",
+     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
+     "explanation": "²³⁵U + ¹n → ¹⁴¹Ba + 3 ¹n + X: A = 235 + 1 − 141 − 3 = 92, Z = 92 − 56 = 36, so ⁹²Kr.",
+     "sourceSlide": "s4",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "e.g. 25Mg or Mg-25"
+     },
+     "evaluator": {
+      "type": "pattern_match",
+      "acceptedPatterns": [
+       "^\\s*(?:\\^?\\s*92\\s*-?\\s*Kr|Kr\\s*-?\\s*92|⁹²\\s*Kr|(?:krypton)\\s*-?\\s*92)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+      ],
+      "caseSensitive": false,
+      "expectedDisplay": "⁹²Kr"
+     }
+    },
+    {
+     "variantId": "c4-nuclear-gen-05",
+     "perspectiveLabel": "⁴He",
+     "marks": 2,
+     "stem": "⁷Li captures a proton (¹H) and splits into two identical nuclei X. Identify X.",
+     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
+     "explanation": "⁷Li + ¹H → 2 X: A = (7 + 1)/2 = 4, Z = (3 + 1)/2 = 2, so ⁴He (an α particle each).",
+     "sourceSlide": "s4",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "e.g. 25Mg or Mg-25"
+     },
+     "evaluator": {
+      "type": "pattern_match",
+      "acceptedPatterns": [
+       "^\\s*(?:\\^?\\s*4\\s*-?\\s*He|He\\s*-?\\s*4|⁴\\s*He|(?:helium)\\s*-?\\s*4)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+      ],
+      "caseSensitive": false,
+      "expectedDisplay": "⁴He"
+     }
+    },
+    {
+     "variantId": "c4-nuclear-gen-06",
+     "perspectiveLabel": "²⁸Al",
+     "marks": 2,
+     "stem": "²⁸Si captures a neutron and then emits a proton (¹H). Which isotope forms?",
+     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
+     "explanation": "²⁸Si + ¹n → X + ¹H: A = 28 + 1 − 1 = 28, Z = 14 + 0 − 1 = 13, so ²⁸Al.",
+     "sourceSlide": "s4",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "e.g. 25Mg or Mg-25"
+     },
+     "evaluator": {
+      "type": "pattern_match",
+      "acceptedPatterns": [
+       "^\\s*(?:\\^?\\s*28\\s*-?\\s*Al|Al\\s*-?\\s*28|²⁸\\s*Al|(?:aluminium|aluminum)\\s*-?\\s*28)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+      ],
+      "caseSensitive": false,
+      "expectedDisplay": "²⁸Al"
+     }
+    },
+    {
+     "variantId": "c4-nuclear-gen-07",
+     "perspectiveLabel": "³⁸Ar",
+     "marks": 2,
+     "stem": "³⁷Cl captures a neutron and the product then undergoes one β⁻ decay. Which isotope results?",
+     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
+     "explanation": "³⁷Cl + ¹n → ³⁸Cl; β⁻ decay raises Z by 1 and leaves A unchanged: ³⁸Ar.",
+     "sourceSlide": "s4",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "e.g. 25Mg or Mg-25"
+     },
+     "evaluator": {
+      "type": "pattern_match",
+      "acceptedPatterns": [
+       "^\\s*(?:\\^?\\s*38\\s*-?\\s*Ar|Ar\\s*-?\\s*38|³⁸\\s*Ar|(?:argon)\\s*-?\\s*38)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+      ],
+      "caseSensitive": false,
+      "expectedDisplay": "³⁸Ar"
+     }
+    },
+    {
+     "variantId": "c4-nuclear-gen-08",
+     "perspectiveLabel": "²⁹Si",
+     "marks": 2,
+     "stem": "²⁶Mg captures an α particle (⁴He) and then emits a neutron. Which isotope forms?",
+     "hint": "Conserve the mass number A (top) and the atomic number Z (bottom) on both sides. β⁻ decay: Z + 1, A unchanged. α = ⁴He, neutron = ¹n (Z = 0), proton = ¹H.",
+     "explanation": "²⁶Mg + ⁴He → X + ¹n: A = 26 + 4 − 1 = 29, Z = 12 + 2 = 14, so ²⁹Si.",
+     "sourceSlide": "s4",
+     "inputSlot": {
+      "type": "typed_short",
+      "formatHint": "e.g. 25Mg or Mg-25"
+     },
+     "evaluator": {
+      "type": "pattern_match",
+      "acceptedPatterns": [
+       "^\\s*(?:\\^?\\s*29\\s*-?\\s*Si|Si\\s*-?\\s*29|²⁹\\s*Si|(?:silicon)\\s*-?\\s*29)\\s*(?:\\([^)]*\\))?\\s*\\.?\\s*$"
+      ],
+      "caseSensitive": false,
+      "expectedDisplay": "²⁹Si"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c3-homo-gen",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "HOMO electron counts for hydrides and small ions",
+    "source": "Template of the Kinjo example mid-terms (CH₄ and OH⁻, C₂) and finals (SF₆, CH₄)",
+    "week": 3,
+    "primaryTheme": "Molecular Orbital Theory",
+    "conceptTags": [
+     "homo",
+     "mo-diagram"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "homo-gen"
+   },
+   "variants": [
+    {
+     "variantId": "c3-homo-gen-v1",
+     "perspectiveLabel": "NH₃, H₂O, HF, BH₃, NO",
+     "marks": 5,
+     "stem": "Based on MO theory, give the total number of electrons in the HOMO (count every electron in a degenerate HOMO set) of each species.",
+     "hint": "Fill the valence MOs in energy order, then count the electrons in the highest occupied level (both orbitals if it is a degenerate pair or triple).",
+     "explanation": "NH₃: the HOMO is the non-bonding lone-pair a₁ orbital, 2 electrons. H₂O: the HOMO is the non-bonding out-of-plane O 2p lone pair (b₁), 2 electrons. HF: the HOMO is the degenerate non-bonding F 2p π pair, 4 electrons. BH₃ (6 valence electrons): a₁′ and e′ are filled, so the HOMO e′ pair holds 4 electrons. NO: the single unpaired electron sits in a degenerate π* orbital, 1 electron.",
+     "sourceSlide": "s3",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "h0",
+        "label": "NH₃"
+       },
+       {
+        "key": "h1",
+        "label": "H₂O"
+       },
+       {
+        "key": "h2",
+        "label": "HF"
+       },
+       {
+        "key": "h3",
+        "label": "BH₃"
+       },
+       {
+        "key": "h4",
+        "label": "NO"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "h0": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "h1": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "h2": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       },
+       "h3": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       },
+       "h4": {
+        "type": "numeric",
+        "targetExpr": "1",
+        "tolerance": 0
+       }
+      }
+     }
+    },
+    {
+     "variantId": "c3-homo-gen-v2",
+     "perspectiveLabel": "SiH₄, CN⁻, O₂⁻, NO⁺, F₂",
+     "marks": 5,
+     "stem": "Based on MO theory, give the total number of electrons in the HOMO (count every electron in a degenerate HOMO set) of each species.",
+     "hint": "Fill the valence MOs in energy order, then count the electrons in the highest occupied level (both orbitals if it is a degenerate pair or triple).",
+     "explanation": "SiH₄ is like CH₄: a₁ then the t₂ set holds the last 6 electrons. CN⁻ and NO⁺ are isoelectronic with N₂ (10 valence electrons): the HOMO is the σ orbital with 2 electrons. O₂⁻ (13 valence electrons) puts 3 electrons in the π* pair. F₂ has all of π* filled: 4 electrons.",
+     "sourceSlide": "s3",
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "h0",
+        "label": "SiH₄"
+       },
+       {
+        "key": "h1",
+        "label": "CN⁻"
+       },
+       {
+        "key": "h2",
+        "label": "O₂⁻"
+       },
+       {
+        "key": "h3",
+        "label": "NO⁺"
+       },
+       {
+        "key": "h4",
+        "label": "F₂"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "h0": {
+        "type": "numeric",
+        "targetExpr": "6",
+        "tolerance": 0
+       },
+       "h1": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "h2": {
+        "type": "numeric",
+        "targetExpr": "3",
+        "tolerance": 0
+       },
+       "h3": {
+        "type": "numeric",
+        "targetExpr": "2",
+        "tolerance": 0
+       },
+       "h4": {
+        "type": "numeric",
+        "targetExpr": "4",
+        "tolerance": 0
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c4-crown-draw",
+   "moduleCode": "CM2021",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Draw a crown ether and name its best ion",
+    "source": "Kinjo example mid-terms (18-crown-6 in two papers, 15-crown-5 in one); cavity sizes from the bank",
+    "week": 4,
+    "primaryTheme": "Crown Ethers",
+    "conceptTags": [
+     "crown-ether",
+     "draw"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "crown-draw"
+   },
+   "variants": [
+    {
+     "variantId": "c4-crown-draw-12c4",
+     "perspectiveLabel": "12-crown-4",
+     "marks": 3,
+     "stem": "Draw the structure of 12-crown-4 and say which alkali-metal ion it binds best.",
+     "hint": "Repeat –O–CH₂–CH₂– around the ring, count the ring atoms, then match the cavity size to the ion size.",
+     "explanation": "12-crown-4: a ring of 12 atoms (4 oxygen donors, each pair of neighbouring O atoms joined by –CH₂CH₂–). The cavity (1.2–1.5 Å against Li⁺ 1.36 Å) matches Li⁺, so Li⁺ is bound best; ions that are too small rattle in the cavity and ions that are too large do not fit.",
+     "sourceSlide": "s4-5",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "A single ring of 12 atoms in total",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "4 oxygen atoms, each separated from the next by two CH₂ groups (–O–CH₂CH₂–O–)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Best-binding ion Li⁺, because the ion size matches the cavity size (1.2–1.5 Å against Li⁺ 1.36 Å)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     },
+     "comparisonVisualAsset": {
+      "type": "svg",
+      "payload": "<svg viewBox=\"0 0 320 322\" role=\"img\" aria-label=\"12-crown-4\" style=\"width:100%;max-width:460px;height:auto;display:block;margin:0 auto\"><polygon points=\"160.0,69.0 218.5,58.7 238.8,114.5 277.0,160.0 238.8,205.5 218.5,261.3 160.0,251.0 101.5,261.3 81.2,205.5 43.0,160.0 81.2,114.5 101.5,58.7\" fill=\"none\" stroke=\"#0f172a\" stroke-width=\"2.6\" stroke-linejoin=\"round\"/><circle cx=\"160.0\" cy=\"69.0\" r=\"12\" fill=\"#fff\"/><text x=\"160.0\" y=\"74.5\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"277.0\" cy=\"160.0\" r=\"12\" fill=\"#fff\"/><text x=\"277.0\" y=\"165.5\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"160.0\" cy=\"251.0\" r=\"12\" fill=\"#fff\"/><text x=\"160.0\" y=\"256.5\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"43.0\" cy=\"160.0\" r=\"12\" fill=\"#fff\"/><text x=\"43.0\" y=\"165.5\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"160\" cy=\"160\" r=\"16\" fill=\"#dbeafe\" stroke=\"#1d4ed8\" stroke-width=\"1.5\"/><text x=\"160\" y=\"165\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#1d4ed8\">Li⁺</text><text x=\"160\" y=\"22\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#334155\">12-crown-4</text><text x=\"160\" y=\"312\" text-anchor=\"middle\" font-size=\"12\" fill=\"#475569\">12 ring atoms · 4 O, each pair joined by –CH₂CH₂–</text></svg>",
+      "caption": "12-crown-4: 4 O donors separated by two CH₂ groups; cavity matches Li⁺"
+     }
+    },
+    {
+     "variantId": "c4-crown-draw-15c5",
+     "perspectiveLabel": "15-crown-5",
+     "marks": 3,
+     "stem": "Draw the structure of 15-crown-5 and say which alkali-metal ion it binds best.",
+     "hint": "Repeat –O–CH₂–CH₂– around the ring, count the ring atoms, then match the cavity size to the ion size.",
+     "explanation": "15-crown-5: a ring of 15 atoms (5 oxygen donors, each pair of neighbouring O atoms joined by –CH₂CH₂–). The cavity (1.7–2.2 Å against Na⁺ 1.9 Å) matches Na⁺, so Na⁺ is bound best; ions that are too small rattle in the cavity and ions that are too large do not fit.",
+     "sourceSlide": "s4-5",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "A single ring of 15 atoms in total",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "5 oxygen atoms, each separated from the next by two CH₂ groups (–O–CH₂CH₂–O–)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Best-binding ion Na⁺, because the ion size matches the cavity size (1.7–2.2 Å against Na⁺ 1.9 Å)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     },
+     "comparisonVisualAsset": {
+      "type": "svg",
+      "payload": "<svg viewBox=\"0 0 320 322\" role=\"img\" aria-label=\"15-crown-5\" style=\"width:100%;max-width:460px;height:auto;display:block;margin:0 auto\"><polygon points=\"160.0,69.0 207.6,53.1 227.6,99.1 271.3,123.8 250.5,169.5 261.3,218.5 213.5,233.6 184.3,274.4 141.1,249.0 91.2,254.7 81.2,205.5 43.6,172.2 73.5,131.9 73.1,81.7 123.0,76.9\" fill=\"none\" stroke=\"#0f172a\" stroke-width=\"2.6\" stroke-linejoin=\"round\"/><circle cx=\"160.0\" cy=\"69.0\" r=\"12\" fill=\"#fff\"/><text x=\"160.0\" y=\"74.5\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"271.3\" cy=\"123.8\" r=\"12\" fill=\"#fff\"/><text x=\"271.3\" y=\"129.3\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"213.5\" cy=\"233.6\" r=\"12\" fill=\"#fff\"/><text x=\"213.5\" y=\"239.1\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"91.2\" cy=\"254.7\" r=\"12\" fill=\"#fff\"/><text x=\"91.2\" y=\"260.2\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"73.5\" cy=\"131.9\" r=\"12\" fill=\"#fff\"/><text x=\"73.5\" y=\"137.4\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"160\" cy=\"160\" r=\"20\" fill=\"#dbeafe\" stroke=\"#1d4ed8\" stroke-width=\"1.5\"/><text x=\"160\" y=\"165\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#1d4ed8\">Na⁺</text><text x=\"160\" y=\"22\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#334155\">15-crown-5</text><text x=\"160\" y=\"312\" text-anchor=\"middle\" font-size=\"12\" fill=\"#475569\">15 ring atoms · 5 O, each pair joined by –CH₂CH₂–</text></svg>",
+      "caption": "15-crown-5: 5 O donors separated by two CH₂ groups; cavity matches Na⁺"
+     }
+    },
+    {
+     "variantId": "c4-crown-draw-18c6",
+     "perspectiveLabel": "18-crown-6",
+     "marks": 3,
+     "stem": "Draw the structure of 18-crown-6 and say which alkali-metal ion it binds best.",
+     "hint": "Repeat –O–CH₂–CH₂– around the ring, count the ring atoms, then match the cavity size to the ion size.",
+     "explanation": "18-crown-6: a ring of 18 atoms (6 oxygen donors, each pair of neighbouring O atoms joined by –CH₂CH₂–). The cavity (2.6–3.2 Å against K⁺ 2.66 Å) matches K⁺, so K⁺ is bound best; ions that are too small rattle in the cavity and ions that are too large do not fit.",
+     "sourceSlide": "s4-5",
+     "drawOnPaperThenCompare": true,
+     "inputSlot": {
+      "type": "typed_synthesis",
+      "placeholder": "Write the key points (or tick the box if you answered on paper)…",
+      "minWordsToUnlockRubric": 0,
+      "allowPaperScratchpad": true
+     },
+     "evaluator": {
+      "type": "atomic_rubric",
+      "rubric": [
+       {
+        "id": "r1",
+        "criterion": "A single ring of 18 atoms in total",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r2",
+        "criterion": "6 oxygen atoms, each separated from the next by two CH₂ groups (–O–CH₂CH₂–O–)",
+        "marks": 1,
+        "isCritical": true
+       },
+       {
+        "id": "r3",
+        "criterion": "Best-binding ion K⁺, because the ion size matches the cavity size (2.6–3.2 Å against K⁺ 2.66 Å)",
+        "marks": 1,
+        "isCritical": false
+       }
+      ]
+     },
+     "comparisonVisualAsset": {
+      "type": "svg",
+      "payload": "<svg viewBox=\"0 0 320 322\" role=\"img\" aria-label=\"18-crown-6\" style=\"width:100%;max-width:460px;height:auto;display:block;margin:0 auto\"><polygon points=\"160.0,69.0 200.0,50.1 218.5,90.3 261.3,101.5 249.6,144.2 275.2,180.3 238.8,205.5 235.2,249.6 191.1,245.5 160.0,277.0 128.9,245.5 84.8,249.6 81.2,205.5 44.8,180.3 70.4,144.2 58.7,101.5 101.5,90.3 120.0,50.1\" fill=\"none\" stroke=\"#0f172a\" stroke-width=\"2.6\" stroke-linejoin=\"round\"/><circle cx=\"160.0\" cy=\"69.0\" r=\"12\" fill=\"#fff\"/><text x=\"160.0\" y=\"74.5\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"261.3\" cy=\"101.5\" r=\"12\" fill=\"#fff\"/><text x=\"261.3\" y=\"107.0\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"238.8\" cy=\"205.5\" r=\"12\" fill=\"#fff\"/><text x=\"238.8\" y=\"211.0\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"160.0\" cy=\"277.0\" r=\"12\" fill=\"#fff\"/><text x=\"160.0\" y=\"282.5\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"81.2\" cy=\"205.5\" r=\"12\" fill=\"#fff\"/><text x=\"81.2\" y=\"211.0\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"58.7\" cy=\"101.5\" r=\"12\" fill=\"#fff\"/><text x=\"58.7\" y=\"107.0\" text-anchor=\"middle\" font-size=\"17\" font-weight=\"700\" fill=\"#be123c\">O</text><circle cx=\"160\" cy=\"160\" r=\"26\" fill=\"#dbeafe\" stroke=\"#1d4ed8\" stroke-width=\"1.5\"/><text x=\"160\" y=\"165\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#1d4ed8\">K⁺</text><text x=\"160\" y=\"22\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"700\" fill=\"#334155\">18-crown-6</text><text x=\"160\" y=\"312\" text-anchor=\"middle\" font-size=\"12\" fill=\"#475569\">18 ring atoms · 6 O, each pair joined by –CH₂CH₂–</text></svg>",
+      "caption": "18-crown-6: 6 O donors separated by two CH₂ groups; cavity matches K⁺"
      }
     }
    ]

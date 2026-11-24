@@ -48,8 +48,8 @@ const answerCard = (spoil) => {
     const noScroll = async (label) => { const m = await p.evaluate(() => ({ sh: document.scrollingElement.scrollHeight, ih: innerHeight, sw: document.scrollingElement.scrollWidth, iw: innerWidth })); ok(m.sh <= m.ih + 1 && m.sw <= m.iw + 1, `${name}: ${label}: the page does not scroll (${m.sw}x${m.sh} in ${m.iw}x${m.ih})`); };
     await p.evaluate(() => [...document.querySelectorAll('[data-nav="trainer"]')].find((x) => x.offsetParent !== null).click()); await p.waitForTimeout(500);
     await noScroll('home');
-    const kinds = await p.evaluate(() => Object.keys(window.__MASTERY_ENGINE__.Trainer.KINDS));
-    ok(kinds.length === 16 && (await p.locator('[data-tr-start]').count()) === 16, `${name}: a drill button for each of the ${kinds.length} steps`);
+    const kinds = await p.evaluate(() => Object.keys(window.__MASTERY_ENGINE__.Trainer.KINDS).filter((k) => window.__MASTERY_ENGINE__.Trainer.KINDS[k].tab === 'terms'));
+    ok(kinds.length === 16 && (await p.locator('[data-tr-start]').count()) === 16, `${name}: a drill button for each of the ${kinds.length} terms and Tanabe-Sugano steps`);
 
     // every drill, answered right through the inputs
     const only = name === 'phone' ? ['table', 'tsbands', 'tsread', 'tsratio'] : kinds;
@@ -78,6 +78,35 @@ const answerCard = (spoil) => {
     ok(before.seen >= 1 && before.right < before.seen, `${name}: the miss is counted (${before.right}/${before.seen})`);
     await p.evaluate(() => document.getElementById('trEnd').click()); await p.waitForTimeout(100);
 
+    // naming tab: every naming drill and both naming chains, answered right
+    await p.evaluate(() => document.querySelector('[data-tr-tab="naming"]').click()); await p.waitForTimeout(150);
+    const nk = await p.evaluate(() => Object.keys(window.__MASTERY_ENGINE__.Trainer.KINDS).filter((k) => window.__MASTERY_ENGINE__.Trainer.KINDS[k].tab === 'naming'));
+    ok(nk.length === 15 && (await p.locator('[data-tr-start]').count()) === 15, `${name}: a drill for each of the ${nk.length} naming steps`);
+    for (const k of (name === 'phone' ? ['ln-name', 'ln-alpha', 'ln-lform'] : nk)) {
+      await p.evaluate((kk) => document.querySelector(`[data-tr-start="${kk}"]`).click(), k); await p.waitForTimeout(300);
+      let n = 0, allRight = true;
+      while (await p.evaluate(() => !!document.querySelector('[data-tr-card]')) && n < 14) {
+        await p.evaluate(answerCard, false); await p.waitForTimeout(40);
+        if (!/Correct/.test(await p.evaluate(() => document.querySelector('[data-tr-verdict]')?.textContent || ''))) { allRight = false; console.log('   not correct on', k, n); }
+        await p.evaluate(() => document.getElementById('trNext').click()); await p.waitForTimeout(40); n++;
+      }
+      ok(allRight && n >= 4, `${name}: ${k}: ${n} cards, all right`);
+      await p.evaluate(() => document.getElementById('trHome').click()); await p.waitForTimeout(100);
+      await p.evaluate(() => document.querySelector('[data-tr-tab="naming"]').click()); await p.waitForTimeout(100);
+    }
+    for (const id of ['nmname', 'nmwrite']) {
+      await p.evaluate((i) => document.querySelector(`[data-tr-chain="${i}"]`).click(), id); await p.waitForTimeout(300);
+      let n = 0, right = true;
+      while (await p.evaluate(() => !!document.querySelector('[data-tr-card]')) && n < 10) {
+        await p.evaluate(answerCard, false); await p.waitForTimeout(40);
+        if (!/Correct/.test(await p.evaluate(() => document.querySelector('[data-tr-verdict]')?.textContent || ''))) right = false;
+        await p.evaluate(() => document.getElementById('trNext').click()); await p.waitForTimeout(40); n++;
+      }
+      ok(right && n >= 2, `${name}: naming chain ${id}: ${n} steps, all right`);
+      await p.evaluate(() => document.getElementById('trHome').click()); await p.waitForTimeout(100);
+      await p.evaluate(() => document.querySelector('[data-tr-tab="naming"]').click()); await p.waitForTimeout(100);
+    }
+    await noScroll('naming home');
     // chains
     await p.evaluate(() => document.querySelector('[data-tr-tab="chain"]').click()); await p.waitForTimeout(150);
     for (const id of ['micro', 'ts', 'bands']) {

@@ -28,10 +28,11 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   const A = (fn, arg) => p.evaluate(fn, arg);
   const click = async (sel) => { await A((s) => document.querySelector(s)?.click(), sel); await p.waitForTimeout(300); };
 
-  const st = await A(() => { const a = window.__MASTERY_ENGINE__.UI.appState; return { c9: a.nodes.filter((n) => n.id.startsWith('bk-c9-')).length, all: a.allNodes.filter((n) => n.id.startsWith('bk-c9-')).length, chunk: !!a.skillMap.chunks.find((c) => c.id === 'kinetics'), skills: a.skillMap.skills.filter((s) => s.id.startsWith('c9.')).length, jt: !!a.nodes.find((n) => n.id === 'bk-c7-jt-more'), wk: (a.modules.find((m) => m.moduleCode === 'CM2021').weeks || []).map((w) => w.weekNum) }; });
+  const st = await A(() => { const a = window.__MASTERY_ENGINE__.UI.appState; return { iso: a.nodes.filter((n) => /^bk-c6-(chirality|delta-lambda|isomer-type)$/.test(n.id)).length, isoChunk: !!a.skillMap.chunks.find((c) => c.id === 'isomerism'), shared: !!a.nodes.find((n) => n.id === 'bk-c6-ambidentate'), c9: a.nodes.filter((n) => n.id.startsWith('bk-c9-')).length, all: a.allNodes.filter((n) => n.id.startsWith('bk-c9-')).length, chunk: !!a.skillMap.chunks.find((c) => c.id === 'kinetics'), skills: a.skillMap.skills.filter((s) => s.id.startsWith('c9.')).length, jt: !!a.nodes.find((n) => n.id === 'bk-c7-jt-more'), wk: (a.modules.find((m) => m.moduleCode === 'CM2021').weeks || []).map((w) => w.weekNum) }; });
   ok(st.c9 === 0 && st.all === 0, 'no Chapter 9 question is loaded');
+  ok(st.iso === 0 && !st.isoChunk && st.shared, 'the isomerism questions and chunk are gone; a question that also tests naming stays');
   ok(!st.chunk && st.skills === 0, 'the Substitution kinetics chunk and its skills are gone from the skill map');
-  ok(st.jt && !st.wk.includes(9) && st.wk.includes(8), `the module lists chapters without 9 (${st.wk.join(',')}), and the Ch 7 deck questions are still served`);
+  ok(st.jt && !st.wk.includes(9) && !st.wk.includes(5) && st.wk.includes(8), `the module lists chapters without 5 and 9 (${st.wk.join(',')}), and the Ch 7 deck questions are still served`);
 
   // the Bank, the mock chapter list, the Plan topics
   await click('.nav-link[data-nav="bank"]');
@@ -45,7 +46,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await click('.nav-link[data-nav="study"]');
   // 60 cards of the normal queue never serve one
   const served = await A(async () => { const { UI } = window.__MASTERY_ENGINE__, a = UI.appState; const seen = []; for (let i = 0; i < 60; i++) { UI.loadNextQuestion(); await new Promise((r) => setTimeout(r, 15)); seen.push(a.current?.node.id); } return seen; });
-  ok(served.length === 60 && !served.some((id) => /^bk-c9-/.test(id)), 'sixty queue cards include no Chapter 9 question');
+  ok(served.length === 60 && !served.some((id) => /^bk-c9-|^bk-c6-(chirality|delta-lambda|isomer-type|isomer-counts|geometric-misc|tut4-stereo|drawing|agno3-test)$|^bk-c5-symmetry-rules$/.test(id)), 'sixty queue cards include no Chapter 9 or isomerism-only question');
 
   ok(errs.length === 0, 'no page errors' + (errs.length ? ': ' + errs.join(' | ') : ''));
   await b.close(); srv.close();

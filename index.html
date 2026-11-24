@@ -8739,20 +8739,32 @@
       }
 
       /* ---------- grading: returns { grade 0 | 0.5 | 1, feedback, missing, extra } ---------- */
+      /* typed in lower case (2ko2 + 2h2o -> 2koh ...)? put each species back into the case the answer uses, but only where it matches a species of this reaction ignoring case */
+      function repairCase(text, r) {
+        const known = new Map();
+        for (const rt of routesOf(r)) for (const eq of rt) for (const sp of String(eq).split(/->|→|\+(?=\s)|\s\+\s/)) {
+          const s = sp.trim().replace(/^\d+\s*/, ''); if (s) known.set(norm(s).toLowerCase(), s);
+        }
+        return String(text).split(/(\s+)/).map((tok) => {
+          const m = tok.match(/^(\d*)(.+)$/); if (!m || /^\s*$/.test(tok) || /^(->|→|\+|=)$/.test(tok)) return tok;
+          const hit = known.get(norm(m[2]).toLowerCase());
+          return hit ? m[1] + hit : tok;
+        }).join('');
+      }
       function gradeCard(card, r, text, evalFns) {
         const out = { grade: 0, feedback: '', missing: [], extra: [] };
         const t = String(text ?? '').trim();
         if (!t) { out.feedback = 'Nothing entered.'; return out; }
-        if (card.kind === 'write') {
+        if (card.kind === 'write' || (card.kind === 'gap' && /->|→/.test(t))) {
           const acc = routesOf(r).map((rt) => ({ equations: rt }));
-          const res = evalFns.gradeEquationMatch({ accepted: acc }, t);
+          const res = evalFns.gradeEquationMatch({ accepted: acc }, repairCase(t, r));
           out.grade = res.normalizedGrade >= 1 ? 1 : res.normalizedGrade > 0 ? 0.5 : 0;
           out.feedback = res.feedback; out.missing = res.missingSpecies || []; out.extra = res.extraSpecies || [];
           if (out.grade === 0 && !out.missing.length && !out.extra.length && evalFns.parseEquationLine) out.feedback = diagnose(routesOf(r), t, evalFns) || 'The species are right, but not as one reaction: check the lines and which side each is on.';
           return out;
         }
         if (card.kind === 'gap') {
-          out.grade = formulaKey(t) === formulaKey(card.answer) ? 1 : 0;
+          out.grade = formulaKey(t).toLowerCase() === formulaKey(card.answer).toLowerCase() ? 1 : 0;
           out.feedback = out.grade ? 'That is the missing formula.' : `The missing formula is not ${t}.`;
           return out;
         }
@@ -8820,7 +8832,7 @@
         return q.toLowerCase().split(/\s+/).filter(Boolean).every((w) => hay.includes(w));
       };
 
-      return { INTERVALS_MS, fmtFormula, fmtEq, fmtReactants, label, routesOf, norm, formulaKey, parseIsotope, chooseKind, buildCard, buildExceptionCard, gradeException, gradeExceptionOutcome, gradeCard, applyResult, isKnown, eligible, pickQueue, summary, dotLevel, matches };
+      return { INTERVALS_MS, fmtFormula, fmtEq, fmtReactants, label, routesOf, norm, formulaKey, parseIsotope, chooseKind, repairCase, buildCard, buildExceptionCard, gradeException, gradeExceptionOutcome, gradeCard, applyResult, isKnown, eligible, pickQueue, summary, dotLevel, matches };
     })();
 
     /* =====================================================================

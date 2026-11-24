@@ -8795,7 +8795,7 @@
         supersedes: {},           // per module: pairs 'harder question covers an easier one' (content/<dir>/supersedes.json)
         retired: null,            // Scheduler.supersession result for the current history (questions skipped because a harder one was passed)
         rxStats: {},              // per-reaction spaced boxes (settings row 'reactionStats')
-        rx: { tab: 'train', mapView: 'chunks', q: '', filters: { finals: false, named: false, check: false, weak: false }, cover: false, revealed: new Set(), collapsed: new Set(), session: null, opts: { group: 'ALL', examOnly: false, namedOnly: false, n: 12 } },
+        rx: { tab: 'train', reagent: 'ALL', mapView: 'chunks', q: '', filters: { finals: false, named: false, check: false, weak: false }, cover: false, revealed: new Set(), collapsed: new Set(), session: null, opts: { group: 'ALL', examOnly: false, namedOnly: false, n: 12 } },
         methods: {},
         reviewMap: {},
         attemptLogs: [],
@@ -12016,6 +12016,43 @@
           <div class="view-scroll space-y-2.5 pb-3" id="rxMapBody">${body}</div>`;
       }
 
+      /* Patterns: the reactions cut by reagent and by the family that shares a behaviour (content/cm2021/reactions.json "patterns"). */
+      function rxPatternsHtml() {
+        const rx = appState.rx, byId = rxById();
+        const pats = appState.reactions.patterns || [];
+        const reagents = [...new Set(pats.flatMap((p) => p.reagents))];
+        const shown = pats.filter((p) => rx.reagent === 'ALL' || p.reagents.includes(rx.reagent));
+        const chip = (k, t) => `<button type="button" data-rx-reagent="${esc(k)}" aria-pressed="${rx.reagent === k}" class="px-2.5 py-1 text-[11px] font-medium rounded-full border ${rx.reagent === k ? 'bg-slate-900 border-slate-900 text-white' : 'bg-white border-slate-300 text-slate-700'}">${t}</button>`;
+        const body = shown.map((p) => {
+          const ruleKey = 'pat:' + p.id, ruleShown = !rx.cover || rx.revealed.has(ruleKey);
+          const known = p.rows.filter((row) => Reactions.isKnown(appState.rxStats[row.rid])).length;
+          return `<section class="bg-white border border-slate-200 rounded-xl p-3" data-rx-pattern="${esc(p.id)}">
+            <div class="flex items-start justify-between gap-2">
+              <div class="min-w-0"><h2 class="font-display text-[15px] font-semibold text-slate-900">${esc(p.title)}</h2>
+              <div class="mt-0.5 flex flex-wrap gap-1">${p.reagents.map((x) => `<span class="px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 text-[10px] font-semibold">${esc(x)}</span>`).join('')}</div></div>
+              <span class="shrink-0 text-[11px] font-mono text-slate-500 whitespace-nowrap">${known}/${p.rows.length}</span>
+            </div>
+            <div class="mt-1.5 rounded-lg ${ruleShown ? 'bg-blue-50 border border-blue-200' : 'bg-slate-50 border border-dashed border-slate-300 cursor-pointer'} px-2.5 py-1.5" data-rx-pat-rule="${esc(ruleKey)}">
+              ${ruleShown ? `<p class="text-xs text-slate-800" data-rx-pat-text>${esc(p.rule)}</p>` : '<p class="text-xs text-slate-500">What is the pattern? Tap to check your answer.</p>'}
+            </div>
+            <ul class="mt-1">${p.rows.map((row) => {
+              const r = byId[row.rid], revealed = !rx.cover || rx.revealed.has(row.rid), lvl = Reactions.dotLevel(appState.rxStats[row.rid]);
+              return `<li class="flex gap-2.5 py-2 border-t border-slate-100 first:border-t-0 ${rx.cover ? 'cursor-pointer' : ''}" data-rx-row="${esc(row.rid)}">
+                <span class="mt-1.5 w-2.5 h-2.5 rounded-full shrink-0 ${RX_DOT[lvl]}" title="${RX_DOT_TEXT[lvl]}"></span>
+                <div class="min-w-0 flex-1"><div class="flex flex-wrap items-center gap-1.5"><span class="text-[11px] font-semibold text-slate-600">${esc(row.label)}</span>${row.odd ? '<span class="px-1.5 py-0.5 rounded bg-amber-50 border border-amber-300 text-amber-900 text-[10px] font-medium">exception</span>' : ''}</div>
+                ${(r.steps || [r.eq]).map((e) => `<div class="text-[14px] leading-relaxed">${revealed ? Reactions.fmtEq(e) : Reactions.fmtReactants(e)}</div>`).join('')}</div></li>`;
+            }).join('')}</ul>
+            <div class="mt-1.5"><button type="button" data-rx-pat-test="${esc(p.id)}" class="px-3 py-1.5 text-xs font-medium border border-slate-300 rounded-lg bg-white hover:bg-slate-50">Test this pattern (${p.rows.length})</button></div>
+          </section>`;
+        }).join('');
+        return `<div class="shrink-0 space-y-2">
+            <p class="text-xs text-slate-600">The same reactions grouped by what they react with, so you can see the trend and the exception. Cover answers hides the rule and the products; Test writes each row as a card.</p>
+            <div class="flex flex-wrap items-center gap-1.5">${chip('ALL', 'All')}${reagents.map((x) => chip(x, esc(x))).join('')}
+              <button type="button" id="rxCover" aria-pressed="${rx.cover}" class="ml-auto px-2.5 py-1 text-[11px] font-medium rounded-full border ${rx.cover ? 'bg-blue-700 border-blue-700 text-white' : 'bg-white border-blue-300 text-blue-800'}">${rx.cover ? 'Covered: tap to check' : 'Cover answers'}</button></div>
+          </div>
+          <div class="view-scroll space-y-2.5 pb-3" id="rxPatternsBody">${body || '<p class="py-10 text-center text-sm text-slate-500">No patterns for that reagent.</p>'}</div>`;
+      }
+
       function rxTrainHtml() {
         const rx = appState.rx, s = rx.session, now = Date.now();
         if (s && !s.done) return rxCardHtml();
@@ -12103,9 +12140,9 @@
         root.innerHTML = `<div class="view" id="rxView">
           <div class="shrink-0 flex items-center justify-between gap-2">
             <h1 class="font-display text-lg sm:text-xl font-bold text-slate-900">Reactions <span class="font-mono text-xs font-normal text-slate-500">${total} to know</span></h1>
-            <div class="seg w-44 shrink-0" role="tablist"><button type="button" role="tab" data-rx-tab="train" aria-selected="${rx.tab === 'train'}">Train</button><button type="button" role="tab" data-rx-tab="map" aria-selected="${rx.tab === 'map'}">Map</button></div>
+            <div class="seg w-60 shrink-0" role="tablist"><button type="button" role="tab" data-rx-tab="train" aria-selected="${rx.tab === 'train'}">Train</button><button type="button" role="tab" data-rx-tab="map" aria-selected="${rx.tab === 'map'}">Map</button><button type="button" role="tab" data-rx-tab="patterns" aria-selected="${rx.tab === 'patterns'}">Patterns</button></div>
           </div>
-          ${rx.tab === 'map' ? rxMapHtml() : rxTrainHtml()}
+          ${rx.tab === 'map' ? rxMapHtml() : rx.tab === 'patterns' ? rxPatternsHtml() : rxTrainHtml()}
         </div>`;
         rxBind(root);
       }
@@ -12123,7 +12160,7 @@
         if (!s) return;
         if (s.i >= s.queue.length) { s.done = true; s.card = null; render(); return; }
         const r = rxById()[s.queue[s.i]];
-        const kind = Reactions.chooseKind(r, appState.rxStats[r.id], Math.random());
+        const kind = s.forceKind && r.kind !== 'nuc' ? s.forceKind : Reactions.chooseKind(r, appState.rxStats[r.id], Math.random());
         s.card = Reactions.buildCard(r, kind, Math.random());
         s.result = null; s.revealed = false;
         render();
@@ -12161,6 +12198,13 @@
         $$('details[data-rx-group]', root).forEach((d) => d.addEventListener('toggle', () => { if (d.open) rx.collapsed.delete(d.dataset.rxGroup); else rx.collapsed.add(d.dataset.rxGroup); }));
         $$('[data-rx-drill]', root).forEach((b) => b.addEventListener('click', (e) => { e.preventDefault(); rxStartSession({ group: b.dataset.rxDrill, n: 12, examOnly: false, namedOnly: false }); }));
         $$('[data-rx-drill-one]', root).forEach((b) => b.addEventListener('click', () => { const id = b.dataset.rxDrillOne; appState.rx.tab = 'train'; appState.rx.session = { queue: [id], i: 0, results: [], retried: new Set(), card: null, result: null, revealed: false, opts: {} }; rxNextCard(); }));
+        $$('[data-rx-reagent]', root).forEach((b) => b.addEventListener('click', () => { rx.reagent = b.dataset.rxReagent; render(); }));
+        $$('[data-rx-pat-rule]', root).forEach((d) => d.addEventListener('click', () => { if (!rx.cover) return; const k = d.dataset.rxPatRule; if (rx.revealed.has(k)) rx.revealed.delete(k); else rx.revealed.add(k); render(); }));
+        $$('[data-rx-pat-test]', root).forEach((b) => b.addEventListener('click', () => {
+          const p = (appState.reactions.patterns || []).find((x) => x.id === b.dataset.rxPatTest); if (!p) return;
+          const ids = [...new Set(p.rows.map((x) => x.rid))].sort(() => Math.random() - 0.5);
+          rx.tab = 'train'; rx.session = { queue: ids, i: 0, results: [], retried: new Set(), card: null, result: null, revealed: false, opts: {}, forceKind: 'write' }; rxNextCard();
+        }));
         $('#rxStart', root)?.addEventListener('click', () => {
           rx.opts = { group: $('#rxOptGroup', root).value, examOnly: $('#rxOptExam', root).checked, namedOnly: $('#rxOptNamed', root).checked, n: 12 };
           rxStartSession(rx.opts);

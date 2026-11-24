@@ -151,3 +151,18 @@ test('a wrong answer with the right species says what is off instead of a generi
   assert.match(g('n-wislicenus', '2Na + 2NH3 -> 2NaNH2 + H2\n2NaNH2 + N2O -> NaN3 + NaOH').feedback, /NH3 should appear on both sides|missing species/i);
   assert.match(g('n-wislicenus', '2Na + 2NH3 -> 2NaNH2 + H2').feedback, /missing species|takes 2 equations/i);
 });
+
+test('patterns: each has a title, a rule, reagent chips and at least three rows that point at real reactions', () => {
+  assert.ok(Array.isArray(doc.patterns) && doc.patterns.length >= 8, 'patterns exist');
+  const ids = new Set(doc.reactions.map((r) => r.id)), seen = new Set();
+  for (const p of doc.patterns) {
+    assert.ok(!seen.has(p.id), `duplicate ${p.id}`); seen.add(p.id);
+    assert.ok(p.title && p.rule && p.rule.length > 40, `${p.id}: title and rule`);
+    assert.ok(p.reagents.length >= 1, `${p.id}: reagents`);
+    assert.ok(p.rows.length >= 3, `${p.id}: rows`);
+    for (const row of p.rows) { assert.ok(row.label, `${p.id}: label`); assert.ok(ids.has(row.rid), `${p.id}: ${row.rid}`); }
+  }
+  // the reagent axis the owner asked for is covered
+  const chips = new Set(doc.patterns.flatMap((p) => p.reagents));
+  for (const x of ['O₂', 'H₂O', 'N₂', 'H₂', 'Cl₂', 'F₂']) assert.ok(chips.has(x), `reagent ${x}`);
+});

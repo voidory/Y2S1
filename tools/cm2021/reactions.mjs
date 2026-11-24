@@ -283,13 +283,52 @@ export const CHAINS = [
     { from: 'CO + H₂', to: 'CH₃OH', label: 'ZnO', rid: 'h2-meoh' } ] },
 ];
 
+/* Patterns: the same reactions cut by reagent (and by the family of elements that share a behaviour), so a trend or an exception is
+   visible in one place. Every row points at a reaction already in the list; the rule is our own wording of what the equations show.
+   `reagents` = the chips on the Patterns tab; a row with `odd: true` is the exception to the rule. */
+export const PATTERNS = [
+  { id: 'pat-o2', title: 'Elements burnt in O₂', reagents: ['O₂'],
+    rule: 'A small cation gives the normal oxide, a big cation a peroxide or superoxide (Li₂O, Na₂O₂, KO₂; Mg gives MgO but Ba gives BaO₂). Non-metals give covalent oxides: P₄ stops at P₄O₆ when O₂ is limited and goes to P₄O₁₀ in excess; sulfur burns to SO₂, not SO₃.',
+    rows: [{ label: 'Li', rid: 'g1-li' }, { label: 'Na', rid: 'g1-na' }, { label: 'K', rid: 'g1-k' }, { label: 'Mg', rid: 'g2-mg' }, { label: 'Ba', rid: 'g2-ba', odd: true },
+      { label: 'P₄, limited O₂', rid: 'p-p4o6' }, { label: 'P₄O₆, more O₂', rid: 'p-p4o10' }, { label: 'S₈', rid: 's-s8' }] },
+  { id: 'pat-anion-h2o', title: 'Basic anions + water', reagents: ['H₂O'],
+    rule: 'Each of these anions takes H⁺ from water and leaves hydroxide: H⁻ gives H₂, N³⁻ gives NH₃, O²⁻ just gives OH⁻, O₂²⁻ gives H₂O₂ (and O₂⁻ gives H₂O₂ with some O₂ released).',
+    rows: [{ label: 'H⁻ (CaH₂)', rid: 'hyd-cah2' }, { label: 'N³⁻ (Li₃N)', rid: 'g1-li3n' }, { label: 'O²⁻ (Li₂O)', rid: 'g1-li2o' }, { label: 'O₂²⁻ (Na₂O₂)', rid: 'g1-na2o2' }, { label: 'O₂⁻ (KO₂)', rid: 'g1-ko2', odd: true }] },
+  { id: 'pat-metal-h2o', title: 'Reactive metals + water, alcohol or acid', reagents: ['H₂O'],
+    rule: 'Group 1 and 2 metals push H₂ out of anything with an acidic H: water gives the hydroxide + H₂, an alcohol gives the alkoxide + H₂, an acid gives the salt + H₂.',
+    rows: [{ label: 'Na + water', rid: 'g1-h2o' }, { label: 'Mg + water', rid: 'g2-m-h2o' }, { label: 'Na + alcohol', rid: 'g1-roh' }, { label: 'Mg + acid', rid: 'g2-mg-hcl' }] },
+  { id: 'pat-halide-h2o', title: 'Covalent halides + water', reagents: ['H₂O'],
+    rule: 'Covalent p-block halides are hydrolysed to the oxo-acid or oxide plus HX: BCl₃ to B(OH)₃, SiCl₄ to SiO₂, PCl₃ to H₃PO₃. SiF₄ keeps the fluoride as [SiF₆]²⁻. SF₆ is the exception: hydrolysis is favourable but it does not happen (kinetically inert).',
+    rows: [{ label: 'BCl₃', rid: 'b-bcl3-h2o' }, { label: 'SiCl₄', rid: 'si-sicl4' }, { label: 'PCl₃', rid: 'p-pcl3-h2o' }, { label: 'SiF₄', rid: 'si-sif4-h2o', odd: true }, { label: 'SF₆ (does not)', rid: 's-sf6', odd: true }] },
+  { id: 'pat-cov-hydride', title: 'Covalent hydrides (B₂H₆, SiH₄)', reagents: ['O₂', 'H₂O'],
+    rule: 'They burn in O₂ to the oxide + water and are hydrolysed (water for B₂H₆, base for SiH₄) to give H₂ and the oxo-product.',
+    rows: [{ label: 'B₂H₆ + O₂', rid: 'b-b2h6-o2' }, { label: 'SiH₄ + O₂', rid: 'si-sih4-o2' }, { label: 'B₂H₆ + water', rid: 'b-b2h6-h2o' }, { label: 'SiH₄ + base', rid: 'si-sih4-koh' }] },
+  { id: 'pat-f2', title: 'Fluorine: highest oxidation states', reagents: ['F₂'],
+    rule: 'F₂ drives the central atom to its highest fluoride, and bigger atoms take more F (ClF₅, IF₇). Compare Cl₂, which stops P at PCl₃ where F₂ goes to PF₅. Xenon is oxidised too.',
+    rows: [{ label: 'Cl₂ + F₂ (1)', rid: 'hal-clf' }, { label: 'Cl₂ + F₂ (3)', rid: 'hal-clf3' }, { label: 'Cl₂ + F₂ (5)', rid: 'hal-clf5' }, { label: 'I₂ + F₂ (5)', rid: 'hal-if5' }, { label: 'I₂ + F₂ (7)', rid: 'hal-if7' },
+      { label: 'Xe + F₂ (2)', rid: 'ng-xef2' }, { label: 'Xe + F₂ (4)', rid: 'ng-xef4' }, { label: 'P₄ + F₂', rid: 'p-pf5' }, { label: 'P₄ + Cl₂ (limited)', rid: 'p-pcl3' }] },
+  { id: 'pat-cl2', title: 'Chlorine', reagents: ['Cl₂'],
+    rule: 'Metals give ionic chlorides (NaCl, MgCl₂); non-metals give covalent ones (SiCl₄, PCl₃). Cl₂ also oxidises Br⁻ and I⁻ (a halogen higher up the group beats a halide below it).',
+    rows: [{ label: 'Na', rid: 'g1-cl2' }, { label: 'Mg', rid: 'g2-halide' }, { label: 'Si', rid: 'si-sicl4-syn' }, { label: 'P₄', rid: 'p-pcl3' }, { label: 'Br⁻', rid: 'hal-clbr' }, { label: 'I⁻', rid: 'hal-cli' }] },
+  { id: 'pat-n2-h2', title: 'Nitrogen and hydrogen', reagents: ['N₂', 'H₂'],
+    rule: 'Every alkali metal and Ca give a salt-like hydride with H₂. With N₂ only Li of Group 1 reacts directly (Li₃N); Mg burns in N₂ to Mg₃N₂. Nitrides then give NH₃ with water.',
+    rows: [{ label: 'Na + H₂', rid: 'hyd-gH2' }, { label: 'Ca + H₂', rid: 'g2-mh2' }, { label: 'Li + N₂', rid: 'g1-li-n2', odd: true }, { label: 'Mg + N₂', rid: 'g2-mg3n2' }] },
+  { id: 'pat-lewis-f', title: 'Halide acceptors: how many F⁻ they take', reagents: ['F⁻ / HF'],
+    rule: 'Be and B stop at four-coordinate ([BeF₄]²⁻, [BF₄]⁻); Si and Sn go to six ([SiF₆]²⁻, [SnCl₆]²⁻) because they have room to expand.',
+    rows: [{ label: 'BF₃ + HF', rid: 'b-bf3-hf' }, { label: 'BeF₂ + F⁻', rid: 'g2-bef4' }, { label: 'SiF₄ + F⁻', rid: 'si-sif4-f' }, { label: 'SnCl₄ + Cl⁻', rid: 'si-sncl4' }] },
+  { id: 'pat-g2-oh', title: 'Group 2 hydroxides: Be is the odd one', reagents: ['H₂O'],
+    rule: 'CaO and the other oxides add water to give a base; Be(OH)₂ is amphoteric and reacts with acid and with NaOH.',
+    rows: [{ label: 'CaO + water', rid: 'g2-mo-h2o' }, { label: 'Be(OH)₂ + acid', rid: 'g2-beoh-acid', odd: true }, { label: 'Be(OH)₂ + NaOH', rid: 'g2-beoh-naoh', odd: true }] },
+];
+
 export function build() {
   const ids = new Set();
   for (const r of R) { if (ids.has(r.id)) throw new Error('duplicate ' + r.id); ids.add(r.id); }
   const groupIds = new Set(GROUPS.map((g) => g.id));
   for (const r of R) if (!groupIds.has(r.g)) throw new Error(`${r.id}: unknown group ${r.g}`);
   for (const c of CHAINS) for (const row of c.rows) if (!ids.has(row.rid)) throw new Error(`${c.id}: unknown reaction ${row.rid}`);
-  return { version: 1, module: 'CM2021', exportedAt: '2026-11-22', groups: GROUPS, chains: CHAINS, reactions: R };
+  for (const p of PATTERNS) for (const row of p.rows) if (!ids.has(row.rid)) throw new Error(`${p.id}: unknown reaction ${row.rid}`);
+  return { version: 1, module: 'CM2021', exportedAt: '2026-11-24', groups: GROUPS, chains: CHAINS, patterns: PATTERNS, reactions: R };
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname)) {

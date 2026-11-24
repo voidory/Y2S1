@@ -32,7 +32,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
 
   // 1. nav entry (phone tab bar, six tabs) on CM2021
   const nav = await p.evaluate(() => { const t = document.querySelector('.tabbar'); const b = [...t.querySelectorAll('[data-nav]')].filter((x) => !x.classList.contains('hidden')); const r = b.map((x) => x.getBoundingClientRect()); return { n: b.length, names: b.map((x) => x.dataset.nav).join(','), right: Math.max(...r.map((x) => x.right)), w: innerWidth, minW: Math.min(...r.map((x) => x.width)) }; });
-  ok(nav.names.includes('reactions') && nav.n === 6, `CM2021 shows a Reactions tab (${nav.names})`);
+  ok(nav.names.includes('reactions') && nav.n === 7, `CM2021 shows a Reactions tab (${nav.names})`);
   ok(nav.right <= nav.w + 1 && nav.minW >= 55, `six tabs fit a phone (right edge ${Math.round(nav.right)} of ${nav.w}, narrowest ${Math.round(nav.minW)}px)`);
   await p.click('.tabbar [data-nav="reactions"]'); await p.waitForTimeout(400);
   ok(await p.$('#rxView') !== null, 'the Reactions screen opens');

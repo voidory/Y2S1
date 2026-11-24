@@ -105,12 +105,15 @@ const moH2O = () => { const f = levels(320, 240, 'H₂O: 1a₁, 1b₂, 2a₁ bon
 
 /* ---------- crown ethers ---------- */
 export function crownSvg(n, ion, name) {
-  const cx = 110, cy = 100, R = 66, pts = Array.from({ length: n }, (_, i) => { const a = -Math.PI / 2 + (2 * Math.PI * i) / n; return [cx + R * Math.cos(a), cy + R * Math.sin(a)]; });
-  let s = `<polygon points="${pts.map((p) => p.join(',')).join(' ')}" fill="none" stroke="#0f172a" stroke-width="1.6"/>`;
-  pts.forEach(([x, y], i) => { const isO = i % 3 === 0; s += isO ? `<circle cx="${x}" cy="${y}" r="9" fill="#fff"/><text x="${x}" y="${y + 4.5}" text-anchor="middle" font-size="13" font-weight="700" fill="#be123c">O</text>` : `<circle cx="${x}" cy="${y}" r="2.6" fill="#0f172a"/>`; });
-  s += `<circle cx="${cx}" cy="${cy}" r="${n === 12 ? 12 : n === 15 ? 15 : 19}" fill="#dbeafe" stroke="#1d4ed8"/><text x="${cx}" y="${cy + 4}" text-anchor="middle" font-size="11" font-weight="700" fill="#1d4ed8">${esc(ion)}</text>`;
-  s += `<text x="215" y="86" font-size="11" fill="#334155">${esc(name)}</text><text x="215" y="102" font-size="10" fill="#475569">${n} ring atoms</text><text x="215" y="116" font-size="10" fill="#475569">${n / 3} O, each pair of O</text><text x="215" y="129" font-size="10" fill="#475569">joined by –CH₂CH₂–</text><text x="215" y="148" font-size="10" fill="#1d4ed8">binds ${esc(ion)} best</text>`;
-  return { type: 'svg', payload: `<svg viewBox="0 0 340 200" role="img" aria-label="${esc(name)}" style="width:100%;max-width:340px;height:auto;display:block;margin:0 auto">${s}</svg>`, caption: `${name}: ${n / 3} O donors separated by two CH₂ groups; cavity matches ${ion}` };
+  /* skeletal zig-zag ring: every vertex is an O or a CH2 (printed-style bent straight bonds, not a smooth circle) */
+  const cx = 160, cy = 160, R = 104, d = 13;
+  const pts = Array.from({ length: n }, (_, i) => { const a = -Math.PI / 2 + (2 * Math.PI * i) / n, r = R + (i % 2 ? d : -d); return [cx + r * Math.cos(a), cy + r * Math.sin(a)]; });
+  const f = (v) => v.toFixed(1);
+  let s = `<polygon points="${pts.map((p) => f(p[0]) + ',' + f(p[1])).join(' ')}" fill="none" stroke="#0f172a" stroke-width="2.6" stroke-linejoin="round"/>`;
+  pts.forEach(([x, y], i) => { if (i % 3 === 0) s += `<circle cx="${f(x)}" cy="${f(y)}" r="12" fill="#fff"/><text x="${f(x)}" y="${f(y + 5.5)}" text-anchor="middle" font-size="17" font-weight="700" fill="#be123c">O</text>`; });
+  s += `<circle cx="${cx}" cy="${cy}" r="${n === 12 ? 16 : n === 15 ? 20 : 26}" fill="#dbeafe" stroke="#1d4ed8" stroke-width="1.5"/><text x="${cx}" y="${cy + 5}" text-anchor="middle" font-size="15" font-weight="700" fill="#1d4ed8">${esc(ion)}</text>`;
+  s += `<text x="${cx}" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#334155">${esc(name)}</text><text x="${cx}" y="312" text-anchor="middle" font-size="12" fill="#475569">${n} ring atoms · ${n / 3} O, each pair joined by –CH₂CH₂–</text>`;
+  return { type: 'svg', payload: `<svg viewBox="0 0 320 322" role="img" aria-label="${esc(name)}" style="width:100%;max-width:460px;height:auto;display:block;margin:0 auto">${s}</svg>`, caption: `${name}: ${n / 3} O donors separated by two CH₂ groups; cavity matches ${ion}` };
 }
 
 /* ---------- more draw items ---------- */

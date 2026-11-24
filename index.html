@@ -10095,12 +10095,12 @@
               </div>
               <div class="${refCompareAsset ? 'grid grid-cols-1 md:grid-cols-12 gap-4 items-start' : 'space-y-2'}">
                 ${refCompareAsset ? `
-                  <div class="md:col-span-5" data-reference-compare>
+                  <div class="md:col-span-6" data-reference-compare>
                     <div class="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Reference Image (Compare with Your Drawing)</div>
                     ${renderVisualAssetHtml(refCompareAsset, 'mb-0', 'reference-compare-image')}
                   </div>
                 ` : ''}
-                <div class="${refCompareAsset ? 'md:col-span-7' : ''} space-y-2">
+                <div class="${refCompareAsset ? 'md:col-span-6' : ''} space-y-2">
                   ${items.map((item) => {
                     const checked = Boolean(cur.rubricChecks[item.id]);
                     return `

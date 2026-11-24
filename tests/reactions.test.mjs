@@ -166,3 +166,24 @@ test('patterns: each has a title, a rule, reagent chips and at least three rows 
   const chips = new Set(doc.patterns.flatMap((p) => p.reagents));
   for (const x of ['O₂', 'H₂O', 'N₂', 'H₂', 'Cl₂', 'F₂']) assert.ok(chips.has(x), `reagent ${x}`);
 });
+
+test('exceptions: each card has 3+ single-equation options, the answer among them, a why, and the pure card/grade logic works', () => {
+  const { Reactions } = loadEngine();
+  assert.ok(Array.isArray(doc.exceptions) && doc.exceptions.length >= 5);
+  const byId = new Map(doc.reactions.map((r) => [r.id, r]));
+  const answers = new Set();
+  for (const e of doc.exceptions) {
+    assert.ok(e.ask && e.why && e.why.length > 30, `${e.id}: ask/why`);
+    assert.ok(e.options.length >= 3 && e.options.includes(e.answer), `${e.id}: options`);
+    assert.ok(!answers.has(e.answer), `${e.id}: the answer reaction is used once`); answers.add(e.answer);
+    for (const o of e.options) assert.ok(byId.get(o)?.eq, `${e.id}: ${o} needs a single equation to show as reactants`);
+    // seeded shuffles keep the same set, and grading is right/wrong only for the answer
+    for (const seed of [0.01, 0.5, 0.99]) {
+      let k = 0; const seq = [seed, 1 - seed, seed / 2, 0.7];
+      const card = Reactions.buildExceptionCard(e, () => seq[k++ % seq.length]);
+      assert.deepEqual([...card.options].sort(), [...e.options].sort(), `${e.id}: same options`);
+      assert.equal(Reactions.gradeException(card, e.answer).grade, 1);
+      for (const o of e.options.filter((x) => x !== e.answer)) assert.equal(Reactions.gradeException(card, o).grade, 0);
+    }
+  }
+});

@@ -75,9 +75,10 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   ok(await A(() => !!document.querySelector('[data-rx-pattern="pat-halide-h2o"] [data-rx-exc="pat-halide-h2o"]')), 'a pattern with exceptions has its own button');
   await click('[data-rx-exc="ALL"]');
   ok(await A(() => document.querySelector('[data-rx-card]')?.dataset.rxCard) === 'exc', 'it opens exception cards');
-  const first = await A(() => { const a = window.__MASTERY_ENGINE__.UI.appState, s = a.rx.session; return { n: s.queue.length, answer: s.card.answer, opts: s.card.options, ids: [...document.querySelectorAll('[data-rx-choose]')].map((x) => x.dataset.rxChoose), hasProducts: /→\s*[A-Za-z0-9]/.test(document.querySelector('[data-rx-card]').textContent) }; });
+  const first = await A(() => { const a = window.__MASTERY_ENGINE__.UI.appState, s = a.rx.session; return { n: s.queue.length, answer: s.card.answer, ids: [...document.querySelectorAll('[data-rx-choose]')].map((x) => x.dataset.rxChoose), ask: document.querySelector('[data-rx-card]').textContent, hasProducts: /→\s*[A-Za-z0-9]/.test(document.querySelector('[data-rx-card]').textContent) }; });
   ok(first.n === nExc && first.ids.length >= 3 && first.ids.includes(first.answer), `a session has one card per exception (${first.n}) with ${first.ids.length} options`);
   ok(!first.hasProducts, 'the options show reactants only');
+  ok(!/Li only|also releases|does not hydrolyse/.test(first.ask), 'the stem does not name the exception');
   const wrong = first.ids.find((x) => x !== first.answer);
   await click(`[data-rx-choose="${wrong}"]`);
   ok(/Not quite/.test(await A(() => document.querySelector('[data-rx-verdict]').textContent)) && await A(() => document.querySelectorAll('[data-rx-choose] sub').length) > 0, 'a wrong pick says so and then reveals every equation');
@@ -85,7 +86,16 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await click('#rxNext');
   const second = await A(() => { const s = window.__MASTERY_ENGINE__.UI.appState.rx.session; return s.card.answer; });
   await click(`[data-rx-choose="${second}"]`);
-  ok(/Correct/.test(await A(() => document.querySelector('[data-rx-verdict]').textContent)), 'the right pick is Correct');
+  ok(await A(() => !document.querySelector('[data-rx-verdict]') && document.querySelectorAll('[data-rx-then]').length >= 4), 'the right odd-one-out opens step 2 (what does it give?) without a verdict yet');
+  const ti = await A(() => window.__MASTERY_ENGINE__.UI.appState.rx.session.card.then.options.findIndex((o) => !o.ok));
+  await click(`[data-rx-then="${ti}"]`);
+  ok(/Not quite/.test(await A(() => document.querySelector('[data-rx-verdict]').textContent)), 'a wrong product in step 2 is a miss even after the right pick');
+  await click('#rxNext');
+  const third = await A(() => window.__MASTERY_ENGINE__.UI.appState.rx.session.card.answer);
+  await click(`[data-rx-choose="${third}"]`);
+  const ri = await A(() => window.__MASTERY_ENGINE__.UI.appState.rx.session.card.then.options.findIndex((o) => o.ok));
+  await click(`[data-rx-then="${ri}"]`);
+  ok(/Correct/.test(await A(() => document.querySelector('[data-rx-verdict]').textContent)), 'both steps right is Correct');
   await click('#rxStop'); await click('#rxBack');
 
   await p.setViewportSize({ width: 1280, height: 800 }); await p.waitForTimeout(300);

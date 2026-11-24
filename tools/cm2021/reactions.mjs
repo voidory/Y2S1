@@ -325,23 +325,29 @@ export const PATTERNS = [
    reactants only), `answer` is the one that breaks the rule, `why` is one sentence of our own wording. `pattern` links the card to a
    Patterns-tab entry when there is one. */
 export const EXCEPTIONS = [
-  { id: 'exc-o2-ba', pattern: 'pat-o2', ask: 'Burnt in O₂, which of these does NOT give the ordinary oxide?',
-    options: ['g1-li', 'g2-mg', 'g2-ba'], answer: 'g2-ba',
+  { id: 'exc-o2-ba', pattern: 'pat-o2', ask: 'Each metal is burnt in excess O₂. One does not give the plain oxide. Which?',
+    options: ['g1-li', 'g2-mg', 'g2-ba'], decoys: [], answer: 'g2-ba',
+    then: { q: 'What does it give?', right: 'BaO₂ (peroxide)', wrong: ['BaO (plain oxide)', 'Ba₂O', 'BaO₃'] },
     why: 'Mg (like Be to Sr) burns to the oxide; Ba, the big cation, takes the peroxide ion and gives BaO₂.' },
-  { id: 'exc-g1-li', pattern: null, ask: 'Three of these work for every alkali metal. Which one is Li only?',
-    options: ['g1-li-n2', 'hyd-gH2', 'g1-c2h2', 'g1-h2o'], answer: 'g1-li-n2',
-    why: 'Only Li takes N₂ directly (Li₃N). Every alkali metal gives MH with H₂, loses H⁺ from acetylene and reacts with water.' },
-  { id: 'exc-sf6', pattern: 'pat-halide-h2o', ask: 'Which of these covalent halides does NOT hydrolyse, although the reaction is favourable?',
-    options: ['b-bcl3-h2o', 'si-sicl4', 'p-pcl3-h2o', 's-sf6'], answer: 's-sf6',
+  { id: 'exc-g1-li', pattern: null, ask: 'Four of these reactions work for every alkali metal. One does not. Which?',
+    options: ['g1-li-n2', 'hyd-gH2', 'g1-c2h2', 'g1-h2o'], decoys: ['g1-rli', 'g1-cl2', 'g1-roh'], answer: 'g1-li-n2',
+    then: { q: 'What happens with Na or K instead of Li?', right: 'No reaction (only Li takes N₂ directly)', wrong: ['Na₃N forms, just more slowly', 'NaN₃ forms', 'Na₂N₂ forms'] },
+    why: 'Only Li takes N₂ directly (Li₃N). Every alkali metal gives MH with H₂, loses H⁺ from acetylene, reacts with water, Cl₂ and alcohols.' },
+  { id: 'exc-sf6', pattern: 'pat-halide-h2o', ask: 'Each covalent halide is shaken with water. Which one gives no reaction at all?',
+    options: ['b-bcl3-h2o', 'si-sicl4', 'p-pcl3-h2o', 's-sf6'], decoys: [], answer: 's-sf6',
+    then: { q: 'What is the outcome, and why?', right: 'No reaction: favourable but kinetically inert', wrong: ['SO₃ + 6HF at once', 'No reaction: the reaction is thermodynamically uphill', 'H₂SO₄ + 6HF slowly on heating'] },
     why: 'BCl₃, SiCl₄ and PCl₃ are hydrolysed at once. SF₆ has ΔG° = −221 kJ mol⁻¹ but is kinetically inert, so nothing happens.' },
-  { id: 'exc-sif4', pattern: 'pat-halide-h2o', ask: 'Which hydrolysis keeps its fluoride as a complex ion instead of releasing the halide as HX?',
-    options: ['b-bcl3-h2o', 'p-pcl3-h2o', 'si-sif4-h2o'], answer: 'si-sif4-h2o',
+  { id: 'exc-sif4', pattern: 'pat-halide-h2o', ask: 'Each halide is hydrolysed. In which one is the halogen NOT released as simple HX?',
+    options: ['b-bcl3-h2o', 'p-pcl3-h2o', 'si-sif4-h2o'], decoys: [], answer: 'si-sif4-h2o',
+    then: { q: 'Where does the fluorine end up?', right: 'In [SiF₆]²⁻ (with SiO₂)', wrong: ['As free HF (with SiO₂)', 'As F₂ gas', 'As Si–F bonds in Si(OH)₄'] },
     why: 'BCl₃ and PCl₃ give the oxo-acid and HCl. SiF₄ gives SiO₂ and the fluoride is taken up as [SiF₆]²⁻.' },
-  { id: 'exc-ko2', pattern: 'pat-anion-h2o', ask: 'Each of these anions takes H⁺ from water. Which one also releases O₂?',
-    options: ['hyd-cah2', 'g1-li2o', 'g1-na2o2', 'g1-ko2'], answer: 'g1-ko2',
-    why: 'H⁻ gives H₂, O²⁻ gives OH⁻ and O₂²⁻ gives H₂O₂. The superoxide gives H₂O₂ and also O₂.' },
-  { id: 'exc-bf4', pattern: 'pat-lewis-f', ask: 'These halides all add halide ion. Which one stops at four-coordinate?',
-    options: ['b-bf3-hf', 'si-sif4-f', 'si-sncl4'], answer: 'b-bf3-hf',
+  { id: 'exc-ko2', pattern: 'pat-anion-h2o', ask: 'Each of these is added to water. Which gives a product the others do not?',
+    options: ['hyd-cah2', 'g1-li2o', 'g1-na2o2', 'g1-ko2'], decoys: ['g1-li3n'], answer: 'g1-ko2',
+    then: { q: 'What are the products?', right: 'KOH + H₂O₂ + O₂', wrong: ['KOH + H₂O₂ only', 'KOH + O₂ only', 'K₂O₂ + H₂'] },
+    why: 'H⁻ gives H₂, O²⁻ gives OH⁻, N³⁻ gives NH₃ and O₂²⁻ gives H₂O₂. The superoxide gives H₂O₂ and also O₂.' },
+  { id: 'exc-bf4', pattern: 'pat-lewis-f', ask: 'Each halide takes up one more halide ion or HF. Which product ion has a different coordination number from the other two?',
+    options: ['b-bf3-hf', 'si-sif4-f', 'si-sncl4'], decoys: [], answer: 'b-bf3-hf',
+    then: { q: 'What does it form?', right: '[BF₄]⁻ (four-coordinate)', wrong: ['[BF₆]³⁻ (six-coordinate)', '[BF₅]²⁻ (five-coordinate)', 'No ion forms'] },
     why: 'B has no room to expand and stops at [BF₄]⁻; Si and Sn go to six-coordinate ([SiF₆]²⁻, [SnCl₆]²⁻).' },
 ];
 
@@ -356,7 +362,8 @@ export function build() {
   for (const e of EXCEPTIONS) {
     if (e.pattern && !pids.has(e.pattern)) throw new Error(`${e.id}: unknown pattern ${e.pattern}`);
     if (e.options.length < 3 || !e.options.includes(e.answer)) throw new Error(`${e.id}: options`);
-    for (const o of e.options) if (!ids.has(o)) throw new Error(`${e.id}: unknown reaction ${o}`);
+    for (const o of [...e.options, ...(e.decoys || [])]) if (!ids.has(o)) throw new Error(`${e.id}: unknown reaction ${o}`);
+    if (!e.then || !e.then.right || !e.then.q || !Array.isArray(e.then.wrong) || e.then.wrong.length < 3) throw new Error(`${e.id}: then`);
   }
   return { version: 1, module: 'CM2021', exportedAt: '2026-11-24', groups: GROUPS, chains: CHAINS, patterns: PATTERNS, exceptions: EXCEPTIONS, reactions: R };
 }

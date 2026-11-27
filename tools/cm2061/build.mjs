@@ -2,7 +2,7 @@
  *
  * Mark weights follow the plan agreed for CM2061 (sum 100 once every group exists):
  *   unseen-procedure reasoning 30, experiments 22, spectroscopy 20, techniques 11, structures and apparatus 10,
- *   calculations 5, framework and literature 2, e-labs 0 until the materials exist.
+ *   calculations 5, framework and literature 2, e-labs 10 (a seed from one e-lab so far).
  * A group with no content yet is left out and the rest are rescaled to 100, so the planner never sends you to study nothing.
  * Stage 1 builds framework, techniques, spectroscopy, experiments and calculations. Node ids are stable: the app deletes progress
  * for any node that disappears from the bank, so never rename an id once released.
@@ -13,17 +13,19 @@ import { fileURLToPath } from 'node:url';
 import a from './a-framework.mjs';
 import b from './b-techniques.mjs';
 import c from './c-spectroscopy.mjs';
+import c2 from './c2-databook.mjs';
 import d1 from './d1-experiments.mjs';
 import d5 from './d5-experiments.mjs';
 import d6 from './d6-experiments.mjs';
 import g from './g-calcs.mjs';
+import h from './h-elabs.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const outDir = path.resolve(here, '..', '..', 'public', 'content', 'cm2061');
 
-export const GROUP_WEIGHT = { framework: 2, techniques: 11, spectroscopy: 20, experiments: 22, calcs: 5, unseen: 30, structures: 10, elabs: 0 };
+export const GROUP_WEIGHT = { framework: 2, techniques: 11, spectroscopy: 20, experiments: 22, calcs: 5, unseen: 30, structures: 10, elabs: 10 };
 
-const WEEK = { 1: 'A. Course framework, safety and the literature', 2: 'B. Laboratory techniques and apparatus', 3: 'C. Spectroscopy: IR and 1H NMR', 4: 'D. The experiments', 7: 'G. Calculations' };
+const WEEK = { 8: 'H. E-labs', 1: 'A. Course framework, safety and the literature', 2: 'B. Laboratory techniques and apparatus', 3: 'C. Spectroscopy: IR and 1H NMR', 4: 'D. The experiments', 7: 'G. Calculations' };
 const CHUNKS = [
   { id: 'fw-method', group: 'framework', name: 'Purification, and synthesise-purify-characterise', summary: 'The four purification methods and when to use each; the three stages; who does what with IR and NMR' },
   { id: 'fw-safety', group: 'framework', name: 'Risk assessment, safety rules and conduct', summary: 'A hazard is a property; goggles, contact lenses, the fume-cupboard sash, dress code, lateness, ethics' },
@@ -41,15 +43,17 @@ const CHUNKS = [
   { id: 'sp-nmr-basics', group: 'spectroscopy', name: '1H NMR basics', summary: 'FID and Fourier transform, spin states, instrument frequencies, δ and τ, TMS, solvents' },
   { id: 'sp-shift', group: 'spectroscopy', name: 'Chemical shift', summary: 'Electronegativity, distance, additivity, ring currents and [18]annulene, typical regions' },
   { id: 'sp-coupling', group: 'spectroscopy', name: 'Splitting and coupling constants', summary: 'n+1 rule, Pascal ratios, J and geometry, long-range coupling, methyl crotonate' },
+  { id: 'sp-databook', group: 'spectroscopy', name: 'Reading the CBC databook', summary: 'Look up IR ranges, 1H shifts, coupling constants and the methylene additivity rule, as the open-databook exam allows' },
   { id: 'sp-integral', group: 'spectroscopy', name: 'Equivalence, integration and exchange', summary: 'Which protons couple, integrals and mixtures, OH and NH' },
   ...[['1a', '1A paracetamol'], ['1b', '1B phenyl toluene-p-sulfonate'], ['1c', '1C dibenzalacetone'], ['1d', '1D Py2Zn(NCO)2'], ['1e', '1E 1-tosylpyrrole'], ['1f', '1F tetraphenylcyclopentadienone'], ['5a', '5A methyl 3-nitrobenzoate'], ['5b', '5B dinitroveratrole'], ['5c', '5C nitromethylenedioxybenzene'], ['5d', '5D 2-iodobenzoic acid'], ['5e', '5E 2-trifluoroacetylpyrrole'], ['6', '6 reduction of ethyl acetoacetate'], ['7', '7 acetylation of ferrocene and the column'], ['8', '8 siloxanes and bouncing putty'], ['9', '9 Grignard: benzoic acid']]
     .map(([e, name]) => ({ id: `ex-${e}`, group: 'experiments', name: `Expt ${name}`, summary: 'Reaction and roles, work-up and purification, observations, characterisation and what goes wrong' })),
   { id: 'ex-cross', group: 'experiments', name: 'Comparing the experiments', summary: 'Which solvent, which technique and which reaction class belongs to which experiment' },
+  { id: 'el-2', group: 'elabs', name: 'E-lab 2: metal chelate, Cr(CO)4(bipy)', summary: 'Hazards, the Schlenk line, the substitution, 18 electrons, IR of the carbonyls (seed from one example screen)' },
   { id: 'calc-mass', group: 'calcs', name: 'Amounts, yields and reagent quantities', summary: 'Volume from density, equivalents, limiting reagent, % yield, NaBH4 hydride' },
   { id: 'calc-spec', group: 'calcs', name: 'Spectroscopy and measurement numbers', summary: '[α]D and ee, spin-only μ, Hz and ppm, integrals, Rf' },
 ].map((c0) => ({ ...c0, part: null }));
 
-const all = [...a, ...b, ...c, ...d1, ...d5, ...d6, ...g];
+const all = [...a, ...b, ...c, ...c2, ...d1, ...d5, ...d6, ...g, ...h];
 const nodes = all.map((x) => x.node);
 const ids = new Set();
 for (const n of nodes) {

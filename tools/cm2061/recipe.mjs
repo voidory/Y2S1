@@ -13,10 +13,10 @@ const root = path.resolve(here, '..', '..');
 const bank = JSON.parse(fs.readFileSync(path.join(root, 'public/content/cm2061/question-bank.json'), 'utf8'));
 const map = JSON.parse(fs.readFileSync(path.join(root, 'public/content/cm2061/skill-map.json'), 'utf8'));
 const chunkOf = (id) => { const s = map.skills.find((k) => k.nodes.includes(id)); return s.chunk; };
-const groupOf = (c) => (/^fw-/.test(c) ? 'fw' : /^tq-/.test(c) ? 'tq' : /^sp-/.test(c) ? 'sp' : /^ex-/.test(c) ? 'ex' : /^calc-/.test(c) ? 'calc' : 'other');
+const groupOf = (c) => (/^fw-/.test(c) ? 'fw' : /^tq-/.test(c) ? 'tq' : /^sp-/.test(c) ? 'sp' : /^ex-/.test(c) ? 'ex' : /^calc-/.test(c) ? 'calc' : /^el-/.test(c) ? 'el' : 'other');
 
 const single = (n) => n.variants.every((v) => v.inputSlot.type === 'choice' && v.inputSlot.selectionMode !== 'multi');
-const pools = { fw: [], tq: [], sp: [], ex: [], calc: [], mixed: [] };
+const pools = { fw: [], tq: [], sp: [], ex: [], el: [], calc: [], mixed: [] };
 for (const n of bank.questionNodes) {
   const g = groupOf(chunkOf(n.id));
   if (g === 'calc') pools.calc.push(n.id);
@@ -24,7 +24,7 @@ for (const n of bank.questionNodes) {
   else pools.mixed.push(n.id);              // multi-select and ordering items form the short-answer pool
 }
 // how many MCQ parts per group (about 40): proportional to the agreed weights, with calculations as short answers
-const PARTS = { ex: 15, sp: 12, tq: 9, fw: 4 };
+const PARTS = { ex: 13, sp: 12, tq: 8, el: 5, fw: 2 };
 
 function split(ids, k) {
   const out = Array.from({ length: k }, () => []);

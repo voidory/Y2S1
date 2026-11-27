@@ -119,7 +119,7 @@ add(mcq({
 add(mcq({
   id: 'bk-c61-d-1c-ir', ...C('1c'), source: 'Manual p.31; IR correlation tables', beyond: true,
   stem: 'Which IR band is characteristic of dibenzalacetone, and where does it fall relative to an ordinary ketone?',
-  right: ['A conjugated C=O near 1650 cm⁻¹, lower than the 1715 cm⁻¹ of acetone', 'Conjugation with two C=C bonds lowers the carbonyl frequency; a C=C stretch appears near 1600-1625 cm⁻¹ too.'],
+  right: ['A conjugated C=O at about 1650-1685 cm⁻¹ (databook: 1685-1660 for α,β-unsaturated ketones), lower than the 1725-1705 cm⁻¹ of acetone', 'Conjugation with two C=C bonds lowers the carbonyl frequency; a C=C stretch appears near 1600-1625 cm⁻¹ too.'],
   wrong: [['An aldehyde C-H near 2720 cm⁻¹ from unreacted benzaldehyde', 'In the pure product that band should be absent, so its presence would indicate contamination.'], ['A broad O-H near 3300 cm⁻¹', 'There is no OH in the pure product.'], ['A C=O at 1740 cm⁻¹', 'That is typical of an ester.']],
 }));
 add(mcq({

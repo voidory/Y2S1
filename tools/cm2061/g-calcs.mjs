@@ -4,6 +4,8 @@
 import { node, calc, num, kw, range, choice } from './lib.mjs';
 
 const W = 7;
+/* Formulas shown in the stems: the exam gives formulas and densities but no molar masses, so M comes from the databook's atomic masses (p.2-3). */
+const FORM = {'94.11': 'C₆H₅OH', '190.65': 'C₇H₇ClO₂S', '132.16': 'C₆H₁₂O₃', '171.22': 'C₇H₉NO₂S', '24.31': 'Mg', '157.01': 'C₆H₅Br', '58.08': 'C₃H₆O', '106.12': 'C₆H₅CHO', '60.05': 'CH₃CO₂H', '138.17': 'C₈H₁₀O₂', '63.01': 'HNO₃', '109.13': 'C₆H₇NO', '151.16': 'C₈H₉NO₂', '137.14': 'C₇H₇NO₂', '248.02': 'C₇H₅IO₂', '122.12': 'C₇H₆O₂', '136.15': 'C₈H₈O₂', '181.15': 'C₈H₇NO₄', '186.04': 'C₁₀H₁₀Fe', '228.07': 'C₁₂H₁₂FeO', '130.14': 'C₆H₁₀O₃', '37.83': 'NaBH₄', '166.00': 'KI', '69.00': 'NaNO₂', '102.09': 'C₄H₆O₃'};
 const out = [];
 const add = (nd, skill) => out.push({ node: nd, skill });
 const SRC = 'Manual pp.29-51 (quantities); databook-type molar masses and densities';
@@ -58,8 +60,8 @@ const mk = (id, title, chunk, tags, source, variants, extra = {}) => node({ id, 
   const LIMIT = { pn: 'phenol', ts: 'tosyl chloride' };
   const pair = ({ id, label, expt, A, B, nameA, nameB, mwA, mwB, ra, rb, dpa, dpb, stoichB = 1 }) => calc({
     id, label, marks: 5,
-    stem: `${expt}: ${nameA} (${'{{fix(a,' + dpa + ')}}'} g, M = ${mwA} g mol⁻¹) reacts with ${nameB} (${'{{fix(b,' + dpb + ')}}'} g, M = ${mwB} g mol⁻¹)${stoichB === 2 ? ', and each ' + nameA + ' molecule condenses with two ' + nameB + ' molecules' : ' in a 1:1 reaction'}. Give the amount of each reagent, the equivalents of ${nameB} relative to ${nameA}, which reagent is limiting and the maximum amount of product in mmol.`,
-    hint: 'n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.',
+    stem: `${expt}: ${nameA} (${'{{fix(a,' + dpa + ')}}'} g, ${FORM[mwA]}) reacts with ${nameB} (${'{{fix(b,' + dpb + ')}}'} g, ${FORM[mwB]})${stoichB === 2 ? ', and each ' + nameA + ' molecule condenses with two ' + nameB + ' molecules' : ' in a 1:1 reaction'}. Give the amount of each reagent, the equivalents of ${nameB} relative to ${nameA}, which reagent is limiting and the maximum amount of product in mmol.`,
+    hint: 'Work out each M from the databook atomic masses. n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.',
     explanation: `n = m / M, so n(${nameA}) = a/${mwA} and n(${nameB}) = b/${mwB}. Equivalents of B per A = n(B)/n(A)${stoichB === 2 ? ' (the reaction needs 2 equivalents of ' + nameB + ' per ' + nameA + ', so compare n(B)/2 with n(A))' : ''}. The reagent that gives the smaller number of reaction units is limiting and sets the maximum product.`,
     sampled: { a: range(ra[0], ra[1], ra[2], dpa), b: range(rb[0], rb[1], rb[2], dpb) },
     derived: { nA: `a / ${mwA} * 1000`, nB: `b / ${mwB} * 1000`, eq: 'nB / nA', lim: `nB / ${stoichB} < nA ? '${nameB}' : '${nameA}'`, prod: `min(nA, nB / ${stoichB})`, prodWrong: 'min(nA, nB)' },
@@ -83,7 +85,7 @@ const mk = (id, title, chunk, tags, source, variants, extra = {}) => node({ id, 
   // equivalents of a liquid reagent or solvent given by volume (needs the density)
   variants.push(calc({
     id: 'eq-1e-acoh', label: '1E: equivalents of acetic acid', marks: 3,
-    stem: 'In Expt 1E, tosylamide ({{fix(a,2)}} g, M = 171.22 g mol⁻¹) is heated in {{fix(v,1)}} mL of glacial acetic acid (density 1.05 g mL⁻¹, M = 60.05 g mol⁻¹). How many equivalents of acetic acid per tosylamide is that?',
+    stem: 'In Expt 1E, tosylamide ({{fix(a,2)}} g, C₇H₉NO₂S) is heated in {{fix(v,1)}} mL of glacial acetic acid (density 1.05 g mL⁻¹, CH₃CO₂H). How many equivalents of acetic acid per tosylamide is that?',
     hint: 'Convert the volume to mass with the density, then to moles, then divide by moles of tosylamide.',
     explanation: 'n(AcOH) = V × d / M. Comparing with n(tosylamide) shows the "solvent" is a large excess (about 15 equivalents), which is why it works as solvent and acid catalyst at once.',
     sampled: { a: range(0.95, 1.10, 0.01, 2), v: range(4.5, 5.5, 0.1, 1) },
@@ -95,7 +97,7 @@ const mk = (id, title, chunk, tags, source, variants, extra = {}) => node({ id, 
   }));
   variants.push(calc({
     id: 'eq-5b-hno3', label: '5B: equivalents of nitric acid (70%)', marks: 4,
-    stem: 'In Expt 5B, 1,2-dimethoxybenzene ({{fix(a,3)}} g, M = 138.17 g mol⁻¹) is added to {{fix(v,0)}} mL of 70% (w/w) nitric acid (density 1.41 g mL⁻¹, M = 63.01 g mol⁻¹). How many equivalents of HNO₃ are present per mole of substrate, and how many does the product need (two nitro groups)?',
+    stem: 'In Expt 5B, 1,2-dimethoxybenzene ({{fix(a,3)}} g, C₈H₁₀O₂) is added to {{fix(v,0)}} mL of 70% (w/w) nitric acid (density 1.41 g mL⁻¹, HNO₃). How many equivalents of HNO₃ are present per mole of substrate, and how many does the product need (two nitro groups)?',
     hint: 'Mass of solution = V × d; mass of HNO₃ = 0.70 × that; then moles.',
     explanation: 'n(HNO₃) = V × d × 0.70 / M. The ratio to substrate is large (about 18 equivalents) against the 2 needed, which is why this procedure drives the second nitration.',
     sampled: { a: range(0.800, 0.880, 0.005, 3), v: range(6, 8, 1, 0) },
@@ -112,15 +114,15 @@ const mk = (id, title, chunk, tags, source, variants, extra = {}) => node({ id, 
 /* ---------- theoretical and percentage yield ---------- */
 {
   const Y = [
-    { id: '1a', name: 'paracetamol', expt: '1A', lim: '4-aminophenol (1.1 g, M = 109.13)', n: '1.10 / 109.13 * 1000', other: '1.2 * 1.08 / 102.09 * 1000', M: 151.16, act: [0.90, 1.40, 0.01], note: 'Acetic anhydride (1.2 mL, d 1.08, M = 102.09) is in slight excess, so 4-aminophenol limits.' },
-    { id: '5d', name: '2-iodobenzoic acid', expt: '5D', lim: 'anthranilic acid (3.42 g, M = 137.14)', n: '3.42 / 137.14 * 1000', other: '4.25 / 166.00 * 1000', M: 248.02, act: [3.80, 5.60, 0.01], note: 'Potassium iodide (4.25 g, M = 166.00) and sodium nitrite (1.8 g, M = 69.00) are each in slight excess, so anthranilic acid limits.' },
-    { id: '9', name: 'benzoic acid', expt: '9', lim: 'magnesium (500 mg, M = 24.31)', n: '0.500 / 24.31 * 1000', other: '3.3 / 157.01 * 1000', M: 122.12, act: [1.20, 2.20, 0.01], note: 'Bromobenzene (3.3 g, M = 157.01) is in very slight excess, so magnesium limits.' },
-    { id: '5a', name: 'methyl 3-nitrobenzoate', expt: '5A', lim: 'methyl benzoate (1.00 g, M = 136.15)', n: '1.00 / 136.15 * 1000', other: '0.65 * 1.41 * 0.70 / 63.01 * 1000', M: 181.15, act: [0.80, 1.20, 0.01], note: 'Concentrated nitric acid (about 0.65 mL of the 1:1 mixture, taken as 70% w/w, d 1.41) is in excess, so the ester limits.' },
-    { id: '7', name: 'acetylferrocene', expt: '7', lim: 'ferrocene (465 mg, M = 186.04)', n: '0.465 / 186.04 * 1000', other: '1.75 * 1.08 / 102.09 * 1000', M: 228.07, act: [0.15, 0.45, 0.01], note: 'Acetic anhydride (1.75 mL, d 1.08, M = 102.09) is in large excess, so ferrocene limits.' },
+    { id: '1a', name: 'paracetamol', expt: '1A', lim: '4-aminophenol (1.1 g, C₆H₇NO)', n: '1.10 / 109.13 * 1000', other: '1.2 * 1.08 / 102.09 * 1000', M: 151.16, act: [0.90, 1.40, 0.01], note: 'Acetic anhydride (1.2 mL, d 1.08, C₄H₆O₃) is in slight excess, so 4-aminophenol limits.' },
+    { id: '5d', name: '2-iodobenzoic acid', expt: '5D', lim: 'anthranilic acid (3.42 g, C₇H₇NO₂)', n: '3.42 / 137.14 * 1000', other: '4.25 / 166.00 * 1000', M: 248.02, act: [3.80, 5.60, 0.01], note: 'Potassium iodide (4.25 g, KI) and sodium nitrite (1.8 g) are each in slight excess, so anthranilic acid limits.' },
+    { id: '9', name: 'benzoic acid', expt: '9', lim: 'magnesium (500 mg, Mg)', n: '0.500 / 24.31 * 1000', other: '3.3 / 157.01 * 1000', M: 122.12, act: [1.20, 2.20, 0.01], note: 'Bromobenzene (3.3 g, C₆H₅Br) is in very slight excess, so magnesium limits.' },
+    { id: '5a', name: 'methyl 3-nitrobenzoate', expt: '5A', lim: 'methyl benzoate (1.00 g, C₈H₈O₂)', n: '1.00 / 136.15 * 1000', other: '0.65 * 1.41 * 0.70 / 63.01 * 1000', M: 181.15, act: [0.80, 1.20, 0.01], note: 'Concentrated nitric acid (about 0.65 mL of the 1:1 mixture, taken as 70% w/w, d 1.41) is in excess, so the ester limits.' },
+    { id: '7', name: 'acetylferrocene', expt: '7', lim: 'ferrocene (465 mg, C₁₀H₁₀Fe)', n: '0.465 / 186.04 * 1000', other: '1.75 * 1.08 / 102.09 * 1000', M: 228.07, act: [0.15, 0.45, 0.01], note: 'Acetic anhydride (1.75 mL, d 1.08, C₄H₆O₃) is in large excess, so ferrocene limits.' },
   ].map((y) => calc({
     id: `yield-${y.id}`, label: `${y.expt}: ${y.name}`, marks: 4,
-    stem: `Expt ${y.expt} starts from ${y.lim}. ${y.note} You isolate {{fix(act,2)}} g of ${y.name} (M = ${y.M} g mol⁻¹). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).`,
-    hint: 'theoretical mass = n(limiting) × M(product) for a 1:1 reaction; % yield = actual ÷ theoretical × 100.',
+    stem: `Expt ${y.expt} starts from ${y.lim}. ${y.note} You isolate {{fix(act,2)}} g of ${y.name} (${FORM[y.M.toFixed(2)]}). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).`,
+    hint: 'Work out each M from the databook atomic masses. Theoretical mass = n(limiting) × M(product) for a 1:1 reaction; % yield = actual ÷ theoretical × 100.',
     explanation: `The limiting reagent sets the theoretical yield: n × M(product). % yield = actual ÷ theoretical × 100, quoted as a whole percentage (accuracy table). Using the reagent in excess gives a theoretical yield that is too high and a percentage that is too low.`,
     sampled: { act: range(y.act[0], y.act[1], y.act[2], 2) },
     derived: { n: y.n, th: `n * ${y.M} / 1000`, pc: 'act / th * 100', nOther: y.other, pcWrong: `act / (nOther * ${y.M} / 1000) * 100` },
@@ -207,7 +209,7 @@ const mk = (id, title, chunk, tags, source, variants, extra = {}) => node({ id, 
 {
   const variants = [0.5, 0.4, 0.3].map((eqv, i) => calc({
     id: `hydride-${i + 1}`, label: `${eqv} equivalents of NaBH₄`, marks: 4,
-    stem: `Expt 6 reduces ethyl acetoacetate ({{fix(a,2)}} g, M = 130.14 g mol⁻¹) with ${eqv} equivalents of sodium borohydride (M = 37.83 g mol⁻¹). Calculate the amount of substrate, the mass of NaBH₄ to weigh, and the number of hydride equivalents available per ketone (each BH₄⁻ has four hydrides).`,
+    stem: `Expt 6 reduces ethyl acetoacetate ({{fix(a,2)}} g, C₆H₁₀O₃) with ${eqv} equivalents of sodium borohydride (NaBH₄). Calculate the amount of substrate, the mass of NaBH₄ to weigh, and the number of hydride equivalents available per ketone (each BH₄⁻ has four hydrides).`,
     hint: 'n(NaBH₄) = equiv × n(substrate); hydrides = 4 × n(NaBH₄).',
     explanation: `n(NaBH₄) = ${eqv} × n(substrate); mass = n × 37.83. Each NaBH₄ carries four B-H bonds, so ${eqv} equivalents provide ${4 * eqv} equivalents of hydride per ketone, which is why a sub-stoichiometric amount of NaBH₄ is enough. In practice some hydride is lost to the ethanol (effervescence), so an excess of hydride over the one needed per ketone is used.`,
     sampled: { a: range(1.30, 1.70, 0.05, 2) },
@@ -275,6 +277,50 @@ const mk = (id, title, chunk, tags, source, variants, extra = {}) => node({ id, 
   ];
   add(mk('bk-c61-g-spec', 'Hz and ppm, integrals and Rf', 'calc-spec', ['nmr', 'tlc'], 'Manual pp.17, 20-22 and footnote 10, 24', variants, { family: 'calc-spec' }),
     { id: 'g.nmrnum', name: 'Hz and ppm, integrals and Rf values', chunk: 'calc-spec' });
+}
+
+/* ---------- molar mass from a formula with the databook's atomic masses (p.2-3), and the methylene additivity rule (p.15) ---------- */
+{
+  // databook values: H 1.00794, C 12.011, N 14.00674, O 15.9994, F 18.9984032, Cl 35.4527, S 32.066, Br 79.904, I 126.90447, Cr 51.9961, Fe 55.847, Mg 24.3050, Zn 65.39, Na 22.989768, K 39.0983, B 10.811
+  const molar = (id, name, formula, expr, wrong) => calc({
+    id: `mm-${id}`, label: name, marks: 2,
+    stem: `Calculate the molar mass of ${name}, ${formula}, from the relative atomic masses in the CBC databook. Report it to the accuracy the course asks for (2 decimal places).`,
+    hint: 'Add the atomic mass of every atom in the formula, using the databook values (for example C 12.011, H 1.00794).',
+    explanation: `Add the databook atomic masses atom by atom: ${expr.replace(/\*/g, ' × ')}. The accuracy table (Manual p.14) quotes molecular mass to 2 decimal places. The exam gives formulas and densities, not molar masses.`,
+    derived: { M: expr, Mwrong: wrong.expr },
+    fields: [num('M', 'Molar mass', 'g mol⁻¹', 'M', { relTol: 0.0005, tol: 0.02, sig: 5, paths: [{ label: wrong.label, expr: 'Mwrong' }] })],
+  });
+  const mm = [
+    molar('phbr', 'bromobenzene', 'C₆H₅Br', '6*12.011 + 5*1.00794 + 79.904', { label: 'You counted six hydrogens (the ring has five on a monosubstituted benzene).', expr: '6*12.011 + 6*1.00794 + 79.904' }),
+    molar('tscl', 'p-toluenesulfonyl chloride', 'C₇H₇ClO₂S', '7*12.011 + 7*1.00794 + 35.4527 + 2*15.9994 + 32.066', { label: 'You counted one oxygen instead of two.', expr: '7*12.011 + 7*1.00794 + 35.4527 + 15.9994 + 32.066' }),
+    molar('iodo', '2-iodobenzoic acid', 'C₇H₅IO₂', '7*12.011 + 5*1.00794 + 126.90447 + 2*15.9994', { label: 'You left out the iodine.', expr: '7*12.011 + 5*1.00794 + 2*15.9994' }),
+    molar('crco6', 'chromium hexacarbonyl', 'Cr(CO)₆', '51.9961 + 6*12.011 + 6*15.9994', { label: 'You counted only one CO ligand.', expr: '51.9961 + 12.011 + 15.9994' }),
+    molar('fc', 'ferrocene', 'Fe(C₅H₅)₂', '55.847 + 10*12.011 + 10*1.00794', { label: 'You counted one cyclopentadienyl ring.', expr: '55.847 + 5*12.011 + 5*1.00794' }),
+    molar('tfaa', 'trifluoroacetic anhydride', '(CF₃CO)₂O', '4*12.011 + 6*18.9984032 + 3*15.9994', { label: 'You counted two oxygens (the anhydride has three: two C=O and the bridge).', expr: '4*12.011 + 6*18.9984032 + 2*15.9994' }),
+  ];
+  add(mk('bk-c61-g-molarmass', 'Molar mass from the databook atomic masses', 'calc-mass', ['molar-mass'], 'CBC databook p.2-3; Manual p.14 (2 d.p.)', mm, { family: 'calc-molar' }),
+    { id: 'g.molarmass', name: 'Molar mass from a formula (databook)', chunk: 'calc-mass' });
+
+  // methylene additivity: delta(CH2X1X2) = 1.25 + X1 + X2 (databook p.15)
+  const X = { alkyl: 0.0, vinyl: 0.8, alkynyl: 0.9, phenyl: 1.3, OH: 1.7, OR: 1.5, OPh: 2.3, OCOR: 2.7, NH2: 1.0, NO2: 3.0, F: 2.1, Cl: 2.0, Br: 1.9, I: 1.4, SR: 1.0, SO2R: 1.7, CHO: 1.2, COR: 1.2, CO2H: 0.8, CO2R: 0.7, CN: 1.2 };
+  const ex = (id, what, a, b) => calc({
+    id: `add-${id}`, label: what, marks: 2,
+    stem: `Use the databook additivity table to estimate the ¹H chemical shift of the CH₂ group in ${what}. Its two substituents on the CH₂ are ${a} and ${b}. (Give δ to 2 decimal places.)`,
+    hint: 'δ(CH₂X₁X₂) = 1.25 + X₁ + X₂, with the substituent increments from the databook table.',
+    explanation: `δ = 1.25 + X(${a}) + X(${b}) = 1.25 + ${X[a]} + ${X[b]}. It is an estimate: the databook warns shifts are usually within about ±0.2 of tabulated values but can differ more.`,
+    derived: { d: `1.25 + ${X[a]} + ${X[b]}`, dNoBase: `${X[a]} + ${X[b]}`, dTwice: `2.5 + ${X[a]} + ${X[b]}` },
+    fields: [num('d', 'δ (CH₂)', 'ppm', 'd', { relTol: 0.005, tol: 0.03, sig: 3, paths: [{ label: 'You left out the 1.25 base value.', expr: 'dNoBase' }, { label: 'You added the base value twice.', expr: 'dTwice' }] })],
+  });
+  const vs = [
+    ex('dcm', 'dichloromethane, CH₂Cl₂', 'Cl', 'Cl'),
+    ex('bnCl', 'benzyl chloride, PhCH₂Cl', 'phenyl', 'Cl'),
+    ex('bnOMe', 'benzyl methyl ether, PhCH₂OCH₃', 'phenyl', 'OR'),
+    ex('bnCN', 'benzyl cyanide, PhCH₂CN', 'phenyl', 'CN'),
+    ex('malon', 'ethyl acetoacetate, CH₃COCH₂CO₂Et', 'COR', 'CO2R'),
+    ex('brpr', '1-bromopropane, the CH₂Br group of CH₃CH₂CH₂Br', 'alkyl', 'Br'),
+  ];
+  add(mk('bk-c61-g-additivity', 'Estimating a methylene shift from the databook', 'calc-spec', ['nmr', 'additivity'], 'CBC databook p.15; Manual p.19 (additive effects of electronegative groups)', vs, { family: 'calc-additivity' }),
+    { id: 'g.additivity', name: 'Methylene shift from the additivity table', chunk: 'calc-spec' });
 }
 
 export default out;

@@ -100,6 +100,12 @@
    "summary": "n+1 rule, Pascal ratios, J and geometry, long-range coupling, methyl crotonate"
   },
   {
+   "id": "sp-databook",
+   "part": "C. Spectroscopy: IR and 1H NMR",
+   "name": "Reading the CBC databook",
+   "summary": "Look up IR ranges, 1H shifts, coupling constants and the methylene additivity rule, as the open-databook exam allows"
+  },
+  {
    "id": "sp-integral",
    "part": "C. Spectroscopy: IR and 1H NMR",
    "name": "Equivalence, integration and exchange",
@@ -202,6 +208,12 @@
    "summary": "Which solvent, which technique and which reaction class belongs to which experiment"
   },
   {
+   "id": "el-2",
+   "part": "H. E-labs",
+   "name": "E-lab 2: metal chelate, Cr(CO)4(bipy)",
+   "summary": "Hazards, the Schlenk line, the substitution, 18 electrons, IR of the carbonyls (seed from one example screen)"
+  },
+  {
    "id": "calc-mass",
    "part": "G. Calculations",
    "name": "Amounts, yields and reagent quantities",
@@ -221,14 +233,14 @@
    "name": "The four purification methods",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.267,
+   "marks": 0.229,
    "basis": "manual",
    "ref": "Manual p.3",
    "tags": [],
    "ids": [
     "bk-c61-a-four-methods"
    ],
-   "weight": 0.00267,
+   "weight": 0.00229,
    "nodes": [
     "bk-c61-a-four-methods",
     "bk-c61-a-pick-method"
@@ -241,14 +253,14 @@
    "name": "Synthesise, purify, characterise",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.267,
+   "marks": 0.229,
    "basis": "manual",
    "ref": "Manual p.4",
    "tags": [],
    "ids": [
     "bk-c61-a-spc"
    ],
-   "weight": 0.00267,
+   "weight": 0.00229,
    "nodes": [
     "bk-c61-a-spc",
     "bk-c61-a-nmr-who"
@@ -261,14 +273,14 @@
    "name": "Risk assessment: hazards and precautions",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.533,
+   "marks": 0.457,
    "basis": "manual",
    "ref": "Manual p.7",
    "tags": [],
    "ids": [
     "bk-c61-a-hazard-def"
    ],
-   "weight": 0.00533,
+   "weight": 0.00457,
    "nodes": [
     "bk-c61-a-hazard-def",
     "bk-c61-a-hazard-which",
@@ -283,14 +295,14 @@
    "name": "Safety rules and dress code",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.067,
+   "marks": 0.914,
    "basis": "manual",
    "ref": "Manual p.8",
    "tags": [],
    "ids": [
     "bk-c61-a-goggles"
    ],
-   "weight": 0.01067,
+   "weight": 0.00914,
    "nodes": [
     "bk-c61-a-goggles",
     "bk-c61-a-lenses",
@@ -309,14 +321,14 @@
    "name": "Notebook and report rules",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.533,
+   "marks": 0.457,
    "basis": "manual",
    "ref": "Manual p.12",
    "tags": [],
    "ids": [
     "bk-c61-a-card-board"
    ],
-   "weight": 0.00533,
+   "weight": 0.00457,
    "nodes": [
     "bk-c61-a-card-board",
     "bk-c61-a-card-submit",
@@ -331,14 +343,14 @@
    "name": "Accuracy table: decimal places",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.267,
+   "marks": 0.229,
    "basis": "manual",
    "ref": "Manual p.14",
    "tags": [],
    "ids": [
     "bk-c61-a-accuracy"
    ],
-   "weight": 0.00267,
+   "weight": 0.00229,
    "nodes": [
     "bk-c61-a-accuracy",
     "bk-c61-a-accuracy-mm"
@@ -351,14 +363,14 @@
    "name": "Journals, paper types and citations",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.267,
+   "marks": 0.229,
    "basis": "manual",
    "ref": "Manual pp.26-27",
    "tags": [],
    "ids": [
     "bk-c61-a-papers"
    ],
-   "weight": 0.00267,
+   "weight": 0.00229,
    "nodes": [
     "bk-c61-a-papers",
     "bk-c61-a-citation"
@@ -371,14 +383,14 @@
    "name": "Databases and searching the literature",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.133,
+   "marks": 0.114,
    "basis": "manual",
    "ref": "Manual p.28",
    "tags": [],
    "ids": [
     "bk-c61-a-databases"
    ],
-   "weight": 0.00133,
+   "weight": 0.00114,
    "nodes": [
     "bk-c61-a-databases"
    ],
@@ -390,14 +402,14 @@
    "name": "TLC: Rf, polarity and visualising agents",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.243,
+   "marks": 1.065,
    "basis": "manual",
    "ref": "Manual p.24",
    "tags": [],
    "ids": [
     "bk-c61-b-tlc-rf"
    ],
-   "weight": 0.01243,
+   "weight": 0.01065,
    "nodes": [
     "bk-c61-b-tlc-rf",
     "bk-c61-b-tlc-ionic",
@@ -412,14 +424,14 @@
    "name": "Reflux set-up and rules",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.554,
+   "marks": 1.332,
    "basis": "manual",
    "ref": "Manual p.24",
    "tags": [],
    "ids": [
     "bk-c61-b-reflux-water"
    ],
-   "weight": 0.01554,
+   "weight": 0.01332,
    "nodes": [
     "bk-c61-b-reflux-water",
     "bk-c61-b-reflux-clamp",
@@ -435,14 +447,14 @@
    "name": "Rotary evaporator use",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.932,
+   "marks": 0.799,
    "basis": "manual",
    "ref": "Manual p.25",
    "tags": [],
    "ids": [
     "bk-c61-b-rotavap-spin"
    ],
-   "weight": 0.00932,
+   "weight": 0.00799,
    "nodes": [
     "bk-c61-b-rotavap-spin",
     "bk-c61-b-rotavap-temp",
@@ -456,14 +468,14 @@
    "name": "Flash column chromatography",
    "mode": "auto",
    "engine": "gen",
-   "marks": 2.486,
+   "marks": 2.131,
    "basis": "manual",
    "ref": "Manual p.44",
    "tags": [],
    "ids": [
     "bk-c61-b-col-vs-tlc"
    ],
-   "weight": 0.02486,
+   "weight": 0.02131,
    "nodes": [
     "bk-c61-b-col-vs-tlc",
     "bk-c61-b-col-dry",
@@ -482,14 +494,14 @@
    "name": "Sublimation",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.243,
+   "marks": 1.065,
    "basis": "manual",
    "ref": "Manual p.39",
    "tags": [],
    "ids": [
     "bk-c61-b-sub-why"
    ],
-   "weight": 0.01243,
+   "weight": 0.01065,
    "nodes": [
     "bk-c61-b-sub-why",
     "bk-c61-b-sub-order",
@@ -503,14 +515,14 @@
    "name": "Polarimetry",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.243,
+   "marks": 1.065,
    "basis": "manual",
    "ref": "Manual pp.40, 42; 2015 paper style",
    "tags": [],
    "ids": [
     "bk-c61-b-pol-what"
    ],
-   "weight": 0.01243,
+   "weight": 0.01065,
    "nodes": [
     "bk-c61-b-pol-what",
     "bk-c61-b-pol-report",
@@ -525,14 +537,14 @@
    "name": "Magnetic susceptibility",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.4 (mentioned); 2015 paper style",
    "tags": [],
    "ids": [
     "bk-c61-b-mag-instr"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-b-mag-instr",
     "bk-c61-b-mag-zn"
@@ -545,14 +557,14 @@
    "name": "Reduced-pressure distillation, nomograph and azeotropes",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.864,
+   "marks": 1.598,
    "basis": "manual",
    "ref": "Manual p.4 (video); 2015 paper style",
    "tags": [],
    "ids": [
     "bk-c61-b-dist-why"
    ],
-   "weight": 0.01864,
+   "weight": 0.01598,
    "nodes": [
     "bk-c61-b-dist-why",
     "bk-c61-b-dist-nomo",
@@ -569,14 +581,14 @@
    "name": "Recrystallisation and filtration",
    "mode": "auto",
    "engine": "gen",
-   "marks": 2.797,
+   "marks": 2.397,
    "basis": "manual",
    "ref": "Manual pp.29, 34 (and Year-1 technique)",
    "tags": [],
    "ids": [
     "bk-c61-b-recryst-order"
    ],
-   "weight": 0.02797,
+   "weight": 0.02397,
    "nodes": [
     "bk-c61-b-recryst-order",
     "bk-c61-b-recryst-toomuch",
@@ -592,14 +604,14 @@
    "name": "Separatory funnel and extraction",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.243,
+   "marks": 1.065,
    "basis": "manual",
    "ref": "Manual pp.39, 41, 47; densities from standard tables",
    "tags": [],
    "ids": [
     "bk-c61-b-sep-layers"
    ],
-   "weight": 0.01243,
+   "weight": 0.01065,
    "nodes": [
     "bk-c61-b-sep-layers",
     "bk-c61-b-sep-ether",
@@ -614,14 +626,14 @@
    "name": "Drying agents",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.311,
+   "marks": 0.266,
    "basis": "manual",
    "ref": "Manual pp.39, 41, 47; properties from standard tables",
    "tags": [],
    "ids": [
     "bk-c61-b-dryagent"
    ],
-   "weight": 0.00311,
+   "weight": 0.00266,
    "nodes": [
     "bk-c61-b-dryagent"
    ],
@@ -633,14 +645,14 @@
    "name": "Drying tubes, oven-dried glassware and the Schlenk line",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.243,
+   "marks": 1.065,
    "basis": "manual",
    "ref": "Manual pp.39, 44",
    "tags": [],
    "ids": [
     "bk-c61-b-dryingtube"
    ],
-   "weight": 0.01243,
+   "weight": 0.01065,
    "nodes": [
     "bk-c61-b-dryingtube",
     "bk-c61-b-5e-dry",
@@ -655,14 +667,14 @@
    "name": "Flask size, necks and addition funnels",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.554,
+   "marks": 1.332,
    "basis": "manual",
    "ref": "Manual p.50",
    "tags": [],
    "ids": [
     "bk-c61-b-pressure-eq"
    ],
-   "weight": 0.01554,
+   "weight": 0.01332,
    "nodes": [
     "bk-c61-b-pressure-eq",
     "bk-c61-b-necks-9",
@@ -678,14 +690,14 @@
    "name": "IR of solids: the nujol bands",
    "mode": "auto",
    "engine": "gen",
-   "marks": 4.167,
+   "marks": 2.956,
    "basis": "manual",
    "ref": "Manual p.15",
    "tags": [],
    "ids": [
     "bk-c61-c-nujol-bands"
    ],
-   "weight": 0.04167,
+   "weight": 0.02956,
    "nodes": [
     "bk-c61-c-nujol-bands",
     "bk-c61-c-nujol-only",
@@ -699,14 +711,14 @@
    "name": "IR: group frequencies you must know",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.389,
+   "marks": 0.985,
    "basis": "manual",
    "ref": "Year-1 IR correlation (standard tables); 2015 paper style",
    "tags": [],
    "ids": [
     "bk-c61-c-ir-bands"
    ],
-   "weight": 0.01389,
+   "weight": 0.00985,
    "nodes": [
     "bk-c61-c-ir-bands"
    ],
@@ -718,14 +730,14 @@
    "name": "From FID to spectrum",
    "mode": "auto",
    "engine": "gen",
-   "marks": 2.778,
+   "marks": 1.97,
    "basis": "manual",
    "ref": "Manual p.16",
    "tags": [],
    "ids": [
     "bk-c61-c-fid"
    ],
-   "weight": 0.02778,
+   "weight": 0.0197,
    "nodes": [
     "bk-c61-c-fid",
     "bk-c61-c-print"
@@ -738,14 +750,14 @@
    "name": "Spin states and nuclei",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.389,
+   "marks": 0.985,
    "basis": "manual",
    "ref": "Manual p.16 and footnote 1; p.23",
    "tags": [],
    "ids": [
     "bk-c61-c-spin"
    ],
-   "weight": 0.01389,
+   "weight": 0.00985,
    "nodes": [
     "bk-c61-c-spin"
    ],
@@ -757,14 +769,14 @@
    "name": "Field strength and frequency",
    "mode": "auto",
    "engine": "gen",
-   "marks": 4.167,
+   "marks": 2.956,
    "basis": "manual",
    "ref": "Manual pp.16-17 and footnote 4",
    "tags": [],
    "ids": [
     "bk-c61-c-freq"
    ],
-   "weight": 0.04167,
+   "weight": 0.02956,
    "nodes": [
     "bk-c61-c-freq",
     "bk-c61-c-ppm",
@@ -778,14 +790,14 @@
    "name": "The δ scale, TMS and τ",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.389,
+   "marks": 0.985,
    "basis": "manual",
    "ref": "Manual p.17 and footnotes 3-4",
    "tags": [],
    "ids": [
     "bk-c61-c-delta"
    ],
-   "weight": 0.01389,
+   "weight": 0.00985,
    "nodes": [
     "bk-c61-c-delta"
    ],
@@ -797,14 +809,14 @@
    "name": "Deuterated solvents and the residual peak",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.389,
+   "marks": 0.985,
    "basis": "manual",
    "ref": "Manual p.21 footnote 9",
    "tags": [],
    "ids": [
     "bk-c61-c-solvent"
    ],
-   "weight": 0.01389,
+   "weight": 0.00985,
    "nodes": [
     "bk-c61-c-solvent"
    ],
@@ -816,14 +828,14 @@
    "name": "Electronegativity and distance",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.389,
+   "marks": 0.985,
    "basis": "manual",
    "ref": "Manual p.18 (CH₃X table)",
    "tags": [],
    "ids": [
     "bk-c61-c-shift-en"
    ],
-   "weight": 0.01389,
+   "weight": 0.00985,
    "nodes": [
     "bk-c61-c-shift-en"
    ],
@@ -835,14 +847,14 @@
    "name": "Additive shift effects",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.389,
+   "marks": 0.985,
    "basis": "manual",
    "ref": "Manual p.19 (CH₃Cl, CH₂Cl₂, CHCl₃)",
    "tags": [],
    "ids": [
     "bk-c61-c-additive"
    ],
-   "weight": 0.01389,
+   "weight": 0.00985,
    "nodes": [
     "bk-c61-c-additive"
    ],
@@ -854,14 +866,14 @@
    "name": "Ring currents and [18]annulene",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.389,
+   "marks": 0.985,
    "basis": "manual",
    "ref": "Manual pp.18-19",
    "tags": [],
    "ids": [
     "bk-c61-c-ring"
    ],
-   "weight": 0.01389,
+   "weight": 0.00985,
    "nodes": [
     "bk-c61-c-ring"
    ],
@@ -873,14 +885,14 @@
    "name": "Approximate shifts of common proton types",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.389,
+   "marks": 0.985,
    "basis": "manual",
    "ref": "Manual p.17 (shift scale figure); typical values",
    "tags": [],
    "ids": [
     "bk-c61-c-regions"
    ],
-   "weight": 0.01389,
+   "weight": 0.00985,
    "nodes": [
     "bk-c61-c-regions"
    ],
@@ -892,14 +904,14 @@
    "name": "The n+1 rule and Pascal ratios",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.389,
+   "marks": 0.985,
    "basis": "manual",
    "ref": "Manual pp.20-21",
    "tags": [],
    "ids": [
     "bk-c61-c-nplus1"
    ],
-   "weight": 0.01389,
+   "weight": 0.00985,
    "nodes": [
     "bk-c61-c-nplus1"
    ],
@@ -911,14 +923,14 @@
    "name": "Equivalence and coupling",
    "mode": "auto",
    "engine": "gen",
-   "marks": 2.778,
+   "marks": 1.97,
    "basis": "manual",
    "ref": "Manual p.20",
    "tags": [],
    "ids": [
     "bk-c61-c-equiv-coupling"
    ],
-   "weight": 0.02778,
+   "weight": 0.0197,
    "nodes": [
     "bk-c61-c-equiv-coupling",
     "bk-c61-c-equiv-count"
@@ -931,14 +943,14 @@
    "name": "Coupling constants: size and geometry",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.389,
+   "marks": 0.985,
    "basis": "manual",
    "ref": "Manual p.21 (J ranges) and p.19 footnote 6 (long-range coupling)",
    "tags": [],
    "ids": [
     "bk-c61-c-j"
    ],
-   "weight": 0.01389,
+   "weight": 0.00985,
    "nodes": [
     "bk-c61-c-j"
    ],
@@ -950,14 +962,14 @@
    "name": "Reading a multiplet: methyl crotonate",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.389,
+   "marks": 0.985,
    "basis": "manual",
    "ref": "Manual pp.21-22 (methyl crotonate)",
    "tags": [],
    "ids": [
     "bk-c61-c-dq"
    ],
-   "weight": 0.01389,
+   "weight": 0.00985,
    "nodes": [
     "bk-c61-c-dq"
    ],
@@ -969,14 +981,14 @@
    "name": "Integration and mixtures",
    "mode": "auto",
    "engine": "gen",
-   "marks": 2.778,
+   "marks": 1.97,
    "basis": "manual",
    "ref": "Manual p.22 and footnote 10",
    "tags": [],
    "ids": [
     "bk-c61-c-integral-def"
    ],
-   "weight": 0.02778,
+   "weight": 0.0197,
    "nodes": [
     "bk-c61-c-integral-def",
     "bk-c61-c-mixture"
@@ -989,18 +1001,59 @@
    "name": "Exchangeable protons (OH, NH)",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.389,
+   "marks": 0.985,
    "basis": "manual",
    "ref": "Manual p.22 (exchange); p.17 (shift chart, acid OH near 12)",
    "tags": [],
    "ids": [
     "bk-c61-c-exch"
    ],
-   "weight": 0.01389,
+   "weight": 0.00985,
    "nodes": [
     "bk-c61-c-exch"
    ],
    "chunk": "sp-integral"
+  },
+  {
+   "id": "sp.db-ir",
+   "ch": 3,
+   "name": "Reading the databook IR tables",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.97,
+   "basis": "manual",
+   "ref": "CBC databook p.9 (C=O stretching); 2015 paper style",
+   "tags": [],
+   "ids": [
+    "bk-c61-c2-db-co"
+   ],
+   "weight": 0.0197,
+   "nodes": [
+    "bk-c61-c2-db-co",
+    "bk-c61-c2-db-ir-other"
+   ],
+   "chunk": "sp-databook"
+  },
+  {
+   "id": "sp.db-nmr",
+   "ch": 3,
+   "name": "Reading the databook NMR tables",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 2.956,
+   "basis": "manual",
+   "ref": "CBC databook pp.14-15 (1H shifts of methyl, methylene, methine and unsaturated protons)",
+   "tags": [],
+   "ids": [
+    "bk-c61-c2-db-shift"
+   ],
+   "weight": 0.02956,
+   "nodes": [
+    "bk-c61-c2-db-shift",
+    "bk-c61-c2-db-j",
+    "bk-c61-c2-db-nuclides"
+   ],
+   "chunk": "sp-databook"
   },
   {
    "id": "ex.1a.reaction",
@@ -1008,14 +1061,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.29",
    "tags": [],
    "ids": [
     "bk-c61-d-1a-reaction"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-1a-reaction",
     "bk-c61-d-1a-byproduct"
@@ -1028,14 +1081,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.243,
+   "marks": 1.065,
    "basis": "manual",
    "ref": "Manual p.29",
    "tags": [],
    "ids": [
     "bk-c61-d-1a-naoh"
    ],
-   "weight": 0.01243,
+   "weight": 0.01065,
    "nodes": [
     "bk-c61-d-1a-naoh",
     "bk-c61-d-1a-litmus",
@@ -1050,14 +1103,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.311,
+   "marks": 0.266,
    "basis": "manual",
    "ref": "Manual p.29; IR correlation tables",
    "tags": [],
    "ids": [
     "bk-c61-d-1a-ir"
    ],
-   "weight": 0.00311,
+   "weight": 0.00266,
    "nodes": [
     "bk-c61-d-1a-ir"
    ],
@@ -1069,14 +1122,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.932,
+   "marks": 0.799,
    "basis": "manual",
    "ref": "Manual p.30",
    "tags": [],
    "ids": [
     "bk-c61-d-1b-reaction"
    ],
-   "weight": 0.00932,
+   "weight": 0.00799,
    "nodes": [
     "bk-c61-d-1b-reaction",
     "bk-c61-d-1b-acetone",
@@ -1090,14 +1143,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.30",
    "tags": [],
    "ids": [
     "bk-c61-d-1b-water"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-1b-water",
     "bk-c61-d-1b-hazards"
@@ -1110,14 +1163,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.311,
+   "marks": 0.266,
    "basis": "manual",
    "ref": "Manual p.30; IR correlation tables",
    "tags": [],
    "ids": [
     "bk-c61-d-1b-ir"
    ],
-   "weight": 0.00311,
+   "weight": 0.00266,
    "nodes": [
     "bk-c61-d-1b-ir"
    ],
@@ -1129,14 +1182,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.932,
+   "marks": 0.799,
    "basis": "manual",
    "ref": "Manual p.31",
    "tags": [],
    "ids": [
     "bk-c61-d-1c-reaction"
    ],
-   "weight": 0.00932,
+   "weight": 0.00799,
    "nodes": [
     "bk-c61-d-1c-reaction",
     "bk-c61-d-1c-roles",
@@ -1150,14 +1203,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.31",
    "tags": [],
    "ids": [
     "bk-c61-d-1c-temp"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-1c-temp",
     "bk-c61-d-1c-recryst"
@@ -1170,14 +1223,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.311,
+   "marks": 0.266,
    "basis": "manual",
    "ref": "Manual p.31; IR correlation tables",
    "tags": [],
    "ids": [
     "bk-c61-d-1c-ir"
    ],
-   "weight": 0.00311,
+   "weight": 0.00266,
    "nodes": [
     "bk-c61-d-1c-ir"
    ],
@@ -1189,14 +1242,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.932,
+   "marks": 0.799,
    "basis": "manual",
    "ref": "Manual p.32",
    "tags": [],
    "ids": [
     "bk-c61-d-1d-reaction"
    ],
-   "weight": 0.00932,
+   "weight": 0.00799,
    "nodes": [
     "bk-c61-d-1d-reaction",
     "bk-c61-d-1d-stoich",
@@ -1210,14 +1263,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.32",
    "tags": [],
    "ids": [
     "bk-c61-d-1d-wash"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-1d-wash",
     "bk-c61-d-1d-hazard"
@@ -1230,14 +1283,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.311,
+   "marks": 0.266,
    "basis": "manual",
    "ref": "Manual p.32; IR correlation tables",
    "tags": [],
    "ids": [
     "bk-c61-d-1d-ir"
    ],
-   "weight": 0.00311,
+   "weight": 0.00266,
    "nodes": [
     "bk-c61-d-1d-ir"
    ],
@@ -1249,14 +1302,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.932,
+   "marks": 0.799,
    "basis": "manual",
    "ref": "Manual p.33",
    "tags": [],
    "ids": [
     "bk-c61-d-1e-reaction"
    ],
-   "weight": 0.00932,
+   "weight": 0.00799,
    "nodes": [
     "bk-c61-d-1e-reaction",
     "bk-c61-d-1e-stoich",
@@ -1270,14 +1323,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.33",
    "tags": [],
    "ids": [
     "bk-c61-d-1e-workup"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-1e-workup",
     "bk-c61-d-1e-apparatus"
@@ -1290,14 +1343,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.311,
+   "marks": 0.266,
    "basis": "manual",
    "ref": "Manual p.33; IR correlation tables",
    "tags": [],
    "ids": [
     "bk-c61-d-1e-ir"
    ],
-   "weight": 0.00311,
+   "weight": 0.00266,
    "nodes": [
     "bk-c61-d-1e-ir"
    ],
@@ -1309,14 +1362,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.34",
    "tags": [],
    "ids": [
     "bk-c61-d-1f-reaction"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-1f-reaction",
     "bk-c61-d-1f-base"
@@ -1329,14 +1382,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.932,
+   "marks": 0.799,
    "basis": "manual",
    "ref": "Manual p.34",
    "tags": [],
    "ids": [
     "bk-c61-d-1f-addition"
    ],
-   "weight": 0.00932,
+   "weight": 0.00799,
    "nodes": [
     "bk-c61-d-1f-addition",
     "bk-c61-d-1f-hazard",
@@ -1350,14 +1403,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.311,
+   "marks": 0.266,
    "basis": "manual",
    "ref": "Manual p.34; IR correlation tables",
    "tags": [],
    "ids": [
     "bk-c61-d-1f-ir"
    ],
-   "weight": 0.00311,
+   "weight": 0.00266,
    "nodes": [
     "bk-c61-d-1f-ir"
    ],
@@ -1369,14 +1422,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.35",
    "tags": [],
    "ids": [
     "bk-c61-d-5a-reaction"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-5a-reaction",
     "bk-c61-d-5a-regio"
@@ -1389,14 +1442,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.932,
+   "marks": 0.799,
    "basis": "manual",
    "ref": "Manual p.35",
    "tags": [],
    "ids": [
     "bk-c61-d-5a-temp"
    ],
-   "weight": 0.00932,
+   "weight": 0.00799,
    "nodes": [
     "bk-c61-d-5a-temp",
     "bk-c61-d-5a-ice",
@@ -1410,14 +1463,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.35; IR correlation tables",
    "tags": [],
    "ids": [
     "bk-c61-d-5a-ir"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-5a-ir",
     "bk-c61-d-5a-impurity"
@@ -1430,14 +1483,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.932,
+   "marks": 0.799,
    "basis": "manual",
    "ref": "Manual p.36",
    "tags": [],
    "ids": [
     "bk-c61-d-5b-reaction"
    ],
-   "weight": 0.00932,
+   "weight": 0.00799,
    "nodes": [
     "bk-c61-d-5b-reaction",
     "bk-c61-d-5b-regio",
@@ -1451,14 +1504,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.36",
    "tags": [],
    "ids": [
     "bk-c61-d-5b-wash"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-5b-wash",
     "bk-c61-d-5b-add"
@@ -1471,14 +1524,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.311,
+   "marks": 0.266,
    "basis": "manual",
    "ref": "Manual pp.36-37",
    "tags": [],
    "ids": [
     "bk-c61-d-5b-source"
    ],
-   "weight": 0.00311,
+   "weight": 0.00266,
    "nodes": [
     "bk-c61-d-5b-source"
    ],
@@ -1490,14 +1543,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.311,
+   "marks": 0.266,
    "basis": "manual",
    "ref": "Manual p.37",
    "tags": [],
    "ids": [
     "bk-c61-d-5c-regio"
    ],
-   "weight": 0.00311,
+   "weight": 0.00266,
    "nodes": [
     "bk-c61-d-5c-regio"
    ],
@@ -1509,14 +1562,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.37",
    "tags": [],
    "ids": [
     "bk-c61-d-5c-temp"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-5c-temp",
     "bk-c61-d-5c-workup"
@@ -1529,14 +1582,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.37 (NMR submitted); standard shifts",
    "tags": [],
    "ids": [
     "bk-c61-d-5c-nmr"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-5c-nmr",
     "bk-c61-d-5c-compare"
@@ -1549,14 +1602,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.38",
    "tags": [],
    "ids": [
     "bk-c61-d-5d-reaction"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-5d-reaction",
     "bk-c61-d-5d-hcl"
@@ -1569,14 +1622,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.932,
+   "marks": 0.799,
    "basis": "manual",
    "ref": "Manual p.38",
    "tags": [],
    "ids": [
     "bk-c61-d-5d-temp"
    ],
-   "weight": 0.00932,
+   "weight": 0.00799,
    "nodes": [
     "bk-c61-d-5d-temp",
     "bk-c61-d-5d-bisulfite",
@@ -1590,14 +1643,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.932,
+   "marks": 0.799,
    "basis": "manual",
    "ref": "Manual p.38",
    "tags": [],
    "ids": [
     "bk-c61-d-5d-n2"
    ],
-   "weight": 0.00932,
+   "weight": 0.00799,
    "nodes": [
     "bk-c61-d-5d-n2",
     "bk-c61-d-5d-ir",
@@ -1611,14 +1664,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.39",
    "tags": [],
    "ids": [
     "bk-c61-d-5e-reaction"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-5e-reaction",
     "bk-c61-d-5e-regio"
@@ -1631,14 +1684,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.243,
+   "marks": 1.065,
    "basis": "manual",
    "ref": "Manual p.39",
    "tags": [],
    "ids": [
     "bk-c61-d-5e-setup"
    ],
-   "weight": 0.01243,
+   "weight": 0.01065,
    "nodes": [
     "bk-c61-d-5e-setup",
     "bk-c61-d-5e-workup",
@@ -1653,14 +1706,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.39",
    "tags": [],
    "ids": [
     "bk-c61-d-5e-observe"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-5e-observe",
     "bk-c61-d-5e-ir"
@@ -1673,14 +1726,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.243,
+   "marks": 1.065,
    "basis": "manual",
    "ref": "Manual p.40",
    "tags": [],
    "ids": [
     "bk-c61-d-6-stereo"
    ],
-   "weight": 0.01243,
+   "weight": 0.01065,
    "nodes": [
     "bk-c61-d-6-stereo",
     "bk-c61-d-6-why-chiral",
@@ -1695,14 +1748,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.41",
    "tags": [],
    "ids": [
     "bk-c61-d-6-yeast-obs"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-6-yeast-obs",
     "bk-c61-d-6-polarimetry"
@@ -1715,14 +1768,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 2.175,
+   "marks": 1.864,
    "basis": "manual",
    "ref": "Manual p.41",
    "tags": [],
    "ids": [
     "bk-c61-d-6-filter"
    ],
-   "weight": 0.02175,
+   "weight": 0.01864,
    "nodes": [
     "bk-c61-d-6-filter",
     "bk-c61-d-6-extract",
@@ -1740,14 +1793,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.43",
    "tags": [],
    "ids": [
     "bk-c61-d-7-reaction"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-7-reaction",
     "bk-c61-d-7-diacetyl"
@@ -1760,14 +1813,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.243,
+   "marks": 1.065,
    "basis": "manual",
    "ref": "Manual p.43",
    "tags": [],
    "ids": [
     "bk-c61-d-7-temp"
    ],
-   "weight": 0.01243,
+   "weight": 0.01065,
    "nodes": [
     "bk-c61-d-7-temp",
     "bk-c61-d-7-quench",
@@ -1782,14 +1835,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.932,
+   "marks": 0.799,
    "basis": "manual",
    "ref": "Manual p.43; 2015 paper style",
    "tags": [],
    "ids": [
     "bk-c61-d-7-conversion"
    ],
-   "weight": 0.00932,
+   "weight": 0.00799,
    "nodes": [
     "bk-c61-d-7-conversion",
     "bk-c61-d-7-colours",
@@ -1803,14 +1856,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual p.47",
    "tags": [],
    "ids": [
     "bk-c61-d-8-hydrolysis"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-8-hydrolysis",
     "bk-c61-d-8-boric"
@@ -1823,14 +1876,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.243,
+   "marks": 1.065,
    "basis": "manual",
    "ref": "Manual p.47",
    "tags": [],
    "ids": [
     "bk-c61-d-8-ice"
    ],
-   "weight": 0.01243,
+   "weight": 0.01065,
    "nodes": [
     "bk-c61-d-8-ice",
     "bk-c61-d-8-workup",
@@ -1845,14 +1898,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.932,
+   "marks": 0.799,
    "basis": "manual",
    "ref": "Manual p.48",
    "tags": [],
    "ids": [
     "bk-c61-d-8-bounce"
    ],
-   "weight": 0.00932,
+   "weight": 0.00799,
    "nodes": [
     "bk-c61-d-8-bounce",
     "bk-c61-d-8-flow",
@@ -1866,14 +1919,14 @@
    "name": "Reaction, reagents and roles",
    "mode": "auto",
    "engine": "gen",
-   "marks": 1.554,
+   "marks": 1.332,
    "basis": "manual",
    "ref": "Manual pp.49-50",
    "tags": [],
    "ids": [
     "bk-c61-d-9-reaction"
    ],
-   "weight": 0.01554,
+   "weight": 0.01332,
    "nodes": [
     "bk-c61-d-9-reaction",
     "bk-c61-d-9-ether",
@@ -1889,14 +1942,14 @@
    "name": "Work-up, purification and apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 2.175,
+   "marks": 1.864,
    "basis": "manual",
    "ref": "Manual pp.50-51",
    "tags": [],
    "ids": [
     "bk-c61-d-9-iodine"
    ],
-   "weight": 0.02175,
+   "weight": 0.01864,
    "nodes": [
     "bk-c61-d-9-iodine",
     "bk-c61-d-9-rate",
@@ -1914,14 +1967,14 @@
    "name": "Observations, characterisation and problems",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.621,
+   "marks": 0.533,
    "basis": "manual",
    "ref": "Manual pp.49-51",
    "tags": [],
    "ids": [
     "bk-c61-d-9-byproduct"
    ],
-   "weight": 0.00621,
+   "weight": 0.00533,
    "nodes": [
     "bk-c61-d-9-byproduct",
     "bk-c61-d-9-mp-recover"
@@ -1934,14 +1987,14 @@
    "name": "Which solvent, which technique, which experiment",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.311,
+   "marks": 0.266,
    "basis": "manual",
    "ref": "Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43-44; dried glassware p.50)",
    "tags": [],
    "ids": [
     "bk-c61-d-x-solvent"
    ],
-   "weight": 0.00311,
+   "weight": 0.00266,
    "nodes": [
     "bk-c61-d-x-solvent"
    ],
@@ -1953,14 +2006,14 @@
    "name": "Reaction classes across the experiments",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.311,
+   "marks": 0.266,
    "basis": "manual",
    "ref": "Manual pp.29-51",
    "tags": [],
    "ids": [
     "bk-c61-d-x-classes"
    ],
-   "weight": 0.00311,
+   "weight": 0.00266,
    "nodes": [
     "bk-c61-d-x-classes"
    ],
@@ -1972,14 +2025,14 @@
    "name": "Volume or mass of a liquid from its density",
    "mode": "calc",
    "engine": "gen",
-   "marks": 0.733,
+   "marks": 0.534,
    "basis": "manual",
    "ref": "Manual pp.29-51 (quantities); databook-type molar masses and densities",
    "tags": [],
    "ids": [
     "bk-c61-g-volume"
    ],
-   "weight": 0.00733,
+   "weight": 0.00534,
    "nodes": [
     "bk-c61-g-volume"
    ],
@@ -1991,14 +2044,14 @@
    "name": "Moles, equivalents and the limiting reagent",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.709,
+   "marks": 1.246,
    "basis": "manual",
    "ref": "Manual pp.29-51 (quantities); databook-type molar masses and densities",
    "tags": [],
    "ids": [
     "bk-c61-g-equiv"
    ],
-   "weight": 0.01709,
+   "weight": 0.01246,
    "nodes": [
     "bk-c61-g-equiv"
    ],
@@ -2010,14 +2063,14 @@
    "name": "Theoretical and percentage yield",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.465,
+   "marks": 1.068,
    "basis": "manual",
    "ref": "Manual pp.29-51 (quantities); databook-type molar masses and densities",
    "tags": [],
    "ids": [
     "bk-c61-g-yield"
    ],
-   "weight": 0.01465,
+   "weight": 0.01068,
    "nodes": [
     "bk-c61-g-yield"
    ],
@@ -2029,14 +2082,14 @@
    "name": "Specific rotation (and ee)",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.221,
+   "marks": 0.89,
    "basis": "manual",
    "ref": "Manual pp.40, 42; ee is beyond the manual",
    "tags": [],
    "ids": [
     "bk-c61-g-alpha"
    ],
-   "weight": 0.01221,
+   "weight": 0.0089,
    "nodes": [
     "bk-c61-g-alpha"
    ],
@@ -2048,14 +2101,14 @@
    "name": "Spin-only moment and unpaired electrons",
    "mode": "calc",
    "engine": "gen",
-   "marks": 0.733,
+   "marks": 0.534,
    "basis": "manual",
    "ref": "Manual p.4 (susceptibility mentioned), p.14 (2 d.p.); formula from CM2021 (beyond the manual)",
    "tags": [],
    "ids": [
     "bk-c61-g-mu"
    ],
-   "weight": 0.00733,
+   "weight": 0.00534,
    "nodes": [
     "bk-c61-g-mu"
    ],
@@ -2067,14 +2120,14 @@
    "name": "NaBH₄ mass and hydride equivalents",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.465,
+   "marks": 1.068,
    "basis": "manual",
    "ref": "Manual p.41; M(NaBH4) from databook",
    "tags": [],
    "ids": [
     "bk-c61-g-hydride"
    ],
-   "weight": 0.01465,
+   "weight": 0.01068,
    "nodes": [
     "bk-c61-g-hydride"
    ],
@@ -2086,18 +2139,116 @@
    "name": "Hz and ppm, integrals and Rf values",
    "mode": "calc",
    "engine": "gen",
-   "marks": 1.007,
+   "marks": 0.734,
    "basis": "manual",
    "ref": "Manual pp.17, 20-22 and footnote 10, 24",
    "tags": [],
    "ids": [
     "bk-c61-g-spec"
    ],
-   "weight": 0.01007,
+   "weight": 0.00734,
    "nodes": [
     "bk-c61-g-spec"
    ],
    "chunk": "calc-spec"
+  },
+  {
+   "id": "g.molarmass",
+   "ch": 7,
+   "name": "Molar mass from a formula (databook)",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 0.534,
+   "basis": "manual",
+   "ref": "CBC databook p.2-3; Manual p.14 (2 d.p.)",
+   "tags": [],
+   "ids": [
+    "bk-c61-g-molarmass"
+   ],
+   "weight": 0.00534,
+   "nodes": [
+    "bk-c61-g-molarmass"
+   ],
+   "chunk": "calc-mass"
+  },
+  {
+   "id": "g.additivity",
+   "ch": 7,
+   "name": "Methylene shift from the additivity table",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 0.534,
+   "basis": "manual",
+   "ref": "CBC databook p.15; Manual p.19 (additive effects of electronegative groups)",
+   "tags": [],
+   "ids": [
+    "bk-c61-g-additivity"
+   ],
+   "weight": 0.00534,
+   "nodes": [
+    "bk-c61-g-additivity"
+   ],
+   "chunk": "calc-spec"
+  },
+  {
+   "id": "el.2.safety",
+   "ch": 8,
+   "name": "E-lab 2: hazards, Schlenk line and atmosphere",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 7.143,
+   "basis": "manual",
+   "ref": "E-lab 2 (metal chelate) example screen; standard inorganic chemistry",
+   "tags": [],
+   "ids": [
+    "bk-c61-h-2-hazards"
+   ],
+   "weight": 0.07143,
+   "nodes": [
+    "bk-c61-h-2-hazards",
+    "bk-c61-h-2-bubbler",
+    "bk-c61-h-2-n2"
+   ],
+   "chunk": "el-2"
+  },
+  {
+   "id": "el.2.reaction",
+   "ch": 8,
+   "name": "E-lab 2: the reaction and its product",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 4.762,
+   "basis": "manual",
+   "ref": "E-lab 2 (metal chelate) example screen; standard inorganic chemistry",
+   "tags": [],
+   "ids": [
+    "bk-c61-h-2-co"
+   ],
+   "weight": 0.04762,
+   "nodes": [
+    "bk-c61-h-2-co",
+    "bk-c61-h-2-structure"
+   ],
+   "chunk": "el-2"
+  },
+  {
+   "id": "el.2.char",
+   "ch": 8,
+   "name": "E-lab 2: IR and characterisation",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 2.381,
+   "basis": "manual",
+   "ref": "E-lab 2 (metal chelate) example screen; CBC databook pp.11, 19; standard inorganic chemistry",
+   "tags": [],
+   "ids": [
+    "bk-c61-h-2-ir"
+   ],
+   "weight": 0.02381,
+   "nodes": [
+    "bk-c61-h-2-ir"
+   ],
+   "chunk": "el-2"
   }
  ],
  "nodeSkills": {
@@ -2409,6 +2560,21 @@
   ],
   "bk-c61-c-hzppm": [
    "sp.field"
+  ],
+  "bk-c61-c2-db-co": [
+   "sp.db-ir"
+  ],
+  "bk-c61-c2-db-ir-other": [
+   "sp.db-ir"
+  ],
+  "bk-c61-c2-db-shift": [
+   "sp.db-nmr"
+  ],
+  "bk-c61-c2-db-j": [
+   "sp.db-nmr"
+  ],
+  "bk-c61-c2-db-nuclides": [
+   "sp.db-nmr"
   ],
   "bk-c61-d-1a-reaction": [
    "ex.1a.reaction"
@@ -2784,6 +2950,30 @@
   ],
   "bk-c61-g-spec": [
    "g.nmrnum"
+  ],
+  "bk-c61-g-molarmass": [
+   "g.molarmass"
+  ],
+  "bk-c61-g-additivity": [
+   "g.additivity"
+  ],
+  "bk-c61-h-2-hazards": [
+   "el.2.safety"
+  ],
+  "bk-c61-h-2-bubbler": [
+   "el.2.safety"
+  ],
+  "bk-c61-h-2-co": [
+   "el.2.reaction"
+  ],
+  "bk-c61-h-2-n2": [
+   "el.2.safety"
+  ],
+  "bk-c61-h-2-structure": [
+   "el.2.reaction"
+  ],
+  "bk-c61-h-2-ir": [
+   "el.2.char"
   ]
  }
 }

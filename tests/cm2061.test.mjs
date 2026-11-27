@@ -30,7 +30,7 @@ test('bundle: every node validates, ids are unique, none collide with built-in n
   const noSource = bank.questionNodes.filter((n) => !n.metadata.source || n.metadata.source.length < 6).map((n) => n.id);
   none(noSource, 'every node must name its source (manual page, paper style or external reference)');
   // sources name a printed manual page, a paper style or an external reference
-  const odd = bank.questionNodes.filter((n) => !/Manual p|2015 paper style|CM2021|Year-1|databook|CRC|Standard|standard/i.test(n.metadata.source)).map((n) => `${n.id}: ${n.metadata.source}`);
+  const odd = bank.questionNodes.filter((n) => !/Manual p|2015 paper style|CM2021|Year-1|databook|CRC|Standard|standard|E-lab/i.test(n.metadata.source)).map((n) => `${n.id}: ${n.metadata.source}`);
   none(odd);
 });
 
@@ -43,15 +43,15 @@ test('skill map: valid, consistent with the bank, every question in a skill and 
   for (const c of map.chunks) assert.ok(Content.chunkNodeIds(map, c.id).length > 0, `${c.id} has questions`);
 });
 
-test('weights follow the agreed plan: groups keep their 2:11:20:22:5 proportions while others are not built', () => {
-  const group = (id) => (/^fw-/.test(id) ? 'framework' : /^tq-/.test(id) ? 'techniques' : /^sp-/.test(id) ? 'spectroscopy' : /^ex-/.test(id) ? 'experiments' : /^calc-/.test(id) ? 'calcs' : 'other');
+test('weights follow the agreed plan: groups keep their 2:11:20:22:5:10 proportions while unseen-procedure and structures are not built', () => {
+  const group = (id) => (/^fw-/.test(id) ? 'framework' : /^tq-/.test(id) ? 'techniques' : /^sp-/.test(id) ? 'spectroscopy' : /^ex-/.test(id) ? 'experiments' : /^calc-/.test(id) ? 'calcs' : /^el-/.test(id) ? 'elabs' : 'other');
   const totals = {};
   for (const s of map.skills) totals[group(s.chunk)] = (totals[group(s.chunk)] || 0) + s.marks;
   assert.equal(totals.other, undefined);
   const sum = Object.values(totals).reduce((a, b) => a + b, 0);
   assert.ok(Math.abs(sum - 100) < 0.5, `marks sum to ${sum}`);
-  const want = { framework: 2, techniques: 11, spectroscopy: 20, experiments: 22, calcs: 5 };
-  for (const [g, w] of Object.entries(want)) assert.ok(Math.abs(totals[g] / sum - w / 60) < 0.005, `${g}: ${(totals[g] / sum * 60).toFixed(2)} vs ${w}`);
+  const want = { framework: 2, techniques: 11, spectroscopy: 20, experiments: 22, calcs: 5, elabs: 10 };
+  for (const [g, w] of Object.entries(want)) assert.ok(Math.abs(totals[g] / sum - w / 70) < 0.005, `${g}: ${(totals[g] / sum * 70).toFixed(2)} vs ${w}`);
 });
 
 test('there are at least 150 pick-one questions, each key unique and every distractor explained', () => {

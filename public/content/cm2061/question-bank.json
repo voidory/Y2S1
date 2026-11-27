@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-27T10:23:44.620Z",
+ "exportedAt": "2026-11-27T10:35:28.087Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -5602,7 +5602,7 @@
      "perspectiveLabel": "IR: group frequencies you must know",
      "marks": 1,
      "stem": "Which functional group gives a broad, strong absorption between about 2500 and 3300 cm⁻¹?",
-     "explanation": "**A carboxylic acid O-H (hydrogen-bonded).** Acid dimers give a very broad band overlapping the C-H stretches. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **A ketone C=O**: That is a sharp band near 1715 cm⁻¹.\n- **An alkene C=C**: It gives a weak band near 1650 cm⁻¹.\n- **A nitro group**: It gives two strong bands near 1530 and 1350 cm⁻¹.\n\n*Source: Year-1 IR correlation (standard tables); 2015 paper style.*",
+     "explanation": "**A carboxylic acid O-H (hydrogen-bonded).** Acid dimers give a very broad band overlapping the C-H stretches. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **A ketone C=O**: That is a sharp band near 1715 cm⁻¹.\n- **An alkene C=C**: It gives a weak band near 1650 cm⁻¹.\n- **A nitro group**: It gives two strong bands near 1550 and 1350 cm⁻¹.\n\n*Source: Year-1 IR correlation (standard tables); 2015 paper style.*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -5639,7 +5639,7 @@
      "perspectiveLabel": "IR: group frequencies you must know",
      "marks": 1,
      "stem": "An aromatic nitro compound is expected to show which pair of strong IR bands?",
-     "explanation": "**About 1530 and 1350 cm⁻¹.** These are the asymmetric and symmetric N-O stretches of Ar-NO₂. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **About 3300 and 1650 cm⁻¹**: These suggest N-H and an amide C=O.\n- **About 2250 and 2100 cm⁻¹**: Triple-bond region (nitrile, alkyne).\n- **About 1740 and 1250 cm⁻¹**: These suggest an ester (C=O and C-O).\n\n*Source: Year-1 IR correlation (standard tables); 2015 paper style.*",
+     "explanation": "**About 1550 and 1350 cm⁻¹.** These are the asymmetric and symmetric N-O stretches; the databook gives 1555-1540 and 1385-1350 cm⁻¹ for nitro compounds. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **About 3300 and 1650 cm⁻¹**: These suggest N-H and an amide C=O.\n- **About 2250 and 2100 cm⁻¹**: Triple-bond region (nitrile, alkyne).\n- **About 1740 and 1250 cm⁻¹**: These suggest an ester (C=O and C-O).\n\n*Source: Year-1 IR correlation (standard tables); 2015 paper style.*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -5647,7 +5647,7 @@
       "options": [
        {
         "id": "a",
-        "label": "About 1530 and 1350 cm⁻¹"
+        "label": "About 1550 and 1350 cm⁻¹"
        },
        {
         "id": "b",
@@ -5713,7 +5713,7 @@
      "perspectiveLabel": "IR: group frequencies you must know",
      "marks": 1,
      "stem": "Conjugating a ketone C=O to a C=C or an aryl ring changes its IR stretch how?",
-     "explanation": "**It lowers the frequency, to about 1650-1685 cm⁻¹ compared with about 1715 cm⁻¹.** Delocalisation weakens the C=O bond, as seen for dibenzalacetone and acylferrocenes. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **It raises it to about 1750 cm⁻¹**: Raising occurs for strained rings and esters, not conjugation.\n- **It does not change it**: Conjugation lowers it by 30-60 cm⁻¹.\n- **It makes the band disappear**: The band stays strong.\n\n*Source: Year-1 IR correlation (standard tables); 2015 paper style.*",
+     "explanation": "**It lowers the frequency, to about 1685-1660 cm⁻¹ (databook, α,β-unsaturated ketones) compared with 1725-1705 cm⁻¹ for a saturated ketone.** Delocalisation weakens the C=O bond, as seen for dibenzalacetone and acylferrocenes. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **It raises it to about 1750 cm⁻¹**: Raising occurs for strained rings and esters, not conjugation.\n- **It does not change it**: Conjugation lowers it by 30-60 cm⁻¹.\n- **It makes the band disappear**: The band stays strong.\n\n*Source: Year-1 IR correlation (standard tables); 2015 paper style.*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -5721,7 +5721,7 @@
       "options": [
        {
         "id": "a",
-        "label": "It lowers the frequency, to about 1650-1685 cm⁻¹ compared with about 1715 cm⁻¹"
+        "label": "It lowers the frequency, to about 1685-1660 cm⁻¹ (databook, α,β-unsaturated ketones) compared with 1725-1705 cm⁻¹ for a saturated ketone"
        },
        {
         "id": "b",
@@ -8127,6 +8127,730 @@
   },
   {
    "schemaVersion": "3.0",
+   "id": "bk-c61-c2-db-co",
+   "moduleCode": "CM2061",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Using the databook, which of these carbonyl types has the LOWEST wa...",
+    "source": "CBC databook p.9 (C=O stretching); 2015 paper style",
+    "week": 3,
+    "primaryTheme": "sp-databook",
+    "conceptTags": [],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 1,
+    "examStyle": "mcq_1mark",
+    "family": "bk-c61-c2-db-co"
+   },
+   "variants": [
+    {
+     "variantId": "bk-c61-c2-db-co-v1",
+     "perspectiveLabel": "Reading the databook IR tables",
+     "marks": 1,
+     "stem": "Using the databook, which of these carbonyl types has the LOWEST wavenumber range?",
+     "explanation": "**An α,β-unsaturated ketone (1685-1660 cm⁻¹).** Conjugation lowers the C=O stretch; the saturated ketone is 1725-1705 and the aryl ketone 1700-1680.\n\nWhy the others fail:\n- **A saturated acyclic ketone (1725-1705 cm⁻¹)**: Higher: no conjugation to lower it.\n- **An aryl ketone (1700-1680 cm⁻¹)**: Lowered by the ring, but not as far as an α,β-unsaturated ketone.\n- **A five-membered ring ketone (1750-1740 cm⁻¹)**: Ring strain raises the frequency.\n\n*Source: CBC databook p.9 (C=O stretching); 2015 paper style.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "An α,β-unsaturated ketone (1685-1660 cm⁻¹)"
+       },
+       {
+        "id": "b",
+        "label": "A saturated acyclic ketone (1725-1705 cm⁻¹)"
+       },
+       {
+        "id": "c",
+        "label": "An aryl ketone (1700-1680 cm⁻¹)"
+       },
+       {
+        "id": "d",
+        "label": "A five-membered ring ketone (1750-1740 cm⁻¹)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-c2-db-co-v2",
+     "perspectiveLabel": "Reading the databook IR tables",
+     "marks": 1,
+     "stem": "Which of these has the highest-frequency C=O stretch in the databook?",
+     "explanation": "**A saturated anhydride (1850-1800 and 1790-1740 cm⁻¹).** Anhydrides and acid chlorides are above the normal ester range.\n\nWhy the others fail:\n- **A saturated ester (1750-1735 cm⁻¹)**: Lower than an anhydride.\n- **A saturated ketone (1725-1705 cm⁻¹)**: Lower still.\n- **A secondary amide (1700-1670 cm⁻¹)**: Amides are the lowest of these, because of nitrogen donation.\n\n*Source: CBC databook p.9 (C=O stretching); 2015 paper style.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "A saturated anhydride (1850-1800 and 1790-1740 cm⁻¹)"
+       },
+       {
+        "id": "b",
+        "label": "A saturated ester (1750-1735 cm⁻¹)"
+       },
+       {
+        "id": "c",
+        "label": "A saturated ketone (1725-1705 cm⁻¹)"
+       },
+       {
+        "id": "d",
+        "label": "A secondary amide (1700-1670 cm⁻¹)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-c2-db-co-v3",
+     "perspectiveLabel": "Reading the databook IR tables",
+     "marks": 1,
+     "stem": "The solid (nujol mull) IR spectrum of paracetamol is read against the databook. Which pair of secondary-amide bands should you look for?",
+     "explanation": "**About 1680-1630 cm⁻¹ (C=O) and 1570-1515 cm⁻¹ (N-H bend), the solid-phase values.** The databook gives separate solid-phase and solution ranges; a mull is solid phase.\n\nWhy the others fail:\n- **About 1850-1800 and 1790-1740 cm⁻¹**: That is the anhydride pair; paracetamol has no anhydride.\n- **About 1750-1735 cm⁻¹ only**: That is a saturated ester, which paracetamol lacks.\n- **About 1670-1630 cm⁻¹ alone**: That is the single tertiary-amide band; paracetamol is a secondary amide with two bands.\n\n*Source: CBC databook p.9 (C=O stretching); 2015 paper style.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "About 1680-1630 cm⁻¹ (C=O) and 1570-1515 cm⁻¹ (N-H bend), the solid-phase values"
+       },
+       {
+        "id": "b",
+        "label": "About 1850-1800 and 1790-1740 cm⁻¹"
+       },
+       {
+        "id": "c",
+        "label": "About 1750-1735 cm⁻¹ only"
+       },
+       {
+        "id": "d",
+        "label": "About 1670-1630 cm⁻¹ alone"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-c2-db-co-v4",
+     "perspectiveLabel": "Reading the databook IR tables",
+     "marks": 1,
+     "stem": "In which databook range would the strong C=O band of an aryl carboxylic acid such as benzoic acid fall?",
+     "explanation": "**1700-1680 cm⁻¹.** The databook lists aryl acids at 1700-1680 (saturated acids 1725-1700, α,β-unsaturated 1715-1690).\n\nWhy the others fail:\n- **1725-1700 cm⁻¹**: That is the saturated acid range.\n- **1610-1550 cm⁻¹**: That is the carboxylate anion, not the neutral acid.\n- **1750-1735 cm⁻¹**: That is a saturated ester.\n\n*Source: CBC databook p.9 (C=O stretching); 2015 paper style.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "1700-1680 cm⁻¹"
+       },
+       {
+        "id": "b",
+        "label": "1725-1700 cm⁻¹"
+       },
+       {
+        "id": "c",
+        "label": "1610-1550 cm⁻¹"
+       },
+       {
+        "id": "d",
+        "label": "1750-1735 cm⁻¹"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c61-c2-db-ir-other",
+   "moduleCode": "CM2061",
+   "tier": "atomic",
+   "metadata": {
+    "title": "A dilute solution of an alcohol shows a sharp O-H band near 3620 cm...",
+    "source": "CBC databook pp.9-11 (OH, CH, nitro, alkene deformations, anions)",
+    "week": 3,
+    "primaryTheme": "sp-databook",
+    "conceptTags": [],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 1,
+    "examStyle": "mcq_1mark",
+    "family": "bk-c61-c2-db-ir-other"
+   },
+   "variants": [
+    {
+     "variantId": "bk-c61-c2-db-ir-other-v1",
+     "perspectiveLabel": "Reading the databook IR tables",
+     "marks": 1,
+     "stem": "A dilute solution of an alcohol shows a sharp O-H band near 3620 cm⁻¹. Which databook entry fits?",
+     "explanation": "**Free (non-hydrogen-bonded) O-H, 3650-3590 cm⁻¹, sharp.** Hydrogen bonding in concentrated samples shifts and broadens the band to 3400-3200.\n\nWhy the others fail:\n- **Carboxylic acid O-H, 3200-2500 cm⁻¹, broad**: Far lower and very broad.\n- **Intermolecular hydrogen-bonded polymeric O-H, 3400-3200 cm⁻¹**: Lower and broad.\n- **Alkyne C-H, 3300 cm⁻¹**: Not near 3620, and no alkyne is involved.\n\n*Source: CBC databook pp.9-11 (OH, CH, nitro, alkene deformations, anions).*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "Free (non-hydrogen-bonded) O-H, 3650-3590 cm⁻¹, sharp"
+       },
+       {
+        "id": "b",
+        "label": "Carboxylic acid O-H, 3200-2500 cm⁻¹, broad"
+       },
+       {
+        "id": "c",
+        "label": "Intermolecular hydrogen-bonded polymeric O-H, 3400-3200 cm⁻¹"
+       },
+       {
+        "id": "d",
+        "label": "Alkyne C-H, 3300 cm⁻¹"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-c2-db-ir-other-v2",
+     "perspectiveLabel": "Reading the databook IR tables",
+     "marks": 1,
+     "stem": "Which databook range covers both the asymmetric and symmetric stretches of an aromatic nitro group (two bands)?",
+     "explanation": "**1555-1540 and 1385-1350 cm⁻¹.** These are the two N=O ranges for nitro compounds.\n\nWhy the others fail:\n- **1850-1800 and 1790-1740 cm⁻¹**: These are the anhydride C=O pair.\n- **3500-3300 cm⁻¹ (two bands)**: These are primary amine N-H stretches.\n- **2260-2220 and 2260-2100 cm⁻¹**: These are nitrile and alkyne stretches.\n\n*Source: CBC databook pp.9-11 (OH, CH, nitro, alkene deformations, anions).*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "1555-1540 and 1385-1350 cm⁻¹"
+       },
+       {
+        "id": "b",
+        "label": "1850-1800 and 1790-1740 cm⁻¹"
+       },
+       {
+        "id": "c",
+        "label": "3500-3300 cm⁻¹ (two bands)"
+       },
+       {
+        "id": "d",
+        "label": "2260-2220 and 2260-2100 cm⁻¹"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-c2-db-ir-other-v3",
+     "perspectiveLabel": "Reading the databook IR tables",
+     "marks": 1,
+     "stem": "You make Py₂Zn(NCO)₂ from zinc nitrate. Which databook band would reveal residual nitrate in the product spectrum?",
+     "explanation": "**A strong nitrate absorption at 1380-1350 cm⁻¹.** Nitrate is listed among the anions at that range; its presence would show incomplete washing.\n\nWhy the others fail:\n- **A band at 2150-2050 cm⁻¹**: That range belongs to thiocyanate.\n- **A band at 1130-1080 cm⁻¹**: That is sulfate.\n- **A band at 1610-1550 cm⁻¹**: That is carboxylate (and not nitrate).\n\n*Source: CBC databook pp.9-11 (OH, CH, nitro, alkene deformations, anions).*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "A strong nitrate absorption at 1380-1350 cm⁻¹"
+       },
+       {
+        "id": "b",
+        "label": "A band at 2150-2050 cm⁻¹"
+       },
+       {
+        "id": "c",
+        "label": "A band at 1130-1080 cm⁻¹"
+       },
+       {
+        "id": "d",
+        "label": "A band at 1610-1550 cm⁻¹"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-c2-db-ir-other-v4",
+     "perspectiveLabel": "Reading the databook IR tables",
+     "marks": 1,
+     "stem": "Which band shows the trans geometry of the C=C bonds in dibenzalacetone, according to the databook C-H deformation table?",
+     "explanation": "**RCH=CHR (trans) at 970-960 cm⁻¹.** The trans out-of-plane C-H deformation is listed there; the cis one is near 690.\n\nWhy the others fail:\n- **RCH=CHR (cis) at about 690 cm⁻¹**: That is the cis band.\n- **RCH=CH₂ at 995-985 and 915-905 cm⁻¹**: That is a terminal vinyl group.\n- **An aldehyde C-H at 2900-2700 cm⁻¹**: That is not an alkene deformation.\n\n*Source: CBC databook pp.9-11 (OH, CH, nitro, alkene deformations, anions).*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "RCH=CHR (trans) at 970-960 cm⁻¹"
+       },
+       {
+        "id": "b",
+        "label": "RCH=CHR (cis) at about 690 cm⁻¹"
+       },
+       {
+        "id": "c",
+        "label": "RCH=CH₂ at 995-985 and 915-905 cm⁻¹"
+       },
+       {
+        "id": "d",
+        "label": "An aldehyde C-H at 2900-2700 cm⁻¹"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c61-c2-db-shift",
+   "moduleCode": "CM2061",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Methyl acetate, CH₃CO₂CH₃, shows two methyl singlets. Using the dat...",
+    "source": "CBC databook pp.14-15 (1H shifts of methyl, methylene, methine and unsaturated protons)",
+    "week": 3,
+    "primaryTheme": "sp-databook",
+    "conceptTags": [],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 1,
+    "examStyle": "mcq_1mark",
+    "family": "bk-c61-c2-db-shift"
+   },
+   "variants": [
+    {
+     "variantId": "bk-c61-c2-db-shift-v1",
+     "perspectiveLabel": "Reading the databook NMR tables",
+     "marks": 1,
+     "stem": "Methyl acetate, CH₃CO₂CH₃, shows two methyl singlets. Using the databook, which assignment is right?",
+     "explanation": "**The OCH₃ at about δ 3.7 and the acetyl CH₃ at about δ 2.0.** CH₃-O-CO-R is 3.7 and CH₃-CO-OR is 2.0.\n\nWhy the others fail:\n- **The OCH₃ at about δ 2.0 and the acetyl CH₃ at about δ 3.7**: This swaps them: the methyl on oxygen is the more deshielded.\n- **Both at about δ 0.9**: That is CH₃ on a plain carbon.\n- **Both at about δ 3.3**: That is CH₃-OR in an ether, not the ester pair.\n\n*Source: CBC databook pp.14-15 (1H shifts of methyl, methylene, methine and unsaturated protons).*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "The OCH₃ at about δ 3.7 and the acetyl CH₃ at about δ 2.0"
+       },
+       {
+        "id": "b",
+        "label": "The OCH₃ at about δ 2.0 and the acetyl CH₃ at about δ 3.7"
+       },
+       {
+        "id": "c",
+        "label": "Both at about δ 0.9"
+       },
+       {
+        "id": "d",
+        "label": "Both at about δ 3.3"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-c2-db-shift-v2",
+     "perspectiveLabel": "Reading the databook NMR tables",
+     "marks": 1,
+     "stem": "Which methyl group is predicted at the highest chemical shift by the databook table?",
+     "explanation": "**CH₃-OAr (about 3.8).** Methyl on an aryl ether oxygen is the most deshielded of these.\n\nWhy the others fail:\n- **CH₃-CO-R (about 2.2)**: Lower: separated from oxygen.\n- **CH₃-S (about 2.1)**: Lower: sulfur is less deshielding than oxygen.\n- **CH₃-C (about 0.9)**: The most shielded methyl.\n\n*Source: CBC databook pp.14-15 (1H shifts of methyl, methylene, methine and unsaturated protons).*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "CH₃-OAr (about 3.8)"
+       },
+       {
+        "id": "b",
+        "label": "CH₃-CO-R (about 2.2)"
+       },
+       {
+        "id": "c",
+        "label": "CH₃-S (about 2.1)"
+       },
+       {
+        "id": "d",
+        "label": "CH₃-C (about 0.9)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-c2-db-shift-v3",
+     "perspectiveLabel": "Reading the databook NMR tables",
+     "marks": 1,
+     "stem": "Why are the acetyl CH₃ of acetophenone (about 2.6) and the CH₃ of toluene (about 2.3) different?",
+     "explanation": "**The carbonyl and the ring together deshield the acetyl methyl more than a ring alone deshields a benzylic methyl.** The databook lists CH₃-CO-Ar at 2.6 and CH₃-Ar at 2.3.\n\nWhy the others fail:\n- **Toluene's methyl is on oxygen**: It is on carbon (a benzylic methyl).\n- **Acetophenone has more protons**: The number of protons does not set the shift.\n- **They are identical within the databook's accuracy**: The values differ by 0.3, more than the quoted ±0.2.\n\n*Source: CBC databook pp.14-15 (1H shifts of methyl, methylene, methine and unsaturated protons).*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "The carbonyl and the ring together deshield the acetyl methyl more than a ring alone deshields a benzylic methyl"
+       },
+       {
+        "id": "b",
+        "label": "Toluene's methyl is on oxygen"
+       },
+       {
+        "id": "c",
+        "label": "Acetophenone has more protons"
+       },
+       {
+        "id": "d",
+        "label": "They are identical within the databook's accuracy"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-c2-db-shift-v4",
+     "perspectiveLabel": "Reading the databook NMR tables",
+     "marks": 1,
+     "stem": "The databook says shifts are \"usually within ±0.2\" of the tabulated value. What does that margin warn you about?",
+     "explanation": "**Use the table with caution: inductive, anisotropic or steric effects can move a signal further.** It is a typical accuracy, not a guarantee.\n\nWhy the others fail:\n- **The table is exact for all compounds**: The databook itself says to use it with caution.\n- **Only ¹³C values are uncertain**: The caution is stated for both ¹H and ¹³C shifts.\n- **Shifts depend on the spectrometer frequency, so ±0.2 ppm is meaningless**: δ is field-independent; the margin reflects structure, not the machine.\n\n*Source: CBC databook pp.14-15 (1H shifts of methyl, methylene, methine and unsaturated protons).*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "Use the table with caution: inductive, anisotropic or steric effects can move a signal further"
+       },
+       {
+        "id": "b",
+        "label": "The table is exact for all compounds"
+       },
+       {
+        "id": "c",
+        "label": "Only ¹³C values are uncertain"
+       },
+       {
+        "id": "d",
+        "label": "Shifts depend on the spectrometer frequency, so ±0.2 ppm is meaningless"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-c2-db-shift-v5",
+     "perspectiveLabel": "Reading the databook NMR tables",
+     "marks": 1,
+     "stem": "Which proton type does the databook place at the HIGHEST chemical shift range?",
+     "explanation": "**R-CO₂H (about 10 to 13).** Acid protons come above aldehyde protons.\n\nWhy the others fail:\n- **R-CHO and Ar-CHO (9.4-10.5)**: High, but below the carboxylic acid upper range.\n- **Aromatic protons (6.0-9.0)**: Lower than aldehydes.\n- **R-OH (2-10, variable)**: Spread over a wide range but typically well below 10.\n\n*Source: CBC databook pp.14-15 (1H shifts of methyl, methylene, methine and unsaturated protons).*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "R-CO₂H (about 10 to 13)"
+       },
+       {
+        "id": "b",
+        "label": "R-CHO and Ar-CHO (9.4-10.5)"
+       },
+       {
+        "id": "c",
+        "label": "Aromatic protons (6.0-9.0)"
+       },
+       {
+        "id": "d",
+        "label": "R-OH (2-10, variable)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c61-c2-db-j",
+   "moduleCode": "CM2061",
+   "tier": "atomic",
+   "metadata": {
+    "title": "In a 1,2,4-trisubstituted benzene, one proton has an ortho neighbou...",
+    "source": "CBC databook p.16 (1H-1H coupling constants)",
+    "week": 3,
+    "primaryTheme": "sp-databook",
+    "conceptTags": [],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 1,
+    "examStyle": "mcq_1mark",
+    "family": "bk-c61-c2-db-j"
+   },
+   "variants": [
+    {
+     "variantId": "bk-c61-c2-db-j-v1",
+     "perspectiveLabel": "Reading the databook NMR tables",
+     "marks": 1,
+     "stem": "In a 1,2,4-trisubstituted benzene, one proton has an ortho neighbour and a meta neighbour. What pattern and couplings does the databook lead you to expect?",
+     "explanation": "**A doublet of doublets, J about 6-9 Hz (ortho) and 1-3 Hz (meta).** The databook gives ortho 6-9, meta 1-3 and para 0-1 Hz.\n\nWhy the others fail:\n- **A triplet, J about 6-9 Hz**: A triplet needs two equal couplings; here they differ.\n- **A singlet**: The couplings are small but real; a singlet means no neighbours at all.\n- **A doublet of doublets, J about 12-18 Hz and 5-12 Hz**: Those are alkene trans and cis couplings.\n\n*Source: CBC databook p.16 (1H-1H coupling constants).*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "A doublet of doublets, J about 6-9 Hz (ortho) and 1-3 Hz (meta)"
+       },
+       {
+        "id": "b",
+        "label": "A triplet, J about 6-9 Hz"
+       },
+       {
+        "id": "c",
+        "label": "A singlet"
+       },
+       {
+        "id": "d",
+        "label": "A doublet of doublets, J about 12-18 Hz and 5-12 Hz"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-c2-db-j-v2",
+     "perspectiveLabel": "Reading the databook NMR tables",
+     "marks": 1,
+     "stem": "Two alkene protons on a double bond show J = 15 Hz. According to the databook ranges, what is their geometry?",
+     "explanation": "**Trans (12-18 Hz).** The databook gives trans 12-18 and cis 5-12 Hz (the manual quotes 10-12 and 15-18).\n\nWhy the others fail:\n- **Cis (5-12 Hz)**: Too small for 15 Hz.\n- **Geminal (-3 to +3 Hz)**: Geminal couplings on an alkene are tiny.\n- **Ortho aromatic (6-9 Hz)**: These protons are on a C=C, not on a ring.\n\n*Source: CBC databook p.16 (1H-1H coupling constants).*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "Trans (12-18 Hz)"
+       },
+       {
+        "id": "b",
+        "label": "Cis (5-12 Hz)"
+       },
+       {
+        "id": "c",
+        "label": "Geminal (-3 to +3 Hz)"
+       },
+       {
+        "id": "d",
+        "label": "Ortho aromatic (6-9 Hz)"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-c2-db-j-v3",
+     "perspectiveLabel": "Reading the databook NMR tables",
+     "marks": 1,
+     "stem": "For an ethyl group with free rotation, the databook gives a H-C-C-H coupling of:",
+     "explanation": "**6-8 Hz.** This is the typical vicinal coupling for freely rotating sp³ carbons.\n\nWhy the others fail:\n- **12-18 Hz**: That is an alkene trans coupling.\n- **0-1 Hz**: That is a para aromatic coupling.\n- **40-60 Hz**: H-H couplings never reach that size.\n\n*Source: CBC databook p.16 (1H-1H coupling constants).*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "6-8 Hz"
+       },
+       {
+        "id": "b",
+        "label": "12-18 Hz"
+       },
+       {
+        "id": "c",
+        "label": "0-1 Hz"
+       },
+       {
+        "id": "d",
+        "label": "40-60 Hz"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c61-c2-db-nuclides",
+   "moduleCode": "CM2061",
+   "tier": "atomic",
+   "metadata": {
+    "title": "In 2-trifluoroacetylpyrrole, which pair of nuclides is both spin-½ ...",
+    "source": "CBC databook p.12 (NMR-active nuclides); Manual p.23",
+    "week": 3,
+    "primaryTheme": "sp-databook",
+    "conceptTags": [],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 1,
+    "examStyle": "mcq_1mark",
+    "family": "bk-c61-c2-db-nuclides"
+   },
+   "variants": [
+    {
+     "variantId": "bk-c61-c2-db-nuclides-v1",
+     "perspectiveLabel": "Reading the databook NMR tables",
+     "marks": 1,
+     "stem": "In 2-trifluoroacetylpyrrole, which pair of nuclides is both spin-½ and 100% (or essentially 100%) naturally abundant, and so easy to observe?",
+     "explanation": "**¹H and ¹⁹F.** ¹H is 99.985% and ¹⁹F is 100%, both with I = ½ (the databook also lists ¹³C at only 1.108%).\n\nWhy the others fail:\n- **¹H and ¹³C**: ¹³C is only 1.1% abundant, which is why ¹³C spectra are weak.\n- **¹⁹F and ¹²C**: ¹²C has no spin.\n- **¹⁴N and ¹⁹F**: ¹⁴N has I = 1 and is a quadrupolar nucleus; it is not spin-½.\n\n*Source: CBC databook p.12 (NMR-active nuclides); Manual p.23.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "¹H and ¹⁹F"
+       },
+       {
+        "id": "b",
+        "label": "¹H and ¹³C"
+       },
+       {
+        "id": "c",
+        "label": "¹⁹F and ¹²C"
+       },
+       {
+        "id": "d",
+        "label": "¹⁴N and ¹⁹F"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
    "id": "bk-c61-d-1a-reaction",
    "moduleCode": "CM2061",
    "tier": "atomic",
@@ -9099,7 +9823,7 @@
      "perspectiveLabel": "Observations, characterisation and problems",
      "marks": 1,
      "stem": "Which IR band is characteristic of dibenzalacetone, and where does it fall relative to an ordinary ketone?",
-     "explanation": "**A conjugated C=O near 1650 cm⁻¹, lower than the 1715 cm⁻¹ of acetone.** Conjugation with two C=C bonds lowers the carbonyl frequency; a C=C stretch appears near 1600-1625 cm⁻¹ too. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **An aldehyde C-H near 2720 cm⁻¹ from unreacted benzaldehyde**: In the pure product that band should be absent, so its presence would indicate contamination.\n- **A broad O-H near 3300 cm⁻¹**: There is no OH in the pure product.\n- **A C=O at 1740 cm⁻¹**: That is typical of an ester.\n\n*Source: Manual p.31; IR correlation tables.*",
+     "explanation": "**A conjugated C=O at about 1650-1685 cm⁻¹ (databook: 1685-1660 for α,β-unsaturated ketones), lower than the 1725-1705 cm⁻¹ of acetone.** Conjugation with two C=C bonds lowers the carbonyl frequency; a C=C stretch appears near 1600-1625 cm⁻¹ too. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **An aldehyde C-H near 2720 cm⁻¹ from unreacted benzaldehyde**: In the pure product that band should be absent, so its presence would indicate contamination.\n- **A broad O-H near 3300 cm⁻¹**: There is no OH in the pure product.\n- **A C=O at 1740 cm⁻¹**: That is typical of an ester.\n\n*Source: Manual p.31; IR correlation tables.*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -9107,7 +9831,7 @@
       "options": [
        {
         "id": "a",
-        "label": "A conjugated C=O near 1650 cm⁻¹, lower than the 1715 cm⁻¹ of acetone"
+        "label": "A conjugated C=O at about 1650-1685 cm⁻¹ (databook: 1685-1660 for α,β-unsaturated ketones), lower than the 1725-1705 cm⁻¹ of acetone"
        },
        {
         "id": "b",
@@ -10499,7 +11223,7 @@
      "perspectiveLabel": "Observations, characterisation and problems",
      "marks": 1,
      "stem": "Which pair of IR features would you expect for methyl 3-nitrobenzoate?",
-     "explanation": "**Ester C=O near 1725 cm⁻¹ and nitro bands near 1530 and 1350 cm⁻¹.** The ester carbonyl is retained and the nitro group adds two strong bands. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **A broad O-H near 3300 cm⁻¹ and a C=O near 1700 cm⁻¹**: These would indicate a carboxylic acid; the ester has no OH.\n- **Only a C=O at 1725 cm⁻¹**: The nitro bands should also be present.\n- **A nitrile near 2250 cm⁻¹ and an NH near 3300 cm⁻¹**: Neither group is present.\n\n*Source: Manual p.35; IR correlation tables.*",
+     "explanation": "**Ester C=O near 1725 cm⁻¹ and nitro bands near 1550 and 1350 cm⁻¹.** The ester of an aromatic acid absorbs at 1730-1715 cm⁻¹ and the nitro group adds two strong bands (databook: 1555-1540 and 1385-1350 cm⁻¹). *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **A broad O-H near 3300 cm⁻¹ and a C=O near 1700 cm⁻¹**: These would indicate a carboxylic acid; the ester has no OH.\n- **Only a C=O at 1725 cm⁻¹**: The nitro bands should also be present.\n- **A nitrile near 2250 cm⁻¹ and an NH near 3300 cm⁻¹**: Neither group is present.\n\n*Source: Manual p.35; IR correlation tables.*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -10507,7 +11231,7 @@
       "options": [
        {
         "id": "a",
-        "label": "Ester C=O near 1725 cm⁻¹ and nitro bands near 1530 and 1350 cm⁻¹"
+        "label": "Ester C=O near 1725 cm⁻¹ and nitro bands near 1550 and 1350 cm⁻¹"
        },
        {
         "id": "b",
@@ -15597,8 +16321,8 @@
      "variantId": "eq-1b-tscl",
      "perspectiveLabel": "1B: phenol and tosyl chloride (TsCl limiting)",
      "marks": 5,
-     "stem": "Expt 1B: phenol ({{fix(a,2)}} g, M = 94.11 g mol⁻¹) reacts with tosyl chloride ({{fix(b,2)}} g, M = 190.65 g mol⁻¹) in a 1:1 reaction. Give the amount of each reagent, the equivalents of tosyl chloride relative to phenol, which reagent is limiting and the maximum amount of product in mmol.",
-     "hint": "n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
+     "stem": "Expt 1B: phenol ({{fix(a,2)}} g, C₆H₅OH) reacts with tosyl chloride ({{fix(b,2)}} g, C₇H₇ClO₂S) in a 1:1 reaction. Give the amount of each reagent, the equivalents of tosyl chloride relative to phenol, which reagent is limiting and the maximum amount of product in mmol.",
+     "hint": "Work out each M from the databook atomic masses. n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
      "explanation": "n = m / M, so n(phenol) = a/94.11 and n(tosyl chloride) = b/190.65. Equivalents of B per A = n(B)/n(A). The reagent that gives the smaller number of reaction units is limiting and sets the maximum product.",
      "variables": {
       "sampled": {
@@ -15732,8 +16456,8 @@
      "variantId": "eq-1b-phenol",
      "perspectiveLabel": "1B: phenol and tosyl chloride (phenol limiting)",
      "marks": 5,
-     "stem": "Expt 1B: phenol ({{fix(a,2)}} g, M = 94.11 g mol⁻¹) reacts with tosyl chloride ({{fix(b,2)}} g, M = 190.65 g mol⁻¹) in a 1:1 reaction. Give the amount of each reagent, the equivalents of tosyl chloride relative to phenol, which reagent is limiting and the maximum amount of product in mmol.",
-     "hint": "n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
+     "stem": "Expt 1B: phenol ({{fix(a,2)}} g, C₆H₅OH) reacts with tosyl chloride ({{fix(b,2)}} g, C₇H₇ClO₂S) in a 1:1 reaction. Give the amount of each reagent, the equivalents of tosyl chloride relative to phenol, which reagent is limiting and the maximum amount of product in mmol.",
+     "hint": "Work out each M from the databook atomic masses. n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
      "explanation": "n = m / M, so n(phenol) = a/94.11 and n(tosyl chloride) = b/190.65. Equivalents of B per A = n(B)/n(A). The reagent that gives the smaller number of reaction units is limiting and sets the maximum product.",
      "variables": {
       "sampled": {
@@ -15867,8 +16591,8 @@
      "variantId": "eq-1e-ts",
      "perspectiveLabel": "1E: dimethoxytetrahydrofuran and tosylamide (tosylamide limiting)",
      "marks": 5,
-     "stem": "Expt 1E: dimethoxytetrahydrofuran ({{fix(a,2)}} g, M = 132.16 g mol⁻¹) reacts with tosylamide ({{fix(b,2)}} g, M = 171.22 g mol⁻¹) in a 1:1 reaction. Give the amount of each reagent, the equivalents of tosylamide relative to dimethoxytetrahydrofuran, which reagent is limiting and the maximum amount of product in mmol.",
-     "hint": "n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
+     "stem": "Expt 1E: dimethoxytetrahydrofuran ({{fix(a,2)}} g, C₆H₁₂O₃) reacts with tosylamide ({{fix(b,2)}} g, C₇H₉NO₂S) in a 1:1 reaction. Give the amount of each reagent, the equivalents of tosylamide relative to dimethoxytetrahydrofuran, which reagent is limiting and the maximum amount of product in mmol.",
+     "hint": "Work out each M from the databook atomic masses. n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
      "explanation": "n = m / M, so n(dimethoxytetrahydrofuran) = a/132.16 and n(tosylamide) = b/171.22. Equivalents of B per A = n(B)/n(A). The reagent that gives the smaller number of reaction units is limiting and sets the maximum product.",
      "variables": {
       "sampled": {
@@ -16002,8 +16726,8 @@
      "variantId": "eq-9-mg",
      "perspectiveLabel": "9: magnesium and bromobenzene (Mg limiting)",
      "marks": 5,
-     "stem": "Expt 9: magnesium ({{fix(a,3)}} g, M = 24.31 g mol⁻¹) reacts with bromobenzene ({{fix(b,2)}} g, M = 157.01 g mol⁻¹) in a 1:1 reaction. Give the amount of each reagent, the equivalents of bromobenzene relative to magnesium, which reagent is limiting and the maximum amount of product in mmol.",
-     "hint": "n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
+     "stem": "Expt 9: magnesium ({{fix(a,3)}} g, Mg) reacts with bromobenzene ({{fix(b,2)}} g, C₆H₅Br) in a 1:1 reaction. Give the amount of each reagent, the equivalents of bromobenzene relative to magnesium, which reagent is limiting and the maximum amount of product in mmol.",
+     "hint": "Work out each M from the databook atomic masses. n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
      "explanation": "n = m / M, so n(magnesium) = a/24.31 and n(bromobenzene) = b/157.01. Equivalents of B per A = n(B)/n(A). The reagent that gives the smaller number of reaction units is limiting and sets the maximum product.",
      "variables": {
       "sampled": {
@@ -16137,8 +16861,8 @@
      "variantId": "eq-9-phbr",
      "perspectiveLabel": "9: magnesium and bromobenzene (bromobenzene limiting)",
      "marks": 5,
-     "stem": "Expt 9: magnesium ({{fix(a,3)}} g, M = 24.31 g mol⁻¹) reacts with bromobenzene ({{fix(b,2)}} g, M = 157.01 g mol⁻¹) in a 1:1 reaction. Give the amount of each reagent, the equivalents of bromobenzene relative to magnesium, which reagent is limiting and the maximum amount of product in mmol.",
-     "hint": "n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
+     "stem": "Expt 9: magnesium ({{fix(a,3)}} g, Mg) reacts with bromobenzene ({{fix(b,2)}} g, C₆H₅Br) in a 1:1 reaction. Give the amount of each reagent, the equivalents of bromobenzene relative to magnesium, which reagent is limiting and the maximum amount of product in mmol.",
+     "hint": "Work out each M from the databook atomic masses. n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
      "explanation": "n = m / M, so n(magnesium) = a/24.31 and n(bromobenzene) = b/157.01. Equivalents of B per A = n(B)/n(A). The reagent that gives the smaller number of reaction units is limiting and sets the maximum product.",
      "variables": {
       "sampled": {
@@ -16272,8 +16996,8 @@
      "variantId": "eq-1c-acetone",
      "perspectiveLabel": "1C: benzaldehyde and acetone, 2:1 (benzaldehyde limiting)",
      "marks": 5,
-     "stem": "Expt 1C: acetone ({{fix(a,2)}} g, M = 58.08 g mol⁻¹) reacts with benzaldehyde ({{fix(b,2)}} g, M = 106.12 g mol⁻¹), and each acetone molecule condenses with two benzaldehyde molecules. Give the amount of each reagent, the equivalents of benzaldehyde relative to acetone, which reagent is limiting and the maximum amount of product in mmol.",
-     "hint": "n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
+     "stem": "Expt 1C: acetone ({{fix(a,2)}} g, C₃H₆O) reacts with benzaldehyde ({{fix(b,2)}} g, C₆H₅CHO), and each acetone molecule condenses with two benzaldehyde molecules. Give the amount of each reagent, the equivalents of benzaldehyde relative to acetone, which reagent is limiting and the maximum amount of product in mmol.",
+     "hint": "Work out each M from the databook atomic masses. n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
      "explanation": "n = m / M, so n(acetone) = a/58.08 and n(benzaldehyde) = b/106.12. Equivalents of B per A = n(B)/n(A) (the reaction needs 2 equivalents of benzaldehyde per acetone, so compare n(B)/2 with n(A)). The reagent that gives the smaller number of reaction units is limiting and sets the maximum product.",
      "variables": {
       "sampled": {
@@ -16413,8 +17137,8 @@
      "variantId": "eq-1c-acetone2",
      "perspectiveLabel": "1C: benzaldehyde and acetone, 2:1 (acetone limiting)",
      "marks": 5,
-     "stem": "Expt 1C: acetone ({{fix(a,2)}} g, M = 58.08 g mol⁻¹) reacts with benzaldehyde ({{fix(b,2)}} g, M = 106.12 g mol⁻¹), and each acetone molecule condenses with two benzaldehyde molecules. Give the amount of each reagent, the equivalents of benzaldehyde relative to acetone, which reagent is limiting and the maximum amount of product in mmol.",
-     "hint": "n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
+     "stem": "Expt 1C: acetone ({{fix(a,2)}} g, C₃H₆O) reacts with benzaldehyde ({{fix(b,2)}} g, C₆H₅CHO), and each acetone molecule condenses with two benzaldehyde molecules. Give the amount of each reagent, the equivalents of benzaldehyde relative to acetone, which reagent is limiting and the maximum amount of product in mmol.",
+     "hint": "Work out each M from the databook atomic masses. n = m ÷ M. Equivalents = n(B) ÷ n(A). The limiting reagent is the one with the smaller n(reagent) ÷ coefficient.",
      "explanation": "n = m / M, so n(acetone) = a/58.08 and n(benzaldehyde) = b/106.12. Equivalents of B per A = n(B)/n(A) (the reaction needs 2 equivalents of benzaldehyde per acetone, so compare n(B)/2 with n(A)). The reagent that gives the smaller number of reaction units is limiting and sets the maximum product.",
      "variables": {
       "sampled": {
@@ -16554,7 +17278,7 @@
      "variantId": "eq-1e-acoh",
      "perspectiveLabel": "1E: equivalents of acetic acid",
      "marks": 3,
-     "stem": "In Expt 1E, tosylamide ({{fix(a,2)}} g, M = 171.22 g mol⁻¹) is heated in {{fix(v,1)}} mL of glacial acetic acid (density 1.05 g mL⁻¹, M = 60.05 g mol⁻¹). How many equivalents of acetic acid per tosylamide is that?",
+     "stem": "In Expt 1E, tosylamide ({{fix(a,2)}} g, C₇H₉NO₂S) is heated in {{fix(v,1)}} mL of glacial acetic acid (density 1.05 g mL⁻¹, CH₃CO₂H). How many equivalents of acetic acid per tosylamide is that?",
      "hint": "Convert the volume to mass with the density, then to moles, then divide by moles of tosylamide.",
      "explanation": "n(AcOH) = V × d / M. Comparing with n(tosylamide) shows the \"solvent\" is a large excess (about 15 equivalents), which is why it works as solvent and acid catalyst at once.",
      "variables": {
@@ -16641,7 +17365,7 @@
      "variantId": "eq-5b-hno3",
      "perspectiveLabel": "5B: equivalents of nitric acid (70%)",
      "marks": 4,
-     "stem": "In Expt 5B, 1,2-dimethoxybenzene ({{fix(a,3)}} g, M = 138.17 g mol⁻¹) is added to {{fix(v,0)}} mL of 70% (w/w) nitric acid (density 1.41 g mL⁻¹, M = 63.01 g mol⁻¹). How many equivalents of HNO₃ are present per mole of substrate, and how many does the product need (two nitro groups)?",
+     "stem": "In Expt 5B, 1,2-dimethoxybenzene ({{fix(a,3)}} g, C₈H₁₀O₂) is added to {{fix(v,0)}} mL of 70% (w/w) nitric acid (density 1.41 g mL⁻¹, HNO₃). How many equivalents of HNO₃ are present per mole of substrate, and how many does the product need (two nitro groups)?",
      "hint": "Mass of solution = V × d; mass of HNO₃ = 0.70 × that; then moles.",
      "explanation": "n(HNO₃) = V × d × 0.70 / M. The ratio to substrate is large (about 18 equivalents) against the 2 needed, which is why this procedure drives the second nitration.",
      "variables": {
@@ -16737,8 +17461,8 @@
      "variantId": "yield-1a",
      "perspectiveLabel": "1A: paracetamol",
      "marks": 4,
-     "stem": "Expt 1A starts from 4-aminophenol (1.1 g, M = 109.13). Acetic anhydride (1.2 mL, d 1.08, M = 102.09) is in slight excess, so 4-aminophenol limits. You isolate {{fix(act,2)}} g of paracetamol (M = 151.16 g mol⁻¹). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).",
-     "hint": "theoretical mass = n(limiting) × M(product) for a 1:1 reaction; % yield = actual ÷ theoretical × 100.",
+     "stem": "Expt 1A starts from 4-aminophenol (1.1 g, C₆H₇NO). Acetic anhydride (1.2 mL, d 1.08, C₄H₆O₃) is in slight excess, so 4-aminophenol limits. You isolate {{fix(act,2)}} g of paracetamol (C₈H₉NO₂). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).",
+     "hint": "Work out each M from the databook atomic masses. Theoretical mass = n(limiting) × M(product) for a 1:1 reaction; % yield = actual ÷ theoretical × 100.",
      "explanation": "The limiting reagent sets the theoretical yield: n × M(product). % yield = actual ÷ theoretical × 100, quoted as a whole percentage (accuracy table). Using the reagent in excess gives a theoretical yield that is too high and a percentage that is too low.",
      "variables": {
       "sampled": {
@@ -16832,8 +17556,8 @@
      "variantId": "yield-5d",
      "perspectiveLabel": "5D: 2-iodobenzoic acid",
      "marks": 4,
-     "stem": "Expt 5D starts from anthranilic acid (3.42 g, M = 137.14). Potassium iodide (4.25 g, M = 166.00) and sodium nitrite (1.8 g, M = 69.00) are each in slight excess, so anthranilic acid limits. You isolate {{fix(act,2)}} g of 2-iodobenzoic acid (M = 248.02 g mol⁻¹). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).",
-     "hint": "theoretical mass = n(limiting) × M(product) for a 1:1 reaction; % yield = actual ÷ theoretical × 100.",
+     "stem": "Expt 5D starts from anthranilic acid (3.42 g, C₇H₇NO₂). Potassium iodide (4.25 g, KI) and sodium nitrite (1.8 g) are each in slight excess, so anthranilic acid limits. You isolate {{fix(act,2)}} g of 2-iodobenzoic acid (C₇H₅IO₂). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).",
+     "hint": "Work out each M from the databook atomic masses. Theoretical mass = n(limiting) × M(product) for a 1:1 reaction; % yield = actual ÷ theoretical × 100.",
      "explanation": "The limiting reagent sets the theoretical yield: n × M(product). % yield = actual ÷ theoretical × 100, quoted as a whole percentage (accuracy table). Using the reagent in excess gives a theoretical yield that is too high and a percentage that is too low.",
      "variables": {
       "sampled": {
@@ -16927,8 +17651,8 @@
      "variantId": "yield-9",
      "perspectiveLabel": "9: benzoic acid",
      "marks": 4,
-     "stem": "Expt 9 starts from magnesium (500 mg, M = 24.31). Bromobenzene (3.3 g, M = 157.01) is in very slight excess, so magnesium limits. You isolate {{fix(act,2)}} g of benzoic acid (M = 122.12 g mol⁻¹). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).",
-     "hint": "theoretical mass = n(limiting) × M(product) for a 1:1 reaction; % yield = actual ÷ theoretical × 100.",
+     "stem": "Expt 9 starts from magnesium (500 mg, Mg). Bromobenzene (3.3 g, C₆H₅Br) is in very slight excess, so magnesium limits. You isolate {{fix(act,2)}} g of benzoic acid (C₇H₆O₂). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).",
+     "hint": "Work out each M from the databook atomic masses. Theoretical mass = n(limiting) × M(product) for a 1:1 reaction; % yield = actual ÷ theoretical × 100.",
      "explanation": "The limiting reagent sets the theoretical yield: n × M(product). % yield = actual ÷ theoretical × 100, quoted as a whole percentage (accuracy table). Using the reagent in excess gives a theoretical yield that is too high and a percentage that is too low.",
      "variables": {
       "sampled": {
@@ -17022,8 +17746,8 @@
      "variantId": "yield-5a",
      "perspectiveLabel": "5A: methyl 3-nitrobenzoate",
      "marks": 4,
-     "stem": "Expt 5A starts from methyl benzoate (1.00 g, M = 136.15). Concentrated nitric acid (about 0.65 mL of the 1:1 mixture, taken as 70% w/w, d 1.41) is in excess, so the ester limits. You isolate {{fix(act,2)}} g of methyl 3-nitrobenzoate (M = 181.15 g mol⁻¹). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).",
-     "hint": "theoretical mass = n(limiting) × M(product) for a 1:1 reaction; % yield = actual ÷ theoretical × 100.",
+     "stem": "Expt 5A starts from methyl benzoate (1.00 g, C₈H₈O₂). Concentrated nitric acid (about 0.65 mL of the 1:1 mixture, taken as 70% w/w, d 1.41) is in excess, so the ester limits. You isolate {{fix(act,2)}} g of methyl 3-nitrobenzoate (C₈H₇NO₄). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).",
+     "hint": "Work out each M from the databook atomic masses. Theoretical mass = n(limiting) × M(product) for a 1:1 reaction; % yield = actual ÷ theoretical × 100.",
      "explanation": "The limiting reagent sets the theoretical yield: n × M(product). % yield = actual ÷ theoretical × 100, quoted as a whole percentage (accuracy table). Using the reagent in excess gives a theoretical yield that is too high and a percentage that is too low.",
      "variables": {
       "sampled": {
@@ -17117,8 +17841,8 @@
      "variantId": "yield-7",
      "perspectiveLabel": "7: acetylferrocene",
      "marks": 4,
-     "stem": "Expt 7 starts from ferrocene (465 mg, M = 186.04). Acetic anhydride (1.75 mL, d 1.08, M = 102.09) is in large excess, so ferrocene limits. You isolate {{fix(act,2)}} g of acetylferrocene (M = 228.07 g mol⁻¹). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).",
-     "hint": "theoretical mass = n(limiting) × M(product) for a 1:1 reaction; % yield = actual ÷ theoretical × 100.",
+     "stem": "Expt 7 starts from ferrocene (465 mg, C₁₀H₁₀Fe). Acetic anhydride (1.75 mL, d 1.08, C₄H₆O₃) is in large excess, so ferrocene limits. You isolate {{fix(act,2)}} g of acetylferrocene (C₁₂H₁₂FeO). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).",
+     "hint": "Work out each M from the databook atomic masses. Theoretical mass = n(limiting) × M(product) for a 1:1 reaction; % yield = actual ÷ theoretical × 100.",
      "explanation": "The limiting reagent sets the theoretical yield: n × M(product). % yield = actual ÷ theoretical × 100, quoted as a whole percentage (accuracy table). Using the reagent in excess gives a theoretical yield that is too high and a percentage that is too low.",
      "variables": {
       "sampled": {
@@ -17654,7 +18378,7 @@
      "variantId": "hydride-1",
      "perspectiveLabel": "0.5 equivalents of NaBH₄",
      "marks": 4,
-     "stem": "Expt 6 reduces ethyl acetoacetate ({{fix(a,2)}} g, M = 130.14 g mol⁻¹) with 0.5 equivalents of sodium borohydride (M = 37.83 g mol⁻¹). Calculate the amount of substrate, the mass of NaBH₄ to weigh, and the number of hydride equivalents available per ketone (each BH₄⁻ has four hydrides).",
+     "stem": "Expt 6 reduces ethyl acetoacetate ({{fix(a,2)}} g, C₆H₁₀O₃) with 0.5 equivalents of sodium borohydride (NaBH₄). Calculate the amount of substrate, the mass of NaBH₄ to weigh, and the number of hydride equivalents available per ketone (each BH₄⁻ has four hydrides).",
      "hint": "n(NaBH₄) = equiv × n(substrate); hydrides = 4 × n(NaBH₄).",
      "explanation": "n(NaBH₄) = 0.5 × n(substrate); mass = n × 37.83. Each NaBH₄ carries four B-H bonds, so 0.5 equivalents provide 2 equivalents of hydride per ketone, which is why a sub-stoichiometric amount of NaBH₄ is enough. In practice some hydride is lost to the ethanol (effervescence), so an excess of hydride over the one needed per ketone is used.",
      "variables": {
@@ -17742,7 +18466,7 @@
      "variantId": "hydride-2",
      "perspectiveLabel": "0.4 equivalents of NaBH₄",
      "marks": 4,
-     "stem": "Expt 6 reduces ethyl acetoacetate ({{fix(a,2)}} g, M = 130.14 g mol⁻¹) with 0.4 equivalents of sodium borohydride (M = 37.83 g mol⁻¹). Calculate the amount of substrate, the mass of NaBH₄ to weigh, and the number of hydride equivalents available per ketone (each BH₄⁻ has four hydrides).",
+     "stem": "Expt 6 reduces ethyl acetoacetate ({{fix(a,2)}} g, C₆H₁₀O₃) with 0.4 equivalents of sodium borohydride (NaBH₄). Calculate the amount of substrate, the mass of NaBH₄ to weigh, and the number of hydride equivalents available per ketone (each BH₄⁻ has four hydrides).",
      "hint": "n(NaBH₄) = equiv × n(substrate); hydrides = 4 × n(NaBH₄).",
      "explanation": "n(NaBH₄) = 0.4 × n(substrate); mass = n × 37.83. Each NaBH₄ carries four B-H bonds, so 0.4 equivalents provide 1.6 equivalents of hydride per ketone, which is why a sub-stoichiometric amount of NaBH₄ is enough. In practice some hydride is lost to the ethanol (effervescence), so an excess of hydride over the one needed per ketone is used.",
      "variables": {
@@ -17830,7 +18554,7 @@
      "variantId": "hydride-3",
      "perspectiveLabel": "0.3 equivalents of NaBH₄",
      "marks": 4,
-     "stem": "Expt 6 reduces ethyl acetoacetate ({{fix(a,2)}} g, M = 130.14 g mol⁻¹) with 0.3 equivalents of sodium borohydride (M = 37.83 g mol⁻¹). Calculate the amount of substrate, the mass of NaBH₄ to weigh, and the number of hydride equivalents available per ketone (each BH₄⁻ has four hydrides).",
+     "stem": "Expt 6 reduces ethyl acetoacetate ({{fix(a,2)}} g, C₆H₁₀O₃) with 0.3 equivalents of sodium borohydride (NaBH₄). Calculate the amount of substrate, the mass of NaBH₄ to weigh, and the number of hydride equivalents available per ketone (each BH₄⁻ has four hydrides).",
      "hint": "n(NaBH₄) = equiv × n(substrate); hydrides = 4 × n(NaBH₄).",
      "explanation": "n(NaBH₄) = 0.3 × n(substrate); mass = n × 37.83. Each NaBH₄ carries four B-H bonds, so 0.3 equivalents provide 1.2 equivalents of hydride per ketone, which is why a sub-stoichiometric amount of NaBH₄ is enough. In practice some hydride is lost to the ethanol (effervescence), so an excess of hydride over the one needed per ketone is used.",
      "variables": {
@@ -18239,6 +18963,1226 @@
         }
        }
       }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c61-g-molarmass",
+   "moduleCode": "CM2061",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Molar mass from the databook atomic masses",
+    "source": "CBC databook p.2-3; Manual p.14 (2 d.p.)",
+    "week": 7,
+    "primaryTheme": "calc-mass",
+    "conceptTags": [
+     "molar-mass"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "calc-molar"
+   },
+   "variants": [
+    {
+     "variantId": "mm-phbr",
+     "perspectiveLabel": "bromobenzene",
+     "marks": 2,
+     "stem": "Calculate the molar mass of bromobenzene, C₆H₅Br, from the relative atomic masses in the CBC databook. Report it to the accuracy the course asks for (2 decimal places).",
+     "hint": "Add the atomic mass of every atom in the formula, using the databook values (for example C 12.011, H 1.00794).",
+     "explanation": "Add the databook atomic masses atom by atom: 6 × 12.011 + 5 × 1.00794 + 79.904. The accuracy table (Manual p.14) quotes molecular mass to 2 decimal places. The exam gives formulas and densities, not molar masses.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "M": "6*12.011 + 5*1.00794 + 79.904",
+       "Mwrong": "6*12.011 + 6*1.00794 + 79.904"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "M",
+        "label": "Molar mass",
+        "unit": "g mol⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "M": {
+        "type": "numeric",
+        "targetExpr": "M",
+        "relTol": 0.0005,
+        "sig": 5,
+        "tolerance": 0.02,
+        "unit": "g mol⁻¹",
+        "paths": [
+         {
+          "label": "You counted six hydrogens (the ring has five on a monosubstituted benzene).",
+          "expr": "Mwrong"
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "mm-tscl",
+     "perspectiveLabel": "p-toluenesulfonyl chloride",
+     "marks": 2,
+     "stem": "Calculate the molar mass of p-toluenesulfonyl chloride, C₇H₇ClO₂S, from the relative atomic masses in the CBC databook. Report it to the accuracy the course asks for (2 decimal places).",
+     "hint": "Add the atomic mass of every atom in the formula, using the databook values (for example C 12.011, H 1.00794).",
+     "explanation": "Add the databook atomic masses atom by atom: 7 × 12.011 + 7 × 1.00794 + 35.4527 + 2 × 15.9994 + 32.066. The accuracy table (Manual p.14) quotes molecular mass to 2 decimal places. The exam gives formulas and densities, not molar masses.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "M": "7*12.011 + 7*1.00794 + 35.4527 + 2*15.9994 + 32.066",
+       "Mwrong": "7*12.011 + 7*1.00794 + 35.4527 + 15.9994 + 32.066"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "M",
+        "label": "Molar mass",
+        "unit": "g mol⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "M": {
+        "type": "numeric",
+        "targetExpr": "M",
+        "relTol": 0.0005,
+        "sig": 5,
+        "tolerance": 0.02,
+        "unit": "g mol⁻¹",
+        "paths": [
+         {
+          "label": "You counted one oxygen instead of two.",
+          "expr": "Mwrong"
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "mm-iodo",
+     "perspectiveLabel": "2-iodobenzoic acid",
+     "marks": 2,
+     "stem": "Calculate the molar mass of 2-iodobenzoic acid, C₇H₅IO₂, from the relative atomic masses in the CBC databook. Report it to the accuracy the course asks for (2 decimal places).",
+     "hint": "Add the atomic mass of every atom in the formula, using the databook values (for example C 12.011, H 1.00794).",
+     "explanation": "Add the databook atomic masses atom by atom: 7 × 12.011 + 5 × 1.00794 + 126.90447 + 2 × 15.9994. The accuracy table (Manual p.14) quotes molecular mass to 2 decimal places. The exam gives formulas and densities, not molar masses.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "M": "7*12.011 + 5*1.00794 + 126.90447 + 2*15.9994",
+       "Mwrong": "7*12.011 + 5*1.00794 + 2*15.9994"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "M",
+        "label": "Molar mass",
+        "unit": "g mol⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "M": {
+        "type": "numeric",
+        "targetExpr": "M",
+        "relTol": 0.0005,
+        "sig": 5,
+        "tolerance": 0.02,
+        "unit": "g mol⁻¹",
+        "paths": [
+         {
+          "label": "You left out the iodine.",
+          "expr": "Mwrong"
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "mm-crco6",
+     "perspectiveLabel": "chromium hexacarbonyl",
+     "marks": 2,
+     "stem": "Calculate the molar mass of chromium hexacarbonyl, Cr(CO)₆, from the relative atomic masses in the CBC databook. Report it to the accuracy the course asks for (2 decimal places).",
+     "hint": "Add the atomic mass of every atom in the formula, using the databook values (for example C 12.011, H 1.00794).",
+     "explanation": "Add the databook atomic masses atom by atom: 51.9961 + 6 × 12.011 + 6 × 15.9994. The accuracy table (Manual p.14) quotes molecular mass to 2 decimal places. The exam gives formulas and densities, not molar masses.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "M": "51.9961 + 6*12.011 + 6*15.9994",
+       "Mwrong": "51.9961 + 12.011 + 15.9994"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "M",
+        "label": "Molar mass",
+        "unit": "g mol⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "M": {
+        "type": "numeric",
+        "targetExpr": "M",
+        "relTol": 0.0005,
+        "sig": 5,
+        "tolerance": 0.02,
+        "unit": "g mol⁻¹",
+        "paths": [
+         {
+          "label": "You counted only one CO ligand.",
+          "expr": "Mwrong"
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "mm-fc",
+     "perspectiveLabel": "ferrocene",
+     "marks": 2,
+     "stem": "Calculate the molar mass of ferrocene, Fe(C₅H₅)₂, from the relative atomic masses in the CBC databook. Report it to the accuracy the course asks for (2 decimal places).",
+     "hint": "Add the atomic mass of every atom in the formula, using the databook values (for example C 12.011, H 1.00794).",
+     "explanation": "Add the databook atomic masses atom by atom: 55.847 + 10 × 12.011 + 10 × 1.00794. The accuracy table (Manual p.14) quotes molecular mass to 2 decimal places. The exam gives formulas and densities, not molar masses.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "M": "55.847 + 10*12.011 + 10*1.00794",
+       "Mwrong": "55.847 + 5*12.011 + 5*1.00794"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "M",
+        "label": "Molar mass",
+        "unit": "g mol⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "M": {
+        "type": "numeric",
+        "targetExpr": "M",
+        "relTol": 0.0005,
+        "sig": 5,
+        "tolerance": 0.02,
+        "unit": "g mol⁻¹",
+        "paths": [
+         {
+          "label": "You counted one cyclopentadienyl ring.",
+          "expr": "Mwrong"
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "mm-tfaa",
+     "perspectiveLabel": "trifluoroacetic anhydride",
+     "marks": 2,
+     "stem": "Calculate the molar mass of trifluoroacetic anhydride, (CF₃CO)₂O, from the relative atomic masses in the CBC databook. Report it to the accuracy the course asks for (2 decimal places).",
+     "hint": "Add the atomic mass of every atom in the formula, using the databook values (for example C 12.011, H 1.00794).",
+     "explanation": "Add the databook atomic masses atom by atom: 4 × 12.011 + 6 × 18.9984032 + 3 × 15.9994. The accuracy table (Manual p.14) quotes molecular mass to 2 decimal places. The exam gives formulas and densities, not molar masses.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "M": "4*12.011 + 6*18.9984032 + 3*15.9994",
+       "Mwrong": "4*12.011 + 6*18.9984032 + 2*15.9994"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "M",
+        "label": "Molar mass",
+        "unit": "g mol⁻¹",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "M": {
+        "type": "numeric",
+        "targetExpr": "M",
+        "relTol": 0.0005,
+        "sig": 5,
+        "tolerance": 0.02,
+        "unit": "g mol⁻¹",
+        "paths": [
+         {
+          "label": "You counted two oxygens (the anhydride has three: two C=O and the bridge).",
+          "expr": "Mwrong"
+         }
+        ]
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c61-g-additivity",
+   "moduleCode": "CM2061",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Estimating a methylene shift from the databook",
+    "source": "CBC databook p.15; Manual p.19 (additive effects of electronegative groups)",
+    "week": 7,
+    "primaryTheme": "calc-spec",
+    "conceptTags": [
+     "nmr",
+     "additivity"
+    ],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 3,
+    "examStyle": "short_2to3",
+    "family": "calc-additivity"
+   },
+   "variants": [
+    {
+     "variantId": "add-dcm",
+     "perspectiveLabel": "dichloromethane, CH₂Cl₂",
+     "marks": 2,
+     "stem": "Use the databook additivity table to estimate the ¹H chemical shift of the CH₂ group in dichloromethane, CH₂Cl₂. Its two substituents on the CH₂ are Cl and Cl. (Give δ to 2 decimal places.)",
+     "hint": "δ(CH₂X₁X₂) = 1.25 + X₁ + X₂, with the substituent increments from the databook table.",
+     "explanation": "δ = 1.25 + X(Cl) + X(Cl) = 1.25 + 2 + 2. It is an estimate: the databook warns shifts are usually within about ±0.2 of tabulated values but can differ more.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "d": "1.25 + 2 + 2",
+       "dNoBase": "2 + 2",
+       "dTwice": "2.5 + 2 + 2"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "d",
+        "label": "δ (CH₂)",
+        "unit": "ppm",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "d": {
+        "type": "numeric",
+        "targetExpr": "d",
+        "relTol": 0.005,
+        "sig": 3,
+        "tolerance": 0.03,
+        "unit": "ppm",
+        "paths": [
+         {
+          "label": "You left out the 1.25 base value.",
+          "expr": "dNoBase"
+         },
+         {
+          "label": "You added the base value twice.",
+          "expr": "dTwice"
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "add-bnCl",
+     "perspectiveLabel": "benzyl chloride, PhCH₂Cl",
+     "marks": 2,
+     "stem": "Use the databook additivity table to estimate the ¹H chemical shift of the CH₂ group in benzyl chloride, PhCH₂Cl. Its two substituents on the CH₂ are phenyl and Cl. (Give δ to 2 decimal places.)",
+     "hint": "δ(CH₂X₁X₂) = 1.25 + X₁ + X₂, with the substituent increments from the databook table.",
+     "explanation": "δ = 1.25 + X(phenyl) + X(Cl) = 1.25 + 1.3 + 2. It is an estimate: the databook warns shifts are usually within about ±0.2 of tabulated values but can differ more.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "d": "1.25 + 1.3 + 2",
+       "dNoBase": "1.3 + 2",
+       "dTwice": "2.5 + 1.3 + 2"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "d",
+        "label": "δ (CH₂)",
+        "unit": "ppm",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "d": {
+        "type": "numeric",
+        "targetExpr": "d",
+        "relTol": 0.005,
+        "sig": 3,
+        "tolerance": 0.03,
+        "unit": "ppm",
+        "paths": [
+         {
+          "label": "You left out the 1.25 base value.",
+          "expr": "dNoBase"
+         },
+         {
+          "label": "You added the base value twice.",
+          "expr": "dTwice"
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "add-bnOMe",
+     "perspectiveLabel": "benzyl methyl ether, PhCH₂OCH₃",
+     "marks": 2,
+     "stem": "Use the databook additivity table to estimate the ¹H chemical shift of the CH₂ group in benzyl methyl ether, PhCH₂OCH₃. Its two substituents on the CH₂ are phenyl and OR. (Give δ to 2 decimal places.)",
+     "hint": "δ(CH₂X₁X₂) = 1.25 + X₁ + X₂, with the substituent increments from the databook table.",
+     "explanation": "δ = 1.25 + X(phenyl) + X(OR) = 1.25 + 1.3 + 1.5. It is an estimate: the databook warns shifts are usually within about ±0.2 of tabulated values but can differ more.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "d": "1.25 + 1.3 + 1.5",
+       "dNoBase": "1.3 + 1.5",
+       "dTwice": "2.5 + 1.3 + 1.5"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "d",
+        "label": "δ (CH₂)",
+        "unit": "ppm",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "d": {
+        "type": "numeric",
+        "targetExpr": "d",
+        "relTol": 0.005,
+        "sig": 3,
+        "tolerance": 0.03,
+        "unit": "ppm",
+        "paths": [
+         {
+          "label": "You left out the 1.25 base value.",
+          "expr": "dNoBase"
+         },
+         {
+          "label": "You added the base value twice.",
+          "expr": "dTwice"
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "add-bnCN",
+     "perspectiveLabel": "benzyl cyanide, PhCH₂CN",
+     "marks": 2,
+     "stem": "Use the databook additivity table to estimate the ¹H chemical shift of the CH₂ group in benzyl cyanide, PhCH₂CN. Its two substituents on the CH₂ are phenyl and CN. (Give δ to 2 decimal places.)",
+     "hint": "δ(CH₂X₁X₂) = 1.25 + X₁ + X₂, with the substituent increments from the databook table.",
+     "explanation": "δ = 1.25 + X(phenyl) + X(CN) = 1.25 + 1.3 + 1.2. It is an estimate: the databook warns shifts are usually within about ±0.2 of tabulated values but can differ more.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "d": "1.25 + 1.3 + 1.2",
+       "dNoBase": "1.3 + 1.2",
+       "dTwice": "2.5 + 1.3 + 1.2"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "d",
+        "label": "δ (CH₂)",
+        "unit": "ppm",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "d": {
+        "type": "numeric",
+        "targetExpr": "d",
+        "relTol": 0.005,
+        "sig": 3,
+        "tolerance": 0.03,
+        "unit": "ppm",
+        "paths": [
+         {
+          "label": "You left out the 1.25 base value.",
+          "expr": "dNoBase"
+         },
+         {
+          "label": "You added the base value twice.",
+          "expr": "dTwice"
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "add-malon",
+     "perspectiveLabel": "ethyl acetoacetate, CH₃COCH₂CO₂Et",
+     "marks": 2,
+     "stem": "Use the databook additivity table to estimate the ¹H chemical shift of the CH₂ group in ethyl acetoacetate, CH₃COCH₂CO₂Et. Its two substituents on the CH₂ are COR and CO2R. (Give δ to 2 decimal places.)",
+     "hint": "δ(CH₂X₁X₂) = 1.25 + X₁ + X₂, with the substituent increments from the databook table.",
+     "explanation": "δ = 1.25 + X(COR) + X(CO2R) = 1.25 + 1.2 + 0.7. It is an estimate: the databook warns shifts are usually within about ±0.2 of tabulated values but can differ more.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "d": "1.25 + 1.2 + 0.7",
+       "dNoBase": "1.2 + 0.7",
+       "dTwice": "2.5 + 1.2 + 0.7"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "d",
+        "label": "δ (CH₂)",
+        "unit": "ppm",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "d": {
+        "type": "numeric",
+        "targetExpr": "d",
+        "relTol": 0.005,
+        "sig": 3,
+        "tolerance": 0.03,
+        "unit": "ppm",
+        "paths": [
+         {
+          "label": "You left out the 1.25 base value.",
+          "expr": "dNoBase"
+         },
+         {
+          "label": "You added the base value twice.",
+          "expr": "dTwice"
+         }
+        ]
+       }
+      }
+     }
+    },
+    {
+     "variantId": "add-brpr",
+     "perspectiveLabel": "1-bromopropane, the CH₂Br group of CH₃CH₂CH₂Br",
+     "marks": 2,
+     "stem": "Use the databook additivity table to estimate the ¹H chemical shift of the CH₂ group in 1-bromopropane, the CH₂Br group of CH₃CH₂CH₂Br. Its two substituents on the CH₂ are alkyl and Br. (Give δ to 2 decimal places.)",
+     "hint": "δ(CH₂X₁X₂) = 1.25 + X₁ + X₂, with the substituent increments from the databook table.",
+     "explanation": "δ = 1.25 + X(alkyl) + X(Br) = 1.25 + 0 + 1.9. It is an estimate: the databook warns shifts are usually within about ±0.2 of tabulated values but can differ more.",
+     "variables": {
+      "sampled": {},
+      "derived": {
+       "d": "1.25 + 0 + 1.9",
+       "dNoBase": "0 + 1.9",
+       "dTwice": "2.5 + 0 + 1.9"
+      }
+     },
+     "inputSlot": {
+      "type": "mapped_fields",
+      "layout": "table",
+      "fields": [
+       {
+        "key": "d",
+        "label": "δ (CH₂)",
+        "unit": "ppm",
+        "numeric": true
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "mapped_fields_match",
+      "targets": {
+       "d": {
+        "type": "numeric",
+        "targetExpr": "d",
+        "relTol": 0.005,
+        "sig": 3,
+        "tolerance": 0.03,
+        "unit": "ppm",
+        "paths": [
+         {
+          "label": "You left out the 1.25 base value.",
+          "expr": "dNoBase"
+         },
+         {
+          "label": "You added the base value twice.",
+          "expr": "dTwice"
+         }
+        ]
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c61-h-2-hazards",
+   "moduleCode": "CM2061",
+   "tier": "atomic",
+   "metadata": {
+    "title": "In the metal-chelate e-lab, toluene is heated on a hotplate near a ...",
+    "source": "E-lab 2 (metal chelate) example screen; standard inorganic chemistry",
+    "week": 8,
+    "primaryTheme": "el-2",
+    "conceptTags": [],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 1,
+    "examStyle": "mcq_1mark",
+    "family": "bk-c61-h-2-hazards"
+   },
+   "variants": [
+    {
+     "variantId": "bk-c61-h-2-hazards-v1",
+     "perspectiveLabel": "E-lab 2: hazards, Schlenk line and atmosphere",
+     "marks": 1,
+     "stem": "In the metal-chelate e-lab, toluene is heated on a hotplate near a hot oil bath. Which hazard should head its entry in the risk assessment?",
+     "explanation": "**Flammable.** A volatile organic liquid heated near a hot surface is chiefly a fire risk (it is also harmful, but fire is the leading hazard here). *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **Corrosive**: Toluene does not attack skin or metal in the way an acid or base does.\n- **Not hazardous**: It is a flammable, harmful liquid.\n- **Explosive on contact with water**: It does not react with water.\n\n*Source: E-lab 2 (metal chelate) example screen; standard inorganic chemistry.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "Flammable"
+       },
+       {
+        "id": "b",
+        "label": "Corrosive"
+       },
+       {
+        "id": "c",
+        "label": "Not hazardous"
+       },
+       {
+        "id": "d",
+        "label": "Explosive on contact with water"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-h-2-hazards-v2",
+     "perspectiveLabel": "E-lab 2: hazards, Schlenk line and atmosphere",
+     "marks": 1,
+     "stem": "Which hazard should head the risk-assessment entry for chromium hexacarbonyl, Cr(CO)₆, in this e-lab?",
+     "explanation": "**Toxic.** It is a volatile metal carbonyl: toxic by inhalation, ingestion and skin contact, and it can release carbon monoxide. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **Corrosive**: It is not an acid or a base.\n- **Flammable liquid**: It is a solid, and toxicity is the principal hazard.\n- **Not hazardous, since it is a stable solid**: Stability does not remove its toxicity.\n\n*Source: E-lab 2 (metal chelate) example screen; standard inorganic chemistry.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "Toxic"
+       },
+       {
+        "id": "b",
+        "label": "Corrosive"
+       },
+       {
+        "id": "c",
+        "label": "Flammable liquid"
+       },
+       {
+        "id": "d",
+        "label": "Not hazardous, since it is a stable solid"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-h-2-hazards-v3",
+     "perspectiveLabel": "E-lab 2: hazards, Schlenk line and atmosphere",
+     "marks": 1,
+     "stem": "Which hazard should head the entry for the ligand 2,2'-bipyridyl?",
+     "explanation": "**Toxic.** It is harmful if swallowed or absorbed through the skin. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **Flammable**: It is a solid with a high flash point; it is not the leading hazard.\n- **Corrosive**: It is a weak base, not a corrosive reagent.\n- **Not hazardous**: It is toxic and needs gloves and care.\n\n*Source: E-lab 2 (metal chelate) example screen; standard inorganic chemistry.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "Toxic"
+       },
+       {
+        "id": "b",
+        "label": "Flammable"
+       },
+       {
+        "id": "c",
+        "label": "Corrosive"
+       },
+       {
+        "id": "d",
+        "label": "Not hazardous"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c61-h-2-bubbler",
+   "moduleCode": "CM2061",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Why is an oil bubbler attached to the nitrogen side of the Schlenk ...",
+    "source": "E-lab 2 (metal chelate) example screen; standard inorganic chemistry",
+    "week": 8,
+    "primaryTheme": "el-2",
+    "conceptTags": [],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 1,
+    "examStyle": "mcq_1mark",
+    "family": "bk-c61-h-2-bubbler"
+   },
+   "variants": [
+    {
+     "variantId": "bk-c61-h-2-bubbler-v1",
+     "perspectiveLabel": "E-lab 2: hazards, Schlenk line and atmosphere",
+     "marks": 1,
+     "stem": "Why is an oil bubbler attached to the nitrogen side of the Schlenk line in the e-lab?",
+     "explanation": "**It lets excess gas escape so the pressure cannot build up, while the oil seal stops air from being drawn back in.** A closed line being heated would otherwise pressurise; a bubbler also shows the gas is flowing. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **It measures the exact pressure of the line**: A bubbler indicates flow; it is not a pressure gauge.\n- **It dries the nitrogen**: Drying uses a desiccant column or trap; the oil does not dry the gas.\n- **It condenses the toluene vapour**: Condensing is the job of the reflux condenser.\n\n*Source: E-lab 2 (metal chelate) example screen; standard inorganic chemistry.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "It lets excess gas escape so the pressure cannot build up, while the oil seal stops air from being drawn back in"
+       },
+       {
+        "id": "b",
+        "label": "It measures the exact pressure of the line"
+       },
+       {
+        "id": "c",
+        "label": "It dries the nitrogen"
+       },
+       {
+        "id": "d",
+        "label": "It condenses the toluene vapour"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c61-h-2-co",
+   "moduleCode": "CM2061",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Cr(CO)₆ reacts with 2,2'-bipyridyl (bipy) in refluxing toluene to g...",
+    "source": "E-lab 2 (metal chelate) example screen; standard inorganic chemistry",
+    "week": 8,
+    "primaryTheme": "el-2",
+    "conceptTags": [],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 1,
+    "examStyle": "mcq_1mark",
+    "family": "bk-c61-h-2-co"
+   },
+   "variants": [
+    {
+     "variantId": "bk-c61-h-2-co-v1",
+     "perspectiveLabel": "E-lab 2: the reaction and its product",
+     "marks": 1,
+     "stem": "Cr(CO)₆ reacts with 2,2'-bipyridyl (bipy) in refluxing toluene to give Cr(CO)₄(bipy). Which by-product explains why the reaction is done in a fume cupboard, and how many moles form per mole of product?",
+     "explanation": "**Carbon monoxide, 2 mol (Cr(CO)₆ + bipy → Cr(CO)₄(bipy) + 2 CO).** The chelating bipy replaces two CO ligands, and carbon monoxide is toxic. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **Carbon dioxide, 2 mol**: CO₂ is not formed; the CO ligands leave as CO.\n- **Carbon monoxide, 6 mol**: Only two of the six CO ligands are displaced.\n- **Chromium oxide, 1 mol**: The chromium stays in the complex; no oxide forms under nitrogen.\n\n*Source: E-lab 2 (metal chelate) example screen; standard inorganic chemistry.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "Carbon monoxide, 2 mol (Cr(CO)₆ + bipy → Cr(CO)₄(bipy) + 2 CO)"
+       },
+       {
+        "id": "b",
+        "label": "Carbon dioxide, 2 mol"
+       },
+       {
+        "id": "c",
+        "label": "Carbon monoxide, 6 mol"
+       },
+       {
+        "id": "d",
+        "label": "Chromium oxide, 1 mol"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c61-h-2-n2",
+   "moduleCode": "CM2061",
+   "tier": "atomic",
+   "metadata": {
+    "title": "The reaction is run under nitrogen to prevent oxidation. Which comp...",
+    "source": "E-lab 2 (metal chelate) example screen; standard inorganic chemistry",
+    "week": 8,
+    "primaryTheme": "el-2",
+    "conceptTags": [],
+    "difficultyEstimate": 2,
+    "estimatedMinutes": 1,
+    "examStyle": "mcq_1mark",
+    "family": "bk-c61-h-2-n2"
+   },
+   "variants": [
+    {
+     "variantId": "bk-c61-h-2-n2-v1",
+     "perspectiveLabel": "E-lab 2: hazards, Schlenk line and atmosphere",
+     "marks": 1,
+     "stem": "The reaction is run under nitrogen to prevent oxidation. Which component is most likely to be oxidised by air?",
+     "explanation": "**The chromium(0) centre of Cr(CO)₆ and of the product, a low-valent, electron-rich metal.** Metals in a low oxidation state with strong π-acceptor ligands are easily oxidised, especially when heated. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **The carbon monoxide ligands**: Bound CO is not what air oxidises first; the electron-rich metal is.\n- **The 2,2'-bipyridyl**: It is an aromatic heterocycle that is stable in air.\n- **The toluene**: It is only oxidised under much harsher conditions.\n\n*Source: E-lab 2 (metal chelate) example screen; standard inorganic chemistry.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "The chromium(0) centre of Cr(CO)₆ and of the product, a low-valent, electron-rich metal"
+       },
+       {
+        "id": "b",
+        "label": "The carbon monoxide ligands"
+       },
+       {
+        "id": "c",
+        "label": "The 2,2'-bipyridyl"
+       },
+       {
+        "id": "d",
+        "label": "The toluene"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c61-h-2-structure",
+   "moduleCode": "CM2061",
+   "tier": "atomic",
+   "metadata": {
+    "title": "How many valence electrons does the chromium centre have in Cr(CO)₄...",
+    "source": "E-lab 2 (metal chelate) example screen; standard inorganic chemistry",
+    "week": 8,
+    "primaryTheme": "el-2",
+    "conceptTags": [],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 1,
+    "examStyle": "mcq_1mark",
+    "family": "bk-c61-h-2-structure"
+   },
+   "variants": [
+    {
+     "variantId": "bk-c61-h-2-structure-v1",
+     "perspectiveLabel": "E-lab 2: the reaction and its product",
+     "marks": 1,
+     "stem": "How many valence electrons does the chromium centre have in Cr(CO)₄(bipy)? (Cr contributes 6; each CO donates 2; bipy donates 4 through its two nitrogens.)",
+     "explanation": "**18.** 6 + 4×2 + 4 = 18, a closed-shell count like Cr(CO)₆ (6 + 6×2). *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **16**: This would be missing the two electrons from one donor.\n- **14**: Too few: the bipy donates 4, not 2.\n- **20**: Too many; the count is 18 for both complexes.\n\n*Source: E-lab 2 (metal chelate) example screen; standard inorganic chemistry.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "18"
+       },
+       {
+        "id": "b",
+        "label": "16"
+       },
+       {
+        "id": "c",
+        "label": "14"
+       },
+       {
+        "id": "d",
+        "label": "20"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-h-2-structure-v2",
+     "perspectiveLabel": "E-lab 2: the reaction and its product",
+     "marks": 1,
+     "stem": "Why can one 2,2'-bipyridyl displace two CO ligands from Cr(CO)₆?",
+     "explanation": "**Bipy is a bidentate chelate: its two nitrogens bind the same metal, and the chelate effect (an entropy gain) favours substitution of two CO by one ligand.** It is a ligand substitution releasing two CO molecules. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **Bipy is monodentate and replaces one CO only**: Bipy has two donor nitrogens and binds through both.\n- **Bipy oxidises chromium and the CO is lost as CO₂**: Chromium stays Cr(0) and CO leaves as CO.\n- **Bipy displaces all six CO ligands**: Only two are replaced under these conditions.\n\n*Source: E-lab 2 (metal chelate) example screen; standard inorganic chemistry.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "Bipy is a bidentate chelate: its two nitrogens bind the same metal, and the chelate effect (an entropy gain) favours substitution of two CO by one ligand"
+       },
+       {
+        "id": "b",
+        "label": "Bipy is monodentate and replaces one CO only"
+       },
+       {
+        "id": "c",
+        "label": "Bipy oxidises chromium and the CO is lost as CO₂"
+       },
+       {
+        "id": "d",
+        "label": "Bipy displaces all six CO ligands"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-h-2-structure-v3",
+     "perspectiveLabel": "E-lab 2: the reaction and its product",
+     "marks": 1,
+     "stem": "Is Cr(CO)₄(bipy) paramagnetic or diamagnetic, and what would a magnetic susceptibility measurement give?",
+     "explanation": "**Diamagnetic: all electrons are paired (a low-spin 18-electron d⁶ complex), so no unpaired electrons.** Both CO and bipy are strong-field ligands, high on the databook spectrochemical series. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **Paramagnetic with four unpaired electrons**: A strong-field d⁶ complex pairs its electrons.\n- **Paramagnetic with two unpaired electrons**: There are none.\n- **Ferromagnetic**: Molecular complexes like this are not ferromagnetic.\n\n*Source: E-lab 2 (metal chelate) example screen; standard inorganic chemistry.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "Diamagnetic: all electrons are paired (a low-spin 18-electron d⁶ complex), so no unpaired electrons"
+       },
+       {
+        "id": "b",
+        "label": "Paramagnetic with four unpaired electrons"
+       },
+       {
+        "id": "c",
+        "label": "Paramagnetic with two unpaired electrons"
+       },
+       {
+        "id": "d",
+        "label": "Ferromagnetic"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    }
+   ]
+  },
+  {
+   "schemaVersion": "3.0",
+   "id": "bk-c61-h-2-ir",
+   "moduleCode": "CM2061",
+   "tier": "atomic",
+   "metadata": {
+    "title": "Which databook range covers the C-O stretching bands of a neutral t...",
+    "source": "E-lab 2 (metal chelate) example screen; CBC databook pp.11, 19; standard inorganic chemistry",
+    "week": 8,
+    "primaryTheme": "el-2",
+    "conceptTags": [],
+    "difficultyEstimate": 3,
+    "estimatedMinutes": 1,
+    "examStyle": "mcq_1mark",
+    "family": "bk-c61-h-2-ir"
+   },
+   "variants": [
+    {
+     "variantId": "bk-c61-h-2-ir-v1",
+     "perspectiveLabel": "E-lab 2: IR and characterisation",
+     "marks": 1,
+     "stem": "Which databook range covers the C-O stretching bands of a neutral terminal metal carbonyl?",
+     "explanation": "**2150-1900 cm⁻¹.** The databook lists terminal CO at 2150-1900 (bridging 1900-1750, triply bridging 1800-1600). *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **1800-1600 cm⁻¹**: That is the range for triply bridging (capping) CO.\n- **3650-3590 cm⁻¹**: That is free O-H.\n- **1725-1705 cm⁻¹**: That is an organic saturated ketone C=O.\n\n*Source: E-lab 2 (metal chelate) example screen; CBC databook pp.11, 19; standard inorganic chemistry.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "2150-1900 cm⁻¹"
+       },
+       {
+        "id": "b",
+        "label": "1800-1600 cm⁻¹"
+       },
+       {
+        "id": "c",
+        "label": "3650-3590 cm⁻¹"
+       },
+       {
+        "id": "d",
+        "label": "1725-1705 cm⁻¹"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-h-2-ir-v2",
+     "perspectiveLabel": "E-lab 2: IR and characterisation",
+     "marks": 1,
+     "stem": "The CO bands of Cr(CO)₄(bipy) lie at lower wavenumber than those of Cr(CO)₆. Which explanation is right?",
+     "explanation": "**Bipy is a stronger σ-donor and a weaker π-acceptor than CO, so more electron density goes into the remaining CO π* orbitals, lowering the C-O stretch.** Replacing a strong π-acceptor by a weaker one increases back-bonding to the CO ligands that stay. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **Bipy is a stronger π-acceptor than CO**: The reverse: CO is the strongest π-acceptor (top of the spectrochemical series with CN⁻).\n- **The chromium is oxidised, which strengthens the C-O bond**: Chromium stays Cr(0); less back-bonding would raise, not lower, ν(CO).\n- **The sample is dissolved in a heavier solvent**: Solvent does not explain the systematic shift.\n\n*Source: E-lab 2 (metal chelate) example screen; CBC databook pp.11, 19; standard inorganic chemistry.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "Bipy is a stronger σ-donor and a weaker π-acceptor than CO, so more electron density goes into the remaining CO π* orbitals, lowering the C-O stretch"
+       },
+       {
+        "id": "b",
+        "label": "Bipy is a stronger π-acceptor than CO"
+       },
+       {
+        "id": "c",
+        "label": "The chromium is oxidised, which strengthens the C-O bond"
+       },
+       {
+        "id": "d",
+        "label": "The sample is dissolved in a heavier solvent"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-h-2-ir-v3",
+     "perspectiveLabel": "E-lab 2: IR and characterisation",
+     "marks": 1,
+     "stem": "How many CO stretching bands are expected in the IR of octahedral Cr(CO)₆ and of cis-Cr(CO)₄(bipy) (C₂ᵥ local symmetry)?",
+     "explanation": "**One for Cr(CO)₆ and four for Cr(CO)₄(bipy).** The octahedral molecule has a single IR-active T₁ᵤ mode; the lower-symmetry chelate has A₁ + A₁ + B₁ + B₂, all IR-active. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **Four for Cr(CO)₆ and one for Cr(CO)₄(bipy)**: This reverses them.\n- **Six for both, one per CO**: Symmetry-equivalent CO groups vibrate together; not one band per CO.\n- **One for both**: Lowering the symmetry splits the modes.\n\n*Source: E-lab 2 (metal chelate) example screen; CBC databook pp.11, 19; standard inorganic chemistry.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "One for Cr(CO)₆ and four for Cr(CO)₄(bipy)"
+       },
+       {
+        "id": "b",
+        "label": "Four for Cr(CO)₆ and one for Cr(CO)₄(bipy)"
+       },
+       {
+        "id": "c",
+        "label": "Six for both, one per CO"
+       },
+       {
+        "id": "d",
+        "label": "One for both"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
+     }
+    },
+    {
+     "variantId": "bk-c61-h-2-ir-v4",
+     "perspectiveLabel": "E-lab 2: IR and characterisation",
+     "marks": 1,
+     "stem": "Which observation would tell you that Cr(CO)₄(bipy) has formed from the colourless Cr(CO)₆?",
+     "explanation": "**The product is intensely coloured, unlike colourless Cr(CO)₆, and its CO bands move to lower wavenumber and increase in number.** Charge-transfer (metal to bipy π*) absorption gives the colour. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **The product is colourless and its IR is unchanged**: Then nothing has happened.\n- **The mixture turns white and effervesces violently**: Gas is evolved gently as CO is lost; the product is deeply coloured, not white.\n- **A broad O-H band at 3300 cm⁻¹ appears**: There is no OH in the product.\n\n*Source: E-lab 2 (metal chelate) example screen; CBC databook pp.11, 19; standard inorganic chemistry.*",
+     "inputSlot": {
+      "type": "choice",
+      "selectionMode": "single",
+      "shuffleOptions": true,
+      "options": [
+       {
+        "id": "a",
+        "label": "The product is intensely coloured, unlike colourless Cr(CO)₆, and its CO bands move to lower wavenumber and increase in number"
+       },
+       {
+        "id": "b",
+        "label": "The product is colourless and its IR is unchanged"
+       },
+       {
+        "id": "c",
+        "label": "The mixture turns white and effervesces violently"
+       },
+       {
+        "id": "d",
+        "label": "A broad O-H band at 3300 cm⁻¹ appears"
+       }
+      ]
+     },
+     "evaluator": {
+      "type": "choice_match",
+      "targetIds": [
+       "a"
+      ],
+      "gradingMode": "exact"
      }
     }
    ]

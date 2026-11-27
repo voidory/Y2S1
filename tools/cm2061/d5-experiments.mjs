@@ -43,7 +43,7 @@ add(mcq({
 add(mcq({
   id: 'bk-c61-d-5a-ir', ...C('5a'), source: 'Manual p.35; IR correlation tables', beyond: true,
   stem: 'Which pair of IR features would you expect for methyl 3-nitrobenzoate?',
-  right: ['Ester C=O near 1725 cm⁻¹ and nitro bands near 1530 and 1350 cm⁻¹', 'The ester carbonyl is retained and the nitro group adds two strong bands.'],
+  right: ['Ester C=O near 1725 cm⁻¹ and nitro bands near 1550 and 1350 cm⁻¹', 'The ester of an aromatic acid absorbs at 1730-1715 cm⁻¹ and the nitro group adds two strong bands (databook: 1555-1540 and 1385-1350 cm⁻¹).'],
   wrong: [['A broad O-H near 3300 cm⁻¹ and a C=O near 1700 cm⁻¹', 'These would indicate a carboxylic acid; the ester has no OH.'], ['Only a C=O at 1725 cm⁻¹', 'The nitro bands should also be present.'], ['A nitrile near 2250 cm⁻¹ and an NH near 3300 cm⁻¹', 'Neither group is present.']],
 }));
 add(mcq({

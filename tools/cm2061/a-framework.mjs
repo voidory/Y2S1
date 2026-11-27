@@ -276,7 +276,7 @@ add(mcqSet({
       right: ['The title of the paper', 'Chemistry journals (almost always) omit the paper title; biologists usually include it.'],
       wrong: [['The first page number', 'The first page is required.'], ['The year', 'The year is required (in bold).'], ['The volume', 'The volume is required (in italics), where the journal has one.']] },
     { stem: 'Which reference is acceptable in a CM2061 lab report?',
-      right: ['Hegedus, L. S.; Bates, R. W.; Soderberg, B. C. J. Am. Chem. Soc. 1991, 113, 923-927.', 'It cites a journal paper with authors (family name, initials), abbreviated journal, year, volume and pages.'],
+      right: ['Hegedus, L. S.; Bates, R. W.; Soderberg, B. C. J. Am. Chem. Soc. 1991, 113, 923-927', 'It cites a journal paper with authors (family name, initials), abbreviated journal, year, volume and pages.'],
       wrong: [['https://www.nobelprize.org/prizes/chemistry/1912/summary/', 'Citations must be to journals, not web pages.'], ['Hegedus; Bates; Soderberg. J. Am. Chem. Soc. 113 (3), 1991.', 'It lacks initials and pages, and quotes an issue number the format does not need.'], ['Wikipedia, "Grignard reagent", retrieved last week.', 'A web page, not a journal paper; the manual says no www.']] },
     { stem: 'In the citation format, how are the authors written?',
       right: ['Family name then initials, authors separated by semicolons, no comma before the journal', 'The example reads "Hegedus, L.S.; Bates, R.W.; Soderberg, B.C. J. Am. Chem. Soc."'],

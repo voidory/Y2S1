@@ -49,7 +49,7 @@ add(mcq({
 add(mcq({
   id: 'bk-c61-d-1a-hazard', ...K('1a'), source: 'Manual p.29',
   stem: 'Which hazard does the manual attach to Expt 1A?',
-  right: ['Acetic anhydride is corrosive', 'The corrosive property is the hazard; precautions are gloves and the fume cupboard when dispensing.'],
+  right: ['Acetic anhydride is corrosive', 'The corrosive property is the hazard. The manual lists the hazard only; a suitable precaution (gloves, fume cupboard) is your own risk-assessment entry (see p.7).'],
   wrong: [['4-Aminophenol is pyrophoric', 'It is not.'], ['Sodium hydroxide gas is released', 'NaOH is a solid or a solution; no gas is released.'], ['Water is flammable', 'It is not.']],
 }));
 
@@ -221,7 +221,7 @@ add(mcq({
 add(mcq({
   id: 'bk-c61-d-1f-addition', ...K('1f'), source: 'Manual p.34',
   stem: 'Why is the KOH solution added with a Pasteur pipette through the top of the condenser to the almost-boiling mixture, in two portions?',
-  right: ['The mixture froths when the base goes in, so adding the KOH in two portions through the condenser keeps it controlled without opening the hot apparatus', 'The manual waits for the frothing to subside before refluxing for 15 minutes. *(Beyond the manual: the condensation is also exothermic.)*'],
+  right: ['The mixture froths when the base goes in, so adding the KOH in two portions through the condenser keeps it controlled without opening the hot apparatus', 'The manual gives the procedure (base added in two portions through the condenser, then wait for the frothing to subside before refluxing for 15 minutes); the reason is inferred from that frothing.'],
   wrong: [['To keep air out of the flask', 'The apparatus is not under inert gas.'], ['KOH only dissolves when added slowly to cold ethanol', 'It is dissolved first in 1 mL of ethanol.'], ['The condenser is the only neck available for a stirrer', 'A stir bar is used and the condenser neck is used for addition.']],
 }));
 add(mcq({

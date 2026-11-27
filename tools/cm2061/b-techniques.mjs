@@ -204,7 +204,7 @@ add(mcq({
   id: 'bk-c61-b-mag-instr', ...mag, source: 'Manual p.4 (mentioned); 2015 paper style',
   stem: 'Which instrument would you use to find the number of unpaired electrons in a metal complex?',
   right: ['A magnetic susceptibility balance', 'It measures susceptibility, from which the effective magnetic moment and the number of unpaired electrons follow.'],
-  wrong: [['A polarimeter', 'It measures optical rotation of chiral compounds.'], ['An NMR spectrometer', 'A routine proton NMR does not count unpaired electrons (paramagnetism in fact broadens signals).'], ['An IR spectrometer', 'It identifies functional groups by vibrations.']],
+  wrong: [['A polarimeter', 'It measures optical rotation of chiral compounds.'], ['An NMR spectrometer recording a routine proton spectrum', 'A routine spectrum does not count unpaired electrons (paramagnetism in fact broadens signals); special methods such as the Evans method are a different measurement and are not what the course uses.'], ['An IR spectrometer', 'It identifies functional groups by vibrations.']],
   beyond: true,
 }));
 add(mcq({

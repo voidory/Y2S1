@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-27T10:19:33.475Z",
+ "exportedAt": "2026-11-27T10:23:44.620Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -1832,7 +1832,7 @@
      "perspectiveLabel": "Journals, paper types and citations",
      "marks": 1,
      "stem": "Which reference is acceptable in a CM2061 lab report?",
-     "explanation": "**Hegedus, L. S.; Bates, R. W.; Soderberg, B. C. J. Am. Chem. Soc. 1991, 113, 923-927..** It cites a journal paper with authors (family name, initials), abbreviated journal, year, volume and pages.\n\nWhy the others fail:\n- **https://www.nobelprize.org/prizes/chemistry/1912/summary/**: Citations must be to journals, not web pages.\n- **Hegedus; Bates; Soderberg. J. Am. Chem. Soc. 113 (3), 1991.**: It lacks initials and pages, and quotes an issue number the format does not need.\n- **Wikipedia, \"Grignard reagent\", retrieved last week.**: A web page, not a journal paper; the manual says no www.\n\n*Source: Manual p.27.*",
+     "explanation": "**Hegedus, L. S.; Bates, R. W.; Soderberg, B. C. J. Am. Chem. Soc. 1991, 113, 923-927.** It cites a journal paper with authors (family name, initials), abbreviated journal, year, volume and pages.\n\nWhy the others fail:\n- **https://www.nobelprize.org/prizes/chemistry/1912/summary/**: Citations must be to journals, not web pages.\n- **Hegedus; Bates; Soderberg. J. Am. Chem. Soc. 113 (3), 1991.**: It lacks initials and pages, and quotes an issue number the format does not need.\n- **Wikipedia, \"Grignard reagent\", retrieved last week.**: A web page, not a journal paper; the manual says no www.\n\n*Source: Manual p.27.*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -1840,7 +1840,7 @@
       "options": [
        {
         "id": "a",
-        "label": "Hegedus, L. S.; Bates, R. W.; Soderberg, B. C. J. Am. Chem. Soc. 1991, 113, 923-927."
+        "label": "Hegedus, L. S.; Bates, R. W.; Soderberg, B. C. J. Am. Chem. Soc. 1991, 113, 923-927"
        },
        {
         "id": "b",
@@ -3790,7 +3790,7 @@
      "perspectiveLabel": "Magnetic susceptibility",
      "marks": 1,
      "stem": "Which instrument would you use to find the number of unpaired electrons in a metal complex?",
-     "explanation": "**A magnetic susceptibility balance.** It measures susceptibility, from which the effective magnetic moment and the number of unpaired electrons follow. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **A polarimeter**: It measures optical rotation of chiral compounds.\n- **An NMR spectrometer**: A routine proton NMR does not count unpaired electrons (paramagnetism in fact broadens signals).\n- **An IR spectrometer**: It identifies functional groups by vibrations.\n\n*Source: Manual p.4 (mentioned); 2015 paper style.*",
+     "explanation": "**A magnetic susceptibility balance.** It measures susceptibility, from which the effective magnetic moment and the number of unpaired electrons follow. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **A polarimeter**: It measures optical rotation of chiral compounds.\n- **An NMR spectrometer recording a routine proton spectrum**: A routine spectrum does not count unpaired electrons (paramagnetism in fact broadens signals); special methods such as the Evans method are a different measurement and are not what the course uses.\n- **An IR spectrometer**: It identifies functional groups by vibrations.\n\n*Source: Manual p.4 (mentioned); 2015 paper style.*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -3806,7 +3806,7 @@
        },
        {
         "id": "c",
-        "label": "An NMR spectrometer"
+        "label": "An NMR spectrometer recording a routine proton spectrum"
        },
        {
         "id": "d",
@@ -8483,7 +8483,7 @@
      "perspectiveLabel": "Work-up, purification and apparatus",
      "marks": 1,
      "stem": "Which hazard does the manual attach to Expt 1A?",
-     "explanation": "**Acetic anhydride is corrosive.** The corrosive property is the hazard; precautions are gloves and the fume cupboard when dispensing.\n\nWhy the others fail:\n- **4-Aminophenol is pyrophoric**: It is not.\n- **Sodium hydroxide gas is released**: NaOH is a solid or a solution; no gas is released.\n- **Water is flammable**: It is not.\n\n*Source: Manual p.29.*",
+     "explanation": "**Acetic anhydride is corrosive.** The corrosive property is the hazard. The manual lists the hazard only; a suitable precaution (gloves, fume cupboard) is your own risk-assessment entry (see p.7).\n\nWhy the others fail:\n- **4-Aminophenol is pyrophoric**: It is not.\n- **Sodium hydroxide gas is released**: NaOH is a solid or a solution; no gas is released.\n- **Water is flammable**: It is not.\n\n*Source: Manual p.29.*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -9995,7 +9995,7 @@
      "perspectiveLabel": "Work-up, purification and apparatus",
      "marks": 1,
      "stem": "Why is the KOH solution added with a Pasteur pipette through the top of the condenser to the almost-boiling mixture, in two portions?",
-     "explanation": "**The mixture froths when the base goes in, so adding the KOH in two portions through the condenser keeps it controlled without opening the hot apparatus.** The manual waits for the frothing to subside before refluxing for 15 minutes. *(Beyond the manual: the condensation is also exothermic.)*\n\nWhy the others fail:\n- **To keep air out of the flask**: The apparatus is not under inert gas.\n- **KOH only dissolves when added slowly to cold ethanol**: It is dissolved first in 1 mL of ethanol.\n- **The condenser is the only neck available for a stirrer**: A stir bar is used and the condenser neck is used for addition.\n\n*Source: Manual p.34.*",
+     "explanation": "**The mixture froths when the base goes in, so adding the KOH in two portions through the condenser keeps it controlled without opening the hot apparatus.** The manual gives the procedure (base added in two portions through the condenser, then wait for the frothing to subside before refluxing for 15 minutes); the reason is inferred from that frothing.\n\nWhy the others fail:\n- **To keep air out of the flask**: The apparatus is not under inert gas.\n- **KOH only dissolves when added slowly to cold ethanol**: It is dissolved first in 1 mL of ethanol.\n- **The condenser is the only neck available for a stirrer**: A stir bar is used and the condenser neck is used for addition.\n\n*Source: Manual p.34.*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -12459,7 +12459,7 @@
      "perspectiveLabel": "Work-up, purification and apparatus",
      "marks": 1,
      "stem": "Why is NaBH₄ added in portions to the ice-cooled ethanol solution, and what do you expect to see?",
-     "explanation": "**It reacts with the protic solvent (ethanol) to evolve hydrogen, and the reduction is exothermic, so portionwise addition controls the effervescence and the heat.** The manual warns \"beware of effervescence\". *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **The solid is hygroscopic and would clump if added at once**: The concern is gas evolution.\n- **The ketone freezes in the ice bath**: It stays dissolved in ethanol.\n- **NaBH₄ is added in portions because it is the limiting reagent**: Its amount is 0.5 equivalents; the portionwise addition is a control measure.\n\n*Source: Manual p.41.*",
+     "explanation": "**It reacts with the protic solvent (ethanol) to evolve hydrogen, and the reduction is exothermic, so portionwise addition controls the effervescence and the heat.** The manual warns \"beware of effervescence\". *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **The solid is hygroscopic and would clump if added at once**: The concern is gas evolution.\n- **The ketone freezes in the ice bath**: It stays dissolved in ethanol.\n- **NaBH₄ is added in portions because it is the limiting reagent**: At 0.5 equivalents it is already in hydride excess (each BH₄⁻ carries up to four hydrides), so it is not limiting; the portionwise addition is a control measure for the effervescence and heat.\n\n*Source: Manual p.41.*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -14628,7 +14628,7 @@
    "tier": "atomic",
    "metadata": {
     "title": "Which experiment's product is recrystallised from water?",
-    "source": "Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43; dried glassware p.50)",
+    "source": "Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43-44; dried glassware p.50)",
     "week": 4,
     "primaryTheme": "ex-cross",
     "conceptTags": [],
@@ -14643,7 +14643,7 @@
      "perspectiveLabel": "Which solvent, which technique, which experiment",
      "marks": 1,
      "stem": "Which experiment's product is recrystallised from water?",
-     "explanation": "**1A, paracetamol.** The manual says to recrystallise paracetamol from water (after the base/acid purification).\n\nWhy the others fail:\n- **1B, phenyl tosylate**: It is recrystallised from ethanol.\n- **5A, methyl 3-nitrobenzoate**: It is recrystallised from methanol.\n- **5E, trifluoroacetylpyrrole**: It is purified by sublimation, not recrystallisation.\n\n*Source: Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43; dried glassware p.50).*",
+     "explanation": "**1A, paracetamol.** The manual says to recrystallise paracetamol from water (after the base/acid purification).\n\nWhy the others fail:\n- **1B, phenyl tosylate**: It is recrystallised from ethanol.\n- **5A, methyl 3-nitrobenzoate**: It is recrystallised from methanol.\n- **5E, trifluoroacetylpyrrole**: It is purified by sublimation, not recrystallisation.\n\n*Source: Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43-44; dried glassware p.50).*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -14680,7 +14680,7 @@
      "perspectiveLabel": "Which solvent, which technique, which experiment",
      "marks": 1,
      "stem": "Which product is recrystallised from methanol?",
-     "explanation": "**Methyl 3-nitrobenzoate (5A).** Expt 5A says recrystallise from methanol; the 1B, 1C, 1E, 5B and 5C products use ethanol.\n\nWhy the others fail:\n- **Phenyl tosylate (1B)**: It uses ethanol.\n- **Dibenzalacetone (1C)**: It uses ethanol.\n- **1,2-Dimethoxy-4,5-dinitrobenzene (5B)**: It uses ethanol.\n\n*Source: Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43; dried glassware p.50).*",
+     "explanation": "**Methyl 3-nitrobenzoate (5A).** Expt 5A says recrystallise from methanol; the 1B, 1C, 1E, 5B and 5C products use ethanol.\n\nWhy the others fail:\n- **Phenyl tosylate (1B)**: It uses ethanol.\n- **Dibenzalacetone (1C)**: It uses ethanol.\n- **1,2-Dimethoxy-4,5-dinitrobenzene (5B)**: It uses ethanol.\n\n*Source: Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43-44; dried glassware p.50).*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -14716,8 +14716,8 @@
      "variantId": "bk-c61-d-x-solvent-v3",
      "perspectiveLabel": "Which solvent, which technique, which experiment",
      "marks": 1,
-     "stem": "Which product is purified by sublimation?",
-     "explanation": "**2-Trifluoroacetylpyrrole (5E).** It is a volatile solid sublimed at about 6 mmHg with gentle heating.\n\nWhy the others fail:\n- **Paracetamol (1A)**: It is recrystallised from water.\n- **Benzoic acid (9)**: It is recrystallised by acidifying and cooling, not by sublimation.\n- **Acetylferrocene (7)**: It is separated by column chromatography.\n\n*Source: Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43; dried glassware p.50).*",
+     "stem": "Which product does the manual purify by sublimation?",
+     "explanation": "**2-Trifluoroacetylpyrrole (5E).** It is a volatile solid sublimed at about 6 mmHg with gentle heating.\n\nWhy the others fail:\n- **Paracetamol (1A)**: It is recrystallised from water.\n- **Benzoic acid (9)**: It is recrystallised by acidifying and cooling, not by sublimation.\n- **Acetylferrocene (7)**: It is separated by column chromatography.\n\n*Source: Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43-44; dried glassware p.50).*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -14754,7 +14754,7 @@
      "perspectiveLabel": "Which solvent, which technique, which experiment",
      "marks": 1,
      "stem": "Which experiment uses a flash column to separate a mixture?",
-     "explanation": "**Expt 7, the acetylation of ferrocene.** The mixture of ferrocene, acetylferrocene and diacetylferrocene is separated on silica.\n\nWhy the others fail:\n- **Expt 9, the Grignard synthesis**: Benzoic acid is isolated by acidification and crystallisation.\n- **Expt 8, the silicone**: The step-1 siloxane oil is isolated by extraction and evaporation; the final product is a putty.\n- **Expt 1C, dibenzalacetone**: The product is recrystallised.\n\n*Source: Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43; dried glassware p.50).*",
+     "explanation": "**Expt 7, the acetylation of ferrocene.** The mixture of ferrocene, acetylferrocene and diacetylferrocene is separated on silica.\n\nWhy the others fail:\n- **Expt 9, the Grignard synthesis**: Benzoic acid is isolated by acidification and crystallisation.\n- **Expt 8, the silicone**: The step-1 siloxane oil is isolated by extraction and evaporation; the final product is a putty.\n- **Expt 1C, dibenzalacetone**: The product is recrystallised.\n\n*Source: Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43-44; dried glassware p.50).*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -14791,7 +14791,7 @@
      "perspectiveLabel": "Which solvent, which technique, which experiment",
      "marks": 1,
      "stem": "Which experiments need a drying tube (or oven-dried glassware) to exclude moisture?",
-     "explanation": "**5E (trifluoroacetic anhydride), 6 (the NaBH₄ flask), 7 (acetic anhydride) and 9 (the Grignard).** Each involves a reagent that reacts with water or is moisture-sensitive.\n\nWhy the others fail:\n- **1A, 1B and 1C only**: These run in water or aqueous base.\n- **5A, 5B and 5C only**: Nitrations in strong aqueous acid do not use drying tubes.\n- **None of them**: Several do, as listed.\n\n*Source: Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43; dried glassware p.50).*",
+     "explanation": "**5E (trifluoroacetic anhydride), 6 (the NaBH₄ flask), 7 (acetic anhydride) and 9 (the Grignard).** Each involves a reagent that reacts with water or is moisture-sensitive.\n\nWhy the others fail:\n- **1A, 1B and 1C only**: These run in water or aqueous base.\n- **5A, 5B and 5C only**: Nitrations in strong aqueous acid do not use drying tubes.\n- **None of them**: Several do, as listed.\n\n*Source: Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43-44; dried glassware p.50).*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -14828,7 +14828,7 @@
      "perspectiveLabel": "Which solvent, which technique, which experiment",
      "marks": 1,
      "stem": "Which experiments use a reflux condenser with water in at the bottom?",
-     "explanation": "**1E, 1F and the Grignard formation in 9.** Each heats a volatile solvent at its boiling point for a time; 7 and 8 use the condenser without cooling water.\n\nWhy the others fail:\n- **5A, 5B and 5C**: Nitrations are run in a flask in baths with no reflux.\n- **1A and 1B**: These are stirred in a flask without a condenser.\n- **5D and 6 only**: They do not use a reflux condenser.\n\n*Source: Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43; dried glassware p.50).*",
+     "explanation": "**1E, 1F and the Grignard formation in 9.** Each heats a volatile solvent at its boiling point for a time; 7 and 8 use the condenser without cooling water.\n\nWhy the others fail:\n- **5A, 5B and 5C**: Nitrations are run in a flask in baths with no reflux.\n- **1A and 1B**: These are stirred in a flask without a condenser.\n- **5D and 6 only**: They do not use a reflux condenser.\n\n*Source: Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43-44; dried glassware p.50).*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -17022,7 +17022,7 @@
      "variantId": "yield-5a",
      "perspectiveLabel": "5A: methyl 3-nitrobenzoate",
      "marks": 4,
-     "stem": "Expt 5A starts from methyl benzoate (1.00 g, M = 136.15). Nitric acid (about 0.65 mL of 70%, d 1.41) is in excess, so the ester limits. You isolate {{fix(act,2)}} g of methyl 3-nitrobenzoate (M = 181.15 g mol⁻¹). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).",
+     "stem": "Expt 5A starts from methyl benzoate (1.00 g, M = 136.15). Concentrated nitric acid (about 0.65 mL of the 1:1 mixture, taken as 70% w/w, d 1.41) is in excess, so the ester limits. You isolate {{fix(act,2)}} g of methyl 3-nitrobenzoate (M = 181.15 g mol⁻¹). Give the amount of limiting reagent, the theoretical yield and the percentage yield (whole percent).",
      "hint": "theoretical mass = n(limiting) × M(product) for a 1:1 reaction; % yield = actual ÷ theoretical × 100.",
      "explanation": "The limiting reagent sets the theoretical yield: n × M(product). % yield = actual ÷ theoretical × 100, quoted as a whole percentage (accuracy table). Using the reagent in excess gives a theoretical yield that is too high and a percentage that is too low.",
      "variables": {

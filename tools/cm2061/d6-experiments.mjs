@@ -51,7 +51,7 @@ add(mcq({
   id: 'bk-c61-d-6-nabh4-add', ...K('6'), source: 'Manual p.41',
   stem: 'Why is NaBH₄ added in portions to the ice-cooled ethanol solution, and what do you expect to see?',
   right: ['It reacts with the protic solvent (ethanol) to evolve hydrogen, and the reduction is exothermic, so portionwise addition controls the effervescence and the heat', 'The manual warns "beware of effervescence".'],
-  wrong: [['The solid is hygroscopic and would clump if added at once', 'The concern is gas evolution.'], ['The ketone freezes in the ice bath', 'It stays dissolved in ethanol.'], ['NaBH₄ is added in portions because it is the limiting reagent', 'Its amount is 0.5 equivalents; the portionwise addition is a control measure.']],
+  wrong: [['The solid is hygroscopic and would clump if added at once', 'The concern is gas evolution.'], ['The ketone freezes in the ice bath', 'It stays dissolved in ethanol.'], ['NaBH₄ is added in portions because it is the limiting reagent', 'At 0.5 equivalents it is already in hydride excess (each BH₄⁻ carries up to four hydrides), so it is not limiting; the portionwise addition is a control measure for the effervescence and heat.']],
   beyond: true,
 }));
 add(mcq({
@@ -292,7 +292,7 @@ add(mcq({
 
 // ======================================= cross-experiment comparisons =======================================
 add(mcqSet({
-  id: 'bk-c61-d-x-solvent', week: W, chunk: 'ex-cross', skill: 'ex.cross.recryst', skillName: 'Which solvent, which technique, which experiment', source: 'Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43; dried glassware p.50)', diff: 3,
+  id: 'bk-c61-d-x-solvent', week: W, chunk: 'ex-cross', skill: 'ex.cross.recryst', skillName: 'Which solvent, which technique, which experiment', source: 'Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43-44; dried glassware p.50)', diff: 3,
   items: [
     { stem: 'Which experiment\'s product is recrystallised from water?',
       right: ['1A, paracetamol', 'The manual says to recrystallise paracetamol from water (after the base/acid purification).'],
@@ -300,7 +300,7 @@ add(mcqSet({
     { stem: 'Which product is recrystallised from methanol?',
       right: ['Methyl 3-nitrobenzoate (5A)', 'Expt 5A says recrystallise from methanol; the 1B, 1C, 1E, 5B and 5C products use ethanol.'],
       wrong: [['Phenyl tosylate (1B)', 'It uses ethanol.'], ['Dibenzalacetone (1C)', 'It uses ethanol.'], ['1,2-Dimethoxy-4,5-dinitrobenzene (5B)', 'It uses ethanol.']] },
-    { stem: 'Which product is purified by sublimation?',
+    { stem: 'Which product does the manual purify by sublimation?',
       right: ['2-Trifluoroacetylpyrrole (5E)', 'It is a volatile solid sublimed at about 6 mmHg with gentle heating.'],
       wrong: [['Paracetamol (1A)', 'It is recrystallised from water.'], ['Benzoic acid (9)', 'It is recrystallised by acidifying and cooling, not by sublimation.'], ['Acetylferrocene (7)', 'It is separated by column chromatography.']] },
     { stem: 'Which experiment uses a flash column to separate a mixture?',

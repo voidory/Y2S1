@@ -74,3 +74,13 @@ export function orderItem({ id, week, chunk, skill, skillName, source, stem, ste
     skill: { id: skill, name: skillName, chunk },
   };
 }
+
+/** Draw on paper, then reveal a model answer and tick a checklist (atomic_rubric). items: [criterion, marks][]; figure: SVG string. */
+export function drawItem({ id, week, chunk, skill, skillName, source, stem, items, explanation, figure, caption, tags = [], diff = 3, hint }) {
+  const variant = base.written({ id: `${id}-v1`, label: tags[0] || skillName, stem, explanation: `${explanation}\n\n*Source: ${source}.*`, items, paper: true, hint });
+  variant.comparisonVisualAsset = { type: 'svg', payload: figure, caption: caption || 'Model answer' };
+  return {
+    node: node({ id, week, title: tags[0] || skillName, theme: chunk, tags, diff, exam: 'construct_4to6', mins: 6, source, variants: [variant] }),
+    skill: { id: skill, name: skillName, chunk },
+  };
+}

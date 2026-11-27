@@ -19,13 +19,15 @@ import d5 from './d5-experiments.mjs';
 import d6 from './d6-experiments.mjs';
 import g from './g-calcs.mjs';
 import h from './h-elabs.mjs';
+import e from './e-cases.mjs';
+import f from './f-structures.mjs';
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const outDir = path.resolve(here, '..', '..', 'public', 'content', 'cm2061');
 
 export const GROUP_WEIGHT = { framework: 2, techniques: 11, spectroscopy: 20, experiments: 22, calcs: 5, unseen: 30, structures: 10, elabs: 10 };
 
-const WEEK = { 8: 'H. E-labs', 1: 'A. Course framework, safety and the literature', 2: 'B. Laboratory techniques and apparatus', 3: 'C. Spectroscopy: IR and 1H NMR', 4: 'D. The experiments', 7: 'G. Calculations' };
+const WEEK = { 5: 'E. Reasoning about an unseen procedure', 6: 'F. Structures and apparatus drawings', 8: 'H. E-labs', 1: 'A. Course framework, safety and the literature', 2: 'B. Laboratory techniques and apparatus', 3: 'C. Spectroscopy: IR and 1H NMR', 4: 'D. The experiments', 7: 'G. Calculations' };
 const CHUNKS = [
   { id: 'fw-method', group: 'framework', name: 'Purification, and synthesise-purify-characterise', summary: 'The four purification methods and when to use each; the three stages; who does what with IR and NMR' },
   { id: 'fw-safety', group: 'framework', name: 'Risk assessment, safety rules and conduct', summary: 'A hazard is a property; goggles, contact lenses, the fume-cupboard sash, dress code, lateness, ethics' },
@@ -48,12 +50,16 @@ const CHUNKS = [
   ...[['1a', '1A paracetamol'], ['1b', '1B phenyl toluene-p-sulfonate'], ['1c', '1C dibenzalacetone'], ['1d', '1D Py2Zn(NCO)2'], ['1e', '1E 1-tosylpyrrole'], ['1f', '1F tetraphenylcyclopentadienone'], ['5a', '5A methyl 3-nitrobenzoate'], ['5b', '5B dinitroveratrole'], ['5c', '5C nitromethylenedioxybenzene'], ['5d', '5D 2-iodobenzoic acid'], ['5e', '5E 2-trifluoroacetylpyrrole'], ['6', '6 reduction of ethyl acetoacetate'], ['7', '7 acetylation of ferrocene and the column'], ['8', '8 siloxanes and bouncing putty'], ['9', '9 Grignard: benzoic acid']]
     .map(([e, name]) => ({ id: `ex-${e}`, group: 'experiments', name: `Expt ${name}`, summary: 'Reaction and roles, work-up and purification, observations, characterisation and what goes wrong' })),
   { id: 'ex-cross', group: 'experiments', name: 'Comparing the experiments', summary: 'Which solvent, which technique and which reaction class belongs to which experiment' },
+  ...[['1', 'cyclohexene from cyclohexanol', 'dehydration, distilling the product, azeotrope, drying, alkene stain'], ['2', 'methyl benzoate (Fischer esterification)', 'equilibrium, reflux, bicarbonate wash and the salt, TLC, IR and NMR evidence'], ['3', 'triphenylmethanol (Grignard on a ketone)', 'dry glassware, limiting Mg, quench, biphenyl by-product, TLC order and stains'], ['4', 'p-bromoacetanilide (bromination)', 'bromine hazards, why acetylate, bisulfite, HBr, IR range limit, NMR of a para ring'], ['5', 'adipic acid (permanganate oxidation)', 'electron counting, MnO2, acidifying a carboxylate, TLC of salts, recrystallisation solvent'], ['6', 'the anthracene-maleic anhydride adduct (Diels-Alder)', 'high-boiling solvent, drying tube, washes, IR anhydride bands, achiral so no polarimetry']]
+    .map(([n, name, sum]) => ({ id: `case-${n}`, group: 'unseen', name: `Case ${n}: ${name}`, summary: sum })),
+  { id: 'st-structures', group: 'structures', name: 'Bond-line structures of the laboratory chemicals', summary: 'Ten chemicals per set as in the 2015 paper: solvents, inorganic reagents, reagents and products of every experiment, organometallics' },
+  { id: 'st-apparatus', group: 'structures', name: 'Apparatus sketches', summary: 'Reflux, addition funnel with drying tube, reduced-pressure distillation, Grignard on a Schlenk line, sublimation, flash column, separatory funnel' },
   { id: 'el-2', group: 'elabs', name: 'E-lab 2: metal chelate, Cr(CO)4(bipy)', summary: 'Hazards, the Schlenk line, the substitution, 18 electrons, IR of the carbonyls (seed from one example screen)' },
   { id: 'calc-mass', group: 'calcs', name: 'Amounts, yields and reagent quantities', summary: 'Volume from density, equivalents, limiting reagent, % yield, NaBH4 hydride' },
   { id: 'calc-spec', group: 'calcs', name: 'Spectroscopy and measurement numbers', summary: '[α]D and ee, spin-only μ, Hz and ppm, integrals, Rf' },
 ].map((c0) => ({ ...c0, part: null }));
 
-const all = [...a, ...b, ...c, ...c2, ...d1, ...d5, ...d6, ...g, ...h];
+const all = [...a, ...b, ...c, ...c2, ...d1, ...d5, ...d6, ...e, ...f, ...g, ...h];
 const nodes = all.map((x) => x.node);
 const ids = new Set();
 for (const n of nodes) {

@@ -134,7 +134,7 @@ const ok = (cond, msg) => { if (!cond) { fail.push(msg); console.log('  FAIL ' +
   const url = `http://127.0.0.1:${server.address().port}/index.html`;
   const browser = await chromium.launch();
   let checks = 0, bad = 0;
-  const STUDY = ['bk-c61-b-reflux-water', 'bk-c61-b-recryst-recovery', 'bk-c61-b-sub-order', 'bk-c61-g-equiv', 'bk-c61-g-yield', 'bk-c61-g-alpha', 'bk-c61-c-dq', 'bk-c61-d-9-workup'];
+  const STUDY = ['bk-c61-b-reflux-water', 'bk-c61-b-recryst-recovery', 'bk-c61-b-sub-order', 'bk-c61-g-equiv', 'bk-c61-g-yield', 'bk-c61-g-alpha', 'bk-c61-c-dq', 'bk-c61-d-9-workup', 'bk-c61-e-case-cyclohexene', 'bk-c61-e-case-grignard', 'bk-c61-f-set-products1', 'bk-c61-f-app-grignard', 'bk-c61-f-set-organometallic'];
   for (const [name, size] of SIZES) {
     const c = await browser.newContext({ viewport: size, deviceScaleFactor: 1, hasTouch: size.width < 768 });
     await offline(c);

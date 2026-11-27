@@ -13,13 +13,15 @@ const root = path.resolve(here, '..', '..');
 const bank = JSON.parse(fs.readFileSync(path.join(root, 'public/content/cm2061/question-bank.json'), 'utf8'));
 const map = JSON.parse(fs.readFileSync(path.join(root, 'public/content/cm2061/skill-map.json'), 'utf8'));
 const chunkOf = (id) => { const s = map.skills.find((k) => k.nodes.includes(id)); return s.chunk; };
-const groupOf = (c) => (/^fw-/.test(c) ? 'fw' : /^tq-/.test(c) ? 'tq' : /^sp-/.test(c) ? 'sp' : /^ex-/.test(c) ? 'ex' : /^calc-/.test(c) ? 'calc' : /^el-/.test(c) ? 'el' : 'other');
+const groupOf = (c) => (/^fw-/.test(c) ? 'fw' : /^tq-/.test(c) ? 'tq' : /^sp-/.test(c) ? 'sp' : /^ex-/.test(c) ? 'ex' : /^calc-/.test(c) ? 'calc' : /^el-/.test(c) ? 'el' : /^case-/.test(c) ? 'case' : /^st-/.test(c) ? 'st' : 'other');
 
 const single = (n) => n.variants.every((v) => v.inputSlot.type === 'choice' && v.inputSlot.selectionMode !== 'multi');
-const pools = { fw: [], tq: [], sp: [], ex: [], el: [], calc: [], mixed: [] };
+const pools = { fw: [], tq: [], sp: [], ex: [], el: [], case: [], st: [], calc: [], mixed: [] };
 for (const n of bank.questionNodes) {
   const g = groupOf(chunkOf(n.id));
   if (g === 'calc') pools.calc.push(n.id);
+  else if (g === 'case') pools.case.push(n.id);
+  else if (g === 'st') pools.st.push(n.id);
   else if (single(n)) pools[g].push(n.id);
   else pools.mixed.push(n.id);              // multi-select and ordering items form the short-answer pool
 }
@@ -44,11 +46,16 @@ const calcA = pools.calc.filter((id) => /equiv|yield|volume|hydride/.test(id));
 const calcB = pools.calc.filter((id) => /alpha|mu|spec/.test(id));
 sections.push({ label: 'Part A · Short answers: amounts and measurements', parts: [calcA.filter((id) => /equiv|yield/.test(id)), calcA.filter((id) => /volume|hydride/.test(id)), calcB] });
 sections.push({ label: 'Part A · Short answers: techniques', parts: split(pools.mixed, 3) });
+// the 2015 pattern: one unseen procedure with a chain of linked parts, then structures and a glassware sketch
+const stStruct = pools.st.filter((id) => /-set-/.test(id));
+const stApp = pools.st.filter((id) => /-app-/.test(id));
+sections.push({ label: 'Part A · An unseen procedure (one case chain)', parts: [pools.case] });
+sections.push({ label: 'Part A · Structures and a glassware sketch (draw on paper, then self-mark)', parts: [stStruct, stApp] });
 
 const nMcq = interleaved.length;
 const recipe = `        CM2061: {
-          label: 'Final-style paper', durationMinutes: 120, approxMarks: ${nMcq + 14}, sizeLabel: '${nMcq} pick-one + short answers',
-          note: 'Built like the exam described on Manual p.14 (2 h, no notes, between 30 and 50 pick-one questions plus short answers). This stage has ${nMcq} pick-one questions and short answers on amounts and techniques; the unseen-procedure case chain and the structures set are added with their banks. Use the CBC databook as in the exam.',
+          label: 'Final-style paper', durationMinutes: 120, approxMarks: ${nMcq + 14 + 14 + 20 + 8}, sizeLabel: '${nMcq} pick-one + 1 case chain + 1 structures set + 1 glassware sketch + short answers',
+          note: 'Built like the exam described on Manual p.14 (2 h, no notes, between 30 and 50 pick-one questions plus short answers). It has ${nMcq} pick-one questions, short answers on amounts and techniques, one unseen-procedure case chain (about 14 marks), one set of ten structures (20) and one glassware sketch (8), about 100 marks in all, which is more than 2 h of work at a careful pace: treat the drawings as 25 minutes. Use the CBC databook as in the exam.',
           sections: ${JSON.stringify(sections, null, 0).replace(/"/g, "'")},
         },`;
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
@@ -58,4 +65,4 @@ if (a < 0 || b < 0) throw new Error('markers missing in index.html');
 const startEnd = html.indexOf('*/', a) + 2;
 const out = html.slice(0, startEnd) + '\n' + recipe + '\n        ' + html.slice(b);
 fs.writeFileSync(path.join(root, 'index.html'), out);
-console.log(`CM2061 recipe: ${nMcq} pick-one parts, ${sections[1].parts.length + sections[2].parts.length} short-answer parts`);
+console.log(`CM2061 recipe: ${nMcq} pick-one parts, ${sections.length - 1} further sections`);

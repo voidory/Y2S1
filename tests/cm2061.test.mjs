@@ -43,15 +43,15 @@ test('skill map: valid, consistent with the bank, every question in a skill and 
   for (const c of map.chunks) assert.ok(Content.chunkNodeIds(map, c.id).length > 0, `${c.id} has questions`);
 });
 
-test('weights follow the agreed plan: groups keep their 2:11:20:22:5:10 proportions while unseen-procedure and structures are not built', () => {
-  const group = (id) => (/^fw-/.test(id) ? 'framework' : /^tq-/.test(id) ? 'techniques' : /^sp-/.test(id) ? 'spectroscopy' : /^ex-/.test(id) ? 'experiments' : /^calc-/.test(id) ? 'calcs' : /^el-/.test(id) ? 'elabs' : 'other');
+test('weights follow the agreed plan: unseen-procedure 30, experiments 22, spectroscopy 20, techniques 11, structures 10, e-labs 10, calculations 5, framework 2', () => {
+  const group = (id) => (/^fw-/.test(id) ? 'framework' : /^tq-/.test(id) ? 'techniques' : /^sp-/.test(id) ? 'spectroscopy' : /^ex-/.test(id) ? 'experiments' : /^calc-/.test(id) ? 'calcs' : /^el-/.test(id) ? 'elabs' : /^case-/.test(id) ? 'unseen' : /^st-/.test(id) ? 'structures' : 'other');
   const totals = {};
   for (const s of map.skills) totals[group(s.chunk)] = (totals[group(s.chunk)] || 0) + s.marks;
   assert.equal(totals.other, undefined);
   const sum = Object.values(totals).reduce((a, b) => a + b, 0);
   assert.ok(Math.abs(sum - 100) < 0.5, `marks sum to ${sum}`);
-  const want = { framework: 2, techniques: 11, spectroscopy: 20, experiments: 22, calcs: 5, elabs: 10 };
-  for (const [g, w] of Object.entries(want)) assert.ok(Math.abs(totals[g] / sum - w / 70) < 0.005, `${g}: ${(totals[g] / sum * 70).toFixed(2)} vs ${w}`);
+  const want = { framework: 2, techniques: 11, spectroscopy: 20, experiments: 22, calcs: 5, elabs: 10, unseen: 30, structures: 10 };
+  for (const [g, w] of Object.entries(want)) assert.ok(Math.abs(totals[g] / sum - w / 110) < 0.005, `${g}: ${(totals[g] / sum * 110).toFixed(2)} vs ${w}`);
 });
 
 test('there are at least 150 pick-one questions, each key unique and every distractor explained', () => {
@@ -230,4 +230,62 @@ test('final-style paper: CM2061 has a recipe whose parts all resolve', () => {
   assert.equal(new Set(qids).size, qids.length);
   const other = Scheduler.assembleRecipePaper(bank.questionNodes, recipe, { random: () => 0.81 });
   assert.notEqual(qids.join(), other.questions.map((q) => q.node.id + '/' + q.inst.variant.variantId).join());
+});
+
+test('case chains: six or more, each a linked question of 10-14 parts; only the keyed option scores, for every part', () => {
+  const cases = bank.questionNodes.filter((n) => /^bk-c61-e-case-/.test(n.id));
+  assert.ok(cases.length >= 6, `${cases.length} cases`);
+  const bad = [];
+  for (const n of cases) {
+    const v = n.variants[0];
+    const keys = Object.keys(v.evaluator.targets);
+    if (keys.length < 10 || keys.length > 14) bad.push(`${n.id}: ${keys.length} parts`);
+    if (!/Organic Syntheses style/.test(n.metadata.source) || !/not a verified/.test(n.metadata.source)) bad.push(`${n.id}: source must say it is a model procedure`);
+    for (const seed of [1, 2, 3]) {
+      const inst = Scheduler.instantiateVariant(v, seed * 7919);
+      for (const f of v.inputSlot.fields) {
+        if (!Array.isArray(f.options)) continue;
+        const spec = v.evaluator.targets[f.key];
+        const right = spec.synonyms.ok[0];
+        if (!f.options.includes(right)) { bad.push(`${n.id}.${f.key}: key not among the options`); continue; }
+        if (new Set(f.options).size !== f.options.length) bad.push(`${n.id}.${f.key}: duplicate options`);
+        for (const o of f.options) {
+          const r = Evaluators.evaluate(v, { [f.key]: o }, inst.scope, {}, n).fieldResults[f.key];
+          if ((o === right) !== (r.normalizedGrade === 1)) bad.push(`${n.id}.${f.key}: option "${o.slice(0, 30)}" scored ${r.normalizedGrade}`);
+        }
+      }
+    }
+    // the key is not always the first option
+  }
+  assert.deepEqual(bad.slice(0, 8), []);
+  let first = 0, all = 0;
+  for (const n of cases) for (const f of n.variants[0].inputSlot.fields) if (Array.isArray(f.options)) { all++; if (f.options[0] === n.variants[0].evaluator.targets[f.key].synonyms.ok[0]) first++; }
+  assert.ok(first / all < 0.5, `key is first in ${first}/${all} parts`);
+});
+
+test('structures and apparatus: every draw item has a model answer and a checklist whose marks add up', () => {
+  const draws = bank.questionNodes.filter((n) => /^bk-c61-f-/.test(n.id));
+  assert.ok(draws.length >= 15, `${draws.length} draw items`);
+  const bad = [];
+  for (const n of draws) {
+    const v = n.variants[0];
+    if (!v.drawOnPaperThenCompare) bad.push(`${n.id}: not draw-then-reveal`);
+    if (v.evaluator.type !== 'atomic_rubric') bad.push(`${n.id}: not a rubric`);
+    const svg = v.comparisonVisualAsset?.payload || '';
+    if (!/<svg/.test(svg) || /NaN|undefined/.test(svg)) bad.push(`${n.id}: bad model answer`);
+    const sum = v.evaluator.rubric.reduce((a, r) => a + r.marks, 0);
+    if (sum !== v.marks) bad.push(`${n.id}: rubric ${sum} vs marks ${v.marks}`);
+  }
+  assert.deepEqual(bad, []);
+  // ten structures per set (two marks each), as in the 2015 paper's Q2
+  const sets = draws.filter((n) => /-set-/.test(n.id) && !/products3|organometallic/.test(n.id));
+  for (const n of sets) assert.equal(n.variants[0].marks, 20, `${n.id} is 10 x 2 marks`);
+});
+
+test('every reagent, solvent and product named in the manual experiments has a drawn structure', () => {
+  const text = bank.questionNodes.filter((n) => /^bk-c61-f-set-/.test(n.id)).map((n) => n.variants[0].evaluator.rubric.map((r) => r.criterion).join(' ')).join(' ').toLowerCase();
+  const need = ['pyridine', 'ethyl acetate', 'acetone', 'benzoic acid', 'sodium sulfate', 'nitric acid', 'hydrogen peroxide', 'dimethyldichlorosilane', 'paracetamol', 'phenyl toluene-p-sulfonate',
+    'dibenzalacetone', 'py2zn', 'sulfonyl)pyrrole', 'tetraphenylcyclopentadienone', 'methyl 3-nitrobenzoate', 'dinitrobenzene', 'benzodioxole', '2-iodobenzoic acid', 'trifluoroacetylpyrrole', 'ethyl acetoacetate',
+    'ethyl (s)-3-hydroxybutanoate', 'sodium borohydride', 'ferrocene', 'acetylferrocene', 'bromobenzene', 'phenylmagnesium bromide', 'carbon dioxide', 'boric oxide', 'sodium cyanate', 'zinc nitrate', 'potassium iodide', 'iodine'];
+  for (const w of need) assert.ok(text.includes(w), `no drawing for ${w}`);
 });

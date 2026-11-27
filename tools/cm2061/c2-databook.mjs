@@ -19,16 +19,16 @@ add(mcqSet({
     { stem: 'Which of these has the highest-frequency C=O stretch in the databook?',
       right: ['A saturated anhydride (1850-1800 and 1790-1740 cm⁻¹)', 'Anhydrides and acid chlorides are above the normal ester range.'],
       wrong: [['A saturated ester (1750-1735 cm⁻¹)', 'Lower than an anhydride.'], ['A saturated ketone (1725-1705 cm⁻¹)', 'Lower still.'], ['A secondary amide (1700-1670 cm⁻¹)', 'Amides are the lowest of these, because of nitrogen donation.']] },
-    { stem: 'The solid (nujol mull) IR spectrum of paracetamol is read against the databook. Which pair of secondary-amide bands should you look for?',
-      right: ['About 1680-1630 cm⁻¹ (C=O) and 1570-1515 cm⁻¹ (N-H bend), the solid-phase values', 'The databook gives separate solid-phase and solution ranges; a mull is solid phase.'],
-      wrong: [['About 1850-1800 and 1790-1740 cm⁻¹', 'That is the anhydride pair; paracetamol has no anhydride.'], ['About 1750-1735 cm⁻¹ only', 'That is a saturated ester, which paracetamol lacks.'], ['About 1670-1630 cm⁻¹ alone', 'That is the single tertiary-amide band; paracetamol is a secondary amide with two bands.']] },
+    { stem: 'The solid (nujol mull) IR spectrum of paracetamol is read against the databook. Which C=O range should you look for?',
+      right: ['About 1680-1630 cm⁻¹, the secondary-amide range for the solid phase', 'The databook gives separate solid-phase and solution ranges for secondary amides; a mull is solid phase.'],
+      wrong: [['About 1850-1800 cm⁻¹', 'That is the saturated anhydride range; paracetamol has no anhydride.'], ['About 1750-1735 cm⁻¹', 'That is a saturated ester, which paracetamol lacks.'], ['About 1700-1670 cm⁻¹', 'That is the solution value for a secondary amide, so it is the wrong row for a mull (the two overlap at the edge, which is why the phase matters).']] },
     { stem: 'In which databook range would the strong C=O band of an aryl carboxylic acid such as benzoic acid fall?',
       right: ['1700-1680 cm⁻¹', 'The databook lists aryl acids at 1700-1680 (saturated acids 1725-1700, α,β-unsaturated 1715-1690).'],
       wrong: [['1725-1700 cm⁻¹', 'That is the saturated acid range.'], ['1610-1550 cm⁻¹', 'That is the carboxylate anion, not the neutral acid.'], ['1750-1735 cm⁻¹', 'That is a saturated ester.']] },
   ],
 }));
 add(mcqSet({
-  id: 'bk-c61-c2-db-ir-other', ...IR, source: 'CBC databook pp.9-11 (OH, CH, nitro, alkene deformations, anions)', diff: 3,
+  id: 'bk-c61-c2-db-ir-other', ...IR, source: 'CBC databook pp.8-11 (OH, CH, nitro, alkene deformations, anions)', diff: 3,
   items: [
     { stem: 'A dilute solution of an alcohol shows a sharp O-H band near 3620 cm⁻¹. Which databook entry fits?',
       right: ['Free (non-hydrogen-bonded) O-H, 3650-3590 cm⁻¹, sharp', 'Hydrogen bonding in concentrated samples shifts and broadens the band to 3400-3200.'],
@@ -56,13 +56,13 @@ add(mcqSet({
       wrong: [['CH₃-CO-R (about 2.2)', 'Lower: separated from oxygen.'], ['CH₃-S (about 2.1)', 'Lower: sulfur is less deshielding than oxygen.'], ['CH₃-C (about 0.9)', 'The most shielded methyl.']] },
     { stem: 'Why are the acetyl CH₃ of acetophenone (about 2.6) and the CH₃ of toluene (about 2.3) different?',
       right: ['The carbonyl and the ring together deshield the acetyl methyl more than a ring alone deshields a benzylic methyl', 'The databook lists CH₃-CO-Ar at 2.6 and CH₃-Ar at 2.3.'],
-      wrong: [['Toluene\'s methyl is on oxygen', 'It is on carbon (a benzylic methyl).'], ['Acetophenone has more protons', 'The number of protons does not set the shift.'], ['They are identical within the databook\'s accuracy', 'The values differ by 0.3, more than the quoted ±0.2.']] },
+      wrong: [['Toluene\'s methyl is on oxygen', 'It is on carbon (a benzylic methyl).'], ['Acetophenone has more protons', 'The number of protons does not set the shift.'], ['They are identical within the databook\'s accuracy', 'The databook lists distinct values, 2.6 and 2.3; a difference of 0.3 is larger than the ±0.2 typical error on either one alone.']] },
     { stem: 'The databook says shifts are "usually within ±0.2" of the tabulated value. What does that margin warn you about?',
       right: ['Use the table with caution: inductive, anisotropic or steric effects can move a signal further', 'It is a typical accuracy, not a guarantee.'],
       wrong: [['The table is exact for all compounds', 'The databook itself says to use it with caution.'], ['Only ¹³C values are uncertain', 'The caution is stated for both ¹H and ¹³C shifts.'], ['Shifts depend on the spectrometer frequency, so ±0.2 ppm is meaningless', 'δ is field-independent; the margin reflects structure, not the machine.']] },
     { stem: 'Which proton type does the databook place at the HIGHEST chemical shift range?',
       right: ['R-CO₂H (about 10 to 13)', 'Acid protons come above aldehyde protons.'],
-      wrong: [['R-CHO and Ar-CHO (9.4-10.5)', 'High, but below the carboxylic acid upper range.'], ['Aromatic protons (6.0-9.0)', 'Lower than aldehydes.'], ['R-OH (2-10, variable)', 'Spread over a wide range but typically well below 10.']] },
+      wrong: [['R-CHO and Ar-CHO (9.4-10.5)', 'High, but below the carboxylic acid upper range.'], ['Aromatic protons (6.0-9.0)', 'Lower than aldehydes.'], ['Alcohol R-OH (2-10, leaving aside H-bonded enols)', 'Spread over a wide range but typically well below 10.']] },
   ],
 }));
 add(mcqSet({

@@ -1,6 +1,6 @@
 {
  "bundleVersion": "3.0",
- "exportedAt": "2026-11-27T10:35:28.087Z",
+ "exportedAt": "2026-11-27T10:39:01.018Z",
  "questionNodes": [
   {
    "schemaVersion": "3.0",
@@ -8220,8 +8220,8 @@
      "variantId": "bk-c61-c2-db-co-v3",
      "perspectiveLabel": "Reading the databook IR tables",
      "marks": 1,
-     "stem": "The solid (nujol mull) IR spectrum of paracetamol is read against the databook. Which pair of secondary-amide bands should you look for?",
-     "explanation": "**About 1680-1630 cm⁻¹ (C=O) and 1570-1515 cm⁻¹ (N-H bend), the solid-phase values.** The databook gives separate solid-phase and solution ranges; a mull is solid phase.\n\nWhy the others fail:\n- **About 1850-1800 and 1790-1740 cm⁻¹**: That is the anhydride pair; paracetamol has no anhydride.\n- **About 1750-1735 cm⁻¹ only**: That is a saturated ester, which paracetamol lacks.\n- **About 1670-1630 cm⁻¹ alone**: That is the single tertiary-amide band; paracetamol is a secondary amide with two bands.\n\n*Source: CBC databook p.9 (C=O stretching); 2015 paper style.*",
+     "stem": "The solid (nujol mull) IR spectrum of paracetamol is read against the databook. Which C=O range should you look for?",
+     "explanation": "**About 1680-1630 cm⁻¹, the secondary-amide range for the solid phase.** The databook gives separate solid-phase and solution ranges for secondary amides; a mull is solid phase.\n\nWhy the others fail:\n- **About 1850-1800 cm⁻¹**: That is the saturated anhydride range; paracetamol has no anhydride.\n- **About 1750-1735 cm⁻¹**: That is a saturated ester, which paracetamol lacks.\n- **About 1700-1670 cm⁻¹**: That is the solution value for a secondary amide, so it is the wrong row for a mull (the two overlap at the edge, which is why the phase matters).\n\n*Source: CBC databook p.9 (C=O stretching); 2015 paper style.*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -8229,19 +8229,19 @@
       "options": [
        {
         "id": "a",
-        "label": "About 1680-1630 cm⁻¹ (C=O) and 1570-1515 cm⁻¹ (N-H bend), the solid-phase values"
+        "label": "About 1680-1630 cm⁻¹, the secondary-amide range for the solid phase"
        },
        {
         "id": "b",
-        "label": "About 1850-1800 and 1790-1740 cm⁻¹"
+        "label": "About 1850-1800 cm⁻¹"
        },
        {
         "id": "c",
-        "label": "About 1750-1735 cm⁻¹ only"
+        "label": "About 1750-1735 cm⁻¹"
        },
        {
         "id": "d",
-        "label": "About 1670-1630 cm⁻¹ alone"
+        "label": "About 1700-1670 cm⁻¹"
        }
       ]
      },
@@ -8299,7 +8299,7 @@
    "tier": "atomic",
    "metadata": {
     "title": "A dilute solution of an alcohol shows a sharp O-H band near 3620 cm...",
-    "source": "CBC databook pp.9-11 (OH, CH, nitro, alkene deformations, anions)",
+    "source": "CBC databook pp.8-11 (OH, CH, nitro, alkene deformations, anions)",
     "week": 3,
     "primaryTheme": "sp-databook",
     "conceptTags": [],
@@ -8314,7 +8314,7 @@
      "perspectiveLabel": "Reading the databook IR tables",
      "marks": 1,
      "stem": "A dilute solution of an alcohol shows a sharp O-H band near 3620 cm⁻¹. Which databook entry fits?",
-     "explanation": "**Free (non-hydrogen-bonded) O-H, 3650-3590 cm⁻¹, sharp.** Hydrogen bonding in concentrated samples shifts and broadens the band to 3400-3200.\n\nWhy the others fail:\n- **Carboxylic acid O-H, 3200-2500 cm⁻¹, broad**: Far lower and very broad.\n- **Intermolecular hydrogen-bonded polymeric O-H, 3400-3200 cm⁻¹**: Lower and broad.\n- **Alkyne C-H, 3300 cm⁻¹**: Not near 3620, and no alkyne is involved.\n\n*Source: CBC databook pp.9-11 (OH, CH, nitro, alkene deformations, anions).*",
+     "explanation": "**Free (non-hydrogen-bonded) O-H, 3650-3590 cm⁻¹, sharp.** Hydrogen bonding in concentrated samples shifts and broadens the band to 3400-3200.\n\nWhy the others fail:\n- **Carboxylic acid O-H, 3200-2500 cm⁻¹, broad**: Far lower and very broad.\n- **Intermolecular hydrogen-bonded polymeric O-H, 3400-3200 cm⁻¹**: Lower and broad.\n- **Alkyne C-H, 3300 cm⁻¹**: Not near 3620, and no alkyne is involved.\n\n*Source: CBC databook pp.8-11 (OH, CH, nitro, alkene deformations, anions).*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -8351,7 +8351,7 @@
      "perspectiveLabel": "Reading the databook IR tables",
      "marks": 1,
      "stem": "Which databook range covers both the asymmetric and symmetric stretches of an aromatic nitro group (two bands)?",
-     "explanation": "**1555-1540 and 1385-1350 cm⁻¹.** These are the two N=O ranges for nitro compounds.\n\nWhy the others fail:\n- **1850-1800 and 1790-1740 cm⁻¹**: These are the anhydride C=O pair.\n- **3500-3300 cm⁻¹ (two bands)**: These are primary amine N-H stretches.\n- **2260-2220 and 2260-2100 cm⁻¹**: These are nitrile and alkyne stretches.\n\n*Source: CBC databook pp.9-11 (OH, CH, nitro, alkene deformations, anions).*",
+     "explanation": "**1555-1540 and 1385-1350 cm⁻¹.** These are the two N=O ranges for nitro compounds.\n\nWhy the others fail:\n- **1850-1800 and 1790-1740 cm⁻¹**: These are the anhydride C=O pair.\n- **3500-3300 cm⁻¹ (two bands)**: These are primary amine N-H stretches.\n- **2260-2220 and 2260-2100 cm⁻¹**: These are nitrile and alkyne stretches.\n\n*Source: CBC databook pp.8-11 (OH, CH, nitro, alkene deformations, anions).*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -8388,7 +8388,7 @@
      "perspectiveLabel": "Reading the databook IR tables",
      "marks": 1,
      "stem": "You make Py₂Zn(NCO)₂ from zinc nitrate. Which databook band would reveal residual nitrate in the product spectrum?",
-     "explanation": "**A strong nitrate absorption at 1380-1350 cm⁻¹.** Nitrate is listed among the anions at that range; its presence would show incomplete washing.\n\nWhy the others fail:\n- **A band at 2150-2050 cm⁻¹**: That range belongs to thiocyanate.\n- **A band at 1130-1080 cm⁻¹**: That is sulfate.\n- **A band at 1610-1550 cm⁻¹**: That is carboxylate (and not nitrate).\n\n*Source: CBC databook pp.9-11 (OH, CH, nitro, alkene deformations, anions).*",
+     "explanation": "**A strong nitrate absorption at 1380-1350 cm⁻¹.** Nitrate is listed among the anions at that range; its presence would show incomplete washing.\n\nWhy the others fail:\n- **A band at 2150-2050 cm⁻¹**: That range belongs to thiocyanate.\n- **A band at 1130-1080 cm⁻¹**: That is sulfate.\n- **A band at 1610-1550 cm⁻¹**: That is carboxylate (and not nitrate).\n\n*Source: CBC databook pp.8-11 (OH, CH, nitro, alkene deformations, anions).*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -8425,7 +8425,7 @@
      "perspectiveLabel": "Reading the databook IR tables",
      "marks": 1,
      "stem": "Which band shows the trans geometry of the C=C bonds in dibenzalacetone, according to the databook C-H deformation table?",
-     "explanation": "**RCH=CHR (trans) at 970-960 cm⁻¹.** The trans out-of-plane C-H deformation is listed there; the cis one is near 690.\n\nWhy the others fail:\n- **RCH=CHR (cis) at about 690 cm⁻¹**: That is the cis band.\n- **RCH=CH₂ at 995-985 and 915-905 cm⁻¹**: That is a terminal vinyl group.\n- **An aldehyde C-H at 2900-2700 cm⁻¹**: That is not an alkene deformation.\n\n*Source: CBC databook pp.9-11 (OH, CH, nitro, alkene deformations, anions).*",
+     "explanation": "**RCH=CHR (trans) at 970-960 cm⁻¹.** The trans out-of-plane C-H deformation is listed there; the cis one is near 690.\n\nWhy the others fail:\n- **RCH=CHR (cis) at about 690 cm⁻¹**: That is the cis band.\n- **RCH=CH₂ at 995-985 and 915-905 cm⁻¹**: That is a terminal vinyl group.\n- **An aldehyde C-H at 2900-2700 cm⁻¹**: That is not an alkene deformation.\n\n*Source: CBC databook pp.8-11 (OH, CH, nitro, alkene deformations, anions).*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -8555,7 +8555,7 @@
      "perspectiveLabel": "Reading the databook NMR tables",
      "marks": 1,
      "stem": "Why are the acetyl CH₃ of acetophenone (about 2.6) and the CH₃ of toluene (about 2.3) different?",
-     "explanation": "**The carbonyl and the ring together deshield the acetyl methyl more than a ring alone deshields a benzylic methyl.** The databook lists CH₃-CO-Ar at 2.6 and CH₃-Ar at 2.3.\n\nWhy the others fail:\n- **Toluene's methyl is on oxygen**: It is on carbon (a benzylic methyl).\n- **Acetophenone has more protons**: The number of protons does not set the shift.\n- **They are identical within the databook's accuracy**: The values differ by 0.3, more than the quoted ±0.2.\n\n*Source: CBC databook pp.14-15 (1H shifts of methyl, methylene, methine and unsaturated protons).*",
+     "explanation": "**The carbonyl and the ring together deshield the acetyl methyl more than a ring alone deshields a benzylic methyl.** The databook lists CH₃-CO-Ar at 2.6 and CH₃-Ar at 2.3.\n\nWhy the others fail:\n- **Toluene's methyl is on oxygen**: It is on carbon (a benzylic methyl).\n- **Acetophenone has more protons**: The number of protons does not set the shift.\n- **They are identical within the databook's accuracy**: The databook lists distinct values, 2.6 and 2.3; a difference of 0.3 is larger than the ±0.2 typical error on either one alone.\n\n*Source: CBC databook pp.14-15 (1H shifts of methyl, methylene, methine and unsaturated protons).*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -8629,7 +8629,7 @@
      "perspectiveLabel": "Reading the databook NMR tables",
      "marks": 1,
      "stem": "Which proton type does the databook place at the HIGHEST chemical shift range?",
-     "explanation": "**R-CO₂H (about 10 to 13).** Acid protons come above aldehyde protons.\n\nWhy the others fail:\n- **R-CHO and Ar-CHO (9.4-10.5)**: High, but below the carboxylic acid upper range.\n- **Aromatic protons (6.0-9.0)**: Lower than aldehydes.\n- **R-OH (2-10, variable)**: Spread over a wide range but typically well below 10.\n\n*Source: CBC databook pp.14-15 (1H shifts of methyl, methylene, methine and unsaturated protons).*",
+     "explanation": "**R-CO₂H (about 10 to 13).** Acid protons come above aldehyde protons.\n\nWhy the others fail:\n- **R-CHO and Ar-CHO (9.4-10.5)**: High, but below the carboxylic acid upper range.\n- **Aromatic protons (6.0-9.0)**: Lower than aldehydes.\n- **Alcohol R-OH (2-10, leaving aside H-bonded enols)**: Spread over a wide range but typically well below 10.\n\n*Source: CBC databook pp.14-15 (1H shifts of methyl, methylene, methine and unsaturated protons).*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -8649,7 +8649,7 @@
        },
        {
         "id": "d",
-        "label": "R-OH (2-10, variable)"
+        "label": "Alcohol R-OH (2-10, leaving aside H-bonded enols)"
        }
       ]
      },
@@ -20042,7 +20042,7 @@
      "perspectiveLabel": "E-lab 2: IR and characterisation",
      "marks": 1,
      "stem": "Which databook range covers the C-O stretching bands of a neutral terminal metal carbonyl?",
-     "explanation": "**2150-1900 cm⁻¹.** The databook lists terminal CO at 2150-1900 (bridging 1900-1750, triply bridging 1800-1600). *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **1800-1600 cm⁻¹**: That is the range for triply bridging (capping) CO.\n- **3650-3590 cm⁻¹**: That is free O-H.\n- **1725-1705 cm⁻¹**: That is an organic saturated ketone C=O.\n\n*Source: E-lab 2 (metal chelate) example screen; CBC databook pp.11, 19; standard inorganic chemistry.*",
+     "explanation": "**2150-1850 cm⁻¹.** The databook lists terminal CO at 2150-1850 (bridging 1850-1750, triply bridging or capping 1750-1600). *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **1750-1600 cm⁻¹**: That is the range for triply bridging (capping) CO.\n- **3650-3590 cm⁻¹**: That is free O-H.\n- **1725-1705 cm⁻¹**: That is an organic saturated ketone C=O.\n\n*Source: E-lab 2 (metal chelate) example screen; CBC databook pp.11, 19; standard inorganic chemistry.*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",
@@ -20050,11 +20050,11 @@
       "options": [
        {
         "id": "a",
-        "label": "2150-1900 cm⁻¹"
+        "label": "2150-1850 cm⁻¹"
        },
        {
         "id": "b",
-        "label": "1800-1600 cm⁻¹"
+        "label": "1750-1600 cm⁻¹"
        },
        {
         "id": "c",
@@ -20079,7 +20079,7 @@
      "perspectiveLabel": "E-lab 2: IR and characterisation",
      "marks": 1,
      "stem": "The CO bands of Cr(CO)₄(bipy) lie at lower wavenumber than those of Cr(CO)₆. Which explanation is right?",
-     "explanation": "**Bipy is a stronger σ-donor and a weaker π-acceptor than CO, so more electron density goes into the remaining CO π* orbitals, lowering the C-O stretch.** Replacing a strong π-acceptor by a weaker one increases back-bonding to the CO ligands that stay. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **Bipy is a stronger π-acceptor than CO**: The reverse: CO is the strongest π-acceptor (top of the spectrochemical series with CN⁻).\n- **The chromium is oxidised, which strengthens the C-O bond**: Chromium stays Cr(0); less back-bonding would raise, not lower, ν(CO).\n- **The sample is dissolved in a heavier solvent**: Solvent does not explain the systematic shift.\n\n*Source: E-lab 2 (metal chelate) example screen; CBC databook pp.11, 19; standard inorganic chemistry.*",
+     "explanation": "**Bipy is a stronger σ-donor and a weaker π-acceptor than CO, so more electron density goes into the remaining CO π* orbitals, lowering the C-O stretch.** Replacing a strong π-acceptor by a weaker one increases back-bonding to the CO ligands that stay. *(Beyond the manual: standard organic or analytical chemistry.)*\n\nWhy the others fail:\n- **Bipy is a stronger π-acceptor than CO**: The reverse: CO is among the strongest π-acceptors, and sits at the top of the databook spectrochemical series.\n- **The chromium is oxidised, which strengthens the C-O bond**: Chromium stays Cr(0); less back-bonding would raise, not lower, ν(CO).\n- **The sample is dissolved in a heavier solvent**: Solvent does not explain the systematic shift.\n\n*Source: E-lab 2 (metal chelate) example screen; CBC databook pp.11, 19; standard inorganic chemistry.*",
      "inputSlot": {
       "type": "choice",
       "selectionMode": "single",

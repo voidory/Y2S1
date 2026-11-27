@@ -260,13 +260,13 @@ test('numeric grading: relative tolerance, absolute tolerance and unit-bearing d
 
 /* ---------- multi-module plumbing ---------- */
 
-test('syncAllBanks: loads both modules, keeps separate records, and is idempotent', async () => {
+test('syncAllBanks: loads every module, keeps separate records, and is idempotent', async () => {
   const db = fakeDb();
   const r1 = await Content.syncAllBanks(db, diskFetch());
   assert.equal(r1.state, 'synced', JSON.stringify(r1.error));
   none(r1.rejected);
   const mods = new Set([...db.nodes.values()].map((n) => n.moduleCode));
-  assert.equal([...mods].sort().join(), 'CM2011,CM2021');
+  assert.equal([...mods].sort().join(), 'CM2011,CM2021,CM2061');
   assert.ok(db.rows.get('bundledBank') && db.rows.get('bundledBank:CM2011'));
   assert.equal(db.rows.get('bundledBank:CM2011').ids.length, bank.questionNodes.length);
   const r2 = await Content.syncAllBanks(db, diskFetch());
@@ -292,7 +292,7 @@ test('syncAllBanks: one module failing to load does not stop the other', async (
 test('loadAllSkillMaps returns one valid map per module', async () => {
   const r = await Content.loadAllSkillMaps(diskFetch());
   assert.equal(r.error, null);
-  assert.equal(Object.keys(r.maps).sort().join(), 'CM2011,CM2021');
+  assert.equal(Object.keys(r.maps).sort().join(), 'CM2011,CM2021,CM2061');
   assert.equal(r.maps.CM2011.module, 'CM2011');
 });
 

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { loadEngine, readContent } from './helpers/load-engine.mjs';
 
 const { Scheduler, Evaluators } = loadEngine();
-const banks = { cm2011: readContent('question-bank.json', 'cm2011'), cm2021: readContent('question-bank.json', 'cm2021') };
+const banks = { cm2011: readContent('question-bank.json', 'cm2011'), cm2021: readContent('question-bank.json', 'cm2021'), cm2061: readContent('question-bank.json', 'cm2061') };
 const variants = (b) => b.questionNodes.flatMap((n) => n.variants.map((v) => [n, v]));
 
 test('every choice question shuffles its options (authored key-first, so position must not give it away)', () => {
@@ -67,8 +67,7 @@ test('blank answers never earn marks on typed questions', () => {
 
 test('a sampled number is never printed rounder than it is (the key is computed from the displayed value)', () => {
   const bad = [];
-  const cm11 = banks.cm2011;
-  for (const n of cm11.questionNodes) for (const v of n.variants) {
+  for (const n of [...banks.cm2011.questionNodes, ...banks.cm2061.questionNodes]) for (const v of n.variants) {
     const sampled = Object.keys(v.variables?.sampled || {});
     const seen = new Set();
     for (const t of [v.stem, v.hint || '']) for (const m of t.matchAll(/\{\{fix\(\s*([A-Za-z_]\w*)\s*,\s*(\d)\s*\)\}\}/g)) {

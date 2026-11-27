@@ -29,7 +29,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await load();
   await p.evaluate(() => document.querySelector('.nav-link[data-nav="readiness"]').click()); await p.waitForTimeout(300);
   ok(await p.evaluate(() => document.querySelector('[data-seg-ready="plan"]')?.getAttribute('aria-selected') === 'true'), 'Progress opens on the Plan tab');
-  ok((await p.$$('[data-plan-exam]')).length === 2, 'both modules have an exam date field');
+  ok((await p.$$('[data-plan-exam]')).length === 3, 'every module (CM2021, CM2011, CM2061) has an exam date field');
   const rows = await p.evaluate(() => [...document.querySelectorAll('[data-plan-row]')].map((r) => r.dataset.planRow.split(':')[0]));
   ok(rows.includes('CM2011') && rows.includes('CM2021'), 'the topic grid lists both modules');
   ok((await p.$$('[data-plan-block]')).length === 9, 'six hours make nine 40-minute blocks');

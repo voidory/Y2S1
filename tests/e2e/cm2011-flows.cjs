@@ -29,7 +29,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
 
   // 1. the switch
   const sw = await p.evaluate(() => { const s = document.querySelector('#moduleSwitch'); const r = s.getBoundingClientRect(); return { hidden: s.classList.contains('hidden'), opts: [...s.options].map((o) => o.value).join(), right: Math.round(r.right), w: innerWidth, val: s.value }; });
-  ok(!sw.hidden && sw.opts === 'CM2011,CM2021' && sw.val === 'CM2021', `the header has a module switch (${sw.opts}, showing ${sw.val})`);
+  ok(!sw.hidden && sw.opts === 'CM2011,CM2021,CM2061' && sw.val === 'CM2021', `the header has a module switch (${sw.opts}, showing ${sw.val})`);
   ok(sw.right <= sw.w - 4, `the switch fits inside the phone header (right edge ${sw.right} of ${sw.w})`);
   const before = await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.nodes.length);
   ok(before > 150 && await p.evaluate(() => window.__MASTERY_ENGINE__.UI.appState.nodes.every((n) => n.moduleCode === 'CM2021')), `starts on CM2021 with only its questions (${before})`);
@@ -215,7 +215,7 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
   await p.evaluate(async () => { const db = await window.__MASTERY_ENGINE__.DB.init(); await db.modules.delete('CM2011'); await db.settings.delete('bundledBank:CM2011'); await db.settings.delete('activeModule'); const ids = (await db.questionNodes.where('moduleCode').equals('CM2011').primaryKeys()); await db.questionNodes.bulkDelete(ids); });
   await boot();
   const up = await p.evaluate(() => { const a = window.__MASTERY_ENGINE__.UI.appState; return { mods: a.modules.map((m) => m.moduleCode).sort().join(), active: a.activeModule, sw: [...document.querySelector('#moduleSwitch').options].length, c11: a.allNodes.filter((n) => n.moduleCode === 'CM2011').length }; });
-  ok(up.mods === 'CM2011,CM2021' && up.active === 'CM2021' && up.sw === 2 && up.c11 >= 30, `an older install gains the CM2011 module and its questions (${up.mods}, ${up.c11} questions, still on ${up.active})`);
+  ok(up.mods === 'CM2011,CM2021,CM2061' && up.active === 'CM2021' && up.sw === 3 && up.c11 >= 30, `an older install gains the CM2011 module and its questions (${up.mods}, ${up.c11} questions, still on ${up.active})`);
   // an install from before the second half: seven chapters (one renamed and re-weighted) pick up the three new ones and keep the edit
   await p.evaluate(async () => { const db = await window.__MASTERY_ENGINE__.DB.init(); const m = await db.modules.get('CM2011'); m.weeks = m.weeks.filter((w) => w.weekNum <= 7).map((w) => (w.weekNum === 4 ? { ...w, title: 'My ISE chapter', examWeight: 2 } : w)); await db.modules.put(m); });
   await boot();

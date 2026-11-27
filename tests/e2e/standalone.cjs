@@ -38,7 +38,8 @@ const ok = (cond, msg) => { console.log((cond ? 'ok   ' : 'FAIL ') + msg); if (!
     out.ts = Object.keys((await E.Content.fetchContent('content/figures/ts.json')).ions).length;
     return out;
   });
-  ok(mods.CM2011 > 70 && mods.CM2021 > 190, `both question banks are inside the file (CM2011 ${mods.CM2011}, CM2021 ${mods.CM2021})`);
+  ok(mods.CM2011 > 70 && mods.CM2021 > 190 && mods.CM2061 > 200, `all three question banks are inside the file (CM2011 ${mods.CM2011}, CM2021 ${mods.CM2021}, CM2061 ${mods.CM2061})`);
+  ok(await p.evaluate(() => document.documentElement.outerHTML.length > 0 && [...document.querySelectorAll('#moduleSwitch option')].map((o) => o.value).includes('CM2061')), 'the standalone offers the CM2061 module');
   ok(mods.methods >= 15 && mods.ts >= 7, `method pages and the Tanabe–Sugano data are inside the file (${mods.methods} pages, ${mods.ts} ions)`);
 
   // answer a question

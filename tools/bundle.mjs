@@ -93,6 +93,13 @@ swap(`import Dexie from 'https://unpkg.com/dexie@4.0.10/dist/dexie.mjs';\n    wi
 const left = [...html.matchAll(/(?:src|href)="(https?:[^"]+)"|import[^;]*from '(https?:[^']+)'/g)].map((m) => m[1] || m[2]);
 if (left.length) throw new Error('still loads from the network: ' + left.join(', '));
 
+/* 7. the explanatory header comment (tools/standalone-header.txt), with the build date and branch */
+let branch = 'the working tree';
+try { branch = 'branch ' + execFileSync('git', ['-C', root, 'rev-parse', '--abbrev-ref', 'HEAD'], { encoding: 'utf8' }).trim(); } catch (_) { /* not a git checkout */ }
+const header = fs.readFileSync(path.join(root, 'tools', 'standalone-header.txt'), 'utf8')
+  .replace('{{BUILT}}', new Date().toISOString().slice(0, 10)).replace('{{BRANCH}}', branch);
+html = header + html;
+
 fs.mkdirSync(path.join(root, 'dist'), { recursive: true });
 const out = path.join(root, 'dist', 'y2s1-standalone.html');
 fs.writeFileSync(out, html);

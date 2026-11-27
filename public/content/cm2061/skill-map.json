@@ -1,0 +1,2789 @@
+{
+ "version": "1.0",
+ "date": "2026-11-27",
+ "module": "CM2061",
+ "chunks": [
+  {
+   "id": "fw-method",
+   "part": "A. Course framework, safety and the literature",
+   "name": "Purification, and synthesise-purify-characterise",
+   "summary": "The four purification methods and when to use each; the three stages; who does what with IR and NMR"
+  },
+  {
+   "id": "fw-safety",
+   "part": "A. Course framework, safety and the literature",
+   "name": "Risk assessment, safety rules and conduct",
+   "summary": "A hazard is a property; goggles, contact lenses, the fume-cupboard sash, dress code, lateness, ethics"
+  },
+  {
+   "id": "fw-reports",
+   "part": "A. Course framework, safety and the literature",
+   "name": "Notebook, reports and the accuracy table",
+   "summary": "Carbon-copy notebook, the one-PDF report, grade weights, decimal places for every quantity"
+  },
+  {
+   "id": "fw-lit",
+   "part": "A. Course framework, safety and the literature",
+   "name": "Journals, citations and databases",
+   "summary": "Publishers, communication / paper / review, ACS citation, SciFinder, Reaxys, Scopus, chemnetbase and formula order"
+  },
+  {
+   "id": "tq-tlc",
+   "part": "B. Laboratory techniques and apparatus",
+   "name": "TLC and visualising agents",
+   "summary": "Rf and polarity, ionic compounds, UV, iodine, molybdate, DNP, permanganate"
+  },
+  {
+   "id": "tq-heat",
+   "part": "B. Laboratory techniques and apparatus",
+   "name": "Reflux and the rotary evaporator",
+   "summary": "Water in at the bottom, ice-water only for ether, clamp the neck, oil bath; fast rotation, 35-40 °C, less than half full"
+  },
+  {
+   "id": "tq-column",
+   "part": "B. Laboratory techniques and apparatus",
+   "name": "Flash column chromatography",
+   "summary": "Packing, sand, never dry, loading, elution order, fractions checked by TLC"
+  },
+  {
+   "id": "tq-special",
+   "part": "B. Laboratory techniques and apparatus",
+   "name": "Sublimation, polarimetry and magnetic susceptibility",
+   "summary": "Conditions and shut-down for sublimation; [α]D sample preparation; the susceptibility balance"
+  },
+  {
+   "id": "tq-distil",
+   "part": "B. Laboratory techniques and apparatus",
+   "name": "Distillation under reduced pressure and azeotropes",
+   "summary": "Why reduce the pressure, the nomograph, azeotropes, bumping under vacuum"
+  },
+  {
+   "id": "tq-isolate",
+   "part": "B. Laboratory techniques and apparatus",
+   "name": "Recrystallisation, filtration, extraction and drying",
+   "summary": "Minimum hot solvent and recovery, Buchner, separatory funnel, brine, Na2SO4 vs MgSO4"
+  },
+  {
+   "id": "tq-inert",
+   "part": "B. Laboratory techniques and apparatus",
+   "name": "Drying tubes, oven-dried glassware and the Schlenk line",
+   "summary": "Keeping water and air out without sealing the system"
+  },
+  {
+   "id": "tq-apparatus",
+   "part": "B. Laboratory techniques and apparatus",
+   "name": "Flask size, necks and addition funnels",
+   "summary": "Half full or less, how many necks, pressure-equalising funnels"
+  },
+  {
+   "id": "sp-ir",
+   "part": "C. Spectroscopy: IR and 1H NMR",
+   "name": "IR: nujol and group frequencies",
+   "summary": "Nujol bands to ignore, re-recording, C=O, O-H, NO2 and other key bands"
+  },
+  {
+   "id": "sp-nmr-basics",
+   "part": "C. Spectroscopy: IR and 1H NMR",
+   "name": "1H NMR basics",
+   "summary": "FID and Fourier transform, spin states, instrument frequencies, δ and τ, TMS, solvents"
+  },
+  {
+   "id": "sp-shift",
+   "part": "C. Spectroscopy: IR and 1H NMR",
+   "name": "Chemical shift",
+   "summary": "Electronegativity, distance, additivity, ring currents and [18]annulene, typical regions"
+  },
+  {
+   "id": "sp-coupling",
+   "part": "C. Spectroscopy: IR and 1H NMR",
+   "name": "Splitting and coupling constants",
+   "summary": "n+1 rule, Pascal ratios, J and geometry, long-range coupling, methyl crotonate"
+  },
+  {
+   "id": "sp-integral",
+   "part": "C. Spectroscopy: IR and 1H NMR",
+   "name": "Equivalence, integration and exchange",
+   "summary": "Which protons couple, integrals and mixtures, OH and NH"
+  },
+  {
+   "id": "ex-1a",
+   "part": "D. The experiments",
+   "name": "Expt 1A paracetamol",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-1b",
+   "part": "D. The experiments",
+   "name": "Expt 1B phenyl toluene-p-sulfonate",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-1c",
+   "part": "D. The experiments",
+   "name": "Expt 1C dibenzalacetone",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-1d",
+   "part": "D. The experiments",
+   "name": "Expt 1D Py2Zn(NCO)2",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-1e",
+   "part": "D. The experiments",
+   "name": "Expt 1E 1-tosylpyrrole",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-1f",
+   "part": "D. The experiments",
+   "name": "Expt 1F tetraphenylcyclopentadienone",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-5a",
+   "part": "D. The experiments",
+   "name": "Expt 5A methyl 3-nitrobenzoate",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-5b",
+   "part": "D. The experiments",
+   "name": "Expt 5B dinitroveratrole",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-5c",
+   "part": "D. The experiments",
+   "name": "Expt 5C nitromethylenedioxybenzene",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-5d",
+   "part": "D. The experiments",
+   "name": "Expt 5D 2-iodobenzoic acid",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-5e",
+   "part": "D. The experiments",
+   "name": "Expt 5E 2-trifluoroacetylpyrrole",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-6",
+   "part": "D. The experiments",
+   "name": "Expt 6 reduction of ethyl acetoacetate",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-7",
+   "part": "D. The experiments",
+   "name": "Expt 7 acetylation of ferrocene and the column",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-8",
+   "part": "D. The experiments",
+   "name": "Expt 8 siloxanes and bouncing putty",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-9",
+   "part": "D. The experiments",
+   "name": "Expt 9 Grignard: benzoic acid",
+   "summary": "Reaction and roles, work-up and purification, observations, characterisation and what goes wrong"
+  },
+  {
+   "id": "ex-cross",
+   "part": "D. The experiments",
+   "name": "Comparing the experiments",
+   "summary": "Which solvent, which technique and which reaction class belongs to which experiment"
+  },
+  {
+   "id": "calc-mass",
+   "part": "G. Calculations",
+   "name": "Amounts, yields and reagent quantities",
+   "summary": "Volume from density, equivalents, limiting reagent, % yield, NaBH4 hydride"
+  },
+  {
+   "id": "calc-spec",
+   "part": "G. Calculations",
+   "name": "Spectroscopy and measurement numbers",
+   "summary": "[α]D and ee, spin-only μ, Hz and ppm, integrals, Rf"
+  }
+ ],
+ "skills": [
+  {
+   "id": "fw.purif",
+   "ch": 1,
+   "name": "The four purification methods",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.267,
+   "basis": "manual",
+   "ref": "Manual p.3",
+   "tags": [],
+   "ids": [
+    "bk-c61-a-four-methods"
+   ],
+   "weight": 0.00267,
+   "nodes": [
+    "bk-c61-a-four-methods",
+    "bk-c61-a-pick-method"
+   ],
+   "chunk": "fw-method"
+  },
+  {
+   "id": "fw.spc",
+   "ch": 1,
+   "name": "Synthesise, purify, characterise",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.267,
+   "basis": "manual",
+   "ref": "Manual p.4",
+   "tags": [],
+   "ids": [
+    "bk-c61-a-spc"
+   ],
+   "weight": 0.00267,
+   "nodes": [
+    "bk-c61-a-spc",
+    "bk-c61-a-nmr-who"
+   ],
+   "chunk": "fw-method"
+  },
+  {
+   "id": "fw.risk",
+   "ch": 1,
+   "name": "Risk assessment: hazards and precautions",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.533,
+   "basis": "manual",
+   "ref": "Manual p.7",
+   "tags": [],
+   "ids": [
+    "bk-c61-a-hazard-def"
+   ],
+   "weight": 0.00533,
+   "nodes": [
+    "bk-c61-a-hazard-def",
+    "bk-c61-a-hazard-which",
+    "bk-c61-a-risk-count",
+    "bk-c61-a-risk-check"
+   ],
+   "chunk": "fw-safety"
+  },
+  {
+   "id": "fw.rules",
+   "ch": 1,
+   "name": "Safety rules and dress code",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.067,
+   "basis": "manual",
+   "ref": "Manual p.8",
+   "tags": [],
+   "ids": [
+    "bk-c61-a-goggles"
+   ],
+   "weight": 0.01067,
+   "nodes": [
+    "bk-c61-a-goggles",
+    "bk-c61-a-lenses",
+    "bk-c61-a-sash",
+    "bk-c61-a-dress",
+    "bk-c61-a-phone",
+    "bk-c61-a-late",
+    "bk-c61-a-leave-reaction",
+    "bk-c61-a-ethics"
+   ],
+   "chunk": "fw-safety"
+  },
+  {
+   "id": "fw.notebook",
+   "ch": 1,
+   "name": "Notebook and report rules",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.533,
+   "basis": "manual",
+   "ref": "Manual p.12",
+   "tags": [],
+   "ids": [
+    "bk-c61-a-card-board"
+   ],
+   "weight": 0.00533,
+   "nodes": [
+    "bk-c61-a-card-board",
+    "bk-c61-a-card-submit",
+    "bk-c61-a-report-ok",
+    "bk-c61-a-grade"
+   ],
+   "chunk": "fw-reports"
+  },
+  {
+   "id": "fw.accuracy",
+   "ch": 1,
+   "name": "Accuracy table: decimal places",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.267,
+   "basis": "manual",
+   "ref": "Manual p.14",
+   "tags": [],
+   "ids": [
+    "bk-c61-a-accuracy"
+   ],
+   "weight": 0.00267,
+   "nodes": [
+    "bk-c61-a-accuracy",
+    "bk-c61-a-accuracy-mm"
+   ],
+   "chunk": "fw-reports"
+  },
+  {
+   "id": "fw.journals",
+   "ch": 1,
+   "name": "Journals, paper types and citations",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.267,
+   "basis": "manual",
+   "ref": "Manual pp.26-27",
+   "tags": [],
+   "ids": [
+    "bk-c61-a-papers"
+   ],
+   "weight": 0.00267,
+   "nodes": [
+    "bk-c61-a-papers",
+    "bk-c61-a-citation"
+   ],
+   "chunk": "fw-lit"
+  },
+  {
+   "id": "fw.databases",
+   "ch": 1,
+   "name": "Databases and searching the literature",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.133,
+   "basis": "manual",
+   "ref": "Manual p.28",
+   "tags": [],
+   "ids": [
+    "bk-c61-a-databases"
+   ],
+   "weight": 0.00133,
+   "nodes": [
+    "bk-c61-a-databases"
+   ],
+   "chunk": "fw-lit"
+  },
+  {
+   "id": "tq.tlc",
+   "ch": 2,
+   "name": "TLC: Rf, polarity and visualising agents",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.243,
+   "basis": "manual",
+   "ref": "Manual p.24",
+   "tags": [],
+   "ids": [
+    "bk-c61-b-tlc-rf"
+   ],
+   "weight": 0.01243,
+   "nodes": [
+    "bk-c61-b-tlc-rf",
+    "bk-c61-b-tlc-ionic",
+    "bk-c61-b-tlc-uv",
+    "bk-c61-b-tlc-stain"
+   ],
+   "chunk": "tq-tlc"
+  },
+  {
+   "id": "tq.reflux",
+   "ch": 2,
+   "name": "Reflux set-up and rules",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.554,
+   "basis": "manual",
+   "ref": "Manual p.24",
+   "tags": [],
+   "ids": [
+    "bk-c61-b-reflux-water"
+   ],
+   "weight": 0.01554,
+   "nodes": [
+    "bk-c61-b-reflux-water",
+    "bk-c61-b-reflux-clamp",
+    "bk-c61-b-reflux-ice",
+    "bk-c61-b-reflux-bath",
+    "bk-c61-b-reflux-why"
+   ],
+   "chunk": "tq-heat"
+  },
+  {
+   "id": "tq.rotavap",
+   "ch": 2,
+   "name": "Rotary evaporator use",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.932,
+   "basis": "manual",
+   "ref": "Manual p.25",
+   "tags": [],
+   "ids": [
+    "bk-c61-b-rotavap-spin"
+   ],
+   "weight": 0.00932,
+   "nodes": [
+    "bk-c61-b-rotavap-spin",
+    "bk-c61-b-rotavap-temp",
+    "bk-c61-b-rotavap-how"
+   ],
+   "chunk": "tq-heat"
+  },
+  {
+   "id": "tq.column",
+   "ch": 2,
+   "name": "Flash column chromatography",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 2.486,
+   "basis": "manual",
+   "ref": "Manual p.44",
+   "tags": [],
+   "ids": [
+    "bk-c61-b-col-vs-tlc"
+   ],
+   "weight": 0.02486,
+   "nodes": [
+    "bk-c61-b-col-vs-tlc",
+    "bk-c61-b-col-dry",
+    "bk-c61-b-col-order",
+    "bk-c61-b-col-eluent",
+    "bk-c61-b-col-pack",
+    "bk-c61-b-col-load",
+    "bk-c61-b-col-fractions",
+    "bk-c61-b-col-flash"
+   ],
+   "chunk": "tq-column"
+  },
+  {
+   "id": "tq.sublim",
+   "ch": 2,
+   "name": "Sublimation",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.243,
+   "basis": "manual",
+   "ref": "Manual p.39",
+   "tags": [],
+   "ids": [
+    "bk-c61-b-sub-why"
+   ],
+   "weight": 0.01243,
+   "nodes": [
+    "bk-c61-b-sub-why",
+    "bk-c61-b-sub-order",
+    "bk-c61-b-sub-set"
+   ],
+   "chunk": "tq-special"
+  },
+  {
+   "id": "tq.polarimetry",
+   "ch": 2,
+   "name": "Polarimetry",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.243,
+   "basis": "manual",
+   "ref": "Manual pp.40, 42; 2015 paper style",
+   "tags": [],
+   "ids": [
+    "bk-c61-b-pol-what"
+   ],
+   "weight": 0.01243,
+   "nodes": [
+    "bk-c61-b-pol-what",
+    "bk-c61-b-pol-report",
+    "bk-c61-b-pol-sample",
+    "bk-c61-b-pol-ta"
+   ],
+   "chunk": "tq-special"
+  },
+  {
+   "id": "tq.magsus",
+   "ch": 2,
+   "name": "Magnetic susceptibility",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.4 (mentioned); 2015 paper style",
+   "tags": [],
+   "ids": [
+    "bk-c61-b-mag-instr"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-b-mag-instr",
+    "bk-c61-b-mag-zn"
+   ],
+   "chunk": "tq-special"
+  },
+  {
+   "id": "tq.distil",
+   "ch": 2,
+   "name": "Reduced-pressure distillation, nomograph and azeotropes",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.864,
+   "basis": "manual",
+   "ref": "Manual p.4 (video); 2015 paper style",
+   "tags": [],
+   "ids": [
+    "bk-c61-b-dist-why"
+   ],
+   "weight": 0.01864,
+   "nodes": [
+    "bk-c61-b-dist-why",
+    "bk-c61-b-dist-nomo",
+    "bk-c61-b-dist-nomoread",
+    "bk-c61-b-dist-azeo",
+    "bk-c61-b-dist-azeo-fa",
+    "bk-c61-b-dist-bump"
+   ],
+   "chunk": "tq-distil"
+  },
+  {
+   "id": "tq.recryst",
+   "ch": 2,
+   "name": "Recrystallisation and filtration",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 2.797,
+   "basis": "manual",
+   "ref": "Manual pp.29, 34 (and Year-1 technique)",
+   "tags": [],
+   "ids": [
+    "bk-c61-b-recryst-order"
+   ],
+   "weight": 0.02797,
+   "nodes": [
+    "bk-c61-b-recryst-order",
+    "bk-c61-b-recryst-toomuch",
+    "bk-c61-b-recryst-recovery",
+    "bk-c61-b-buchner",
+    "bk-c61-b-slowcool"
+   ],
+   "chunk": "tq-isolate"
+  },
+  {
+   "id": "tq.extraction",
+   "ch": 2,
+   "name": "Separatory funnel and extraction",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.243,
+   "basis": "manual",
+   "ref": "Manual pp.39, 41, 47; densities from standard tables",
+   "tags": [],
+   "ids": [
+    "bk-c61-b-sep-layers"
+   ],
+   "weight": 0.01243,
+   "nodes": [
+    "bk-c61-b-sep-layers",
+    "bk-c61-b-sep-ether",
+    "bk-c61-b-brine",
+    "bk-c61-b-bicarb"
+   ],
+   "chunk": "tq-isolate"
+  },
+  {
+   "id": "tq.drying",
+   "ch": 2,
+   "name": "Drying agents",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.311,
+   "basis": "manual",
+   "ref": "Manual pp.39, 41, 47; properties from standard tables",
+   "tags": [],
+   "ids": [
+    "bk-c61-b-dryagent"
+   ],
+   "weight": 0.00311,
+   "nodes": [
+    "bk-c61-b-dryagent"
+   ],
+   "chunk": "tq-isolate"
+  },
+  {
+   "id": "tq.inert",
+   "ch": 2,
+   "name": "Drying tubes, oven-dried glassware and the Schlenk line",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.243,
+   "basis": "manual",
+   "ref": "Manual pp.39, 44",
+   "tags": [],
+   "ids": [
+    "bk-c61-b-dryingtube"
+   ],
+   "weight": 0.01243,
+   "nodes": [
+    "bk-c61-b-dryingtube",
+    "bk-c61-b-5e-dry",
+    "bk-c61-b-oven",
+    "bk-c61-b-schlenk"
+   ],
+   "chunk": "tq-inert"
+  },
+  {
+   "id": "tq.apparatus",
+   "ch": 2,
+   "name": "Flask size, necks and addition funnels",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.554,
+   "basis": "manual",
+   "ref": "Manual p.50",
+   "tags": [],
+   "ids": [
+    "bk-c61-b-pressure-eq"
+   ],
+   "weight": 0.01554,
+   "nodes": [
+    "bk-c61-b-pressure-eq",
+    "bk-c61-b-necks-9",
+    "bk-c61-b-flasksize",
+    "bk-c61-b-necks-min",
+    "bk-c61-b-sepfunnel-add"
+   ],
+   "chunk": "tq-apparatus"
+  },
+  {
+   "id": "sp.ir-nujol",
+   "ch": 3,
+   "name": "IR of solids: the nujol bands",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 4.167,
+   "basis": "manual",
+   "ref": "Manual p.15",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-nujol-bands"
+   ],
+   "weight": 0.04167,
+   "nodes": [
+    "bk-c61-c-nujol-bands",
+    "bk-c61-c-nujol-only",
+    "bk-c61-c-ir-flip"
+   ],
+   "chunk": "sp-ir"
+  },
+  {
+   "id": "sp.ir-bands",
+   "ch": 3,
+   "name": "IR: group frequencies you must know",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.389,
+   "basis": "manual",
+   "ref": "Year-1 IR correlation (standard tables); 2015 paper style",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-ir-bands"
+   ],
+   "weight": 0.01389,
+   "nodes": [
+    "bk-c61-c-ir-bands"
+   ],
+   "chunk": "sp-ir"
+  },
+  {
+   "id": "sp.fid",
+   "ch": 3,
+   "name": "From FID to spectrum",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 2.778,
+   "basis": "manual",
+   "ref": "Manual p.16",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-fid"
+   ],
+   "weight": 0.02778,
+   "nodes": [
+    "bk-c61-c-fid",
+    "bk-c61-c-print"
+   ],
+   "chunk": "sp-nmr-basics"
+  },
+  {
+   "id": "sp.spin",
+   "ch": 3,
+   "name": "Spin states and nuclei",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.389,
+   "basis": "manual",
+   "ref": "Manual p.16 and footnote 1; p.23",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-spin"
+   ],
+   "weight": 0.01389,
+   "nodes": [
+    "bk-c61-c-spin"
+   ],
+   "chunk": "sp-nmr-basics"
+  },
+  {
+   "id": "sp.field",
+   "ch": 3,
+   "name": "Field strength and frequency",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 4.167,
+   "basis": "manual",
+   "ref": "Manual pp.16-17 and footnote 4",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-freq"
+   ],
+   "weight": 0.04167,
+   "nodes": [
+    "bk-c61-c-freq",
+    "bk-c61-c-ppm",
+    "bk-c61-c-hzppm"
+   ],
+   "chunk": "sp-nmr-basics"
+  },
+  {
+   "id": "sp.delta",
+   "ch": 3,
+   "name": "The δ scale, TMS and τ",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.389,
+   "basis": "manual",
+   "ref": "Manual p.17 and footnotes 3-4",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-delta"
+   ],
+   "weight": 0.01389,
+   "nodes": [
+    "bk-c61-c-delta"
+   ],
+   "chunk": "sp-nmr-basics"
+  },
+  {
+   "id": "sp.solvent",
+   "ch": 3,
+   "name": "Deuterated solvents and the residual peak",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.389,
+   "basis": "manual",
+   "ref": "Manual p.21 footnote 9",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-solvent"
+   ],
+   "weight": 0.01389,
+   "nodes": [
+    "bk-c61-c-solvent"
+   ],
+   "chunk": "sp-nmr-basics"
+  },
+  {
+   "id": "sp.shift-en",
+   "ch": 3,
+   "name": "Electronegativity and distance",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.389,
+   "basis": "manual",
+   "ref": "Manual p.18 (CH₃X table)",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-shift-en"
+   ],
+   "weight": 0.01389,
+   "nodes": [
+    "bk-c61-c-shift-en"
+   ],
+   "chunk": "sp-shift"
+  },
+  {
+   "id": "sp.shift-add",
+   "ch": 3,
+   "name": "Additive shift effects",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.389,
+   "basis": "manual",
+   "ref": "Manual p.19 (CH₃Cl, CH₂Cl₂, CHCl₃)",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-additive"
+   ],
+   "weight": 0.01389,
+   "nodes": [
+    "bk-c61-c-additive"
+   ],
+   "chunk": "sp-shift"
+  },
+  {
+   "id": "sp.ring",
+   "ch": 3,
+   "name": "Ring currents and [18]annulene",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.389,
+   "basis": "manual",
+   "ref": "Manual pp.18-19",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-ring"
+   ],
+   "weight": 0.01389,
+   "nodes": [
+    "bk-c61-c-ring"
+   ],
+   "chunk": "sp-shift"
+  },
+  {
+   "id": "sp.shift-groups",
+   "ch": 3,
+   "name": "Approximate shifts of common proton types",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.389,
+   "basis": "manual",
+   "ref": "Manual p.17 (shift scale figure); typical values",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-regions"
+   ],
+   "weight": 0.01389,
+   "nodes": [
+    "bk-c61-c-regions"
+   ],
+   "chunk": "sp-shift"
+  },
+  {
+   "id": "sp.nplus1",
+   "ch": 3,
+   "name": "The n+1 rule and Pascal ratios",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.389,
+   "basis": "manual",
+   "ref": "Manual pp.20-21",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-nplus1"
+   ],
+   "weight": 0.01389,
+   "nodes": [
+    "bk-c61-c-nplus1"
+   ],
+   "chunk": "sp-coupling"
+  },
+  {
+   "id": "sp.equiv",
+   "ch": 3,
+   "name": "Equivalence and coupling",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 2.778,
+   "basis": "manual",
+   "ref": "Manual p.20",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-equiv-coupling"
+   ],
+   "weight": 0.02778,
+   "nodes": [
+    "bk-c61-c-equiv-coupling",
+    "bk-c61-c-equiv-count"
+   ],
+   "chunk": "sp-integral"
+  },
+  {
+   "id": "sp.J",
+   "ch": 3,
+   "name": "Coupling constants: size and geometry",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.389,
+   "basis": "manual",
+   "ref": "Manual p.21 (J ranges) and p.19 footnote 6 (long-range coupling)",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-j"
+   ],
+   "weight": 0.01389,
+   "nodes": [
+    "bk-c61-c-j"
+   ],
+   "chunk": "sp-coupling"
+  },
+  {
+   "id": "sp.dq",
+   "ch": 3,
+   "name": "Reading a multiplet: methyl crotonate",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.389,
+   "basis": "manual",
+   "ref": "Manual pp.21-22 (methyl crotonate)",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-dq"
+   ],
+   "weight": 0.01389,
+   "nodes": [
+    "bk-c61-c-dq"
+   ],
+   "chunk": "sp-coupling"
+  },
+  {
+   "id": "sp.integral",
+   "ch": 3,
+   "name": "Integration and mixtures",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 2.778,
+   "basis": "manual",
+   "ref": "Manual p.22 and footnote 10",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-integral-def"
+   ],
+   "weight": 0.02778,
+   "nodes": [
+    "bk-c61-c-integral-def",
+    "bk-c61-c-mixture"
+   ],
+   "chunk": "sp-integral"
+  },
+  {
+   "id": "sp.exch",
+   "ch": 3,
+   "name": "Exchangeable protons (OH, NH)",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.389,
+   "basis": "manual",
+   "ref": "Manual p.22 (exchange); p.17 (shift chart, acid OH near 12)",
+   "tags": [],
+   "ids": [
+    "bk-c61-c-exch"
+   ],
+   "weight": 0.01389,
+   "nodes": [
+    "bk-c61-c-exch"
+   ],
+   "chunk": "sp-integral"
+  },
+  {
+   "id": "ex.1a.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.29",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1a-reaction"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-1a-reaction",
+    "bk-c61-d-1a-byproduct"
+   ],
+   "chunk": "ex-1a"
+  },
+  {
+   "id": "ex.1a.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.243,
+   "basis": "manual",
+   "ref": "Manual p.29",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1a-naoh"
+   ],
+   "weight": 0.01243,
+   "nodes": [
+    "bk-c61-d-1a-naoh",
+    "bk-c61-d-1a-litmus",
+    "bk-c61-d-1a-recryst",
+    "bk-c61-d-1a-hazard"
+   ],
+   "chunk": "ex-1a"
+  },
+  {
+   "id": "ex.1a.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.311,
+   "basis": "manual",
+   "ref": "Manual p.29; IR correlation tables",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1a-ir"
+   ],
+   "weight": 0.00311,
+   "nodes": [
+    "bk-c61-d-1a-ir"
+   ],
+   "chunk": "ex-1a"
+  },
+  {
+   "id": "ex.1b.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.932,
+   "basis": "manual",
+   "ref": "Manual p.30",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1b-reaction"
+   ],
+   "weight": 0.00932,
+   "nodes": [
+    "bk-c61-d-1b-reaction",
+    "bk-c61-d-1b-acetone",
+    "bk-c61-d-1b-limiting"
+   ],
+   "chunk": "ex-1b"
+  },
+  {
+   "id": "ex.1b.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.30",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1b-water"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-1b-water",
+    "bk-c61-d-1b-hazards"
+   ],
+   "chunk": "ex-1b"
+  },
+  {
+   "id": "ex.1b.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.311,
+   "basis": "manual",
+   "ref": "Manual p.30; IR correlation tables",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1b-ir"
+   ],
+   "weight": 0.00311,
+   "nodes": [
+    "bk-c61-d-1b-ir"
+   ],
+   "chunk": "ex-1b"
+  },
+  {
+   "id": "ex.1c.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.932,
+   "basis": "manual",
+   "ref": "Manual p.31",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1c-reaction"
+   ],
+   "weight": 0.00932,
+   "nodes": [
+    "bk-c61-d-1c-reaction",
+    "bk-c61-d-1c-roles",
+    "bk-c61-d-1c-stoich"
+   ],
+   "chunk": "ex-1c"
+  },
+  {
+   "id": "ex.1c.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.31",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1c-temp"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-1c-temp",
+    "bk-c61-d-1c-recryst"
+   ],
+   "chunk": "ex-1c"
+  },
+  {
+   "id": "ex.1c.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.311,
+   "basis": "manual",
+   "ref": "Manual p.31; IR correlation tables",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1c-ir"
+   ],
+   "weight": 0.00311,
+   "nodes": [
+    "bk-c61-d-1c-ir"
+   ],
+   "chunk": "ex-1c"
+  },
+  {
+   "id": "ex.1d.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.932,
+   "basis": "manual",
+   "ref": "Manual p.32",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1d-reaction"
+   ],
+   "weight": 0.00932,
+   "nodes": [
+    "bk-c61-d-1d-reaction",
+    "bk-c61-d-1d-stoich",
+    "bk-c61-d-1d-structure"
+   ],
+   "chunk": "ex-1d"
+  },
+  {
+   "id": "ex.1d.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.32",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1d-wash"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-1d-wash",
+    "bk-c61-d-1d-hazard"
+   ],
+   "chunk": "ex-1d"
+  },
+  {
+   "id": "ex.1d.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.311,
+   "basis": "manual",
+   "ref": "Manual p.32; IR correlation tables",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1d-ir"
+   ],
+   "weight": 0.00311,
+   "nodes": [
+    "bk-c61-d-1d-ir"
+   ],
+   "chunk": "ex-1d"
+  },
+  {
+   "id": "ex.1e.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.932,
+   "basis": "manual",
+   "ref": "Manual p.33",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1e-reaction"
+   ],
+   "weight": 0.00932,
+   "nodes": [
+    "bk-c61-d-1e-reaction",
+    "bk-c61-d-1e-stoich",
+    "bk-c61-d-1e-acid"
+   ],
+   "chunk": "ex-1e"
+  },
+  {
+   "id": "ex.1e.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.33",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1e-workup"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-1e-workup",
+    "bk-c61-d-1e-apparatus"
+   ],
+   "chunk": "ex-1e"
+  },
+  {
+   "id": "ex.1e.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.311,
+   "basis": "manual",
+   "ref": "Manual p.33; IR correlation tables",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1e-ir"
+   ],
+   "weight": 0.00311,
+   "nodes": [
+    "bk-c61-d-1e-ir"
+   ],
+   "chunk": "ex-1e"
+  },
+  {
+   "id": "ex.1f.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.34",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1f-reaction"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-1f-reaction",
+    "bk-c61-d-1f-base"
+   ],
+   "chunk": "ex-1f"
+  },
+  {
+   "id": "ex.1f.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.932,
+   "basis": "manual",
+   "ref": "Manual p.34",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1f-addition"
+   ],
+   "weight": 0.00932,
+   "nodes": [
+    "bk-c61-d-1f-addition",
+    "bk-c61-d-1f-hazard",
+    "bk-c61-d-1f-isolate"
+   ],
+   "chunk": "ex-1f"
+  },
+  {
+   "id": "ex.1f.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.311,
+   "basis": "manual",
+   "ref": "Manual p.34; IR correlation tables",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-1f-ir"
+   ],
+   "weight": 0.00311,
+   "nodes": [
+    "bk-c61-d-1f-ir"
+   ],
+   "chunk": "ex-1f"
+  },
+  {
+   "id": "ex.5a.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.35",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5a-reaction"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-5a-reaction",
+    "bk-c61-d-5a-regio"
+   ],
+   "chunk": "ex-5a"
+  },
+  {
+   "id": "ex.5a.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.932,
+   "basis": "manual",
+   "ref": "Manual p.35",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5a-temp"
+   ],
+   "weight": 0.00932,
+   "nodes": [
+    "bk-c61-d-5a-temp",
+    "bk-c61-d-5a-ice",
+    "bk-c61-d-5a-hazard"
+   ],
+   "chunk": "ex-5a"
+  },
+  {
+   "id": "ex.5a.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.35; IR correlation tables",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5a-ir"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-5a-ir",
+    "bk-c61-d-5a-impurity"
+   ],
+   "chunk": "ex-5a"
+  },
+  {
+   "id": "ex.5b.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.932,
+   "basis": "manual",
+   "ref": "Manual p.36",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5b-reaction"
+   ],
+   "weight": 0.00932,
+   "nodes": [
+    "bk-c61-d-5b-reaction",
+    "bk-c61-d-5b-regio",
+    "bk-c61-d-5b-conditions"
+   ],
+   "chunk": "ex-5b"
+  },
+  {
+   "id": "ex.5b.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.36",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5b-wash"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-5b-wash",
+    "bk-c61-d-5b-add"
+   ],
+   "chunk": "ex-5b"
+  },
+  {
+   "id": "ex.5b.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.311,
+   "basis": "manual",
+   "ref": "Manual pp.36-37",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5b-source"
+   ],
+   "weight": 0.00311,
+   "nodes": [
+    "bk-c61-d-5b-source"
+   ],
+   "chunk": "ex-5b"
+  },
+  {
+   "id": "ex.5c.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.311,
+   "basis": "manual",
+   "ref": "Manual p.37",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5c-regio"
+   ],
+   "weight": 0.00311,
+   "nodes": [
+    "bk-c61-d-5c-regio"
+   ],
+   "chunk": "ex-5c"
+  },
+  {
+   "id": "ex.5c.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.37",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5c-temp"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-5c-temp",
+    "bk-c61-d-5c-workup"
+   ],
+   "chunk": "ex-5c"
+  },
+  {
+   "id": "ex.5c.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.37 (NMR submitted); standard shifts",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5c-nmr"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-5c-nmr",
+    "bk-c61-d-5c-compare"
+   ],
+   "chunk": "ex-5c"
+  },
+  {
+   "id": "ex.5d.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.38",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5d-reaction"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-5d-reaction",
+    "bk-c61-d-5d-hcl"
+   ],
+   "chunk": "ex-5d"
+  },
+  {
+   "id": "ex.5d.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.932,
+   "basis": "manual",
+   "ref": "Manual p.38",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5d-temp"
+   ],
+   "weight": 0.00932,
+   "nodes": [
+    "bk-c61-d-5d-temp",
+    "bk-c61-d-5d-bisulfite",
+    "bk-c61-d-5d-recryst"
+   ],
+   "chunk": "ex-5d"
+  },
+  {
+   "id": "ex.5d.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.932,
+   "basis": "manual",
+   "ref": "Manual p.38",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5d-n2"
+   ],
+   "weight": 0.00932,
+   "nodes": [
+    "bk-c61-d-5d-n2",
+    "bk-c61-d-5d-ir",
+    "bk-c61-d-5d-problem"
+   ],
+   "chunk": "ex-5d"
+  },
+  {
+   "id": "ex.5e.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.39",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5e-reaction"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-5e-reaction",
+    "bk-c61-d-5e-regio"
+   ],
+   "chunk": "ex-5e"
+  },
+  {
+   "id": "ex.5e.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.243,
+   "basis": "manual",
+   "ref": "Manual p.39",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5e-setup"
+   ],
+   "weight": 0.01243,
+   "nodes": [
+    "bk-c61-d-5e-setup",
+    "bk-c61-d-5e-workup",
+    "bk-c61-d-5e-evap",
+    "bk-c61-d-5e-hazard"
+   ],
+   "chunk": "ex-5e"
+  },
+  {
+   "id": "ex.5e.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.39",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-5e-observe"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-5e-observe",
+    "bk-c61-d-5e-ir"
+   ],
+   "chunk": "ex-5e"
+  },
+  {
+   "id": "ex.6.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.243,
+   "basis": "manual",
+   "ref": "Manual p.40",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-6-stereo"
+   ],
+   "weight": 0.01243,
+   "nodes": [
+    "bk-c61-d-6-stereo",
+    "bk-c61-d-6-why-chiral",
+    "bk-c61-d-6-oxidised",
+    "bk-c61-d-6-chemoselect"
+   ],
+   "chunk": "ex-6"
+  },
+  {
+   "id": "ex.6.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.41",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-6-yeast-obs"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-6-yeast-obs",
+    "bk-c61-d-6-polarimetry"
+   ],
+   "chunk": "ex-6"
+  },
+  {
+   "id": "ex.6.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 2.175,
+   "basis": "manual",
+   "ref": "Manual p.41",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-6-filter"
+   ],
+   "weight": 0.02175,
+   "nodes": [
+    "bk-c61-d-6-filter",
+    "bk-c61-d-6-extract",
+    "bk-c61-d-6-nabh4-add",
+    "bk-c61-d-6-quench",
+    "bk-c61-d-6-salts",
+    "bk-c61-d-6-drying-tube",
+    "bk-c61-d-6-timing"
+   ],
+   "chunk": "ex-6"
+  },
+  {
+   "id": "ex.7.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.43",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-7-reaction"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-7-reaction",
+    "bk-c61-d-7-diacetyl"
+   ],
+   "chunk": "ex-7"
+  },
+  {
+   "id": "ex.7.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.243,
+   "basis": "manual",
+   "ref": "Manual p.43",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-7-temp"
+   ],
+   "weight": 0.01243,
+   "nodes": [
+    "bk-c61-d-7-temp",
+    "bk-c61-d-7-quench",
+    "bk-c61-d-7-condenser",
+    "bk-c61-d-7-safety"
+   ],
+   "chunk": "ex-7"
+  },
+  {
+   "id": "ex.7.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.932,
+   "basis": "manual",
+   "ref": "Manual p.43; 2015 paper style",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-7-conversion"
+   ],
+   "weight": 0.00932,
+   "nodes": [
+    "bk-c61-d-7-conversion",
+    "bk-c61-d-7-colours",
+    "bk-c61-d-7-ir"
+   ],
+   "chunk": "ex-7"
+  },
+  {
+   "id": "ex.8.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual p.47",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-8-hydrolysis"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-8-hydrolysis",
+    "bk-c61-d-8-boric"
+   ],
+   "chunk": "ex-8"
+  },
+  {
+   "id": "ex.8.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.243,
+   "basis": "manual",
+   "ref": "Manual p.47",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-8-ice"
+   ],
+   "weight": 0.01243,
+   "nodes": [
+    "bk-c61-d-8-ice",
+    "bk-c61-d-8-workup",
+    "bk-c61-d-8-air",
+    "bk-c61-d-8-hazard"
+   ],
+   "chunk": "ex-8"
+  },
+  {
+   "id": "ex.8.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.932,
+   "basis": "manual",
+   "ref": "Manual p.48",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-8-bounce"
+   ],
+   "weight": 0.00932,
+   "nodes": [
+    "bk-c61-d-8-bounce",
+    "bk-c61-d-8-flow",
+    "bk-c61-d-8-ir"
+   ],
+   "chunk": "ex-8"
+  },
+  {
+   "id": "ex.9.reaction",
+   "ch": 4,
+   "name": "Reaction, reagents and roles",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 1.554,
+   "basis": "manual",
+   "ref": "Manual pp.49-50",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-9-reaction"
+   ],
+   "weight": 0.01554,
+   "nodes": [
+    "bk-c61-d-9-reaction",
+    "bk-c61-d-9-ether",
+    "bk-c61-d-9-dry",
+    "bk-c61-d-9-reactivity",
+    "bk-c61-d-9-limiting"
+   ],
+   "chunk": "ex-9"
+  },
+  {
+   "id": "ex.9.work",
+   "ch": 4,
+   "name": "Work-up, purification and apparatus",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 2.175,
+   "basis": "manual",
+   "ref": "Manual pp.50-51",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-9-iodine"
+   ],
+   "weight": 0.02175,
+   "nodes": [
+    "bk-c61-d-9-iodine",
+    "bk-c61-d-9-rate",
+    "bk-c61-d-9-dryice",
+    "bk-c61-d-9-workup",
+    "bk-c61-d-9-acidify",
+    "bk-c61-d-9-hazard",
+    "bk-c61-d-9-inert"
+   ],
+   "chunk": "ex-9"
+  },
+  {
+   "id": "ex.9.char",
+   "ch": 4,
+   "name": "Observations, characterisation and problems",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.621,
+   "basis": "manual",
+   "ref": "Manual pp.49-51",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-9-byproduct"
+   ],
+   "weight": 0.00621,
+   "nodes": [
+    "bk-c61-d-9-byproduct",
+    "bk-c61-d-9-mp-recover"
+   ],
+   "chunk": "ex-9"
+  },
+  {
+   "id": "ex.cross.recryst",
+   "ch": 4,
+   "name": "Which solvent, which technique, which experiment",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.311,
+   "basis": "manual",
+   "ref": "Manual pp.29-51 (solvents and techniques; drying tubes pp.39, 41, 43; dried glassware p.50)",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-x-solvent"
+   ],
+   "weight": 0.00311,
+   "nodes": [
+    "bk-c61-d-x-solvent"
+   ],
+   "chunk": "ex-cross"
+  },
+  {
+   "id": "ex.cross.class",
+   "ch": 4,
+   "name": "Reaction classes across the experiments",
+   "mode": "auto",
+   "engine": "gen",
+   "marks": 0.311,
+   "basis": "manual",
+   "ref": "Manual pp.29-51",
+   "tags": [],
+   "ids": [
+    "bk-c61-d-x-classes"
+   ],
+   "weight": 0.00311,
+   "nodes": [
+    "bk-c61-d-x-classes"
+   ],
+   "chunk": "ex-cross"
+  },
+  {
+   "id": "g.volume",
+   "ch": 7,
+   "name": "Volume or mass of a liquid from its density",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 0.733,
+   "basis": "manual",
+   "ref": "Manual pp.29-51 (quantities); databook-type molar masses and densities",
+   "tags": [],
+   "ids": [
+    "bk-c61-g-volume"
+   ],
+   "weight": 0.00733,
+   "nodes": [
+    "bk-c61-g-volume"
+   ],
+   "chunk": "calc-mass"
+  },
+  {
+   "id": "g.equiv",
+   "ch": 7,
+   "name": "Moles, equivalents and the limiting reagent",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 1.709,
+   "basis": "manual",
+   "ref": "Manual pp.29-51 (quantities); databook-type molar masses and densities",
+   "tags": [],
+   "ids": [
+    "bk-c61-g-equiv"
+   ],
+   "weight": 0.01709,
+   "nodes": [
+    "bk-c61-g-equiv"
+   ],
+   "chunk": "calc-mass"
+  },
+  {
+   "id": "g.yield",
+   "ch": 7,
+   "name": "Theoretical and percentage yield",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 1.465,
+   "basis": "manual",
+   "ref": "Manual pp.29-51 (quantities); databook-type molar masses and densities",
+   "tags": [],
+   "ids": [
+    "bk-c61-g-yield"
+   ],
+   "weight": 0.01465,
+   "nodes": [
+    "bk-c61-g-yield"
+   ],
+   "chunk": "calc-mass"
+  },
+  {
+   "id": "g.alpha",
+   "ch": 7,
+   "name": "Specific rotation (and ee)",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 1.221,
+   "basis": "manual",
+   "ref": "Manual pp.40, 42; ee is beyond the manual",
+   "tags": [],
+   "ids": [
+    "bk-c61-g-alpha"
+   ],
+   "weight": 0.01221,
+   "nodes": [
+    "bk-c61-g-alpha"
+   ],
+   "chunk": "calc-spec"
+  },
+  {
+   "id": "g.mu",
+   "ch": 7,
+   "name": "Spin-only moment and unpaired electrons",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 0.733,
+   "basis": "manual",
+   "ref": "Manual p.4 (susceptibility mentioned), p.14 (2 d.p.); formula from CM2021 (beyond the manual)",
+   "tags": [],
+   "ids": [
+    "bk-c61-g-mu"
+   ],
+   "weight": 0.00733,
+   "nodes": [
+    "bk-c61-g-mu"
+   ],
+   "chunk": "calc-spec"
+  },
+  {
+   "id": "g.hydride",
+   "ch": 7,
+   "name": "NaBH₄ mass and hydride equivalents",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 1.465,
+   "basis": "manual",
+   "ref": "Manual p.41; M(NaBH4) from databook",
+   "tags": [],
+   "ids": [
+    "bk-c61-g-hydride"
+   ],
+   "weight": 0.01465,
+   "nodes": [
+    "bk-c61-g-hydride"
+   ],
+   "chunk": "calc-mass"
+  },
+  {
+   "id": "g.nmrnum",
+   "ch": 7,
+   "name": "Hz and ppm, integrals and Rf values",
+   "mode": "calc",
+   "engine": "gen",
+   "marks": 1.007,
+   "basis": "manual",
+   "ref": "Manual pp.17, 20-22 and footnote 10, 24",
+   "tags": [],
+   "ids": [
+    "bk-c61-g-spec"
+   ],
+   "weight": 0.01007,
+   "nodes": [
+    "bk-c61-g-spec"
+   ],
+   "chunk": "calc-spec"
+  }
+ ],
+ "nodeSkills": {
+  "bk-c61-a-four-methods": [
+   "fw.purif"
+  ],
+  "bk-c61-a-pick-method": [
+   "fw.purif"
+  ],
+  "bk-c61-a-spc": [
+   "fw.spc"
+  ],
+  "bk-c61-a-nmr-who": [
+   "fw.spc"
+  ],
+  "bk-c61-a-hazard-def": [
+   "fw.risk"
+  ],
+  "bk-c61-a-hazard-which": [
+   "fw.risk"
+  ],
+  "bk-c61-a-risk-count": [
+   "fw.risk"
+  ],
+  "bk-c61-a-risk-check": [
+   "fw.risk"
+  ],
+  "bk-c61-a-goggles": [
+   "fw.rules"
+  ],
+  "bk-c61-a-lenses": [
+   "fw.rules"
+  ],
+  "bk-c61-a-sash": [
+   "fw.rules"
+  ],
+  "bk-c61-a-dress": [
+   "fw.rules"
+  ],
+  "bk-c61-a-phone": [
+   "fw.rules"
+  ],
+  "bk-c61-a-late": [
+   "fw.rules"
+  ],
+  "bk-c61-a-leave-reaction": [
+   "fw.rules"
+  ],
+  "bk-c61-a-ethics": [
+   "fw.rules"
+  ],
+  "bk-c61-a-card-board": [
+   "fw.notebook"
+  ],
+  "bk-c61-a-card-submit": [
+   "fw.notebook"
+  ],
+  "bk-c61-a-report-ok": [
+   "fw.notebook"
+  ],
+  "bk-c61-a-grade": [
+   "fw.notebook"
+  ],
+  "bk-c61-a-accuracy": [
+   "fw.accuracy"
+  ],
+  "bk-c61-a-accuracy-mm": [
+   "fw.accuracy"
+  ],
+  "bk-c61-a-papers": [
+   "fw.journals"
+  ],
+  "bk-c61-a-citation": [
+   "fw.journals"
+  ],
+  "bk-c61-a-databases": [
+   "fw.databases"
+  ],
+  "bk-c61-b-tlc-rf": [
+   "tq.tlc"
+  ],
+  "bk-c61-b-tlc-ionic": [
+   "tq.tlc"
+  ],
+  "bk-c61-b-tlc-uv": [
+   "tq.tlc"
+  ],
+  "bk-c61-b-tlc-stain": [
+   "tq.tlc"
+  ],
+  "bk-c61-b-reflux-water": [
+   "tq.reflux"
+  ],
+  "bk-c61-b-reflux-clamp": [
+   "tq.reflux"
+  ],
+  "bk-c61-b-reflux-ice": [
+   "tq.reflux"
+  ],
+  "bk-c61-b-reflux-bath": [
+   "tq.reflux"
+  ],
+  "bk-c61-b-reflux-why": [
+   "tq.reflux"
+  ],
+  "bk-c61-b-rotavap-spin": [
+   "tq.rotavap"
+  ],
+  "bk-c61-b-rotavap-temp": [
+   "tq.rotavap"
+  ],
+  "bk-c61-b-rotavap-how": [
+   "tq.rotavap"
+  ],
+  "bk-c61-b-col-vs-tlc": [
+   "tq.column"
+  ],
+  "bk-c61-b-col-dry": [
+   "tq.column"
+  ],
+  "bk-c61-b-col-order": [
+   "tq.column"
+  ],
+  "bk-c61-b-col-eluent": [
+   "tq.column"
+  ],
+  "bk-c61-b-col-pack": [
+   "tq.column"
+  ],
+  "bk-c61-b-col-load": [
+   "tq.column"
+  ],
+  "bk-c61-b-col-fractions": [
+   "tq.column"
+  ],
+  "bk-c61-b-col-flash": [
+   "tq.column"
+  ],
+  "bk-c61-b-sub-why": [
+   "tq.sublim"
+  ],
+  "bk-c61-b-sub-order": [
+   "tq.sublim"
+  ],
+  "bk-c61-b-sub-set": [
+   "tq.sublim"
+  ],
+  "bk-c61-b-pol-what": [
+   "tq.polarimetry"
+  ],
+  "bk-c61-b-pol-report": [
+   "tq.polarimetry"
+  ],
+  "bk-c61-b-pol-sample": [
+   "tq.polarimetry"
+  ],
+  "bk-c61-b-pol-ta": [
+   "tq.polarimetry"
+  ],
+  "bk-c61-b-mag-instr": [
+   "tq.magsus"
+  ],
+  "bk-c61-b-mag-zn": [
+   "tq.magsus"
+  ],
+  "bk-c61-b-dist-why": [
+   "tq.distil"
+  ],
+  "bk-c61-b-dist-nomo": [
+   "tq.distil"
+  ],
+  "bk-c61-b-dist-nomoread": [
+   "tq.distil"
+  ],
+  "bk-c61-b-dist-azeo": [
+   "tq.distil"
+  ],
+  "bk-c61-b-dist-azeo-fa": [
+   "tq.distil"
+  ],
+  "bk-c61-b-dist-bump": [
+   "tq.distil"
+  ],
+  "bk-c61-b-recryst-order": [
+   "tq.recryst"
+  ],
+  "bk-c61-b-recryst-toomuch": [
+   "tq.recryst"
+  ],
+  "bk-c61-b-recryst-recovery": [
+   "tq.recryst"
+  ],
+  "bk-c61-b-buchner": [
+   "tq.recryst"
+  ],
+  "bk-c61-b-slowcool": [
+   "tq.recryst"
+  ],
+  "bk-c61-b-sep-layers": [
+   "tq.extraction"
+  ],
+  "bk-c61-b-sep-ether": [
+   "tq.extraction"
+  ],
+  "bk-c61-b-brine": [
+   "tq.extraction"
+  ],
+  "bk-c61-b-bicarb": [
+   "tq.extraction"
+  ],
+  "bk-c61-b-dryagent": [
+   "tq.drying"
+  ],
+  "bk-c61-b-dryingtube": [
+   "tq.inert"
+  ],
+  "bk-c61-b-5e-dry": [
+   "tq.inert"
+  ],
+  "bk-c61-b-oven": [
+   "tq.inert"
+  ],
+  "bk-c61-b-schlenk": [
+   "tq.inert"
+  ],
+  "bk-c61-b-pressure-eq": [
+   "tq.apparatus"
+  ],
+  "bk-c61-b-necks-9": [
+   "tq.apparatus"
+  ],
+  "bk-c61-b-flasksize": [
+   "tq.apparatus"
+  ],
+  "bk-c61-b-necks-min": [
+   "tq.apparatus"
+  ],
+  "bk-c61-b-sepfunnel-add": [
+   "tq.apparatus"
+  ],
+  "bk-c61-c-nujol-bands": [
+   "sp.ir-nujol"
+  ],
+  "bk-c61-c-nujol-only": [
+   "sp.ir-nujol"
+  ],
+  "bk-c61-c-ir-flip": [
+   "sp.ir-nujol"
+  ],
+  "bk-c61-c-ir-bands": [
+   "sp.ir-bands"
+  ],
+  "bk-c61-c-fid": [
+   "sp.fid"
+  ],
+  "bk-c61-c-print": [
+   "sp.fid"
+  ],
+  "bk-c61-c-spin": [
+   "sp.spin"
+  ],
+  "bk-c61-c-freq": [
+   "sp.field"
+  ],
+  "bk-c61-c-ppm": [
+   "sp.field"
+  ],
+  "bk-c61-c-delta": [
+   "sp.delta"
+  ],
+  "bk-c61-c-solvent": [
+   "sp.solvent"
+  ],
+  "bk-c61-c-shift-en": [
+   "sp.shift-en"
+  ],
+  "bk-c61-c-additive": [
+   "sp.shift-add"
+  ],
+  "bk-c61-c-ring": [
+   "sp.ring"
+  ],
+  "bk-c61-c-regions": [
+   "sp.shift-groups"
+  ],
+  "bk-c61-c-nplus1": [
+   "sp.nplus1"
+  ],
+  "bk-c61-c-equiv-coupling": [
+   "sp.equiv"
+  ],
+  "bk-c61-c-equiv-count": [
+   "sp.equiv"
+  ],
+  "bk-c61-c-j": [
+   "sp.J"
+  ],
+  "bk-c61-c-dq": [
+   "sp.dq"
+  ],
+  "bk-c61-c-integral-def": [
+   "sp.integral"
+  ],
+  "bk-c61-c-mixture": [
+   "sp.integral"
+  ],
+  "bk-c61-c-exch": [
+   "sp.exch"
+  ],
+  "bk-c61-c-hzppm": [
+   "sp.field"
+  ],
+  "bk-c61-d-1a-reaction": [
+   "ex.1a.reaction"
+  ],
+  "bk-c61-d-1a-byproduct": [
+   "ex.1a.reaction"
+  ],
+  "bk-c61-d-1a-naoh": [
+   "ex.1a.work"
+  ],
+  "bk-c61-d-1a-litmus": [
+   "ex.1a.work"
+  ],
+  "bk-c61-d-1a-recryst": [
+   "ex.1a.work"
+  ],
+  "bk-c61-d-1a-ir": [
+   "ex.1a.char"
+  ],
+  "bk-c61-d-1a-hazard": [
+   "ex.1a.work"
+  ],
+  "bk-c61-d-1b-reaction": [
+   "ex.1b.reaction"
+  ],
+  "bk-c61-d-1b-acetone": [
+   "ex.1b.reaction"
+  ],
+  "bk-c61-d-1b-water": [
+   "ex.1b.work"
+  ],
+  "bk-c61-d-1b-hazards": [
+   "ex.1b.work"
+  ],
+  "bk-c61-d-1b-ir": [
+   "ex.1b.char"
+  ],
+  "bk-c61-d-1b-limiting": [
+   "ex.1b.reaction"
+  ],
+  "bk-c61-d-1c-reaction": [
+   "ex.1c.reaction"
+  ],
+  "bk-c61-d-1c-roles": [
+   "ex.1c.reaction"
+  ],
+  "bk-c61-d-1c-temp": [
+   "ex.1c.work"
+  ],
+  "bk-c61-d-1c-stoich": [
+   "ex.1c.reaction"
+  ],
+  "bk-c61-d-1c-ir": [
+   "ex.1c.char"
+  ],
+  "bk-c61-d-1c-recryst": [
+   "ex.1c.work"
+  ],
+  "bk-c61-d-1d-reaction": [
+   "ex.1d.reaction"
+  ],
+  "bk-c61-d-1d-stoich": [
+   "ex.1d.reaction"
+  ],
+  "bk-c61-d-1d-wash": [
+   "ex.1d.work"
+  ],
+  "bk-c61-d-1d-hazard": [
+   "ex.1d.work"
+  ],
+  "bk-c61-d-1d-structure": [
+   "ex.1d.reaction"
+  ],
+  "bk-c61-d-1d-ir": [
+   "ex.1d.char"
+  ],
+  "bk-c61-d-1e-reaction": [
+   "ex.1e.reaction"
+  ],
+  "bk-c61-d-1e-stoich": [
+   "ex.1e.reaction"
+  ],
+  "bk-c61-d-1e-workup": [
+   "ex.1e.work"
+  ],
+  "bk-c61-d-1e-apparatus": [
+   "ex.1e.work"
+  ],
+  "bk-c61-d-1e-ir": [
+   "ex.1e.char"
+  ],
+  "bk-c61-d-1e-acid": [
+   "ex.1e.reaction"
+  ],
+  "bk-c61-d-1f-reaction": [
+   "ex.1f.reaction"
+  ],
+  "bk-c61-d-1f-base": [
+   "ex.1f.reaction"
+  ],
+  "bk-c61-d-1f-addition": [
+   "ex.1f.work"
+  ],
+  "bk-c61-d-1f-hazard": [
+   "ex.1f.work"
+  ],
+  "bk-c61-d-1f-isolate": [
+   "ex.1f.work"
+  ],
+  "bk-c61-d-1f-ir": [
+   "ex.1f.char"
+  ],
+  "bk-c61-d-5a-reaction": [
+   "ex.5a.reaction"
+  ],
+  "bk-c61-d-5a-regio": [
+   "ex.5a.reaction"
+  ],
+  "bk-c61-d-5a-temp": [
+   "ex.5a.work"
+  ],
+  "bk-c61-d-5a-ice": [
+   "ex.5a.work"
+  ],
+  "bk-c61-d-5a-hazard": [
+   "ex.5a.work"
+  ],
+  "bk-c61-d-5a-ir": [
+   "ex.5a.char"
+  ],
+  "bk-c61-d-5a-impurity": [
+   "ex.5a.char"
+  ],
+  "bk-c61-d-5b-reaction": [
+   "ex.5b.reaction"
+  ],
+  "bk-c61-d-5b-regio": [
+   "ex.5b.reaction"
+  ],
+  "bk-c61-d-5b-conditions": [
+   "ex.5b.reaction"
+  ],
+  "bk-c61-d-5b-wash": [
+   "ex.5b.work"
+  ],
+  "bk-c61-d-5b-add": [
+   "ex.5b.work"
+  ],
+  "bk-c61-d-5b-source": [
+   "ex.5b.char"
+  ],
+  "bk-c61-d-5c-regio": [
+   "ex.5c.reaction"
+  ],
+  "bk-c61-d-5c-temp": [
+   "ex.5c.work"
+  ],
+  "bk-c61-d-5c-workup": [
+   "ex.5c.work"
+  ],
+  "bk-c61-d-5c-nmr": [
+   "ex.5c.char"
+  ],
+  "bk-c61-d-5c-compare": [
+   "ex.5c.char"
+  ],
+  "bk-c61-d-5d-reaction": [
+   "ex.5d.reaction"
+  ],
+  "bk-c61-d-5d-temp": [
+   "ex.5d.work"
+  ],
+  "bk-c61-d-5d-hcl": [
+   "ex.5d.reaction"
+  ],
+  "bk-c61-d-5d-n2": [
+   "ex.5d.char"
+  ],
+  "bk-c61-d-5d-bisulfite": [
+   "ex.5d.work"
+  ],
+  "bk-c61-d-5d-recryst": [
+   "ex.5d.work"
+  ],
+  "bk-c61-d-5d-ir": [
+   "ex.5d.char"
+  ],
+  "bk-c61-d-5d-problem": [
+   "ex.5d.char"
+  ],
+  "bk-c61-d-5e-reaction": [
+   "ex.5e.reaction"
+  ],
+  "bk-c61-d-5e-regio": [
+   "ex.5e.reaction"
+  ],
+  "bk-c61-d-5e-setup": [
+   "ex.5e.work"
+  ],
+  "bk-c61-d-5e-workup": [
+   "ex.5e.work"
+  ],
+  "bk-c61-d-5e-evap": [
+   "ex.5e.work"
+  ],
+  "bk-c61-d-5e-observe": [
+   "ex.5e.char"
+  ],
+  "bk-c61-d-5e-ir": [
+   "ex.5e.char"
+  ],
+  "bk-c61-d-5e-hazard": [
+   "ex.5e.work"
+  ],
+  "bk-c61-d-6-stereo": [
+   "ex.6.reaction"
+  ],
+  "bk-c61-d-6-why-chiral": [
+   "ex.6.reaction"
+  ],
+  "bk-c61-d-6-oxidised": [
+   "ex.6.reaction"
+  ],
+  "bk-c61-d-6-yeast-obs": [
+   "ex.6.char"
+  ],
+  "bk-c61-d-6-filter": [
+   "ex.6.work"
+  ],
+  "bk-c61-d-6-extract": [
+   "ex.6.work"
+  ],
+  "bk-c61-d-6-nabh4-add": [
+   "ex.6.work"
+  ],
+  "bk-c61-d-6-quench": [
+   "ex.6.work"
+  ],
+  "bk-c61-d-6-salts": [
+   "ex.6.work"
+  ],
+  "bk-c61-d-6-drying-tube": [
+   "ex.6.work"
+  ],
+  "bk-c61-d-6-chemoselect": [
+   "ex.6.reaction"
+  ],
+  "bk-c61-d-6-polarimetry": [
+   "ex.6.char"
+  ],
+  "bk-c61-d-6-timing": [
+   "ex.6.work"
+  ],
+  "bk-c61-d-7-reaction": [
+   "ex.7.reaction"
+  ],
+  "bk-c61-d-7-diacetyl": [
+   "ex.7.reaction"
+  ],
+  "bk-c61-d-7-temp": [
+   "ex.7.work"
+  ],
+  "bk-c61-d-7-quench": [
+   "ex.7.work"
+  ],
+  "bk-c61-d-7-condenser": [
+   "ex.7.work"
+  ],
+  "bk-c61-d-7-conversion": [
+   "ex.7.char"
+  ],
+  "bk-c61-d-7-colours": [
+   "ex.7.char"
+  ],
+  "bk-c61-d-7-ir": [
+   "ex.7.char"
+  ],
+  "bk-c61-d-7-safety": [
+   "ex.7.work"
+  ],
+  "bk-c61-d-8-hydrolysis": [
+   "ex.8.reaction"
+  ],
+  "bk-c61-d-8-ice": [
+   "ex.8.work"
+  ],
+  "bk-c61-d-8-workup": [
+   "ex.8.work"
+  ],
+  "bk-c61-d-8-boric": [
+   "ex.8.reaction"
+  ],
+  "bk-c61-d-8-air": [
+   "ex.8.work"
+  ],
+  "bk-c61-d-8-bounce": [
+   "ex.8.char"
+  ],
+  "bk-c61-d-8-flow": [
+   "ex.8.char"
+  ],
+  "bk-c61-d-8-ir": [
+   "ex.8.char"
+  ],
+  "bk-c61-d-8-hazard": [
+   "ex.8.work"
+  ],
+  "bk-c61-d-9-reaction": [
+   "ex.9.reaction"
+  ],
+  "bk-c61-d-9-ether": [
+   "ex.9.reaction"
+  ],
+  "bk-c61-d-9-dry": [
+   "ex.9.reaction"
+  ],
+  "bk-c61-d-9-iodine": [
+   "ex.9.work"
+  ],
+  "bk-c61-d-9-rate": [
+   "ex.9.work"
+  ],
+  "bk-c61-d-9-dryice": [
+   "ex.9.work"
+  ],
+  "bk-c61-d-9-workup": [
+   "ex.9.work"
+  ],
+  "bk-c61-d-9-acidify": [
+   "ex.9.work"
+  ],
+  "bk-c61-d-9-byproduct": [
+   "ex.9.char"
+  ],
+  "bk-c61-d-9-hazard": [
+   "ex.9.work"
+  ],
+  "bk-c61-d-9-reactivity": [
+   "ex.9.reaction"
+  ],
+  "bk-c61-d-9-limiting": [
+   "ex.9.reaction"
+  ],
+  "bk-c61-d-9-inert": [
+   "ex.9.work"
+  ],
+  "bk-c61-d-9-mp-recover": [
+   "ex.9.char"
+  ],
+  "bk-c61-d-x-solvent": [
+   "ex.cross.recryst"
+  ],
+  "bk-c61-d-x-classes": [
+   "ex.cross.class"
+  ],
+  "bk-c61-g-volume": [
+   "g.volume"
+  ],
+  "bk-c61-g-equiv": [
+   "g.equiv"
+  ],
+  "bk-c61-g-yield": [
+   "g.yield"
+  ],
+  "bk-c61-g-alpha": [
+   "g.alpha"
+  ],
+  "bk-c61-g-mu": [
+   "g.mu"
+  ],
+  "bk-c61-g-hydride": [
+   "g.hydride"
+  ],
+  "bk-c61-g-spec": [
+   "g.nmrnum"
+  ]
+ }
+}

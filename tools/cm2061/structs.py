@@ -13,6 +13,8 @@ import json, os, re, sys
 from rdkit import Chem
 from rdkit.Chem import Draw
 from rdkit.Chem.Draw import rdMolDraw2D
+from rdkit.Chem import rdDepictor
+rdDepictor.SetPreferCoordGen(True)   # cleaner layouts for oxoanions such as permanganate
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -89,6 +91,18 @@ SETS = {
         ('disodium hydrogen phosphate', '[Na+].[Na+].OP([O-])([O-])=O', 'phosphorus with one P=O, one OH and two O- groups, with two Na+'),
         ('bromobenzene', 'Brc1ccccc1', 'a benzene ring with one Br'),
         ('phenylmagnesium bromide', 'Br[Mg]c1ccccc1', 'a benzene ring with an Mg-Br group bonded to carbon'),
+    ]),
+    'extras': ('Other chemicals named in the experiments', [
+        ('sodium hydroxide', '[Na+].[OH-]', 'Na+ with HO-'),
+        ('methanol', 'CO', 'CH3 on OH (a one-carbon chain ending in OH)'),
+        ('water', 'O', 'H-O-H (a bent molecule with two O-H bonds)'),
+        ('magnesium', '[Mg]', 'a single Mg atom (the metal used in Expt 9)'),
+        ('sodium hydrogen sulfite (bisulfite)', '[Na+].OS([O-])=O', 'S with one S=O, one OH and one O-, with Na+'),
+        ('sodium chloride', '[Na+].[Cl-]', 'Na+ and Cl-'),
+        ('sodium carbonate', '[Na+].[Na+].[O-]C([O-])=O', 'a carbon with one C=O and two O-, with two Na+'),
+        ('dimethylsilanediol (hydrolysis of Me2SiCl2)', 'C[Si](C)(O)O', 'silicon with two methyl and two OH groups'),
+        ('hexamethylcyclotrisiloxane (a cyclic product of Expt 8)', 'C[Si]1(C)O[Si](C)(C)O[Si](C)(C)O1', 'a six-membered ring of alternating Si and O, each Si carrying two methyl groups'),
+        ('calcium chloride (the drying-tube desiccant)', '[Ca+2].[Cl-].[Cl-]', 'Ca2+ with two Cl-'),
     ]),
     'products3': ('Experiments 7 to 9 and the work-up', [
         ('benzoic acid', 'OC(=O)c1ccccc1', 'a benzene ring carrying CO2H'),

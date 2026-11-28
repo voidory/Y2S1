@@ -43,7 +43,7 @@ const hex = (cx, cy, r, rot) => pg(Array.from({ length: 6 }, (_, i) => [cx + r *
 // pyridine ring centred (cx,cy) whose N vertex points toward angle `ang`; returns the markup and the N position
 const pyN = (cx, cy, r, ang) => {
   const nx = cx + r * Math.cos(ang), ny = cy + r * Math.sin(ang);
-  return { svg: hex(cx, cy, r, ang) + `<circle cx="${f(nx)}" cy="${f(ny)}" r="8" fill="#fff"/>` + tx(nx, ny + 4, 'N', { a: 'middle', b: true }), n: [nx, ny] };
+  return { svg: hex(cx, cy, r, ang) + ci(cx, cy, r * 0.55, { w: 1.2 }) + `<circle cx="${f(nx)}" cy="${f(ny)}" r="8" fill="#fff"/>` + tx(nx, ny + 4, 'N', { a: 'middle', b: true }), n: [nx, ny] };
 };
 const co = (x, y, dx, dy, o = {}) => ln(x, y, x + dx, y + dy, S, o.dash ? 2 : 3, o.dash ? '4 3' : '') + tx(x + dx + (dx > 0 ? 4 : dx < 0 ? -4 : 0), y + dy + (dy > 0 ? 14 : dy < 0 ? -5 : 4), 'CO', { a: dx > 0 ? 'start' : dx < 0 ? 'end' : 'middle' });
 const zn = () => {
@@ -52,11 +52,11 @@ const zn = () => {
     ln(138, 124, 108, 170, S, 3, '4 3') + tx(100, 186, 'N=C=O', { a: 'middle' }) + ln(152, 124, 182, 170, S, 3) + tx(190, 186, 'N=C=O', { a: 'middle' });
 };
 const crbipy = () => {
-  const p1 = pyN(75, 185, 22, -Math.PI / 6), p2 = pyN(195, 185, 22, (7 * Math.PI) / 6);
+  const p1 = pyN(60, 215, 22, -Math.PI / 6), p2 = pyN(210, 215, 22, (7 * Math.PI) / 6);
   return ci(135, 100, 15) + tx(135, 105, 'Cr', { a: 'middle', b: true }) + co(135, 85, 0, -45) + co(150, 100, 60, 0) + co(120, 100, -60, 0) +
-    ln(135, 115, 135, 128, S, 3, '4 3') + tx(135, 141, 'CO', { a: 'middle' }) +
-    p1.svg + p2.svg + ln(p1.n[0] + 4, p1.n[1] - 6, 125, 112) + ln(p2.n[0] - 4, p2.n[1] - 6, 145, 112) + ln(97, 193, 173, 193) +
-    tx(135, 232, '2,2′-bipyridyl (bidentate, binds through both N)', { a: 'middle', size: 10 });
+    ln(135, 115, 135, 138, S, 3, '4 3') + tx(135, 152, 'CO', { a: 'middle' }) +
+    p1.svg + p2.svg + ln(p1.n[0] + 4, p1.n[1] - 6, 123, 112) + ln(p2.n[0] - 4, p2.n[1] - 6, 147, 112) + ln(82, 223, 188, 223) +
+    tx(135, 262, '2,2′-bipyridyl (bidentate, binds through both N)', { a: 'middle', size: 10 });
 };
 export const ORGANOMETALLIC = {
   title: 'Organometallic and coordination compounds',
@@ -67,7 +67,7 @@ export const ORGANOMETALLIC = {
     { name: 'Py2Zn(NCO)2', desc: 'Zn at the centre with four nitrogen donors: two pyridine rings bonded through N and two N=C=O (isocyanate) groups bonded through N, drawn tetrahedral', svg: svg(290, 200, zn(), 'Py2Zn(NCO)2', 20) },
     { name: 'Cr(CO)6', desc: 'Cr at the centre of an octahedron with six CO ligands (two along the vertical axis, four in the horizontal plane shown with wedges and dashes)',
       svg: svg(240, 220, ci(120, 110, 15) + tx(120, 115, 'Cr', { a: 'middle', b: true }) + co(120, 95, 0, -50) + co(120, 125, 0, 50) + co(135, 110, 65, 0) + co(105, 110, -65, 0) + co(131, 118, 38, 38, { dash: true }) + co(109, 118, -38, 38, { dash: true }), 'Cr(CO)6', 30) },
-    { name: 'Cr(CO)4(bipy)', desc: 'Cr bonded to four CO ligands and to both nitrogens of one 2,2\'-bipyridyl (two linked pyridine rings, a bidentate chelate)', svg: svg(270, 240, crbipy(), 'Cr(CO)4(bipy)', 20) },
+    { name: 'Cr(CO)4(bipy)', desc: 'Cr bonded to four CO ligands and to both nitrogens of one 2,2\'-bipyridyl (two linked pyridine rings, a bidentate chelate)', svg: svg(270, 280, crbipy(), 'Cr(CO)4(bipy)', 20) },
   ],
 };
 
@@ -91,13 +91,13 @@ const rbf = (cx, cy, r, liquid, necks) => {
 };
 
 const REFLUX = svg(380, 410,
-  ground(10, 395, 360) + stand(30, 20, 395) + clamp(30, 150, 140) +
+  ground(10, 395, 360) + stand(30, 20, 395) + clamp(30, 222, 192) +
   // hotplate and oil bath behind the flask, oil level BELOW the liquid level in the flask
   rc(110, 375, 180, 20, { fill: '#e2e8f0' }) + rc(120, 322, 160, 53, { fill: '#fde68a', stroke: '#d97706', w: 1.5, r: 3 }) +
   rbf(200, 295, 55, 0.5, [[200, 70]]) + rc(184, 232, 32, 8, { fill: '#fff', stroke: 'none' }) +
   ci(194, 330, 3, { fill: '#475569' }) + ln(185, 332, 210, 332, '#475569', 4) +
   condenser(200, 60, 140) + ln(186, 48, 214, 48, S, 2) + tx(200, 38, 'open top: not sealed', { a: 'middle' }) +
-  label(140, 150, 'clamp on the NECK of the flask,', -20, 230) + tx(-20, 244, 'not on the condenser', { a: 'start' }) +
+  label(160, 222, 'clamp on the NECK of the flask,', -20, 205) + tx(-20, 219, 'not on the condenser', { a: 'start' }) +
   label(246, 76, 'water OUT at the top', 300, 62) + label(246, 184, 'water IN at the bottom', 300, 196) +
   label(280, 340, 'oil bath: oil level BELOW the liquid level', 300, 352) + label(185, 285, 'liquid: flask less than half full', -20, 285) +
   label(200, 332, 'stir bar (or anti-bumping granules)', 300, 380) + tx(200, 408, 'hotplate stirrer', { a: 'middle', size: 10 }),
@@ -108,7 +108,7 @@ const ADDITION = svg(380, 430,
   rc(185, 20, 34, 38, { fill: '#e2e8f0' }) + tx(202, 44, 'CaCl₂', { a: 'middle', size: 9 }) + pa('M219 32 q16 0 16 -12') +
   rc(190, 58, 24, 22, { fill: '#fff' }) + pa('M170 80 L234 80 L218 175 L186 175 Z', { fill: '#dbeafe' }) + ln(202, 175, 202, 232, S, 3) +
   ln(190, 195, 214, 195, S, 3) + ci(202, 195, 4, { fill: S }) +
-  rbf(202, 320, 58, 0.35, [[202, 90]]) + rc(138, 372, 128, 16, { fill: '#e0f2fe', stroke: '#0284c7', w: 1.5 }) + tx(202, 404, 'ice-water bath', { a: 'middle', size: 10 }) +
+  pg([[130, 332], [274, 332], [264, 394], [140, 394]], { fill: '#e0f2fe', stroke: '#0284c7', w: 1.5 }) + rbf(202, 320, 58, 0.35, [[202, 90]]) + tx(202, 410, 'ice-water bath (the flask sits in it)', { a: 'middle', size: 10 }) +
   label(235, 40, 'drying tube: open to the air, keeps moisture out', 285, 28) + label(234, 125, 'addition funnel: pyrrole solution', 285, 115) +
   label(214, 195, 'stopcock (closed at the start)', 285, 208) + label(258, 325, 'dried flask: anhydride in CH₂Cl₂', 285, 320) +
   label(160, 345, 'oven-dried stir bar', -20, 365) + label(180, 245, 'clamp the flask neck', -20, 260),
@@ -120,7 +120,7 @@ const tilted = (x1, y1, x2, y2, w, fill) => {
   return pg([[x1 + dx, y1 + dy], [x2 + dx, y2 + dy], [x2 - dx, y2 - dy], [x1 - dx, y1 - dy]], { fill });
 };
 const VACDIST = svg(520, 400,
-  ground(10, 385, 500) + rc(30, 350, 140, 30, { fill: '#e2e8f0' }) + tx(100, 370, 'hotplate stirrer', { a: 'middle', size: 10 }) +
+  ground(10, 385, 500) + stand(20, 60, 385) + clamp(20, 230, 90) + clamp(20, 120, 80) + rc(30, 350, 140, 30, { fill: '#e2e8f0' }) + tx(100, 370, 'hotplate stirrer', { a: 'middle', size: 10 }) +
   rc(48, 305, 104, 45, { fill: '#fef3c7', stroke: '#d97706', w: 1.5, r: 3 }) + tx(100, 342, 'oil bath', { a: 'middle', size: 10 }) +
   rbf(100, 290, 42, 0.45, [[100, 60]]) + ln(92, 296, 108, 296, '#475569', 4) +
   // still head: vertical tube from the flask, thermometer in the top port, side arm to the condenser
@@ -157,16 +157,16 @@ const SUBLIM = svg(380, 400,
   rc(183, 40, 24, 250, { fill: '#e0f2fe', stroke: '#0284c7' }) + ln(195, 40, 195, 230, '#0284c7', 1.5) +
   arrow(110, 60, 183, 60) + arrow(207, 76, 262, 76) + tx(105, 56, 'ice-cold water in', { a: 'end', size: 10, fill: BL }) + tx(268, 80, 'water out', { size: 10, fill: BL }) +
   rc(162, 330, 66, 16, { fill: '#fde68a', stroke: '#b45309' }) + tx(195, 322, 'crude solid', { a: 'middle', size: 10 }) +
-  ci(195, 296, 3, { fill: '#475569' }) + ci(188, 304, 3, { fill: '#475569' }) + ci(202, 304, 3, { fill: '#475569' }) +
+  ci(188, 306, 3, { fill: '#475569' }) + ci(202, 306, 3, { fill: '#475569' }) + ci(195, 300, 3, { fill: '#475569' }) + ci(186, 262, 2.5, { fill: '#0ea5e9' }) + ci(204, 270, 2.5, { fill: '#0ea5e9' }) + ci(190, 280, 2.5, { fill: '#0ea5e9' }) + ci(201, 254, 2.5, { fill: '#0ea5e9' }) +
   rc(120, 352, 150, 22, { fill: '#fef3c7', stroke: '#d97706', w: 1.5, r: 3 }) + tx(195, 368, 'gentle heat (not above 50 °C)', { a: 'middle', size: 10 }) +
-  label(195, 296, 'sublimed solid collects on the cold finger', -20, 320) + label(188, 128, 'greased joint', -20, 118, { size: 10 }) + label(240, 250, 'vacuum first, then gentle heat', 290, 250),
+  label(190, 268, 'sublimed solid collects on the cold finger', -20, 290) + label(188, 128, 'greased joint', -20, 118, { size: 10 }) + label(240, 250, 'vacuum first, then gentle heat', 290, 250),
   'Sublimation apparatus', 240);
 
 const COLUMN = svg(380, 440,
-  ground(10, 428, 360) + stand(30, 20, 428) + clamp(30, 210, 140) +
+  ground(10, 428, 360) + stand(30, 20, 428) + clamp(30, 210, 172) +
   rc(165, 18, 40, 30, { fill: '#fff' }) + rc(163, 44, 44, 8, { fill: '#16a34a', stroke: '#16a34a' }) + ln(205, 28, 250, 28, S, 5) + tx(256, 32, 'connection to air pump', { size: 10 }) +
   ci(185, 100, 36, { fill: '#fff' }) + rc(176, 52, 18, 20, { fill: '#fff', stroke: 'none' }) + ln(160, 112, 210, 112, '#475569', 1.5, '3 3') + tx(185, 90, 'eluent', { a: 'middle', size: 10 }) +
-  rc(177, 132, 16, 230, { fill: '#fff' }) + rc(178, 190, 14, 120, { fill: '#e2e8f0', stroke: 'none' }) + rc(178, 310, 14, 8, { fill: '#fde68a', stroke: 'none' }) + ln(178, 182, 192, 182, '#475569', 1.5, '3 3') +
+  rc(177, 132, 16, 230, { fill: '#fff' }) + rc(178, 133, 14, 49, { fill: LQ, stroke: 'none' }) + rc(178, 190, 14, 120, { fill: '#e2e8f0', stroke: 'none' }) + rc(178, 310, 14, 8, { fill: '#fde68a', stroke: 'none' }) + ln(178, 182, 192, 182, '#475569', 1.5, '3 3') +
   rc(178, 330, 14, 14, { fill: '#f8fafc', stroke: GR, w: 1 }) + ln(170, 352, 210, 352, S, 3) + ci(185, 352, 4, { fill: S }) +
   rc(170, 372, 30, 50, { fill: '#fff' }) + rc(171, 397, 28, 24, { fill: LQ, stroke: 'none' }) +
   label(208, 50, 'green clip holds the adapter', 262, 56, { size: 10 }) + label(221, 112, 'solvent reservoir', 262, 112) +
@@ -174,7 +174,7 @@ const COLUMN = svg(380, 440,
   label(195, 352, 'stopcock', 262, 366) + label(200, 400, 'test tubes in order; check by TLC', 262, 410, { size: 10 }),
   'Flash column', 240);
 
-const SEPFUN = svg(380, 420,
+const SEPFUN = svg(560, 420,
   ground(10, 405, 360) + stand(30, 40, 405) + ln(30, 150, 120, 150, GR, 4) + ci(150, 150, 32, { stroke: GR, w: 4 }) +
   rc(138, 52, 24, 16, { fill: '#fff' }) + tx(150, 46, 'stopper', { a: 'middle', size: 10 }) +
   pa('M140 68 L140 120 Q100 140 118 196 L144 276 L156 276 L182 196 Q200 140 160 120 L160 68 Z', { fill: '#fff' }) +
@@ -183,6 +183,12 @@ const SEPFUN = svg(380, 420,
   pa('M110 340 L118 392 L182 392 L190 340 Z', { fill: '#fff' }) + pa('M116 372 L184 372 L182 392 L118 392 Z', { fill: LQ, stroke: 'none' }) + arrow(150, 306, 150, 336, GR) +
   label(185, 150, 'upper layer (lighter: ether or hexane)', 235, 128) + label(170, 215, 'lower layer (denser: water, or CH₂Cl₂)', 235, 215) +
   label(120, 150, 'ring clamp on a stand', -20, 130, { size: 10 }) + label(162, 290, 'stopcock: drain the lower layer', 235, 296) + label(184, 372, 'keep BOTH layers until the product is found', 235, 380, { size: 10 }) +
+  // inset: same funnel with dichloromethane, layers inverted
+  rc(398, 40, 150, 200, { fill: 'none', stroke: GR, w: 1 }) + tx(473, 56, 'With CH₂Cl₂ instead', { a: 'middle', size: 10, b: true }) +
+  pa('M462 70 L462 112 Q438 126 448 160 L464 214 L482 214 L498 160 Q508 126 484 112 L484 70 Z', { fill: '#fff' }) +
+  pa('M446 160 L500 160 L482 210 L464 210 Z', { fill: '#fef9c3', stroke: 'none' }) + pa('M440 130 Q444 146 446 160 L500 160 Q502 146 506 130 Z', { fill: LQ, stroke: 'none' }) + ln(444, 160, 502, 160, '#475569', 1.5, '3 3') +
+  tx(473, 150, 'water (upper)', { a: 'middle', size: 10 }) + tx(473, 188, 'CH₂Cl₂ (lower)', { a: 'middle', size: 10 }) +
+  ln(473, 214, 473, 228, S, 3) + tx(473, 238, 'drain the lower layer', { a: 'middle', size: 9 }) +
   tx(10, 16, 'Shake, invert and vent through the stopcock; remove the stopper before draining', { size: 10, b: true }),
   'Separatory funnel extraction', 240);
 

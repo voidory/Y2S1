@@ -19,13 +19,13 @@ const AP = (id, name) => ({ week: W, chunk: 'st-apparatus', skill: `st.app.${id}
 
 const SET_ORDER = [
   ['solvents', 'bk-c61-f-set-solvents'], ['inorganic', 'bk-c61-f-set-inorganic'], ['inorganic2', 'bk-c61-f-set-inorganic2'],
-  ['reagents1', 'bk-c61-f-set-reagents1'], ['products1', 'bk-c61-f-set-products1'], ['products2', 'bk-c61-f-set-products2'], ['products3', 'bk-c61-f-set-products3'],
+  ['reagents1', 'bk-c61-f-set-reagents1'], ['products1', 'bk-c61-f-set-products1'], ['products2', 'bk-c61-f-set-products2'], ['products3', 'bk-c61-f-set-products3'], ['extras', 'bk-c61-f-set-extras'],
 ];
 for (const [key, id] of SET_ORDER) {
   const s = SETS[key];
   const names = s.items.map((it, i) => `(${String.fromCharCode(97 + i)}) ${it.name}`).join('; ');
   add(drawItem({
-    id, ...ST, source: 'Manual pp.29-51 (every chemical named in the experiments); 2015 paper style (Q2: ten chemicals, bond-line notation)',
+    id, ...ST, source: 'Manual pp.29-51 (the chemicals named in the experiments, plus the common laboratory solvents and reagents the 2015 paper drew); 2015 paper style (Q2: ten chemicals, bond-line notation)',
     stem: `Using bond-line notation, draw the structure of each of these laboratory chemicals on paper (inorganic ones as you would in a lab report: show charges, counter-ions and double bonds to oxygen). When you have finished, reveal the model answers and mark yourself, 2 marks for each: ${names}.`,
     items: s.items.map((it, i) => [`(${String.fromCharCode(97 + i)}) ${it.name}: ${it.desc}`, 2]),
     figure: s.svg, caption: `${s.title}: model answers`,

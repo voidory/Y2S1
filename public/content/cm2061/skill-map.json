@@ -1,6 +1,6 @@
 {
  "version": "1.0",
- "date": "2026-11-27",
+ "date": "2026-11-28",
  "module": "CM2061",
  "chunks": [
   {
@@ -2187,14 +2187,14 @@
    "name": "Bond-line structures of the laboratory chemicals",
    "mode": "auto",
    "engine": "gen",
-   "marks": 6.578,
+   "marks": 6.808,
    "basis": "manual",
-   "ref": "Manual pp.29-51 (every chemical named in the experiments); 2015 paper style (Q2: ten chemicals, bond-line notation)",
+   "ref": "Manual pp.29-51 (the chemicals named in the experiments, plus the common laboratory solvents and reagents the 2015 paper drew); 2015 paper style (Q2: ten chemicals, bond-line notation)",
    "tags": [],
    "ids": [
     "bk-c61-f-set-solvents"
    ],
-   "weight": 0.06579,
+   "weight": 0.06809,
    "nodes": [
     "bk-c61-f-set-solvents",
     "bk-c61-f-set-inorganic",
@@ -2203,6 +2203,7 @@
     "bk-c61-f-set-products1",
     "bk-c61-f-set-products2",
     "bk-c61-f-set-products3",
+    "bk-c61-f-set-extras",
     "bk-c61-f-set-organometallic"
    ],
    "chunk": "st-structures"
@@ -2213,14 +2214,14 @@
    "name": "Reflux apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.411,
+   "marks": 0.374,
    "basis": "manual",
    "ref": "Expts 1E, 1F, 9 (Manual pp.24-25, 33, 34, 49-51); 2015 paper Q1(a) and Q24 (glassware sketch, clamp position)",
    "tags": [],
    "ids": [
     "bk-c61-f-app-reflux"
    ],
-   "weight": 0.00411,
+   "weight": 0.00374,
    "nodes": [
     "bk-c61-f-app-reflux"
    ],
@@ -2232,14 +2233,14 @@
    "name": "Addition funnel with a drying tube",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.365,
+   "marks": 0.332,
    "basis": "manual",
    "ref": "Expt 5E (Manual p.39); 2015 paper style (set-up sketches)",
    "tags": [],
    "ids": [
     "bk-c61-f-app-addition"
    ],
-   "weight": 0.00365,
+   "weight": 0.00332,
    "nodes": [
     "bk-c61-f-app-addition"
    ],
@@ -2251,14 +2252,14 @@
    "name": "Distillation under reduced pressure",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.365,
+   "marks": 0.332,
    "basis": "manual",
    "ref": "Manual p.4 (video); 2015 paper Q9, Q23 (reduced-pressure distillation, short-path head)",
    "tags": [],
    "ids": [
     "bk-c61-f-app-vacdist"
    ],
-   "weight": 0.00365,
+   "weight": 0.00332,
    "nodes": [
     "bk-c61-f-app-vacdist"
    ],
@@ -2270,14 +2271,14 @@
    "name": "Grignard apparatus on a Schlenk line",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.365,
+   "marks": 0.332,
    "basis": "manual",
    "ref": "Expt 9 (Manual pp.49-51); the open-versus-closed contrast with a drying tube",
    "tags": [],
    "ids": [
     "bk-c61-f-app-grignard"
    ],
-   "weight": 0.00365,
+   "weight": 0.00332,
    "nodes": [
     "bk-c61-f-app-grignard"
    ],
@@ -2289,14 +2290,14 @@
    "name": "Sublimation apparatus",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.32,
+   "marks": 0.291,
    "basis": "manual",
    "ref": "Expt 5E (Manual p.39)",
    "tags": [],
    "ids": [
     "bk-c61-f-app-sublimation"
    ],
-   "weight": 0.0032,
+   "weight": 0.00291,
    "nodes": [
     "bk-c61-f-app-sublimation"
    ],
@@ -2308,14 +2309,14 @@
    "name": "Flash column",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.365,
+   "marks": 0.332,
    "basis": "manual",
    "ref": "Expt 7 (Manual pp.44-46)",
    "tags": [],
    "ids": [
     "bk-c61-f-app-column"
    ],
-   "weight": 0.00365,
+   "weight": 0.00332,
    "nodes": [
     "bk-c61-f-app-column"
    ],
@@ -2327,14 +2328,14 @@
    "name": "Separatory funnel extraction",
    "mode": "auto",
    "engine": "gen",
-   "marks": 0.32,
+   "marks": 0.291,
    "basis": "manual",
    "ref": "Expts 5E, 6, 8 (Manual pp.39, 41, 47)",
    "tags": [],
    "ids": [
     "bk-c61-f-app-sepfunnel"
    ],
-   "weight": 0.0032,
+   "weight": 0.00291,
    "nodes": [
     "bk-c61-f-app-sepfunnel"
    ],
@@ -2545,7 +2546,7 @@
    "ids": [
     "bk-c61-h-2-co"
    ],
-   "weight": 0.03031,
+   "weight": 0.0303,
    "nodes": [
     "bk-c61-h-2-co",
     "bk-c61-h-2-structure"
@@ -3288,6 +3289,9 @@
    "st.bondline"
   ],
   "bk-c61-f-set-products3": [
+   "st.bondline"
+  ],
+  "bk-c61-f-set-extras": [
    "st.bondline"
   ],
   "bk-c61-f-set-organometallic": [
